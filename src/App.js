@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar, Footer, Loader } from './components';
-import { Homepage, EventDetails, Forms, Dashboard, InCTeams } from './pages';
+import { Homepage, EventDetails, Auth, Forms, Dashboard, InCTeams } from './pages';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 
@@ -16,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/' component={<Homepage />} />
           <Route path='/event-details' component={<EventDetails />} />
+          <Route path='/auth' component={<Auth />} />
           <Route path='/forms/:eventName' component={<ProtectedRoutes children={<Forms />} />} />
           <Route path='/dashboard' component={<ProtectedRoutes children={<Dashboard />} />} />
           <Route path='/inc-teams' component={<InCTeams />} />
