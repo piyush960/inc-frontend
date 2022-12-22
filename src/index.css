@@ -27,9 +27,16 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(to top left, #0c2e8a 2%, #09245d 20%, #000f2d 78%);
+  min-height: 100vh;
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+html{
+  scroll-behavior: smooth;
 }
