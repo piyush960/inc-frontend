@@ -14,12 +14,12 @@ function App() {
         <Navbar />
         {loading ? <Loader /> : <></>}
         <Routes>
-          <Route path='/' component={<Homepage />} />
-          <Route path='/event-details' component={<EventDetails />} />
-          <Route path='/auth' component={<Auth />} />
-          <Route path='/forms/:eventName' component={<ProtectedRoutes children={<Forms />} />} />
-          <Route path='/dashboard' component={<ProtectedRoutes children={<Dashboard />} />} />
-          <Route path='/inc-teams' component={<InCTeams />} />
+          <Route path='/' element={<Homepage />} />
+          <Route path='/event-details' element={<EventDetails />} />
+          <Route path='/auth' element={<Auth />} />
+          <Route path='/forms/:eventName' element={<ProtectedRoutes children={<Forms />} />} />
+          <Route path='/dashboard' element={<ProtectedRoutes children={<Dashboard />} />} />
+          <Route path='/inc-teams' element={<InCTeams />} />
         </Routes>
         <Footer />
       </BrowserRouter>
