@@ -3,7 +3,7 @@ function Card(props){
         <div className="card">       
             {/* my card*/}
                 <div className="py-10">
-                    <div className="rounded overflow-hidden shadow-lg max-w-sm bg-cyan-800 hover:scale-105 cursor-pointer">
+                    <div className="rounded overflow-hidden shadow-lg max-w-sm bg-cyan-800 hover:scale-105 cursor-pointer  hover:shadow-indigo-500 hover:shadow-lg">
                         <img src ="https://reactjs.org/logo-og.png" 
                         alt="" 
                         className="w-full"/>
