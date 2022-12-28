@@ -1,6 +1,5 @@
 import './styles/eventCards.css';
-// import Card from './Card/card';
-// import eventData from './Card/eventData';
+
 
 const eventData = [
   {
@@ -66,4 +65,4 @@ function EventCards() {
     )
 }
 
-export default {EventCards,Card};
+export default EventCards;
