@@ -1,27 +1,11 @@
-import Loader from './loader.jsx';
-import Navbar from './navbar.jsx';
-import Hero from './hero.jsx';
-import Schedule from './schedule.jsx';
-import EventCards from './eventCards.jsx';
-import Sponsors from './sponsors.jsx';
-import InCTeamsSection from './incTeams.jsx';
-import Footer from './footer.jsx';
-import Modals from './modals.jsx';
-import Buttons from './buttons.jsx';
-import InputBox from './inputBox.jsx';
-
-const Components = {
-    Loader,
-    Navbar,
-    Hero,
-    Schedule,
-    EventCards,
-    Sponsors,
-    InCTeamsSection,
-    Footer,
-    Modals,
-    Buttons,
-    InputBox,
-}
-
-export default Components;
+export { default as Loader } from './loader.jsx';
+export { default as Navbar } from './navbar.jsx';
+export { default as Hero } from './hero.jsx';
+export { default as Schedule } from './schedule.jsx';
+export { default as EventCards } from './eventCards.jsx';
+export { default as Sponsors } from './sponsors.jsx';
+export { default as InCTeamsSection } from './incTeams.jsx';
+export { default as Footer } from './footer.jsx';
+export { default as Modals } from './modals.jsx';
+export { default as Buttons } from './buttons.jsx';
+export { default as InputBox } from './inputBox.jsx';
