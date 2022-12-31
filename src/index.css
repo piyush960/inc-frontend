@@ -6,20 +6,29 @@
   font-family: "Poppins";
   src: local("Poppins"),
     url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
-  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Poppins-bold";
+  src: local("Poppins-bold"),
+    url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Gilroy";
   src: local("Gilroy"), url("./assets/fonts/Gilroy-Light.otf") format("otf");
-  font-weight: normal;
 }
 
 @font-face {
   font-family: "Montserrat";
   src: local("Montserrat"),
     url("./assets/fonts/Montserrat-Regular.ttf") format("ttf");
-  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Montserrat-bold";
+  src: local("Montserrat-bold"),
+    url("./assets/fonts/Montserrat-ExtraBold.ttf") format("ttf");
 }
 
 body {
@@ -27,6 +36,19 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: "Montserrat-bold", sans-serif;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+title {
+  font-family: "Poppins-bold", sans-serif;
 }
 
 code {
