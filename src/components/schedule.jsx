@@ -10,8 +10,10 @@ import {
   FaCalendarDay,
   FaExternalLinkAlt,
 } from "react-icons/fa";
-import { HiCurrencyRupee } from "react-icons/hi"
+import { HiCurrencyRupee } from "react-icons/hi";
 import { Fade } from "react-awesome-reveal";
+import { Timeline, TimelineEvent } from "@mailtop/horizontal-timeline";
+import { FaBug, FaRegCalendarCheck, FaRegFileAlt } from "react-icons/fa";
 
 function Schedule() {
   return (
@@ -22,7 +24,7 @@ function Schedule() {
         </Fade>
       </span>
 
-      <VerticalTimeline>
+      {/* <VerticalTimeline>
         <Fade delay={100} duration={1000}>
           <VerticalTimelineElement
             className="vertical-timeline-element--work drop-shadow-xl hover:"
@@ -47,7 +49,6 @@ function Schedule() {
             <h4 className="vertical-timeline-element-subtitle py-2">
               one liner or tagline
             </h4>
-            {/* <p className="px-5 font-poppins text-slate-600"> */}
             <ul className="list-disc px-5 font-poppins text-slate-600">
               <li>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet,
@@ -62,7 +63,6 @@ function Schedule() {
                 beatae.
               </li>
             </ul>
-            {/* </p> */}
             <div className="flex flex-wrap mt-3 text-sm font-poppins font-bold">
               <div className="rounded-full bg-[#4391c5] py-1 px-2 mx-1 my-1 flex justify-center items-center">
                 <FaCalendarDay />
@@ -78,23 +78,36 @@ function Schedule() {
             iconStyle={{ background: "#46a8ff", color: "#000" }}
             icon={<FaUserClock />}
           />
-          {/* <VerticalTimelineElement
-              className="vertical-timeline-element--work"
-              date="2010 - 2011"
-              iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
-              icon={<FaShoppingBag />}
-            >
-              <h3 className="vertical-timeline-element-title">Art Director</h3>
-              <h4 className="vertical-timeline-element-subtitle">
-                San Francisco, CA
-              </h4>
-              <p>
-                Creative Direction, User Experience, Visual Design, SEO, Online
-                Marketing
-              </p>
-            </VerticalTimelineElement> */}
         </Fade>
-      </VerticalTimeline>
+      </VerticalTimeline> */}
+      <Fade>
+        <div className="text-white">
+          <Timeline minEvents={3} placeholder>
+            <TimelineEvent
+              icon={FaRegFileAlt}
+              title="Impetus"
+              subtitle="26/03/2019"
+              color="#1560bd"
+            />
+            <TimelineEvent
+              color="#3a7ca5"
+              icon={FaRegCalendarCheck}
+              title="Pradnya"
+              subtitle="26/03/2019"
+            />
+            <TimelineEvent
+              color="#1560bd"
+              icon={FaBug}
+              title="Competus"
+              subtitle="26/03/2019"
+              // action={{
+              //   label: "Ver detalhes...",
+              //   onClick: () => window.alert("Error!"),
+              // }}
+            />
+          </Timeline>
+        </div>
+      </Fade>
     </div>
   );
 }

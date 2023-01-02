@@ -40,3 +40,28 @@ code {
 html{
   scroll-behavior: smooth;
 }
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #0d7f96 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #010642;
+    /* background-color: transparent; */
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #0d7f96;
+    border-radius: 10px;
+    border: 3px solid #010642;
+    /* border: transparent; */
+  }

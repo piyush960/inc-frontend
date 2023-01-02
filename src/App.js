@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import { Navbar, Footer, Loader } from './components';
-
-// import { Homepage, EventDetails, Auth, Forms, Dashboard, InCTeams } from './pages';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 import Navbar from './components/navbar';
