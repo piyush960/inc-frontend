@@ -15,7 +15,7 @@ function App() {
         {loading ? <Loader /> : <></>}
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/event-details' element={<EventDetails />} />
+          <Route path='/event-details/:eventName' element={<EventDetails />} />
           <Route path='/auth' element={<Auth />} />
           <Route path='/forms/:eventName' element={<ProtectedRoutes children={<Forms />} />} />
           <Route path='/dashboard' element={<ProtectedRoutes children={<Dashboard />} />} />
