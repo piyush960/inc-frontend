@@ -1,6 +1,6 @@
 import './styles/eventCards.css';
-import Card from './Card/card';
-import eventData from './Card/eventData';
+import Card from './card';
+import eventData from './card/eventData';
 
 function EventCards() {
     return (
