@@ -1,10 +1,5 @@
-// import { Hero, Schedule, EventCards, Sponsors, InCTeamsSection } from '../components';
+import { Hero, Schedule, EventCards, Sponsors, InCTeamsSection } from '../components';
 import './styles/homepage.css';
-import Hero from '../components/hero';
-import Schedule from '../components/schedule';
-import EventCards from '../components/eventCards';
-import InCTeamsSection from '../pages/incTeams';
-import Sponsors from '../components/sponsors';
 
 function Homepage() {
     return (

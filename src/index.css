@@ -42,8 +42,8 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: white;
-  background-color: black;
+  color: white !important;
+  background-color: black !important;
 }
 
 h1 {
@@ -57,9 +57,6 @@ h5,
 h6,
 title {
   font-family: "Poppins-bold", sans-serif;
-  background-image: linear-gradient(to top left, #0c2e8a 2%, #09245d 20%, #000f2d 78%);
-  min-height: 100vh;
-
 }
 
 code {
@@ -67,31 +64,31 @@ code {
     monospace;
 }
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
 /* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #0d7f96 #ffffff;
-  }
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0d7f96 #ffffff;
+}
 
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 11px;
-    height: 11px;
-  }
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
 
-  *::-webkit-scrollbar-track {
-    background: #010642;
-    /* background-color: transparent; */
-  }
+*::-webkit-scrollbar-track {
+  background: #010642;
+  /* background-color: transparent; */
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color: #0d7f96;
-    border-radius: 10px;
-    border: 3px solid #010642;
-    /* border: transparent; */
-  }
+*::-webkit-scrollbar-thumb {
+  background-color: #0d7f96;
+  border-radius: 10px;
+  border: 3px solid #010642;
+  /* border: transparent; */
+}
