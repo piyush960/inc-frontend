@@ -42,7 +42,7 @@ function Card(props){
       <div className="card">       
           {/* my card*/}
               <div className="py-10">
-                  <div className="rounded overflow-hidden shadow-lg max-w-sm bg-cyan-800 hover:scale-105 cursor-pointer  hover:shadow-indigo-500 hover:shadow-lg">
+                  <div className="rounded overflow-hidden shadow-lg max-w-sm bg-cyan-700 hover:scale-105 cursor-pointer  hover:shadow-indigo-400 hover:shadow-xl">
                       <img src = {props.logo}
                       alt="" 
                       className="w-full"/>
