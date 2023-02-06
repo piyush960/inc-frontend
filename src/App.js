@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar, Loader, Footer } from './components';
-import { EventDetails, Forms, Dashboard, InCTeams, Homepage, Auth } from './pages';
+import { EventDetails, Forms, Payment, Dashboard, InCTeams, Homepage, Auth } from './pages';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 
@@ -17,6 +17,7 @@ function App() {
         <Route path='/event-details/:eventName' element={<EventDetails />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/forms/:eventName' element={<ProtectedRoutes children={<Forms />} />} />
+        <Route path='/payment/:id' element={<Payment />} />
         <Route path='/dashboard' element={<ProtectedRoutes children={<Dashboard />} />} />
         <Route path='/inc-teams' element={<InCTeams />} />
       </Routes>
