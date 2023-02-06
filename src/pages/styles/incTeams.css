@@ -1,0 +1,129 @@
+.inc-teams {
+  padding: 12rem 10% 3.5rem;
+}
+
+.team {
+  background-color: rgb(17 24 39 / 0.4);
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
+    0 10px 15px -3px rgb(17 24 39 / 0.4), 0 4px 6px -4px rgb(17 24 39 / 0.4);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgb(12 74 110 / 0.8);
+  border-radius: 0.75rem;
+  padding: 3rem;
+  text-align: center;
+}
+
+.team-name {
+  position: relative;
+  display: block;
+  font-size: 3rem;
+  margin-top: -5.4rem;
+  text-transform: uppercase;
+}
+
+.team-name::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 1.65rem;
+  width: 30%;
+  height: 3.4rem;
+  background-color: rgb(17 24 39 / 0.8);
+  border: 1px solid rgb(12 74 110 / 0.4);
+  border-radius: 0.5rem;
+  z-index: -1;
+}
+
+.members {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.apple {
+  -webkit-tap-highlight-color: transparent;
+  transform: scale(0.58);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.apple:hover {
+  transform: scale(0.64);
+}
+
+.apple-inner {
+  clip-path: path("M 0 0 L 0 300 A 150 150 9 0 0 300 300 L 300 0 Z");
+  position: relative;
+  height: 300px;
+  width: 300px;
+  top: -100px;
+}
+
+.circle {
+  position: absolute;
+  top: 40%;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: none;
+  filter: drop-shadow(0px 0px 10px rgb(12 74 110 / 0.5));
+}
+
+.img {
+  clip-path: circle(50% at 50% 50%);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 100%;
+  pointer-events: none;
+  transform: translate(-50%, 20px) scale(1);
+  transform-origin: center bottom;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0px -5px 10px rgb(12 74 110));
+}
+
+.apple:hover .img {
+  transform: translate(-50%, 0) scale(1.2);
+}
+
+.divider {
+  margin: -2rem auto 0.4rem;
+  background-color: rgb(12 74 110);
+  height: 1px;
+  width: 160px;
+}
+
+.name {
+  color: #f2a30f;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.post {
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.member-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.member-icons a {
+  margin: 0 6px;
+  padding: 6px;
+  border-radius: 0.25rem;
+  border: 1px solid rgb(12 74 110);
+  opacity: 0.7;
+  transition: all 200ms ease-in-out;
+}

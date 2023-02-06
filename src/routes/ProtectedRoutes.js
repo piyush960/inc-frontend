@@ -1,9 +1,9 @@
-import { Auth } from '../pages';
+import Auth from '../pages/auth';
 
 function ProtectedRoutes({ children }) {
     var user = true
     return (
-        user ? { children } : <Auth />
+        user ? children : <Auth />
     );
 }
 
