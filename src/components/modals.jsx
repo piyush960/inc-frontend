@@ -1,9 +1,14 @@
 import './styles/modals.css';
 
-function Modals() {
+function Modals({ modalState, children, toggleModal }) {
     return (
-        <div className='modals'>
-        </div>
+        <>
+            {modalState &&
+                <div className='modals'>
+                    {children}
+                </div>
+            }
+        </>
     );
 }
 

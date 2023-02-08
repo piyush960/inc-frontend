@@ -16,7 +16,7 @@ function App() {
         <Route path='/' element={<Homepage />} />
         <Route path='/event-details/:eventName' element={<EventDetails />} />
         <Route path='/auth' element={<Auth />} />
-        <Route path='/forms/:eventName' element={<ProtectedRoutes children={<Forms />} />} />
+        <Route path='/events/:eventName' element={<ProtectedRoutes children={<Forms />} />} />
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/dashboard' element={<ProtectedRoutes children={<Dashboard />} />} />
         <Route path='/inc-teams' element={<InCTeams />} />
