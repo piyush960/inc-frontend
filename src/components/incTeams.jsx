@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { Buttons } from '../components';
 import './styles/incTeams.css';
 
 function InCTeamsSection() {
@@ -11,9 +12,9 @@ function InCTeamsSection() {
                 <figcaption className='md:text-xl'>- Phil Jackson</figcaption>
             </figure>
             <div className='w-full md:w-2/5 relative flex justify-center items-center gap-6 md:p-6'>
-                <button type='button' onClick={() => navigate('/inc-team')}>Student Team</button>
-                <button type='button' onClick={() => navigate('/')}>Faculty Team</button>
-                <button type='button' onClick={() => navigate('/')}>Gallery</button>
+                <Buttons value={'Student Team'} onClick={() => navigate('/inc-teams')} />
+                <Buttons value={'Faculty Team'} onClick={() => navigate('/')} />
+                <Buttons value={'Gallery'} onClick={() => navigate('/')} />
             </div>
         </div>
     )
