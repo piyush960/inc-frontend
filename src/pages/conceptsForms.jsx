@@ -24,6 +24,7 @@ function ConceptsForm() {
 
     return (
         <div className='forms'>
+            <TeamConcepts  />
             <FormsBanner />
             <ProgressBar />
             <Modals modalState={modalState} toggleModal={toggleInstructionsModal} >
@@ -31,7 +32,8 @@ function ConceptsForm() {
                 </>
             </Modals>
             <Buttons onClick={toggleInstructionsModal} />
-            <TeamConcepts team={team} groupDetails={groupDetails} />
+            
+            {/* {team={} groupDetails={}} */}
             {/*ProjectDetails props=setProjectDetails*/}
             {/*Next Step btns*/}
         </div>
