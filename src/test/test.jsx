@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { InputBox, Buttons } from "../components";
+import { useRef } from 'react';
+import { InputBox, Buttons } from '../components';
 
 function Test() {
     const emailRef = useRef('')
