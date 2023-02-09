@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar, Loader, Footer } from './components';
 import { EventDetails, Forms, Payment, Dashboard, InCTeams, Homepage, Auth } from './pages';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
+
+const Test = lazy(() => import('./test/test.jsx'))
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -20,6 +22,13 @@ function App() {
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/dashboard' element={<ProtectedRoutes children={<Dashboard />} />} />
         <Route path='/inc-teams' element={<InCTeams />} />
+        {process.env.REACT_APP_ENVIRONMENT === 'development' &&
+          <Route path='/test' element={
+            <Suspense fallback={<>...</>}>
+              <Test />
+            </Suspense>
+          } />
+        }
       </Routes>
       <Footer />
     </BrowserRouter>
