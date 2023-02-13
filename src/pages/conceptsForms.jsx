@@ -27,11 +27,7 @@ function ConceptsForm() {
             <FormsBanner />
             <FormsBanner logo={conlogo} eventName="CONCEPTS" eventDescription="24th and 25th March"/>
             <ProgressBar />
-            <Modals modalState={modalState} toggleModal={toggleInstructionsModal} >
-                <>
-                </>
-            </Modals>
-            <Buttons onClick={toggleInstructionsModal} />
+           
             <TeamConcepts  />
             {/* {team={} groupDetails={}} */}
             {/*ProjectDetails props=setProjectDetails*/}
