@@ -1,5 +1,4 @@
 import { Hero, Schedule, EventCards, Sponsors, InCTeamsSection } from '../components';
-import ConceptsForm from './conceptsForms';
 import './styles/homepage.css';
 
 function Homepage() {
@@ -10,7 +9,6 @@ function Homepage() {
             <EventCards />
             <Sponsors />
             <InCTeamsSection />
-            <ConceptsForm />
         </div>
     );
 }

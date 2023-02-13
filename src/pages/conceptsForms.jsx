@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { FormsBanner, ProgressBar, Modals, Buttons, TeamConcepts } from '../components';
 import './styles/forms.css';
-
+const conlogo = require("./concepts23_logo_bw.png");
 function ConceptsForm() {
     const MAX_STEPS = 2;
     const [activeStep, setActiveStep] = useState(0)
@@ -24,15 +24,15 @@ function ConceptsForm() {
 
     return (
         <div className='forms'>
-            <TeamConcepts  />
             <FormsBanner />
+            <FormsBanner logo={conlogo} eventName="CONCEPTS" eventDescription="24th and 25th March"/>
             <ProgressBar />
             <Modals modalState={modalState} toggleModal={toggleInstructionsModal} >
                 <>
                 </>
             </Modals>
             <Buttons onClick={toggleInstructionsModal} />
-            
+            <TeamConcepts  />
             {/* {team={} groupDetails={}} */}
             {/*ProjectDetails props=setProjectDetails*/}
             {/*Next Step btns*/}
