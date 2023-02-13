@@ -69,7 +69,7 @@ function ConceptsForm() {
                 </>
         </Modals>
 
-            <TeamConcepts team={team} groupDetails={groupDetails} />
+            <TeamConcepts />
             {/*ProjectDetails props=setProjectDetails*/}
             {/*Next Step btns*/}
         </div>
