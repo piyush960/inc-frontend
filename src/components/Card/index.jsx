@@ -1,9 +1,9 @@
 function Card(props){
     return (
-        <div className="card">       
+        <div className="card   ">       
             {/* my card*/}
-                <div className="py-10">
-                    <div className="rounded overflow-hidden shadow-lg max-w-sm bg-cyan-800 hover:scale-105 cursor-pointer">
+                <div className="my-10">
+                    <div className="  rounded overflow-hidden shadow-lg max-w-sm bg-cyan-800 hover:scale-105 hover:shadow-xl hover:shadow-light_blue cursor-pointer">
                         <img src ="https://reactjs.org/logo-og.png" 
                         alt="" 
                         className="w-full"/>
