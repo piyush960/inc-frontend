@@ -4,7 +4,7 @@ function Footer() {
     return (
         <div className='footer'>
             
-<footer class="p-4 bg-white sm:p-6 dark:bg-gray-900">
+<footer class="p-4 bg-gray-800 border-t-2 border-t-gold sm:p-6 ">
                 <div class="md:flex md:justify-between lg:px-52 sm:m-10">
                     <div className="Address md:mb-6">
                         <h1 className="mb-2 text-2xl text-gray-900 uppercase dark:text-white">ADDRESS</h1>

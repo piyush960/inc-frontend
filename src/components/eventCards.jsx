@@ -42,20 +42,20 @@ function Card(props){
       <div className="card">       
           {/* my card*/}
               <div className="py-10">
-                  <div className="rounded overflow-hidden shadow-lg max-w-sm bg-cyan-700 hover:scale-105 cursor-pointer  hover:shadow-indigo-400 hover:shadow-xl">
+                  <div className=" overflow-hidden transition-all hover:border-faint_blue hover:bottom-2 group shadow-lg max-w-sm bg-faint_blue rounded-3xl hover:bg-transparent hover:text-gold   hover:scale-105 cursor-pointer  hover:shadow-light_blue hover:shadow-xl">
                       <img src = {props.logo}
                       alt="" 
                       className="w-full"/>
                       <div className="px-6">
-                      <hr className='pt-2'/>
-                      <div className="font-bold text-xl mb-2 text-white text-center">{props.name}</div>
-                      <hr className='py-2'/>
+                      <hr className='pt-2 group-hover:text-white'/>
+                      <div className="font-bold text-xl mb-2  text-center">{props.name}</div>
+                      <hr className='py-2 group-hover:text-white '/>
                       {/* <p className="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio magni dolorem libero pariatur nisi fugit voluptate perferendis, harum sapiente sit eius excepturi, similique repellendus explicabo dicta a ipsa iure temporibus dolorum, accusantium consequatur sequi possimus! Quas non veniam aliquid et?</p> */}
-                      <p className="text-md mb-2 text-white text-center">TEAM : {props.team}</p>
-                      <hr className='py-1'/>
-                      <p className="text-md mb-2 text-white text-center">FEES :</p>
-                      <p className="text-sm mb-2 text-white text-center">{props.ne}</p>
-                      <p className="text-sm mb-2 text-white text-center">{props.ie}</p>
+                      <p className="text-md mb-2 text-center">TEAM : {props.team}</p>
+                      <hr className='py-1 group-hover:text-white '/>
+                      <p className="text-md mb-2 text-center">FEES :</p>
+                      <p className="text-sm mb-2 text-center">{props.ne}</p>
+                      <p className="text-sm mb-2 text-center">{props.ie}</p>
                       <br />
                       {/* <button className="bg-transparent text-white hover:text-blue-300 font-semibold hover:text-green-300 px-2">View More</button> */}
                   </div>
@@ -67,9 +67,9 @@ function Card(props){
 
 function EventCards() {
     return (
-        <div className='eventCards'>
+        <div className='eventCards my-10 '>
           <h1 className="mt-10 mb-2 text-center capitalize text-4xl font-bold text-white">Events</h1>
-          <hr className="w-1/5 mx-auto"/>
+          <hr className="w-1/5 mx-auto mb-5 "/>
           <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 lg:gap-3 justify-items-center'>
             {
               eventData.map( (eva) =>{
