@@ -24,10 +24,10 @@ function TeamConcepts() {
     )
 
     const handleInputChange0 = (e) => {
-        // const { title, value } = e.target;
-        // setForm0({ ...form0, [title]: value });
+        const { label, value } = e.target;
+        setForm0({ ...form0, [label]: value });
         console.log(form0);
-        setForm0(form0);
+       //    setForm0(form0);
 
     }
 

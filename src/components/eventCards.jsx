@@ -10,7 +10,7 @@ function EventCards() {
           <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 lg:gap-3 justify-items-center'>
             {
               eventData.map( (eva) =>{
-                  return <Card name = {eva.name}/>
+                  return <Card name = {eva.name} logo = {eva.logo} />
               })
             }
           </div>
