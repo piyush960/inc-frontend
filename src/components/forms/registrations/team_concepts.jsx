@@ -35,7 +35,7 @@ function TeamConcepts() {
         const { name, value } = e.target;
         setForm0({ ...form0, [name]: value });
         console.log(form0);
-        
+        setForm0(form0);
 
     }
 
@@ -314,7 +314,7 @@ function TeamConcepts() {
                                             <InputBox
                                                 label="phoneno"
                                                 name = "phoneno"
-                                                type="text"
+                                                type="number"
                                                 placeholder="phone number"
                                                 required
                                                 onChange={(event) => handleFormChange(event, index)}
