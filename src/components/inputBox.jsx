@@ -1,12 +1,13 @@
 import './styles/inputBox.css';
 
-function InputBox({ label,name, type, placeholder, inputRef, onChange , classNames, required, error }) {
+function InputBox({ label,name ,  type, placeholder, inputRef, onChange , classNames, required, error }) {
     return (
         <div className='input-box w-full mb-3 relative'>
             <label htmlFor={label.toLowerCase().replace(/ /g, "_")} className='input-label font-medium mb-3 text-white text-lg'>{label}</label>
             <input
                 type={type}
-                name={name}
+                label={label.toLowerCase().replace(/ /g, "_")}
+                name = {name}
                 placeholder={placeholder}
                 ref={inputRef}
                 onChange = {onChange}
