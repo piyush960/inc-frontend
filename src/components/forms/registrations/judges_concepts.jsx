@@ -2,19 +2,37 @@ import React from "react";
 import InputBox from "../../inputBox";
 import Buttons from "../../buttons";
 import { Checkbox } from "@material-tailwind/react";
-const handleSubmit = (e) => {
 
-}
+
+
 
 function JudgesConcepts() {
+    const[judges,setJudges]=useState(
+        [
+            {
+                name:"",
+                phnumber:"",
+                email:"",
+                ind_exp:""
+            }
+        ]
+    )
+
+    
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setJudges({ ...judges, [name]: value });
+        console.log(judges);
+      };
     return (
         <div className='mx-32 my-6'>
             <form className="border rounded-lg px-8 pt-6 pb-8 mb-4" action="">
 
-                <InputBox label="Name" type="text" placeholder="name" required />
-                <InputBox label="Industry Experience(In years) " type="number" placeholder="Eg-3,5" required />
-                <InputBox label="Email" type="email" placeholder="email" required />
-                <InputBox label="Phone" type="number" placeholder="number" required />
+                <InputBox label="Name" type="text" placeholder="name" name="name" onChange={(e) => handleInputChange(e)} value={judges.name} required />
+                <InputBox label="Industry Experience(In years) " type="number" placeholder="Eg-3,5" name="ind_exp" onChange={(e) => handleInputChange(e)} value={judges.ind_exp} required />
+                <InputBox label="Email" type="email" placeholder="email" name="email" onChange={(e) => handleInputChange(e)} value={judges.email} required />
+                <InputBox label="Phone" type="number" placeholder="number" name="phnumber" onChange={(e) => handleInputChange(e)} value={judges.phnumber} required />
                 <div>
                     <p className="input-label font-medium my-3 text-white text-lg">Domain of Work</p>
                     <div className="font-medium  text-white text-lg">
@@ -57,7 +75,10 @@ function JudgesConcepts() {
                         </select>
                     </div>
                 </div>
-                <Buttons value="Submit" onClick={handleSubmit} classNames="" />
+                <div className="flex justify-end ">
+                <Buttons value="Submit" onClick={handleSubmit} classNames="mt-5 mr-5" />
+                </div>
+                
             </form>
 
         </div>

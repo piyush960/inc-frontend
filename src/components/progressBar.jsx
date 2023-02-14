@@ -16,7 +16,7 @@ const StepContainer = styled.div`
   :before {
     content: '';
     position: absolute;
-    background: #155e75;
+    background: #f3e7f3;
     height: 4px;
     width: 100%;
     top: 50%;
@@ -56,7 +56,7 @@ const StepStyle = styled.div`
 
 const StepCount = styled.span`
   font-size: 19px;
-  color: #155e75;
+  color: #000000;
   @media (max-width: 600px) {
     font-size: 16px;
   }

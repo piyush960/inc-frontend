@@ -1,6 +1,5 @@
-import './styles/inputBox.css';
 
-function InputBox({ label,name, type, placeholder, inputRef, onChange , classNames, required, error }) {
+function FileInputBox({ label,name,accept,type, placeholder, inputRef, onChange , classNames, required, error }) {
     return (
         <div className='input-box w-full mb-3 relative'>
             <label htmlFor={label.toLowerCase().replace(/ /g, "_")} className='input-label font-medium mb-3 text-white text-lg'>{label}</label>
@@ -9,8 +8,9 @@ function InputBox({ label,name, type, placeholder, inputRef, onChange , classNam
                 name={name}
                 placeholder={placeholder}
                 ref={inputRef}
+                accept={accept}
                 onChange = {onChange}
-                className={`input w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20 ${classNames}`}
+                className={`block w-full font-medium mb-3 text-white text-lg dark:text-white border border-gray-300 rounded-lg cursor-pointer bg-faint_blue focus:outline-none dark:bg-faint_blue dark:border-gray-600 dark:placeholder-gray-400 ${classNames}`}
                 autoComplete='off'
                 required={required}
             />
@@ -19,4 +19,4 @@ function InputBox({ label,name, type, placeholder, inputRef, onChange , classNam
     );
 }
 
-export default InputBox;
+export default FileInputBox;
