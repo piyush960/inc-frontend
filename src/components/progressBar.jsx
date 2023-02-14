@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
+import Buttons from './buttons';
 const MainContainer = styled.div`
   width: 100%;
-  max-width: 600px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 16px;
 `
@@ -166,12 +167,9 @@ const ProgressBar = () => {
       {/* form */}
 
       <ButtonsContainer>
-        <ButtonStyle onClick={prevStep} disabled={activeStep === 1}>
-          Previous
-        </ButtonStyle>
-        <ButtonStyle onClick={nextStep} disabled={activeStep === totalSteps}>
-          Next
-        </ButtonStyle>
+        <Buttons value="Previous" onClick={prevStep} disabled={activeStep === 1} classNames="disabled:cursor:not-allowed"/>
+         
+        <Buttons value="Next" onClick={nextStep} disabled={activeStep === totalSteps}/>
       </ButtonsContainer>
     </MainContainer>
   )

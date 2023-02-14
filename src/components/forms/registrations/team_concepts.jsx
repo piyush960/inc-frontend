@@ -24,10 +24,18 @@ function TeamConcepts() {
     )
 
     const handleInputChange0 = (e) => {
-        // const { title, value } = e.target;
-        // setForm0({ ...form0, [title]: value });
+        const { name, value } = e.target;
+        setForm0({ ...form0, [name]: value });
         console.log(form0);
-        setForm0(form0);
+        
+
+    }
+
+    const handleSelectChange0 = (e) => {
+        const { name, value } = e.target;
+        setForm0({ ...form0, [name]: value });
+        console.log(form0);
+        
 
     }
 
@@ -49,8 +57,17 @@ function TeamConcepts() {
         let data = [...formfields];
         data[index][event.target.name] = event.target.value;
         console.log(formfields);
-        setformfields(formfields);
+        setformfields(data);
     };
+
+    const handleSelectChange1 =(event , index) =>
+    {
+        let data = [...formfields];
+        console.log(event.target.value)
+        data[index][event.target.name] = event.target.value;
+        console.log(formfields);
+        setformfields(data);
+    }
 
     const addfields = () => {
         let object = {
@@ -85,33 +102,41 @@ function TeamConcepts() {
     )
 
     const handleInputChange2 = (e) => {
-        // const { title, value } = e.target;
-        // setForm0({ ...form0, [title]: value });
+        const { name, value } = e.target;
+        setForm2({ ...form2, [name]: value });
         console.log(form2);
-        setForm2(form2);
+        
 
+    }
+
+    const handleSelectChange2 = (e) =>
+    {
+        const { name, value } = e.target;
+        setForm2({ ...form2, [name]: value });
+        console.log(form2);
     }
 
     //steps for whole form
     const [formStep, setFormStep] = React.useState(0);
 
-    const prevForm = () => {
+    const prevForm = (e) => {
+        // e.preventDefault();
         setFormStep((currentStep) => currentStep - 1);
     };
 
     const nextForm = (e) => {
         e.preventDefault();
         console.log(formfields);
+        console.log(form0);
+        console.log(form2);
         setFormStep((currentStep) => currentStep + 1);
     };
 
     //dropdown
 
-    const [option, setOption] = useState();
+    //const [option, setOption] = useState();
 
-    function handleChange(event) {
-        setOption(event.target.value);
-    }
+    
 
     return (
         <div className=" mx-16 my-6">
@@ -121,7 +146,8 @@ function TeamConcepts() {
                     <>
                         <InputBox
                             type="text"
-                            label={"Title"}
+                            label={"Project Title"}
+                            name = {"title"}
                             placeholder={"Project title"}
                             classNames=""
                             required
@@ -134,7 +160,8 @@ function TeamConcepts() {
                             </p>
                             <div className="relative w-full lg:w-full block px-0  text-sm">
                                 <select
-                                    // value = {option.domain}
+                                    name = {"domain"}
+                                    onChange = {(e)=>handleSelectChange0(e)}
                                     // onChange={handleChange}
                                     className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                 >
@@ -143,7 +170,7 @@ function TeamConcepts() {
                                     <option value="Digital/ Image/ Speech/ Video Processing">Digital/ Image/ Speech/ Video Processing</option>
                                     <option value="Embedded/ VLSI System">Embedded/ VLSI System</option>
                                     <option value="Machine Learning and Pattern Recognition">Machine Learning and Pattern Recognition</option>
-                                    <option value="Select" selected className="text-white">
+                                    <option value="" selected className="text-white">
                                         Select
                                     </option>
                                 </select>
@@ -155,13 +182,13 @@ function TeamConcepts() {
                             </p>
                             <div className="relative w-full lg:w-full block px-0  text-sm">
                                 <select
-                                    // value = {option.domain}
-                                    // onChange={handleChange}
+                                    name = {"type"}
+                                    onChange = {(e)=>handleSelectChange0(e)}
                                     className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                 >
                                     <option value="Open Hardware">Open Hardware</option>
                                     <option value="Open Software">Open Software</option>
-                                    <option value="Select" selected className="text-white">
+                                    <option value="" selected className="text-white">
                                         Select
                                     </option>
                                 </select>
@@ -170,6 +197,7 @@ function TeamConcepts() {
                         <InputBox
                             type="text"
                             label={"Guide_Name"}
+                            name = {"guide_name"}
                             placeholder={"Name"}
                             classNames=""
                             required
@@ -179,6 +207,7 @@ function TeamConcepts() {
                         <InputBox
                             type="email"
                             label={"Guide_Email"}
+                            name = {"guide_email"}
                             placeholder={"Email"}
                             classNames=""
                             required
@@ -188,6 +217,7 @@ function TeamConcepts() {
                         <InputBox
                             type="number"
                             label={"Guide_Phone"}
+                            name = {"guide_phone"}
                             placeholder={"Phone"}
                             classNames=""
                             required
@@ -211,6 +241,7 @@ function TeamConcepts() {
                             type="text"
                             label={"If yes, then name of company?"}
                             placeholder={"Company name"}
+                            name = {"company_name"}
                             classNames=""
                             required
                             onChange={(e) => handleInputChange0(e)}
@@ -226,6 +257,7 @@ function TeamConcepts() {
                         <InputBox
                             type="textarea"
                             label={"Abstract"}
+                            name = {"abstract"}
                             placeholder={"In 300 words or less"}
                             classNames=""
                             required
@@ -261,6 +293,7 @@ function TeamConcepts() {
                                 <div key={index}>
                                     <InputBox
                                         label="name"
+                                        name = "name"
                                         type="text"
                                         placeholder="name "
                                         required
@@ -269,6 +302,7 @@ function TeamConcepts() {
                                     />
                                     <InputBox
                                         label="email"
+                                        name = "email"
                                         type="text"
                                         placeholder="email "
                                         required
@@ -279,6 +313,7 @@ function TeamConcepts() {
                                         <div className="mr-1 w-1/2">
                                             <InputBox
                                                 label="phoneno"
+                                                name = "phoneno"
                                                 type="text"
                                                 placeholder="phone number"
                                                 required
@@ -292,14 +327,15 @@ function TeamConcepts() {
                                             </p>
                                             <div className="relative w-full lg:w-full block px-0  text-sm">
                                                 <select
-                                                    // name="option"
+                                                    name = "gender"
+                                                    onChange = {(event)=>handleSelectChange1(event,index)}
                                                     // onChange={handleChange}
                                                     className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                                 >
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
                                                     <option value="Other">Other</option>
-                                                    <option value="Select" selected className="text-white">
+                                                    <option value="" selected className="text-white">
                                                         Select
                                                     </option>
                                                 </select>
@@ -323,6 +359,7 @@ function TeamConcepts() {
                         <div className=" mx-1 my-2">
                             <InputBox
                                 label="college"
+                                name = {"college"}
                                 type="text"
                                 placeholder="college name"
                                 required
@@ -333,6 +370,7 @@ function TeamConcepts() {
                         <div className="mx-1 my-2">
                             <InputBox
                                 label="country"
+                                name = {"country"}
                                 type="text"
                                 placeholder="country"
                                 required
@@ -345,6 +383,7 @@ function TeamConcepts() {
                                 <InputBox
                                     label="state"
                                     type="text"
+                                    name = {"state"}
                                     placeholder="state"
                                     required
                                     onChange={(e) => handleInputChange2(e)}
@@ -354,6 +393,7 @@ function TeamConcepts() {
                             <div className="ml-1 w-1/2">
                                 <InputBox
                                     label="district"
+                                    name = {"district"}
                                     type="text"
                                     placeholder="district"
                                     required
@@ -367,9 +407,12 @@ function TeamConcepts() {
                                 Locality
                             </p>
                             <div className="relative w-full lg:w-full block px-0  text-sm">
-                                <select className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                    <option>Rural</option>
-                                    <option>Urban</option>
+                                <select 
+                                name = {"locality"}
+                                onChange = {(e)=>handleSelectChange2(e)}
+                                className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
+                                    <option value = "Rural">Rural</option>
+                                    <option value = "Urban">Urban</option>
                                     <option selected className="text-white">
                                         Select
                                     </option>
