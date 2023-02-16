@@ -228,24 +228,45 @@ function TeamConcepts() {
     //form 2
 
     const [form2 , setForm2] = useState (
-        [
+        
             {
-                college : "Pune Institue of Computer Technology",
-                country : "India",
-                state : "Maharashtra",
-                district : "Pune",
-                locality : "dhankwadi"
+                college : "",
+                country : "",
+                state : "",
+                district : "",
+                locality : "1"
 
             }
-        ]
+        
     )
 
     const handleInputChange2 = (e) => {
-        const { name, value } = e.target;
-        setForm2({ ...form2, [name]: value });
-        console.log(form2);
         
-
+        const { name, value } = e.target;
+        if (name === "pict" && value==="1") {
+            console.log("hi")
+            setForm2((form2) => ({
+              ...form2,
+              college: "Pune Institute Of Computer Technology",
+              country:"India",
+              state : "Maharashtra",
+                district : "Pune",
+                locality : "1"
+            }));
+          } else if(name === "pict" && value==="0"){
+            setForm2((form2) => ({
+                ...form2,
+                college : "",
+                country : "",
+                state : "",
+                district : "",
+                locality : ""
+              }));
+          }
+          else{
+            setForm2({ ...form2, [name]: value });
+            console.log(form2);
+          }
     }
 
     const handleSelectChange2 = (e) =>
@@ -517,7 +538,21 @@ function TeamConcepts() {
 
                 {/* form 2 */}
                 {formStep === 2 && (
-                    <>
+                    <>  
+                        <div className="my-5">
+                            <p className="input-label font-medium mb-3 text-white text-lg">
+                                Are you PICTian or not?
+                            </p>
+                            <input type="radio" value="1" name="pict" onChange = {handleInputChange2} /> Yes
+                            <input
+                                type="radio"
+                                value="0"
+                                name="pict"
+                                className="ml-10"
+                                onChange = {handleInputChange2}
+                            />{" "}
+                            No
+                        </div>
                         <div className=" mx-1 my-2">
                             <InputBox
                                 label="college"
@@ -526,6 +561,7 @@ function TeamConcepts() {
                                 placeholder="college name"
                                 required
                                 onChange={(e) => handleInputChange2(e)}
+                                
                                 value={form2.college}
                             />
                         </div>
@@ -537,6 +573,7 @@ function TeamConcepts() {
                                 placeholder="country"
                                 required
                                 onChange={(e) => handleInputChange2(e)}
+
                                 value={form2.country}
                             />
                         </div>
@@ -571,11 +608,11 @@ function TeamConcepts() {
                             <div className="relative w-full lg:w-full block px-0  text-sm">
                                 <select 
                                 name = {"locality"}
-                                onChange = {(e)=>handleSelectChange2(e)}
+                                onChange = {(e)=>handleInputChange2(e)}
                                 className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                    <option value = "Rural">Rural</option>
-                                    <option value = "Urban">Urban</option>
-                                    <option selected className="text-white">
+                                    <option value = "0" selected={form2.locality=="0"}>Rural</option>
+                                    <option value = "1" selected={form2.locality=="1"}>Urban</option>
+                                    <option disabled selected className="text-white">
                                         Select
                                     </option>
                                 </select>
@@ -609,7 +646,7 @@ function TeamConcepts() {
                             />
                         )
                     )}
-
+                   
                     {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registering for concepts!!!</h1>}
                 </div>
             </form>
