@@ -18,6 +18,10 @@ function TeamConcepts() {
                 guide_phone: "",
                 company_name: "",
                 abstract: "",
+                nda : "",
+                sponsor : "",
+                mode : "",
+
 
             }
         ]
@@ -35,7 +39,7 @@ function TeamConcepts() {
         const { name, value } = e.target;
         setForm0({ ...form0, [name]: value });
         console.log(form0);
-        setForm0(form0);
+        //setForm0(form0);
 
     }
 
@@ -228,12 +232,13 @@ function TeamConcepts() {
                             <p className="input-label font-medium mb-3 text-white text-lg">
                                 Is the project sponsored or not?
                             </p>
-                            <input type="radio" value="Yes" name="sponsor" /> Yes
+                            <input type="radio" value="Yes" name="sponsor" onChange = {handleInputChange0} /> Yes
                             <input
                                 type="radio"
                                 value="No"
                                 name="sponsor"
                                 className="ml-10"
+                                onChange = {handleInputChange0}
                             />{" "}
                             No
                         </div>
@@ -251,8 +256,8 @@ function TeamConcepts() {
                             <p className="input-label font-medium mb-3 text-white text-lg">
                                 NDA signed or not?
                             </p>
-                            <input type="radio" value="Yes" name="nda" /> Yes
-                            <input type="radio" value="No" name="nda" className="ml-10" /> No
+                            <input type="radio" value="Yes" name="nda" onChange = {handleInputChange0} /> Yes
+                            <input type="radio" value="No" name="nda" className="ml-10 " onChange = {handleInputChange0} /> No
                         </div>
                         <InputBox
                             type="textarea"
@@ -268,12 +273,13 @@ function TeamConcepts() {
                             <p className="input-label font-medium mb-3 text-white text-lg">
                                 Preferred mode of presentation
                             </p>
-                            <input type="radio" value="Yes" name="mode" /> Online
+                            <input type="radio" value="Online" name="mode" onChange = {handleInputChange0} /> Online
                             <input
                                 type="radio"
-                                value="No"
+                                value="Offline"
                                 name="mode"
                                 className="ml-10"
+                                onChange = {handleInputChange0}
                             />{" "}
                             Offline
                         </div>
