@@ -27,11 +27,6 @@ const coSponsors = [
     name: "Bajaj Finserve",
     logo: 'https://drive.google.com/uc?export=view&id=1aeQVY01k-PjY8Rueva06KMtd4-bHLNEs',
     website: "https://pubmatic.com/",
-    linkedin: "https://www.linkedin.com/company/pubmatic/",
-    instagram: "https://www.instagram.com/pubmatic/",
-    facebook: "https://www.facebook.com/PubMatic",
-    twitter: "https://twitter.com/pubmatic",
-    careers: "https://pubmatic.com/careers/engineering/",
   },
 ];
 
