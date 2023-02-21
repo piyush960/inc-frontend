@@ -10,16 +10,22 @@ import dummy from '../assets/images/logo.png'
 
 const titleSponsors = [
   {
-    name: "CION Digital",
-    logo: dummy,
+    name: "CION EQ",
+    logo: 'https://drive.google.com/uc?export=view&id=1nMyMSeV2GxwmikZcm-a1LGQUEZCBNafd',
+    website: "https://www.ciondigital.com/",
+  },
+
+  {
+    name: "eQ Technologic",
+    logo: 'https://drive.google.com/uc?export=view&id=1aIkXVwq1fn669OsmkKzJQ1s4je9n-Hps',
     website: "https://www.ciondigital.com/",
   },
 ];
 
 const coSponsors = [
   {
-    name: "PubMatic",
-    logo: dummy,
+    name: "Bajaj Finserve",
+    logo: 'https://drive.google.com/uc?export=view&id=1aeQVY01k-PjY8Rueva06KMtd4-bHLNEs',
     website: "https://pubmatic.com/",
     linkedin: "https://www.linkedin.com/company/pubmatic/",
     instagram: "https://www.instagram.com/pubmatic/",
@@ -31,15 +37,20 @@ const coSponsors = [
 
 const educationSponsors = [
   {
-    name: "AlgoAnalytics",
-    logo: dummy,
+    name: "Imocha",
+    logo: 'https://drive.google.com/uc?export=view&id=1a19W1JWRjSMKRwmQut76fbTk-S0CI3hg',
     website: "https://www.algoanalytics.com/",
   },
   {
-    name: "Harbinger Group",
-    logo: dummy,
-    website: "https://harbingergroup.com/",
-  }
+    name: "Sarvatra",
+    logo: 'https://drive.google.com/uc?export=view&id=1_z5nKoWl7ka3WFbv3N6Dadt79PlLQXjC',
+    website: "https://www.algoanalytics.com/",
+  },
+  {
+    name: "Airvana",
+    logo: 'https://drive.google.com/uc?export=view&id=1add614SJWsdD_MM2JPLs0HvtbxyDV0fO',
+    website: "https://www.algoanalytics.com/",
+  },
 ];
 
 const eventSponsors = [
@@ -122,9 +133,9 @@ export default function Sponsors() {
       </div>
       <h1 className="sponsors-head">Title Sponsor</h1>
       <div className="sponsors-list title-sponsors">{titleSponsorsList}</div>
-      <div className="sponsors-head">Co Sponsors</div>
+      <div className="sponsors-head">Co Sponsors And Concept Sponsor</div>
       <div className="sponsors-list">{coSponsorsList}</div>
-      <div className="sponsors-head">Education Partners</div>
+      <div className="sponsors-head">CO Sponsors OF INC</div>
       <div className="sponsors-list">{educationSponsorsList}</div>
       <div className="sponsors-head">Event Sponsors</div>
       <div className="sponsors-list">{eventSponsorsList}</div>
