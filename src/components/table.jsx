@@ -36,35 +36,44 @@ function AdminData() {
     // setData(temp);
     setDummy(e.target.value)
 };
+  const handleButtonClick=(e, id)=>{
+    e.preventDefault();
+    let obj = changes.findIndex(o => o.id===id);
+    if(obj===-1) window.alert('No changes to Update');
+    else{
+      window.alert(`Value updated to ${changes[obj].name} ${changes[obj].nativeName} ${changes[obj].capital}`);
+      console.log(changes[obj]);
+    }
+  }
   const columns = [
-  //   {
-  //     name: "Actions",
-  //     button: true,
-  //     input: true,
-  //     cell: (row) => (
-  //       <div>
+    {
+      name: "Actions",
+      button: true,
+      input: true,
+      cell: (row) => (
+        <div>
 
-  //         <button
-  //             className="btn btn-outline btn-xs"
-  //             onClick={(e) => {console.log(row);handleButtonClick(e, row.id)}}
-  //         >
-  //             Edit
-  //         </button>
-  //         <input
-  //                     type="text"
-  //                     style={{
-  //                       width: '100%',
-  //                       border: 'none',
-  //                       fontSize: '1rem',
-  //                       padding: 0,
-  //                       margin: 0,
-  //                     }}
-  //                     value={value}
-  //                     onChange={(event) => setValue(event.target.value)}
-  //                   />
-  //       </div>
-  //     ),
-  // },
+          <button
+              className="btn btn-outline btn-xs"
+              onClick={(e) => {console.log(row);handleButtonClick(e, row.id)}}
+          >
+              Update
+          </button>
+          {/* <input
+                      type="text"
+                      style={{
+                        width: '100%',
+                        border: 'none',
+                        fontSize: '1rem',
+                        padding: 0,
+                        margin: 0,
+                      }}
+                      value={value}
+                      onChange={(event) => setValue(event.target.value)}
+                    /> */}
+        </div>
+      ),
+  },
   {
       name: "Country Name",
       selector: (row) => row.name,
@@ -81,6 +90,7 @@ function AdminData() {
                       }}
                       value={row.name}
                       onChange={(event) => handleChange(event,row.id,'name')}
+                      // disabled
                     />
         </div>
       ),
@@ -141,12 +151,12 @@ function AdminData() {
     {dummy}
       <DataTable columns={columns} data={value} pagination fixedHeader fixedHeaderScrollHeight="400px" highlightOnHover title="Student Data" />
       </div>
-      <button
+      {/* <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
               onClick={(e) => {e.preventDefault();console.log('chages are: ',changes)}}
           >
               Update
-          </button>
+          </button> */}
           
     </div>
   );
