@@ -5,7 +5,7 @@ import React from "react";
 // import algoanalytics from "../../assets/images/algoanalytics.png";
 // import budhani from "../../assets/images/budhani.jpeg";
 // import harbinger from "../../assets/images/harbinger.png";
-import dummy from '../assets/images/logo.png'
+// import dummy from '../assets/images/logo.png'
 
 
 const titleSponsors = [
@@ -50,20 +50,55 @@ const educationSponsors = [
 
 const eventSponsors = [
   {
-    name: "CION Digital",
-    logo: dummy,
+    name: "Agcocorp",
+    logo: 'https://drive.google.com/uc?export=view&id=1wrcCCJ5erGljke-TKHZvPOyq84owOPDR',
     website: "https://www.ciondigital.com/",
   },
 ];
 
-const foodSponsors = [
+const eventSponsors2 = [
   {
-    name: "Budhani Bros Waferwala",
-    logo: dummy,
-    website: "https://www.budhanibros.com/",
-    instagram: "https://www.instagram.com/budhanibroswaferwala/"
-  }
-]
+    name: "Veritas",
+    logo: 'https://drive.google.com/uc?export=view&id=1KmAmtM6bhre8GCgOFMk4AXNtT2BowRbw',
+    website: "https://www.ciondigital.com/",
+  },
+];
+
+const Other = [
+  {
+    name: "Foodhealth",
+    logo: 'https://drive.google.com/uc?export=view&id=17JKWKnysEwogKmsfAtLKGbj-QzHSpcAO',
+    website: "https://www.ciondigital.com/",
+  },
+  {
+    name: "Zbyte",
+    logo: 'https://drive.google.com/uc?export=view&id=1d9g1gGyF7fNUFaNCJqj77ADdZk77uCKQ',
+    website: "https://www.ciondigital.com/",
+  },
+  {
+    name: "Algorithm Analytics",
+    logo: 'https://drive.google.com/uc?export=view&id=1sQVfyycKbZt53KjD9ELH75Kc3kCThPxM',
+    website: "https://www.ciondigital.com/",
+  },
+];
+
+const Assosiation = [
+  {
+    name: "IEEE",
+    logo: 'https://drive.google.com/uc?export=view&id=1efqYW5q3PWhXVXPaYv0s_zWzW2dj_EEx',
+    website: "https://www.ciondigital.com/",
+  },
+  {
+    name: "ACM",
+    logo: 'https://drive.google.com/uc?export=view&id=1lYLoIpQ2YYcsBi0iwbrYEtuLoyvRz-ca',
+    website: "https://www.ciondigital.com/",
+  },
+  {
+    name: "CSI",
+    logo: 'https://drive.google.com/uc?export=view&id=1tGkGZC1zwSGdvW_h7meX6LIGgbCimn6G',
+    website: "https://www.ciondigital.com/",
+  },
+];
 
 const getList1 = (sponsorsArray) => {
   const list = sponsorsArray.map((sponsor) => {
@@ -117,8 +152,10 @@ const getList1 = (sponsorsArray) => {
 const titleSponsorsList = getList1(titleSponsors);
 const coSponsorsList = getList1(coSponsors);
 const educationSponsorsList = getList1(educationSponsors);
-const eventSponsorsList = getList1(eventSponsors);
-const foodSponsorsList = getList1(foodSponsors);
+const ImpetusSponsorsList = getList1(eventSponsors);
+const PradnyaSponsorsList = getList1(eventSponsors2);
+const OtherSponsorsList = getList1(Other);
+const AssosiationSponsorsList = getList1(Assosiation);
 
 export default function Sponsors() {
   return (
@@ -132,10 +169,14 @@ export default function Sponsors() {
       <div className="sponsors-list">{coSponsorsList}</div>
       <div className="sponsors-head">CO Sponsors OF INC</div>
       <div className="sponsors-list">{educationSponsorsList}</div>
-      <div className="sponsors-head">Event Sponsors</div>
-      <div className="sponsors-list">{eventSponsorsList}</div>
-      <div className="sponsors-head">Food Partners</div>
-      <div className="sponsors-list">{foodSponsorsList}</div>
+      <div className="sponsors-head">Impetus Sponsor</div>
+      <div className="sponsors-list">{ImpetusSponsorsList}</div>
+      <div className="sponsors-head">Concept Sponsor</div>
+      <div className="sponsors-list">{PradnyaSponsorsList}</div>
+      <div className="sponsors-head">Other Sponsors</div>
+      <div className="sponsors-list">{OtherSponsorsList}</div>
+      <div className="sponsors-head">In Assosiation With</div>
+      <div className="sponsors-list">{AssosiationSponsorsList}</div>
     </div>
   );
 }
