@@ -1,5 +1,5 @@
 import React from 'react';
-import { RadioButtons, Checkboxes } from '../components';
+import { RadioButtons, Checkboxes, toast, Buttons } from '../components';
 
 function Test() {
     const [state, setState] = React.useState({ domains: ['AD'] })
@@ -9,7 +9,7 @@ function Test() {
         {
             value: '1',
             label: 'Yes',
-            onChange: function(e) { }
+            onChange: function (e) { }
         },
         {
             value: '0',
@@ -36,6 +36,12 @@ function Test() {
         },
     ]
 
+    function a(e) {
+        e.preventDefault()
+        console.log('Submitted');
+        toast.success('Submitted', { icon: '🔥' })
+    }
+
     function submit(e) {
         e.preventDefault()
         console.log(e.target.isPICT.value);
@@ -47,7 +53,7 @@ function Test() {
             <form className='w-1/2' onSubmit={submit}>
                 <RadioButtons label='Are you from PICT ?' options={options} state={checked} setState={setChecked} name='isPICT' required />
                 <Checkboxes label='Domains' options={domains} state={state} setState={setState} name='domains' />
-                <button>Submit</button>
+                <Buttons value='Submit' onClick={a} />
             </form>
         </div>
     );
