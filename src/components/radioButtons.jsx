@@ -23,7 +23,7 @@ function RadioButtons({ label, options, state, setState, name, required, error }
                 ))}
 
             </div>
-            {error && <span className='text-red-500 bg-black px-2 py-1 rounded-lg absolute right-3 mt-10'>{error}</span>}
+            {error && <span className='text-red-500 bg-black px-2 py-1 rounded-lg absolute right-3 -mt-4'>{error}</span>}
         </div>
     )
 }

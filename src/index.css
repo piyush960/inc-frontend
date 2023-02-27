@@ -107,3 +107,19 @@ input:hover ~ .label {
   border: 3px solid #010642;
   /* border: transparent; */
 }
+
+/* ===== Loader CSS ===== */
+
+.spin_loader {
+  animation: spin_loader 1s linear infinite;
+  transition: all 0.5s ease-in-out;
+}
+
+@keyframes spin_loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

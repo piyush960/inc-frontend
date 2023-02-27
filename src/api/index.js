@@ -1,0 +1,1 @@
+export { registerJudge } from './requests';
