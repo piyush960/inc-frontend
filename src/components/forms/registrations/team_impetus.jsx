@@ -303,24 +303,19 @@ function TeamImpetus() {
         e.preventDefault();
         if (formStep === 0) {
             for (const property in form0) {
-
-                if (form0[property] == "") {
+                if((form0.sponsored=="0" && form0.company==""))
+                continue;
+                if((form0.mode=="1" && form0.reason_of_mode==""))
+                continue;
+                if (form0[property] == "" ) {
+                    
                     console.log("error")
                     return
 
                 }
             }
         }
-        if (formStep === 1) {
-            for (const property in formfields) {
-
-                if (formfields[property] == "") {
-                    console.log("error")
-                    return
-
-                }
-            }
-        }
+        
         if (formStep === 2) {
             for (const property in form2) {
 
