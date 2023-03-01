@@ -137,7 +137,7 @@ const steps = [
 const totalSteps = steps.length
 
 
-function TeamConcepts() {
+function TeamImpetus() {
 
     //form0
     const [activeStep, setActiveStep] = React.useState(1);
@@ -152,13 +152,12 @@ function TeamConcepts() {
             guide_email: "",
             guide_phone: "",
             hod_email: "",
+            sponsored: "0",
             company: "",
             abstract: "",
             nda: "0",
-            sponsored: "0",
             mode: "1",
             reason_of_mode: "",
-
 
         }
 
@@ -168,6 +167,8 @@ function TeamConcepts() {
         const { name, value } = e.target;
         setForm0({ ...form0, [name]: value });
         console.log(form0);
+
+
     }
 
     const handleSelectChange0 = (e) => {
@@ -185,7 +186,7 @@ function TeamConcepts() {
 
             name: "",
             email: "",
-            phoneno: "",
+            phone: "",
             gender: "",
 
 
@@ -208,10 +209,10 @@ function TeamConcepts() {
     }
 
     const addfields = () => {
-        console.log("hi")
+
         for (const property in formfields) {
-            console.log("hi2")
-            if (formfields[property] == '') {
+
+            if (formfields[property] == "") {
                 console.log("error")
                 return
 
@@ -221,7 +222,7 @@ function TeamConcepts() {
         let object = {
             name: "",
             email: "",
-            phoneno: "",
+            phone: "",
             gender: "",
         };
 
@@ -243,23 +244,27 @@ function TeamConcepts() {
                 country : "",
                 state : "",
                 district : "",
-                locality : "1"
+                city:"",
+                locality : "1",
+                leader : ""
 
             }
-        
     )
 
     const handleInputChange2 = (e) => {
         
         const { name, value } = e.target;
         if (name === "pict" && value==="1") {
+            console.log("hi")
             setForm2((form2) => ({
               ...form2,
               college: "Pune Institute Of Computer Technology",
               country:"India",
               state : "Maharashtra",
                 district : "Pune",
-                locality : "1"
+                city:"Pune",
+                locality : "1",
+                leader :"test1@gmail.com"
             }));
           } else if(name === "pict" && value==="0"){
             setForm2((form2) => ({
@@ -268,7 +273,9 @@ function TeamConcepts() {
                 country : "",
                 state : "",
                 district : "",
-                locality : ""
+                city:"",
+                locality : "",
+                leader : ""
               }));
           }
           else{
@@ -296,12 +303,18 @@ function TeamConcepts() {
         e.preventDefault();
         if (formStep === 0) {
             for (const property in form0) {
-                if((form0.sponsored=="0" && form0.company==""))
-                continue;
-                if((form0.mode=="1" && form0.reason_of_mode==""))
-                continue;
-                if (form0[property] == "" ) {
-                    
+
+                if (form0[property] == "") {
+                    console.log("error")
+                    return
+
+                }
+            }
+        }
+        if (formStep === 1) {
+            for (const property in formfields) {
+
+                if (formfields[property] == "") {
                     console.log("error")
                     return
 
@@ -323,7 +336,9 @@ function TeamConcepts() {
         console.log(form0);
         console.log(form2);
         setFormStep((currentStep) => currentStep + 1);
-        setActiveStep(activeStep + 1);
+        setActiveStep(activeStep + 1)
+
+
     };
 
     //dropdown
@@ -561,12 +576,12 @@ function TeamConcepts() {
                                             <div className="mr-1 w-1/2">
                                                 <InputBox
                                                     label="phoneno"
-                                                    name="phoneno"
+                                                    name="phone"
                                                     type="number"
                                                     placeholder="phone number"
                                                     required
                                                     onChange={(event) => handleFormChange(event, index)}
-                                                    value={form.phoneno}
+                                                    value={form.phone}
                                                 />
                                             </div>
                                             <div className="ml-1 w-1/2">
@@ -632,6 +647,7 @@ function TeamConcepts() {
                                 value={form2.college}
                             />
                         </div>
+                        <div className="flex mx-1 ">
                         <div className="mx-1 my-2">
                             <InputBox
                                 label="country"
@@ -644,6 +660,20 @@ function TeamConcepts() {
                                 value={form2.country}
                             />
                         </div>
+                        <div className="mx-1 my-2">
+                            <InputBox
+                                label="city"
+                                name = {"city"}
+                                type="text"
+                                placeholder="city"
+                                required
+                                onChange={(e) => handleInputChange2(e)}
+
+                                value={form2.city}
+                            />
+                        </div>
+                        </div>
+                       
                         <div className="flex mx-1 ">
                             <div className="mr-1 w-1/2">
                                 <InputBox
@@ -714,7 +744,7 @@ function TeamConcepts() {
                         )
                     )}
                    
-                    {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registring for concepts!!!</h1>}
+                    {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registering for Impetus!!!</h1>}
                 </div>
             </form>
             {/* <Buttons
@@ -727,4 +757,4 @@ function TeamConcepts() {
     );
 }
 
-export default TeamConcepts;
+export default TeamImpetus;
