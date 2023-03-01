@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import ConceptsForms from './conceptsForms';
 import ImpetusForms from './impetusForms';
-import PradnyaForms from './pradnyaForm';
+import PradnyaForms from './pradnyaForms';
 
 function Forms() {
     let { eventName } = useParams();
