@@ -15,7 +15,7 @@ module.exports = {
       'gold': '#f2a30f',
       'light_blue': '#075985cc',
       transparent: 'transparent',
-    },
+    }
   },
   plugins: [],
 }
