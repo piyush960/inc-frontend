@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { FormsBanner, Modals, Buttons } from '../components';
-import TeamImpetus from '../components/forms/registrations/team_impetus';
+import { useState, useRef } from 'react';
+import { FormsBanner, ProgressBar, Modals, Buttons } from '../components';
+import TeamPradnya from '../components/forms/registrations/team_pradnya';
 import './styles/forms.css';
-const implogo=require('../assets/images/impetus_logo.png')
-function ImpetusForms() {
+const implogo=require('../assets/images/pradnya_logo.png')
+function PradnyaForms() {
     const [showModal, setShowModal] = useState(false)
     function toggleInstructionsModal() {
         setShowModal(prevState => !prevState)
     }
     return (
         <div>
-            <FormsBanner logo={implogo} eventName="IMPETUS" eventDescription="24th and 25th March" />
+            <FormsBanner logo={implogo} eventName="PRADNYA" eventDescription="24th and 25th March" />
 
             <div className='flex justify-end'>
                 <Buttons value="i" onClick={toggleInstructionsModal} classNames="rounded-full mr-24" />
@@ -53,8 +53,8 @@ function ImpetusForms() {
                     </div>
                 </>
             </Modals>
-             <TeamImpetus />
+             <TeamPradnya />
         </div>
     );
 }
-export default ImpetusForms;
+export default PradnyaForms;
