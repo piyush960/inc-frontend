@@ -3,8 +3,10 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import InputBox from "../../inputBox";
 import Buttons from "../../buttons";
+
 import styled from 'styled-components';
 import FileInputBox from "../../fileInputBox";
+import { toast } from "../../../components";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -303,12 +305,12 @@ function TeamImpetus() {
         e.preventDefault();
         if (formStep === 0) {
             for (const property in form0) {
-                if((form0.sponsored=="0" && form0.company==""))
-                continue;
-                if((form0.mode=="1" && form0.reason_of_mode==""))
-                continue;
+                // if((form0.sponsored=="0" && form0.company==""))
+                // continue;
+                // if((form0.mode=="1" && form0.reason_of_mode==""))
+                // continue;
                 if (form0[property] == "" ) {
-                    
+                    toast.warn("Please enter all fields!")
                     console.log("error")
                     return
 
@@ -320,11 +322,13 @@ function TeamImpetus() {
             for (const property in form2) {
 
                 if (form2[property] == "") {
+                    toast.warn("Please enter all fields!")
                     console.log("error")
                     return
 
                 }
             }
+            toast.success("Form submitted successfully!")
         }
 
         console.log(formfields);
@@ -360,7 +364,7 @@ function TeamImpetus() {
                     </StepWrapper>
                 ))}
             </StepContainer>
-            <div className=" mx-16 my-6">
+            <div className=" md:mx-16 my-6">
                 <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
                     {/* form 0 */}
                     {formStep === 0 && (
@@ -376,7 +380,7 @@ function TeamImpetus() {
                                 value={form0.title}
                             ></InputBox>
                             <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Domain Of Project
                                 </p>
                                 <div className="relative w-full lg:w-full block px-0  text-sm">
@@ -398,7 +402,7 @@ function TeamImpetus() {
                                 </div>
                             </div>
                             <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Project Type
                                 </p>
                                 <div className="relative w-full lg:w-full block px-0  text-sm">
@@ -456,7 +460,7 @@ function TeamImpetus() {
                                 value={form0.hod_email}
                             ></InputBox>
                             <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Is the project sponsored or not?
                                 </p>
                                 <input type="radio" value="1" name="sponsored" onChange={handleInputChange0} /> Yes
@@ -482,7 +486,7 @@ function TeamImpetus() {
                                         value={form0.company}
                                     ></InputBox>
                                     <div className="my-5">
-                                        <p className="input-label font-medium mb-3 text-white text-lg">
+                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                             NDA signed or not?
                                         </p>
                                         <input type="radio" value="1" name="nda" onChange={handleInputChange0} /> Yes
@@ -504,7 +508,7 @@ function TeamImpetus() {
                                 value={form0.abstract}
                             ></InputBox>
                             <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Preferred mode of presentation
                                 </p>
                                 <input type="radio" value="0" name="mode" onChange={handleInputChange0} /> Online
@@ -550,7 +554,7 @@ function TeamImpetus() {
                                 return (
                                     <div key={index}>
                                         <InputBox
-                                            label="name"
+                                            label="Name"
                                             name="name"
                                             type="text"
                                             placeholder="name "
@@ -559,7 +563,7 @@ function TeamImpetus() {
                                             value={form.name}
                                         />
                                         <InputBox
-                                            label="email"
+                                            label="Email ID"
                                             name="email"
                                             type="text"
                                             placeholder="email "
@@ -570,7 +574,7 @@ function TeamImpetus() {
                                         <div className="flex">
                                             <div className="mr-1 w-1/2">
                                                 <InputBox
-                                                    label="phoneno"
+                                                    label="Phone Number"
                                                     name="phone"
                                                     type="number"
                                                     placeholder="phone number"
@@ -580,7 +584,7 @@ function TeamImpetus() {
                                                 />
                                             </div>
                                             <div className="ml-1 w-1/2">
-                                                <p className="input-label font-medium  text-white text-lg">
+                                                <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                                     Gender
                                                 </p>
                                                 <div className="relative w-full lg:w-full block px-0  text-sm">
@@ -600,7 +604,7 @@ function TeamImpetus() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <FileInputBox accept="image/png, image/jpeg" type="file" label="Upload Screenshot of ID" required />
+                                        <FileInputBox accept="image/png, image/jpeg" type="file" label="Upload Screenshot of ID" classNames={'after:content-['*'] after:ml-0.5 after:text-gold'} required />
 
                                         <Buttons
                                             value="remove member"
@@ -617,7 +621,7 @@ function TeamImpetus() {
                 {formStep === 2 && (
                     <>  
                         <div className="my-5">
-                            <p className="input-label font-medium mb-3 text-white text-lg">
+                            <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                 Are you PICTian or not?
                             </p>
                             <input type="radio" value="1" name="pict" onChange = {handleInputChange2} /> Yes
@@ -632,7 +636,7 @@ function TeamImpetus() {
                         </div>
                         <div className=" mx-1 my-2">
                             <InputBox
-                                label="college"
+                                label="College"
                                 name = {"college"}
                                 type="text"
                                 placeholder="college name"
@@ -645,7 +649,7 @@ function TeamImpetus() {
                         <div className="flex mx-1 ">
                         <div className="mx-1 my-2">
                             <InputBox
-                                label="country"
+                                label="Country"
                                 name = {"country"}
                                 type="text"
                                 placeholder="country"
@@ -657,7 +661,7 @@ function TeamImpetus() {
                         </div>
                         <div className="mx-1 my-2">
                             <InputBox
-                                label="city"
+                                label="City"
                                 name = {"city"}
                                 type="text"
                                 placeholder="city"
@@ -672,7 +676,7 @@ function TeamImpetus() {
                         <div className="flex mx-1 ">
                             <div className="mr-1 w-1/2">
                                 <InputBox
-                                    label="state"
+                                    label="State"
                                     type="text"
                                     name = {"state"}
                                     placeholder="state"
@@ -683,7 +687,7 @@ function TeamImpetus() {
                             </div>
                             <div className="ml-1 w-1/2">
                                 <InputBox
-                                    label="district"
+                                    label="District"
                                     name = {"district"}
                                     type="text"
                                     placeholder="district"
@@ -694,10 +698,10 @@ function TeamImpetus() {
                             </div>
                         </div>
                         <div className=" mx-1 my-2">
-                            <p className="input-label font-medium mb-3 text-white text-lg">
+                            <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                 Locality
                             </p>
-                            <div className="relative w-full lg:w-full block px-0  text-sm">
+                            <div className="relative w-full lg:w-full block px-0  text-sm ">
                                 <select 
                                 name = {"locality"}
                                 onChange = {(e)=>handleInputChange2(e)}

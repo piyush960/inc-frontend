@@ -1,7 +1,7 @@
 function FormsBanner(props) {
     return (
-        <header className="w-full flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue">
-            <div className="w-32 h-auto shadow-white">
+        <header className=" flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue md:mx-20 mx-5 mt-10">
+            <div className="w-20 h-auto shadow-white">
                 <img src={props.logo} alt="" />
             </div>
             <div className='flex flex-col justify-center gap-3'>
