@@ -117,22 +117,22 @@ const CheckMark = styled.div`
 `
 
 const steps = [
-  {
-    label: 'Step1',
-    step: 1,
-  },
-  {
-    label: 'Step2',
-    step: 2,
-  },
-  {
-    label: 'Step3',
-    step: 3,
-  },
-  {
-    label: 'Step4',
-    step: 4,
-  },
+    {
+        label: 'Step1',
+        step: 1,
+    },
+    {
+        label: 'Step2',
+        step: 2,
+    },
+    {
+        label: 'Step3',
+        step: 3,
+    },
+    {
+        label: 'Step4',
+        step: 4,
+    },
 ]
 const totalSteps = steps.length
 
@@ -236,45 +236,45 @@ function TeamConcepts() {
 
     //form 2
 
-    const [form2 , setForm2] = useState (
-        
-            {
-                college : "",
-                country : "",
-                state : "",
-                district : "",
-                locality : "1"
+    const [form2, setForm2] = useState(
 
-            }
-        
+        {
+            college: "",
+            country: "",
+            state: "",
+            district: "",
+            locality: "1"
+
+        }
+
     )
 
     const handleInputChange2 = (e) => {
-        
+
         const { name, value } = e.target;
-        if (name === "pict" && value==="1") {
-            setForm2((form2) => ({
-              ...form2,
-              college: "Pune Institute Of Computer Technology",
-              country:"India",
-              state : "Maharashtra",
-                district : "Pune",
-                locality : "1"
-            }));
-          } else if(name === "pict" && value==="0"){
+        if (name === "pict" && value === "1") {
             setForm2((form2) => ({
                 ...form2,
-                college : "",
-                country : "",
-                state : "",
-                district : "",
-                locality : ""
-              }));
-          }
-          else{
+                college: "Pune Institute Of Computer Technology",
+                country: "India",
+                state: "Maharashtra",
+                district: "Pune",
+                locality: "1"
+            }));
+        } else if (name === "pict" && value === "0") {
+            setForm2((form2) => ({
+                ...form2,
+                college: "",
+                country: "",
+                state: "",
+                district: "",
+                locality: ""
+            }));
+        }
+        else {
             setForm2({ ...form2, [name]: value });
             console.log(form2);
-          }
+        }
     }
 
     const handleSelectChange2 = (e) => {
@@ -296,12 +296,12 @@ function TeamConcepts() {
         e.preventDefault();
         if (formStep === 0) {
             for (const property in form0) {
-                if((form0.sponsored=="0" && form0.company==""))
-                continue;
-                if((form0.mode=="1" && form0.reason_of_mode==""))
-                continue;
-                if (form0[property] == "" ) {
-                    
+                // if ((form0.sponsored == "0" && form0.company == ""))
+                //     continue;
+                // if ((form0.mode == "1" && form0.reason_of_mode == ""))
+                //     continue;
+                if (form0[property] == "") {
+
                     console.log("error")
                     return
 
@@ -350,7 +350,7 @@ function TeamConcepts() {
                     </StepWrapper>
                 ))}
             </StepContainer>
-            <div className=" mx-16 my-6">
+            <div className=" md:mx-16 my-6">
                 <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
                     {/* form 0 */}
                     {formStep === 0 && (
@@ -366,7 +366,7 @@ function TeamConcepts() {
                                 value={form0.title}
                             ></InputBox>
                             <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Domain Of Project
                                 </p>
                                 <div className="relative w-full lg:w-full block px-0  text-sm">
@@ -388,7 +388,7 @@ function TeamConcepts() {
                                 </div>
                             </div>
                             <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Project Type
                                 </p>
                                 <div className="relative w-full lg:w-full block px-0  text-sm">
@@ -446,7 +446,7 @@ function TeamConcepts() {
                                 value={form0.hod_email}
                             ></InputBox>
                             <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Is the project sponsored or not?
                                 </p>
                                 <input type="radio" value="1" name="sponsored" onChange={handleInputChange0} /> Yes
@@ -472,7 +472,7 @@ function TeamConcepts() {
                                         value={form0.company}
                                     ></InputBox>
                                     <div className="my-5">
-                                        <p className="input-label font-medium mb-3 text-white text-lg">
+                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                             NDA signed or not?
                                         </p>
                                         <input type="radio" value="1" name="nda" onChange={handleInputChange0} /> Yes
@@ -494,7 +494,7 @@ function TeamConcepts() {
                                 value={form0.abstract}
                             ></InputBox>
                             <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Preferred mode of presentation
                                 </p>
                                 <input type="radio" value="0" name="mode" onChange={handleInputChange0} /> Online
@@ -540,7 +540,7 @@ function TeamConcepts() {
                                 return (
                                     <div key={index}>
                                         <InputBox
-                                            label="name"
+                                            label="Name"
                                             name="name"
                                             type="text"
                                             placeholder="name "
@@ -549,7 +549,7 @@ function TeamConcepts() {
                                             value={form.name}
                                         />
                                         <InputBox
-                                            label="email"
+                                            label="Email ID"
                                             name="email"
                                             type="text"
                                             placeholder="email "
@@ -560,7 +560,7 @@ function TeamConcepts() {
                                         <div className="flex">
                                             <div className="mr-1 w-1/2">
                                                 <InputBox
-                                                    label="phoneno"
+                                                    label="Phone No"
                                                     name="phoneno"
                                                     type="number"
                                                     placeholder="phone number"
@@ -570,7 +570,7 @@ function TeamConcepts() {
                                                 />
                                             </div>
                                             <div className="ml-1 w-1/2">
-                                                <p className="input-label font-medium  text-white text-lg">
+                                                <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                                     Gender
                                                 </p>
                                                 <div className="relative w-full lg:w-full block px-0  text-sm">
@@ -603,128 +603,128 @@ function TeamConcepts() {
                         </>
                     )}
 
-                {/* form 2 */}
-                {formStep === 2 && (
-                    <>  
-                        <div className="my-5">
-                            <p className="input-label font-medium mb-3 text-white text-lg">
-                                Are you PICTian or not?
-                            </p>
-                            <input type="radio" value="1" name="pict" onChange = {handleInputChange2} /> Yes
-                            <input
-                                type="radio"
-                                value="0"
-                                name="pict"
-                                className="ml-10"
-                                onChange = {handleInputChange2}
-                            />{" "}
-                            No
-                        </div>
-                        <div className=" mx-1 my-2">
-                            <InputBox
-                                label="college"
-                                name = {"college"}
-                                type="text"
-                                placeholder="college name"
-                                required
-                                onChange={(e) => handleInputChange2(e)}
-                                
-                                value={form2.college}
-                            />
-                        </div>
-                        <div className="mx-1 my-2">
-                            <InputBox
-                                label="country"
-                                name = {"country"}
-                                type="text"
-                                placeholder="country"
-                                required
-                                onChange={(e) => handleInputChange2(e)}
+                    {/* form 2 */}
+                    {formStep === 2 && (
+                        <>
+                            <div className="my-5">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                    Are you PICTian or not?
+                                </p>
+                                <input type="radio" value="1" name="pict" onChange={handleInputChange2} /> Yes
+                                <input
+                                    type="radio"
+                                    value="0"
+                                    name="pict"
+                                    className="ml-10"
+                                    onChange={handleInputChange2}
+                                />{" "}
+                                No
+                            </div>
+                            <div className=" mx-1 my-2">
+                                <InputBox
+                                    label="College"
+                                    name={"college"}
+                                    type="text"
+                                    placeholder="college name"
+                                    required
+                                    onChange={(e) => handleInputChange2(e)}
 
-                                value={form2.country}
-                            />
-                        </div>
-                        <div className="flex mx-1 ">
-                            <div className="mr-1 w-1/2">
-                                <InputBox
-                                    label="state"
-                                    type="text"
-                                    name = {"state"}
-                                    placeholder="state"
-                                    required
-                                    onChange={(e) => handleInputChange2(e)}
-                                    value={form2.state}
+                                    value={form2.college}
                                 />
                             </div>
-                            <div className="ml-1 w-1/2">
+                            <div className="mx-1 my-2">
                                 <InputBox
-                                    label="district"
-                                    name = {"district"}
+                                    label="Country"
+                                    name={"country"}
                                     type="text"
-                                    placeholder="district"
+                                    placeholder="country"
                                     required
                                     onChange={(e) => handleInputChange2(e)}
-                                    value={form2.district}
+
+                                    value={form2.country}
                                 />
                             </div>
-                        </div>
-                        <div className=" mx-1 my-2">
-                            <p className="input-label font-medium mb-3 text-white text-lg">
-                                Locality
-                            </p>
-                            <div className="relative w-full lg:w-full block px-0  text-sm">
-                                <select 
-                                name = {"locality"}
-                                onChange = {(e)=>handleInputChange2(e)}
-                                className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                    <option value = "0" selected={form2.locality=="0"}>Rural</option>
-                                    <option value = "1" selected={form2.locality=="1"}>Urban</option>
-                                    <option disabled selected className="text-white">
-                                        Select
-                                    </option>
-                                </select>
+                            <div className="flex mx-1 ">
+                                <div className="mr-1 w-1/2">
+                                    <InputBox
+                                        label="State"
+                                        type="text"
+                                        name={"state"}
+                                        placeholder="state"
+                                        required
+                                        onChange={(e) => handleInputChange2(e)}
+                                        value={form2.state}
+                                    />
+                                </div>
+                                <div className="ml-1 w-1/2">
+                                    <InputBox
+                                        label="District"
+                                        name={"district"}
+                                        type="text"
+                                        placeholder="district"
+                                        required
+                                        onChange={(e) => handleInputChange2(e)}
+                                        value={form2.district}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    </>
-                )}
-                <div className="flex justify-between">
-                    {formStep > 0 && formStep < 3 ? (
-                        <Buttons
-                            className="mx-2 my-2"
-                            value=" Previous Step"
-                            onClick={prevForm}
-                        />
-                    ) : (
-                        ""
+                            <div className=" mx-1 my-2">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                    Locality
+                                </p>
+                                <div className="relative w-full lg:w-full block px-0  text-sm">
+                                    <select
+                                        name={"locality"}
+                                        onChange={(e) => handleInputChange2(e)}
+                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
+                                        <option value="0" selected={form2.locality == "0"}>Rural</option>
+                                        <option value="1" selected={form2.locality == "1"}>Urban</option>
+                                        <option disabled selected className="text-white">
+                                            Select
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </>
                     )}
-
-                    {formStep === 2 ? (
-                        <Buttons
-                            className=" mx-2 my-2 p-1 "
-                            value="Submit"
-                            onClick={nextForm}
-                        />
-                    ) : (
-                        formStep < 2 && (
+                    <div className="flex justify-between">
+                        {formStep > 0 && formStep < 3 ? (
                             <Buttons
-                                className=" mx-2 my-2 p-1 "
-                                value="Next Step"
+                                className="mx-2 my-2"
+                                value=" Previous Step"
+                                onClick={prevForm}
+                            />
+                        ) : (
+                            ""
+                        )}
+
+                        {formStep === 2 ? (
+                            <Buttons
+                                className=" mx-2 my-2 "
+                                value="Submit"
                                 onClick={nextForm}
                             />
-                        )
-                    )}
-                   
-                    {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registring for concepts!!!</h1>}
-                </div>
-            </form>
-            {/* <Buttons
+                        ) : (
+                            formStep < 2 && (
+                                <Buttons
+                                    className=" mx-2 my-2  "
+                                    value="Next Step"
+                                    onClick={nextForm}
+                                />
+                            )
+                        )}
+
+                        {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registring for concepts!!!</h1>}
+                    </div>
+                </form>
+                {/* <Buttons
                 value="submit"
                 onClick={submit}
                 classNames='mx-2 my-2'
             /> */}
-        </div>
+            </div>
         </MainContainer>
     );
 }
 
-export default TeamConcepts;
+export default TeamConcepts;

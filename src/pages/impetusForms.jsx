@@ -10,10 +10,9 @@ function ImpetusForms() {
     }
     return (
         <div>
-            <FormsBanner logo={implogo} eventName="IMPETUS" eventDescription="24th and 25th March" />
-
+            
             <div className='flex justify-end'>
-                <Buttons value="i" onClick={toggleInstructionsModal} classNames="rounded-full mr-24" />
+                <Buttons value="i" onClick={toggleInstructionsModal} classNames="rounded-full mr-24 my-5" />
             </div>
             <Modals modalState={showModal} toggleModal={toggleInstructionsModal}  >
                 <>

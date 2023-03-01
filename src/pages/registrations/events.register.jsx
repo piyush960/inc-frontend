@@ -3,6 +3,10 @@ import { FormsBanner } from '../../components';
 import ConceptsForms from '../conceptsForms';
 import ImpetusForms from '../impetusForms';
 import PradnyaForms from '../pradnyaForms';
+const conlogo=require('../../assets/images/concepts_logo.png')
+const implogo=require('../../assets/images/impetus_logo.png')
+const pralogo=require('../../assets/images/pradnya_logo.png')
+
 
 function EventsForms() {
     let { eventName } = useParams();
@@ -12,7 +16,7 @@ function EventsForms() {
         case 'concepts':
             return (
                 <>
-                    <FormsBanner logo='' eventName='Concepts' eventDescription='Register for the most grand project exhibition event Concepts for final year student' />
+                    <FormsBanner logo={conlogo} eventName='Concepts' eventDescription='Register for the most grand project exhibition event Concepts for final year student' />
                     <ConceptsForms />
                 </>
             )
@@ -20,7 +24,7 @@ function EventsForms() {
         case 'impetus':
             return (
                 <>
-                    <FormsBanner logo='' eventName='Impetus' eventDescription='Register for the most grand project exhibition event impetus for all students from First to Third Year' />
+                    <FormsBanner logo={implogo} eventName='Impetus' eventDescription='Register for the most grand project exhibition event impetus for all students from First to Third Year' />
                     <ImpetusForms />
                 </>
             )
@@ -28,7 +32,7 @@ function EventsForms() {
         case 'pradnya':
             return (
                 <>
-                    <FormsBanner logo='' eventName='Pradnya' eventDescription='Register for the most competitive live coding event Pradnya' />
+                    <FormsBanner logo={pralogo} eventName='Pradnya' eventDescription='Register for the most competitive live coding event Pradnya' />
                     <PradnyaForms />
                 </>
             )
