@@ -1,10 +1,10 @@
 import "../styles/event_registrations.css";
 import React, { useRef } from "react";
 import { useState } from "react";
-import InputBox from "../../inputBox";
-import Buttons from "../../buttons";
-import styled from 'styled-components';
+import { InputBox, Buttons, toast } from "../../../components";
 import FileInputBox from "../../fileInputBox";
+import styled from 'styled-components';
+
 
 const MainContainer = styled.div`
   width: 100%;
@@ -187,10 +187,17 @@ function TeamConcepts() {
             email: "",
             phoneno: "",
             gender: "",
-
+            member_id:"",
 
         },
     ]);
+
+    const handleImageChange = (event, index) => {
+        let data = [...formfields];
+        data[index][event.target.name] = event.target.files[0];
+        console.log(event.target.files);
+        setformfields(data);
+    };
 
     const handleFormChange = (event, index) => {
         let data = [...formfields];
@@ -208,13 +215,12 @@ function TeamConcepts() {
     }
 
     const addfields = () => {
-        console.log("hi")
-        for (const property in formfields) {
-            console.log("hi2")
-            if (formfields[property] == '') {
+        console.log(formfields.at(-1),'asdf')
+        for (const property in formfields.at(-1)) {
+            console.log(formfields.at(-1)[property])
+            if (formfields.at(-1)[property] == '') {
                 console.log("error")
                 return
-
             }
         }
 
@@ -223,15 +229,20 @@ function TeamConcepts() {
             email: "",
             phoneno: "",
             gender: "",
+            member_id:"",
         };
 
         setformfields([...formfields, object]);
     };
 
     const removefields = (index) => {
-        let data = [...formfields];
+        if(formfields.length>1){
+            let data = [...formfields];
         data.splice(index, 1);
         setformfields(data);
+        }
+        else 
+        return
     };
 
     //form 2
@@ -284,7 +295,7 @@ function TeamConcepts() {
     }
 
     //steps for whole form
-    const [formStep, setFormStep] = React.useState(0);
+    const [formStep, setFormStep] = React.useState(1);
 
     const prevForm = (e) => {
         // e.preventDefault();
@@ -296,14 +307,19 @@ function TeamConcepts() {
         e.preventDefault();
         if (formStep === 0) {
             for (const property in form0) {
-                // if ((form0.sponsored == "0" && form0.company == ""))
-                //     continue;
-                // if ((form0.mode == "1" && form0.reason_of_mode == ""))
-                //     continue;
-                if (form0[property] == "") {
+                console.log(property)
 
-                    console.log("error")
-                    return
+                if (form0[property] == "") {
+                    if (property == "company" && form0["sponsored"] == "0")
+                        continue;
+                    if (property == "reason_of_mode" && form0["mode"] == "1")
+                        continue;
+                    else {
+                        toast.warn("Please enter all fields!")
+                        console.log("error")
+                        return
+                    }
+
 
                 }
             }
@@ -312,11 +328,13 @@ function TeamConcepts() {
             for (const property in form2) {
 
                 if (form2[property] == "") {
+                    toast.warn("Please enter all fields!")
                     console.log("error")
                     return
 
                 }
             }
+            toast.success("Form submitted successfully!")
         }
 
         console.log(formfields);
@@ -590,12 +608,13 @@ function TeamConcepts() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <FileInputBox accept="image/png, image/jpeg" type="file" label="Upload Screenshot of ID" required />
-
+                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange = {(e)=>handleImageChange(e,index)} label="Upload Screenshot of ID" required />
+                                     
                                         <Buttons
                                             value="remove member"
                                             onClick={() => removefields(index)}
                                             classNames=" my-2"
+                                            disabled={true}
                                         />
                                     </div>
                                 );

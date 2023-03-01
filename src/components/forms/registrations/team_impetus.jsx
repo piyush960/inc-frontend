@@ -3,8 +3,10 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import InputBox from "../../inputBox";
 import Buttons from "../../buttons";
+
 import styled from 'styled-components';
 import FileInputBox from "../../fileInputBox";
+import { toast } from "../../../components";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -308,7 +310,7 @@ function TeamImpetus() {
                 // if((form0.mode=="1" && form0.reason_of_mode==""))
                 // continue;
                 if (form0[property] == "" ) {
-                    
+                    toast.warn("Please enter all fields!")
                     console.log("error")
                     return
 
@@ -320,11 +322,13 @@ function TeamImpetus() {
             for (const property in form2) {
 
                 if (form2[property] == "") {
+                    toast.warn("Please enter all fields!")
                     console.log("error")
                     return
 
                 }
             }
+            toast.success("Form submitted successfully!")
         }
 
         console.log(formfields);
