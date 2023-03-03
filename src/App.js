@@ -25,13 +25,13 @@ function App() {
         <Route path='/dashboard' element={<ProtectedRoutes children={<Dashboard />} />} />
         <Route path='/inc-teams' element={<InCTeams />} />
         <Route path='/judge' element={<ProtectedRoutes children={<JudgeForm />} />} />
-        {/* {process.env.REACT_APP_ENVIRONMENT === 'development' && */}
+        {process.env.REACT_APP_ENVIRONMENT === 'development' &&
           <Route path='/test' element={
-            // <Suspense fallback={<>...</>}>
+            <Suspense fallback={<>...</>}>
               <Test />
-            // </Suspense>
+            </Suspense>
           } />
-        {/* } */}
+        }
       </Routes>
       <Footer />
     </BrowserRouter>
