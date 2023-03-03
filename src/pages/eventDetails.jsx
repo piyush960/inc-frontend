@@ -249,8 +249,7 @@ import { useNavigate, useParams } from 'react-router-dom';
                             </div>
                         </div>
                       </div>
-        
-                      <div className="col-span-2">
+                      <>{eventDetail.rounds?<div className="col-span-2">
                         <div className="text-2xl font-bold bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">
                           {/* Platforms :MCQ */}
                           Rounds
@@ -271,7 +270,8 @@ import { useNavigate, useParams } from 'react-router-dom';
                             ))}
                           </div>
                         </div>
-                      </div>
+                      </div>:''}</>
+                      
         
                       <div className="col-span-2">
                         <div className="text-2xl font-bold pb-2 mt-5 bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">
