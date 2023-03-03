@@ -91,7 +91,8 @@ import { useNavigate, useParams } from 'react-router-dom';
         else _404Navigator('/404');
       
       }
-      useEffect(()=>fetchName(),[])
+      // eslint-disable-next-line
+      useEffect(()=>fetchName(),[]) 
         return (
             <>
                (
@@ -133,7 +134,11 @@ import { useNavigate, useParams } from 'react-router-dom';
                       Registrations are currently being done manually. Sorry for
                       inconvenience:(
                     </p> */}
-                    
+                    <button
+                        className="border-2 border-solid p-2"
+                      >
+                        <a href={eventDetail.button_link}>Register</a>
+                      </button>
                     <p className="text-red-400 font-medium event-register-buttons disabled">
                         Registrations closed! Try with other events.
                       </p>          
