@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastUtils, Navbar, Loader, Footer } from './components';
 import { EventDetails, RegistrationsForms, Payment, Dashboard, InCTeams, Homepage, Auth } from './pages';
 import ProtectedRoutes from './routes/ProtectedRoutes';
@@ -12,7 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <BrowserRouter>
+    <Router>
       <ToastUtils />
       <Navbar />
       {loading ? <Loader /> : <></>}
@@ -34,7 +34,7 @@ function App() {
         }
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </Router>
   );
 }
 
