@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
-import{ registerConceptStep1 } from '../api';
+import { registerEventStep3 } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
 
-function useRegisterConceptStep1(setErrors) {
-    const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(registerConceptStep1 , {
+function useRegisterStep3(setErrors , eventName) {
+    const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(registerEventStep3(eventName), {
         onError: (err) => {
             const parsedError = errorParser(err)
             parsedError.error && toast.error(parsedError.error, { autoClose: 5000 })
@@ -23,5 +23,5 @@ function useRegisterConceptStep1(setErrors) {
 }
 
 export {
-    useRegisterConceptStep1,
+    useRegisterStep3,
 }
