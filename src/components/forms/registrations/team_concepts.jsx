@@ -186,8 +186,7 @@ function TeamConcepts() {
     abstract: "",
     nda: "0",
     sponsored: "0",
-    mode: "1",
-    reason_of_mode: "",
+    
   });
   const [errors0, setErrors0] = useState(initialErrorsForm0);
   const registerUserMutaionForm0 = useRegisterConceptStep1(setErrors0);
@@ -276,13 +275,11 @@ function TeamConcepts() {
   };
 
     const removefields = (index) => {
-        if(formfields.length>1){
+      
             let data = [...formfields];
         data.splice(index, 1);
         setformfields(data);
-        }
-        else 
-        return
+       
     };
 
   //form 2
@@ -294,7 +291,9 @@ function TeamConcepts() {
                 country : "",
                 state : "",
                 district : "",
-                locality : "1"
+                locality : "1",
+                mode: "1",
+                reason_of_mode: ""
 
             }
         
@@ -360,8 +359,7 @@ function TeamConcepts() {
                 if (form0[property] == "") {
                     if (property == "company" && form0["sponsored"] == "0")
                         continue;
-                    if (property == "reason_of_mode" && form0["mode"] == "1")
-                        continue;
+                   
                     else {
                         toast.warn("Please enter all fields!")
                         console.log("error")
@@ -384,6 +382,9 @@ function TeamConcepts() {
         }
           
         if (formStep === 1) {
+            if(formfields.length == 1)
+                    {toast.warn("Atleast one member needed!")
+                    return}
           for (const property in form0) {
             if (formfields[property] == "") {
               console.log("error");
@@ -405,6 +406,8 @@ function TeamConcepts() {
             for (const property in form2) {
 
                 if (form2[property] == "") {
+                    if (property == "reason_of_mode" && form2["mode"] == "1")
+                    continue;
                     toast.warn("Please enter all fields!")
                     console.log("error")
                     return
@@ -695,12 +698,13 @@ function TeamConcepts() {
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange = {(e)=>handleImageChange(e,index)} label="Upload Screenshot of ID" required />
                                      
-                                        <Buttons
-                                            value="remove member"
-                                            onClick={() => removefields(index)}
-                                            classNames=" my-2"
-                                            disabled={true}
-                                        />
+                                        {formfields.length>1 &&
+                                       (<><Buttons
+                                        value="remove member"
+                                        onClick={() => removefields(index)}
+                                        classNames=" my-2"
+                                        disabled={true}
+                                    /></>)} 
                                     </div>
                                 );
                             })}
@@ -789,6 +793,35 @@ function TeamConcepts() {
                                     </select>
                                 </div>
                             </div>
+                            <div className="my-5">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                    Preferred mode of presentation
+                                </p>
+                                <input type="radio" value="0" name="mode" onChange={handleInputChange2} /> Online
+                                <input
+                                    type="radio"
+                                    value="1"
+                                    name="mode"
+                                    className="ml-10"
+                                    onChange={handleInputChange2}
+                                />{" "}
+                                Offline
+                            </div>
+                            {form2.mode === "0" && (
+                                <div>
+                                    <InputBox
+                                        type="textarea"
+                                        label={"Reason for Online"}
+                                        name={"reason_of_mode"}
+                                        placeholder={"reason"}
+                                        classNames=""
+                                        required
+                                        onChange={(e) => handleInputChange2(e)}
+                                        value={form2.reason_of_mode}
+                                    ></InputBox>
+                                </div>
+                            )
+                            }
                         </>
                     )}
                     <div className="flex justify-between">
