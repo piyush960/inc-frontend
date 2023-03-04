@@ -4,9 +4,9 @@ import { useState } from "react";
 import InputBox from "../../inputBox";
 import Buttons from "../../buttons";
 import styled from 'styled-components';
-import { useRegisterConceptStep1 } from "../../../hooks/conceptsStep1.hooks";
-import { useRegisterConceptStep2 } from "../../../hooks/conceptsStep2.hooks";
-import { useRegisterConceptStep3 } from "../../../hooks/conceptsStep3.hooks";
+import { useRegisterStep1 } from "../../../hooks/eventsStep1.hooks";
+import { useRegisterStep2 } from "../../../hooks/eventsStep2.hooks";
+import { useRegisterStep3 } from "../../../hooks/eventsStep3.hooks";
 import { toast } from "react-toastify";
 import FileInputBox from "../../fileInputBox";
 
@@ -189,7 +189,7 @@ function TeamConcepts() {
     
   });
   const [errors0, setErrors0] = useState(initialErrorsForm0);
-  const registerUserMutaionForm0 = useRegisterConceptStep1(setErrors0);
+  const registerUserMutaionForm0 = useRegisterStep1(setErrors0,'concepts');
   const handleInputChange0 = (e) => {
     const { name, value } = e.target;
     setForm0((prevState) => {
@@ -232,7 +232,7 @@ function TeamConcepts() {
       setformfields(data);
   };
   const [errors1, setErrors1] = useState(initialErrorsForm1);
-  const registerUserMutaionForm1 = useRegisterConceptStep2(setErrors1);
+  const registerUserMutaionForm1 = useRegisterStep2(setErrors1,'concepts');
     const handleFormChange = (event, index) => {
       const { name, value } = event.target;
       setformfields((prevState) => {
@@ -299,7 +299,7 @@ function TeamConcepts() {
         
     )
     const [errors2, setErrors2] = useState(initialErrorsForm2);
-  const registerUserMutaionForm2 = useRegisterConceptStep3(setErrors2);
+  const registerUserMutaionForm2 = useRegisterStep3(setErrors2,'concepts');
 
     const handleInputChange2 = (e) => {
         

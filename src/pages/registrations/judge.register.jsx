@@ -35,7 +35,7 @@ function JudgeForm() {
 
     const [errors, setErrors] = useState(initialErrors)
 
-    const registerJudgeMutation = useRegisterJudge(setErrors)
+    const registerJudgeMutation = useRegisterJudge(setErrors, 'judge')
 
     const onSuccessNavigator = useNavigate()
 

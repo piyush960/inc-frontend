@@ -1,4 +1,5 @@
 export { registerJudge } from './requests';
-export { registerConceptStep1 } from './requests';
-export { registerConceptStep2 } from './requests';
-export { registerConceptStep3 } from './requests';
+export { registerEventStep1 } from './requests';
+export { registerEventStep2 } from './requests';
+export { registerEventStep3 } from './requests';
+export { verifyEmail } from './requests';
