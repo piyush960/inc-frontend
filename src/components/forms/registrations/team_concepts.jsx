@@ -4,9 +4,7 @@ import { useState } from "react";
 import InputBox from "../../inputBox";
 import Buttons from "../../buttons";
 import styled from 'styled-components';
-import { useRegisterStep1 } from "../../../hooks/eventsStep1.hooks";
-import { useRegisterStep2 } from "../../../hooks/eventsStep2.hooks";
-import { useRegisterStep3 } from "../../../hooks/eventsStep3.hooks";
+import { useRegisterStep1, useRegisterStep2, useRegisterStep3 } from "../../../hooks/events.hooks";
 import { toast } from "react-toastify";
 import FileInputBox from "../../fileInputBox";
 
@@ -244,7 +242,7 @@ function TeamConcepts() {
         return data;
       });
     };
-  
+
 
   const handleSelectChange1 = (event, index) => {
     let data = [...formfields];
@@ -281,14 +279,14 @@ function TeamConcepts() {
         data.splice(index, 1);
         setformfields(data);
         }
-        else 
+        else
         return
     };
 
   //form 2
 
     const [form2 , setForm2] = useState (
-        
+
             {
                 college : "",
                 country : "",
@@ -297,13 +295,13 @@ function TeamConcepts() {
                 locality : "1"
 
             }
-        
+
     )
     const [errors2, setErrors2] = useState(initialErrorsForm2);
   const registerUserMutaionForm2 = useRegisterStep3(setErrors2,'concepts');
 
     const handleInputChange2 = (e) => {
-        
+
         const { name, value } = e.target;
         if (name === "pict" && value==="1") {
             setForm2((form2) => ({
@@ -382,7 +380,7 @@ function TeamConcepts() {
               },
             });
         }
-          
+
         if (formStep === 1) {
           for (const property in form0) {
             if (formfields[property] == "") {
@@ -694,7 +692,7 @@ function TeamConcepts() {
                                             </div>
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange = {(e)=>handleImageChange(e,index)} label="Upload Screenshot of ID" required />
-                                     
+
                                         <Buttons
                                             value="remove member"
                                             onClick={() => removefields(index)}
