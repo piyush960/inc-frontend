@@ -6,7 +6,7 @@ import Buttons from "../../buttons";
 
 import styled from 'styled-components';
 import FileInputBox from "../../fileInputBox";
-import { toast } from "../../../components";
+import { RadioButtons, toast } from "../../../components";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -158,8 +158,8 @@ function TeamImpetus() {
             company: "",
             abstract: "",
             nda: "0",
-            mode: "1",
-            reason_of_mode: "",
+            demo:"1",
+            reason_of_demo:"",
 
         }
 
@@ -190,7 +190,7 @@ function TeamImpetus() {
             email: "",
             phone: "",
             gender: "",
-
+            member_id:"",
 
         },
     ]);
@@ -212,20 +212,19 @@ function TeamImpetus() {
 
     const addfields = () => {
 
-        for (const property in formfields) {
-
-            if (formfields[property] == "") {
+        for (const property in formfields.at(-1)) {
+            console.log(formfields.at(-1)[property])
+            if (formfields.at(-1)[property] == '') {
                 console.log("error")
                 return
-
             }
         }
-
         let object = {
             name: "",
             email: "",
             phone: "",
             gender: "",
+            member_id:"",
         };
 
         setformfields([...formfields, object]);
@@ -234,6 +233,12 @@ function TeamImpetus() {
     const removefields = (index) => {
         let data = [...formfields];
         data.splice(index, 1);
+        setformfields(data);
+    };
+    const handleImageChange = (event, index) => {
+        let data = [...formfields];
+        data[index][event.target.name] = event.target.files[0];
+        console.log(event.target.files);
         setformfields(data);
     };
 
@@ -248,8 +253,10 @@ function TeamImpetus() {
                 district : "",
                 city:"",
                 locality : "1",
-                leader : ""
-
+                leader : "",
+                mode: "1",
+                reason_of_mode: "",
+                year:""
             }
     )
 
@@ -305,11 +312,14 @@ function TeamImpetus() {
         e.preventDefault();
         if (formStep === 0) {
             for (const property in form0) {
-                // if((form0.sponsored=="0" && form0.company==""))
-                // continue;
-                // if((form0.mode=="1" && form0.reason_of_mode==""))
-                // continue;
+               
                 if (form0[property] == "" ) {
+                if (property == "company" && form0["sponsored"] == "0")
+                    continue;
+                if (property == "nda" && form0["sponsored"] == "0")
+                    continue;
+                if (property == "reason_of_demo" && form0["demo"] == "1")
+                    continue;
                     toast.warn("Please enter all fields!")
                     console.log("error")
                     return
@@ -317,11 +327,17 @@ function TeamImpetus() {
                 }
             }
         }
-        
+        if(formStep === 1){
+            if(formfields.length == 1)
+                    {toast.warn("Atleast one member needed!")
+                    return}
+        }
         if (formStep === 2) {
             for (const property in form2) {
 
                 if (form2[property] == "") {
+                    if (property == "reason_of_mode" && form2["mode"] == "1")
+                    continue;
                     toast.warn("Please enter all fields!")
                     console.log("error")
                     return
@@ -509,35 +525,35 @@ function TeamImpetus() {
                             ></InputBox>
                             <div className="my-5">
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Preferred mode of presentation
+                                    Can you show a demo of your project?
                                 </p>
-                                <input type="radio" value="0" name="mode" onChange={handleInputChange0} /> Online
+                                <input type="radio" value="1" name="demo" onChange={handleInputChange0} /> Yes
                                 <input
                                     type="radio"
-                                    value="1"
-                                    name="mode"
+                                    value="0"
+                                    name="demo"
                                     className="ml-10"
                                     onChange={handleInputChange0}
                                 />{" "}
-                                Offline
+                                No
+                               
                             </div>
-                            {form0.mode === "0" && (
+                            {form0.demo === "0" && (
                                 <div>
                                     <InputBox
                                         type="textarea"
-                                        label={"Reason for Online"}
-                                        name={"reason_of_mode"}
+                                        label={"Reason for demo"}
+                                        name={"reason_of_demo"}
                                         placeholder={"reason"}
                                         classNames=""
                                         required
                                         onChange={(e) => handleInputChange0(e)}
-                                        value={form0.reason_of_mode}
+                                        value={form0.reason_of_demo}
                                     ></InputBox>
                                 </div>
                             )
-
-
                             }
+                            
 
                         </>
                     )}
@@ -604,13 +620,14 @@ function TeamImpetus() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <FileInputBox accept="image/png, image/jpeg" type="file" label="Upload Screenshot of ID" classNames={'after:content-['*'] after:ml-0.5 after:text-gold'} required />
-
-                                        <Buttons
-                                            value="remove member"
-                                            onClick={() => removefields(index)}
-                                            classNames=" my-2"
-                                        />
+                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
+                                        {formfields.length>1 &&
+                                       (<><Buttons
+                                        value="remove member"
+                                        onClick={() => removefields(index)}
+                                        classNames=" my-2"
+                                        disabled={true}
+                                    /></>)} 
                                     </div>
                                 );
                             })}
@@ -642,7 +659,7 @@ function TeamImpetus() {
                                 placeholder="college name"
                                 required
                                 onChange={(e) => handleInputChange2(e)}
-                                
+                                disabled={form2.pict}
                                 value={form2.college}
                             />
                         </div>
@@ -712,6 +729,55 @@ function TeamImpetus() {
                                         Select
                                     </option>
                                 </select>
+                            </div>
+                            <div className="my-5">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                    Preferred mode of presentation
+                                </p>
+                                <input type="radio" value="0" name="mode" onChange={handleInputChange2} /> Online
+                                <input
+                                    type="radio"
+                                    value="1"
+                                    name="mode"
+                                    className="ml-10"
+                                    onChange={handleInputChange2}
+                                />{" "}
+                                Offline
+                            </div>
+                            {form2.mode === "0" && (
+                                <div>
+                                    <InputBox
+                                        type="textarea"
+                                        label={"Reason for Online"}
+                                        name={"reason_of_mode"}
+                                        placeholder={"reason"}
+                                        classNames=""
+                                        required
+                                        onChange={(e) => handleInputChange2(e)}
+                                        value={form2.reason_of_mode}
+                                    ></InputBox>
+                                </div>
+                            )
+                            }
+                            <div className="relative z-0  w-full group">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                    Which year are you in?
+                                </p>
+                                <div className="relative w-full lg:w-full block px-0  text-sm">
+                                    <select
+                                        name={"year"}
+                                        onChange={(e) => handleSelectChange2(e)}
+                                        // onChange={handleChange}
+                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
+                                    >
+                                        <option value="1">1st</option>
+                                        <option value="2">2nd</option>
+                                        <option value="3">3rd</option>
+                                        <option value="" selected className="text-white">
+                                            Select
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </>

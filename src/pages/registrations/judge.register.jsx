@@ -2,27 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Buttons, Checkboxes, FormsBanner, InputBox, NoteBox, toast } from '../../components';
 import { useRegisterJudge } from '../../hooks/judge.hooks';
-
-const events = [
-    { value: 'concepts', label: 'Concepts' },
-    { value: 'impetus', label: 'Impetus' }
-]
-
-const domains = [
-    { value: 'AD', label: 'Application Development' },
-    { value: 'CN', label: 'Communication Networks and Security Systems' },
-    { value: 'DP', label: 'Digital / Image/ Speech / Video Processing' },
-    { value: 'ES', label: 'Embedded/VLSI Systems' },
-    { value: 'ML', label: 'Machine Learning and Pattern Recognition' },
-    { value: 'OT', label: 'Others' }
-]
-
-const slots = [
-    { value: '1', label: 'Friday 24th March (9:00 AM - 11:59 AM)' },
-    { value: '2', label: 'Friday 24th March (1:00 PM - 6:00 PM)' },
-    { value: '3', label: 'Saturday 25th March (9:00 AM - 11:59 AM)' },
-    { value: '4', label: 'Saturday 24th March (1:00 PM - 6:00 PM)' }
-]
+import {events,slots,domains} from "../../static/data"
 
 const initialErrors = {
     name: '',
@@ -65,6 +45,7 @@ function JudgeForm() {
             errors[name] !== '' && setErrors(prevState => ({ ...prevState, [name]: '' }))
             return { ...prevState, [name]: value }
         })
+        console.log(judge)
     }
 
     function handleSubmit(e) {

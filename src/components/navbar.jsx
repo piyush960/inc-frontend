@@ -60,7 +60,7 @@ function Navbar() {
                 About
               </a>
               <a
-                href="#schedule"
+                href="/#schedule"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
                   selected === "#schedule"
                     ? "border-light_blue/80 text-gold"

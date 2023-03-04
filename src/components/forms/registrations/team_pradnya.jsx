@@ -5,6 +5,8 @@ import InputBox from "../../inputBox";
 import Buttons from "../../buttons";
 import styled from 'styled-components';
 import FileInputBox from "../../fileInputBox";
+import { RadioButtons, toast } from "../../../components";
+import Dropdown from "../../dropdown";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -115,19 +117,50 @@ function TeamPradnya() {
     const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`
 
     //form1
-
+    const genderopt = [
+        { value: 'Male', label: 'Male' },
+        { value: 'Female', label: 'Female' },
+        { value: 'Other', label: 'Other' }
+    ]
     const [form1, setForm1] = useState([
         {
 
             name: "",
             email: "",
-            phone: "",
+            phoneno: "",
             gender: "",
-
+            member_id: "",
 
         },
     ]);
+    const addfields = () => {
+        console.log(form1.at(-1))
+        for (const property in form1.at(-1)) {
+            console.log(form1.at(-1)[property])
+            if (form1.at(-1)[property] == '') {
+                console.log("error")
+                return
+            }
+        }
 
+        let object = {
+            name: "",
+            email: "",
+            phoneno: "",
+            gender: "",
+            member_id: "",
+        };
+
+        setForm1([...form1, object]);
+    };
+    
+    const removefields = (index) => {
+    
+            let data = [...form1];
+            data.splice(index, 1);
+            setForm1(data);
+    
+    };
 
     const handleInputChange1 = (e) => {
         const { name, value } = e.target;
@@ -146,16 +179,31 @@ function TeamPradnya() {
             district: "",
             city: "",
             locality: "1",
-            leader: ""
+            leader: "",
+            year:"",
 
         }
     )
-
+    const handleFormChange = (event, index) => {
+        const { name, value } = event.target;
+        setForm1((prevState) => {
+            // errors1[name] !== "" &&
+            //     setErrors1((prevState) => ({ ...prevState, [name]: "" }));
+            let data = [...prevState];
+            data[index][name] = value;
+            return data;
+        });
+    };
+    const handleImageChange = (event, index) => {
+        let data = [...form1];
+        data[index][event.target.name] = event.target.files[0];
+        console.log(event.target.files);
+        setForm1(data);
+    };
     const handleInputChange2 = (e) => {
 
         const { name, value } = e.target;
         if (name === "pict" && value === "1") {
-            console.log("hi")
             setForm2((form2) => ({
                 ...form2,
                 college: "Pune Institute Of Computer Technology",
@@ -198,8 +246,13 @@ function TeamPradnya() {
         e.preventDefault();
         if (formStep === 1) {
             for (const property in form1) {
-
+                console.log(form1.length)
+                if(form1.length == 1)
+                    {toast.warn("Atleast one member needed!")
+                    return}
                 if (form1[property] == "") {
+                    
+                    toast.warn("Please enter all fields!")
                     console.log("error")
                     return
 
@@ -210,6 +263,7 @@ function TeamPradnya() {
             for (const property in form2) {
 
                 if (form2[property] == "") {
+                    toast.warn("Please enter all fields!")
                     console.log("error")
                     return
 
@@ -253,60 +307,55 @@ function TeamPradnya() {
                     {/* form 1 */}
                     {formStep === 1 && (
                         <>
+                        {form1.length<2 &&(<>
+                            <Buttons
+                                value="add members"
+                                onClick={addfields}
+                                classNames=" my-2"
+                            />
+                        </>)}
+                            {form1.map((form, index) => {
+                                return (
+                                    <div key={index}>
+                                        <InputBox label="Name"  name="name"  type="text"  placeholder="name "  required  onChange={(event) => handleFormChange(event, index)}  value={form.name} />
+                                        <InputBox label="Email ID"  name="email" type="text"  placeholder="email " required  onChange={(event) => handleFormChange(event, index)}  value={form.email} />
+                                        <div className="flex">
+                                            <div className="mr-1 w-1/2">
+                                                <InputBox label="Phone No"   name="phoneno"  type="number"  placeholder="phone number" required onChange={(event) => handleFormChange(event, index)} value={form.phoneno} />
+                                            </div>
+                                            <div className="ml-1 w-1/2">
+                                            <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                                    Gender
+                                                </p>
+                                                <div className="relative w-full lg:w-full block px-0  text-sm">
+                                                    <select
+                                                        name="gender"
+                                                        onChange={(event) => handleFormChange(event, index)}
+                                                        // onChange={handleChange}
+                                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
+                                                    >
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Other">Other</option>
+                                                        <option value="" selected className="text-white">
+                                                            Select
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
 
-                            <InputBox
-                                label="Name"
-                                name="name"
-                                type="text"
-                                placeholder="name "
-                                required
-                                onChange={(event) => handleInputChange1(event)}
-                                value={form1.name}
-                            />
-                            <InputBox
-                                label="Email ID"
-                                name="email"
-                                type="text"
-                                placeholder="email "
-                                required
-                                onChange={(event) => handleInputChange1(event)}
-                                value={form1.email}
-                            />
-                            <div className="md:flex md:w-1/2">
-                                <div className="mr-1 ">
-                                    <InputBox
-                                        label="Phone Number"
-                                        name="phone"
-                                        type="number"
-                                        placeholder="phone number"
-                                        required
-                                        onChange={(event) => handleInputChange1(event)}
-                                        value={form1.phone}
-                                    />
-                                </div>
-                                <div className="ml-1 md:w-1/2">
-                                    <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                        Gender
-                                    </p>
-                                    <div className="relative w-full lg:w-full block px-0  text-sm">
-                                        <select
-                                            name="gender"
-                                            onChange={(event) => handleInputChange1(event)}
-                                            // onChange={handleChange}
-                                            className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
-                                        >
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Other">Other</option>
-                                            <option value="" selected className="text-white">
-                                                Select
-                                            </option>
-                                        </select>
+                                       {form1.length>1 &&
+                                       (<><Buttons
+                                        value="remove member"
+                                        onClick={() => removefields(index)}
+                                        classNames=" my-2"
+                                        disabled={true}
+                                    /></>)} 
                                     </div>
-                                </div>
-                            </div>
-                            <FileInputBox accept="image/png, image/jpeg" type="file" label="Upload Screenshot of ID" required />
-
+                                );
+                            })}
                         </>
                     )}
 
@@ -403,6 +452,27 @@ function TeamPradnya() {
                                         <option value="0" selected={form2.locality == "0"}>Rural</option>
                                         <option value="1" selected={form2.locality == "1"}>Urban</option>
                                         <option disabled selected className="text-white">
+                                            Select
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div className="relative z-0  w-full group">
+                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                    Which year are you in?
+                                </p>
+                                <div className="relative w-full lg:w-full block px-0 my-3 text-sm">
+                                    <select
+                                        name={"year"}
+                                        onChange={(e) => handleInputChange2(e)}
+                                        // onChange={handleChange}
+                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
+                                    >
+                                        <option value="1">1st</option>
+                                        <option value="2">2nd</option>
+                                        <option value="3">3rd</option>
+                                        <option value="" selected className="text-white">
                                             Select
                                         </option>
                                     </select>
