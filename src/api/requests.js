@@ -8,9 +8,9 @@ const registerJudge =  (eventName) =>  async (data) => await backend.post(`/${ev
 const registerEventStep1 = (eventName) =>  async (data) => await backend.post(`/events/${eventName}/step_1`, data);
 const registerEventStep2 = (eventName) =>  async (data) => await backend.post(`/events/${eventName}/step_2`, data);
 const registerEventStep3 = (eventName) =>  async (data) => await backend.post(`/events/${eventName}/step_3`, data);
-
+const verifyEmail = (eventName) =>  async (data) => await backend.post(`/events/verify/payment/${eventName}`, data);
 
 
 export {
-    registerJudge, registerEventStep1, registerEventStep2, registerEventStep3,
+    registerJudge, registerEventStep1, registerEventStep2, registerEventStep3, verifyEmail
 }
