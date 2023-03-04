@@ -8,17 +8,17 @@ function VerifyEventRegistration() {
 
     const options = [
         {
-            name: 'Concepts',
+            label: 'Concepts',
             value: 'concepts',
             onChange: (event) => handleEventChange(event.target.value),
         },
         {
-            name: 'Impetus',
+            label: 'Impetus',
             value: 'impetus',
             onChange: (event) => handleEventChange(event.target.value),
         },
         {
-            name: 'Pradnya',
+            label: 'Pradnya',
             value: 'pradnya',
             onChange: (event) => handleEventChange(event.target.value),
         },
@@ -119,8 +119,8 @@ function VerifyEventRegistration() {
 
     return (
         <>
-            <h1 className='text-2xl font-semibold mt-5'>Verify Event Registrations</h1>
-            <div className='w-full flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue md:mx-20 mx-5 mt-10'>
+            <h1 className='text-center text-4xl font-semibold mt-5'>Verify Event Registrations</h1>
+            <div className='flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:px-8 md:pt-6 border border-light_blue md:mx-20 mx-5 my-10'>
                 <RadioButtons label='Select Event' options={options} state={event} setState={setEvent} />
             </div>
             <Suspense fallback={<div>Loading...</div>}>

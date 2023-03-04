@@ -467,6 +467,7 @@ function TeamConcepts() {
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.title}
+                                minlenght='10'
                             ></InputBox>
                             <div className="relative z-0  w-full group">
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
@@ -595,6 +596,7 @@ function TeamConcepts() {
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.abstract}
+                                minlenght='50'
                             ></InputBox>
                             <div className="my-5">
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
