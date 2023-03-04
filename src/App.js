@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastUtils, Navbar, Loader, Footer } from './components';
 import { EventDetails, RegistrationsForms, Payment, Dashboard, InCTeams, Homepage, Auth } from './pages';
+import Table from './pages/table';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 import JudgeForm from './pages/registrations/judge.register';
@@ -25,6 +26,7 @@ function App() {
         <Route path='/dashboard' element={<ProtectedRoutes children={<Dashboard />} />} />
         <Route path='/inc-teams' element={<InCTeams />} />
         <Route path='/judge' element={<ProtectedRoutes children={<JudgeForm />} />} />
+        <Route path='/table' element={<Table />} />
         {/* {process.env.REACT_APP_ENVIRONMENT === 'development' && */}
           <Route path='/test' element={
             // <Suspense fallback={<>...</>}>
