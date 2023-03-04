@@ -12,7 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
+    <BrowserRouter>
       <ToastUtils />
       <Navbar />
       {loading ? <Loader /> : <></>}
