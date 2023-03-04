@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastUtils, Navbar, Loader, Footer } from './components';
 import { EventDetails, RegistrationsForms, Payment, Dashboard, InCTeams, Homepage, Auth } from './pages';
 import ProtectedRoutes from './routes/ProtectedRoutes';
@@ -12,7 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <Router>
+    <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
       <ToastUtils />
       <Navbar />
       {loading ? <Loader /> : <></>}
@@ -20,7 +20,7 @@ function App() {
         <Route index element={<Homepage />} />
         <Route path='/event-details/:eventName' element={<EventDetails />} />
         <Route path='/auth' element={<Auth />} />
-        <Route path='/register*' element={<RegistrationsForms />} />
+        <Route path='/register/*' element={<RegistrationsForms />} />
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/dashboard' element={<ProtectedRoutes children={<Dashboard />} />} />
         <Route path='/inc-teams' element={<InCTeams />} />
@@ -34,7 +34,7 @@ function App() {
         }
       </Routes>
       <Footer />
-    </Router>
+    </BrowserRouter>
   );
 }
 
