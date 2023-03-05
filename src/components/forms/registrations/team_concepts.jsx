@@ -229,7 +229,8 @@ function TeamConcepts() {
   };
   const [errors1, setErrors1] = useState(initialErrorsForm1);
   const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
-    const handleFormChange = (event, index) => {
+  
+  const handleFormChange = (event, index) => {
       const { name, value } = event.target;
       setFormFields((prevState) => {
         errors1[name] !== "" &&
@@ -475,7 +476,7 @@ function TeamConcepts() {
                                         ))}
                                         <option value="" selected className="text-white">
                                             Select
-                                        </option>
+                                        </option>   
                                     </select>
                                 </div>
                             </div>
