@@ -19,7 +19,7 @@ function Navbar() {
 
   const handleSelect = (e) => {
     if (e.target.value === "Register") return;
-    navigate(`/register/event/${e.target.value.toLowerCase()}`);
+    navigate(`/register/events/${e.target.value.toLowerCase()}`);
   };
 
   return (

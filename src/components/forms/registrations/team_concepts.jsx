@@ -136,43 +136,6 @@ const steps = [
 const totalSteps = steps.length
 
 const initialErrorsForm0 = {
-  title: "",
-  domain: "",
-  project_type: "",
-  guide_name: "",
-  guide_email: "",
-  guide_phone: "",
-  hod_email: "",
-  company: "",
-  abstract: "",
-  nda: "",
-  sponsored: "",
-};
-const initialErrorsForm1 = {
-  name: "",
-  email: "",
-  phone: "",
-  gender: "",
-  member_id: "",
-};
-const initialErrorsForm2 = {
-    isPICT: "",
-    isInternational: "",
-  college: "",
-  country: "",
-  state: "",
-  district: "",
-  locality: "",
-  mode: "",
-  reason_of_mode: "",
-  referral: "",
-};
-
-function TeamConcepts() {
-  //form0
-  const [activeStep, setActiveStep] = useState(1);
-  const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
-  const [form0, setForm0] = useState({
     title: "",
     domain: "",
     project_type: "",
@@ -182,32 +145,69 @@ function TeamConcepts() {
     hod_email: "",
     company: "",
     abstract: "",
-    nda: "0",
-    sponsored: "0",
+    nda: "",
+    sponsored: "",
+};
+const initialErrorsForm1 = {
+    name: "",
+    email: "",
+    phone: "",
+    gender: "",
+    member_id: "",
+};
+const initialErrorsForm2 = {
+    isPICT: "",
+    isInternational: "",
+    college: "",
+    country: "",
+    state: "",
+    district: "",
+    locality: "",
+    mode: "",
+    reason_of_mode: "",
+    referral: "",
+};
 
-  });
-  const [errors0, setErrors0] = useState(initialErrorsForm0);
-  const registerUserMutationForm0 = useRegisterStep1(setErrors0,'concepts');
-  const handleInputChange0 = (e) => {
-    const { name, value } = e.target;
-    setForm0((prevState) => {
-      errors0[name] !== "" &&
-        setErrors0((prevState) => ({ ...prevState, [name]: "" }));
-      return { ...prevState, [name]: value };
+function TeamConcepts() {
+    //form0
+    const [activeStep, setActiveStep] = useState(1);
+    const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
+    const [form0, setForm0] = useState({
+        title: "",
+        domain: "",
+        project_type: "",
+        guide_name: "",
+        guide_email: "",
+        guide_phone: "",
+        hod_email: "",
+        company: "",
+        abstract: "",
+        nda: "0",
+        sponsored: "0",
+
     });
-  };
+    const [errors0, setErrors0] = useState(initialErrorsForm0);
+    const registerUserMutationForm0 = useRegisterStep1(setErrors0, 'concepts');
+    const handleInputChange0 = (e) => {
+        const { name, value } = e.target;
+        setForm0((prevState) => {
+            errors0[name] !== "" &&
+                setErrors0((prevState) => ({ ...prevState, [name]: "" }));
+            return { ...prevState, [name]: value };
+        });
+    };
 
-  const handleSelectChange0 = (e) => {
-    const { name, value } = e.target;
-    setForm0((prevState) => {
-      errors0[name] !== "" &&
-        setErrors0((prevState) => ({ ...prevState, [name]: "" }));
-      return { ...prevState, [name]: value };
-    });
-    //setForm0(form0);
-  };
+    const handleSelectChange0 = (e) => {
+        const { name, value } = e.target;
+        setForm0((prevState) => {
+            errors0[name] !== "" &&
+                setErrors0((prevState) => ({ ...prevState, [name]: "" }));
+            return { ...prevState, [name]: value };
+        });
+        //setForm0(form0);
+    };
 
-  //form1
+    //form1
 
     const [formFields, setFormFields] = useState([
         {
@@ -216,36 +216,37 @@ function TeamConcepts() {
             email: "",
             phone: "",
             gender: "",
-            member_id:"",
+            member_id: "",
 
 
         },
     ]);
 
     const handleImageChange = (event, index) => {
-      let data = [...formFields];
-      data[index][event.target.name] = event.target.files[0];
-      setFormFields(data);
-  };
-  const [errors1, setErrors1] = useState(initialErrorsForm1);
-  const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
+        let data = [...formFields];
+        data[index][event.target.name] = event.target.files[0];
+        setFormFields(data);
+    };
+    const [errors1, setErrors1] = useState(initialErrorsForm1);
+    const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
+
     const handleFormChange = (event, index) => {
-      const { name, value } = event.target;
-      setFormFields((prevState) => {
-        errors1[name] !== "" &&
-          setErrors1((prevState) => ({ ...prevState, [name]: "" }));
-        let data = [...prevState];
-        data[index][name] = value;
-        return data;
-      });
+        const { name, value } = event.target;
+        setFormFields((prevState) => {
+            errors1[name] !== "" &&
+                setErrors1((prevState) => ({ ...prevState, [name]: "" }));
+            let data = [...prevState];
+            data[index][name] = value;
+            return data;
+        });
     };
 
 
-  const handleSelectChange1 = (event, index) => {
-    let data = [...formFields];
-    data[index][event.target.name] = event.target.value;
-    setFormFields(data);
-  };
+    const handleSelectChange1 = (event, index) => {
+        let data = [...formFields];
+        data[index][event.target.name] = event.target.value;
+        setFormFields(data);
+    };
 
     const addFields = () => {
         if (formFields.length < 5) {
@@ -279,88 +280,92 @@ function TeamConcepts() {
             return
         }
         toast.warn("Maximum 5 members are allowed")
-  };
+    };
 
     const removefields = (index) => {
 
-            let data = [...formFields];
+        let data = [...formFields];
         data.splice(index, 1);
         setFormFields(data);
     };
 
-  //form 2
+    //form 2
 
-    const [form2 , setForm2] = useState (
+    const [form2, setForm2] = useState(
 
-            {
-                isPICT: "",
-                isInternational: "0",
-                college : "",
-                country : "",
-                state : "",
-                district : "",
-                locality : "1",
-                mode: "1",
-                reason_of_mode: "",
-                referral: ""
-            }
+        {
+            isPICT: "1",
+            isInternational: "0",
+            college: "",
+            country: "",
+            state: "",
+            district: "",
+            locality: "1",
+            mode: "1",
+            reason_of_mode: "",
+            referral: ""
+        }
 
     )
     const [errors2, setErrors2] = useState(initialErrorsForm2);
-  const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
+    const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
 
     const handleInputChange2 = (e) => {
-
+        console.log(form2.isPICT)
         const { name, value } = e.target;
-        if (name === "isPICT" && value==="1") {
+        if (name === "isPICT" && value === "1") {
             setForm2((form2) => ({
-              ...form2,
-              college: "Pune Institute Of Computer Technology",
-              country:"India",
-              state : "Maharashtra",
-                district : "Pune",
-                locality : "1",
+                ...form2,
+                isPICT: "1",
+                college: "Pune Institute Of Computer Technology",
+                country: "India",
+                city: "Pune",
+                state: "Maharashtra",
+                district: "Pune",
+                locality: "1",
                 mode: "1",
                 reason_of_mode: "",
                 isInternational: "0"
             }));
-          } else if(name === "isPICT" && value==="0"){
+        } else if (name === "isPICT" && value === "0") {
             setForm2((form2) => ({
                 ...form2,
-                college : "",
-                country : "",
-                state : "",
-                district : "",
-                locality : "",
+                isPICT: "0",
+                college: "",
+                country: "",
+                state: "",
+                city: "",
+                district: "",
+                locality: "",
                 isInternational: ""
-              }));
-          }
-          else{
+            }));
+        }
+        else {
             setForm2((prevState) => {
-              errors2[name] !== "" &&
-                setErrors2((prevState) => ({ ...prevState, [name]: "" }));
-              return { ...prevState, [name]: value };
+                errors2[name] !== "" &&
+                    setErrors2((prevState) => ({ ...prevState, [name]: "" }));
+                return { ...prevState, [name]: value };
             });
-          }
+        }
     }
 
-  const handleSelectChange2 = (e) => {
-    const { name, value } = e.target;
-    setForm2((prevState) => {
-      errors2[name] !== "" &&
-        setErrors2((prevState) => ({ ...prevState, [name]: "" }));
-      return { ...prevState, [name]: value };
-    });
-  };
+    const handleSelectChange2 = (e) => {
+        const { name, value } = e.target;
+        setForm2((prevState) => {
+            errors2[name] !== "" &&
+                setErrors2((prevState) => ({ ...prevState, [name]: "" }));
+            return { ...prevState, [name]: value };
+        });
+    };
 
   //steps for whole form
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState(0);
 
-  const prevForm = (e) => {
-    // e.preventDefault();
-    setFormStep((currentStep) => currentStep - 1);
-    setActiveStep(activeStep - 1);
-  };
+    const prevForm = (e) => {
+        // e.preventDefault();
+        setFormStep((currentStep) => currentStep - 1);
+        setActiveStep(activeStep - 1);
+    };
 
     const nextForm = (e) => {
         e.preventDefault();
@@ -370,6 +375,8 @@ function TeamConcepts() {
                 if (form0[property] === "") {
                     if (property === "company" && form0["sponsored"] === "0")
                         continue;
+                    if (property === "nda" && form0["sponsored"] === "0")
+                        continue;
                     else {
                         toast.warn("Please enter all fields!")
                         return
@@ -377,13 +384,13 @@ function TeamConcepts() {
                 }
             }
             registerUserMutationForm0.mutate(form0, {
-              onSuccess: () => {
-                setErrors0(initialErrorsForm0);
-                toast.success("Completed Step 1️⃣ !", { icon: "✅" });
-                setFormStep(currentStep => currentStep + 1);
-                setActiveStep(activeStep => activeStep + 1);
-                return
-              }
+                onSuccess: () => {
+                    setErrors0(initialErrorsForm0);
+                    toast.success("Completed Step 1️⃣ !", { icon: "✅" });
+                    setFormStep(currentStep => currentStep + 1);
+                    setActiveStep(activeStep => activeStep + 1);
+                    return
+                }
             });
         }
         if (formStep === 1) {
@@ -395,6 +402,7 @@ function TeamConcepts() {
             setActiveStep(activeStep => activeStep + 1);
         }
         if (formStep === 2) {
+            console.log(form2)
             for (const property in form2) {
                 if (form2[property] === "") {
                     if (property === "reason_of_mode" && form2["mode"] === "1")
@@ -415,11 +423,11 @@ function TeamConcepts() {
         }
         // if (!registerUserMutationForm0.isLoading || !registerUserMutationForm1.isLoading || !registerUserMutationForm2.isLoading) {
         // }
-  };
+    };
 
-  //dropdown
+    //dropdown
 
-  //const [option, setOption] = useState();
+    //const [option, setOption] = useState();
 
     return (
         <MainContainer>
@@ -464,10 +472,10 @@ function TeamConcepts() {
                                         name={"domain"}
                                         onChange={(e) => handleSelectChange0(e)}
                                         // onChange={handleChange}
-                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
+                                        className="w-full h-14 bg-faint_blue/20 font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue/30 focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                     >
                                         {domains.map(domain => (
-                                            <option value={domain.value} key={domain.value} className="text-white">{domain.label}</option>
+                                            <option value={domain.value} key={domain.value} className="bg-faint_blue">{domain.label}</option>
                                         ))}
                                         <option value="" selected className="text-white">
                                             Select
@@ -629,7 +637,7 @@ function TeamConcepts() {
                                             </div>
                                             <div className="ml-1 w-1/2">
                                                 <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                                    Gender
+                                                    State
                                                 </p>
                                                 <div className="relative w-full lg:w-full block px-0  text-sm">
                                                     <select
@@ -648,14 +656,14 @@ function TeamConcepts() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange = {(e)=>handleImageChange(e,index)} label="Upload Screenshot of ID" required />
+                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
 
-                                        {/* <Buttons
+                                       {formFields.length > 1 &&( <Buttons
                                             value="remove member"
                                             onClick={() => removefields(index)}
                                             classNames=" my-2"
                                             disabled={true}
-                                        /> */}
+                                        />)}
                                     </div>
                                 );
                             })}
@@ -669,7 +677,10 @@ function TeamConcepts() {
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Are you PICTian or not?
                                 </p>
-                                <input type="radio" value="1" name="isPICT" onChange={handleInputChange2} /> Yes
+                                <input type="radio"
+                                    value="1"
+                                    name="isPICT"
+                                    onChange={handleInputChange2} /> Yes
                                 <input
                                     type="radio"
                                     value="0"
@@ -679,6 +690,7 @@ function TeamConcepts() {
                                 />{" "}
                                 No
                             </div>
+
                             {form2.isPICT === "0" && (
                                 <>
                                     <div className="my-5">
@@ -697,16 +709,16 @@ function TeamConcepts() {
                                         Yes
                                     </div>
                                     <div className=" mx-1 my-2">
-                                    <InputBox
-                                        label="College"
-                                        name={"college"}
-                                        type="text"
-                                        placeholder="college name"
-                                        required
-                                        onChange={(e) => handleInputChange2(e)}
+                                        <InputBox
+                                            label="College"
+                                            name={"college"}
+                                            type="text"
+                                            placeholder="college name"
+                                            required
+                                            onChange={(e) => handleInputChange2(e)}
 
-                                        value={form2.college}
-                                    />
+                                            value={form2.college}
+                                        />
                                     </div>
                                     <div className="mx-1 my-2">
                                         <InputBox
@@ -714,10 +726,11 @@ function TeamConcepts() {
                                             name={"country"}
                                             type="text"
                                             placeholder="country"
+                                            disabled={form2.isInternational === "0"}
                                             required
                                             onChange={(e) => handleInputChange2(e)}
 
-                                            value={form2.isInternational === '0' ? 'India': form2.country}
+                                            value={form2.isInternational === '0' ? 'India' : form2.country}
                                         />
                                     </div>
                                     <div className="flex mx-1 ">
@@ -798,11 +811,13 @@ function TeamConcepts() {
                                         name="referral"
                                         placeholder="Referral ID given by Campus Ambassador"
                                         required
-                                        onChange={(e) => handleInputChange0(e)}
+                                        onChange={(e) => handleInputChange2(e)}
                                         value={form2.referral}
                                     />
                                 </>
                             )}
+
+
                         </>
                     )}
                     <div className="flex justify-between">
