@@ -213,7 +213,7 @@ function TeamConcepts() {
 
         for (const property in formfields) {
 
-            if (formfields[property] == "") {
+            if (formfields[property] === "") {
                 console.log("error")
                 return
 
@@ -307,10 +307,10 @@ function TeamConcepts() {
                 }
             }
         }
-        if (formStep === 0) {
-            for (const property in form0) {
+        if (formStep === 2) {
+            for (const property in form2) {
 
-                if (form0[property] == "") {
+                if (form2[property] == "") {
                     console.log("error")
                     return
 

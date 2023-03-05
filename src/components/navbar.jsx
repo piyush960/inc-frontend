@@ -19,7 +19,7 @@ function Navbar() {
 
   const handleSelect = (e) => {
     if (e.target.value === "Register") return;
-    navigate(`/register/${e.target.value.toLowerCase()}`);
+    navigate(`/events/${e.target.value.toLowerCase()}`);
   };
 
   return (
@@ -201,7 +201,7 @@ function Navbar() {
               onClick={handleSelect}
             >
               <option disabled>Register</option>
-              <option>Impetus</option>
+              <option >Impetus</option>
               <option>Concepts</option>
               <option>Pradnya</option>
             </select>
