@@ -197,7 +197,7 @@ function TeamImpetus() {
     reason_of_demo: "",
   });
   const [errors0, setErrors0] = useState(initialErrorsForm0);
-  const registerUserMutationForm0 = useRegisterStep1(setErrors0, "impetus");
+  const registerUserMutationForm0 = useRegisterStep1(setErrors0, 'impetus');
 
   const handleInputChange0 = (e) => {
     const { name, value } = e.target;
@@ -236,7 +236,7 @@ function TeamImpetus() {
   };
 
   const [errors1, setErrors1] = useState(initialErrorsForm1);
-  const registerUserMutationForm1 = useRegisterStep2(setErrors1, "concepts");
+  const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'impetus');
 
   const handleFormChange = (event, index) => {
     const { name, value } = event.target;
@@ -309,7 +309,7 @@ function TeamImpetus() {
     referral: "",
   });
   const [errors2, setErrors2] = useState(initialErrorsForm2);
-  const registerUserMutationForm2 = useRegisterStep3(setErrors2, "impetus");
+  const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'impetus');
 
   const handleInputChange2 = (e) => {
     const { name, value } = e.target;
@@ -901,6 +901,7 @@ function TeamImpetus() {
                 className="mx-2 my-2"
                 value=" Previous Step"
                 onClick={prevForm}
+                loading={registerUserMutationForm0.isLoading}
               />
             ) : (
               ""
@@ -911,6 +912,7 @@ function TeamImpetus() {
                 className=" mx-2 my-2 p-1 "
                 value="Submit"
                 onClick={nextForm}
+                loading={registerUserMutationForm0.isLoading}
               />
             ) : (
               formStep < 2 && (
@@ -918,6 +920,7 @@ function TeamImpetus() {
                   className=" mx-2 my-2 p-1 "
                   value="Next Step"
                   onClick={nextForm}
+                  loading={registerUserMutationForm0.isLoading}
                 />
               )
             )}
