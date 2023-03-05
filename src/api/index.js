@@ -1,5 +1,8 @@
-export { registerJudge } from './requests';
-export { registerEventStep1 } from './requests';
-export { registerEventStep2 } from './requests';
-export { registerEventStep3 } from './requests';
-export { verifyEmail } from './requests';
+export {
+    registerJudge,
+    registerEventStep1,
+    registerEventStep2,
+    registerEventStep3,
+    verifyPayment,
+    getPendingPayments,
+} from './requests';

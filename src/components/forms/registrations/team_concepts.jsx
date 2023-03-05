@@ -1,14 +1,9 @@
 import "../styles/event_registrations.css";
-import React, { useRef } from "react";
 import { useState } from "react";
-import InputBox from "../../inputBox";
-import Buttons from "../../buttons";
 import styled from 'styled-components';
-import { useRegisterStep1 } from "../../../hooks/eventsStep1.hooks";
-import { useRegisterStep2 } from "../../../hooks/eventsStep2.hooks";
-import { useRegisterStep3 } from "../../../hooks/eventsStep3.hooks";
-import { toast } from "react-toastify";
-import FileInputBox from "../../fileInputBox";
+import { InputBox, Buttons, FileInputBox, toast } from "../../index.js";
+import { useRegisterStep1, useRegisterStep2, useRegisterStep3 } from "../../../hooks/events.hooks";
+import { domains } from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -152,16 +147,17 @@ const initialErrorsForm0 = {
   abstract: "",
   nda: "",
   sponsored: "",
-  
 };
 const initialErrorsForm1 = {
   name: "",
   email: "",
-  phoneno: "",
+  phone: "",
   gender: "",
   member_id: "",
 };
 const initialErrorsForm2 = {
+    isPICT: "",
+    isInternational: "",
   college: "",
   country: "",
   state: "",
@@ -169,11 +165,12 @@ const initialErrorsForm2 = {
   locality: "",
   mode: "",
   reason_of_mode: "",
+  referral: "",
 };
 
 function TeamConcepts() {
   //form0
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = useState(1);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
   const [form0, setForm0] = useState({
     title: "",
@@ -187,10 +184,10 @@ function TeamConcepts() {
     abstract: "",
     nda: "0",
     sponsored: "0",
-    
+
   });
   const [errors0, setErrors0] = useState(initialErrorsForm0);
-  const registerUserMutaionForm0 = useRegisterStep1(setErrors0,'concepts');
+  const registerUserMutationForm0 = useRegisterStep1(setErrors0,'concepts');
   const handleInputChange0 = (e) => {
     const { name, value } = e.target;
     setForm0((prevState) => {
@@ -198,7 +195,6 @@ function TeamConcepts() {
         setErrors0((prevState) => ({ ...prevState, [name]: "" }));
       return { ...prevState, [name]: value };
     });
-    console.log(form0);
   };
 
   const handleSelectChange0 = (e) => {
@@ -213,12 +209,12 @@ function TeamConcepts() {
 
   //form1
 
-    const [formfields, setformfields] = useState([
+    const [formFields, setFormFields] = useState([
         {
 
             name: "",
             email: "",
-            phoneno: "",
+            phone: "",
             gender: "",
             member_id:"",
 
@@ -227,16 +223,15 @@ function TeamConcepts() {
     ]);
 
     const handleImageChange = (event, index) => {
-      let data = [...formfields];
+      let data = [...formFields];
       data[index][event.target.name] = event.target.files[0];
-      console.log(event.target.files);
-      setformfields(data);
+      setFormFields(data);
   };
   const [errors1, setErrors1] = useState(initialErrorsForm1);
-  const registerUserMutaionForm1 = useRegisterStep2(setErrors1,'concepts');
+  const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
     const handleFormChange = (event, index) => {
       const { name, value } = event.target;
-      setformfields((prevState) => {
+      setFormFields((prevState) => {
         errors1[name] !== "" &&
           setErrors1((prevState) => ({ ...prevState, [name]: "" }));
         let data = [...prevState];
@@ -244,84 +239,99 @@ function TeamConcepts() {
         return data;
       });
     };
-  
+
 
   const handleSelectChange1 = (event, index) => {
-    let data = [...formfields];
-    console.log(event.target.value);
+    let data = [...formFields];
     data[index][event.target.name] = event.target.value;
-    console.log(formfields);
-    setformfields(data);
+    setFormFields(data);
   };
 
-    const addfields = () => {
-        console.log(formfields.at(-1),'asdf')
-        for (const property in formfields.at(-1)) {
-            console.log(formfields.at(-1)[property])
-            if (formfields.at(-1)[property] == '') {
-                console.log("error")
-                return
+    const addFields = () => {
+        if (formFields.length < 5) {
+            for (const property in formFields.at(-1)) {
+                if (formFields.at(-1)[property] === '') {
+                    toast.warn("Please fill all the fields")
+                    return
+                }
             }
+
+            const memberFormData = new FormData()
+            memberFormData.append('member_id', formFields.at(-1).member_id)
+            const tempMemberDetails = { ...formFields.at(-1) }
+            delete tempMemberDetails.member_id
+            memberFormData.append('body', JSON.stringify(tempMemberDetails))
+            registerUserMutationForm1.mutate(memberFormData, {
+                onSuccess: () => {
+                  setErrors1(initialErrorsForm1);
+                  toast.success("Completed Step 2️⃣ !", { icon: "✅" });
+                  let object = {
+                      name: "",
+                      email: "",
+                      phone: "",
+                      gender: "",
+                      member_id:"",
+                  };
+                  setFormFields([...formFields, object]);
+                }
+            })
+            return
         }
-
-        let object = {
-            name: "",
-            email: "",
-            phoneno: "",
-            gender: "",
-            member_id:"",
-        };
-
-    setformfields([...formfields, object]);
+        toast.warn("Maximum 5 members are allowed")
   };
 
     const removefields = (index) => {
-      
-            let data = [...formfields];
+
+            let data = [...formFields];
         data.splice(index, 1);
-        setformfields(data);
-       
+        setFormFields(data);
     };
 
   //form 2
 
     const [form2 , setForm2] = useState (
-        
+
             {
+                isPICT: "",
+                isInternational: "0",
                 college : "",
                 country : "",
                 state : "",
                 district : "",
                 locality : "1",
                 mode: "1",
-                reason_of_mode: ""
-
+                reason_of_mode: "",
+                referral: ""
             }
-        
+
     )
     const [errors2, setErrors2] = useState(initialErrorsForm2);
-  const registerUserMutaionForm2 = useRegisterStep3(setErrors2,'concepts');
+  const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
 
     const handleInputChange2 = (e) => {
-        
+
         const { name, value } = e.target;
-        if (name === "pict" && value==="1") {
+        if (name === "isPICT" && value==="1") {
             setForm2((form2) => ({
               ...form2,
               college: "Pune Institute Of Computer Technology",
               country:"India",
               state : "Maharashtra",
                 district : "Pune",
-                locality : "1"
+                locality : "1",
+                mode: "1",
+                reason_of_mode: "",
+                isInternational: "0"
             }));
-          } else if(name === "pict" && value==="0"){
+          } else if(name === "isPICT" && value==="0"){
             setForm2((form2) => ({
                 ...form2,
                 college : "",
                 country : "",
                 state : "",
                 district : "",
-                locality : ""
+                locality : "",
+                isInternational: ""
               }));
           }
           else{
@@ -343,7 +353,7 @@ function TeamConcepts() {
   };
 
   //steps for whole form
-  const [formStep, setFormStep] = React.useState(0);
+  const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -354,54 +364,32 @@ function TeamConcepts() {
     const nextForm = (e) => {
         e.preventDefault();
         if (formStep === 0) {
+            console.log('form0', form0);
             for (const property in form0) {
-                console.log(property)
-
-                if (form0[property] == "") {
-                    if (property == "company" && form0["sponsored"] == "0")
+                if (form0[property] === "") {
+                    if (property === "company" && form0["sponsored"] === "0")
                         continue;
-                   
                     else {
                         toast.warn("Please enter all fields!")
-                        console.log("error")
                         return
                     }
-
-
                 }
             }
-            registerUserMutaionForm0.mutate(form0, {
-              onSuccess: (res) => {
+            registerUserMutationForm0.mutate(form0, {
+              onSuccess: () => {
                 setErrors0(initialErrorsForm0);
-                toast.success("Successfully Registered", { icon: "💐" });
-                setTimeout(() => {
-                  console.log("nextForm");
-                  // onSuccessNavigator('/')
-                }, 2000);
-              },
+                toast.success("Completed Step 1️⃣ !", { icon: "✅" });
+                setFormStep(currentStep => currentStep + 1);
+                setActiveStep(activeStep => activeStep + 1);
+                return
+              }
             });
         }
-          
         if (formStep === 1) {
-            if(formfields.length == 1)
-                    {toast.warn("Atleast one member needed!")
-                    return}
-          for (const property in form0) {
-            if (formfields[property] == "") {
-              console.log("error");
-              return;
+            if (formFields.length < 2) {
+                toast.warn("At least two member needed!")
+                return
             }
-          }
-          registerUserMutaionForm1.mutate(formfields, {
-            onSuccess: (res) => {
-              setErrors1(initialErrorsForm1);
-              toast.success("Successfully Registered", { icon: "💐" });
-              setTimeout(() => {
-                console.log("nextForm");
-                // onSuccessNavigator('/')
-              }, 2000);
-            },
-          });
         }
         if (formStep === 2) {
             for (const property in form2) {
@@ -415,7 +403,7 @@ function TeamConcepts() {
 
                 }
             }
-            registerUserMutaionForm2.mutate(form2, {
+            registerUserMutationForm2.mutate(form2, {
               onSuccess: (res) => {
                 setErrors2(initialErrorsForm2);
                 toast.success("Successfully Registered", { icon: "💐" });
@@ -427,12 +415,10 @@ function TeamConcepts() {
             });
 
         }
-
-    console.log(formfields);
-    console.log(form0);
-    console.log(form2);
-    setFormStep((currentStep) => currentStep + 1);
-    setActiveStep(activeStep + 1);
+        // if (!registerUserMutationForm0.isLoading || !registerUserMutationForm1.isLoading || !registerUserMutationForm2.isLoading) {
+        //     setFormStep(currentStep => currentStep + 1);
+        //     setActiveStep(activeStep => activeStep + 1);
+        // }
   };
 
   //dropdown
@@ -467,10 +453,11 @@ function TeamConcepts() {
                                 label={"Project Title"}
                                 name={"title"}
                                 placeholder={"Project title"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.title}
+                                minlenght='10'
                             ></InputBox>
                             <div className="relative z-0  w-full group">
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
@@ -489,6 +476,9 @@ function TeamConcepts() {
                                         <option value="ES">Embedded/ VLSI System</option>
                                         <option value="ML">Machine Learning and Pattern Recognition</option>
                                         <option value="OT">Others</option>
+                                        {domains.map(domain => (
+                                            <option value={domain.value} key={domain.value} className="text-white">{domain.label}</option>
+                                        ))}
                                         <option value="" selected className="text-white">
                                             Select
                                         </option>
@@ -505,7 +495,7 @@ function TeamConcepts() {
                                         onChange={(e) => handleSelectChange0(e)}
                                         className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                     >
-                                        <option value="Open Hardware">Open Hardware</option>
+                                        <option value="Open Hardware/Firmware">Open Hardware/Firmware</option>
                                         <option value="Open Software">Open Software</option>
                                         <option value="" selected className="text-white">
                                             Select
@@ -518,7 +508,6 @@ function TeamConcepts() {
                                 label={"Guide_Name"}
                                 name={"guide_name"}
                                 placeholder={"Name"}
-                                classNames=""
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_name}
@@ -528,27 +517,27 @@ function TeamConcepts() {
                                 label={"Guide_Email"}
                                 name={"guide_email"}
                                 placeholder={"Email"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_email}
                             ></InputBox>
                             <InputBox
-                                type="text"
+                                type="tel"
                                 label={"Guide_Phone"}
                                 name={"guide_phone"}
                                 placeholder={"Phone"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_phone}
                             ></InputBox>
                             <InputBox
-                                type="text"
+                                type="email"
                                 label={"Hod_email"}
                                 name={"hod_email"}
                                 placeholder={"Hod email"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.hod_email}
@@ -574,7 +563,7 @@ function TeamConcepts() {
                                         label={"If yes, then name of company?"}
                                         placeholder={"Company name"}
                                         name={"company"}
-                                        classNames=""
+
                                         required
                                         onChange={(e) => handleInputChange0(e)}
                                         value={form0.company}
@@ -591,18 +580,31 @@ function TeamConcepts() {
 
                             }
 
+                            <InputBox
+                                type="textarea"
+                                label={"Abstract"}
+                                name={"abstract"}
+                                placeholder={"In 300 words or less"}
+
+                                required
+                                onChange={(e) => handleInputChange0(e)}
+                                value={form0.abstract}
+                                minlenght='50'
+                            ></InputBox>
                         </>
                     )}
                     {/* form 1 */}
                     {formStep === 1 && (
                         <>
                             <Buttons
-                                value="add members"
-                                onClick={addfields}
+                                value="Add Members"
+                                onClick={addFields}
                                 classNames=" my-2"
+                                loading={registerUserMutationForm1.isLoading}
+                                disabled={formFields.length >= 5}
                             />
 
-                            {formfields.map((form, index) => {
+                            {formFields.map((form, index) => {
                                 return (
                                     <div key={index}>
                                         <InputBox
@@ -627,12 +629,12 @@ function TeamConcepts() {
                                             <div className="mr-1 w-1/2">
                                                 <InputBox
                                                     label="Phone No"
-                                                    name="phoneno"
+                                                    name="phone"
                                                     type="number"
                                                     placeholder="phone number"
                                                     required
                                                     onChange={(event) => handleFormChange(event, index)}
-                                                    value={form.phoneno}
+                                                    value={form.phone}
                                                 />
                                             </div>
                                             <div className="ml-1 w-1/2">
@@ -657,14 +659,13 @@ function TeamConcepts() {
                                             </div>
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange = {(e)=>handleImageChange(e,index)} label="Upload Screenshot of ID" required />
-                                     
-                                        {formfields.length>1 &&
-                                       (<><Buttons
-                                        value="remove member"
-                                        onClick={() => removefields(index)}
-                                        classNames=" my-2"
-                                        disabled={true}
-                                    /></>)} 
+
+                                        {/* <Buttons
+                                            value="remove member"
+                                            onClick={() => removefields(index)}
+                                            classNames=" my-2"
+                                            disabled={true}
+                                        /> */}
                                     </div>
                                 );
                             })}
@@ -678,110 +679,140 @@ function TeamConcepts() {
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Are you PICTian or not?
                                 </p>
-                                <input type="radio" value="1" name="pict" onChange={handleInputChange2} /> Yes
+                                <input type="radio" value="1" name="isPICT" onChange={handleInputChange2} /> Yes
                                 <input
                                     type="radio"
                                     value="0"
-                                    name="pict"
+                                    name="isPICT"
                                     className="ml-10"
                                     onChange={handleInputChange2}
                                 />{" "}
                                 No
                             </div>
-                            <div className=" mx-1 my-2">
-                                <InputBox
-                                    label="College"
-                                    name={"college"}
-                                    type="text"
-                                    placeholder="college name"
-                                    required
-                                    onChange={(e) => handleInputChange2(e)}
-
-                                    value={form2.college}
-                                />
-                            </div>
-                            <div className="mx-1 my-2">
-                                <InputBox
-                                    label="Country"
-                                    name={"country"}
-                                    type="text"
-                                    placeholder="country"
-                                    required
-                                    onChange={(e) => handleInputChange2(e)}
-
-                                    value={form2.country}
-                                />
-                            </div>
-                            <div className="flex mx-1 ">
-                                <div className="mr-1 w-1/2">
+                            {form2.isPICT === "0" && (
+                                <>
+                                    <div className="my-5">
+                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                            Is International ?
+                                        </p>
+                                        <input type="radio" value="0" name="isInternational" onChange={handleInputChange2}
+                                            selected={form2.isPICT === '1'} /> No
+                                        <input
+                                            type="radio"
+                                            value="1"
+                                            name="isInternational"
+                                            className="ml-10"
+                                            onChange={handleInputChange2}
+                                        />{" "}
+                                        Yes
+                                    </div>
+                                    <div className=" mx-1 my-2">
                                     <InputBox
-                                        label="State"
+                                        label="College"
+                                        name={"college"}
                                         type="text"
-                                        name={"state"}
-                                        placeholder="state"
+                                        placeholder="college name"
                                         required
                                         onChange={(e) => handleInputChange2(e)}
-                                        value={form2.state}
+
+                                        value={form2.college}
                                     />
-                                </div>
-                                <div className="ml-1 w-1/2">
+                                    </div>
+                                    <div className="mx-1 my-2">
+                                        <InputBox
+                                            label="Country"
+                                            name={"country"}
+                                            type="text"
+                                            placeholder="country"
+                                            required
+                                            onChange={(e) => handleInputChange2(e)}
+
+                                            value={form2.isInternational === '0' ? 'India': form2.country}
+                                        />
+                                    </div>
+                                    <div className="flex mx-1 ">
+                                        <div className="mr-1 w-1/2">
+                                            <InputBox
+                                                label="State"
+                                                type="text"
+                                                name={"state"}
+                                                placeholder="state"
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.state}
+                                            />
+                                        </div>
+                                        <div className="ml-1 w-1/2">
+                                            <InputBox
+                                                label="District"
+                                                name={"district"}
+                                                type="text"
+                                                placeholder="district"
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.district}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className=" mx-1 my-2">
+                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                            Locality
+                                        </p>
+                                        <div className="relative w-full lg:w-full block px-0  text-sm">
+                                            <select
+                                                name={"locality"}
+                                                onChange={(e) => handleInputChange2(e)}
+                                                className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
+                                                <option value="0" selected={form2.locality == "0"}>Rural</option>
+                                                <option value="1" selected={form2.locality == "1"}>Urban</option>
+                                                <option disabled selected className="text-white">
+                                                    Select
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="my-5">
+                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                            Preferred mode of presentation
+                                        </p>
+                                        <input type="radio" value="0" name="mode" onChange={handleInputChange2}
+                                            disabled={form2.city.includes("Pune")} /> Online
+                                        <input
+                                            type="radio"
+                                            value="1"
+                                            name="mode"
+                                            className="ml-10"
+                                            onChange={handleInputChange2}
+                                            selected={form2.city.includes("Pune")}
+                                            disabled={form2.city.includes("Pune")}
+                                        />{" "}
+                                        Offline
+                                    </div>
+                                    {form2.mode === "0" && (
+                                        <div>
+                                            <InputBox
+                                                type="textarea"
+                                                label={"Reason for Online"}
+                                                name={"reason_of_mode"}
+                                                placeholder={"reason"}
+
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.reason_of_mode}
+                                            ></InputBox>
+                                        </div>
+                                    )}
                                     <InputBox
-                                        label="District"
-                                        name={"district"}
                                         type="text"
-                                        placeholder="district"
+                                        label="Referral"
+                                        name="referral"
+                                        placeholder="Referral ID given by Campus Ambassador"
                                         required
-                                        onChange={(e) => handleInputChange2(e)}
-                                        value={form2.district}
+                                        onChange={(e) => handleInputChange0(e)}
+                                        value={form2.referral}
                                     />
-                                </div>
-                            </div>
-                            <div className=" mx-1 my-2">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Locality
-                                </p>
-                                <div className="relative w-full lg:w-full block px-0  text-sm">
-                                    <select
-                                        name={"locality"}
-                                        onChange={(e) => handleInputChange2(e)}
-                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                        <option value="0" selected={form2.locality == "0"}>Rural</option>
-                                        <option value="1" selected={form2.locality == "1"}>Urban</option>
-                                        <option disabled selected className="text-white">
-                                            Select
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Preferred mode of presentation
-                                </p>
-                                <input type="radio" value="0" name="mode" onChange={handleInputChange2} /> Online
-                                <input
-                                    type="radio"
-                                    value="1"
-                                    name="mode"
-                                    className="ml-10"
-                                    onChange={handleInputChange2}
-                                />{" "}
-                                Offline
-                            </div>
-                            {form2.mode === "0" && (
-                                <div>
-                                    <InputBox
-                                        type="textarea"
-                                        label={"Reason for Online"}
-                                        name={"reason_of_mode"}
-                                        placeholder={"reason"}
-                                        classNames=""
-                                        required
-                                        onChange={(e) => handleInputChange2(e)}
-                                        value={form2.reason_of_mode}
-                                    ></InputBox>
-                                </div>
-                            )
-                            }
+                                </>
+                            )}
                         </>
                     )}
                     <div className="flex justify-between">
@@ -790,6 +821,7 @@ function TeamConcepts() {
                                 className="mx-2 my-2"
                                 value=" Previous Step"
                                 onClick={prevForm}
+                                loading={registerUserMutationForm0.isLoading}
                             />
                         ) : (
                             ""
@@ -800,6 +832,7 @@ function TeamConcepts() {
                                 className=" mx-2 my-2 "
                                 value="Submit"
                                 onClick={nextForm}
+                                loading={registerUserMutationForm0.isLoading}
                             />
                         ) : (
                             formStep < 2 && (
@@ -807,11 +840,12 @@ function TeamConcepts() {
                                     className=" mx-2 my-2  "
                                     value="Next Step"
                                     onClick={nextForm}
+                                    loading={registerUserMutationForm0.isLoading}
                                 />
                             )
                         )}
 
-                        {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registring for concepts!!!</h1>}
+                        {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registering for InC'23 Concepts !</h1>}
                     </div>
                 </form>
                 {/* <Buttons
