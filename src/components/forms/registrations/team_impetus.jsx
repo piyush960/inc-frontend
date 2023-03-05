@@ -1,12 +1,8 @@
 import "../styles/event_registrations.css";
 import React, { useRef } from "react";
 import { useState } from "react";
-import InputBox from "../../inputBox";
-import Buttons from "../../buttons";
-
+import { InputBox, Buttons, FileInputBox, toast } from "../../index.js";
 import styled from 'styled-components';
-import FileInputBox from "../../fileInputBox";
-import { RadioButtons, toast } from "../../../components";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -183,7 +179,7 @@ function TeamImpetus() {
 
     //form1
 
-    const [formfields, setformfields] = useState([
+    const [formFields, setFormFields] = useState([
         {
 
             name: "",
@@ -196,25 +192,25 @@ function TeamImpetus() {
     ]);
 
     const handleFormChange = (event, index) => {
-        let data = [...formfields];
+        let data = [...formFields];
         data[index][event.target.name] = event.target.value;
-        console.log(formfields);
-        setformfields(data);
+        console.log(formFields);
+        setFormFields(data);
     };
 
     const handleSelectChange1 = (event, index) => {
-        let data = [...formfields];
+        let data = [...formFields];
         console.log(event.target.value)
         data[index][event.target.name] = event.target.value;
-        console.log(formfields);
-        setformfields(data);
+        console.log(formFields);
+        setFormFields(data);
     }
 
-    const addfields = () => {
+    const addFields = () => {
 
-        for (const property in formfields.at(-1)) {
-            console.log(formfields.at(-1)[property])
-            if (formfields.at(-1)[property] == '') {
+        for (const property in formFields.at(-1)) {
+            console.log(formFields.at(-1)[property])
+            if (formFields.at(-1)[property] == '') {
                 console.log("error")
                 return
             }
@@ -227,19 +223,19 @@ function TeamImpetus() {
             member_id:"",
         };
 
-        setformfields([...formfields, object]);
+        setFormFields([...formFields, object]);
     };
 
-    const removefields = (index) => {
-        let data = [...formfields];
+    const removeFields = (index) => {
+        let data = [...formFields];
         data.splice(index, 1);
-        setformfields(data);
+        setFormFields(data);
     };
     const handleImageChange = (event, index) => {
-        let data = [...formfields];
+        let data = [...formFields];
         data[index][event.target.name] = event.target.files[0];
         console.log(event.target.files);
-        setformfields(data);
+        setFormFields(data);
     };
 
     //form 2
@@ -320,7 +316,7 @@ function TeamImpetus() {
                     continue;
                 if (property == "reason_of_demo" && form0["demo"] == "1")
                     continue;
-                    toast.warn("Please enter all fields!")
+                    toast.warn("Please enter all Fields!")
                     console.log("error")
                     return
 
@@ -328,7 +324,7 @@ function TeamImpetus() {
             }
         }
         if(formStep === 1){
-            if(formfields.length == 1)
+            if(formFields.length == 1)
                     {toast.warn("Atleast one member needed!")
                     return}
         }
@@ -338,7 +334,7 @@ function TeamImpetus() {
                 if (form2[property] == "") {
                     if (property == "reason_of_mode" && form2["mode"] == "1")
                     continue;
-                    toast.warn("Please enter all fields!")
+                    toast.warn("Please enter all Fields!")
                     console.log("error")
                     return
 
@@ -347,7 +343,7 @@ function TeamImpetus() {
             toast.success("Form submitted successfully!")
         }
 
-        console.log(formfields);
+        console.log(formFields);
         console.log(form0);
         console.log(form2);
         setFormStep((currentStep) => currentStep + 1);
@@ -561,15 +557,15 @@ function TeamImpetus() {
                     {/* form 1 */}
                     {formStep === 1 && (
                         <>
-                            {formfields.length<5 &&(<>
+                            {formFields.length<5 &&(<>
                             <Buttons
                                 value="add members"
-                                onClick={addfields}
+                                onClick={addFields}
                                 classNames=" my-2"
                             />
                         </>)}
 
-                            {formfields.map((form, index) => {
+                            {formFields.map((form, index) => {
                                 return (
                                     <div key={index}>
                                         <InputBox
@@ -624,10 +620,10 @@ function TeamImpetus() {
                                             </div>
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
-                                        {formfields.length>1 &&
+                                        {formFields.length>1 &&
                                        (<><Buttons
                                         value="remove member"
-                                        onClick={() => removefields(index)}
+                                        onClick={() => removeFields(index)}
                                         classNames=" my-2"
                                         disabled={true}
                                     /></>)} 

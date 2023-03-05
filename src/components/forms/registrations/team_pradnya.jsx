@@ -1,12 +1,9 @@
 import "../styles/event_registrations.css";
 import React from "react";
 import { useState } from "react";
-import InputBox from "../../inputBox";
-import Buttons from "../../buttons";
+import { InputBox, Buttons, FileInputBox, toast } from "../../index.js";
+import { useRegisterStep1, useRegisterStep2, useRegisterStep3 } from "../../../hooks/events.hooks";
 import styled from 'styled-components';
-import FileInputBox from "../../fileInputBox";
-import { RadioButtons, toast } from "../../../components";
-import Dropdown from "../../dropdown";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -109,7 +106,23 @@ const steps = [
 
 ]
 const totalSteps = steps.length
-
+const initialErrorsForm1 = {
+    name: "",
+    email: "",
+    phone: "",
+    gender: "",
+    member_id: "",
+};
+const initialErrorsForm2 = {
+    isPICT: "",
+    isInternational: "",
+    college: "",
+    country: "",
+    state: "",
+    district: "",
+    locality: "",
+    year:"",
+};
 
 function TeamPradnya() {
 
@@ -133,25 +146,49 @@ function TeamPradnya() {
 
         },
     ]);
+    const [errors1, setErrors1] = useState(initialErrorsForm1);
+    const handleFormChange = (event, index) => {
+        const { name, value } = event.target;
+        setForm1((prevState) => {
+            errors1[name] !== "" &&
+                setErrors1((prevState) => ({ ...prevState, [name]: "" }));
+            let data = [...prevState];
+            data[index][name] = value;
+            return data;
+        });
+    };
+    const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
     const addfields = () => {
-        console.log(form1.at(-1))
-        for (const property in form1.at(-1)) {
-            console.log(form1.at(-1)[property])
-            if (form1.at(-1)[property] == '') {
-                console.log("error")
-                return
+        if(form1.length < 2){
+            for (const property in form1.at(-1)) {
+                if (form1.at(-1)[property] === '') {
+                    toast.warn("Please fill all the fields")
+                    return
+                }
             }
+
+            const memberFormData = new FormData()
+            memberFormData.append('member_id', form1.at(-1).member_id)
+            const tempMemberDetails = { ...form1.at(-1) }
+            delete tempMemberDetails.member_id
+            memberFormData.append('body', JSON.stringify(tempMemberDetails))
+            registerUserMutationForm1.mutate(memberFormData, {
+                onSuccess: () => {
+                    setErrors1(initialErrorsForm1);
+                    toast.success("Completed Step 2️⃣ !", { icon: "✅" });
+                    let object = {
+                        name: "",
+                        email: "",
+                        phone: "",
+                        gender: "",
+                        member_id: "",
+                    };
+                    setForm1([...form1, object]);
+                }
+            })
+            return
         }
-
-        let object = {
-            name: "",
-            email: "",
-            phoneno: "",
-            gender: "",
-            member_id: "",
-        };
-
-        setForm1([...form1, object]);
+        toast.warn("Maximum 2 members are allowed")
     };
     
     const removefields = (index) => {
@@ -173,6 +210,8 @@ function TeamPradnya() {
     const [form2, setForm2] = useState(
 
         {
+            isPICT: "",
+            isInternational: "0",
             college: "",
             country: "",
             state: "",
@@ -184,16 +223,10 @@ function TeamPradnya() {
 
         }
     )
-    const handleFormChange = (event, index) => {
-        const { name, value } = event.target;
-        setForm1((prevState) => {
-            // errors1[name] !== "" &&
-            //     setErrors1((prevState) => ({ ...prevState, [name]: "" }));
-            let data = [...prevState];
-            data[index][name] = value;
-            return data;
-        });
-    };
+    const [errors2, setErrors2] = useState(initialErrorsForm2);
+    const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
+
+    
     const handleImageChange = (event, index) => {
         let data = [...form1];
         data[index][event.target.name] = event.target.files[0];
@@ -212,7 +245,7 @@ function TeamPradnya() {
                 district: "Pune",
                 city: "Pune",
                 locality: "1",
-                leader: "test1@gmail.com"
+                isInternational: "0"
             }));
         } else if (name === "pict" && value === "0") {
             setForm2((form2) => ({
@@ -223,12 +256,16 @@ function TeamPradnya() {
                 district: "",
                 city: "",
                 locality: "",
-                leader: ""
+                leader: "",
+                isInternational: ""
             }));
         }
         else {
-            setForm2({ ...form2, [name]: value });
-            console.log(form2);
+            setForm2((prevState) => {
+                errors2[name] !== "" &&
+                    setErrors2((prevState) => ({ ...prevState, [name]: "" }));
+                return { ...prevState, [name]: value };
+            });
         }
     }
 
@@ -241,7 +278,14 @@ function TeamPradnya() {
         setFormStep((currentStep) => currentStep - 1);
         setActiveStep(activeStep - 1)
     };
-
+    const handleSelectChange2 = (e) => {
+        const { name, value } = e.target;
+        setForm2((prevState) => {
+            errors2[name] !== "" &&
+                setErrors2((prevState) => ({ ...prevState, [name]: "" }));
+            return { ...prevState, [name]: value };
+        });
+    };
     const nextForm = (e) => {
         e.preventDefault();
         if (formStep === 1) {
@@ -258,6 +302,15 @@ function TeamPradnya() {
 
                 }
             }
+            registerUserMutationForm1.mutate(form1, {
+                onSuccess: () => {
+                    setErrors1(initialErrorsForm1);
+                    toast.success("Completed Step 1️⃣ !", { icon: "✅" });
+                    setFormStep(currentStep => currentStep + 1);
+                    setActiveStep(activeStep => activeStep + 1);
+                    return
+                }
+            });
         }
         if (formStep === 2) {
             for (const property in form2) {
@@ -269,10 +322,17 @@ function TeamPradnya() {
 
                 }
             }
+            registerUserMutationForm2.mutate(form2, {
+                onSuccess: (res) => {
+                    setErrors2(initialErrorsForm2);
+                    toast.success("Successfully Registered", { icon: "💐" });
+                    setTimeout(() => {
+                        console.log("nextForm");
+                        // onSuccessNavigator('/')
+                    }, 2000);
+                },
+            });
         }
-        console.log(form2);
-        setFormStep((currentStep) => currentStep + 1);
-        setActiveStep(activeStep + 1)
 
 
     };
@@ -366,7 +426,7 @@ function TeamPradnya() {
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Are you PICTian or not?
                                 </p>
-                                <input type="radio" value="1" name="pict" onChange={handleInputChange2} /> Yes
+                                <input type="radio" value="1" name="isPICT" onChange={handleInputChange2} /> Yes
                                 <input
                                     type="radio"
                                     value="0"
