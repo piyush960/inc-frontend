@@ -6,7 +6,7 @@ export const events = [
 export const domains = [
     { value: 'AD', label: 'Application Development' },
     { value: 'CN', label: 'Communication Networks and Security Systems' },
-    { value: 'DP', label: 'Digital / Image/ Speech / Video Processing' },
+    { value: 'DSP', label: 'Digital / Image/ Speech / Video Processing' },
     { value: 'ES', label: 'Embedded/VLSI Systems' },
     { value: 'ML', label: 'Machine Learning and Pattern Recognition' },
     { value: 'OT', label: 'Others' }

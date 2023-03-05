@@ -1,12 +1,8 @@
 import "../styles/event_registrations.css";
-import React, { useRef } from "react";
 import { useState } from "react";
-import InputBox from "../../inputBox";
-import Buttons from "../../buttons";
 import styled from 'styled-components';
+import { InputBox, Buttons, FileInputBox, toast } from "../../index.js";
 import { useRegisterStep1, useRegisterStep2, useRegisterStep3 } from "../../../hooks/events.hooks";
-import { toast } from "react-toastify";
-import FileInputBox from "../../fileInputBox";
 import { domains } from "../../../static/data";
 
 const MainContainer = styled.div`
@@ -174,7 +170,7 @@ const initialErrorsForm2 = {
 
 function TeamConcepts() {
   //form0
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = useState(1);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
   const [form0, setForm0] = useState({
     title: "",
@@ -191,7 +187,7 @@ function TeamConcepts() {
 
   });
   const [errors0, setErrors0] = useState(initialErrorsForm0);
-  const registerUserMutaionForm0 = useRegisterStep1(setErrors0,'concepts');
+  const registerUserMutationForm0 = useRegisterStep1(setErrors0,'concepts');
   const handleInputChange0 = (e) => {
     const { name, value } = e.target;
     setForm0((prevState) => {
@@ -199,7 +195,6 @@ function TeamConcepts() {
         setErrors0((prevState) => ({ ...prevState, [name]: "" }));
       return { ...prevState, [name]: value };
     });
-    console.log(form0);
   };
 
   const handleSelectChange0 = (e) => {
@@ -214,7 +209,7 @@ function TeamConcepts() {
 
   //form1
 
-    const [formfields, setformfields] = useState([
+    const [formFields, setFormFields] = useState([
         {
 
             name: "",
@@ -228,16 +223,15 @@ function TeamConcepts() {
     ]);
 
     const handleImageChange = (event, index) => {
-      let data = [...formfields];
+      let data = [...formFields];
       data[index][event.target.name] = event.target.files[0];
-      console.log(event.target.files);
-      setformfields(data);
+      setFormFields(data);
   };
   const [errors1, setErrors1] = useState(initialErrorsForm1);
-  const registerUserMutationForm1 = useRegisterStep2(setErrors1,'concepts');
+  const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
     const handleFormChange = (event, index) => {
       const { name, value } = event.target;
-      setformfields((prevState) => {
+      setFormFields((prevState) => {
         errors1[name] !== "" &&
           setErrors1((prevState) => ({ ...prevState, [name]: "" }));
         let data = [...prevState];
@@ -248,39 +242,49 @@ function TeamConcepts() {
 
 
   const handleSelectChange1 = (event, index) => {
-    let data = [...formfields];
-    console.log(event.target.value);
+    let data = [...formFields];
     data[index][event.target.name] = event.target.value;
-    console.log(formfields);
-    setformfields(data);
+    setFormFields(data);
   };
 
-    const addfields = () => {
-        console.log(formfields.at(-1),'asdf')
-        for (const property in formfields.at(-1)) {
-            console.log(formfields.at(-1)[property])
-            if (formfields.at(-1)[property] == '') {
-                console.log("error")
-                return
+    const addFields = () => {
+        if (formFields.length < 5) {
+            for (const property in formFields.at(-1)) {
+                if (formFields.at(-1)[property] === '') {
+                    toast.warn("Please fill all the fields")
+                    return
+                }
             }
+
+            const memberFormData = new FormData()
+            memberFormData.append('member_id', formFields.at(-1).member_id)
+            const tempMemberDetails = { ...formFields.at(-1) }
+            delete tempMemberDetails.member_id
+            memberFormData.append('body', JSON.stringify(tempMemberDetails))
+            registerUserMutationForm1.mutate(memberFormData, {
+                onSuccess: () => {
+                  setErrors1(initialErrorsForm1);
+                  toast.success("Completed Step 2️⃣ !", { icon: "✅" });
+                  let object = {
+                      name: "",
+                      email: "",
+                      phone: "",
+                      gender: "",
+                      member_id:"",
+                  };
+                  setFormFields([...formFields, object]);
+                }
+            })
+            return
         }
-
-        let object = {
-            name: "",
-            email: "",
-            phone: "",
-            gender: "",
-            member_id:"",
-        };
-
-    setformfields([...formfields, object]);
+        toast.warn("Maximum 5 members are allowed")
   };
 
     const removefields = (index) => {
 
-            let data = [...formfields];
+            let data = [...formFields];
         data.splice(index, 1);
-        setformfields(data);
+        setFormFields(data);
     };
 
   //form 2
@@ -302,7 +306,7 @@ function TeamConcepts() {
 
     )
     const [errors2, setErrors2] = useState(initialErrorsForm2);
-  const registerUserMutationForm2 = useRegisterStep3(setErrors2,'concepts');
+  const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
 
     const handleInputChange2 = (e) => {
 
@@ -349,7 +353,7 @@ function TeamConcepts() {
   };
 
   //steps for whole form
-  const [formStep, setFormStep] = React.useState(0);
+  const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -360,54 +364,32 @@ function TeamConcepts() {
     const nextForm = (e) => {
         e.preventDefault();
         if (formStep === 0) {
+            console.log('form0', form0);
             for (const property in form0) {
-                console.log(property)
-
-                if (form0[property] == "") {
-                    if (property == "company" && form0["sponsored"] == "0")
+                if (form0[property] === "") {
+                    if (property === "company" && form0["sponsored"] === "0")
                         continue;
-
                     else {
                         toast.warn("Please enter all fields!")
-                        console.log("error")
                         return
                     }
-
-
                 }
             }
-            registerUserMutaionForm0.mutate(form0, {
-              onSuccess: (res) => {
+            registerUserMutationForm0.mutate(form0, {
+              onSuccess: () => {
                 setErrors0(initialErrorsForm0);
-                toast.success("Successfully Registered", { icon: "💐" });
-                setTimeout(() => {
-                  console.log("nextForm");
-                  // onSuccessNavigator('/')
-                }, 2000);
-              },
+                toast.success("Completed Step 1️⃣ !", { icon: "✅" });
+                setFormStep(currentStep => currentStep + 1);
+                setActiveStep(activeStep => activeStep + 1);
+                return
+              }
             });
         }
-
         if (formStep === 1) {
-            if(formfields.length == 1)
-                    {toast.warn("Atleast one member needed!")
-                    return}
-          for (const property in form0) {
-            if (formfields[property] == "") {
-              console.log("error");
-              return;
+            if (formFields.length < 2) {
+                toast.warn("At least two member needed!")
+                return
             }
-          }
-          registerUserMutationForm1.mutate(formfields, {
-            onSuccess: (res) => {
-              setErrors1(initialErrorsForm1);
-              toast.success("Successfully Registered", { icon: "💐" });
-              setTimeout(() => {
-                console.log("nextForm");
-                // onSuccessNavigator('/')
-              }, 2000);
-            },
-          });
         }
         if (formStep === 2) {
             for (const property in form2) {
@@ -433,12 +415,10 @@ function TeamConcepts() {
             });
 
         }
-
-    console.log(formfields);
-    console.log(form0);
-    console.log(form2);
-    setFormStep((currentStep) => currentStep + 1);
-    setActiveStep(activeStep + 1);
+        // if (!registerUserMutationForm0.isLoading || !registerUserMutationForm1.isLoading || !registerUserMutationForm2.isLoading) {
+        //     setFormStep(currentStep => currentStep + 1);
+        //     setActiveStep(activeStep => activeStep + 1);
+        // }
   };
 
   //dropdown
@@ -473,7 +453,7 @@ function TeamConcepts() {
                                 label={"Project Title"}
                                 name={"title"}
                                 placeholder={"Project title"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.title}
@@ -491,7 +471,7 @@ function TeamConcepts() {
                                         className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                     >
                                         {domains.map(domain => (
-                                            <option value={domain.value} selected className="text-white">{domain.label}</option>
+                                            <option value={domain.value} key={domain.value} className="text-white">{domain.label}</option>
                                         ))}
                                         <option value="" selected className="text-white">
                                             Select
@@ -509,7 +489,7 @@ function TeamConcepts() {
                                         onChange={(e) => handleSelectChange0(e)}
                                         className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                     >
-                                        <option value="Open Hardware">Open Hardware</option>
+                                        <option value="Open Hardware/Firmware">Open Hardware/Firmware</option>
                                         <option value="Open Software">Open Software</option>
                                         <option value="" selected className="text-white">
                                             Select
@@ -522,7 +502,6 @@ function TeamConcepts() {
                                 label={"Guide_Name"}
                                 name={"guide_name"}
                                 placeholder={"Name"}
-                                classNames=""
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_name}
@@ -532,7 +511,7 @@ function TeamConcepts() {
                                 label={"Guide_Email"}
                                 name={"guide_email"}
                                 placeholder={"Email"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_email}
@@ -542,7 +521,7 @@ function TeamConcepts() {
                                 label={"Guide_Phone"}
                                 name={"guide_phone"}
                                 placeholder={"Phone"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_phone}
@@ -552,7 +531,7 @@ function TeamConcepts() {
                                 label={"Hod_email"}
                                 name={"hod_email"}
                                 placeholder={"Hod email"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.hod_email}
@@ -578,7 +557,7 @@ function TeamConcepts() {
                                         label={"If yes, then name of company?"}
                                         placeholder={"Company name"}
                                         name={"company"}
-                                        classNames=""
+
                                         required
                                         onChange={(e) => handleInputChange0(e)}
                                         value={form0.company}
@@ -600,7 +579,7 @@ function TeamConcepts() {
                                 label={"Abstract"}
                                 name={"abstract"}
                                 placeholder={"In 300 words or less"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.abstract}
@@ -612,12 +591,14 @@ function TeamConcepts() {
                     {formStep === 1 && (
                         <>
                             <Buttons
-                                value="add members"
-                                onClick={addfields}
+                                value="Add Members"
+                                onClick={addFields}
                                 classNames=" my-2"
+                                loading={registerUserMutationForm1.isLoading}
+                                disabled={formFields.length >= 5}
                             />
 
-                            {formfields.map((form, index) => {
+                            {formFields.map((form, index) => {
                                 return (
                                     <div key={index}>
                                         <InputBox
@@ -673,12 +654,12 @@ function TeamConcepts() {
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange = {(e)=>handleImageChange(e,index)} label="Upload Screenshot of ID" required />
 
-                                        <Buttons
+                                        {/* <Buttons
                                             value="remove member"
                                             onClick={() => removefields(index)}
                                             classNames=" my-2"
                                             disabled={true}
-                                        />
+                                        /> */}
                                     </div>
                                 );
                             })}
@@ -808,7 +789,7 @@ function TeamConcepts() {
                                                 label={"Reason for Online"}
                                                 name={"reason_of_mode"}
                                                 placeholder={"reason"}
-                                                classNames=""
+
                                                 required
                                                 onChange={(e) => handleInputChange2(e)}
                                                 value={form2.reason_of_mode}
@@ -834,6 +815,7 @@ function TeamConcepts() {
                                 className="mx-2 my-2"
                                 value=" Previous Step"
                                 onClick={prevForm}
+                                loading={registerUserMutationForm0.isLoading}
                             />
                         ) : (
                             ""
@@ -844,6 +826,7 @@ function TeamConcepts() {
                                 className=" mx-2 my-2 "
                                 value="Submit"
                                 onClick={nextForm}
+                                loading={registerUserMutationForm0.isLoading}
                             />
                         ) : (
                             formStep < 2 && (
@@ -851,11 +834,12 @@ function TeamConcepts() {
                                     className=" mx-2 my-2  "
                                     value="Next Step"
                                     onClick={nextForm}
+                                    loading={registerUserMutationForm0.isLoading}
                                 />
                             )
                         )}
 
-                        {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registring for concepts!!!</h1>}
+                        {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registering for InC'23 Concepts !</h1>}
                     </div>
                 </form>
                 {/* <Buttons

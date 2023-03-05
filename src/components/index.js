@@ -12,6 +12,7 @@ export { default as Buttons } from './buttons.jsx';
 export { default as InputBox } from './inputBox.jsx';
 export { default as RadioButtons } from './radioButtons.jsx';
 export { default as Checkboxes } from './checkboxes.jsx';
+export { default as FileInputBox } from './fileInputBox.jsx';
 export { default as FormsBanner } from './formsBanner.jsx';
 export { default as ProgressBar } from './progressBar.jsx';
 export { default as TeamConcepts } from './forms/registrations/team_concepts';

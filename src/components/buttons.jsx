@@ -8,7 +8,7 @@ function Buttons({ value, type, onClick, classNames, disabled, loading }) {
             className={`px-1 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 hover:text-gold hover:border-light_blue hover:bg-faint_blue/10 ${loading && 'cursor-no-drop'} ${classNames}`}
             onClick={(e) => onClick(e)}
             value={value}
-            disabled={disabled}
+            disabled={disabled || loading}
             type={type || 'button'}
         >
             {loading ?
