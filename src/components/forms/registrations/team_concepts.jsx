@@ -358,7 +358,7 @@ function TeamConcepts() {
     };
 
     //steps for whole form
-    const [formStep, setFormStep] = useState(0);
+    const [formStep, setFormStep] = useState(2);
 
     const prevForm = (e) => {
         // e.preventDefault();
@@ -664,12 +664,12 @@ function TeamConcepts() {
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
 
-                                        {/* <Buttons
+                                       {formFields.length > 1 &&( <Buttons
                                             value="remove member"
                                             onClick={() => removefields(index)}
                                             classNames=" my-2"
                                             disabled={true}
-                                        /> */}
+                                        />)}
                                     </div>
                                 );
                             })}
@@ -855,7 +855,7 @@ function TeamConcepts() {
                                         name="referral"
                                         placeholder="Referral ID given by Campus Ambassador"
                                         required
-                                        onChange={(e) => handleInputChange0(e)}
+                                        onChange={(e) => handleInputChange2(e)}
                                         value={form2.referral}
                                     />
                                 </>

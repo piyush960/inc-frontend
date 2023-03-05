@@ -121,7 +121,7 @@ const initialErrorsForm2 = {
     state: "",
     district: "",
     locality: "",
-    year:"",
+    year: "",
 };
 
 function TeamPradnya() {
@@ -159,7 +159,7 @@ function TeamPradnya() {
     };
     const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
     const addfields = () => {
-        if(form1.length < 2){
+        if (form1.length < 3) {
             for (const property in form1.at(-1)) {
                 if (form1.at(-1)[property] === '') {
                     toast.warn("Please fill all the fields")
@@ -190,20 +190,14 @@ function TeamPradnya() {
         }
         toast.warn("Maximum 2 members are allowed")
     };
-    
-    const removefields = (index) => {
-    
-            let data = [...form1];
-            data.splice(index, 1);
-            setForm1(data);
-    
-    };
 
-    const handleInputChange1 = (e) => {
-        const { name, value } = e.target;
-        setForm1({ ...form1, [name]: value });
-        console.log(form1);
-    }
+    const removefields = (index) => {
+
+        let data = [...form1];
+        data.splice(index, 1);
+        setForm1(data);
+
+    };
 
     //form 2
 
@@ -219,14 +213,14 @@ function TeamPradnya() {
             city: "",
             locality: "1",
             leader: "",
-            year:"",
+            year: "",
 
         }
     )
     const [errors2, setErrors2] = useState(initialErrorsForm2);
     const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
 
-    
+
     const handleImageChange = (event, index) => {
         let data = [...form1];
         data[index][event.target.name] = event.target.files[0];
@@ -236,20 +230,23 @@ function TeamPradnya() {
     const handleInputChange2 = (e) => {
 
         const { name, value } = e.target;
-        if (name === "pict" && value === "1") {
+        if (name === "isPICT" && value === "1") {
             setForm2((form2) => ({
                 ...form2,
+                isPICT: "1",
                 college: "Pune Institute Of Computer Technology",
                 country: "India",
                 state: "Maharashtra",
                 district: "Pune",
+                leader:"abc@gmail.com",
                 city: "Pune",
                 locality: "1",
                 isInternational: "0"
             }));
-        } else if (name === "pict" && value === "0") {
+        } else if (name === "isPICT" && value === "0") {
             setForm2((form2) => ({
                 ...form2,
+                isPICT: "0",
                 college: "",
                 country: "",
                 state: "",
@@ -271,7 +268,7 @@ function TeamPradnya() {
 
 
     //steps for whole form
-    const [formStep, setFormStep] = React.useState(1);
+    const [formStep, setFormStep] = React.useState(2);
 
     const prevForm = (e) => {
         // e.preventDefault();
@@ -289,19 +286,11 @@ function TeamPradnya() {
     const nextForm = (e) => {
         e.preventDefault();
         if (formStep === 1) {
-            for (const property in form1) {
-                console.log(form1.length)
-                if(form1.length == 1)
-                    {toast.warn("Atleast one member needed!")
-                    return}
-                if (form1[property] == "") {
-                    
-                    toast.warn("Please enter all fields!")
-                    console.log("error")
-                    return
-
-                }
+            if (form1.length == 1) {
+                toast.warn("Atleast one member needed!")
+                return
             }
+            
             registerUserMutationForm1.mutate(form1, {
                 onSuccess: () => {
                     setErrors1(initialErrorsForm1);
@@ -313,11 +302,13 @@ function TeamPradnya() {
             });
         }
         if (formStep === 2) {
+            console.log(form2)
             for (const property in form2) {
 
                 if (form2[property] == "") {
+                    if (property == "referral")
+                        continue;
                     toast.warn("Please enter all fields!")
-                    console.log("error")
                     return
 
                 }
@@ -367,24 +358,24 @@ function TeamPradnya() {
                     {/* form 1 */}
                     {formStep === 1 && (
                         <>
-                        {form1.length<2 &&(<>
-                            <Buttons
-                                value="add members"
-                                onClick={addfields}
-                                classNames=" my-2"
-                            />
-                        </>)}
+                            {form1.length < 2 && (<>
+                                <Buttons
+                                    value="add members"
+                                    onClick={addfields}
+                                    classNames=" my-2"
+                                />
+                            </>)}
                             {form1.map((form, index) => {
                                 return (
                                     <div key={index}>
-                                        <InputBox label="Name"  name="name"  type="text"  placeholder="name "  required  onChange={(event) => handleFormChange(event, index)}  value={form.name} />
-                                        <InputBox label="Email ID"  name="email" type="text"  placeholder="email " required  onChange={(event) => handleFormChange(event, index)}  value={form.email} />
+                                        <InputBox label="Name" name="name" type="text" placeholder="name " required onChange={(event) => handleFormChange(event, index)} value={form.name} />
+                                        <InputBox label="Email ID" name="email" type="text" placeholder="email " required onChange={(event) => handleFormChange(event, index)} value={form.email} />
                                         <div className="flex">
                                             <div className="mr-1 w-1/2">
-                                                <InputBox label="Phone No"   name="phoneno"  type="number"  placeholder="phone number" required onChange={(event) => handleFormChange(event, index)} value={form.phoneno} />
+                                                <InputBox label="Phone No" name="phoneno" type="number" placeholder="phone number" required onChange={(event) => handleFormChange(event, index)} value={form.phoneno} />
                                             </div>
                                             <div className="ml-1 w-1/2">
-                                            <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                                <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                                     Gender
                                                 </p>
                                                 <div className="relative w-full lg:w-full block px-0  text-sm">
@@ -406,13 +397,13 @@ function TeamPradnya() {
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
 
-                                       {form1.length>1 &&
-                                       (<><Buttons
-                                        value="remove member"
-                                        onClick={() => removefields(index)}
-                                        classNames=" my-2"
-                                        disabled={true}
-                                    /></>)} 
+                                        {form1.length > 1 &&
+                                            (<><Buttons
+                                                value="remove member"
+                                                onClick={() => removefields(index)}
+                                                classNames=" my-2"
+                                                disabled={true}
+                                            /></>)}
                                     </div>
                                 );
                             })}
@@ -430,94 +421,145 @@ function TeamPradnya() {
                                 <input
                                     type="radio"
                                     value="0"
-                                    name="pict"
+                                    name="isPICT"
                                     className="ml-10"
                                     onChange={handleInputChange2}
                                 />{" "}
                                 No
                             </div>
-                            <div className=" mx-1 my-2">
-                                <InputBox
-                                    label="College"
-                                    name={"college"}
-                                    type="text"
-                                    placeholder="college name"
-                                    required
-                                    onChange={(e) => handleInputChange2(e)}
+                            {form2.isPICT === "0" && (
+                                <>
+                                    <div className="my-5">
+                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                            Is International ?
+                                        </p>
+                                        <input type="radio" value="0" name="isInternational" onChange={handleInputChange2}
+                                            selected={form2.isPICT === '1'} /> No
+                                        <input
+                                            type="radio"
+                                            value="1"
+                                            name="isInternational"
+                                            className="ml-10"
+                                            onChange={handleInputChange2}
+                                        />{" "}
+                                        Yes
+                                    </div>
+                                    <div className=" mx-1 my-2">
+                                        <InputBox
+                                            label="College"
+                                            name={"college"}
+                                            type="text"
+                                            placeholder="college name"
+                                            required
+                                            onChange={(e) => handleInputChange2(e)}
 
-                                    value={form2.college}
-                                />
-                            </div>
-                            <div className="flex mx-1 ">
-                                <div className="mx-1 my-2">
+                                            value={form2.college}
+                                        />
+                                    </div>
+                                    <div className="mx-1 my-2">
+                                        <InputBox
+                                            label="Country"
+                                            name={"country"}
+                                            type="text"
+                                            placeholder="country"
+                                            disabled={form2.isInternational === "0"}
+                                            required
+                                            onChange={(e) => handleInputChange2(e)}
+
+                                            value={form2.isInternational === '0' ? 'India' : form2.country}
+                                        />
+                                    </div>
+                                    <div className="flex mx-1 ">
+                                        <div className="ml-1 w-1/2">
+                                            
+                                            <div className="relative w-full lg:w-full block px-0  text-sm">
+                                            <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                                    State
+                                                </p>
+                                                    <div className="relative w-full lg:w-full block px-0  text-sm">
+                                                    <select
+                                                        name="gender"
+                                                        onChange={(event) => handleSelectChange2(event)}
+                                                        // onChange={handleChange}
+                                                        className="w-full h-12 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
+                                                    >
+                                                            <option value="">State</option>
+                                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                                            <option value="Assam">Assam</option>
+                                                            <option value="Bihar">Bihar</option>
+                                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                                            <option value="Delhi">Delhi</option>
+                                                            <option value="Goa">Goa</option>
+                                                            <option value="Gujarat">Gujarat</option>
+                                                            <option value="Haryana">Haryana</option>
+                                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                                            <option value="Jammu &amp; Kashmir">Jammu &amp; Kashmir</option>
+                                                            <option value="Jharkhand">Jharkhand</option>
+                                                            <option value="Karnataka">Karnataka</option>
+                                                            <option value="Kerala">Kerala</option>
+                                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                                            <option value="Maharashtra">Maharashtra</option>
+                                                            <option value="Manipur">Manipur</option>
+                                                            <option value="Meghalaya">Meghalaya</option>
+                                                            <option value="Mizoram">Mizoram</option>
+                                                            <option value="Nagaland">Nagaland</option>
+                                                            <option value="Orissa">Orissa</option>
+                                                            <option value="Punjab">Punjab</option>
+                                                            <option value="Rajasthan">Rajasthan</option>
+                                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                                            <option value="Telangana">Telangana</option>
+                                                            <option value="Tripura">Tripura</option>
+                                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                                            <option value="Uttarakhand">Uttarakhand</option>
+                                                            <option value="West Bengal">West Bengal</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                        <div className="ml-1 w-1/2">
+                                            <InputBox
+                                                label="District"
+                                                name={"district"}
+                                                type="text"
+                                                placeholder="district"
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.district}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className=" mx-1 my-2">
+                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                            Locality
+                                        </p>
+                                        <div className="relative w-full lg:w-full block px-0  text-sm">
+                                            <select
+                                                name={"locality"}
+                                                onChange={(e) => handleInputChange2(e)}
+                                                className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
+                                                <option value="0" selected={form2.locality == "0"}>Rural</option>
+                                                <option value="1" selected={form2.locality == "1"}>Urban</option>
+                                                <option disabled selected className="text-white">
+                                                    Select
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                            
                                     <InputBox
-                                        label="Country"
-                                        name={"country"}
                                         type="text"
-                                        placeholder="country"
+                                        label="Referral"
+                                        name="referral"
+                                        placeholder="Referral ID given by Campus Ambassador"
                                         required
                                         onChange={(e) => handleInputChange2(e)}
-
-                                        value={form2.country}
+                                        value={form2.referral}
                                     />
-                                </div>
-
-                            </div>
-
-                            <div className="flex mx-1 ">
-                                <div className="mr-1 w-1/2">
-                                    <InputBox
-                                        label="City"
-                                        name={"city"}
-                                        type="text"
-                                        placeholder="city"
-                                        required
-                                        onChange={(e) => handleInputChange2(e)}
-
-                                        value={form2.city}
-                                    />
-                                </div>
-                                <div className="mr-1 w-1/2">
-                                    <InputBox
-                                        label="State"
-                                        type="text"
-                                        name={"state"}
-                                        placeholder="state"
-                                        required
-                                        onChange={(e) => handleInputChange2(e)}
-                                        value={form2.state}
-                                    />
-                                </div>
-                                <div className="ml-1 w-1/2">
-                                    <InputBox
-                                        label="District"
-                                        name={"district"}
-                                        type="text"
-                                        placeholder="district"
-                                        required
-                                        onChange={(e) => handleInputChange2(e)}
-                                        value={form2.district}
-                                    />
-                                </div>
-                            </div>
-                            <div className=" mx-1 my-2">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Locality
-                                </p>
-                                <div className="relative w-full lg:w-full block px-0  text-sm">
-                                    <select
-                                        name={"locality"}
-                                        onChange={(e) => handleInputChange2(e)}
-                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                        <option value="0" selected={form2.locality == "0"}>Rural</option>
-                                        <option value="1" selected={form2.locality == "1"}>Urban</option>
-                                        <option disabled selected className="text-white">
-                                            Select
-                                        </option>
-                                    </select>
-                                </div>
-
-                            </div>
+                                </>
+                            )}
                             <div className="relative z-0  w-full group">
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Which year are you in?
