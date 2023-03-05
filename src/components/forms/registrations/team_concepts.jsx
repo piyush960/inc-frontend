@@ -264,7 +264,7 @@ function TeamConcepts() {
             registerUserMutationForm1.mutate(memberFormData, {
                 onSuccess: () => {
                   setErrors1(initialErrorsForm1);
-                  toast.success("Completed Step 2️⃣ !", { icon: "✅" });
+                  toast.success("Added member to the team !", { icon: "✅" });
                   let object = {
                       name: "",
                       email: "",
@@ -273,7 +273,8 @@ function TeamConcepts() {
                       member_id:"",
                   };
                   setFormFields([...formFields, object]);
-                }
+                },
+                onError: () => setFormFields(formFields => formFields.slice(0, -1))
             })
             return
         }
@@ -353,7 +354,7 @@ function TeamConcepts() {
   };
 
   //steps for whole form
-  const [formStep, setFormStep] = useState(0);
+  const [formStep, setFormStep] = useState(1);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -390,34 +391,29 @@ function TeamConcepts() {
                 toast.warn("At least two member needed!")
                 return
             }
+            setFormStep(currentStep => currentStep + 1);
+            setActiveStep(activeStep => activeStep + 1);
         }
         if (formStep === 2) {
             for (const property in form2) {
-
-                if (form2[property] == "") {
-                    if (property == "reason_of_mode" && form2["mode"] == "1")
-                    continue;
+                if (form2[property] === "") {
+                    if (property === "reason_of_mode" && form2["mode"] === "1")
+                        continue;
                     toast.warn("Please enter all fields!")
-                    console.log("error")
                     return
-
                 }
             }
             registerUserMutationForm2.mutate(form2, {
-              onSuccess: (res) => {
-                setErrors2(initialErrorsForm2);
-                toast.success("Successfully Registered", { icon: "💐" });
-                setTimeout(() => {
-                  console.log("nextForm");
-                  // onSuccessNavigator('/')
-                }, 2000);
+              onSuccess: () => {
+                  setErrors2(initialErrorsForm2);
+                  toast.success("Completed Step 3️⃣ !", { icon: "✅" });
+                  setFormStep(currentStep => currentStep + 1);
+                  setActiveStep(activeStep => activeStep + 1);
               },
             });
 
         }
         // if (!registerUserMutationForm0.isLoading || !registerUserMutationForm1.isLoading || !registerUserMutationForm2.isLoading) {
-        //     setFormStep(currentStep => currentStep + 1);
-        //     setActiveStep(activeStep => activeStep + 1);
         // }
   };
 
