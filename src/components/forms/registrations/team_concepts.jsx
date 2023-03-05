@@ -229,6 +229,7 @@ function TeamConcepts() {
     };
     const [errors1, setErrors1] = useState(initialErrorsForm1);
     const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
+
     const handleFormChange = (event, index) => {
         const { name, value } = event.target;
         setFormFields((prevState) => {
@@ -292,7 +293,7 @@ function TeamConcepts() {
     const [form2, setForm2] = useState(
 
         {
-            isPICT: "",
+            isPICT: "1",
             isInternational: "0",
             college: "",
             country: "",
@@ -309,13 +310,15 @@ function TeamConcepts() {
     const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
 
     const handleInputChange2 = (e) => {
-
+        console.log(form2.isPICT)
         const { name, value } = e.target;
         if (name === "isPICT" && value === "1") {
             setForm2((form2) => ({
                 ...form2,
+                isPICT: "1",
                 college: "Pune Institute Of Computer Technology",
                 country: "India",
+                city: "Pune",
                 state: "Maharashtra",
                 district: "Pune",
                 locality: "1",
@@ -326,10 +329,11 @@ function TeamConcepts() {
         } else if (name === "isPICT" && value === "0") {
             setForm2((form2) => ({
                 ...form2,
+                isPICT: "0",
                 college: "",
                 country: "",
                 state: "",
-                city:"",
+                city: "",
                 district: "",
                 locality: "",
                 isInternational: ""
@@ -395,10 +399,13 @@ function TeamConcepts() {
             }
         }
         if (formStep === 2) {
+            console.log(form2)
             for (const property in form2) {
 
                 if (form2[property] == "") {
                     if (property == "reason_of_mode" && form2["mode"] == "1")
+                        continue;
+                    if (property == "referral")
                         continue;
                     toast.warn("Please enter all fields!")
                     console.log("error")
@@ -636,7 +643,7 @@ function TeamConcepts() {
                                             </div>
                                             <div className="ml-1 w-1/2">
                                                 <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                                    Gender
+                                                    State
                                                 </p>
                                                 <div className="relative w-full lg:w-full block px-0  text-sm">
                                                     <select
@@ -676,7 +683,10 @@ function TeamConcepts() {
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Are you PICTian or not?
                                 </p>
-                                <input type="radio" value="1" name="isPICT" onChange={handleInputChange2} /> Yes
+                                <input type="radio"
+                                    value="1"
+                                    name="isPICT"
+                                    onChange={handleInputChange2} /> Yes
                                 <input
                                     type="radio"
                                     value="0"
@@ -686,6 +696,7 @@ function TeamConcepts() {
                                 />{" "}
                                 No
                             </div>
+
                             {form2.isPICT === "0" && (
                                 <>
                                     <div className="my-5">
@@ -721,6 +732,7 @@ function TeamConcepts() {
                                             name={"country"}
                                             type="text"
                                             placeholder="country"
+                                            disabled={form2.isInternational === "0"}
                                             required
                                             onChange={(e) => handleInputChange2(e)}
 
@@ -728,16 +740,54 @@ function TeamConcepts() {
                                         />
                                     </div>
                                     <div className="flex mx-1 ">
-                                        <div className="mr-1 w-1/2">
-                                            <InputBox
-                                                label="State"
-                                                type="text"
-                                                name={"state"}
-                                                placeholder="state"
-                                                required
-                                                onChange={(e) => handleInputChange2(e)}
-                                                value={form2.state}
-                                            />
+                                        <div className="ml-1 w-1/2">
+                                            
+                                            <div className="relative w-full lg:w-full block px-0  text-sm">
+                                            <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                                    State
+                                                </p>
+                                                    <div className="relative w-full lg:w-full block px-0  text-sm">
+                                                    <select
+                                                        name="gender"
+                                                        onChange={(event) => handleSelectChange2(event)}
+                                                        // onChange={handleChange}
+                                                        className="w-full h-12 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
+                                                    >
+                                                            <option value="">State</option>
+                                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                                            <option value="Assam">Assam</option>
+                                                            <option value="Bihar">Bihar</option>
+                                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                                            <option value="Delhi">Delhi</option>
+                                                            <option value="Goa">Goa</option>
+                                                            <option value="Gujarat">Gujarat</option>
+                                                            <option value="Haryana">Haryana</option>
+                                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                                            <option value="Jammu &amp; Kashmir">Jammu &amp; Kashmir</option>
+                                                            <option value="Jharkhand">Jharkhand</option>
+                                                            <option value="Karnataka">Karnataka</option>
+                                                            <option value="Kerala">Kerala</option>
+                                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                                            <option value="Maharashtra">Maharashtra</option>
+                                                            <option value="Manipur">Manipur</option>
+                                                            <option value="Meghalaya">Meghalaya</option>
+                                                            <option value="Mizoram">Mizoram</option>
+                                                            <option value="Nagaland">Nagaland</option>
+                                                            <option value="Orissa">Orissa</option>
+                                                            <option value="Punjab">Punjab</option>
+                                                            <option value="Rajasthan">Rajasthan</option>
+                                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                                            <option value="Telangana">Telangana</option>
+                                                            <option value="Tripura">Tripura</option>
+                                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                                            <option value="Uttarakhand">Uttarakhand</option>
+                                                            <option value="West Bengal">West Bengal</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            
                                         </div>
                                         <div className="ml-1 w-1/2">
                                             <InputBox
@@ -810,6 +860,8 @@ function TeamConcepts() {
                                     />
                                 </>
                             )}
+
+
                         </>
                     )}
                     <div className="flex justify-between">
