@@ -406,11 +406,12 @@ function TeamImpetus() {
                                         // onChange={handleChange}
                                         className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                     >
-                                        <option value="Application Development">Application Development</option>
-                                        <option value="Communication Networks And Security Systems">Communication Networks And Security Systems</option>
-                                        <option value="Digital/ Image/ Speech/ Video Processing">Digital/ Image/ Speech/ Video Processing</option>
-                                        <option value="Embedded/ VLSI System">Embedded/ VLSI System</option>
-                                        <option value="Machine Learning and Pattern Recognition">Machine Learning and Pattern Recognition</option>
+                                        <option value="AD">Application Development</option>
+                                        <option value="CN">Communication Networks And Security Systems</option>
+                                        <option value="DP">Digital/ Image/ Speech/ Video Processing</option>
+                                        <option value="ES">Embedded/ VLSI System</option>
+                                        <option value="ML">Machine Learning and Pattern Recognition</option>
+                                        <option value="OT">Others</option>
                                         <option value="" selected className="text-white">
                                             Select
                                         </option>
@@ -560,11 +561,13 @@ function TeamImpetus() {
                     {/* form 1 */}
                     {formStep === 1 && (
                         <>
+                            {formfields.length<5 &&(<>
                             <Buttons
                                 value="add members"
                                 onClick={addfields}
                                 classNames=" my-2"
                             />
+                        </>)}
 
                             {formfields.map((form, index) => {
                                 return (

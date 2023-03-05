@@ -152,8 +152,7 @@ const initialErrorsForm0 = {
   abstract: "",
   nda: "",
   sponsored: "",
-  mode: "",
-  reason_of_mode: "",
+  
 };
 const initialErrorsForm1 = {
   name: "",
@@ -168,6 +167,8 @@ const initialErrorsForm2 = {
   state: "",
   district: "",
   locality: "",
+  mode: "",
+  reason_of_mode: "",
 };
 
 function TeamConcepts() {
@@ -482,11 +483,12 @@ function TeamConcepts() {
                                         // onChange={handleChange}
                                         className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
                                     >
-                                        <option value="Application Development">Application Development</option>
-                                        <option value="Communication Networks And Security Systems">Communication Networks And Security Systems</option>
-                                        <option value="Digital/ Image/ Speech/ Video Processing">Digital/ Image/ Speech/ Video Processing</option>
-                                        <option value="Embedded/ VLSI System">Embedded/ VLSI System</option>
-                                        <option value="Machine Learning and Pattern Recognition">Machine Learning and Pattern Recognition</option>
+                                        <option value="AD">Application Development</option>
+                                        <option value="CN">Communication Networks And Security Systems</option>
+                                        <option value="DP">Digital/ Image/ Speech/ Video Processing</option>
+                                        <option value="ES">Embedded/ VLSI System</option>
+                                        <option value="ML">Machine Learning and Pattern Recognition</option>
+                                        <option value="OT">Others</option>
                                         <option value="" selected className="text-white">
                                             Select
                                         </option>
@@ -586,48 +588,6 @@ function TeamConcepts() {
                                     </div>
                                 </>
                                 )
-
-                            }
-
-                            <InputBox
-                                type="textarea"
-                                label={"Abstract"}
-                                name={"abstract"}
-                                placeholder={"In 300 words or less"}
-                                classNames=""
-                                required
-                                onChange={(e) => handleInputChange0(e)}
-                                value={form0.abstract}
-                            ></InputBox>
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Preferred mode of presentation
-                                </p>
-                                <input type="radio" value="0" name="mode" onChange={handleInputChange0} /> Online
-                                <input
-                                    type="radio"
-                                    value="1"
-                                    name="mode"
-                                    className="ml-10"
-                                    onChange={handleInputChange0}
-                                />{" "}
-                                Offline
-                            </div>
-                            {form0.mode === "0" && (
-                                <div>
-                                    <InputBox
-                                        type="textarea"
-                                        label={"Reason for Online"}
-                                        name={"reason_of_mode"}
-                                        placeholder={"reason"}
-                                        classNames=""
-                                        required
-                                        onChange={(e) => handleInputChange0(e)}
-                                        value={form0.reason_of_mode}
-                                    ></InputBox>
-                                </div>
-                            )
-
 
                             }
 

@@ -1,6 +1,6 @@
 import './styles/inputBox.css';
 
-function InputBox({ label, name, type, value, placeholder, min, max, inputRef, onChange, classNames, required, error }) {
+function InputBox({ label, name, type, value, placeholder, min, max, inputRef, onChange, classNames, disable, required, error }) {
     return (
         <div className='input-box w-full mb-4 relative'>
             <label htmlFor={label.toLowerCase().replace(/ /g, "_")} className={`input-label font-medium mb-3 text-white text-lg before: ${required && 'after:content-["*"] after:ml-0.5 after:text-gold'}`}>{label}</label>
