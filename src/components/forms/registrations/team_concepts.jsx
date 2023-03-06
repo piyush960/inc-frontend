@@ -358,7 +358,7 @@ function TeamConcepts() {
     };
 
     //steps for whole form
-    const [formStep, setFormStep] = useState(2);
+    const [formStep, setFormStep] = useState(0);
 
     const prevForm = (e) => {
         // e.preventDefault();
