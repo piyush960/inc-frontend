@@ -37,6 +37,10 @@
   }
 }
 
+.Toastify__progress-bar--success {
+  background: rgb(242 163 15 / 0.8) !important;
+}
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -68,6 +72,17 @@ html {
   scroll-behavior: smooth;
 }
 
+input:checked ~ .label {
+  color: #f2a30f;
+  background-color: rgba(37, 99, 235, 0.2);
+  border-color: #f2a30f;
+}
+
+input:hover ~ .label {
+  background-color: rgba(37, 99, 235, 0.2);
+  border-color: #f2a30f;
+}
+
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
@@ -91,4 +106,20 @@ html {
   border-radius: 10px;
   border: 3px solid #010642;
   /* border: transparent; */
+}
+
+/* ===== Loader CSS ===== */
+
+.spin_loader {
+  animation: spin_loader 1s linear infinite;
+  transition: all 0.5s ease-in-out;
+}
+
+@keyframes spin_loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

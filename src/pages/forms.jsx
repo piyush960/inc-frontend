@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import ConceptsForms from './conceptsForms';
-import PradnyaForm from './pradnyaForms';
+import ImpetusForms from './impetusForms';
+import PradnyaForms from './pradnyaForms';
 
 function Forms() {
     let { eventName } = useParams();
@@ -9,8 +10,10 @@ function Forms() {
     switch (eventName) {
         case 'concepts':
             return <ConceptsForms />;
-        case 'pradnya' :
-            return <PradnyaForm />;
+        case 'impetus':
+            return <ImpetusForms />;
+        case 'pradnya':
+            return <PradnyaForms />;
         default:
             _404Navigator('/404');
             return
