@@ -279,6 +279,7 @@ function TeamImpetus() {
                     };
                     setFormfields([...formFields, object]);
                 },
+                onError: () => setFormfields(formFields => formFields.slice(0, -1))
             });
             return;
         }
@@ -393,14 +394,16 @@ function TeamImpetus() {
                 toast.warn("At least two member needed!");
                 return;
             }
+            setFormStep(currentStep => currentStep + 1);
+            setActiveStep(activeStep => activeStep + 1);
         }
 
         if (formStep === 2) {
             for (const property in form2) {
-                if (form2[property] == "") {
-                    if (property == "reason_of_mode" && form2["mode"] == "1") 
+                if (form2[property] === "") {
+                    if (property === "reason_of_mode" && form2["mode"] == "1") 
                         continue;
-                    if (property == "referral")
+                    if (property === "referral")
                         continue;
                     toast.warn("Please enter all fields!");
                     console.log("error");
@@ -408,13 +411,11 @@ function TeamImpetus() {
                 }
             }
             registerUserMutationForm2.mutate(form2, {
-                onSuccess: (res) => {
+                onSuccess: () => {
                     setErrors2(initialErrorsForm2);
-                    toast.success("Successfully Registered", { icon: "💐" });
-                    setTimeout(() => {
-                        console.log("nextForm");
-                        // onSuccessNavigator('/')
-                    }, 2000);
+                    toast.success("Completed Step 3️⃣ !", { icon: "✅" });
+                    setFormStep(currentStep => currentStep + 1);
+                    setActiveStep(activeStep => activeStep + 1);
                 },
             });
         }
@@ -655,6 +656,8 @@ function TeamImpetus() {
                                 value="add members"
                                 onClick={addFields}
                                 classNames=" my-2"
+                                loading={registerUserMutationForm1.isLoading}
+                                disabled={formFields.length >= 5}
                             />
 
                             {formFields.map((form, index) => {
