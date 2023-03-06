@@ -11,7 +11,7 @@ import React from "react";
 const titleSponsors = [
   {
     name: "CION EQ",
-    logo: 'https://drive.google.com/uc?export=view&id=1nMyMSeV2GxwmikZcm-a1LGQUEZCBNafd',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678003690/Uptiq_logo_web_address_full_color_1_d40kui.svg',
     website: "https://www.google.co.in/",
   },
 
