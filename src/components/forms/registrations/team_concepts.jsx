@@ -728,15 +728,34 @@ function TeamConcepts() {
                                                     value={form.phone}
                                                 />
                                             </div>
-
-                                            <Dropdown
+                                            <div className="input-box-dropdown w-full mb-4 relative">
+                                                <label className={`input-label font-medium mb-1 text-white text-lg flex`}>{"Gender"}<h1 className="text-gold">*</h1></label>
+                                                <div className="relative inline-block w-full">
+                                                    <select
+                                                        name={"gender"}
+                                            
+                                                        value={formFields.gender}
+                                                        onChange={(event) => handleFormChange(event, index)}
+                                                        required
+                                                        className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
+                                                    >
+                                                        {gender_type.map(option => (
+                                                            <option key={option?.value} value={option?.value} className={`py-1 bg-[#0B1E47] ${option?.className || ''}`}>
+                                                                {option?.label}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                
+                                            </div>
+                                            {/* <Dropdown
                                                 label=" Gender"
                                                 options={gender_type}
                                                 name={"gender"}
                                                 state={formFields}
                                                 setState={setFormFields}
                                                 required
-                                            />
+                                            /> */}
 
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
