@@ -260,37 +260,37 @@ const gender_type = [
     { value: 'OT', label: 'Other' },
 ]
 
-const state_arr = [
-    { value: 'SEL', label: 'Select' },
-    { value: 'AP', label: "Arunachal Pradesh" },
-    { value: 'AS', label: "Assam" },
-    { value: 'BI', label: "Bihar" },
-    { value: 'CH', label: "Chhattisgarh" },
-    { value: 'DEL', label: "Delhi" },
-    { value: 'G', label: "Goa" },
-    { value: 'GUJ', label: "Gujarat" },
-    { value: 'HAR', label: "Haryana" },
-    { value: 'HP', label: "Himachal Pradesh" },
-    { value: 'JK', label: "Jammu &amp; Kashmir" },
-    { value: 'JH', label: "Jharkhand" },
-    { value: 'KAR', label: "Karnataka" },
-    { value: 'KR', label: "Kerala" },
-    { value: 'MP', label: "Madhya Pradesh" },
-    { value: 'MAH', label: "Maharashtra" },
-    { value: 'MN', label: "Manipur" },
-    { value: 'MG', label: "Meghalaya" },
-    { value: 'MZ', label: "Mizoram" },
-    { value: 'OR', label: "Orissa" },
-    { value: 'PN', label: "Punjab" },
-    { value: 'RJ', label: "Rajasthan" },
-    { value: 'TN', label: "Tamil Nadu" },
-    { value: 'TL', label: "Telangana" },
-    { value: 'TR', label: "Tripura" },
-    { value: 'UP', label: "Uttar Pradesh" },
-    { value: 'UT', label: "Uttarakhand" },
-    { value: 'WB', label: "West Bengal" },
+// const state_arr = [
+//     { value: 'SEL', label: 'Select' },
+//     { value: 'AP', label: "Arunachal Pradesh" },
+//     { value: 'AS', label: "Assam" },
+//     { value: 'BI', label: "Bihar" },
+//     { value: 'CH', label: "Chhattisgarh" },
+//     { value: 'DEL', label: "Delhi" },
+//     { value: 'G', label: "Goa" },
+//     { value: 'GUJ', label: "Gujarat" },
+//     { value: 'HAR', label: "Haryana" },
+//     { value: 'HP', label: "Himachal Pradesh" },
+//     { value: 'JK', label: "Jammu &amp; Kashmir" },
+//     { value: 'JH', label: "Jharkhand" },
+//     { value: 'KAR', label: "Karnataka" },
+//     { value: 'KR', label: "Kerala" },
+//     { value: 'MP', label: "Madhya Pradesh" },
+//     { value: 'MAH', label: "Maharashtra" },
+//     { value: 'MN', label: "Manipur" },
+//     { value: 'MG', label: "Meghalaya" },
+//     { value: 'MZ', label: "Mizoram" },
+//     { value: 'OR', label: "Orissa" },
+//     { value: 'PN', label: "Punjab" },
+//     { value: 'RJ', label: "Rajasthan" },
+//     { value: 'TN', label: "Tamil Nadu" },
+//     { value: 'TL', label: "Telangana" },
+//     { value: 'TR', label: "Tripura" },
+//     { value: 'UP', label: "Uttar Pradesh" },
+//     { value: 'UT', label: "Uttarakhand" },
+//     { value: 'WB', label: "West Bengal" },
 
-]
+// ]
 
 const local_arr = [
     { value: 'SEL', label: "Select" },
@@ -307,6 +307,18 @@ const year_arr = [
     { value: 'T', label: "3rd year" },
 ]
 
+const demo_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+
+]
 function TeamImpetus() {
     //form0
     const [activeStep, setActiveStep] = React.useState(1);
@@ -687,26 +699,13 @@ function TeamImpetus() {
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.abstract}
                             ></InputBox>
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Can you show a demo of your project?
-                                </p>
-                                <input
-                                    type="radio"
-                                    value="1"
-                                    name="demo"
-                                    onChange={handleInputChange0}
-                                />{" "}
-                                Yes
-                                <input
-                                    type="radio"
-                                    value="0"
-                                    name="demo"
-                                    className="ml-10"
-                                    onChange={handleInputChange0}
-                                />{" "}
-                                No
-                            </div>
+                            <RadioButtons
+                                label='  Can you show a demo of your project?'
+                                options={demo_arr}
+                                state={form2}
+                                setState={setForm2}
+                                name='isPICT' required />
+                        
                             {form0.demo === "0" && (
                                 <div>
                                     <InputBox
@@ -841,17 +840,16 @@ function TeamImpetus() {
                                         />
                                     </div>
                                     <div className="flex mx-1 ">
-                                        <div className="ml-1 w-1/2">
-                                            <Dropdown
+                                        <div className="mr-1 w-1/2">
+                                            <InputBox
                                                 label="State"
-                                                options={state_arr}
+                                                type="text"
                                                 name={"state"}
-                                                state={form2}
-                                                setState={setForm2}
+                                                placeholder="state"
                                                 required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.state}
                                             />
-
-
                                         </div>
                                         <div className="ml-1 w-1/2">
                                             <InputBox

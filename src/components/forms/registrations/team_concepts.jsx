@@ -253,37 +253,37 @@ const gender_type = [
     { value: 'OT', label: 'Other' },
 ]
 
-const state_arr = [
-    { value: 'SEL', label: 'Select' },
-    { value: 'AP', label: "Arunachal Pradesh" },
-    { value: 'AS', label: "Assam" },
-    { value: 'BI', label: "Bihar" },
-    { value: 'CH', label: "Chhattisgarh" },
-    { value: 'DEL', label: "Delhi" },
-    { value: 'G', label: "Goa" },
-    { value: 'GUJ', label: "Gujarat" },
-    { value: 'HAR', label: "Haryana" },
-    { value: 'HP', label: "Himachal Pradesh" },
-    { value: 'JK', label: "Jammu &amp; Kashmir" },
-    { value: 'JH', label: "Jharkhand" },
-    { value: 'KAR', label: "Karnataka" },
-    { value: 'KR', label: "Kerala" },
-    { value: 'MP', label: "Madhya Pradesh" },
-    { value: 'MAH', label: "Maharashtra" },
-    { value: 'MN', label: "Manipur" },
-    { value: 'MG', label: "Meghalaya" },
-    { value: 'MZ', label: "Mizoram" },
-    { value: 'OR', label: "Orissa" },
-    { value: 'PN', label: "Punjab" },
-    { value: 'RJ', label: "Rajasthan" },
-    { value: 'TN', label: "Tamil Nadu" },
-    { value: 'TL', label: "Telangana" },
-    { value: 'TR', label: "Tripura" },
-    { value: 'UP', label: "Uttar Pradesh" },
-    { value: 'UT', label: "Uttarakhand" },
-    { value: 'WB', label: "West Bengal" },
+// const state_arr = [
+//     { value: 'SEL', label: 'Select' },
+//     { value: 'AP', label: "Arunachal Pradesh" },
+//     { value: 'AS', label: "Assam" },
+//     { value: 'BI', label: "Bihar" },
+//     { value: 'CH', label: "Chhattisgarh" },
+//     { value: 'DEL', label: "Delhi" },
+//     { value: 'G', label: "Goa" },
+//     { value: 'GUJ', label: "Gujarat" },
+//     { value: 'HAR', label: "Haryana" },
+//     { value: 'HP', label: "Himachal Pradesh" },
+//     { value: 'JK', label: "Jammu &amp; Kashmir" },
+//     { value: 'JH', label: "Jharkhand" },
+//     { value: 'KAR', label: "Karnataka" },
+//     { value: 'KR', label: "Kerala" },
+//     { value: 'MP', label: "Madhya Pradesh" },
+//     { value: 'MAH', label: "Maharashtra" },
+//     { value: 'MN', label: "Manipur" },
+//     { value: 'MG', label: "Meghalaya" },
+//     { value: 'MZ', label: "Mizoram" },
+//     { value: 'OR', label: "Orissa" },
+//     { value: 'PN', label: "Punjab" },
+//     { value: 'RJ', label: "Rajasthan" },
+//     { value: 'TN', label: "Tamil Nadu" },
+//     { value: 'TL', label: "Telangana" },
+//     { value: 'TR', label: "Tripura" },
+//     { value: 'UP', label: "Uttar Pradesh" },
+//     { value: 'UT', label: "Uttarakhand" },
+//     { value: 'WB', label: "West Bengal" },
 
-]
+// ]
 
 const local_arr = [
     { value: 'SEL', label: "Select" },
@@ -390,17 +390,18 @@ function TeamConcepts() {
             memberFormData.append('body', JSON.stringify(tempMemberDetails))
             registerUserMutationForm1.mutate(memberFormData, {
                 onSuccess: () => {
-                    setErrors1(initialErrorsForm1);
-                    toast.success("Completed Step 2️⃣ !", { icon: "✅" });
-                    let object = {
-                        name: "",
-                        email: "",
-                        phone: "",
-                        gender: "",
-                        member_id: "",
-                    };
-                    setFormFields([...formFields, object]);
-                }
+                  setErrors1(initialErrorsForm1);
+                  toast.success("Added member to the team !", { icon: "✅" });
+                  let object = {
+                      name: "",
+                      email: "",
+                      phone: "",
+                      gender: "",
+                      member_id:"",
+                  };
+                  setFormFields([...formFields, object]);
+                },
+                onError: () => setFormFields(formFields => formFields.slice(0, -1))
             })
             return
         }
@@ -483,8 +484,8 @@ function TeamConcepts() {
         });
     };
 
-    //steps for whole form
-    const [formStep, setFormStep] = useState(0);
+  //steps for whole form
+  const [formStep, setFormStep] = useState(0);
 
     const prevForm = (e) => {
         // e.preventDefault();
@@ -523,37 +524,30 @@ function TeamConcepts() {
                 toast.warn("At least two member needed!")
                 return
             }
+            setFormStep(currentStep => currentStep + 1);
+            setActiveStep(activeStep => activeStep + 1);
         }
         if (formStep === 2) {
             console.log(form2)
             for (const property in form2) {
-
-                if (form2[property] == "") {
-                    if (property == "reason_of_mode" && form2["mode"] == "1")
-                        continue;
-                    if (property == "referral")
+                if (form2[property] === "") {
+                    if (property === "reason_of_mode" && form2["mode"] === "1")
                         continue;
                     toast.warn("Please enter all fields!")
-                    console.log("error")
                     return
-
                 }
             }
             registerUserMutationForm2.mutate(form2, {
-                onSuccess: (res) => {
-                    setErrors2(initialErrorsForm2);
-                    toast.success("Successfully Registered", { icon: "💐" });
-                    setTimeout(() => {
-                        console.log("nextForm");
-                        // onSuccessNavigator('/')
-                    }, 2000);
-                },
+              onSuccess: () => {
+                  setErrors2(initialErrorsForm2);
+                  toast.success("Completed Step 3️⃣ !", { icon: "✅" });
+                  setFormStep(currentStep => currentStep + 1);
+                  setActiveStep(activeStep => activeStep + 1);
+              },
             });
 
         }
         // if (!registerUserMutationForm0.isLoading || !registerUserMutationForm1.isLoading || !registerUserMutationForm2.isLoading) {
-        //     setFormStep(currentStep => currentStep + 1);
-        //     setActiveStep(activeStep => activeStep + 1);
         // }
     };
 
@@ -804,16 +798,16 @@ function TeamConcepts() {
                                         />
                                     </div>
                                     <div className="flex mx-1 ">
-                                        <div className="ml-1 w-1/2">
-                                            <Dropdown
+                                        <div className="mr-1 w-1/2">
+                                            <InputBox
                                                 label="State"
-                                                options={state_arr}
+                                                type="text"
                                                 name={"state"}
-                                                state={form2}
-                                                setState={setForm2}
+                                                placeholder="state"
                                                 required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.state}
                                             />
-
                                         </div>
                                         <div className="ml-1 w-1/2">
                                             <InputBox
