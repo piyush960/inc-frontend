@@ -18,3 +18,10 @@ export const slots = [
     { value: '3', label: 'Saturday 25th March (9:00 AM - 11:59 AM)' },
     { value: '4', label: 'Saturday 24th March (1:00 PM - 6:00 PM)' }
 ]
+
+export const paymentLinks = new Map([
+    ['test', 'https://easebuzz.in/quickpay/owhseppfut'],
+    ['concepts', 'https://easebuzz.in/quickpay/pkwfmmpssi'],
+    ['impetus', 'https://easebuzz.in/quickpay/jkxuiptnhq'],
+    ['pradnya', 'https://easebuzz.in/quickpay/cwxuyvrypr'],
+])

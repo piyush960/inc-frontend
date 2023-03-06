@@ -1,9 +1,9 @@
 import "../styles/event_registrations.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from 'styled-components';
-import { InputBox, Buttons, FileInputBox, toast } from "../../index.js";
-import { useRegisterStep1, useRegisterStep2, useRegisterStep3 } from "../../../hooks/events.hooks";
-import { domains } from "../../../static/data";
+import { InputBox, Buttons, FileInputBox, toast, NoteBox } from "../../index.js";
+import { useRegisterStep1, useRegisterStep2, useRegisterStep3, useRegisterStep4 } from "../../../hooks/events.hooks";
+import { domains, paymentLinks } from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -168,6 +168,10 @@ const initialErrorsForm2 = {
     referral: "",
 };
 
+const initialErrorsForm3 = {
+    payment_id: "",
+}
+
 function TeamConcepts() {
     //form0
     const [activeStep, setActiveStep] = useState(1);
@@ -264,16 +268,16 @@ function TeamConcepts() {
             memberFormData.append('body', JSON.stringify(tempMemberDetails))
             registerUserMutationForm1.mutate(memberFormData, {
                 onSuccess: () => {
-                  setErrors1(initialErrorsForm1);
-                  toast.success("Added member to the team !", { icon: "✅" });
-                  let object = {
-                      name: "",
-                      email: "",
-                      phone: "",
-                      gender: "",
-                      member_id:"",
-                  };
-                  setFormFields([...formFields, object]);
+                    setErrors1(initialErrorsForm1);
+                    toast.success("Added member to the team !", { icon: "✅" });
+                    let object = {
+                        name: "",
+                        email: "",
+                        phone: "",
+                        gender: "",
+                        member_id: "",
+                    };
+                    setFormFields([...formFields, object]);
                 },
                 onError: () => setFormFields(formFields => formFields.slice(0, -1))
             })
@@ -283,10 +287,7 @@ function TeamConcepts() {
     };
 
     const removefields = (index) => {
-
-        let data = [...formFields];
-        data.splice(index, 1);
-        setFormFields(data);
+        setFormFields(data => data.slice(index, 1));
     };
 
     //form 2
@@ -294,12 +295,13 @@ function TeamConcepts() {
     const [form2, setForm2] = useState(
 
         {
-            isPICT: "1",
+            isPICT: "0",
             isInternational: "0",
             college: "",
             country: "",
             state: "",
             district: "",
+            city: "",
             locality: "1",
             mode: "1",
             reason_of_mode: "",
@@ -311,7 +313,6 @@ function TeamConcepts() {
     const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
 
     const handleInputChange2 = (e) => {
-        console.log(form2.isPICT)
         const { name, value } = e.target;
         if (name === "isPICT" && value === "1") {
             setForm2((form2) => ({
@@ -327,6 +328,7 @@ function TeamConcepts() {
                 reason_of_mode: "",
                 isInternational: "0"
             }));
+            setPaymentStatus(true);
         } else if (name === "isPICT" && value === "0") {
             setForm2((form2) => ({
                 ...form2,
@@ -339,13 +341,29 @@ function TeamConcepts() {
                 locality: "",
                 isInternational: ""
             }));
-        }
-        else {
+        } else if (name === 'isInternational' && value === '0') {
+            setForm2((form2) => ({
+                ...form2,
+                country: "India",
+                isPICT: "0",
+                [name]: value
+            }));
+            setPaymentStatus(false);
+        } else if (name === 'isInternational' && value === '1') {
+            setForm2((form2) => ({
+                ...form2,
+                country: "",
+                isPICT: "0",
+                [name]: value
+            }));
+            setPaymentStatus(true);
+        } else {
             setForm2((prevState) => {
                 errors2[name] !== "" &&
-                    setErrors2((prevState) => ({ ...prevState, [name]: "" }));
+                setErrors2((prevState) => ({ ...prevState, [name]: "" }));
                 return { ...prevState, [name]: value };
             });
+            setPaymentStatus(false);
         }
     }
 
@@ -358,8 +376,14 @@ function TeamConcepts() {
         });
     };
 
-  //steps for whole form
-  const [formStep, setFormStep] = useState(0);
+    //form 3
+    const [paymentStatus, setPaymentStatus] = useState(true)
+    const paymentRef = useRef('')
+    const [errors3, setErrors3] = useState(initialErrorsForm3)
+    const registerUserMutationForm3 = useRegisterStep4(setErrors3, 'concepts')
+
+    //steps for whole form
+    const [formStep, setFormStep] = useState(2);
 
     const prevForm = (e) => {
         // e.preventDefault();
@@ -402,27 +426,51 @@ function TeamConcepts() {
             setActiveStep(activeStep => activeStep + 1);
         }
         if (formStep === 2) {
-            console.log(form2)
             for (const property in form2) {
                 if (form2[property] === "") {
                     if (property === "reason_of_mode" && form2["mode"] === "1")
                         continue;
+                    else if (property === "referral") continue
                     toast.warn("Please enter all fields!")
                     return
                 }
             }
             registerUserMutationForm2.mutate(form2, {
-              onSuccess: () => {
-                  setErrors2(initialErrorsForm2);
-                  toast.success("Completed Step 3️⃣ !", { icon: "✅" });
-                  setFormStep(currentStep => currentStep + 1);
-                  setActiveStep(activeStep => activeStep + 1);
-              },
+                onSuccess: () => {
+                    setErrors2(initialErrorsForm2);
+                    if (form2.isPICT === '1' || form2.isInternational === '1') {
+                        const temp = form2.isPICT === '1' ? { isPICT: '1' } : { isInternational: '1' }
+                        registerUserMutationForm3.mutate(temp, {
+                            onSuccess: () => {
+                                toast.success("Completed Registration !", { icon: "✅" });
+                                setPaymentStatus(true)
+                                setFormStep(currentStep => currentStep + 1);
+                                setActiveStep(activeStep => activeStep + 1);
+                            }
+                        })
+                    } else {
+                        toast.success("Completed Step 3️⃣ !", { icon: "✅" });
+                        const win = window.open(paymentLinks.get('test'), "_blank")
+                        setFormStep(currentStep => currentStep + 1);
+                        setActiveStep(activeStep => activeStep + 1);
+                        win.focus();
+                    }
+                },
             });
-
         }
-        // if (!registerUserMutationForm0.isLoading || !registerUserMutationForm1.isLoading || !registerUserMutationForm2.isLoading) {
-        // }
+        if (formStep === 3) {
+            if (paymentRef.current.value.length < 8) {
+                toast.warn("Please enter valid Transaction ID !")
+                return
+            }
+            registerUserMutationForm3.mutate({ payment_id: paymentRef.current.value?.trim() }, {
+                onSuccess: () => {
+                    toast.success("Completed Step 4️⃣ !", { icon: "✅" });
+                    setActiveStep(activeStep => activeStep + 1);
+                    setPaymentStatus(true)
+                }
+            })
+        }
     };
 
     //dropdown
@@ -452,6 +500,7 @@ function TeamConcepts() {
                     {/* form 0 */}
                     {formStep === 0 && (
                         <>
+                            <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
                             <InputBox
                                 type="text"
                                 label={"Project Title"}
@@ -594,6 +643,7 @@ function TeamConcepts() {
                     {/* form 1 */}
                     {formStep === 1 && (
                         <>
+                            <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
                             <Buttons
                                 value="Add Members"
                                 onClick={addFields}
@@ -658,21 +708,21 @@ function TeamConcepts() {
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
 
-                                       {formFields.length > 1 &&( <Buttons
+                                        {/* {membersCount <= index && (<Buttons
                                             value="remove member"
-                                            onClick={() => removefields(index)}
+                                            onClick={removefields(index)}
                                             classNames=" my-2"
                                             disabled={true}
-                                        />)}
+                                        />)} */}
                                     </div>
                                 );
                             })}
                         </>
                     )}
-
                     {/* form 2 */}
                     {formStep === 2 && (
                         <>
+                            <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
                             <div className="my-5">
                                 <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                     Are you PICTian or not?
@@ -697,14 +747,13 @@ function TeamConcepts() {
                                         <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                             Is International ?
                                         </p>
-                                        <input type="radio" value="0" name="isInternational" onChange={handleInputChange2}
-                                            selected={form2.isPICT === '1'} /> No
+                                        <input type="radio" value="0" name="isInternational" onChange={e => handleInputChange2(e)} /> No
                                         <input
                                             type="radio"
                                             value="1"
                                             name="isInternational"
                                             className="ml-10"
-                                            onChange={handleInputChange2}
+                                            onChange={e => handleInputChange2(e)}
                                         />{" "}
                                         Yes
                                     </div>
@@ -726,7 +775,7 @@ function TeamConcepts() {
                                             name={"country"}
                                             type="text"
                                             placeholder="country"
-                                            disabled={form2.isInternational === "0"}
+                                            readonly={form2.isInternational === "0"}
                                             required
                                             onChange={(e) => handleInputChange2(e)}
 
@@ -757,36 +806,45 @@ function TeamConcepts() {
                                             />
                                         </div>
                                     </div>
-                                    <div className=" mx-1 my-2">
-                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                            Locality
-                                        </p>
-                                        <div className="relative w-full lg:w-full block px-0  text-sm">
+                                    <div className="flex mx-1 gap-2">
+                                        <div className="w-1/2">
+                                            <p className="input-label font-medium text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
+                                                Locality
+                                            </p>
                                             <select
                                                 name={"locality"}
                                                 onChange={(e) => handleInputChange2(e)}
-                                                className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                                <option value="0" selected={form2.locality == "0"}>Rural</option>
-                                                <option value="1" selected={form2.locality == "1"}>Urban</option>
-                                                <option disabled selected className="text-white">
-                                                    Select
-                                                </option>
+                                                className="w-full h-12 bg-faint_blue font-gilroy text-gold text-lg px-4 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
+                                                <option value="0" selected={form2.locality === "0"}>Rural</option>
+                                                <option value="1" selected={form2.locality === "1"}>Urban</option>
+                                                <option disabled selected className="text-white">Select</option>
                                             </select>
                                         </div>
+                                        <div className="w-1/2">
+                                            <InputBox
+                                                label="City"
+                                                name={"city"}
+                                                type="text"
+                                                placeholder="City"
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.city}
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="my-5">
+                                    <div className="my-3">
                                         <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
                                             Preferred mode of presentation
                                         </p>
-                                        <input type="radio" value="0" name="mode" onChange={handleInputChange2}
-                                            disabled={form2.city.includes("Pune")} /> Online
+                                        <input type="radio" value="0" name="mode" onChange={e => handleInputChange2(e)}
+                                            disabled={form2.city.includes("Pune")} checked={form2.mode === "0"} /> Online
                                         <input
                                             type="radio"
                                             value="1"
                                             name="mode"
                                             className="ml-10"
-                                            onChange={handleInputChange2}
-                                            selected={form2.city.includes("Pune")}
+                                            onChange={e => handleInputChange2(e)}
+                                            checked={form2.city.includes("Pune") || form2.mode === "1"}
                                             disabled={form2.city.includes("Pune")}
                                         />{" "}
                                         Offline
@@ -810,47 +868,70 @@ function TeamConcepts() {
                                         label="Referral"
                                         name="referral"
                                         placeholder="Referral ID given by Campus Ambassador"
-                                        required
                                         onChange={(e) => handleInputChange2(e)}
                                         value={form2.referral}
                                     />
                                 </>
                             )}
-
-
                         </>
                     )}
+                    {formStep === 3 && ( paymentStatus ? (
+                        <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+                            <p className="text-xl text-center text-gold font-bold mb-3">Thank you for registering in InC'23. Looking forward to have you in person</p>
+                            <NoteBox title='Note' text='Registration payment will be verified and will be informed by email.' />
+                        </div>
+                    ) : (
+                        <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+                            <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
+                            <InputBox label='Transaction ID' type='text' name='payment_id' placeholder='Enter Transaction ID' inputref={paymentRef} minlenght='8' error={errors3.payment_id} className='tracking-widest' required />
+                        </div>
+                    ))}
                     <div className="flex justify-between">
-                        {formStep > 0 && formStep < 3 ? (
+                        {(formStep > 0 && formStep < 4) && (
                             <Buttons
                                 className="mx-2 my-2"
                                 value=" Previous Step"
                                 onClick={prevForm}
-                                loading={registerUserMutationForm0.isLoading}
+                                loading={registerUserMutationForm1.isLoading || registerUserMutationForm2.isLoading}
                             />
-                        ) : (
-                            ""
                         )}
-
-                        {formStep === 2 ? (
-                            <Buttons
-                                className=" mx-2 my-2 "
-                                value="Submit"
-                                onClick={nextForm}
-                                loading={registerUserMutationForm0.isLoading}
-                            />
-                        ) : (
-                            formStep < 2 && (
+                        {formStep === 3 ? (
+                            paymentStatus ? (
+                                <></>
+                            ) : (
                                 <Buttons
-                                    className=" mx-2 my-2  "
-                                    value="Next Step"
+                                    className=" mx-2 my-2 "
+                                    value="Submit"
                                     onClick={nextForm}
-                                    loading={registerUserMutationForm0.isLoading}
+                                    loading={registerUserMutationForm3.isLoading}
                                 />
                             )
+                        ) : (
+                            formStep === 2 && (paymentStatus ? (
+                                <Buttons
+                                    className=" mx-2 my-2  "
+                                    value="Submit"
+                                    onClick={nextForm}
+                                    loading={registerUserMutationForm0.isLoading || registerUserMutationForm1.isLoading || registerUserMutationForm2.isLoading}
+                                />
+                            ) : (
+                                <Buttons
+                                    className=" mx-2 my-2  "
+                                    value="Pay (Rs.300)"
+                                    onClick={nextForm}
+                                    loading={registerUserMutationForm0.isLoading || registerUserMutationForm1.isLoading || registerUserMutationForm2.isLoading}
+                                />
+                            )
+                        ))
+                        }
+                        {formStep < 2 && (
+                            <Buttons
+                                className=" mx-2 my-2  "
+                                value="Next Step"
+                                onClick={nextForm}
+                                loading={registerUserMutationForm0.isLoading || registerUserMutationForm1.isLoading || registerUserMutationForm2.isLoading}
+                            />
                         )}
-
-                        {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registering for InC'23 Concepts !</h1>}
                     </div>
                 </form>
                 {/* <Buttons
