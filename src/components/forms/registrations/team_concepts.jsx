@@ -630,7 +630,7 @@ function TeamConcepts() {
                             />
                             <Dropdown
                                 label=" Project Type"
-                                options={projectTypes}
+                                options={[...projectTypes, { value: 'SEL', label: 'Select', disabled: true }] }
                                 name={"project_type"}
                                 state={form0}
                                 setState={setForm0}

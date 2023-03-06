@@ -13,7 +13,6 @@ export const projectDomains = [
 ]
 
 export const projectTypes = [
-    { value: 'SEL', label: 'Select', disabled: true },
     { value: 'Open Hardware/Firmware', label: 'Open Hardware/Firmware' },
     { value: 'Open Software', label: 'Open Software' }
 ]
