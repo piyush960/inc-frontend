@@ -202,7 +202,7 @@ function Navbar() {
               onClick={handleSelect}
             >
               <option disabled>Register</option>
-              <option>Impetus</option>
+              <option >Impetus</option>
               <option>Concepts</option>
               <option>Pradnya</option>
               <option>Judges</option>

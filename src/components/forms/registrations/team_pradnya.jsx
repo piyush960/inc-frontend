@@ -4,6 +4,8 @@ import { useState } from "react";
 import { InputBox, Buttons, FileInputBox, toast } from "../../index.js";
 import { useRegisterStep1, useRegisterStep2, useRegisterStep3 } from "../../../hooks/events.hooks";
 import styled from 'styled-components';
+import Dropdown from "../../dropdown";
+import RadioButtons from "../../radioButtons";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -124,17 +126,95 @@ const initialErrorsForm2 = {
     year: "",
 };
 
+const pict_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+
+]
+
+
+const country_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+]
+
+
+
+
+const gender_type = [
+    { value: 'SEL', label: 'Select' },
+    { value: 'M', label: 'Male' },
+    { value: 'F', label: 'Female' },
+    { value: 'OT', label: 'Other' },
+]
+
+// const state_arr = [
+//     { value: 'SEL', label: 'Select' },
+//     { value: 'AP', label: "Arunachal Pradesh" },
+//     { value: 'AS', label: "Assam" },
+//     { value: 'BI', label: "Bihar" },
+//     { value: 'CH', label: "Chhattisgarh" },
+//     { value: 'DEL', label: "Delhi" },
+//     { value: 'G', label: "Goa" },
+//     { value: 'GUJ', label: "Gujarat" },
+//     { value: 'HAR', label: "Haryana" },
+//     { value: 'HP', label: "Himachal Pradesh" },
+//     { value: 'JK', label: "Jammu &amp; Kashmir" },
+//     { value: 'JH', label: "Jharkhand" },
+//     { value: 'KAR', label: "Karnataka" },
+//     { value: 'KR', label: "Kerala" },
+//     { value: 'MP', label: "Madhya Pradesh" },
+//     { value: 'MAH', label: "Maharashtra" },
+//     { value: 'MN', label: "Manipur" },
+//     { value: 'MG', label: "Meghalaya" },
+//     { value: 'MZ', label: "Mizoram" },
+//     { value: 'OR', label: "Orissa" },
+//     { value: 'PN', label: "Punjab" },
+//     { value: 'RJ', label: "Rajasthan" },
+//     { value: 'TN', label: "Tamil Nadu" },
+//     { value: 'TL', label: "Telangana" },
+//     { value: 'TR', label: "Tripura" },
+//     { value: 'UP', label: "Uttar Pradesh" },
+//     { value: 'UT', label: "Uttarakhand" },
+//     { value: 'WB', label: "West Bengal" },
+
+// ]
+
+const local_arr = [
+    { value: 'SEL', label: "Select" },
+    { value: 'UR', label: "Urban" },
+    { value: 'RU', label: "Rural" },
+
+
+]
+const year_arr = [
+    { value: 'SEL', label: "Select" },
+    { value: 'F', label: "1st year" },
+    { value: 'S', label: "2nd year" },
+    { value: 'T', label: "3rd year" },
+]
+
 function TeamPradnya() {
 
     const [activeStep, setActiveStep] = React.useState(1);
     const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`
 
     //form1
-    const genderopt = [
-        { value: 'Male', label: 'Male' },
-        { value: 'Female', label: 'Female' },
-        { value: 'Other', label: 'Other' }
-    ]
+
     const [form1, setForm1] = useState([
         {
 
@@ -238,7 +318,7 @@ function TeamPradnya() {
                 country: "India",
                 state: "Maharashtra",
                 district: "Pune",
-                leader:"abc@gmail.com",
+                leader: "abc@gmail.com",
                 city: "Pune",
                 locality: "1",
                 isInternational: "0"
@@ -290,7 +370,7 @@ function TeamPradnya() {
                 toast.warn("Atleast one member needed!")
                 return
             }
-            
+
             registerUserMutationForm1.mutate(form1, {
                 onSuccess: () => {
                     setErrors1(initialErrorsForm1);
@@ -374,26 +454,15 @@ function TeamPradnya() {
                                             <div className="mr-1 w-1/2">
                                                 <InputBox label="Phone No" name="phoneno" type="number" placeholder="phone number" required onChange={(event) => handleFormChange(event, index)} value={form.phoneno} />
                                             </div>
-                                            <div className="ml-1 w-1/2">
-                                                <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                                    Gender
-                                                </p>
-                                                <div className="relative w-full lg:w-full block px-0  text-sm">
-                                                    <select
-                                                        name="gender"
-                                                        onChange={(event) => handleFormChange(event, index)}
-                                                        // onChange={handleChange}
-                                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
-                                                    >
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                        <option value="" selected className="text-white">
-                                                            Select
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <Dropdown
+                                                label=" Gender"
+                                                options={gender_type}
+                                                name={"gender"}
+                                                state={form1}
+                                                setState={setForm1}
+                                                required
+                                            />
+
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
 
@@ -413,37 +482,20 @@ function TeamPradnya() {
                     {/* form 2 */}
                     {formStep === 2 && (
                         <>
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Are you PICTian or not?
-                                </p>
-                                <input type="radio" value="1" name="isPICT" onChange={handleInputChange2} /> Yes
-                                <input
-                                    type="radio"
-                                    value="0"
-                                    name="isPICT"
-                                    className="ml-10"
-                                    onChange={handleInputChange2}
-                                />{" "}
-                                No
-                            </div>
+                            <RadioButtons
+                                label=' Are you PICTian or not?'
+                                options={pict_arr}
+                                state={form2}
+                                setState={setForm2}
+                                name='isPICT' required />
                             {form2.isPICT === "0" && (
                                 <>
-                                    <div className="my-5">
-                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                            Is International ?
-                                        </p>
-                                        <input type="radio" value="0" name="isInternational" onChange={handleInputChange2}
-                                            selected={form2.isPICT === '1'} /> No
-                                        <input
-                                            type="radio"
-                                            value="1"
-                                            name="isInternational"
-                                            className="ml-10"
-                                            onChange={handleInputChange2}
-                                        />{" "}
-                                        Yes
-                                    </div>
+                                    <RadioButtons
+                                        label='Is International ?'
+                                        options={country_arr}
+                                        state={form2}
+                                        setState={setForm2}
+                                        name='isInternational' required />
                                     <div className=" mx-1 my-2">
                                         <InputBox
                                             label="College"
@@ -470,54 +522,16 @@ function TeamPradnya() {
                                         />
                                     </div>
                                     <div className="flex mx-1 ">
-                                        <div className="ml-1 w-1/2">
-                                            
-                                            <div className="relative w-full lg:w-full block px-0  text-sm">
-                                            <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                                    State
-                                                </p>
-                                                    <div className="relative w-full lg:w-full block px-0  text-sm">
-                                                    <select
-                                                        name="gender"
-                                                        onChange={(event) => handleSelectChange2(event)}
-                                                        // onChange={handleChange}
-                                                        className="w-full h-12 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
-                                                    >
-                                                            <option value="">State</option>
-                                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                                            <option value="Assam">Assam</option>
-                                                            <option value="Bihar">Bihar</option>
-                                                            <option value="Chhattisgarh">Chhattisgarh</option>
-                                                            <option value="Delhi">Delhi</option>
-                                                            <option value="Goa">Goa</option>
-                                                            <option value="Gujarat">Gujarat</option>
-                                                            <option value="Haryana">Haryana</option>
-                                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                                            <option value="Jammu &amp; Kashmir">Jammu &amp; Kashmir</option>
-                                                            <option value="Jharkhand">Jharkhand</option>
-                                                            <option value="Karnataka">Karnataka</option>
-                                                            <option value="Kerala">Kerala</option>
-                                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                                            <option value="Maharashtra">Maharashtra</option>
-                                                            <option value="Manipur">Manipur</option>
-                                                            <option value="Meghalaya">Meghalaya</option>
-                                                            <option value="Mizoram">Mizoram</option>
-                                                            <option value="Nagaland">Nagaland</option>
-                                                            <option value="Orissa">Orissa</option>
-                                                            <option value="Punjab">Punjab</option>
-                                                            <option value="Rajasthan">Rajasthan</option>
-                                                            <option value="Tamil Nadu">Tamil Nadu</option>
-                                                            <option value="Telangana">Telangana</option>
-                                                            <option value="Tripura">Tripura</option>
-                                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                                            <option value="Uttarakhand">Uttarakhand</option>
-                                                            <option value="West Bengal">West Bengal</option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            
+                                    <div className="mr-1 w-1/2">
+                                            <InputBox
+                                                label="State"
+                                                type="text"
+                                                name={"state"}
+                                                placeholder="state"
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.state}
+                                            />
                                         </div>
                                         <div className="ml-1 w-1/2">
                                             <InputBox
@@ -531,24 +545,15 @@ function TeamPradnya() {
                                             />
                                         </div>
                                     </div>
-                                    <div className=" mx-1 my-2">
-                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                            Locality
-                                        </p>
-                                        <div className="relative w-full lg:w-full block px-0  text-sm">
-                                            <select
-                                                name={"locality"}
-                                                onChange={(e) => handleInputChange2(e)}
-                                                className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                                <option value="0" selected={form2.locality == "0"}>Rural</option>
-                                                <option value="1" selected={form2.locality == "1"}>Urban</option>
-                                                <option disabled selected className="text-white">
-                                                    Select
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                            
+                                    <Dropdown
+                                        label="Localtiy"
+                                        options={local_arr}
+                                        name={"locality"}
+                                        state={form2}
+                                        setState={setForm2}
+                                        required
+                                    />
+
                                     <InputBox
                                         type="text"
                                         label="Referral"
@@ -560,26 +565,14 @@ function TeamPradnya() {
                                     />
                                 </>
                             )}
-                            <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Which year are you in?
-                                </p>
-                                <div className="relative w-full lg:w-full block px-0 my-3 text-sm">
-                                    <select
-                                        name={"year"}
-                                        onChange={(e) => handleInputChange2(e)}
-                                        // onChange={handleChange}
-                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
-                                    >
-                                        <option value="1">1st</option>
-                                        <option value="2">2nd</option>
-                                        <option value="3">3rd</option>
-                                        <option value="" selected className="text-white">
-                                            Select
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+                            <Dropdown
+                                label=" Which year are you in?"
+                                options={year_arr}
+                                name={"year"}
+                                state={form2}
+                                setState={setForm2}
+                                required
+                            />
                         </>
                     )}
                     <div className="flex justify-between">
