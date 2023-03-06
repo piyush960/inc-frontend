@@ -1,14 +1,9 @@
 import "../styles/event_registrations.css";
-import React, { useRef } from "react";
-import { useState } from "react";
-import InputBox from "../../inputBox";
-import Buttons from "../../buttons";
+import { useRef, useState } from "react";
 import styled from 'styled-components';
-import { useRegisterConceptStep1 } from "../../../hooks/conceptsStep1.hooks";
-import { useRegisterConceptStep2 } from "../../../hooks/conceptsStep2.hooks";
-import { useRegisterConceptStep3 } from "../../../hooks/conceptsStep3.hooks";
-import { toast } from "react-toastify";
-import FileInputBox from "../../fileInputBox";
+import { InputBox, Buttons, Dropdown, FileInputBox, RadioButtons, toast, NoteBox } from "../../index.js";
+import { useRegisterStep1, useRegisterStep2, useRegisterStep3, useRegisterStep4 } from "../../../hooks/events.hooks";
+import { paymentLinks, projectDomains, projectTypes } from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -141,40 +136,6 @@ const steps = [
 const totalSteps = steps.length
 
 const initialErrorsForm0 = {
-  title: "",
-  domain: "",
-  project_type: "",
-  guide_name: "",
-  guide_email: "",
-  guide_phone: "",
-  hod_email: "",
-  company: "",
-  abstract: "",
-  nda: "",
-  sponsored: "",
-  mode: "",
-  reason_of_mode: "",
-};
-const initialErrorsForm1 = {
-  name: "",
-  email: "",
-  phoneno: "",
-  gender: "",
-  member_id: "",
-};
-const initialErrorsForm2 = {
-  college: "",
-  country: "",
-  state: "",
-  district: "",
-  locality: "",
-};
-
-function TeamConcepts() {
-  //form0
-  const [activeStep, setActiveStep] = React.useState(1);
-  const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
-  const [form0, setForm0] = useState({
     title: "",
     domain: "",
     project_type: "",
@@ -184,256 +145,445 @@ function TeamConcepts() {
     hod_email: "",
     company: "",
     abstract: "",
-    nda: "0",
-    sponsored: "0",
-    mode: "1",
+    nda: "",
+    sponsored: "",
+};
+const initialErrorsForm1 = {
+    name: "",
+    email: "",
+    phone: "",
+    gender: "",
+    member_id: "",
+};
+const initialErrorsForm2 = {
+    isPICT: "",
+    isInternational: "",
+    college: "",
+    country: "",
+    state: "",
+    district: "",
+    locality: "",
+    mode: "",
     reason_of_mode: "",
-  });
-  const [errors0, setErrors0] = useState(initialErrorsForm0);
-  const registerUserMutaionForm0 = useRegisterConceptStep1(setErrors0);
-  const handleInputChange0 = (e) => {
-    const { name, value } = e.target;
-    setForm0((prevState) => {
-      errors0[name] !== "" &&
-        setErrors0((prevState) => ({ ...prevState, [name]: "" }));
-      return { ...prevState, [name]: value };
+    referral: "",
+};
+
+const initialErrorsForm3 = {
+    payment_id: "",
+}
+
+const sponsor_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+]
+
+const nda_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+]
+
+const pict_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+
+]
+
+const mode_arr = [
+    {
+        value: '1',
+        label: 'Offline',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'Online',
+    },
+
+]
+const country_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+]
+
+const gender_type = [
+    { value: 'SEL', label: 'Select', disabled: true },
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+    { value: 'Other', label: 'Other' },
+]
+
+// const state_arr = [
+//     { value: 'SEL', label: 'Select', disabled: true },
+//     { value: 'AP', label: "Arunachal Pradesh" },
+//     { value: 'AS', label: "Assam" },
+//     { value: 'BI', label: "Bihar" },
+//     { value: 'CH', label: "Chhattisgarh" },
+//     { value: 'DEL', label: "Delhi" },
+//     { value: 'G', label: "Goa" },
+//     { value: 'GUJ', label: "Gujarat" },
+//     { value: 'HAR', label: "Haryana" },
+//     { value: 'HP', label: "Himachal Pradesh" },
+//     { value: 'JK', label: "Jammu &amp; Kashmir" },
+//     { value: 'JH', label: "Jharkhand" },
+//     { value: 'KAR', label: "Karnataka" },
+//     { value: 'KR', label: "Kerala" },
+//     { value: 'MP', label: "Madhya Pradesh" },
+//     { value: 'MAH', label: "Maharashtra" },
+//     { value: 'MN', label: "Manipur" },
+//     { value: 'MG', label: "Meghalaya" },
+//     { value: 'MZ', label: "Mizoram" },
+//     { value: 'OR', label: "Orissa" },
+//     { value: 'PN', label: "Punjab" },
+//     { value: 'RJ', label: "Rajasthan" },
+//     { value: 'TN', label: "Tamil Nadu" },
+//     { value: 'TL', label: "Telangana" },
+//     { value: 'TR', label: "Tripura" },
+//     { value: 'UP', label: "Uttar Pradesh" },
+//     { value: 'UT', label: "Uttarakhand" },
+//     { value: 'WB', label: "West Bengal" },
+
+// ]
+
+const local_arr = [
+    { value: 'SEL', label: "Select", disabled: true },
+    { value: 'UR', label: "Urban" },
+    { value: 'RU', label: "Rural" },
+
+
+]
+
+function TeamConcepts() {
+    //form0
+    const [activeStep, setActiveStep] = useState(1);
+    const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
+    const [form0, setForm0] = useState({
+        title: "",
+        domain: "",
+        project_type: "",
+        guide_name: "",
+        guide_email: "",
+        guide_phone: "",
+        hod_email: "",
+        company: "",
+        abstract: "",
+        nda: "0",
+        sponsored: "0",
+
     });
-    console.log(form0);
-  };
+    const [errors0, setErrors0] = useState(initialErrorsForm0);
+    const registerUserMutationForm0 = useRegisterStep1(setErrors0, 'concepts');
+    const handleInputChange0 = (e) => {
+        const { name, value } = e.target;
+        setForm0((prevState) => {
+            errors0[name] !== "" &&
+                setErrors0((prevState) => ({ ...prevState, [name]: "" }));
+            return { ...prevState, [name]: value };
+        });
+    };
 
-  const handleSelectChange0 = (e) => {
-    const { name, value } = e.target;
-    setForm0((prevState) => {
-      errors0[name] !== "" &&
-        setErrors0((prevState) => ({ ...prevState, [name]: "" }));
-      return { ...prevState, [name]: value };
-    });
-    //setForm0(form0);
-  };
+    const handleSelectChange0 = (e) => {
+        const { name, value } = e.target;
+        setForm0((prevState) => {
+            errors0[name] !== "" &&
+                setErrors0((prevState) => ({ ...prevState, [name]: "" }));
+            return { ...prevState, [name]: value };
+        });
+        //setForm0(form0);
+    };
 
-  //form1
+    //form1
 
-    const [formfields, setformfields] = useState([
+    const [formFields, setFormFields] = useState([
         {
 
             name: "",
             email: "",
-            phoneno: "",
+            phone: "",
             gender: "",
-            member_id:"",
+            member_id: "",
 
 
         },
     ]);
 
     const handleImageChange = (event, index) => {
-      let data = [...formfields];
-      data[index][event.target.name] = event.target.files[0];
-      console.log(event.target.files);
-      setformfields(data);
-  };
-  const [errors1, setErrors1] = useState(initialErrorsForm1);
-  const registerUserMutaionForm1 = useRegisterConceptStep2(setErrors1);
-    const handleFormChange = (event, index) => {
-      const { name, value } = event.target;
-      setformfields((prevState) => {
-        errors1[name] !== "" &&
-          setErrors1((prevState) => ({ ...prevState, [name]: "" }));
-        let data = [...prevState];
-        data[index][name] = value;
-        return data;
-      });
+        let data = [...formFields];
+        data[index][event.target.name] = event.target.files[0];
+        setFormFields(data);
     };
-  
+    const [errors1, setErrors1] = useState(initialErrorsForm1);
+    const registerUserMutationForm1 = useRegisterStep2(setErrors1, 'concepts');
 
-  const handleSelectChange1 = (event, index) => {
-    let data = [...formfields];
-    console.log(event.target.value);
-    data[index][event.target.name] = event.target.value;
-    console.log(formfields);
-    setformfields(data);
-  };
+    const handleFormChange = (event, index) => {
+        const { name, value } = event.target;
+        setFormFields((prevState) => {
+            errors1[name] !== "" &&
+                setErrors1((prevState) => ({ ...prevState, [name]: "" }));
+            let data = [...prevState];
+            data[index][name] = value;
+            return data;
+        });
+    };
 
-    const addfields = () => {
-        console.log(formfields.at(-1),'asdf')
-        for (const property in formfields.at(-1)) {
-            console.log(formfields.at(-1)[property])
-            if (formfields.at(-1)[property] == '') {
-                console.log("error")
-                return
+
+    const handleSelectChange1 = (event, index) => {
+        let data = [...formFields];
+        data[index][event.target.name] = event.target.value;
+        setFormFields(data);
+    };
+
+    const addFields = () => {
+        if (formFields.length < 5) {
+            for (const property in formFields.at(-1)) {
+                if (formFields.at(-1)[property] === '') {
+                    toast.warn("Please fill all the fields")
+                    return
+                }
             }
+
+            const memberFormData = new FormData()
+            memberFormData.append('member_id', formFields.at(-1).member_id)
+            const tempMemberDetails = { ...formFields.at(-1) }
+            delete tempMemberDetails.member_id
+            memberFormData.append('body', JSON.stringify(tempMemberDetails))
+            registerUserMutationForm1.mutate(memberFormData, {
+                onSuccess: () => {
+                    setErrors1(initialErrorsForm1);
+                    toast.success("Added member to the team !", { icon: "✅" });
+                    let object = {
+                        name: "",
+                        email: "",
+                        phone: "",
+                        gender: "",
+                        member_id: "",
+                    };
+                    setFormFields([...formFields, object]);
+                },
+                onError: () => setFormFields(formFields => formFields.slice(0, -1))
+            })
+            return
         }
-
-        let object = {
-            name: "",
-            email: "",
-            phoneno: "",
-            gender: "",
-            member_id:"",
-        };
-
-    setformfields([...formfields, object]);
-  };
+        toast.warn("Maximum 5 members are allowed")
+    };
 
     const removefields = (index) => {
-        if(formfields.length>1){
-            let data = [...formfields];
-        data.splice(index, 1);
-        setformfields(data);
-        }
-        else 
-        return
+        setFormFields(data => data.slice(index, 1));
     };
 
-  //form 2
+    //form 2
 
-    const [form2 , setForm2] = useState (
-        
-            {
-                college : "",
-                country : "",
-                state : "",
-                district : "",
-                locality : "1"
+    const [form2, setForm2] = useState(
 
-            }
-        
+        {
+            isPICT: "0",
+            isInternational: "0",
+            college: "",
+            country: "",
+            state: "",
+            district: "",
+            city: "",
+            locality: "1",
+            mode: "1",
+            reason_of_mode: "",
+            referral: ""
+        }
+
     )
     const [errors2, setErrors2] = useState(initialErrorsForm2);
-  const registerUserMutaionForm2 = useRegisterConceptStep3(setErrors2);
+    const registerUserMutationForm2 = useRegisterStep3(setErrors2, 'concepts');
 
     const handleInputChange2 = (e) => {
-        
         const { name, value } = e.target;
-        if (name === "pict" && value==="1") {
-            setForm2((form2) => ({
-              ...form2,
-              college: "Pune Institute Of Computer Technology",
-              country:"India",
-              state : "Maharashtra",
-                district : "Pune",
-                locality : "1"
-            }));
-          } else if(name === "pict" && value==="0"){
+        if (name === "isPICT" && value === "1") {
             setForm2((form2) => ({
                 ...form2,
-                college : "",
-                country : "",
-                state : "",
-                district : "",
-                locality : ""
-              }));
-          }
-          else{
+                isPICT: "1",
+                college: "Pune Institute Of Computer Technology",
+                country: "India",
+                city: "Pune",
+                state: "Maharashtra",
+                district: "Pune",
+                locality: "1",
+                mode: "1",
+                reason_of_mode: "",
+                isInternational: "0"
+            }));
+            setPaymentStatus(true);
+        } else if (name === "isPICT" && value === "0") {
+            setForm2((form2) => ({
+                ...form2,
+                isPICT: "0",
+                college: "",
+                country: "",
+                state: "",
+                city: "",
+                district: "",
+                locality: "",
+                isInternational: ""
+            }));
+        } else if (name === 'isInternational' && value === '0') {
+            setForm2((form2) => ({
+                ...form2,
+                country: "India",
+                isPICT: "0",
+                [name]: value
+            }));
+            setPaymentStatus(false);
+        } else if (name === 'isInternational' && value === '1') {
+            setForm2((form2) => ({
+                ...form2,
+                country: "",
+                isPICT: "0",
+                [name]: value
+            }));
+            setPaymentStatus(true);
+        } else {
             setForm2((prevState) => {
-              errors2[name] !== "" &&
+                errors2[name] !== "" &&
                 setErrors2((prevState) => ({ ...prevState, [name]: "" }));
-              return { ...prevState, [name]: value };
+                return { ...prevState, [name]: value };
             });
-          }
+            setPaymentStatus(false);
+        }
     }
 
-  const handleSelectChange2 = (e) => {
-    const { name, value } = e.target;
-    setForm2((prevState) => {
-      errors2[name] !== "" &&
-        setErrors2((prevState) => ({ ...prevState, [name]: "" }));
-      return { ...prevState, [name]: value };
-    });
-  };
+    const handleSelectChange2 = (e) => {
+        const { name, value } = e.target;
+        setForm2((prevState) => {
+            errors2[name] !== "" &&
+                setErrors2((prevState) => ({ ...prevState, [name]: "" }));
+            return { ...prevState, [name]: value };
+        });
+    };
 
-  //steps for whole form
-  const [formStep, setFormStep] = React.useState(0);
+    //form 3
+    const [paymentStatus, setPaymentStatus] = useState(true)
+    const paymentRef = useRef('')
+    const [errors3, setErrors3] = useState(initialErrorsForm3)
+    const registerUserMutationForm3 = useRegisterStep4(setErrors3, 'concepts')
 
-  const prevForm = (e) => {
-    // e.preventDefault();
-    setFormStep((currentStep) => currentStep - 1);
-    setActiveStep(activeStep - 1);
-  };
+    //steps for whole form
+    const [formStep, setFormStep] = useState(2);
+
+    const prevForm = (e) => {
+        // e.preventDefault();
+        setFormStep((currentStep) => currentStep - 1);
+        setActiveStep(activeStep - 1);
+    };
 
     const nextForm = (e) => {
         e.preventDefault();
         if (formStep === 0) {
+            console.log('form0', form0);
             for (const property in form0) {
-                console.log(property)
-
-                if (form0[property] == "") {
-                    if (property == "company" && form0["sponsored"] == "0")
+                if (form0[property] === "") {
+                    if (property === "company" && form0["sponsored"] === "0")
                         continue;
-                    if (property == "reason_of_mode" && form0["mode"] == "1")
+                    if (property === "nda" && form0["sponsored"] === "0")
                         continue;
                     else {
                         toast.warn("Please enter all fields!")
-                        console.log("error")
                         return
                     }
-
-
                 }
             }
-            registerUserMutaionForm0.mutate(form0, {
-              onSuccess: (res) => {
-                setErrors0(initialErrorsForm0);
-                toast.success("Successfully Registered", { icon: "💐" });
-                setTimeout(() => {
-                  console.log("nextForm");
-                  // onSuccessNavigator('/')
-                }, 2000);
-              },
+            registerUserMutationForm0.mutate(form0, {
+                onSuccess: () => {
+                    setErrors0(initialErrorsForm0);
+                    toast.success("Completed Step 1️⃣ !", { icon: "✅" });
+                    setFormStep(currentStep => currentStep + 1);
+                    setActiveStep(activeStep => activeStep + 1);
+                    return
+                }
             });
         }
-          
         if (formStep === 1) {
-          for (const property in form0) {
-            if (formfields[property] == "") {
-              console.log("error");
-              return;
+            if (formFields.length < 2) {
+                toast.warn("At least two member needed!")
+                return
             }
-          }
-          registerUserMutaionForm1.mutate(formfields, {
-            onSuccess: (res) => {
-              setErrors1(initialErrorsForm1);
-              toast.success("Successfully Registered", { icon: "💐" });
-              setTimeout(() => {
-                console.log("nextForm");
-                // onSuccessNavigator('/')
-              }, 2000);
-            },
-          });
+            setFormStep(currentStep => currentStep + 1);
+            setActiveStep(activeStep => activeStep + 1);
         }
         if (formStep === 2) {
             for (const property in form2) {
-
-                if (form2[property] == "") {
+                if (form2[property] === "") {
+                    if (property === "reason_of_mode" && form2["mode"] === "1")
+                        continue;
+                    else if (property === "referral") continue
                     toast.warn("Please enter all fields!")
-                    console.log("error")
                     return
-
                 }
             }
-            registerUserMutaionForm2.mutate(form2, {
-              onSuccess: (res) => {
-                setErrors2(initialErrorsForm2);
-                toast.success("Successfully Registered", { icon: "💐" });
-                setTimeout(() => {
-                  console.log("nextForm");
-                  // onSuccessNavigator('/')
-                }, 2000);
-              },
+            registerUserMutationForm2.mutate(form2, {
+                onSuccess: () => {
+                    setErrors2(initialErrorsForm2);
+                    if (form2.isPICT === '1' || form2.isInternational === '1') {
+                        const temp = form2.isPICT === '1' ? { isPICT: '1' } : { isInternational: '1' }
+                        registerUserMutationForm3.mutate(temp, {
+                            onSuccess: () => {
+                                toast.success("Completed Registration !", { icon: "✅" });
+                                setPaymentStatus(true)
+                                setFormStep(currentStep => currentStep + 1);
+                                setActiveStep(activeStep => activeStep + 1);
+                            }
+                        })
+                    } else {
+                        toast.success("Completed Step 3️⃣ !", { icon: "✅" });
+                        const win = window.open(paymentLinks.get('test'), "_blank")
+                        setFormStep(currentStep => currentStep + 1);
+                        setActiveStep(activeStep => activeStep + 1);
+                        win.focus();
+                    }
+                },
             });
-
         }
+        if (formStep === 3) {
+            if (paymentRef.current.value.length < 8) {
+                toast.warn("Please enter valid Transaction ID !")
+                return
+            }
+            registerUserMutationForm3.mutate({ payment_id: paymentRef.current.value?.trim() }, {
+                onSuccess: () => {
+                    toast.success("Completed Step 4️⃣ !", { icon: "✅" });
+                    setActiveStep(activeStep => activeStep + 1);
+                    setPaymentStatus(true)
+                }
+            })
+        }
+    };
 
-    console.log(formfields);
-    console.log(form0);
-    console.log(form2);
-    setFormStep((currentStep) => currentStep + 1);
-    setActiveStep(activeStep + 1);
-  };
+    //dropdown
 
-  //dropdown
-
-  //const [option, setOption] = useState();
+    //const [option, setOption] = useState();
 
     return (
         <MainContainer>
@@ -458,62 +608,39 @@ function TeamConcepts() {
                     {/* form 0 */}
                     {formStep === 0 && (
                         <>
+                            <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
                             <InputBox
                                 type="text"
                                 label={"Project Title"}
                                 name={"title"}
                                 placeholder={"Project title"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.title}
+                                minlenght='10'
                             ></InputBox>
-                            <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Domain Of Project
-                                </p>
-                                <div className="relative w-full lg:w-full block px-0  text-sm">
-                                    <select
-                                        name={"domain"}
-                                        onChange={(e) => handleSelectChange0(e)}
-                                        // onChange={handleChange}
-                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
-                                    >
-                                        <option value="Application Development">Application Development</option>
-                                        <option value="Communication Networks And Security Systems">Communication Networks And Security Systems</option>
-                                        <option value="Digital/ Image/ Speech/ Video Processing">Digital/ Image/ Speech/ Video Processing</option>
-                                        <option value="Embedded/ VLSI System">Embedded/ VLSI System</option>
-                                        <option value="Machine Learning and Pattern Recognition">Machine Learning and Pattern Recognition</option>
-                                        <option value="" selected className="text-white">
-                                            Select
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Project Type
-                                </p>
-                                <div className="relative w-full lg:w-full block px-0  text-sm">
-                                    <select
-                                        name={"project_type"}
-                                        onChange={(e) => handleSelectChange0(e)}
-                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
-                                    >
-                                        <option value="Open Hardware">Open Hardware</option>
-                                        <option value="Open Software">Open Software</option>
-                                        <option value="" selected className="text-white">
-                                            Select
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+                            <Dropdown
+                                label="Domain of the project"
+                                options={[...projectDomains, { value: 'SEL', label: 'Select', disabled: true }]}
+                                name={"domain"}
+                                state={form0}
+                                setState={setForm0}
+                                required
+                            />
+                            <Dropdown
+                                label=" Project Type"
+                                options={projectTypes}
+                                name={"project_type"}
+                                state={form0}
+                                setState={setForm0}
+                                required
+                            />
                             <InputBox
                                 type="text"
                                 label={"Guide_Name"}
                                 name={"guide_name"}
                                 placeholder={"Name"}
-                                classNames=""
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_name}
@@ -523,45 +650,39 @@ function TeamConcepts() {
                                 label={"Guide_Email"}
                                 name={"guide_email"}
                                 placeholder={"Email"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_email}
                             ></InputBox>
                             <InputBox
-                                type="text"
+                                type="tel"
                                 label={"Guide_Phone"}
                                 name={"guide_phone"}
                                 placeholder={"Phone"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.guide_phone}
                             ></InputBox>
                             <InputBox
-                                type="text"
+                                type="email"
                                 label={"Hod_email"}
                                 name={"hod_email"}
                                 placeholder={"Hod email"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.hod_email}
                             ></InputBox>
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Is the project sponsored or not?
-                                </p>
-                                <input type="radio" value="1" name="sponsored" onChange={handleInputChange0} /> Yes
-                                <input
-                                    type="radio"
-                                    value="0"
-                                    name="sponsored"
-                                    className="ml-10"
-                                    onChange={handleInputChange0}
-                                />{" "}
-                                No
-                            </div>
+                            <RadioButtons
+                                label='Is the project sponsored or not?'
+                                options={sponsor_arr}
+                                state={form0}
+                                setState={setForm0}
+                                name='sponsored'
+                                required
+                            />
                             {form0.sponsored === "1" &&
                                 (<>
                                     <InputBox
@@ -569,18 +690,16 @@ function TeamConcepts() {
                                         label={"If yes, then name of company?"}
                                         placeholder={"Company name"}
                                         name={"company"}
-                                        classNames=""
+
                                         required
                                         onChange={(e) => handleInputChange0(e)}
                                         value={form0.company}
                                     ></InputBox>
-                                    <div className="my-5">
-                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                            NDA signed or not?
-                                        </p>
-                                        <input type="radio" value="1" name="nda" onChange={handleInputChange0} /> Yes
-                                        <input type="radio" value="0" name="nda" className="ml-10 " onChange={handleInputChange0} /> No
-                                    </div>
+                                    <RadioButtons
+                                        label=' NDA signed or not?'
+                                        options={nda_arr}
+                                        state={form0}
+                                        setState={setForm0} name='nda' required />
                                 </>
                                 )
 
@@ -591,55 +710,27 @@ function TeamConcepts() {
                                 label={"Abstract"}
                                 name={"abstract"}
                                 placeholder={"In 300 words or less"}
-                                classNames=""
+
                                 required
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.abstract}
+                                minlenght='50'
                             ></InputBox>
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Preferred mode of presentation
-                                </p>
-                                <input type="radio" value="0" name="mode" onChange={handleInputChange0} /> Online
-                                <input
-                                    type="radio"
-                                    value="1"
-                                    name="mode"
-                                    className="ml-10"
-                                    onChange={handleInputChange0}
-                                />{" "}
-                                Offline
-                            </div>
-                            {form0.mode === "0" && (
-                                <div>
-                                    <InputBox
-                                        type="textarea"
-                                        label={"Reason for Online"}
-                                        name={"reason_of_mode"}
-                                        placeholder={"reason"}
-                                        classNames=""
-                                        required
-                                        onChange={(e) => handleInputChange0(e)}
-                                        value={form0.reason_of_mode}
-                                    ></InputBox>
-                                </div>
-                            )
-
-
-                            }
-
                         </>
                     )}
                     {/* form 1 */}
                     {formStep === 1 && (
                         <>
+                            <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
                             <Buttons
-                                value="add members"
-                                onClick={addfields}
+                                value="Add Members"
+                                onClick={addFields}
                                 classNames=" my-2"
+                                loading={registerUserMutationForm1.isLoading}
+                                disabled={formFields.length >= 5}
                             />
 
-                            {formfields.map((form, index) => {
+                            {formFields.map((form, index) => {
                                 return (
                                     <div key={index}>
                                         <InputBox
@@ -664,161 +755,222 @@ function TeamConcepts() {
                                             <div className="mr-1 w-1/2">
                                                 <InputBox
                                                     label="Phone No"
-                                                    name="phoneno"
+                                                    name="phone"
                                                     type="number"
                                                     placeholder="phone number"
                                                     required
                                                     onChange={(event) => handleFormChange(event, index)}
-                                                    value={form.phoneno}
+                                                    value={form.phone}
                                                 />
                                             </div>
-                                            <div className="ml-1 w-1/2">
-                                                <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                                    Gender
-                                                </p>
-                                                <div className="relative w-full lg:w-full block px-0  text-sm">
+                                            <div className="input-box-dropdown w-full mb-4 relative">
+                                                <label className={`input-label font-medium mb-1 text-white text-lg flex`}>{"Gender"}<h1 className="text-gold">*</h1></label>
+                                                <div className="relative inline-block w-full">
                                                     <select
-                                                        name="gender"
-                                                        onChange={(event) => handleSelectChange1(event, index)}
-                                                        // onChange={handleChange}
-                                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
+                                                        name={"gender"}
+
+                                                        value={formFields.gender}
+                                                        onChange={(event) => handleFormChange(event, index)}
+                                                        required
+                                                        className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
                                                     >
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                        <option value="" selected className="text-white">
-                                                            Select
-                                                        </option>
+                                                        {gender_type.map(option => (
+                                                            <option key={option?.value} value={option?.value} className={`py-1 bg-[#0B1E47] ${option?.className || ''}`}>
+                                                                {option?.label}
+                                                            </option>
+                                                        ))}
                                                     </select>
                                                 </div>
+
                                             </div>
+                                            {/* <Dropdown
+                                                label=" Gender"
+                                                options={gender_type}
+                                                name={"gender"}
+                                                state={formFields}
+                                                setState={setFormFields}
+                                                required
+                                            /> */}
+
                                         </div>
-                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange = {(e)=>handleImageChange(e,index)} label="Upload Screenshot of ID" required />
-                                     
-                                        <Buttons
+                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
+
+                                        {/* {membersCount <= index && (<Buttons
                                             value="remove member"
-                                            onClick={() => removefields(index)}
+                                            onClick={removefields(index)}
                                             classNames=" my-2"
                                             disabled={true}
-                                        />
+                                        />)} */}
                                     </div>
                                 );
                             })}
                         </>
                     )}
-
                     {/* form 2 */}
                     {formStep === 2 && (
                         <>
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Are you PICTian or not?
-                                </p>
-                                <input type="radio" value="1" name="pict" onChange={handleInputChange2} /> Yes
-                                <input
-                                    type="radio"
-                                    value="0"
-                                    name="pict"
-                                    className="ml-10"
-                                    onChange={handleInputChange2}
-                                />{" "}
-                                No
-                            </div>
-                            <div className=" mx-1 my-2">
-                                <InputBox
-                                    label="College"
-                                    name={"college"}
-                                    type="text"
-                                    placeholder="college name"
-                                    required
-                                    onChange={(e) => handleInputChange2(e)}
+                            <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
+                            <RadioButtons
+                                label=' Are you PICTian or not?'
+                                options={pict_arr}
+                                state={form2}
+                                setState={setForm2}
+                                name='isPICT' required />
+                            {form2.isPICT === "0" && (
+                                <>
+                                    <RadioButtons
+                                        label='Is International ?'
+                                        options={country_arr}
+                                        state={form2}
+                                        setState={setForm2}
+                                        name='isInternational' required />
+                                    <div className=" mx-1 my-2">
+                                        <InputBox
+                                            label="College"
+                                            name={"college"}
+                                            type="text"
+                                            placeholder="college name"
+                                            required
+                                            onChange={(e) => handleInputChange2(e)}
 
-                                    value={form2.college}
-                                />
-                            </div>
-                            <div className="mx-1 my-2">
-                                <InputBox
-                                    label="Country"
-                                    name={"country"}
-                                    type="text"
-                                    placeholder="country"
-                                    required
-                                    onChange={(e) => handleInputChange2(e)}
+                                            value={form2.college}
+                                        />
+                                    </div>
+                                    <div className="mx-1 my-2">
+                                        <InputBox
+                                            label="Country"
+                                            name={"country"}
+                                            type="text"
+                                            placeholder="country"
+                                            readonly={form2.isInternational === "0"}
+                                            required
+                                            onChange={(e) => handleInputChange2(e)}
 
-                                    value={form2.country}
-                                />
-                            </div>
-                            <div className="flex mx-1 ">
-                                <div className="mr-1 w-1/2">
-                                    <InputBox
-                                        label="State"
-                                        type="text"
-                                        name={"state"}
-                                        placeholder="state"
-                                        required
-                                        onChange={(e) => handleInputChange2(e)}
-                                        value={form2.state}
-                                    />
-                                </div>
-                                <div className="ml-1 w-1/2">
-                                    <InputBox
-                                        label="District"
-                                        name={"district"}
-                                        type="text"
-                                        placeholder="district"
-                                        required
-                                        onChange={(e) => handleInputChange2(e)}
-                                        value={form2.district}
-                                    />
-                                </div>
-                            </div>
-                            <div className=" mx-1 my-2">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Locality
-                                </p>
-                                <div className="relative w-full lg:w-full block px-0  text-sm">
-                                    <select
+                                            value={form2.isInternational === '0' ? 'India' : form2.country}
+                                        />
+                                    </div>
+                                    <div className="flex mx-1 ">
+                                        <div className="mr-1 w-1/2">
+                                            <InputBox
+                                                label="State"
+                                                type="text"
+                                                name={"state"}
+                                                placeholder="state"
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.state}
+                                            />
+                                        </div>
+                                        <div className="ml-1 w-1/2">
+                                            <InputBox
+                                                label="District"
+                                                name={"district"}
+                                                type="text"
+                                                placeholder="district"
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.district}
+                                            />
+                                        </div>
+                                    </div>
+                                    <Dropdown
+                                        label="Localtiy"
+                                        options={local_arr}
                                         name={"locality"}
+                                        state={form2}
+                                        setState={setForm2}
+                                        required
+                                    />
+                                    <RadioButtons
+                                        label='  Preferred mode of presentation'
+                                        options={mode_arr}
+                                        state={form2}
+                                        setState={setForm2}
+                                        name='mode' required />
+
+                                    {form2.mode === "0" && (
+                                        <div>
+                                            <InputBox
+                                                type="textarea"
+                                                label={"Reason for Online"}
+                                                name={"reason_of_mode"}
+                                                placeholder={"reason"}
+
+                                                required
+                                                onChange={(e) => handleInputChange2(e)}
+                                                value={form2.reason_of_mode}
+                                            ></InputBox>
+                                        </div>
+                                    )}
+                                    <InputBox
+                                        type="text"
+                                        label="Referral"
+                                        name="referral"
+                                        placeholder="Referral ID given by Campus Ambassador"
                                         onChange={(e) => handleInputChange2(e)}
-                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                        <option value="0" selected={form2.locality == "0"}>Rural</option>
-                                        <option value="1" selected={form2.locality == "1"}>Urban</option>
-                                        <option disabled selected className="text-white">
-                                            Select
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+                                        value={form2.referral}
+                                    />
+                                </>
+                            )}
                         </>
                     )}
+                    {formStep === 3 && ( paymentStatus ? (
+                        <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+                            <p className="text-xl text-center text-gold font-bold mb-3">Thank you for registering in InC'23. Looking forward to have you in person</p>
+                            <NoteBox title='Note' text='Registration payment will be verified and will be informed by email.' />
+                        </div>
+                    ) : (
+                        <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+                            <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
+                            <InputBox label='Transaction ID' type='text' name='payment_id' placeholder='Enter Transaction ID' inputref={paymentRef} minlenght='8' error={errors3.payment_id} className='tracking-widest' required />
+                        </div>
+                    ))}
                     <div className="flex justify-between">
-                        {formStep > 0 && formStep < 3 ? (
+                        {(formStep > 0 && formStep < 4) && (
                             <Buttons
                                 className="mx-2 my-2"
                                 value=" Previous Step"
                                 onClick={prevForm}
+                                loading={registerUserMutationForm1.isLoading || registerUserMutationForm2.isLoading}
                             />
-                        ) : (
-                            ""
                         )}
-
-                        {formStep === 2 ? (
-                            <Buttons
-                                className=" mx-2 my-2 "
-                                value="Submit"
-                                onClick={nextForm}
-                            />
-                        ) : (
-                            formStep < 2 && (
+                        {formStep === 3 ? (
+                            paymentStatus ? (
+                                <></>
+                            ) : (
                                 <Buttons
-                                    className=" mx-2 my-2  "
-                                    value="Next Step"
+                                    className=" mx-2 my-2 "
+                                    value="Submit"
                                     onClick={nextForm}
+                                    loading={registerUserMutationForm3.isLoading}
                                 />
                             )
+                        ) : (
+                            formStep === 2 && (paymentStatus ? (
+                                <Buttons
+                                    className=" mx-2 my-2  "
+                                    value="Submit"
+                                    onClick={nextForm}
+                                    loading={registerUserMutationForm0.isLoading || registerUserMutationForm1.isLoading || registerUserMutationForm2.isLoading}
+                                />
+                            ) : (
+                                <Buttons
+                                    className=" mx-2 my-2  "
+                                    value="Pay (Rs.300)"
+                                    onClick={nextForm}
+                                    loading={registerUserMutationForm0.isLoading || registerUserMutationForm1.isLoading || registerUserMutationForm2.isLoading}
+                                />
+                            )
+                        ))
+                        }
+                        {formStep < 2 && (
+                            <Buttons
+                                className=" mx-2 my-2  "
+                                value="Next Step"
+                                onClick={nextForm}
+                                loading={registerUserMutationForm0.isLoading || registerUserMutationForm1.isLoading || registerUserMutationForm2.isLoading}
+                            />
                         )}
-
-                        {formStep === 3 && <h1 className=" text-gold text-3xl">Thank you for registring for concepts!!!</h1>}
                     </div>
                 </form>
                 {/* <Buttons

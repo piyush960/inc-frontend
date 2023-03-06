@@ -1,6 +1,6 @@
 import React from 'react';
 import { RadioButtons, Checkboxes, toast, Buttons } from '../components';
-
+import Dropdown from '../components/dropdown';
 function Test() {
     const [state, setState] = React.useState({ domains: ['AD'] })
     const [checked, setChecked] = React.useState({ isPICT: '' })
@@ -54,6 +54,7 @@ function Test() {
                 <RadioButtons label='Are you from PICT ?' options={options} state={checked} setState={setChecked} name='isPICT' required />
                 <Checkboxes label='Domains' options={domains} state={state} setState={setState} name='domains' />
                 <Buttons value='Submit' onClick={a} />
+                <Dropdown label="Domain of proj" options={domains} state={state} setState={setState} name="abc"/>
             </form>
         </div>
     );

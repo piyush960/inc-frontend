@@ -1,9 +1,11 @@
-import Auth from '../pages/auth';
+import { useNavigate } from 'react-router-dom';
 
 function ProtectedRoutes({ children }) {
+    const authNavigator = useNavigate()
     var user = true
+
     return (
-        user ? children : <Auth />
+        user ? children : authNavigator('/auth')
     );
 }
 

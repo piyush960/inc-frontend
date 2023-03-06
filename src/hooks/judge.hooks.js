@@ -3,8 +3,8 @@ import { registerJudge } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
 
-function useRegisterJudge(setErrors) {
-    const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(registerJudge, {
+function useRegisterJudge(setErrors , eventName) {
+    const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(registerJudge(eventName), {
         onError: (err) => {
             const parsedError = errorParser(err)
             parsedError.error && toast.error(parsedError.error, { autoClose: 5000 })
