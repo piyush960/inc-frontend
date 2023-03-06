@@ -38,7 +38,7 @@ const educationSponsors = [
   },
   {
     name: "Sarvatra",
-    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914537/logo_sarvatra_ww7sgb.pnghttps://res.cloudinary.com/job-',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914537/logo_sarvatra_ww7sgb.png',
     website: "https://sarvatra.tech/",
   },
   {
