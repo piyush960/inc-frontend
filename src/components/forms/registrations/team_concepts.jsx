@@ -1,9 +1,9 @@
 import "../styles/event_registrations.css";
 import { useRef, useState } from "react";
 import styled from 'styled-components';
-import { InputBox, Buttons, FileInputBox, toast, NoteBox } from "../../index.js";
+import { InputBox, Buttons, Dropdown, FileInputBox, RadioButtons, toast, NoteBox } from "../../index.js";
 import { useRegisterStep1, useRegisterStep2, useRegisterStep3, useRegisterStep4 } from "../../../hooks/events.hooks";
-import { domains, paymentLinks } from "../../../static/data";
+import { paymentLinks, projectDomains, projectTypes } from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -171,6 +171,114 @@ const initialErrorsForm2 = {
 const initialErrorsForm3 = {
     payment_id: "",
 }
+
+const sponsor_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+]
+
+const nda_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+]
+
+const pict_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+
+]
+
+const mode_arr = [
+    {
+        value: '1',
+        label: 'Offline',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'Online',
+    },
+
+]
+const country_arr = [
+    {
+        value: '1',
+        label: 'Yes',
+        // onChange: function (e) { }
+    },
+    {
+        value: '0',
+        label: 'No',
+    },
+]
+
+const gender_type = [
+    { value: 'SEL', label: 'Select', disabled: true },
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+    { value: 'Other', label: 'Other' },
+]
+
+// const state_arr = [
+//     { value: 'SEL', label: 'Select', disabled: true },
+//     { value: 'AP', label: "Arunachal Pradesh" },
+//     { value: 'AS', label: "Assam" },
+//     { value: 'BI', label: "Bihar" },
+//     { value: 'CH', label: "Chhattisgarh" },
+//     { value: 'DEL', label: "Delhi" },
+//     { value: 'G', label: "Goa" },
+//     { value: 'GUJ', label: "Gujarat" },
+//     { value: 'HAR', label: "Haryana" },
+//     { value: 'HP', label: "Himachal Pradesh" },
+//     { value: 'JK', label: "Jammu &amp; Kashmir" },
+//     { value: 'JH', label: "Jharkhand" },
+//     { value: 'KAR', label: "Karnataka" },
+//     { value: 'KR', label: "Kerala" },
+//     { value: 'MP', label: "Madhya Pradesh" },
+//     { value: 'MAH', label: "Maharashtra" },
+//     { value: 'MN', label: "Manipur" },
+//     { value: 'MG', label: "Meghalaya" },
+//     { value: 'MZ', label: "Mizoram" },
+//     { value: 'OR', label: "Orissa" },
+//     { value: 'PN', label: "Punjab" },
+//     { value: 'RJ', label: "Rajasthan" },
+//     { value: 'TN', label: "Tamil Nadu" },
+//     { value: 'TL', label: "Telangana" },
+//     { value: 'TR', label: "Tripura" },
+//     { value: 'UP', label: "Uttar Pradesh" },
+//     { value: 'UT', label: "Uttarakhand" },
+//     { value: 'WB', label: "West Bengal" },
+
+// ]
+
+const local_arr = [
+    { value: 'SEL', label: "Select", disabled: true },
+    { value: 'UR', label: "Urban" },
+    { value: 'RU', label: "Rural" },
+
+
+]
 
 function TeamConcepts() {
     //form0
@@ -512,44 +620,22 @@ function TeamConcepts() {
                                 value={form0.title}
                                 minlenght='10'
                             ></InputBox>
-                            <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Domain Of Project
-                                </p>
-                                <div className="relative w-full lg:w-full block px-0  text-sm">
-                                    <select
-                                        name={"domain"}
-                                        onChange={(e) => handleSelectChange0(e)}
-                                        // onChange={handleChange}
-                                        className="w-full h-14 bg-faint_blue/20 font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue/30 focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
-                                    >
-                                        {domains.map(domain => (
-                                            <option value={domain.value} key={domain.value} className="bg-faint_blue">{domain.label}</option>
-                                        ))}
-                                        <option value="" selected className="text-white">
-                                            Select
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="relative z-0  w-full group">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Project Type
-                                </p>
-                                <div className="relative w-full lg:w-full block px-0  text-sm">
-                                    <select
-                                        name={"project_type"}
-                                        onChange={(e) => handleSelectChange0(e)}
-                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
-                                    >
-                                        <option value="Open Hardware/Firmware">Open Hardware/Firmware</option>
-                                        <option value="Open Software">Open Software</option>
-                                        <option value="" selected className="text-white">
-                                            Select
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+                            <Dropdown
+                                label="Domain of the project"
+                                options={[...projectDomains, { value: 'SEL', label: 'Select', disabled: true }]}
+                                name={"domain"}
+                                state={form0}
+                                setState={setForm0}
+                                required
+                            />
+                            <Dropdown
+                                label=" Project Type"
+                                options={projectTypes}
+                                name={"project_type"}
+                                state={form0}
+                                setState={setForm0}
+                                required
+                            />
                             <InputBox
                                 type="text"
                                 label={"Guide_Name"}
@@ -589,20 +675,14 @@ function TeamConcepts() {
                                 onChange={(e) => handleInputChange0(e)}
                                 value={form0.hod_email}
                             ></InputBox>
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Is the project sponsored or not?
-                                </p>
-                                <input type="radio" value="1" name="sponsored" onChange={handleInputChange0} /> Yes
-                                <input
-                                    type="radio"
-                                    value="0"
-                                    name="sponsored"
-                                    className="ml-10"
-                                    onChange={handleInputChange0}
-                                />{" "}
-                                No
-                            </div>
+                            <RadioButtons
+                                label='Is the project sponsored or not?'
+                                options={sponsor_arr}
+                                state={form0}
+                                setState={setForm0}
+                                name='sponsored'
+                                required
+                            />
                             {form0.sponsored === "1" &&
                                 (<>
                                     <InputBox
@@ -615,13 +695,11 @@ function TeamConcepts() {
                                         onChange={(e) => handleInputChange0(e)}
                                         value={form0.company}
                                     ></InputBox>
-                                    <div className="my-5">
-                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                            NDA signed or not?
-                                        </p>
-                                        <input type="radio" value="1" name="nda" onChange={handleInputChange0} /> Yes
-                                        <input type="radio" value="0" name="nda" className="ml-10 " onChange={handleInputChange0} /> No
-                                    </div>
+                                    <RadioButtons
+                                        label=' NDA signed or not?'
+                                        options={nda_arr}
+                                        state={form0}
+                                        setState={setForm0} name='nda' required />
                                 </>
                                 )
 
@@ -685,26 +763,35 @@ function TeamConcepts() {
                                                     value={form.phone}
                                                 />
                                             </div>
-                                            <div className="ml-1 w-1/2">
-                                                <p className="input-label font-medium  text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                                    State
-                                                </p>
-                                                <div className="relative w-full lg:w-full block px-0  text-sm">
+                                            <div className="input-box-dropdown w-full mb-4 relative">
+                                                <label className={`input-label font-medium mb-1 text-white text-lg flex`}>{"Gender"}<h1 className="text-gold">*</h1></label>
+                                                <div className="relative inline-block w-full">
                                                     <select
-                                                        name="gender"
-                                                        onChange={(event) => handleSelectChange1(event, index)}
-                                                        // onChange={handleChange}
-                                                        className="w-full h-14 bg-faint_blue font-gilroy text-gold text-lg px-3 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20"
+                                                        name={"gender"}
+
+                                                        value={formFields.gender}
+                                                        onChange={(event) => handleFormChange(event, index)}
+                                                        required
+                                                        className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
                                                     >
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                        <option value="" selected className="text-white">
-                                                            Select
-                                                        </option>
+                                                        {gender_type.map(option => (
+                                                            <option key={option?.value} value={option?.value} className={`py-1 bg-[#0B1E47] ${option?.className || ''}`}>
+                                                                {option?.label}
+                                                            </option>
+                                                        ))}
                                                     </select>
                                                 </div>
+
                                             </div>
+                                            {/* <Dropdown
+                                                label=" Gender"
+                                                options={gender_type}
+                                                name={"gender"}
+                                                state={formFields}
+                                                setState={setFormFields}
+                                                required
+                                            /> */}
+
                                         </div>
                                         <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
 
@@ -723,40 +810,20 @@ function TeamConcepts() {
                     {formStep === 2 && (
                         <>
                             <NoteBox title='Note' text='Please complete the payment within 60 minutes before your session expires.' />
-                            <div className="my-5">
-                                <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                    Are you PICTian or not?
-                                </p>
-                                <input type="radio"
-                                    value="1"
-                                    name="isPICT"
-                                    onChange={handleInputChange2} /> Yes
-                                <input
-                                    type="radio"
-                                    value="0"
-                                    name="isPICT"
-                                    className="ml-10"
-                                    onChange={handleInputChange2}
-                                />{" "}
-                                No
-                            </div>
-
+                            <RadioButtons
+                                label=' Are you PICTian or not?'
+                                options={pict_arr}
+                                state={form2}
+                                setState={setForm2}
+                                name='isPICT' required />
                             {form2.isPICT === "0" && (
                                 <>
-                                    <div className="my-5">
-                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                            Is International ?
-                                        </p>
-                                        <input type="radio" value="0" name="isInternational" onChange={e => handleInputChange2(e)} /> No
-                                        <input
-                                            type="radio"
-                                            value="1"
-                                            name="isInternational"
-                                            className="ml-10"
-                                            onChange={e => handleInputChange2(e)}
-                                        />{" "}
-                                        Yes
-                                    </div>
+                                    <RadioButtons
+                                        label='Is International ?'
+                                        options={country_arr}
+                                        state={form2}
+                                        setState={setForm2}
+                                        name='isInternational' required />
                                     <div className=" mx-1 my-2">
                                         <InputBox
                                             label="College"
@@ -806,49 +873,21 @@ function TeamConcepts() {
                                             />
                                         </div>
                                     </div>
-                                    <div className="flex mx-1 gap-2">
-                                        <div className="w-1/2">
-                                            <p className="input-label font-medium text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                                Locality
-                                            </p>
-                                            <select
-                                                name={"locality"}
-                                                onChange={(e) => handleInputChange2(e)}
-                                                className="w-full h-12 bg-faint_blue font-gilroy text-gold text-lg px-4 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20">
-                                                <option value="0" selected={form2.locality === "0"}>Rural</option>
-                                                <option value="1" selected={form2.locality === "1"}>Urban</option>
-                                                <option disabled selected className="text-white">Select</option>
-                                            </select>
-                                        </div>
-                                        <div className="w-1/2">
-                                            <InputBox
-                                                label="City"
-                                                name={"city"}
-                                                type="text"
-                                                placeholder="City"
-                                                required
-                                                onChange={(e) => handleInputChange2(e)}
-                                                value={form2.city}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="my-3">
-                                        <p className="input-label font-medium mb-3 text-white text-lg after:content-['*'] after:ml-0.5 after:text-gold">
-                                            Preferred mode of presentation
-                                        </p>
-                                        <input type="radio" value="0" name="mode" onChange={e => handleInputChange2(e)}
-                                            disabled={form2.city.includes("Pune")} checked={form2.mode === "0"} /> Online
-                                        <input
-                                            type="radio"
-                                            value="1"
-                                            name="mode"
-                                            className="ml-10"
-                                            onChange={e => handleInputChange2(e)}
-                                            checked={form2.city.includes("Pune") || form2.mode === "1"}
-                                            disabled={form2.city.includes("Pune")}
-                                        />{" "}
-                                        Offline
-                                    </div>
+                                    <Dropdown
+                                        label="Localtiy"
+                                        options={local_arr}
+                                        name={"locality"}
+                                        state={form2}
+                                        setState={setForm2}
+                                        required
+                                    />
+                                    <RadioButtons
+                                        label='  Preferred mode of presentation'
+                                        options={mode_arr}
+                                        state={form2}
+                                        setState={setForm2}
+                                        name='mode' required />
+
                                     {form2.mode === "0" && (
                                         <div>
                                             <InputBox

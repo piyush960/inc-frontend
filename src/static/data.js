@@ -3,13 +3,19 @@ export const events = [
     { value: 'impetus', label: 'Impetus' }
 ]
 
-export const domains = [
+export const projectDomains = [
     { value: 'AD', label: 'Application Development' },
     { value: 'CN', label: 'Communication Networks and Security Systems' },
     { value: 'DSP', label: 'Digital / Image/ Speech / Video Processing' },
     { value: 'ES', label: 'Embedded/VLSI Systems' },
     { value: 'ML', label: 'Machine Learning and Pattern Recognition' },
     { value: 'OT', label: 'Others' }
+]
+
+export const projectTypes = [
+    { value: 'SEL', label: 'Select', disabled: true },
+    { value: 'Open Hardware/Firmware', label: 'Open Hardware/Firmware' },
+    { value: 'Open Software', label: 'Open Software' }
 ]
 
 export const slots = [
