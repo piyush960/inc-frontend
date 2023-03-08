@@ -533,7 +533,8 @@ function TeamConcepts() {
             setFormStep(currentStep => currentStep + 1);
             setActiveStep(activeStep => activeStep + 1);
         }
-        if (formStep === 2) {
+        if (formStep === 2) 
+        {
             for (const property in form2) {
                 if (form2[property] === "") {
                     if (property === "reason_of_mode" && form2["mode"] === "1")
