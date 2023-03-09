@@ -183,6 +183,7 @@ const initialErrorsForm2 = {
   mode: "",
   reason_of_mode: "",
   referral: "",
+  year : "",
 };
 
 const initialErrorsForm3 = {
@@ -426,6 +427,7 @@ function TeamConcepts() {
     mode: "1",
     reason_of_mode: "",
     referral: "",
+    
   });
   const [errors2, setErrors2] = useState(initialErrorsForm2);
   const registerUserMutationForm2 = useRegisterStep3(setErrors2, "concepts");
@@ -519,7 +521,7 @@ function TeamConcepts() {
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "concepts");
 
   //steps for whole form
-  const [formStep, setFormStep] = useState(2);
+  const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -656,6 +658,7 @@ function TeamConcepts() {
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.title}
                 minlenght="10"
+                error = {errors0.title}
               ></InputBox>
               <Dropdown
                 label="Domain of the project"
@@ -667,6 +670,7 @@ function TeamConcepts() {
                 state={form0}
                 setState={setForm0}
                 required
+                error = {errors0.domain}
               />
               <Dropdown
                 label=" Project Type"
@@ -678,6 +682,7 @@ function TeamConcepts() {
                 state={form0}
                 setState={setForm0}
                 required
+                error = {errors0.project_type}
               />
               <InputBox
                 type="text"
@@ -687,6 +692,7 @@ function TeamConcepts() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_name}
+                error = {errors0.guide_name}
               ></InputBox>
               <InputBox
                 type="email"
@@ -696,6 +702,7 @@ function TeamConcepts() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_email}
+                error = {errors0.guide_email}
               ></InputBox>
               <InputBox
                 type="tel"
@@ -705,6 +712,7 @@ function TeamConcepts() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_phone}
+                error = {errors0.guide_phone}
               ></InputBox>
               <InputBox
                 type="email"
@@ -714,6 +722,7 @@ function TeamConcepts() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.hod_email}
+                error = {errors0.hod_email}
               ></InputBox>
               <RadioButtons
                 label="Is the project sponsored or not?"
@@ -722,6 +731,7 @@ function TeamConcepts() {
                 setState={setForm0}
                 name="sponsored"
                 required
+                error = {errors0.sponsored}
               />
               {form0.sponsored === "1" && (
                 <>
@@ -733,6 +743,7 @@ function TeamConcepts() {
                     required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.company}
+                    error = {errors0.company}
                   ></InputBox>
                   <RadioButtons
                     label=" NDA signed or not?"
@@ -741,6 +752,7 @@ function TeamConcepts() {
                     setState={setForm0}
                     name="nda"
                     required
+                    error = {errors0.nda}
                   />
                 </>
               )}
@@ -751,6 +763,7 @@ function TeamConcepts() {
                 name={"abstract"}
                 placeholder={"In 300 words or less"}
                 required
+                error = {errors0.abstract}
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.abstract}
                 minlenght="50"
@@ -781,6 +794,7 @@ function TeamConcepts() {
                       type="text"
                       placeholder="name "
                       required
+                      error = {errors1.name}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.name}
                     />
@@ -790,6 +804,7 @@ function TeamConcepts() {
                       type="text"
                       placeholder="email "
                       required
+                      error = {errors1.email}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.email}
                     />
@@ -801,6 +816,7 @@ function TeamConcepts() {
                           type="number"
                           placeholder="phone number"
                           required
+                          error = {errors1.phone}
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.phone}
                         />
@@ -818,6 +834,7 @@ function TeamConcepts() {
                             value={formFields.gender}
                             onChange={(event) => handleFormChange(event, index)}
                             required
+                            error = {errors1.gender}
                             className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
                           >
                             {gender_type.map((option) => (
@@ -850,6 +867,7 @@ function TeamConcepts() {
                       onChange={(e) => handleImageChange(e, index)}
                       label="Upload Screenshot of ID"
                       required
+                      error = {errors1.member_id}
                     />
 
                     {/* {membersCount <= index && (<Buttons
@@ -877,6 +895,7 @@ function TeamConcepts() {
                 setState={setForm2}
                 name="isPICT"
                 required
+                error = {errors2.isPICT}
               />
               {form2.isPICT === "0" && (
                 <>
@@ -887,6 +906,7 @@ function TeamConcepts() {
                     setState={setForm2}
                     name="isInternational"
                     required
+                    error = {errors2.isInternational}
                   />
                   <div className=" mx-1 my-2">
                     <InputBox
@@ -897,6 +917,7 @@ function TeamConcepts() {
                       required
                       onChange={(e) => handleInputChange2(e)}
                       value={form2.college}
+                      error = {errors2.college}
                     />
                   </div>
                   <div className="mx-1 my-2">
@@ -908,6 +929,7 @@ function TeamConcepts() {
                       placeholder="country"
                       readonly={form2.isInternational === "0"}
                       required
+                      error = {errors2.country}
                       onChange={(e) => handleInputChange2(e)}
                       value={
                         form2.isInternational === "0" ? "India" : form2.country
@@ -922,6 +944,7 @@ function TeamConcepts() {
                         name={"state"}
                         placeholder="state"
                         required
+                        error = {errors2.state}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.state}
                       />
@@ -933,6 +956,7 @@ function TeamConcepts() {
                         type="text"
                         placeholder="district"
                         required
+                        error = {errors2.district}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.district}
                       />
@@ -946,6 +970,7 @@ function TeamConcepts() {
                         name={"city"}
                         placeholder="city"
                         required
+                        error = {errors2.city}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.city}
                       />
@@ -958,6 +983,7 @@ function TeamConcepts() {
                         state={form2}
                         setState={setForm2}
                         required
+                        error = {errors2.locality}
                       />
                     </div>
                   </div>
@@ -969,6 +995,7 @@ function TeamConcepts() {
                     setState={setForm2}
                     name="mode"
                     required
+                    error = {errors2.mode}
                   />
 
                   {form2.mode === "0" && (
@@ -979,6 +1006,7 @@ function TeamConcepts() {
                         name={"reason_of_mode"}
                         placeholder={"reason"}
                         required
+                        error = {errors2.reason_of_mode}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.reason_of_mode}
                       ></InputBox>
@@ -991,6 +1019,7 @@ function TeamConcepts() {
                     placeholder="Referral ID given by Campus Ambassador"
                     onChange={(e) => handleInputChange2(e)}
                     value={form2.referral}
+                    error = {errors2.referral}
                   />
                 </>
               )}

@@ -448,11 +448,17 @@ function TeamPradnya() {
                             {form1.map((form, index) => {
                                 return (
                                     <div key={index}>
-                                        <InputBox label="Name" name="name" type="text" placeholder="name " required onChange={(event) => handleFormChange(event, index)} value={form.name} />
-                                        <InputBox label="Email ID" name="email" type="text" placeholder="email " required onChange={(event) => handleFormChange(event, index)} value={form.email} />
+                                        <InputBox label="Name" name="name" type="text" placeholder="name " required 
+                                        error = {errors1.name}
+                                        onChange={(event) => handleFormChange(event, index)} value={form.name} />
+                                        <InputBox label="Email ID" name="email" type="text" placeholder="email " required 
+                                         error = {errors1.email}
+                                        onChange={(event) => handleFormChange(event, index)} value={form.email} />
                                         <div className="flex">
                                             <div className="mr-1 w-1/2">
-                                                <InputBox label="Phone No" name="phoneno" type="number" placeholder="phone number" required onChange={(event) => handleFormChange(event, index)} value={form.phoneno} />
+                                                <InputBox label="Phone No" name="phoneno" type="number" placeholder="phone number" required 
+                                                 error = {errors1.phone}
+                                                onChange={(event) => handleFormChange(event, index)} value={form.phoneno} />
                                             </div>
                                             <Dropdown
                                                 label=" Gender"
@@ -461,10 +467,13 @@ function TeamPradnya() {
                                                 state={form1}
                                                 setState={setForm1}
                                                 required
+                                                error = {errors1.gender}
                                             />
 
                                         </div>
-                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required />
+                                        <FileInputBox name="member_id" accept="image/png, image/jpeg" type="file" onChange={(e) => handleImageChange(e, index)} label="Upload Screenshot of ID" required 
+                                         error = {errors1.member_id}
+                                        />
 
                                         {form1.length > 1 &&
                                             (<><Buttons
@@ -487,7 +496,9 @@ function TeamPradnya() {
                                 options={pict_arr}
                                 state={form2}
                                 setState={setForm2}
-                                name='isPICT' required />
+                                name='isPICT'
+                                error = {errors2.isPICT}
+                                required />
                             {form2.isPICT === "0" && (
                                 <>
                                     <RadioButtons
@@ -495,7 +506,8 @@ function TeamPradnya() {
                                         options={country_arr}
                                         state={form2}
                                         setState={setForm2}
-                                        name='isInternational' required />
+                                        name='isInternational' required
+                                        error = {errors2.isInternational} />
                                     <div className=" mx-1 my-2">
                                         <InputBox
                                             label="College"
@@ -503,6 +515,7 @@ function TeamPradnya() {
                                             type="text"
                                             placeholder="college name"
                                             required
+                                            error = {errors2.college}
                                             onChange={(e) => handleInputChange2(e)}
 
                                             value={form2.college}
@@ -516,6 +529,7 @@ function TeamPradnya() {
                                             placeholder="country"
                                             disabled={form2.isInternational === "0"}
                                             required
+                                            error = {errors2.country}
                                             onChange={(e) => handleInputChange2(e)}
 
                                             value={form2.isInternational === '0' ? 'India' : form2.country}
@@ -529,6 +543,7 @@ function TeamPradnya() {
                                                 name={"state"}
                                                 placeholder="state"
                                                 required
+                                                error = {errors2.state}
                                                 onChange={(e) => handleInputChange2(e)}
                                                 value={form2.state}
                                             />
@@ -540,6 +555,7 @@ function TeamPradnya() {
                                                 type="text"
                                                 placeholder="district"
                                                 required
+                                                error = {errors2.district}
                                                 onChange={(e) => handleInputChange2(e)}
                                                 value={form2.district}
                                             />
@@ -552,6 +568,7 @@ function TeamPradnya() {
                                         state={form2}
                                         setState={setForm2}
                                         required
+                                        error = {errors2.locality}
                                     />
 
                                     <InputBox
@@ -560,6 +577,7 @@ function TeamPradnya() {
                                         name="referral"
                                         placeholder="Referral ID given by Campus Ambassador"
                                         required
+                                        error = {errors2.referral}
                                         onChange={(e) => handleInputChange2(e)}
                                         value={form2.referral}
                                     />
@@ -572,6 +590,7 @@ function TeamPradnya() {
                                 state={form2}
                                 setState={setForm2}
                                 required
+                                error = {errors2.year}
                             />
                         </>
                     )}
