@@ -254,19 +254,18 @@ const proj_domain = [
   { value: "OT", label: "Others" },
 ];
 
-const proj_type = [
-  { value: "SEL", label: "Select" },
-  { value: "OH", label: "Open Hardware" },
-  { value: "OS", label: "Open Software" },
-  { value: "OT", label: "Others" },
-];
+export const projectTypes = [
+  { value: 'Open Hardware/Firmware', label: 'Open Hardware/Firmware' },
+  { value: 'Open Software', label: 'Open Software' }
+]
 
 const gender_type = [
-  { value: "SEL", label: "Select" },
-  { value: "M", label: "Male" },
-  { value: "F", label: "Female" },
-  { value: "OT", label: "Other" },
+  { value: "SEL", label: "Select", disabled: true },
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
+  { value: "Other", label: "Other" },
 ];
+
 
 // const state_arr = [
 //     { value: 'SEL', label: 'Select' },
@@ -301,16 +300,17 @@ const gender_type = [
 // ]
 
 const local_arr = [
-  { value: "SEL", label: "Select" },
-  { value: "UR", label: "Urban" },
-  { value: "RU", label: "Rural" },
+  { value: "SEL", label: "Select", disabled: true },
+  { value: "1", label: "Urban" },
+  { value: "0", label: "Rural" },
 ];
+
 
 const year_arr = [
   { value: "SEL", label: "Select" },
-  { value: "F", label: "1st year" },
-  { value: "S", label: "2nd year" },
-  { value: "T", label: "3rd year" },
+  { value: "FE", label: "1st year" },
+  { value: "SE", label: "2nd year" },
+  { value: "TE", label: "3rd year" },
 ];
 
 const demo_arr = [
@@ -428,8 +428,14 @@ function TeamImpetus() {
             member_id: "",
           };
           setFormFields([...formFields, object]);
+          SetMemberCount((memberCount) => memberCount + 1);
         },
-        onError: () => setFormFields((formFields) => formFields.slice(0, -1)),
+        onError: () => {
+          if (formFields.length === 1) {
+            return;
+          }
+          setFormFields((formFields) => formFields.slice(0, -1));
+        },
       });
       return;
     }
@@ -443,8 +449,8 @@ function TeamImpetus() {
   //form 2
 
   const [form2, setForm2] = useState({
-    isPICT: "0",
-    isInternational: "0",
+    isPICT: "",
+    isInternational: "",
     college: "",
     country: "",
     state: "",
@@ -510,7 +516,23 @@ function TeamImpetus() {
       });
       setPaymentStatus(false);
     }
+    console.log(form2);
   };
+
+  
+  const country_arr = [
+    {
+      value: "1",
+      label: "Yes",
+      onChange : handleInputChange2
+    },
+    {
+      value: "0",
+      label: "No",
+      onChange : handleInputChange2
+    },
+  ];
+
 
   const handleSelectChange2 = (e) => {
     const { name, value } = e.target;
@@ -525,16 +547,18 @@ function TeamImpetus() {
   const [paymentStatus, setPaymentStatus] = useState(true);
   const paymentRef = useRef("");
   const [errors3, setErrors3] = useState(initialErrorsForm3);
-  const registerUserMutationForm3 = useRegisterStep4(setErrors3, "concepts");
+  const registerUserMutationForm3 = useRegisterStep4(setErrors3, "impetus");
 
   //steps for whole form
-  const [formStep, setFormStep] = useState(0);
+  const [formStep, setFormStep] = useState(2);
 
   const prevForm = (e) => {
     // e.preventDefault();
     setFormStep((currentStep) => currentStep - 1);
     setActiveStep(activeStep - 1);
   };
+
+  const [memberCount, SetMemberCount] = useState(0);
 
   const nextForm = (e) => {
     e.preventDefault();
@@ -562,7 +586,7 @@ function TeamImpetus() {
       });
     }
     if (formStep === 1) {
-      if (formFields.length < 2) {
+      if (memberCount < 2) {
         toast.warn("At least two member needed!");
         return;
       }
@@ -622,7 +646,7 @@ function TeamImpetus() {
 
     // console.log(formFields);
     // console.log(form0);
-    // console.log(form2);
+    console.log(form2);
     // setFormStep((currentStep) => currentStep + 1);
     // setActiveStep(activeStep + 1);
   };
@@ -672,9 +696,12 @@ function TeamImpetus() {
                 setState={setForm0}
                 required
               />
-              <Dropdown
+               <Dropdown
                 label=" Project Type"
-                options={proj_type}
+                options={[
+                  ...projectTypes,
+                  { value: "SEL", label: "Select", disabled: true },
+                ]}
                 name={"project_type"}
                 state={form0}
                 setState={setForm0}
@@ -901,7 +928,7 @@ function TeamImpetus() {
               />
               <RadioButtons
                 label=" Are you PICTian or not?"
-                options={pict_arr}
+                options={country_arr}
                 state={form2}
                 setState={setForm2}
                 name="isPICT"
@@ -966,14 +993,29 @@ function TeamImpetus() {
                       />
                     </div>
                   </div>
-                  <Dropdown
-                    label="Localtiy"
-                    options={local_arr}
-                    name={"locality"}
-                    state={form2}
-                    setState={setForm2}
-                    required
-                  />
+                  <div className="flex mx-1 ">
+                    <div className="mr-1 w-1/2">
+                      <InputBox
+                        label="City"
+                        type="text"
+                        name={"city"}
+                        placeholder="city"
+                        required
+                        onChange={(e) => handleInputChange2(e)}
+                        value={form2.city}
+                      />
+                    </div>
+                    <div className="ml-1 w-1/2">
+                      <Dropdown
+                        label="Localtiy"
+                        options={local_arr}
+                        name={"locality"}
+                        state={form2}
+                        setState={setForm2}
+                        required
+                      />
+                    </div>
+                  </div>
                   <RadioButtons
                     label="  Preferred mode of presentation"
                     options={mode_arr}
@@ -1001,7 +1043,7 @@ function TeamImpetus() {
                     name="referral"
                     placeholder="Referral ID given by Campus Ambassador"
                     required
-                    onChange={(e) => handleInputChange0(e)}
+                    onChange={(e) => handleInputChange2(e)}
                     value={form2.referral}
                   />
                 </>
