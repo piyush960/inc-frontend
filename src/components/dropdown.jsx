@@ -23,7 +23,7 @@ function Dropdown({ label, options, state, setState, name, required, error }) {
           className={`w-full h-10 pl-3 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue ${error && 'border-red-500'} ${options.className || ''}`}
         >
           {options.map(option => (
-            <option key={option?.value} value={option?.value} className={`py-1 bg-[#0B1E47] ${option?.className || ''}`}>
+            <option key={option?.value} disabled={option?.disabled} value={option?.value} className={`py-1 bg-[#0B1E47] ${option?.className || ''}`}>
               {option?.label}
             </option>
           ))}

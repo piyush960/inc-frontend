@@ -10,6 +10,7 @@ const registerJudge = (eventName) => async (data) => await backend.post(`/${even
 const registerEventStep1 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_1`, data);
 const registerEventStep2 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_2`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
 const registerEventStep3 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_3`, data);
+const registerEventStep4 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_4`, data);
 const verifyPayment = (eventName) => async (data) => await backend.post(`/events/verify/payment/${eventName}`, data);
 const getPendingPayments = (eventName) => async () => await backend.get(`/events/verify/payment/${eventName}`);
 
@@ -18,6 +19,7 @@ export {
     registerEventStep1,
     registerEventStep2,
     registerEventStep3,
+    registerEventStep4,
     verifyPayment,
     getPendingPayments,
 }
