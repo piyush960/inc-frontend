@@ -1,7 +1,26 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getPendingPayments, verifyPayment } from '../api';
+import { getPendingPayments, loginAdmin, verifyPayment } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
+
+function useLoginAdmin(setErrors) {
+    const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(loginAdmin, {
+        onError: (err) => {
+            const parsedError = errorParser(err)
+            parsedError.error && toast.error(parsedError.error, { autoClose: 5000 })
+            setErrors(prevErrors => {
+                for (const key in prevErrors) {
+                    if (parsedError.hasOwnProperty(key)) {
+                        prevErrors[key] = parsedError[key]
+                    }
+                }
+                return prevErrors
+            })
+            toast.error('Errors in the login form. Please try again.', { autoClose: 5000 })
+        }
+    })
+    return { mutate, isLoading, isSuccess, isError, data, error }
+}
 
 function usePendingPayments(setErrors, eventName) {
     const { isLoading, isSuccess, isError, data, error } = useQuery({ queryKey: ['pendingPayments', eventName], queryFn: getPendingPayments(eventName) })
@@ -50,6 +69,7 @@ function useVerifyPayment(setErrors, eventName) {
 }
 
 export {
+    useLoginAdmin,
     usePendingPayments,
     useVerifyPayment,
 }

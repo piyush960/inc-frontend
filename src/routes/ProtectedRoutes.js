@@ -1,11 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 function ProtectedRoutes({ children }) {
-    const authNavigator = useNavigate()
-    var user = true
+    var user = false
 
     return (
-        user ? children : authNavigator('/auth')
+        user ? children : <Navigate to='/auth' />
     );
 }
 
