@@ -181,6 +181,7 @@ const initialErrorsForm2 = {
   mode: "1",
   reason_of_mode: "",
   referral: "",
+  year : "",
 };
 
 const sponsor_arr = [
@@ -459,6 +460,7 @@ function TeamImpetus() {
     mode: "1",
     reason_of_mode: "",
     referral: "",
+    year : "",
   });
   const [errors2, setErrors2] = useState(initialErrorsForm2);
   const registerUserMutationForm2 = useRegisterStep3(setErrors2, "impetus");
@@ -478,6 +480,7 @@ function TeamImpetus() {
         mode: "1",
         reason_of_mode: "",
         isInternational: "0",
+        year : "",
       }));
       setPaymentStatus(true);
     } else if (name === "isPICT" && value === "0") {
@@ -491,6 +494,7 @@ function TeamImpetus() {
         district: "",
         locality: "",
         isInternational: "",
+        year: "",
       }));
     } else if (name === "isInternational" && value === "0") {
       setForm2((form2) => ({
@@ -687,6 +691,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.title}
+                error = {errors0.title}
               ></InputBox>
               <Dropdown
                 label="Domain of the project"
@@ -695,6 +700,7 @@ function TeamImpetus() {
                 state={form0}
                 setState={setForm0}
                 required
+                error = {errors0.domain}
               />
                <Dropdown
                 label=" Project Type"
@@ -706,6 +712,7 @@ function TeamImpetus() {
                 state={form0}
                 setState={setForm0}
                 required
+                error = {errors0.project_type}
               />
               <InputBox
                 type="text"
@@ -716,6 +723,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_name}
+                error = {errors0.guide_name}
               ></InputBox>
               <InputBox
                 type="email"
@@ -726,6 +734,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_email}
+                error = {errors0.guide_email}
               ></InputBox>
               <InputBox
                 type="text"
@@ -736,6 +745,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_phone}
+                error = {errors0.guide_phone}
               ></InputBox>
               <InputBox
                 type="text"
@@ -746,6 +756,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.hod_email}
+                error = {errors0.hod_email}
               ></InputBox>
               <RadioButtons
                 label="Is the project sponsored or not?"
@@ -754,6 +765,8 @@ function TeamImpetus() {
                 setState={setForm0}
                 name="sponsored"
                 required
+                error = {errors0.sponsored}
+                
               />
               {form0.sponsored === "1" && (
                 <>
@@ -766,6 +779,7 @@ function TeamImpetus() {
                     required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.company}
+                    error = {errors0.company}
                   ></InputBox>
                   <RadioButtons
                     label=" NDA signed or not?"
@@ -774,6 +788,7 @@ function TeamImpetus() {
                     setState={setForm0}
                     name="nda"
                     required
+                    error = {errors0.nda}
                   />
                 </>
               )}
@@ -787,14 +802,16 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.abstract}
+                error = {errors0.abstract}
               ></InputBox>
               <RadioButtons
                 label="  Can you show a demo of your project?"
                 options={demo_arr}
-                state={form2}
-                setState={setForm2}
-                name="isPICT"
+                state={form0}
+                setState={setForm0}
+                name="demo"
                 required
+                error = {errors0.demo}
               />
 
               {form0.demo === "0" && (
@@ -808,6 +825,7 @@ function TeamImpetus() {
                     required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.reason_of_demo}
+                    error = {errors0.reason_of_demo}
                   ></InputBox>
                 </div>
               )}
@@ -822,6 +840,7 @@ function TeamImpetus() {
                 classNames=" my-2"
                 loading={registerUserMutationForm1.isLoading}
                 disabled={formFields.length >= 5}
+                
               />
 
               {formFields.map((form, index) => {
@@ -833,6 +852,7 @@ function TeamImpetus() {
                       type="text"
                       placeholder="name "
                       required
+                      error = {errors1.name}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.name}
                     />
@@ -842,6 +862,7 @@ function TeamImpetus() {
                       type="text"
                       placeholder="email "
                       required
+                      error = {errors1.email}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.email}
                     />
@@ -852,7 +873,8 @@ function TeamImpetus() {
                           name="phone"
                           type="number"
                           placeholder="phone number"
-                          required
+                          required 
+                          error = {errors1.phone}
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.phone}
                         />
@@ -870,6 +892,7 @@ function TeamImpetus() {
                             value={formFields.gender}
                             onChange={(event) => handleFormChange(event, index)}
                             required
+                            error = {errors1.gender}
                             className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
                           >
                             {gender_type.map((option) => (
@@ -902,6 +925,7 @@ function TeamImpetus() {
                       onChange={(e) => handleImageChange(e, index)}
                       label="Upload Screenshot of ID"
                       required
+                      error = {errors1.member_id}
                     />
                     {formFields.length > 1 && (
                       <>
@@ -933,6 +957,7 @@ function TeamImpetus() {
                 setState={setForm2}
                 name="isPICT"
                 required
+                error = {errors2.isPICT}
               />
 
               {form2.isPICT === "0" && (
@@ -944,6 +969,7 @@ function TeamImpetus() {
                     setState={setForm2}
                     name="isInternational"
                     required
+                    error = {errors2.isInternational}
                   />
                   <div className=" mx-1 my-2">
                     <InputBox
@@ -954,6 +980,7 @@ function TeamImpetus() {
                       required
                       onChange={(e) => handleInputChange2(e)}
                       value={form2.college}
+                      error = {errors2.college}
                     />
                   </div>
                   <div className="mx-1 my-2">
@@ -963,6 +990,7 @@ function TeamImpetus() {
                       type="text"
                       placeholder="country"
                       required
+                      error = {errors2.country}
                       onChange={(e) => handleInputChange2(e)}
                       value={
                         form2.isInternational === "0" ? "India" : form2.country
@@ -979,6 +1007,7 @@ function TeamImpetus() {
                         required
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.state}
+                        error = {errors2.state}
                       />
                     </div>
                     <div className="ml-1 w-1/2">
@@ -990,6 +1019,7 @@ function TeamImpetus() {
                         required
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.district}
+                        error = {errors2.district}
                       />
                     </div>
                   </div>
@@ -1001,18 +1031,20 @@ function TeamImpetus() {
                         name={"city"}
                         placeholder="city"
                         required
+                        error = {errors2.city}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.city}
                       />
                     </div>
                     <div className="ml-1 w-1/2">
                       <Dropdown
-                        label="Localtiy"
+                        label="Locality"
                         options={local_arr}
                         name={"locality"}
                         state={form2}
                         setState={setForm2}
                         required
+                        error={errors2.locality}
                       />
                     </div>
                   </div>
@@ -1023,6 +1055,7 @@ function TeamImpetus() {
                     setState={setForm2}
                     name="mode"
                     required
+                    error = {errors2.mode}
                   />
                   {form2.mode === "0" && (
                     <div>
@@ -1032,6 +1065,7 @@ function TeamImpetus() {
                         name={"reason_of_mode"}
                         placeholder={"reason"}
                         required
+                        error = {errors2.reason_of_mode}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.reason_of_mode}
                       ></InputBox>
@@ -1044,6 +1078,7 @@ function TeamImpetus() {
                     placeholder="Referral ID given by Campus Ambassador"
                     required
                     onChange={(e) => handleInputChange2(e)}
+                    error = {errors2.referral}
                     value={form2.referral}
                   />
                 </>
@@ -1056,6 +1091,7 @@ function TeamImpetus() {
                 state={form2}
                 setState={setForm2}
                 required
+                error = {errors2.year}
               />
             </>
           )}

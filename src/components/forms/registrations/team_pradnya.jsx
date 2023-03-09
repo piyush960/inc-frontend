@@ -1,7 +1,13 @@
 import "../styles/event_registrations.css";
 import React from "react";
 import { useState } from "react";
-import { InputBox, Buttons, FileInputBox, toast } from "../../index.js";
+import {
+  InputBox,
+  Buttons,
+  FileInputBox,
+  toast,
+  NoteBox,
+} from "../../index.js";
 import {
   useRegisterStep1,
   useRegisterStep2,
@@ -11,6 +17,8 @@ import {
 import styled from "styled-components";
 import Dropdown from "../../dropdown";
 import RadioButtons from "../../radioButtons";
+import { useRef } from "react";
+import { paymentLinks } from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -120,14 +128,16 @@ const initialErrorsForm1 = {
   member_id: "",
 };
 const initialErrorsForm2 = {
-  isPICT: "",
-  isInternational: "",
   college: "",
+  year: "",
   country: "",
   state: "",
   district: "",
+  city: "",
   locality: "",
-  year: "",
+  mode: "",
+  reason_of_mode: "",
+  referral: "",
 };
 
 const pict_arr = [
@@ -155,12 +165,23 @@ const country_arr = [
 ];
 
 const gender_type = [
-    { value: "SEL", label: "Select", disabled: true },
-    { value: "Male", label: "Male" },
-    { value: "Female", label: "Female" },
-    { value: "Other", label: "Other" },
+  { value: "SEL", label: "Select", disabled: true },
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
+  { value: "Other", label: "Other" },
 ];
 
+const mode_arr = [
+  {
+    value: "1",
+    label: "Offline",
+    // onChange: function (e) { }
+  },
+  {
+    value: "0",
+    label: "Online",
+  },
+];
 // const state_arr = [
 //     { value: 'SEL', label: 'Select' },
 //     { value: 'AP', label: "Arunachal Pradesh" },
@@ -193,16 +214,22 @@ const gender_type = [
 
 // ]
 
+const initialErrorsForm3 = {
+  payment_id: "",
+};
+
 const local_arr = [
-  { value: "SEL", label: "Select" },
-  { value: "UR", label: "Urban" },
-  { value: "RU", label: "Rural" },
+  { value: "SEL", label: "Select", disabled: true },
+  { value: "1", label: "Urban" },
+  { value: "0", label: "Rural" },
 ];
+
 const year_arr = [
   { value: "SEL", label: "Select" },
-  { value: "F", label: "1st year" },
-  { value: "S", label: "2nd year" },
-  { value: "T", label: "3rd year" },
+  { value: "FE", label: "1st year" },
+  { value: "SE", label: "2nd year" },
+  { value: "TE", label: "3rd year" },
+  { value: "BE", label: "4th year" },
 ];
 
 function TeamPradnya() {
@@ -222,7 +249,7 @@ function TeamPradnya() {
   ]);
   const [errors1, setErrors1] = useState(initialErrorsForm1);
   const registerUserMutationForm1 = useRegisterStep2(setErrors1, "pradnya");
-  
+
   const handleFormChange = (event, index) => {
     const { name, value } = event.target;
     setForm1((prevState) => {
@@ -233,7 +260,7 @@ function TeamPradnya() {
       return data;
     });
   };
-  
+
   const addfields = () => {
     if (form1.length < 3) {
       for (const property in form1.at(-1)) {
@@ -251,7 +278,8 @@ function TeamPradnya() {
       registerUserMutationForm1.mutate(memberFormData, {
         onSuccess: () => {
           setErrors1(initialErrorsForm1);
-          toast.success("Completed Step 2️⃣ !", { icon: "✅" });
+
+          toast.success("Added member to the team !", { icon: "✅" });
           let object = {
             name: "",
             email: "",
@@ -260,6 +288,7 @@ function TeamPradnya() {
             member_id: "",
           };
           setForm1([...form1, object]);
+          setMemberCount((memberCount) => memberCount + 1);
         },
       });
       return;
@@ -277,19 +306,22 @@ function TeamPradnya() {
 
   const [form2, setForm2] = useState({
     isPICT: "",
-    isInternational: "0",
+    isInternational: "",
     college: "",
     country: "",
     state: "",
     district: "",
-    city: "",
     locality: "1",
-    leader: "",
+    mode: "1",
+    reason_of_mode: "",
+    referral: "",
     year: "",
   });
+
   const [errors2, setErrors2] = useState(initialErrorsForm2);
   const registerUserMutationForm2 = useRegisterStep3(setErrors2, "pradnya");
-
+  const [paymentStatus, setPaymentStatus] = useState(true);
+  const paymentRef = useRef("");
   const handleImageChange = (event, index) => {
     let data = [...form1];
     data[index][event.target.name] = event.target.files[0];
@@ -297,6 +329,7 @@ function TeamPradnya() {
     setForm1(data);
   };
   const handleInputChange2 = (e) => {
+    console.log(form2);
     const { name, value } = e.target;
     if (name === "isPICT" && value === "1") {
       setForm2((form2) => ({
@@ -304,13 +337,16 @@ function TeamPradnya() {
         isPICT: "1",
         college: "Pune Institute Of Computer Technology",
         country: "India",
+        city: "Pune",
         state: "Maharashtra",
         district: "Pune",
-        leader: "abc@gmail.com",
-        city: "Pune",
         locality: "1",
+        mode: "1",
+        reason_of_mode: "",
         isInternational: "0",
+        year: "",
       }));
+      setPaymentStatus(true);
     } else if (name === "isPICT" && value === "0") {
       setForm2((form2) => ({
         ...form2,
@@ -318,23 +354,56 @@ function TeamPradnya() {
         college: "",
         country: "",
         state: "",
-        district: "",
         city: "",
+        district: "",
         locality: "",
-        leader: "",
         isInternational: "",
+        year: "",
       }));
+    } else if (name === "isInternational" && value === "0") {
+      setForm2((form2) => ({
+        ...form2,
+        country: "India",
+        isPICT: "0",
+        [name]: value,
+      }));
+      setPaymentStatus(false);
+    } else if (name === "isInternational" && value === "1") {
+      setForm2((form2) => ({
+        ...form2,
+        country: "",
+        isPICT: "0",
+        [name]: value,
+      }));
+      setPaymentStatus(true);
     } else {
       setForm2((prevState) => {
         errors2[name] !== "" &&
           setErrors2((prevState) => ({ ...prevState, [name]: "" }));
         return { ...prevState, [name]: value };
       });
+      setPaymentStatus(false);
     }
+    console.log(form2);
   };
 
+  const country_arr = [
+    {
+      value: "1",
+      label: "Yes",
+      onChange: handleInputChange2,
+    },
+    {
+      value: "0",
+      label: "No",
+      onChange: handleInputChange2,
+    },
+  ];
+
+  const [errors3, setErrors3] = useState(initialErrorsForm3);
+  const registerUserMutationForm3 = useRegisterStep4(setErrors3, "impetus");
   //steps for whole form
-  const [formStep, setFormStep] = React.useState(1);
+  const [formStep, setFormStep] = React.useState(2);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -349,41 +418,58 @@ function TeamPradnya() {
       return { ...prevState, [name]: value };
     });
   };
+  const [memberCount, setMemberCount] = useState(0);
   const nextForm = (e) => {
     e.preventDefault();
     if (formStep === 1) {
-      if (form1.length == 1) {
+      if (memberCount === 0) {
         toast.warn("Atleast one member needed!");
         return;
       }
 
-      registerUserMutationForm1.mutate(form1, {
-        onSuccess: () => {
-          setErrors1(initialErrorsForm1);
-          toast.success("Completed Step 1️⃣ !", { icon: "✅" });
-          setFormStep((currentStep) => currentStep + 1);
-          setActiveStep((activeStep) => activeStep + 1);
-          return;
-        },
-      });
+      //   registerUserMutationForm1.mutate(form1, {
+      //     onSuccess: () => {
+      //       setErrors1(initialErrorsForm1);
+      //       toast.success("Completed Step 1️⃣ !", { icon: "✅" });
+      //       setFormStep((currentStep) => currentStep + 1);
+      //       setActiveStep((activeStep) => activeStep + 1);
+      //       return;
+      //     },
+      //   });
+      setFormStep((currentStep) => currentStep + 1);
+      setActiveStep((activeStep) => activeStep + 1);
     }
     if (formStep === 2) {
       console.log(form2);
       for (const property in form2) {
-        if (form2[property] == "") {
-          if (property == "referral") continue;
+        if (form2[property] === "") {
+          if (property === "reason_of_mode" && form2["mode"] === "1") continue;
+          if (property === "referral") continue;
           toast.warn("Please enter all fields!");
           return;
         }
       }
       registerUserMutationForm2.mutate(form2, {
-        onSuccess: (res) => {
+        onSuccess: () => {
           setErrors2(initialErrorsForm2);
-          toast.success("Successfully Registered", { icon: "💐" });
-          setTimeout(() => {
-            console.log("nextForm");
-            // onSuccessNavigator('/')
-          }, 2000);
+          if (form2.isPICT === "1" || form2.isInternational === "1") {
+            const temp =
+              form2.isPICT === "1" ? { isPICT: "1" } : { isInternational: "1" };
+            registerUserMutationForm3.mutate(temp, {
+              onSuccess: () => {
+                toast.success("Completed Registration !", { icon: "✅" });
+                setPaymentStatus(true);
+                setFormStep((currentStep) => currentStep + 1);
+                setActiveStep((activeStep) => activeStep + 1);
+              },
+            });
+          } else {
+            toast.success("Completed Step 3️⃣ !", { icon: "✅" });
+            const win = window.open(paymentLinks.get("test"), "_blank");
+            setFormStep((currentStep) => currentStep + 1);
+            setActiveStep((activeStep) => activeStep + 1);
+            win.focus();
+          }
         },
       });
     }
@@ -416,7 +502,7 @@ function TeamPradnya() {
           {/* form 1 */}
           {formStep === 1 && (
             <>
-              {form1.length < 2 && (
+              {memberCount < 2 && (
                 <>
                   <Buttons
                     value="add members"
@@ -434,6 +520,7 @@ function TeamPradnya() {
                       type="text"
                       placeholder="name "
                       required
+                      error={errors1.name}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.name}
                     />
@@ -443,6 +530,7 @@ function TeamPradnya() {
                       type="text"
                       placeholder="email "
                       required
+                      error={errors1.email}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.email}
                     />
@@ -454,6 +542,7 @@ function TeamPradnya() {
                           type="number"
                           placeholder="phone number"
                           required
+                          error={errors1.phone}
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.phone}
                         />
@@ -471,6 +560,7 @@ function TeamPradnya() {
                             value={form.gender}
                             onChange={(event) => handleFormChange(event, index)}
                             required
+                            error={errors1.gender}
                             className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
                           >
                             {gender_type.map((option) => (
@@ -495,6 +585,7 @@ function TeamPradnya() {
                       onChange={(e) => handleImageChange(e, index)}
                       label="Upload Screenshot of ID"
                       required
+                      error={errors1.member_id}
                     />
 
                     {form1.length > 1 && (
@@ -504,6 +595,7 @@ function TeamPradnya() {
                           onClick={() => removefields(index)}
                           classNames=" my-2"
                           disabled={true}
+                          loading={registerUserMutationForm1.isLoading}
                         />
                       </>
                     )}
@@ -514,15 +606,21 @@ function TeamPradnya() {
           )}
 
           {/* form 2 */}
-          {formStep === 2 && (
+          {formStep === 2 && 
+          (
             <>
+              <NoteBox
+                title="Note"
+                text="Please complete the payment within 60 minutes before your session expires."
+              />
               <RadioButtons
                 label=" Are you PICTian or not?"
-                options={pict_arr}
+                options={country_arr}
                 state={form2}
                 setState={setForm2}
                 name="isPICT"
                 required
+                error={errors2.isPICT}
               />
               {form2.isPICT === "0" && (
                 <>
@@ -533,6 +631,7 @@ function TeamPradnya() {
                     setState={setForm2}
                     name="isInternational"
                     required
+                    error={errors2.isInternational}
                   />
                   <div className=" mx-1 my-2">
                     <InputBox
@@ -543,16 +642,23 @@ function TeamPradnya() {
                       required
                       onChange={(e) => handleInputChange2(e)}
                       value={form2.college}
+                      error={errors2.college}
                     />
                   </div>
                   <div className="mx-1 my-2">
                     <InputBox
+                      className={
+                        form2.isInternational === "0"
+                          ? "pointer-events-none"
+                          : ""
+                      }
                       label="Country"
                       name={"country"}
                       type="text"
                       placeholder="country"
-                      disabled={form2.isInternational === "0"}
+                      readonly={form2.isInternational === "0"}
                       required
+                      error={errors2.country}
                       onChange={(e) => handleInputChange2(e)}
                       value={
                         form2.isInternational === "0" ? "India" : form2.country
@@ -567,6 +673,7 @@ function TeamPradnya() {
                         name={"state"}
                         placeholder="state"
                         required
+                        error={errors2.state}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.state}
                       />
@@ -578,40 +685,84 @@ function TeamPradnya() {
                         type="text"
                         placeholder="district"
                         required
+                        error={errors2.district}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.district}
                       />
                     </div>
                   </div>
-                  <Dropdown
-                    label="Localtiy"
-                    options={local_arr}
-                    name={"locality"}
+                  <div className="flex mx-1 ">
+                    <div className="mr-1 w-1/2">
+                      <InputBox
+                        label="City"
+                        type="text"
+                        name={"city"}
+                        placeholder="city"
+                        required
+                        error={errors2.city}
+                        onChange={(e) => handleInputChange2(e)}
+                        value={form2.city}
+                      />
+                    </div>
+                    <div className="ml-1 w-1/2">
+                      <Dropdown
+                        label="Localtiy"
+                        options={local_arr}
+                        name={"locality"}
+                        state={form2}
+                        setState={setForm2}
+                        required
+                        error={errors2.locality}
+                      />
+                    </div>
+                  </div>
+
+                  <RadioButtons
+                    label="  Preferred mode of presentation"
+                    options={mode_arr}
                     state={form2}
                     setState={setForm2}
+                    name="mode"
                     required
+                    error={errors2.mode}
                   />
 
+                  {form2.mode === "0" && (
+                    <div>
+                      <InputBox
+                        type="textarea"
+                        label={"Reason for Online"}
+                        name={"reason_of_mode"}
+                        placeholder={"reason"}
+                        required
+                        error={errors2.reason_of_mode}
+                        onChange={(e) => handleInputChange2(e)}
+                        value={form2.reason_of_mode}
+                      ></InputBox>
+                    </div>
+                  )}
                   <InputBox
                     type="text"
                     label="Referral"
                     name="referral"
                     placeholder="Referral ID given by Campus Ambassador"
-                    required
                     onChange={(e) => handleInputChange2(e)}
                     value={form2.referral}
+                    error={errors2.referral}
                   />
                 </>
               )}
-              <Dropdown
+                <Dropdown
                 label=" Which year are you in?"
                 options={year_arr}
                 name={"year"}
                 state={form2}
                 setState={setForm2}
                 required
+                error = {errors2.year}
               />
             </>
+          
           )}
           <div className="flex justify-between">
             {formStep > 1 && formStep < 3 ? (

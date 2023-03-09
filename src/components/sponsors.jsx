@@ -18,7 +18,7 @@ const titleSponsors = [
   {
     name: "eQ Technologic",
     logo: 'https://drive.google.com/uc?export=view&id=1aIkXVwq1fn669OsmkKzJQ1s4je9n-Hps',
-    website: "https://www.ciondigital.com/",
+    website: "https://www.1eq.com/",
   },
 ];
 
@@ -26,7 +26,7 @@ const coSponsors = [
   {
     name: "Bajaj Finserve",
     logo: 'https://drive.google.com/uc?export=view&id=1aeQVY01k-PjY8Rueva06KMtd4-bHLNEs',
-    website: "https://pubmatic.com/",
+    website: "https://www.bajajfinserv.in/",
   },
 ];
 
@@ -34,25 +34,25 @@ const educationSponsors = [
   {
     name: "Imocha",
     logo: 'https://drive.google.com/uc?export=view&id=1a19W1JWRjSMKRwmQut76fbTk-S0CI3hg',
-    website: "https://www.algoanalytics.com/",
+    website: "https://www.imocha.io/",
   },
   {
     name: "Sarvatra",
     logo: 'https://drive.google.com/uc?export=view&id=1_z5nKoWl7ka3WFbv3N6Dadt79PlLQXjC',
-    website: "https://www.algoanalytics.com/",
+    website: "https://sarvatra.tech/",
   },
   {
     name: "Airvana",
     logo: 'https://drive.google.com/uc?export=view&id=1add614SJWsdD_MM2JPLs0HvtbxyDV0fO',
-    website: "https://www.algoanalytics.com/",
+    website: "https://airavana.ai/",
   },
 ];
 
 const eventSponsors = [
   {
-    name: "Agcocorp",
+    name: "Agrocorp",
     logo: 'https://drive.google.com/uc?export=view&id=1wrcCCJ5erGljke-TKHZvPOyq84owOPDR',
-    website: "https://www.ciondigital.com/",
+    website: "https://agrocorp.com.sg/",
   },
 ];
 
@@ -60,25 +60,25 @@ const eventSponsors2 = [
   {
     name: "Veritas",
     logo: 'https://drive.google.com/uc?export=view&id=1KmAmtM6bhre8GCgOFMk4AXNtT2BowRbw',
-    website: "https://www.ciondigital.com/",
+    website: "https://www.veritas.com/",
   },
 ];
 
 const Other = [
   {
-    name: "Foodhealth",
+    name: "Foldhealth",
     logo: 'https://drive.google.com/uc?export=view&id=17JKWKnysEwogKmsfAtLKGbj-QzHSpcAO',
-    website: "https://www.ciondigital.com/",
+    website: "https://www.fold.health/",
   },
   {
     name: "Zbyte",
     logo: 'https://drive.google.com/uc?export=view&id=1d9g1gGyF7fNUFaNCJqj77ADdZk77uCKQ',
-    website: "https://www.ciondigital.com/",
+    website: "https://zbyte.io/",
   },
   {
     name: "Algorithm Analytics",
     logo: 'https://drive.google.com/uc?export=view&id=1sQVfyycKbZt53KjD9ELH75Kc3kCThPxM',
-    website: "https://www.ciondigital.com/",
+    website: "https://www.algoanalytics.com/",
   },
 ];
 
@@ -86,17 +86,17 @@ const Assosiation = [
   {
     name: "IEEE",
     logo: 'https://drive.google.com/uc?export=view&id=1efqYW5q3PWhXVXPaYv0s_zWzW2dj_EEx',
-    website: "https://www.ciondigital.com/",
+    website: "https://pictieee.in/",
   },
   {
     name: "ACM",
     logo: 'https://drive.google.com/uc?export=view&id=1lYLoIpQ2YYcsBi0iwbrYEtuLoyvRz-ca',
-    website: "https://www.ciondigital.com/",
+    website: "https://pict.acm.org/",
   },
   {
     name: "CSI",
     logo: 'https://drive.google.com/uc?export=view&id=1tGkGZC1zwSGdvW_h7meX6LIGgbCimn6G',
-    website: "https://www.ciondigital.com/",
+    website: "https://www.pictcsi.com/",
   },
 ];
 
