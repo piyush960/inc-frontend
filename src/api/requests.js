@@ -13,7 +13,7 @@ const registerEventStep3 = (eventName) => async (data) => await backend.post(`/e
 const registerEventStep4 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_4`, data);
 const verifyPayment = (eventName) => async (data) => await backend.post(`/events/verify/payment/${eventName}`, data);
 const getPendingPayments = (eventName) => async () => await backend.get(`/events/verify/payment/${eventName}`);
-
+const verifyAdmin =  (eventName) => async () => await backend.get(`/admin/verify`);
 export {
     registerJudge,
     registerEventStep1,
