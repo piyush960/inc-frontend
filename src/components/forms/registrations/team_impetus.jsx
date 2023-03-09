@@ -663,6 +663,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.title}
+                error = {errors0.title}
               ></InputBox>
               <Dropdown
                 label="Domain of the project"
@@ -671,6 +672,7 @@ function TeamImpetus() {
                 state={form0}
                 setState={setForm0}
                 required
+                error = {errors0.domain}
               />
               <Dropdown
                 label=" Project Type"
@@ -679,6 +681,7 @@ function TeamImpetus() {
                 state={form0}
                 setState={setForm0}
                 required
+                error = {errors0.project_type}
               />
               <InputBox
                 type="text"
@@ -689,6 +692,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_name}
+                error = {errors0.guide_name}
               ></InputBox>
               <InputBox
                 type="email"
@@ -699,6 +703,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_email}
+                error = {errors0.guide_email}
               ></InputBox>
               <InputBox
                 type="text"
@@ -709,6 +714,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_phone}
+                error = {errors0.guide_phone}
               ></InputBox>
               <InputBox
                 type="text"
@@ -719,6 +725,7 @@ function TeamImpetus() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.hod_email}
+                error = {errors0.hod_email}
               ></InputBox>
               <RadioButtons
                 label="Is the project sponsored or not?"
