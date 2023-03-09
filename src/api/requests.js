@@ -6,6 +6,7 @@ const backend = axios.create({
     baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000',
 })
 
+const loginAdmin = async (data) => await backend.post('/admin/login', data);
 const registerJudge = (eventName) => async (data) => await backend.post(`/${eventName}/register`, data);
 const registerEventStep1 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_1`, data);
 const registerEventStep2 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_2`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
@@ -15,6 +16,7 @@ const verifyPayment = (eventName) => async (data) => await backend.post(`/events
 const getPendingPayments = (eventName) => async () => await backend.get(`/events/verify/payment/${eventName}`);
 
 export {
+    loginAdmin,
     registerJudge,
     registerEventStep1,
     registerEventStep2,

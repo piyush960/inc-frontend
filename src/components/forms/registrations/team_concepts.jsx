@@ -434,7 +434,7 @@ function TeamConcepts() {
 
   const handleInputChange2 = (e) => {
     const { name, value } = e.target;
-    
+
     if (name === "isPICT" && value === "1") {
       console.log("is pict");
       setForm2((form2) => ({
@@ -503,7 +503,7 @@ function TeamConcepts() {
       onChange : handleInputChange2
     },
   ];
-  
+
 
   const handleSelectChange2 = (e) => {
     const { name, value } = e.target;
@@ -520,8 +520,8 @@ function TeamConcepts() {
   const [errors3, setErrors3] = useState(initialErrorsForm3);
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "concepts");
 
-  //steps for whole form
-  const [formStep, setFormStep] = useState(0);
+    //steps for whole form
+    const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -533,7 +533,7 @@ function TeamConcepts() {
 
   const nextForm = (e) => {
     e.preventDefault();
-   
+
     if (formStep === 0) {
       console.log("form0", form0);
       for (const property in form0) {
@@ -615,7 +615,7 @@ function TeamConcepts() {
         }
       );
     }
-    
+
   };
 
   //dropdown

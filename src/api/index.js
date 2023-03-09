@@ -1,4 +1,5 @@
 export {
+    loginAdmin,
     registerJudge,
     registerEventStep1,
     registerEventStep2,
