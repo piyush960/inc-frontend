@@ -6,10 +6,10 @@ function Judges() {
     return (
         <div>
            
-             <FormsBanner logo={conlogo} eventName="CONCEPTS_JUDGES_REGISTRATION" eventDescription="24th and 25th March"/>
+             <FormsBanner logo={conlogo} eventName="CONCEPTS JUDGES REGISTRATION" eventDescription="24th and 25th March"/>
            
             <JudgesConcepts/>
         </div>
     );
 }
-export default Judges;
+export default Judges; 

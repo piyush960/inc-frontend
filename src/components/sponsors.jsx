@@ -72,8 +72,8 @@ const Other = [
   },
   {
     name: "Zbyte",
-    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914536/Logo_2x_uj9nr3.png',
-    website: "https://zbyte.io/",
+    logo: 'https://drive.google.com/uc?export=view&id=1d9g1gGyF7fNUFaNCJqj77ADdZk77uCKQ',
+    website: "https://www.ciondigital.com/",
   },
   {
     name: "Algorithm Analytics",
@@ -105,12 +105,16 @@ const getList1 = (sponsorsArray) => {
     return (
       <a href={sponsor.website}>
       <div className="sponsor-card">
-        <div
-          className="logo-container"
-          style={{ backgroundImage: `url(${sponsor.logo})` }}
-        >
-          {/* <img src={sponsor.logo}/> */}
-        </div>
+
+        {sponsor.website && (
+          <a href={sponsor.website} target="_blank" rel="noopener noreferrer">
+            <div
+              className="logo-container hover:border-faint_blue hover:bottom-2 group shadow-lg max-w-sm rounded-3xl hover:bg-transparent hover:text-gold   hover:scale-105 cursor-pointer  hover:shadow-light_blue hover:shadow-xl"
+              style={{ backgroundImage: `url(${sponsor.logo})` }}
+            ></div>
+          </a>
+        )}
+
         <p className="sponsor-name">{sponsor.name}</p>
         {/* <div className="sponsor-social">
           {sponsor.website && (

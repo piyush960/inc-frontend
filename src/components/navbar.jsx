@@ -19,7 +19,7 @@ function Navbar() {
 
   const handleSelect = (e) => {
     if (e.target.value === "Register") return;
-    navigate(`/register/${e.target.value.toLowerCase()}`);
+    navigate(`/register/events/${e.target.value.toLowerCase()}`);
   };
 
   return (
@@ -40,7 +40,7 @@ function Navbar() {
             </div>
             <div className="hidden lg:flex items-center justify-content space-x-3">
               <a
-                href="#home"
+                href="/#home"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
                   selected === "#home"
                     ? "border-light_blue/80 text-gold"
@@ -50,7 +50,7 @@ function Navbar() {
                 Home
               </a>
               <a
-                href="#about"
+                href="/#about"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
                   selected === "#about"
                     ? "border-light_blue/80 text-gold"
@@ -60,7 +60,7 @@ function Navbar() {
                 About
               </a>
               <a
-                href="#schedule"
+                href="/#schedule"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
                   selected === "#schedule"
                     ? "border-light_blue/80 text-gold"
@@ -70,7 +70,7 @@ function Navbar() {
                 Schedule
               </a>
               <a
-                href="#events"
+                href="/#events"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
                   selected === "#events"
                     ? "border-light_blue/80 text-gold"
@@ -80,7 +80,7 @@ function Navbar() {
                 Events
               </a>
               <a
-                href="#team"
+                href="/#team"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
                   selected === "#team"
                     ? "border-light_blue/80 text-gold"
@@ -90,7 +90,7 @@ function Navbar() {
                 Team
               </a>
               <a
-                href="#contact"
+                href="/#contact"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
                   selected === "#contact"
                     ? "border-light_blue/80 text-gold"
@@ -108,6 +108,7 @@ function Navbar() {
                 <option>Impetus</option>
                 <option>Concepts</option>
                 <option>Pradnya</option>
+                <option>Judges</option>
               </select>
             </div>
 
@@ -136,7 +137,7 @@ function Navbar() {
             ref={mobileMenuRef}
           >
             <a
-              href="#home"
+              href="/#home"
               className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${
                 selected === "#home"
                   ? "border-sky-800/80 text-gold"
@@ -201,9 +202,10 @@ function Navbar() {
               onClick={handleSelect}
             >
               <option disabled>Register</option>
-              <option>Impetus</option>
+              <option >Impetus</option>
               <option>Concepts</option>
               <option>Pradnya</option>
+              <option>Judges</option>
             </select>
           </div>
         </div>

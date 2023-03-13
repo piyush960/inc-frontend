@@ -1,26 +1,23 @@
 import "../styles/event_registrations.css";
-import { useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useRef } from "react";
+import { useState } from "react";
 import {
   InputBox,
   Buttons,
-  Dropdown,
   FileInputBox,
-  RadioButtons,
   toast,
   NoteBox,
 } from "../../index.js";
+import styled from "styled-components";
+import { domains, paymentLinks } from "../../../static/data";
+import Dropdown from "../../dropdown";
+import RadioButtons from "../../radioButtons";
 import {
   useRegisterStep1,
   useRegisterStep2,
   useRegisterStep3,
   useRegisterStep4,
 } from "../../../hooks/events.hooks";
-import {
-  paymentLinks,
-  projectDomains,
-  projectTypes,
-} from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -151,7 +148,6 @@ const steps = [
   },
 ];
 const totalSteps = steps.length;
-
 const initialErrorsForm0 = {
   title: "",
   domain: "",
@@ -160,10 +156,12 @@ const initialErrorsForm0 = {
   guide_email: "",
   guide_phone: "",
   hod_email: "",
+  sponsored: "",
   company: "",
   abstract: "",
   nda: "",
-  sponsored: "",
+  demo: "",
+  reason_of_demo: "",
 };
 const initialErrorsForm1 = {
   name: "",
@@ -174,20 +172,16 @@ const initialErrorsForm1 = {
 };
 const initialErrorsForm2 = {
   isPICT: "",
-  isInternational: "",
+  isInternational: "0",
   college: "",
   country: "",
   state: "",
   district: "",
-  locality: "",
-  mode: "",
+  locality: "1",
+  mode: "1",
   reason_of_mode: "",
   referral: "",
   year : "",
-};
-
-const initialErrorsForm3 = {
-  payment_id: "",
 };
 
 const sponsor_arr = [
@@ -213,6 +207,9 @@ const nda_arr = [
     label: "No",
   },
 ];
+const initialErrorsForm3 = {
+  payment_id: "",
+};
 
 const pict_arr = [
   {
@@ -248,6 +245,20 @@ const country_arr = [
     label: "No",
   },
 ];
+const proj_domain = [
+  { value: "SEL", label: "Select" },
+  { value: "AD", label: "Application Development" },
+  { value: "CN", label: "Communication Networks and Security Systems" },
+  { value: "DSP", label: "Digital / Image/ Speech / Video Processing" },
+  { value: "ES", label: "Embedded/VLSI Systems" },
+  { value: "ML", label: "Machine Learning and Pattern Recognition" },
+  { value: "OT", label: "Others" },
+];
+
+export const projectTypes = [
+  { value: 'Open Hardware/Firmware', label: 'Open Hardware/Firmware' },
+  { value: 'Open Software', label: 'Open Software' }
+]
 
 const gender_type = [
   { value: "SEL", label: "Select", disabled: true },
@@ -256,8 +267,9 @@ const gender_type = [
   { value: "Other", label: "Other" },
 ];
 
+
 // const state_arr = [
-//     { value: 'SEL', label: 'Select', disabled: true },
+//     { value: 'SEL', label: 'Select' },
 //     { value: 'AP', label: "Arunachal Pradesh" },
 //     { value: 'AS', label: "Assam" },
 //     { value: 'BI', label: "Bihar" },
@@ -294,9 +306,28 @@ const local_arr = [
   { value: "0", label: "Rural" },
 ];
 
-function TeamConcepts() {
+
+const year_arr = [
+  { value: "SEL", label: "Select" },
+  { value: "FE", label: "1st year" },
+  { value: "SE", label: "2nd year" },
+  { value: "TE", label: "3rd year" },
+];
+
+const demo_arr = [
+  {
+    value: "1",
+    label: "Yes",
+    // onChange: function (e) { }
+  },
+  {
+    value: "0",
+    label: "No",
+  },
+];
+function TeamImpetus() {
   //form0
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = React.useState(1);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
   const [form0, setForm0] = useState({
     title: "",
@@ -306,13 +337,16 @@ function TeamConcepts() {
     guide_email: "",
     guide_phone: "",
     hod_email: "",
+    sponsored: "0",
     company: "",
     abstract: "",
     nda: "0",
-    sponsored: "0",
+    demo: "1",
+    reason_of_demo: "",
   });
   const [errors0, setErrors0] = useState(initialErrorsForm0);
-  const registerUserMutationForm0 = useRegisterStep1(setErrors0, "concepts");
+  const registerUserMutationForm0 = useRegisterStep1(setErrors0, "impetus");
+
   const handleInputChange0 = (e) => {
     const { name, value } = e.target;
     setForm0((prevState) => {
@@ -321,7 +355,6 @@ function TeamConcepts() {
       return { ...prevState, [name]: value };
     });
   };
-
   const handleSelectChange0 = (e) => {
     const { name, value } = e.target;
     setForm0((prevState) => {
@@ -349,8 +382,9 @@ function TeamConcepts() {
     data[index][event.target.name] = event.target.files[0];
     setFormFields(data);
   };
+
   const [errors1, setErrors1] = useState(initialErrorsForm1);
-  const registerUserMutationForm1 = useRegisterStep2(setErrors1, "concepts");
+  const registerUserMutationForm1 = useRegisterStep2(setErrors1, "impetus");
 
   const handleFormChange = (event, index) => {
     const { name, value } = event.target;
@@ -386,7 +420,7 @@ function TeamConcepts() {
       registerUserMutationForm1.mutate(memberFormData, {
         onSuccess: () => {
           setErrors1(initialErrorsForm1);
-          toast.success("Added member to the team !", { icon: "✅" });
+          toast.success("Completed Step 2️⃣ !", { icon: "✅" });
           let object = {
             name: "",
             email: "",
@@ -422,21 +456,18 @@ function TeamConcepts() {
     country: "",
     state: "",
     district: "",
-    city: "",
     locality: "1",
     mode: "1",
     reason_of_mode: "",
     referral: "",
-    
+    year : "",
   });
   const [errors2, setErrors2] = useState(initialErrorsForm2);
-  const registerUserMutationForm2 = useRegisterStep3(setErrors2, "concepts");
+  const registerUserMutationForm2 = useRegisterStep3(setErrors2, "impetus");
 
   const handleInputChange2 = (e) => {
     const { name, value } = e.target;
-
     if (name === "isPICT" && value === "1") {
-      console.log("is pict");
       setForm2((form2) => ({
         ...form2,
         isPICT: "1",
@@ -449,6 +480,7 @@ function TeamConcepts() {
         mode: "1",
         reason_of_mode: "",
         isInternational: "0",
+        year : "",
       }));
       setPaymentStatus(true);
     } else if (name === "isPICT" && value === "0") {
@@ -462,6 +494,7 @@ function TeamConcepts() {
         district: "",
         locality: "",
         isInternational: "",
+        year: "",
       }));
     } else if (name === "isInternational" && value === "0") {
       setForm2((form2) => ({
@@ -487,10 +520,10 @@ function TeamConcepts() {
       });
       setPaymentStatus(false);
     }
-    console.log(form2)
+    console.log(form2);
   };
 
-
+  
   const country_arr = [
     {
       value: "1",
@@ -518,10 +551,10 @@ function TeamConcepts() {
   const [paymentStatus, setPaymentStatus] = useState(true);
   const paymentRef = useRef("");
   const [errors3, setErrors3] = useState(initialErrorsForm3);
-  const registerUserMutationForm3 = useRegisterStep4(setErrors3, "concepts");
+  const registerUserMutationForm3 = useRegisterStep4(setErrors3, "impetus");
 
-    //steps for whole form
-    const [formStep, setFormStep] = useState(0);
+  //steps for whole form
+  const [formStep, setFormStep] = useState(2);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -533,12 +566,12 @@ function TeamConcepts() {
 
   const nextForm = (e) => {
     e.preventDefault();
-
     if (formStep === 0) {
       console.log("form0", form0);
       for (const property in form0) {
         if (form0[property] === "") {
           if (property === "company" && form0["sponsored"] === "0") continue;
+          if (property === "reason_of_demo" && form0["demo"] === "1") continue;
           if (property === "nda" && form0["sponsored"] === "0") continue;
           else {
             toast.warn("Please enter all fields!");
@@ -561,16 +594,15 @@ function TeamConcepts() {
         toast.warn("At least two member needed!");
         return;
       }
-
       setFormStep((currentStep) => currentStep + 1);
       setActiveStep((activeStep) => activeStep + 1);
     }
+
     if (formStep === 2) {
-      console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
-          else if (property === "referral") continue;
+          if (property === "referral") continue;
           toast.warn("Please enter all fields!");
           return;
         }
@@ -616,6 +648,11 @@ function TeamConcepts() {
       );
     }
 
+    // console.log(formFields);
+    // console.log(form0);
+    console.log(form2);
+    // setFormStep((currentStep) => currentStep + 1);
+    // setActiveStep(activeStep + 1);
   };
 
   //dropdown
@@ -645,34 +682,27 @@ function TeamConcepts() {
           {/* form 0 */}
           {formStep === 0 && (
             <>
-              <NoteBox
-                title="Note"
-                text="Please complete the payment within 60 minutes before your session expires."
-              />
               <InputBox
                 type="text"
                 label={"Project Title"}
                 name={"title"}
                 placeholder={"Project title"}
+                classNames=""
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.title}
-                minlenght="10"
                 error = {errors0.title}
               ></InputBox>
               <Dropdown
                 label="Domain of the project"
-                options={[
-                  ...projectDomains,
-                  { value: "SEL", label: "Select", disabled: true },
-                ]}
+                options={proj_domain}
                 name={"domain"}
                 state={form0}
                 setState={setForm0}
                 required
                 error = {errors0.domain}
               />
-              <Dropdown
+               <Dropdown
                 label=" Project Type"
                 options={[
                   ...projectTypes,
@@ -689,6 +719,7 @@ function TeamConcepts() {
                 label={"Guide_Name"}
                 name={"guide_name"}
                 placeholder={"Name"}
+                classNames=""
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_name}
@@ -699,26 +730,29 @@ function TeamConcepts() {
                 label={"Guide_Email"}
                 name={"guide_email"}
                 placeholder={"Email"}
+                classNames=""
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_email}
                 error = {errors0.guide_email}
               ></InputBox>
               <InputBox
-                type="tel"
+                type="text"
                 label={"Guide_Phone"}
                 name={"guide_phone"}
                 placeholder={"Phone"}
+                classNames=""
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_phone}
                 error = {errors0.guide_phone}
               ></InputBox>
               <InputBox
-                type="email"
+                type="text"
                 label={"Hod_email"}
                 name={"hod_email"}
                 placeholder={"Hod email"}
+                classNames=""
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.hod_email}
@@ -732,6 +766,7 @@ function TeamConcepts() {
                 name="sponsored"
                 required
                 error = {errors0.sponsored}
+                
               />
               {form0.sponsored === "1" && (
                 <>
@@ -740,6 +775,7 @@ function TeamConcepts() {
                     label={"If yes, then name of company?"}
                     placeholder={"Company name"}
                     name={"company"}
+                    classNames=""
                     required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.company}
@@ -762,27 +798,49 @@ function TeamConcepts() {
                 label={"Abstract"}
                 name={"abstract"}
                 placeholder={"In 300 words or less"}
+                classNames=""
                 required
-                error = {errors0.abstract}
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.abstract}
-                minlenght="50"
+                error = {errors0.abstract}
               ></InputBox>
+              <RadioButtons
+                label="  Can you show a demo of your project?"
+                options={demo_arr}
+                state={form0}
+                setState={setForm0}
+                name="demo"
+                required
+                error = {errors0.demo}
+              />
+
+              {form0.demo === "0" && (
+                <div>
+                  <InputBox
+                    type="textarea"
+                    label={"Reason for demo"}
+                    name={"reason_of_demo"}
+                    placeholder={"reason"}
+                    classNames=""
+                    required
+                    onChange={(e) => handleInputChange0(e)}
+                    value={form0.reason_of_demo}
+                    error = {errors0.reason_of_demo}
+                  ></InputBox>
+                </div>
+              )}
             </>
           )}
           {/* form 1 */}
           {formStep === 1 && (
             <>
-              <NoteBox
-                title="Note"
-                text="Please complete the payment within 60 minutes before your session expires."
-              />
               <Buttons
-                value="Add Members"
+                value="add members"
                 onClick={addFields}
                 classNames=" my-2"
                 loading={registerUserMutationForm1.isLoading}
                 disabled={formFields.length >= 5}
+                
               />
 
               {formFields.map((form, index) => {
@@ -811,11 +869,11 @@ function TeamConcepts() {
                     <div className="flex">
                       <div className="mr-1 w-1/2">
                         <InputBox
-                          label="Phone No"
+                          label="Phone Number"
                           name="phone"
                           type="number"
                           placeholder="phone number"
-                          required
+                          required 
                           error = {errors1.phone}
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.phone}
@@ -869,18 +927,22 @@ function TeamConcepts() {
                       required
                       error = {errors1.member_id}
                     />
-
-                    {/* {membersCount <= index && (<Buttons
-                                            value="remove member"
-                                            onClick={removefields(index)}
-                                            classNames=" my-2"
-                                            disabled={true}
-                                        />)} */}
+                    {formFields.length > 1 && (
+                      <>
+                        <Buttons
+                          value="remove member"
+                          onClick={() => removefields(index)}
+                          classNames=" my-2"
+                          disabled={true}
+                        />
+                      </>
+                    )}
                   </div>
                 );
               })}
             </>
           )}
+
           {/* form 2 */}
           {formStep === 2 && (
             <>
@@ -897,6 +959,7 @@ function TeamConcepts() {
                 required
                 error = {errors2.isPICT}
               />
+
               {form2.isPICT === "0" && (
                 <>
                   <RadioButtons
@@ -922,12 +985,10 @@ function TeamConcepts() {
                   </div>
                   <div className="mx-1 my-2">
                     <InputBox
-                      className={ form2.isInternational === "0" ? "pointer-events-none" : ""}
                       label="Country"
                       name={"country"}
                       type="text"
                       placeholder="country"
-                      readonly={form2.isInternational === "0"}
                       required
                       error = {errors2.country}
                       onChange={(e) => handleInputChange2(e)}
@@ -944,9 +1005,9 @@ function TeamConcepts() {
                         name={"state"}
                         placeholder="state"
                         required
-                        error = {errors2.state}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.state}
+                        error = {errors2.state}
                       />
                     </div>
                     <div className="ml-1 w-1/2">
@@ -956,9 +1017,9 @@ function TeamConcepts() {
                         type="text"
                         placeholder="district"
                         required
-                        error = {errors2.district}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.district}
+                        error = {errors2.district}
                       />
                     </div>
                   </div>
@@ -977,17 +1038,16 @@ function TeamConcepts() {
                     </div>
                     <div className="ml-1 w-1/2">
                       <Dropdown
-                        label="Localtiy"
+                        label="Locality"
                         options={local_arr}
                         name={"locality"}
                         state={form2}
                         setState={setForm2}
                         required
-                        error = {errors2.locality}
+                        error={errors2.locality}
                       />
                     </div>
                   </div>
-
                   <RadioButtons
                     label="  Preferred mode of presentation"
                     options={mode_arr}
@@ -997,7 +1057,6 @@ function TeamConcepts() {
                     required
                     error = {errors2.mode}
                   />
-
                   {form2.mode === "0" && (
                     <div>
                       <InputBox
@@ -1017,12 +1076,23 @@ function TeamConcepts() {
                     label="Referral"
                     name="referral"
                     placeholder="Referral ID given by Campus Ambassador"
+                    required
                     onChange={(e) => handleInputChange2(e)}
-                    value={form2.referral}
                     error = {errors2.referral}
+                    value={form2.referral}
                   />
                 </>
               )}
+
+              <Dropdown
+                label=" Which year are you in?"
+                options={year_arr}
+                name={"year"}
+                state={form2}
+                setState={setForm2}
+                required
+                error = {errors2.year}
+              />
             </>
           )}
           {formStep === 3 &&
@@ -1068,6 +1138,7 @@ function TeamConcepts() {
                 }
               />
             )}
+
             {formStep === 3 ? (
               paymentStatus ? (
                 <></>
@@ -1129,4 +1200,4 @@ function TeamConcepts() {
   );
 }
 
-export default TeamConcepts;
+export default TeamImpetus;
