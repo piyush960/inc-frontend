@@ -1,3 +1,4 @@
+import { Fade } from 'react-awesome-reveal';
 import './styles/eventCards.css';
 
 
@@ -74,6 +75,7 @@ function Card(props) {
 function EventCards() {
   return (
     <div className='eventCards my-10 '>
+      <Fade>
       <h1 className="mt-10 mb-2 text-center capitalize text-5xl font-bold text-white">Events</h1>
       <hr className="w-1/5 mx-auto mb-5 " />
       <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 lg:gap-3 justify-items-center'>
@@ -82,7 +84,8 @@ function EventCards() {
             return <Card name={eva.name} logo={eva.logo} team={eva.members} ne={eva.nt} ie={eva.it} />
           })
         }
-      </div>
+        </div>
+        </Fade>
     </div>
   )
 }
