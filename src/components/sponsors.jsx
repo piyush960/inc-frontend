@@ -12,7 +12,7 @@ const titleSponsors = [
   {
     name: "CION EQ",
     logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678003690/Uptiq_logo_web_address_full_color_1_d40kui.svg',
-    website: "https://www.google.co.in/",
+    website: "https://www.uptiq.ai/",
   },
 
   {
@@ -68,7 +68,7 @@ const Other = [
   {
     name: "Foodhealth",
     logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914533/foldhealth.jpeg_onmmqj.jpg',
-    website: "https://www.ciondigital.com/",
+    website: "https://www.fold.health/",
   },
   {
     name: "Zbyte",
