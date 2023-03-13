@@ -1,4 +1,5 @@
 import React from 'react';
+import { Fade } from 'react-awesome-reveal';
 import ReactDOM from 'react-dom';
 import './styles/AboutUs.css'
 
@@ -31,6 +32,7 @@ const Tag = ({ text }) => (
 
 const AboutUs = () => (
      <div>
+          <Fade>
           <header className='header-about my-10'>
                <h1 className='text-center'>About Us</h1>
           </header>
@@ -54,7 +56,8 @@ InC announces a total cash prize of ₹6 Lakhs and a special prize of ₹1 Lakh 
       ))}
       <div className='fade'/>
     </div>
-          </div>
+               </div>
+               </Fade>
           </div>
 );
 

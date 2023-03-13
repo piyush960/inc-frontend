@@ -1,5 +1,6 @@
 import './styles/sponsors.css';
 import React from "react";
+import { Fade } from 'react-awesome-reveal';
 // import cion from "../../assets/images/cion.svg";
 // import pubmatic from "../../assets/images/PubMatic_Logo.svg";
 // import algoanalytics from "../../assets/images/algoanalytics.png";
@@ -141,6 +142,7 @@ const AssosiationSponsorsList = getList1(Assosiation);
 export default function Sponsors() {
   return (
     <div className="sponsors">
+      <Fade>
       <div className="text-6xl font-semibold text-center text-white pb-12">
         Sponsors
       </div>
@@ -158,6 +160,7 @@ export default function Sponsors() {
       <div className="sponsors-list">{OtherSponsorsList}</div>
       <div className="sponsors-head">In Assosiation With</div>
       <div className="sponsors-list">{AssosiationSponsorsList}</div>
+      </Fade>
     </div>
   );
 }
