@@ -523,7 +523,7 @@ function TeamImpetus() {
     console.log(form2);
   };
 
-  
+
   const country_arr = [
     {
       value: "1",
@@ -623,7 +623,7 @@ function TeamImpetus() {
             });
           } else {
             toast.success("Completed Step 3️⃣ !", { icon: "✅" });
-            const win = window.open(paymentLinks.get("test"), "_blank");
+            const win = window.open(paymentLinks.get("impetus"), "_blank");
             setFormStep((currentStep) => currentStep + 1);
             setActiveStep((activeStep) => activeStep + 1);
             win.focus();
@@ -766,7 +766,7 @@ function TeamImpetus() {
                 name="sponsored"
                 required
                 error = {errors0.sponsored}
-                
+
               />
               {form0.sponsored === "1" && (
                 <>
@@ -840,7 +840,7 @@ function TeamImpetus() {
                 classNames=" my-2"
                 loading={registerUserMutationForm1.isLoading}
                 disabled={formFields.length >= 5}
-                
+
               />
 
               {formFields.map((form, index) => {
@@ -873,7 +873,7 @@ function TeamImpetus() {
                           name="phone"
                           type="number"
                           placeholder="phone number"
-                          required 
+                          required
                           error = {errors1.phone}
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.phone}

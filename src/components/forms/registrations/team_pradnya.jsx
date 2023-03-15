@@ -465,7 +465,7 @@ function TeamPradnya() {
             });
           } else {
             toast.success("Completed Step 3️⃣ !", { icon: "✅" });
-            const win = window.open(paymentLinks.get("test"), "_blank");
+            const win = window.open(paymentLinks.get("pradnya"), "_blank");
             setFormStep((currentStep) => currentStep + 1);
             setActiveStep((activeStep) => activeStep + 1);
             win.focus();
