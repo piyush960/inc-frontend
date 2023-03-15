@@ -2,6 +2,7 @@ import "./styles/eventCards.css";
 import concepts_logo from "../assets/images/concepts_logo.png";
 import impetus_logo from "../assets/images/impetus_logo.png";
 import pradnya_logo from "../assets/images/pradnya_logo.png";
+import { useNavigate } from "react-router";
 
 const eventData = [
   {
@@ -93,8 +94,10 @@ const eventData = [
 ];
 
 function Card(props) {
+  const redirectEvents = useNavigate()
+
   return (
-    <div className="card">
+    <div className="card hover:cursor-pointer" onClick={() => redirectEvents('/register/events/' + props.name.toLowerCase())}>
       {/* my card*/}
       <div className="py-8 mx-5 md:mx-0">
         <div className="md:h-[670px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
@@ -141,7 +144,6 @@ function Card(props) {
                 <ul>
                   {
                     props.contact.map((item) => {
-                      console.log(item  )
                       return (
                         <li className="my-1 px-4" >
                           <strong>{item.name} : </strong>{item.phone}
