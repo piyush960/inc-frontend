@@ -51,7 +51,7 @@ const educationSponsors = [
 const eventSponsors = [
   {
     name: "Agrocorp",
-    logo: 'https://drive.google.com/uc?export=view&id=1wrcCCJ5erGljke-TKHZvPOyq84owOPDR',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png',
     website: "https://agrocorp.com.sg/",
   },
 ];
@@ -95,7 +95,7 @@ const Assosiation = [
   },
   {
     name: "CSI",
-    logo: 'https://drive.google.com/uc?export=view&id=1tGkGZC1zwSGdvW_h7meX6LIGgbCimn6G',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678885023/CSI_Logo_blue_rmxkvy.png',
     website: "https://www.pictcsi.com/",
   },
 ];
