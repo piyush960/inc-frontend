@@ -2,32 +2,70 @@ import './styles/incTeams.css';
 import test_image from '../assets/images/Abhishek_Jadhav-text-image.png';
 import member_bg from '../assets/images/member_bg.jpg';
 import { EmailIcon, LinkedinIcon, GithubIcon } from '../assets/icons';
-
+const gargi = require('https://www.linkedin.com/in/gargi-mhaskar-097469208/overlay/photo/')
 function InCTeams() {
   const teamsData = [
     {
       team: 'Web Team', members: [
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
+        { name: 'Abhishek Jadhav', post: 'Web Head', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://www.linkedin.com/in/', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
+        { name: 'Adwait Naik', post: 'Web Head', email: 'naikadvait1610@gmail.com ', linkedin: 'https://www.linkedin.com/in/advait-naik-277379199', github: 'https://github.com/advait1610', photo: test_image },
+        { name: 'Haripriya Kulkarni', post: 'Web Head', email: 'haripriyakulkarni13@gmail.com', linkedin: 'https://www.linkedin.com/in/haripriya-kulkarni-7841b81b4/', github: 'https://github.com/maithilitawde', photo: test_image },
+        { name: 'Maithili Tawde', post: 'Web Head', email: 'maithileetawde@gmail.com', linkedin: 'https://www.linkedin.com/in/maithili-tawde-bbb672206/', github: 'https://github.com/hpkoolkarni', photo: test_image },
+        { name: 'Manas Kshatriya', post: 'Web Head', email: 'manaskshatriya01@gmail.com', linkedin: 'https://www.linkedin.com/in/manas-kshatriya-32a776210/', github: 'https://github.com/manaskshatriya', photo: test_image },
       ]
     },
     {
-      team: 'Web Team', members: [
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
+      team: 'Co-ordinators', members: [
+        { name: 'Aditi Chavan', post: 'Overall Co-ordinator', email: 'chavanaditigulab@gmail.com', linkedin: 'https://www.linkedin.com/in/aditi-chavan-439b44206', github: 'https://github.com/AditiChavan16', photo: test_image },
+        { name: 'Anushka Deshmukh', post: 'Overall Co-ordinator', email: 'anushkadeshmukh2592@gmail.com ', linkedin: 'https://www.linkedin.com/in/anushka-deshmukh-137387206', github: 'https://github.com/anushkadeshmukhh', photo: test_image },
+        { name: 'Deves Patil', post: 'Overall Co-ordinator', email: 'devp2872@gmail.com', linkedin: 'https://www.linkedin.com/in/deves-patil-a16186213', github: 'https://github.com/https://github.com/Deves2872', photo: test_image },
+        { name: 'Maanav Chandwani ', post: 'Overall Co-ordinator', email: 'maanavchandwani@gmail.com', linkedin: 'https://www.linkedin.com/in/deves-patil-a16186213', github: 'https://github.com/Maanav-C', photo: test_image },
+        { name: 'Mitul Shah', post: 'Overall Co-ordinator', email: 'mitulshah0709@gmail.com', linkedin: 'https://www.linkedin.com/in/mitul-shah-407592241/', github: 'https://github.com', photo: test_image },
+        { name: 'Om Kuklani', post: 'Overall Co-ordinator', email: 'om.kuklani02@gmail.com', linkedin: 'https://www.linkedin.com/in/om-kuklani-189abb1b7/', github: 'https://github.com/omkuklani', photo: test_image },
+        { name: 'Yash Desai ', post: 'Overall Co-ordinator', email: 'yashvishwasdesai@gmail.com', linkedin: 'https://www.linkedin.com/in/yash-desai3-i46879', github: 'https://github.com/yash-desai3', photo: test_image },
       ]
     },
     {
-      team: 'Web Team', members: [
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-        { name: 'Abhishek Jadhav', post: 'Web Co-ordinator', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://linkedin.com/in/AbhishekJadhav2002', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
+      team: 'Event Co-ordinators', members: [
+        { name: 'Neha Pol', post: 'Pradnya Head', email: 'nehapol40@gmail.com', linkedin: 'https://www.linkedin.com/in/neha-pol-8b9aa6206/', github: 'https://github.com/nehapol1108', photo: test_image },
+        { name: 'Pratik Dhane', post: 'Pradnya Head', email: '21pratikdhane@gmail.com ', linkedin: 'https://www.linkedin.com/in/pratik-dhane/', github: 'https://github.com/patrory', photo: test_image },
+        { name: 'Aarti Jagtap', post: 'Impetus Head', email: 'aartijagtap2002@gmail.com', linkedin: 'https://www.linkedin.com/in/aarti-jagtap', github: '', photo: test_image },
+        { name: ' Apoorvaraj Londhe  ', post: 'Impetus Head', email: 'apoorvarajlondhe15@gmail.com', linkedin: 'https://www.linkedin.com/in/apoorvarajlondhe/', github: 'https://github.com/apoorvarajlondhe ', photo: test_image },
+        { name: 'Mrugank Deshpande', post: 'Impetus Head', email: 'mrugank911@gmail.com', linkedin: 'https://www.linkedin.com/in/mrugank-deshpande-038564201', github: 'https://github.com/Mru911', photo: test_image },
+        { name: ' Vrushali Jadhav', post: 'Impetus Head', email: 'vrushalinjadhav02@gmail.com', linkedin: 'linkedin.com/in/vrushali-jadhav-68a464225', github: 'https://github.com/JadhavVrushali', photo: test_image },
+        { name: 'Yamini Tapde  ', post: 'Concepts Head', email: 'yaminitapde123@gmail.com ', linkedin: 'https://www.linkedin.com/in/yamini-tapde-9447b320b', github: 'https:/github.com/yamini108', photo: test_image },
+        { name: 'Kalpesh Baviskar', post: 'Concepts Head', email: 'kalpeshbaviskar315@gmail.com ', linkedin: 'https://www.linkedin.com/in/kalpesh-baviskar-3a88b6205', github: 'https://github.com/Kalpesh-BK ', photo: test_image },
+        { name: 'Vishakha Parmar ', post: 'Concepts Head', email: 'vishakhaparmar04@gmail.com ', linkedin: 'linkedin.com/in/vishakha-parmar-940b2522a', github: 'https://github.com/Vishakhaparmar04', photo: test_image },
+      ]
+    },
+    {
+      team: 'Content Team', members: [
+        { name: 'Dhruvin Mistry ', post: 'Content Head', email: 'dhruvin.mistry02@gmail.com', linkedin: 'https://www.linkedin.com/in/dhruvin-mistry-854a80215', github: '', photo: test_image },
+        { name: 'Yash Kulkarni', post: 'Content Head', email: 'yashpkulkarni@gmail.com', linkedin: 'https://www.linkedin.com/in/yash-kulkarni-218223218/', github: 'https://github.com', photo: gargi },
+      ]
+    },
+    {
+      team: 'Marketing Team', members: [
+        { name: 'Vishwajit Patil', post: 'Marketing Head', email: 'vishwajitv.patil07@gmail.com', linkedin: 'https://www.linkedin.com/in/vishwajit-patil-8a7663258', github: '', photo: test_image },
+        { name: 'Gargi Mhaskar', post: 'Marketing Head', email: 'mhaskargargi268@gmail.com ', linkedin: 'https://www.linkedin.com/in/gargi-mhaskar-097469208', github: 'https://github.com', photo: gargi },
+      ]
+    },
+    {
+      team: 'Publicity Team', members: [
+        { name: 'Aditya Kamble', post: 'Publicity Head', email: 'adityakamble615@gmail.com	 ', linkedin: 'https://www.linkedin.com/in/adityakamble615/', github: 'https://github.com', photo: test_image },
+        { name: ' Mahaveer Navlakha', post: 'Publicity Head', email: 'mahavirnn@gmail.com	', linkedin: 'https://www.linkedin.com/in/mahaveer-navlakha-844b5a156/', github: 'https://github.com/Mahavirnn', photo: test_image },
+        { name: 'Piyush Bora', post: 'Publicity Head', email: '29piyushbora@gmail.com	', linkedin: 'https://www.linkedin.com/in/piyushbora	', github: 'https://github.com/Piyush-Bora', photo: test_image },
+        { name: ' Reva Dalal ', post: 'Publicity Head', email: 'reva.dalal.197167@gmail.com	', linkedin: 'https://www.linkedin.com/in/reva-dalal-200b44250 ', github: 'https://github.com', photo: test_image },
+        
+      ]
+    },
+    {
+      team: 'Design Team', members: [
+        { name: 'Neha Waghchoure', post: 'Campus Decor', email: 'neha.waghchoure8@gmail.com', linkedin: 'https://www.linkedin.com/in/neha-w-ba150820b', github: 'https://github.com/neha8w', photo: test_image },
+        { name: ' Riya Pendse', post: 'Design Head', email: 'riyapendse@gmail.com ', linkedin: '', github: 'https://github.com/Mahavirnn', photo: test_image },
+        { name: 'Smita Naik', post: 'Design Head', email: 'smitanaik3004@gmail.com', linkedin: 'www.linkedin.com/in/smita-naik-3ba133206	', github: 'https://github.com/Piyush-Bora', photo: test_image },
+        { name: 'Giaa Poddar', post: 'Design Head', email: 'giaa.poddar@gmail.com ', linkedin: 'https://www.linkedin.com/in/giaa-poddar-116b48207', github: 'https://github.com', photo: test_image },
+        
       ]
     },
   ]
