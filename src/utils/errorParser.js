@@ -1,6 +1,6 @@
 function errorParser(err) {
     if (err instanceof Error) {
-        const { response: { data: { message } } } = err
+        const message = err?.response?.data?.message
         if (message) {
             var parsedError = { error: '' }
             if (Array.isArray(message)) {
