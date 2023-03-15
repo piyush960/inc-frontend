@@ -1,7 +1,7 @@
 import "./styles/eventCards.css";
-import { Fade } from 'react-awesome-reveal';
-
-
+import concepts_logo from "../assets/images/concepts_logo.png";
+import impetus_logo from "../assets/images/impetus_logo.png";
+import pradnya_logo from "../assets/images/pradnya_logo.png";
 
 const eventData = [
   {
@@ -10,7 +10,7 @@ const eventData = [
     fees: 200,
     members: "Max 5 members",
     prize: 1000,
-    logo: "https://drive.google.com/uc?export=view&id=1nD_h-1AhcsXfwqlnwAMKZpT8sMNiE5bb",
+    logo: impetus_logo,
     nt: "₹ 100/- For National Entries",
     it: "Free for International Entries",
     contact : [{
@@ -39,7 +39,7 @@ const eventData = [
     fees: 300,
     members: "Max 5 members",
     prize: 1000,
-    logo: "https://drive.google.com/uc?export=view&id=1NgvXwsbT6SMkiyqr-GowrDwWpUCuWz-J",
+    logo: concepts_logo,
     nt: "₹ 300/- For National Entries",
     it: "Free for International Entries",
     contact : [{
@@ -68,7 +68,7 @@ const eventData = [
     fees: 100,
     members: "Max 2 Members",
     prize: 1000,
-    logo: "https://drive.google.com/uc?export=view&id=12hfTCbKmZIqKWakr_79VtTZU_5pjCuXi",
+    logo: pradnya_logo,
     nt: "₹ 100/- For National Entries",
     it: "Free for International Entries",
     contact : [{
@@ -96,7 +96,7 @@ function Card(props) {
   return (
     <div className="card">
       {/* my card*/}
-      <div className="py-8 mx-5 md:mx-0"> 
+      <div className="py-8 mx-5 md:mx-0">
         <div className="md:h-[670px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
         <div className='flex'>
             <div className=''>
@@ -131,7 +131,7 @@ function Card(props) {
                 </p>
               </div>
             </div>
-            
+
             <div className=" flex gap-3  ">
               <p className=" my-1 text-lg md:text-xl flex place-items-center   border-l-2 border-gold md:font-light md:-leading-6   pl-2">
                 {" "}

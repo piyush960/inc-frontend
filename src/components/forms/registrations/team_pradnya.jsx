@@ -403,7 +403,7 @@ function TeamPradnya() {
   const [errors3, setErrors3] = useState(initialErrorsForm3);
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "pradnya");
   //steps for whole form
-  const [formStep, setFormStep] = React.useState(2);
+  const [formStep, setFormStep] = React.useState(1);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -606,7 +606,7 @@ function TeamPradnya() {
           )}
 
           {/* form 2 */}
-          {formStep === 2 && 
+          {formStep === 2 &&
           (
             <>
               <NoteBox
@@ -762,7 +762,7 @@ function TeamPradnya() {
                 error = {errors2.year}
               />
             </>
-          
+
           )}
           <div className="flex justify-between">
             {formStep > 1 && formStep < 3 ? (
