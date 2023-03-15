@@ -24,7 +24,7 @@ const titleSponsors = [
 
 const coSponsors = [
   {
-    name: "Bajaj Finserve",
+    name: "Bajaj Finserv",
     logo: 'https://drive.google.com/uc?export=view&id=1aeQVY01k-PjY8Rueva06KMtd4-bHLNEs',
     website: "https://www.bajajfinserv.in/",
   },
@@ -110,6 +110,7 @@ const getList1 = (sponsorsArray) => {
             <div
               className="logo-container hover:border-faint_blue hover:bottom-2 group shadow-lg max-w-sm rounded-3xl hover:bg-transparent hover:text-gold   hover:scale-105 cursor-pointer  hover:shadow-light_blue hover:shadow-xl"
               style={{ backgroundImage: `url(${sponsor.logo})` }}
+              
             ></div>
           </a>
         )}
@@ -163,13 +164,13 @@ const AssosiationSponsorsList = getList1(Assosiation);
 
 export default function Sponsors() {
   return (
-    <div className="sponsors">
+    <div id="sponsors" className="sponsors">
       <div className="text-6xl font-semibold text-center text-white pb-12">
         Sponsors
       </div>
       <h1 className="sponsors-head">Title Sponsor</h1>
       <div className="sponsors-list title-sponsors">{titleSponsorsList}</div>
-      <div className="sponsors-head">Co Sponsors And Concept Sponsor</div>
+      <div className="sponsors-head title-cosponsors">Co Sponsors And Concept Sponsor</div>
       <div className="sponsors-list">{coSponsorsList}</div>
       <div className="sponsors-head">CO Sponsors OF INC</div>
       <div className="sponsors-list">{educationSponsorsList}</div>

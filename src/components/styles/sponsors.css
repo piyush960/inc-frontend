@@ -86,6 +86,9 @@
     max-width: 90%;
 }
 
+.title-cosponsors .logo-container {
+    height: 250px;
+}
 .title-sponsors .logo-container {
     height: 250px;
 }

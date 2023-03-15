@@ -882,7 +882,9 @@ function TeamConcepts() {
             </>
           )}
           {/* form 2 */}
-          {formStep === 2 && (
+          {formStep === 2 && 
+          (
+
             <>
               <NoteBox
                 title="Note"
