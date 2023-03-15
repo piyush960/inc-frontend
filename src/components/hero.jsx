@@ -47,7 +47,7 @@ function Hero() {
   }, []);
 
   return (
-    <div className="hero">
+    <div id="home" className="hero ">
       <div className="hero-background">
         <span className="event">
           <span>
@@ -77,14 +77,14 @@ function Hero() {
             SOCIETY FOR COMPUTER TECHNOLOGY AND RESEARCH'S
           </h4>
           <h3 className="hero-lines">
-            PUNE INSTITUTE OF COMPUTER TECHNOLOGY PRESENTS
+            PUNE INSTITUTE OF COMPUTER TECHNOLOGY <br /> PRESENTS
           </h3>
           <div className="inc-title m-2" ref={titleRef}>
             <h1>IMPETUS AND CONCEPTS</h1>
           </div>
         </div>
         <div className="hero-cube">
-          <Cube className="scale-50" />
+          <Cube className="scale-100" />
         </div>
       </div>
     </div>

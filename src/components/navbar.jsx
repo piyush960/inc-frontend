@@ -23,7 +23,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar  w-full ">
+    <nav className="navbar fixed   w-full ">
       <div className="shadow-lg shadow-light_blue/20  w-full  border border-light_blue/50  bg-light_blue/30">
         <div className="max-w-full mx-auto px-4 py-2 text-white">
           <div className="flex justify-between text-lg">
@@ -33,7 +33,7 @@ function Navbar() {
                 className="flex items-center py-4 px-2"
               >
                 <img src={inc_logo} alt="inc_Logo" className="h-12 w-12 mr-2" />
-                <span className="font-black text-faint_blue/80 text-2xl">
+                <span className="font-black text-white text-2xl">
                   PICT InC 2023
                 </span>
               </a>
@@ -90,14 +90,14 @@ function Navbar() {
                 Team
               </a>
               <a
-                href="/#contact"
+                href="/#sponsors"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
                   selected === "#contact"
                     ? "border-light_blue/80 text-gold"
                     : "hover:text-gold border-transparent"
                 }`}
               >
-                Contact Us
+                Sponsors
               </a>
               <select
                 className="py-4 px-6 text-white font-semibold hover:text-gold border-transparent hover:border-light_blue/80 bg-faint_blue/30 hover:bg-faint_blue/10 rounded-xl border transition duration-300"
@@ -108,7 +108,7 @@ function Navbar() {
                 <option>Impetus</option>
                 <option>Concepts</option>
                 <option>Pradnya</option>
-                <option>Judges</option>
+               
               </select>
             </div>
 
@@ -187,14 +187,14 @@ function Navbar() {
               Team
             </a>
             <a
-              href="#contact"
+              href="#sponsors"
               className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${
                 selected === "#contact"
                   ? "border-sky-800/80 text-gold"
                   : "hover:text-gold border-transparent"
               }`}
             >
-              Contact Us
+              Sponsors
             </a>
             <select
               className="mt-2 py-4 px-4 font-semibold hover:text-gold border-transparent hover:border-sky-800/80 bg-blue-600/30 hover:bg-blue-600/10 rounded-xl border transition duration-300"

@@ -3,7 +3,7 @@ import { Fade } from 'react-awesome-reveal';
 
 function Schedule() {
   return (
-    <div className='m-20 p-2 flex flex-col justify-evenly items-stretch'>
+    <div id='schedule' className='m-20 p-2 flex flex-col justify-evenly items-stretch'>
       <span className='w-full text-center text-4xl md:text-5xl text-white my-10 drop-shadow-xl font-poppins '>
         <Fade delay={100} duration={1000}>
           Schedule
