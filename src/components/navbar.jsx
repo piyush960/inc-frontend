@@ -23,7 +23,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar fixed   w-full ">
+    <nav className="navbar sticky    w-full ">
       <div className="shadow-lg shadow-light_blue/20  w-full  border border-light_blue/50  bg-light_blue/30">
         <div className="max-w-full mx-auto px-4 py-2 text-white">
           <div className="flex justify-between text-lg">
