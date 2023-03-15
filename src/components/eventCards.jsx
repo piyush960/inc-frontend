@@ -1,4 +1,7 @@
 import "./styles/eventCards.css";
+import { Fade } from 'react-awesome-reveal';
+
+
 
 const eventData = [
   {
