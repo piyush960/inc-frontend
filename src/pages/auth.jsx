@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Buttons, FormsBanner, InputBox, toast } from '../components';
+import { useNavigate, redirect } from 'react-router-dom';
 import { useLoginAdmin } from '../hooks/admin.hooks';
+import { Buttons, FormsBanner, InputBox, toast } from '../components';
 import './styles/auth.css';
 
 const initialErrors = {
@@ -22,7 +22,7 @@ function Auth() {
             onSuccess: () => {
                 setErrors(initialErrors)
                 toast.success('Login Successful', { icon: '👍' })
-                loginNavigator(-1)
+                loginNavigator(-1, { replace: true })
                 return
             }
         })

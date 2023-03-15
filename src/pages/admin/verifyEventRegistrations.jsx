@@ -1,10 +1,13 @@
 import { useState, lazy, Suspense } from 'react';
 import { RadioButtons } from '../../components';
+import { usePendingPayments } from '../../hooks/admin.hooks';
 
 const Table = lazy(() => import('../../components/table.jsx'));
 
 function VerifyEventRegistration() {
     const [event, setEvent] = useState('')
+    const [errors, setErrors] = useState({ error: '' })
+    const { isLoading, isSuccess, data, refetch } = usePendingPayments(setErrors, event)
 
     const options = [
         {
@@ -25,7 +28,8 @@ function VerifyEventRegistration() {
     ]
 
     const handleEventChange = (event_name) => {
-        console.log(event_name)
+        setEvent(event_name)
+        refetch()
     }
 
     const handleButtonClick = (e, id) => {
@@ -34,88 +38,33 @@ function VerifyEventRegistration() {
 
     const columns = [
         {
-            name: 'Actions',
+            name: 'Verify',
             button: true,
-            input: true,
             cell: (row) => (
-                <div>
-
-                    <button
-                        className='btn btn-outline btn-xs'
-                        onClick={(e) => { console.log(row); handleButtonClick(e, row.id) }}
-                    >
-                        Update
-                    </button>
-                    {/* <input
-                      type='text'
-                      style={{
-                        width: '100%',
-                        border: 'none',
-                        fontSize: '1rem',
-                        padding: 0,
-                        margin: 0,
-                      }}
-                      value={value}
-                      onChange={(event) => setValue(event.target.value)}
-                    /> */}
-                </div>
+                <button
+                    className='btn btn-outline btn-xs'
+                    onClick={(e) => { console.log(row); handleButtonClick(e, row.ticket) }}
+                >
+                    Verify
+                </button>
             ),
         },
         {
-            name: 'Country Name',
-            selector: (row) => row.name,
+            name: 'Email',
+            selector: (row) => row.email,
             cell: (row) => (
                 <>{row}</>
             ),
             sortable: true,
         },
         {
-            name: 'Country Capital',
-            selector: (row) => row.capital,
+            name: 'Transaction ID',
+            selector: (row) => row.payment_id,
             cell: (row) => (
-                <div>
-                    <input
-                        type='text'
-                        style={{
-                            width: '100%',
-                            border: 'none',
-                            fontSize: '1rem',
-                            padding: 0,
-                            margin: 0,
-                        }}
-                        value={row.capital}
-                        // onChange={(event) => handleChange(event, row.id, 'capital')}
-                    />
-                </div>
+                <>{row}</>
             ),
         },
-        {
-            name: 'Country Native Name',
-            selector: (row) => row.nativeName,
-            cell: (row) => (
-                <div>
-                    <input
-                        type='text'
-                        style={{
-                            width: '100%',
-                            border: 'none',
-                            fontSize: '1rem',
-                            padding: 0,
-                            margin: 0,
-                        }}
-                        value={row.nativeName}
-                        // onChange={(event) => handleChange(event, row.id, 'nativeName')}
-                    />
-                </div>
-            ),
-        },
-        {
-            name: 'Country Flag',
-            selector: (row) => (
-                <img src={row.flag} alt='' className='w-16 h-16 object-cover' />
-            ),
-        },
-    ];
+    ]
 
     return (
         <>
@@ -124,7 +73,7 @@ function VerifyEventRegistration() {
                 <RadioButtons label='Select Event' options={options} state={event} setState={setEvent} />
             </div>
             <Suspense fallback={<div>Loading...</div>}>
-                <Table columns={columns} data={[]} title='Pending Events Registrations' />
+                {isSuccess && <Table columns={columns} data={data} title='Pending Events Registrations' />}
             </Suspense>
         </>
     );
