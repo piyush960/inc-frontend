@@ -2,10 +2,11 @@ import { useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastUtils, Navbar, Loader, Footer } from './components';
 import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, Homepage, Auth } from './pages';
+import Test from './test/test.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 
-const Test = lazy(() => import('./test/test.jsx'))
+// const Test = lazy(() => import('./test/test.jsx'))
 
 function App() {
   const [loading, setLoading] = useState(false);

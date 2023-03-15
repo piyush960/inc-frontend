@@ -1,8 +1,8 @@
 import { useState, lazy, Suspense } from 'react';
-import { RadioButtons } from '../../components';
+import { RadioButtons, Table } from '../../components';
 import { usePendingPayments } from '../../hooks/admin.hooks';
 
-const Table = lazy(() => import('../../components/table.jsx'));
+// const Table = lazy(() => import('../../components/table.jsx'));
 
 function VerifyEventRegistration() {
     const [event, setEvent] = useState('')

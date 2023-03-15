@@ -1,6 +1,4 @@
-import React from "react";
 import { Fade } from "react-awesome-reveal";
-import ReactDOM from "react-dom";
 import "./styles/AboutUs.css";
 
 const COLORS = [

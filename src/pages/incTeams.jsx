@@ -2,7 +2,7 @@ import './styles/incTeams.css';
 import test_image from '../assets/images/Abhishek_Jadhav-text-image.png';
 import member_bg from '../assets/images/member_bg.jpg';
 import { EmailIcon, LinkedinIcon, GithubIcon } from '../assets/icons';
-const gargi = require('https://www.linkedin.com/in/gargi-mhaskar-097469208/overlay/photo/')
+// const gargi = require('https://www.linkedin.com/in/gargi-mhaskar-097469208/overlay/photo/')
 function InCTeams() {
   const teamsData = [
     {
@@ -41,13 +41,13 @@ function InCTeams() {
     {
       team: 'Content Team', members: [
         { name: 'Dhruvin Mistry ', post: 'Content Head', email: 'dhruvin.mistry02@gmail.com', linkedin: 'https://www.linkedin.com/in/dhruvin-mistry-854a80215', github: '', photo: test_image },
-        { name: 'Yash Kulkarni', post: 'Content Head', email: 'yashpkulkarni@gmail.com', linkedin: 'https://www.linkedin.com/in/yash-kulkarni-218223218/', github: 'https://github.com', photo: gargi },
+        { name: 'Yash Kulkarni', post: 'Content Head', email: 'yashpkulkarni@gmail.com', linkedin: 'https://www.linkedin.com/in/yash-kulkarni-218223218/', github: 'https://github.com', photo: 'https://www.linkedin.com/in/gargi-mhaskar-097469208/overlay/photo/' },
       ]
     },
     {
       team: 'Marketing Team', members: [
         { name: 'Vishwajit Patil', post: 'Marketing Head', email: 'vishwajitv.patil07@gmail.com', linkedin: 'https://www.linkedin.com/in/vishwajit-patil-8a7663258', github: '', photo: test_image },
-        { name: 'Gargi Mhaskar', post: 'Marketing Head', email: 'mhaskargargi268@gmail.com ', linkedin: 'https://www.linkedin.com/in/gargi-mhaskar-097469208', github: 'https://github.com', photo: gargi },
+        { name: 'Gargi Mhaskar', post: 'Marketing Head', email: 'mhaskargargi268@gmail.com ', linkedin: 'https://www.linkedin.com/in/gargi-mhaskar-097469208', github: 'https://github.com', photo: 'https://www.linkedin.com/in/gargi-mhaskar-097469208/overlay/photo/' },
       ]
     },
     {
@@ -56,7 +56,7 @@ function InCTeams() {
         { name: ' Mahaveer Navlakha', post: 'Publicity Head', email: 'mahavirnn@gmail.com	', linkedin: 'https://www.linkedin.com/in/mahaveer-navlakha-844b5a156/', github: 'https://github.com/Mahavirnn', photo: test_image },
         { name: 'Piyush Bora', post: 'Publicity Head', email: '29piyushbora@gmail.com	', linkedin: 'https://www.linkedin.com/in/piyushbora	', github: 'https://github.com/Piyush-Bora', photo: test_image },
         { name: ' Reva Dalal ', post: 'Publicity Head', email: 'reva.dalal.197167@gmail.com	', linkedin: 'https://www.linkedin.com/in/reva-dalal-200b44250 ', github: 'https://github.com', photo: test_image },
-        
+
       ]
     },
     {
@@ -65,7 +65,7 @@ function InCTeams() {
         { name: ' Riya Pendse', post: 'Design Head', email: 'riyapendse@gmail.com ', linkedin: '', github: 'https://github.com/Mahavirnn', photo: test_image },
         { name: 'Smita Naik', post: 'Design Head', email: 'smitanaik3004@gmail.com', linkedin: 'www.linkedin.com/in/smita-naik-3ba133206	', github: 'https://github.com/Piyush-Bora', photo: test_image },
         { name: 'Giaa Poddar', post: 'Design Head', email: 'giaa.poddar@gmail.com ', linkedin: 'https://www.linkedin.com/in/giaa-poddar-116b48207', github: 'https://github.com', photo: test_image },
-        
+
       ]
     },
   ]
