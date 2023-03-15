@@ -1,6 +1,4 @@
-import React from "react";
 import { Fade } from "react-awesome-reveal";
-import ReactDOM from "react-dom";
 import "./styles/AboutUs.css";
 
 const COLORS = [
@@ -52,7 +50,7 @@ const InfiniteLoopSlider = ({ children, duration, reverse = false }) => {
 
 const Tag = ({ text }) => (
   <div className="tag">
-    <span>#</span> {text}
+    <span className="text-lg text-gold">#</span> {text}
   </div>
 );
 
@@ -63,34 +61,18 @@ const AboutUs = () => (
         <h1 className="text-center">About Us</h1>
       </header>
       <div className="about-body relative overflow-hidden py-12">
-        <div className="about-content text-left py-18 w-8/12 z-10 bg-[#000] p-8 text-lg shadow-2xl">
-          Impetus and Concepts (InC) is a flagship technical event of SCTR's
-          Pune Institute of Computer Technology (PICT) Pune, which will be held
-          in during 2nd week of April 2023. InC is an intercollegiate
-          International level competition which has been catching the attention
-          of corporate giants for Quality of projects and an opportunity to
-          recruit/mentor young talented budding entrepreneurs. Every year InC
-          sets a New Benchmark and provides an opportunity to students to
-          realize their ideas into effective product. Over the years, it has
-          become most popular & awaited event with continuous improvement in
-          Footfall, Number and Quality of projects/papers, etc. This event also
-          sets a platform for students to design, exhibit and watch their ideas
-          come true. This technical fest has Inventive events namely - Impetus,
-          Concepts, Pradnya.
+        <div className="about-content text-left w-8/12 z-10 p-8 px-12 text-lg shadow-2xl shadow-light_blue/20 bg-[#000]/80 rounded-xl border border-light_blue/30">
+          Impetus and Concepts (InC) is a flagship technical event of SCTR's Pune Institute of Computer Technology (PICT) Pune, which will be held in during 2nd week of April 2023. InC is an intercollegiate International level competition which has been catching the attention of corporate giants for Quality of projects and an opportunity to recruit/mentor young talented budding entrepreneurs. Every year InC sets a New Benchmark and provides an opportunity to students to realize their ideas into effective product. Over the years, it has become most popular & awaited event with continuous improvement in Footfall, Number and Quality of projects/papers, etc. This event also sets a platform for students to design, exhibit and watch their ideas come true. This technical fest has Inventive events namely - Impetus, Concepts, Pradnya.
           <br />
           <br />
-          Accordingly,Impetus Project Competition FE to TE students, All
-          Engineering Branches confined to specific Domains,Concepts Projects
-          CompetitionFinal Year Students,All Engineering Branches confined
-          Specific Domains & Pradnya - International Coding Competition.
+          Accordingly,Impetus Project Competition FE to TE students, All Engineering Branches confined to specific Domains,Concepts Projects CompetitionFinal Year Students,All Engineering Branches confined Specific Domains & Pradnya - International Coding Competition.
           <br />
           <br />
-          InC announces a total cash prize of ₹6 Lakhs and a special prize of ₹1
-          Lakh for Project related to "Online Teaching Aids" (InC 2023 Theme).
+          InC announces a total cash prize of ₹6 Lakhs and a special prize of ₹1 Lakh for Project related to "Online Teaching Aids" (InC 2023 Theme).
           <br />
         </div>
 
-        <div className="tag-list w-full">
+        <div className="tag-list w-full blur-sm hover:blur-none transition duration-300">
           {[...new Array(ROWS)].map((_, i) => (
             <InfiniteLoopSlider
               key={i}
@@ -110,10 +92,5 @@ const AboutUs = () => (
     </Fade>
   </div>
 );
-
-// ReactDOM.render(
-//   <AboutUs />,
-//   document.body
-// );
 
 export default AboutUs;
