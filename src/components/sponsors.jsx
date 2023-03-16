@@ -171,8 +171,8 @@ export default function Sponsors() {
       <h1 className="sponsors-head">Title Sponsor</h1>
       <div className="sponsors-list  title-sponsors">{titleSponsorsList}</div>
       <div className="sponsors-head  title-sponsors">Co Sponsors And Concept Sponsor</div>
-      <div className="sponsors-list">{coSponsorsList}</div>
-      <div className="sponsors-head">CO Sponsors OF INC</div>
+      <div className="sponsors-list  title-sponsors">{coSponsorsList}</div>
+      <div className="sponsors-head  title-sponsors">CO Sponsors OF INC</div>
       <div className="sponsors-list">{educationSponsorsList}</div>
       <div className="sponsors-head">Impetus Sponsor</div>
       <div className="sponsors-list">{ImpetusSponsorsList}</div>
