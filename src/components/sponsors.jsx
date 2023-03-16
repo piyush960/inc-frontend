@@ -10,9 +10,9 @@ import React from "react";
 
 const titleSponsors = [
   {
-    name: "CION EQ",
+    name: "Uptiq",
     logo: 'https://drive.google.com/uc?export=view&id=1nMyMSeV2GxwmikZcm-a1LGQUEZCBNafd',
-    website: "https://www.ciondigital.com/",
+    website: "https://www.uptiq.ai/",
   },
 
   {
@@ -50,9 +50,9 @@ const educationSponsors = [
 
 const eventSponsors = [
   {
-    name: "Agrocorp",
+    name: "Agcocorp",
     logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png',
-    website: "https://agrocorp.com.sg/",
+    website: "https://www.agcocorp.com/",
   },
 ];
 
@@ -76,7 +76,7 @@ const Other = [
     website: "https://zbyte.io/",
   },
   {
-    name: "Algorithm Analytics",
+    name: "Algoanalytics",
     logo: 'https://drive.google.com/uc?export=view&id=1sQVfyycKbZt53KjD9ELH75Kc3kCThPxM',
     website: "https://www.algoanalytics.com/",
   },
