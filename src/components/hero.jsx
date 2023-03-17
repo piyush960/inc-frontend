@@ -73,10 +73,10 @@ function Hero() {
       </div>
       <div className="flex justify-evenly" >
         <div className="hero-title">
-          <h4 className="hero-lines m-2 md:text-3xl text-xl">
+          <h4 className="hero-lines m-2 md:text-2xl text-xl">
             SOCIETY FOR COMPUTER TECHNOLOGY AND RESEARCH'S
           </h4>
-          <h3 className="hero-lines md:text-5xl text-lg">
+          <h3 className="hero-lines md:text-3xl text-lg">
             PUNE INSTITUTE OF COMPUTER TECHNOLOGY <br /> PRESENTS
           </h3>
           <div className="inc-title m-2 md:text-7xl text-4xl" ref={titleRef}>
