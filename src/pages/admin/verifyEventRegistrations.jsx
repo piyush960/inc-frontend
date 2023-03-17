@@ -1,39 +1,37 @@
 import { useState, lazy, Suspense } from 'react';
-import { RadioButtons, Table } from '../../components';
-import { usePendingPayments } from '../../hooks/admin.hooks';
+import { Buttons, FormsBanner, RadioButtons, toast } from '../../components';
+import { usePendingPayments, useVerifyPayment } from '../../hooks/admin.hooks';
+import { checkAlphanumeric } from '../../utils/regex';
 
-// const Table = lazy(() => import('../../components/table.jsx'));
+const Table = lazy(() => import('../../components/table.jsx'));
 
 function VerifyEventRegistration() {
-    const [event, setEvent] = useState('')
-    const [errors, setErrors] = useState({ error: '' })
-    const { isLoading, isSuccess, data, refetch } = usePendingPayments(setErrors, event)
+    const [event, setEvent] = useState({ eventName: '' })
+    const { isLoading, data } = usePendingPayments(event.eventName)
+    const verifyPaymentMutation = useVerifyPayment(event.eventName)
 
     const options = [
         {
             label: 'Concepts',
             value: 'concepts',
-            onChange: (event) => handleEventChange(event.target.value),
         },
         {
             label: 'Impetus',
             value: 'impetus',
-            onChange: (event) => handleEventChange(event.target.value),
         },
         {
             label: 'Pradnya',
             value: 'pradnya',
-            onChange: (event) => handleEventChange(event.target.value),
         },
     ]
 
-    const handleEventChange = (event_name) => {
-        setEvent(event_name)
-        refetch()
-    }
-
-    const handleButtonClick = (e, id) => {
-        e.preventDefault();
+    function handleButtonClick(e, { ticket, email }) {
+        e.preventDefault()
+        verifyPaymentMutation.mutate({ ticket }, {
+            onSuccess: () => {
+                toast.success(`Verified Payment for ${email}`, { icon: '✅' })
+            },
+        })
     }
 
     const columns = [
@@ -41,40 +39,44 @@ function VerifyEventRegistration() {
             name: 'Verify',
             button: true,
             cell: (row) => (
-                <button
-                    className='btn btn-outline btn-xs'
-                    onClick={(e) => { console.log(row); handleButtonClick(e, row.ticket) }}
-                >
-                    Verify
-                </button>
+                <Buttons
+                    className='scale-75 md:py-2 py-1'
+                    onClick={(e) => handleButtonClick(e, row)}
+                    value='Verify'
+                    loading={verifyPaymentMutation.isLoading}
+                />
             ),
         },
         {
             name: 'Email',
             selector: (row) => row.email,
-            cell: (row) => (
-                <>{row}</>
-            ),
             sortable: true,
         },
         {
             name: 'Transaction ID',
             selector: (row) => row.payment_id,
-            cell: (row) => (
-                <>{row}</>
-            ),
         },
     ]
 
+    const conditionalRowStyles = [{
+        when: row => row.payment_id ? (row.payment_id.length < 8 || checkAlphanumeric(row.payment_id)) : true,
+        style: {
+            backgroundColor: 'rgba(242, 163, 15, 0.2)',
+            color: 'red',
+        },
+    }]
+
     return (
         <>
-            <h1 className='text-center text-4xl font-semibold mt-5'>Verify Event Registrations</h1>
-            <div className='flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:px-8 md:pt-6 border border-light_blue md:mx-20 mx-5 my-10'>
-                <RadioButtons label='Select Event' options={options} state={event} setState={setEvent} />
+            <FormsBanner eventName='Verify Event Registrations' />
+            <div className='flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:px-8 md:pt-6 border border-light_blue md:mx-20 mx-5 my-6'>
+                <RadioButtons name='eventName' label='Select Event' options={options} state={event} setState={setEvent} />
             </div>
-            <Suspense fallback={<div>Loading...</div>}>
-                {isSuccess && <Table columns={columns} data={data} title='Pending Events Registrations' />}
-            </Suspense>
+            {event.eventName &&
+                <Suspense fallback={<h1>Loading...</h1>}>
+                    <Table columns={columns} loading={!event.eventName || isLoading} conditionalRowStyles={conditionalRowStyles} data={data?.data} keyField='payment_id' className='md:mx-20 mb-3 mx-5 mb-10' />
+                </Suspense>
+            }
         </>
     );
 }

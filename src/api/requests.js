@@ -4,6 +4,9 @@ axios.defaults.withCredentials = true
 
 const backend = axios.create({
     baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000',
+    validateStatus: function (status) {
+        return status >= 200 && status <= 302
+    }
 })
 
 const loginAdmin = async (data) => await backend.post('/admin/login', data);

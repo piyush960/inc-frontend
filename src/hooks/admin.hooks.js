@@ -7,46 +7,35 @@ function useLoginAdmin(setErrors) {
   const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(loginAdmin, {
     onError: (err) => {
       const parsedError = errorParser(err)
-      parsedError.error && toast.error(parsedError.error, { autoClose: 5000 })
-      setErrors(prevErrors => {
-        for (const key in prevErrors) {
-          if (parsedError.hasOwnProperty(key)) {
-            prevErrors[key] = parsedError[key]
+      if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+      else {
+        parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+        setErrors(prevErrors => {
+          for (const key in prevErrors) {
+            if (parsedError.hasOwnProperty(key)) {
+              prevErrors[key] = parsedError[key]
+            }
           }
-        }
-        return prevErrors
-      })
-      toast.error('Errors in the login form. Please try again.', { autoClose: 5000 })
+          return prevErrors
+        })
+        toast.error('Errors in the login form. Please try again.', { autoClose: 5000 })
+      }
     }
   })
   return { mutate, isLoading, isSuccess, isError, data, error }
 }
 
-function usePendingPayments(setErrors, eventName) {
-  const { isLoading, isSuccess, isError, data, error, refetch } = useQuery({ queryKey: ['pendingPayments', eventName], queryFn: getPendingPayments(eventName), enabled: !!eventName })
+function usePendingPayments(eventName) {
+  const { isLoading, isError, data, error } = useQuery({ queryKey: ['pendingPayments', eventName], queryFn: getPendingPayments(eventName), enabled: !!eventName })
   if (isError) {
     const parsedError = errorParser(error)
-    parsedError.error && toast.error(parsedError.error, { autoClose: 5000 })
-    setErrors(prevErrors => {
-      for (const key in prevErrors) {
-        if (parsedError.hasOwnProperty(key)) {
-          prevErrors[key] = parsedError[key]
-        }
-      }
-      return prevErrors
-    })
-    toast.error('Errors in the registration form. Please check the form and try again.', { autoClose: 5000 })
+    if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+    else {
+      parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+      toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
+    }
   }
-  else if (isSuccess) {
-    setErrors(prevErrors => {
-      for (const key in prevErrors) {
-        prevErrors[key] = ''
-      }
-      return prevErrors
-    })
-    return data
-  }
-  return { isLoading, isSuccess, data, refetch }
+  return { isLoading, data }
 }
 
 function useVerifyAdmin() {
@@ -54,26 +43,22 @@ function useVerifyAdmin() {
 
   if (isError) {
     const parsedError = errorParser(error)
-    parsedError.error && toast.error(parsedError.error, { autoClose: 5000 })
+    if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+    else {
+      parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+    }
   }
   return { isLoading, isSuccess, isError, data, error }
 }
 
-
-function useVerifyPayment(setErrors, eventName) {
+function useVerifyPayment(eventName) {
   const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(verifyPayment(eventName), {
     onError: (err) => {
       const parsedError = errorParser(err)
-      parsedError.error && toast.error(parsedError.error, { autoClose: 5000 })
-      setErrors(prevErrors => {
-        for (const key in prevErrors) {
-          if (parsedError.hasOwnProperty(key)) {
-            prevErrors[key] = parsedError[key]
-          }
-        }
-        return prevErrors
-      })
-      toast.error('Errors in the registration form. Please check the form and try again.', { autoClose: 5000 })
+      if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+      else {
+        toast.error(`Errors while verifying payment: ${parsedError[Object.keys(parsedError)[0]]}`, { autoClose: 5000 })
+      }
     }
   })
   return { mutate, isLoading, isSuccess, isError, data, error }

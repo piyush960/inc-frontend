@@ -1,5 +1,6 @@
 function errorParser(err) {
     if (err instanceof Error) {
+        if (err.status === 500 || err.status < 200) return { server: 'Error: Internal Server Error. Contact Web Admin' }
         const message = err?.response?.data?.message
         if (message) {
             var parsedError = { error: '' }
