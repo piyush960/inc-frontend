@@ -10,9 +10,9 @@ import React from "react";
 
 const titleSponsors = [
   {
-    name: "CION EQ",
+    name: "Uptiq",
     logo: 'https://drive.google.com/uc?export=view&id=1nMyMSeV2GxwmikZcm-a1LGQUEZCBNafd',
-    website: "https://www.ciondigital.com/",
+    website: "https://www.uptiq.ai/",
   },
 
   {
@@ -50,9 +50,9 @@ const educationSponsors = [
 
 const eventSponsors = [
   {
-    name: "Agrocorp",
-    logo: 'https://drive.google.com/uc?export=view&id=1wrcCCJ5erGljke-TKHZvPOyq84owOPDR',
-    website: "https://agrocorp.com.sg/",
+    name: "Agcocorp",
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png',
+    website: "https://www.agcocorp.com/",
   },
 ];
 
@@ -76,7 +76,7 @@ const Other = [
     website: "https://zbyte.io/",
   },
   {
-    name: "Algorithm Analytics",
+    name: "Algoanalytics",
     logo: 'https://drive.google.com/uc?export=view&id=1sQVfyycKbZt53KjD9ELH75Kc3kCThPxM',
     website: "https://www.algoanalytics.com/",
   },
@@ -95,7 +95,7 @@ const Assosiation = [
   },
   {
     name: "CSI",
-    logo: 'https://drive.google.com/uc?export=view&id=1tGkGZC1zwSGdvW_h7meX6LIGgbCimn6G',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678885023/CSI_Logo_blue_rmxkvy.png',
     website: "https://www.pictcsi.com/",
   },
 ];
@@ -171,8 +171,8 @@ export default function Sponsors() {
       <h1 className="sponsors-head">Title Sponsor</h1>
       <div className="sponsors-list  title-sponsors">{titleSponsorsList}</div>
       <div className="sponsors-head  title-sponsors">Co Sponsors And Concept Sponsor</div>
-      <div className="sponsors-list">{coSponsorsList}</div>
-      <div className="sponsors-head">CO Sponsors OF INC</div>
+      <div className="sponsors-list  title-sponsors">{coSponsorsList}</div>
+      <div className="sponsors-head  title-sponsors">CO Sponsors OF INC</div>
       <div className="sponsors-list">{educationSponsorsList}</div>
       <div className="sponsors-head">Impetus Sponsor</div>
       <div className="sponsors-list">{ImpetusSponsorsList}</div>
