@@ -427,7 +427,7 @@ function TeamConcepts() {
     mode: "1",
     reason_of_mode: "",
     referral: "",
-    
+
   });
   const [errors2, setErrors2] = useState(initialErrorsForm2);
   const registerUserMutationForm2 = useRegisterStep3(setErrors2, "concepts");
@@ -591,7 +591,7 @@ function TeamConcepts() {
             });
           } else {
             toast.success("Completed Step 3️⃣ !", { icon: "✅" });
-            const win = window.open(paymentLinks.get("test"), "_blank");
+            const win = window.open(paymentLinks.get("concepts"), "_blank");
             setFormStep((currentStep) => currentStep + 1);
             setActiveStep((activeStep) => activeStep + 1);
             win.focus();
@@ -663,8 +663,8 @@ function TeamConcepts() {
               <Dropdown
                 label="Domain of the project"
                 options={[
+                  { value: "SEL", label: "Select", selected: true },
                   ...projectDomains,
-                  { value: "SEL", label: "Select", disabled: true },
                 ]}
                 name={"domain"}
                 state={form0}
@@ -675,8 +675,8 @@ function TeamConcepts() {
               <Dropdown
                 label=" Project Type"
                 options={[
+                  { value: "SEL", label: "Select", selected: true },
                   ...projectTypes,
-                  { value: "SEL", label: "Select", disabled: true },
                 ]}
                 name={"project_type"}
                 state={form0}
@@ -882,7 +882,7 @@ function TeamConcepts() {
             </>
           )}
           {/* form 2 */}
-          {formStep === 2 && 
+          {formStep === 2 &&
           (
 
             <>

@@ -19,6 +19,10 @@ function Navbar() {
 
   const handleSelect = (e) => {
     if (e.target.value === "Register") return;
+    if (e.target.value === "Judge") {
+      navigate('/register/judge')
+      return
+    };
     navigate(`/register/events/${e.target.value.toLowerCase()}`);
   };
 
@@ -41,61 +45,55 @@ function Navbar() {
             <div className="hidden lg:flex items-center justify-content space-x-3">
               <a
                 href="/#home"
-                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
-                  selected === "#home"
+                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#home"
                     ? "border-light_blue/80 text-gold"
                     : "hover:text-gold border-transparent"
-                }`}
+                  }`}
               >
                 Home
               </a>
               <a
                 href="/#about"
-                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
-                  selected === "#about"
+                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#about"
                     ? "border-light_blue/80 text-gold"
                     : "hover:text-gold border-transparent"
-                }`}
+                  }`}
               >
                 About
               </a>
               <a
                 href="/#schedule"
-                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
-                  selected === "#schedule"
+                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#schedule"
                     ? "border-light_blue/80 text-gold"
                     : "hover:text-gold border-transparent"
-                }`}
+                  }`}
               >
                 Schedule
               </a>
               <a
                 href="/#events"
-                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
-                  selected === "#events"
+                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#events"
                     ? "border-light_blue/80 text-gold"
                     : "hover:text-gold border-transparent"
-                }`}
+                  }`}
               >
                 Events
               </a>
               <a
                 href="/#team"
-                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
-                  selected === "#team"
+                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#team"
                     ? "border-light_blue/80 text-gold"
                     : "hover:text-gold border-transparent"
-                }`}
+                  }`}
               >
                 Team
               </a>
               <a
                 href="/#sponsors"
-                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${
-                  selected === "#contact"
+                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#contact"
                     ? "border-light_blue/80 text-gold"
                     : "hover:text-gold border-transparent"
-                }`}
+                  }`}
               >
                 Sponsors
               </a>
@@ -108,7 +106,7 @@ function Navbar() {
                 <option>Impetus</option>
                 <option>Concepts</option>
                 <option>Pradnya</option>
-
+                <option>Judge</option>
               </select>
             </div>
 
@@ -138,61 +136,55 @@ function Navbar() {
           >
             <a
               href="/#home"
-              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${
-                selected === "#home"
+              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#home"
                   ? "border-sky-800/80 text-gold"
                   : "hover:text-gold border-transparent"
-              }`}
+                }`}
             >
               Home
             </a>
             <a
               href="#about"
-              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${
-                selected === "#about"
+              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#about"
                   ? "border-sky-800/80 text-gold"
                   : "hover:text-gold border-transparent"
-              }`}
+                }`}
             >
               About
             </a>
             <a
               href="#schedule"
-              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${
-                selected === "#schedule"
+              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#schedule"
                   ? "border-sky-800/80 text-gold"
                   : "hover:text-gold border-transparent"
-              }`}
+                }`}
             >
               Schedule
             </a>
             <a
               href="#events"
-              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${
-                selected === "#events"
+              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#events"
                   ? "border-sky-800/80 text-gold"
                   : "hover:text-gold border-transparent"
-              }`}
+                }`}
             >
               Events
             </a>
             <a
               href="#team"
-              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${
-                selected === "#team"
+              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#team"
                   ? "border-sky-800/80 text-gold"
                   : "hover:text-gold border-transparent"
-              }`}
+                }`}
             >
               Team
             </a>
             <a
               href="#sponsors"
-              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${
-                selected === "#contact"
+              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#contact"
                   ? "border-sky-800/80 text-gold"
                   : "hover:text-gold border-transparent"
-              }`}
+                }`}
             >
               Sponsors
             </a>
