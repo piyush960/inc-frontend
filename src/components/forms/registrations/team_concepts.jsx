@@ -663,8 +663,8 @@ function TeamConcepts() {
               <Dropdown
                 label="Domain of the project"
                 options={[
+                  { value: "SEL", label: "Select", selected: true },
                   ...projectDomains,
-                  { value: "SEL", label: "Select", disabled: true },
                 ]}
                 name={"domain"}
                 state={form0}
@@ -675,8 +675,8 @@ function TeamConcepts() {
               <Dropdown
                 label=" Project Type"
                 options={[
+                  { value: "SEL", label: "Select", selected: true },
                   ...projectTypes,
-                  { value: "SEL", label: "Select", disabled: true },
                 ]}
                 name={"project_type"}
                 state={form0}
