@@ -5,6 +5,7 @@ import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, Homepage, A
 import Test from './test/test.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
+import Judge from './pages/judge';
 
 // const Test = lazy(() => import('./test/test.jsx'))
 
@@ -23,7 +24,7 @@ function App() {
         <Route path='/register/*' element={<RegistrationsForms />} />
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/admin/*' element={<ProtectedRoutes children={<Admin />} />} />
-        <Route path='/judge/*' element={<></>} />
+        <Route path='/judge/*' element={<Judge/>} />
         <Route path='/inc-teams' element={<InCTeams />} />
         {process.env.REACT_APP_ENVIRONMENT === 'development' &&
           <Route path='/test' element={

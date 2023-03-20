@@ -20,6 +20,7 @@ import {
   paymentLinks,
   projectDomains,
   projectTypes,
+  localTypes
 } from "../../../static/data";
 
 const MainContainer = styled.div`
@@ -288,11 +289,7 @@ const gender_type = [
 
 // ]
 
-const local_arr = [
-  { value: "SEL", label: "Select", disabled: true },
-  { value: "1", label: "Urban" },
-  { value: "0", label: "Rural" },
-];
+
 
 function TeamConcepts() {
   //form0
@@ -521,7 +518,7 @@ function TeamConcepts() {
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "concepts");
 
     //steps for whole form
-    const [formStep, setFormStep] = useState(0);
+    const [formStep, setFormStep] = useState(2);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -980,7 +977,10 @@ function TeamConcepts() {
                     <div className="ml-1 w-1/2">
                       <Dropdown
                         label="Localtiy"
-                        options={local_arr}
+                        options={[
+                          { value: "SEL", label: "Select", selected: true },
+                          ...localTypes,
+                        ]}
                         name={"locality"}
                         state={form2}
                         setState={setForm2}

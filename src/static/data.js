@@ -24,6 +24,19 @@ export const slots = [
     { value: '4', label: 'Sunday 9th April (1:00 PM - 6:00 PM)' }
 ]
 
+export const localTypes = [
+    
+    { value: "1", label: "Urban" },
+    { value: "0", label: "Rural" },
+]
+
+export const year_arr = [
+   
+    { value: "FE", label: "1st year" },
+    { value: "SE", label: "2nd year" },
+    { value: "TE", label: "3rd year" },
+  ]
+
 export const paymentLinks = new Map([
     ['test', 'https://easebuzz.in/quickpay/owhseppfut'],
     ['concepts', 'https://easebuzz.in/quickpay/pkwfmmpssi'],
