@@ -42,7 +42,7 @@ const educationSponsors = [
 
 const eventSponsors = [
   {
-    name: 'AGCOcorp',
+    name: 'AGCO',
     logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png',
     website: 'https://www.agcocorp.com/',
   },
