@@ -1,4 +1,6 @@
 import DataTable, { createTheme } from 'react-data-table-component';
+import DataTableExtensions from 'react-data-table-component-extensions';
+import 'react-data-table-component-extensions/dist/index.css';
 
 const theme = createTheme('inc_table_dark', {
   text: {
@@ -60,6 +62,7 @@ const customStyles = {
     style: {
       paddingLeft: '16px',
       paddingRight: '16px',
+      color: 'rgba(200, 162, 13, 0.9)'
     },
     draggingStyle: {
       cursor: 'move',
@@ -228,7 +231,9 @@ function Table({ data, keyField, columns, title, loading, conditionalRowStyles, 
 
   return (
     <div className={`${className}`}>
-      <DataTable columns={columns} data={data} keyField={keyField} pagination fixedHeader fixedHeaderScrollHeight='400px' highlightOnHover theme='inc_table_dark' progressPending={loading} customStyles={customStyles} conditionalRowStyles={conditionalRowStyles} expandableRows={expandableRows} title={title} />
+      <DataTableExtensions columns={columns} data={data} fileName={title} exportHeaders>
+        <DataTable columns={columns} data={data} keyField={keyField} pagination fixedHeader fixedHeaderScrollHeight='400px' highlightOnHover theme='inc_table_dark' progressPending={loading} customStyles={customStyles} conditionalRowStyles={conditionalRowStyles} expandableRows={expandableRows} title={title} />
+      </DataTableExtensions>
     </div>
   );
 }

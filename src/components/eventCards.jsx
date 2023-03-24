@@ -44,7 +44,7 @@ const eventData = [
     nt: "₹ 300/- For National Entries",
     it: "Free for International Entries",
     contact : [{
-      name : "Siddhart",
+      name : "Siddharth",
       phone : "8237892072",
     },
     {

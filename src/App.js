@@ -24,7 +24,7 @@ function App() {
         <Route path='/register/*' element={<RegistrationsForms />} />
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/admin/*' element={<ProtectedRoutes children={<Admin />} />} />
-        <Route path='/judge/*' element={<Judge/>} />
+        <Route path='/judge/*' element={<ProtectedRoutes children={<Judge />} />} />
         <Route path='/inc-teams' element={<InCTeams />} />
         {process.env.REACT_APP_ENVIRONMENT === 'development' &&
           <Route path='/test' element={

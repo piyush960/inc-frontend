@@ -34,7 +34,7 @@ const educationSponsors = [
     website: 'https://sarvatra.tech/',
   },
   {
-    name: 'Airvana',
+    name: 'Airavana',
     logo: 'https://drive.google.com/uc?export=view&id=1add614SJWsdD_MM2JPLs0HvtbxyDV0fO',
     website: 'https://airavana.ai/',
   },
@@ -42,7 +42,7 @@ const educationSponsors = [
 
 const eventSponsors = [
   {
-    name: 'Agcocorp',
+    name: 'AGCO',
     logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png',
     website: 'https://www.agcocorp.com/',
   },
@@ -68,7 +68,7 @@ const Other = [
     website: 'https://zbyte.io/',
   },
   {
-    name: 'Algoanalytics',
+    name: 'AlgoAnalytics',
     logo: 'https://drive.google.com/uc?export=view&id=1sQVfyycKbZt53KjD9ELH75Kc3kCThPxM',
     website: 'https://www.algoanalytics.com/',
   },

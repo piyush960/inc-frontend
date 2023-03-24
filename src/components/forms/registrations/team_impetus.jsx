@@ -649,9 +649,6 @@ function TeamImpetus() {
       );
     }
 
-    // console.log(formFields);
-    // console.log(form0);
-    console.log(form2);
     // setFormStep((currentStep) => currentStep + 1);
     // setActiveStep(activeStep + 1);
   };
@@ -1193,7 +1190,7 @@ function TeamImpetus() {
               ) : (
                 <Buttons
                   className=" mx-2 my-2  "
-                  value="Pay (Rs.300)"
+                  value="Pay (Rs.100)"
                   onClick={nextForm}
                   loading={
                     registerUserMutationForm0.isLoading ||

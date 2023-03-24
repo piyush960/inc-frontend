@@ -310,12 +310,9 @@ function TeamPradnya() {
 
   const [errors2, setErrors2] = useState(initialErrorsForm2);
   const registerUserMutationForm2 = useRegisterStep3(setErrors2, "pradnya");
-  const [paymentStatus, setPaymentStatus] = useState(true);
-  const paymentRef = useRef("");
   const handleImageChange = (event, index) => {
     let data = [...form1];
     data[index][event.target.name] = event.target.files[0];
-    console.log(event.target.files);
     setForm1(data);
   };
   const handleInputChange2 = (e) => {
@@ -390,6 +387,9 @@ function TeamPradnya() {
     },
   ];
 
+
+  const [paymentStatus, setPaymentStatus] = useState(true);
+  const paymentRef = useRef("");
   const [errors3, setErrors3] = useState(initialErrorsForm3);
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "pradnya");
   //steps for whole form
@@ -413,7 +413,7 @@ function TeamPradnya() {
     e.preventDefault();
     if (formStep === 1) {
       if (memberCount === 0) {
-        toast.warn("Atleast one member needed!");
+        toast.warn("At least one member needed!");
         return;
       }
 
@@ -430,7 +430,6 @@ function TeamPradnya() {
       setActiveStep((activeStep) => activeStep + 1);
     }
     if (formStep === 2) {
-      console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
@@ -463,11 +462,23 @@ function TeamPradnya() {
         },
       });
     }
+    if (formStep === 3) {
+      if (paymentRef.current.value.length < 8) {
+        toast.warn("Please enter valid Transaction ID !");
+        return;
+      }
+      registerUserMutationForm3.mutate(
+        { payment_id: paymentRef.current.value?.trim() },
+        {
+          onSuccess: () => {
+            toast.success("Completed Step 4️⃣ !", { icon: "✅" });
+            setActiveStep((activeStep) => activeStep + 1);
+            setPaymentStatus(true);
+          },
+        }
+      );
+    }
   };
-
-  //dropdown
-
-  //const [option, setOption] = useState();
 
   return (
     <MainContainer>
@@ -597,8 +608,7 @@ function TeamPradnya() {
           )}
 
           {/* form 2 */}
-          {formStep === 2 &&
-          (
+          {formStep === 2 && (
             <>
               <NoteBox
                 title="Note"
@@ -768,39 +778,97 @@ function TeamPradnya() {
             </>
 
           )}
-          <div className="flex justify-between">
-            {formStep > 1 && formStep < 3 ? (
-              <Buttons
-                className="mx-2 my-2"
-                value=" Previous Step"
-                onClick={prevForm}
-              />
+          {formStep === 3 &&
+            (paymentStatus ? (
+              <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+                <p className="text-xl text-center text-gold font-bold mb-3">
+                  Thank you for registering in InC'23. Looking forward to have
+                  you in person
+                </p>
+                <NoteBox
+                  title="Note"
+                  text="Registration payment will be verified and will be informed by email."
+                />
+              </div>
             ) : (
-              ""
-            )}
-
-            {formStep === 2 ? (
-              <Buttons
-                className=" mx-2 my-2 p-1 "
-                value="Submit"
-                onClick={nextForm}
-              />
-            ) : (
-              formStep < 2 && (
+              <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+                <NoteBox
+                  title="Note"
+                  text="Please complete the payment within 60 minutes before your session expires."
+                />
+                <InputBox
+                  label="Transaction ID"
+                  type="text"
+                  name="payment_id"
+                  placeholder="Enter Transaction ID"
+                  inputref={paymentRef}
+                  minlenght="8"
+                  error={errors3.payment_id}
+                  className="tracking-widest"
+                  required
+                />
+              </div>
+            ))}
+            <div className="flex justify-between">
+              {formStep > 0 && formStep < 4 && (
                 <Buttons
-                  className=" mx-2 my-2 p-1 "
+                  className="mx-2 my-2"
+                  value=" Previous Step"
+                  onClick={prevForm}
+                  loading={
+                    registerUserMutationForm1.isLoading ||
+                    registerUserMutationForm2.isLoading
+                  }
+                />
+              )}
+
+              {formStep === 3 ? (
+                paymentStatus ? (
+                  <></>
+                ) : (
+                  <Buttons
+                    className=" mx-2 my-2 "
+                    value="Submit"
+                    onClick={nextForm}
+                    loading={registerUserMutationForm3.isLoading}
+                  />
+                )
+              ) : (
+                formStep === 2 &&
+                (paymentStatus ? (
+                  <Buttons
+                    className=" mx-2 my-2  "
+                    value="Submit"
+                    onClick={nextForm}
+                    loading={
+                      registerUserMutationForm1.isLoading ||
+                      registerUserMutationForm2.isLoading
+                    }
+                  />
+                ) : (
+                  <Buttons
+                    className=" mx-2 my-2  "
+                    value="Pay (Rs.100)"
+                    onClick={nextForm}
+                    loading={
+                      registerUserMutationForm1.isLoading ||
+                      registerUserMutationForm2.isLoading
+                    }
+                  />
+                ))
+              )}
+              {formStep < 2 && (
+                <Buttons
+                  className=" mx-2 my-2  "
                   value="Next Step"
                   onClick={nextForm}
+                  loading={
+                    registerUserMutationForm1.isLoading ||
+                    registerUserMutationForm2.isLoading
+                  }
                 />
-              )
-            )}
-
-            {formStep === 3 && (
-              <h1 className=" text-gold text-3xl">
-                Thank you for registering for Pradnya!!!
-              </h1>
-            )}
-          </div>
+              )}
+            </div>
         </form>
         {/* <Buttons
                 value="submit"

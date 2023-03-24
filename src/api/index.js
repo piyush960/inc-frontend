@@ -8,4 +8,5 @@ export {
     verifyPayment,
     verifyAdmin,
     getPendingPayments,
+    getRegistrations,
 } from './requests';
