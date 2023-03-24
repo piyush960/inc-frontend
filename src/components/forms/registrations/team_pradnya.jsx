@@ -529,7 +529,7 @@ function TeamPradnya() {
                         <InputBox
                           label="Phone No"
                           name="phone"
-                          type="number"
+                          type="tel"
                           placeholder="phone number"
                           required
                           error={errors1.phone}

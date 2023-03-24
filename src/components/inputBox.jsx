@@ -4,7 +4,10 @@ import './styles/inputBox.css';
 function InputBox(props) {
     return (
         <div className='input-box w-full mb-4 relative'>
-            <label htmlFor={props.label.toLowerCase().replace(/ /g, "_")} className={`input-label font-medium mb-3 text-white text-lg before: ${props.required && 'after:content-["*"] after:ml-0.5 after:text-gold'}`}>{props.label}</label>
+            <label htmlFor={props.label.toLowerCase().replace(/ /g, "_")} className={`input-label font-medium  text-white text-lg before: ${props.required && 'after:content-["*"] after:ml-0.5 after:text-gold'}`}>{props.label}</label>
+            <div class="tooltip" data-tip={props.tip}>
+                <button className={`bg-faint_blue rounded-full mb-3 ml-5 px-5 ${props.tipstyle}`}>i</button>
+            </div>
             <input
                 {...props}
                 id={props.label.toLowerCase().replace(/ /g, "_")}

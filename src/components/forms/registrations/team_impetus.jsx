@@ -693,6 +693,7 @@ function TeamImpetus() {
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.title}
                 error={errors0.title}
+                tip={"The project title should be between 10 and 100 characters long.(both inclusive)"}
               ></InputBox>
               <Dropdown
                 label="Domain of the project"
@@ -728,6 +729,7 @@ function TeamImpetus() {
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_name}
                 error={errors0.guide_name}
+                tip={"Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters."}
               ></InputBox>
               <InputBox
                 type="email"
@@ -739,6 +741,7 @@ function TeamImpetus() {
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_email}
                 error={errors0.guide_email}
+                tipstyle={"hidden"}
               ></InputBox>
               <InputBox
                 type="text"
@@ -750,6 +753,7 @@ function TeamImpetus() {
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_phone}
                 error={errors0.guide_phone}
+                tipstyle={"hidden"}
               ></InputBox>
               <InputBox
                 type="text"
@@ -761,6 +765,7 @@ function TeamImpetus() {
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.hod_email}
                 error={errors0.hod_email}
+                tipstyle={"hidden"}
               ></InputBox>
               <RadioButtons
                 label="Is the project sponsored or not?"
@@ -784,6 +789,7 @@ function TeamImpetus() {
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.company}
                     error={errors0.company}
+                    tip={"Company name if applicable, should be between 3 and 100 characters(both inclusive)"}
                   ></InputBox>
                   <RadioButtons
                     label=" NDA signed or not?"
@@ -807,6 +813,7 @@ function TeamImpetus() {
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.abstract}
                 error={errors0.abstract}
+                tip={"Abstract should be between 300 and 2000 characters(both inclusive)"}
               ></InputBox>
               <RadioButtons
                 label="  Can you show a demo of your project?"
@@ -830,6 +837,7 @@ function TeamImpetus() {
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.reason_of_demo}
                     error={errors0.reason_of_demo}
+                    tip={"Reason of demo if applicable, should be between 5 and 100 characters(both inclusive)"}
                   ></InputBox>
                 </div>
               )}
@@ -859,6 +867,7 @@ function TeamImpetus() {
                       error={errors1.name}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.name}
+                      tip={"Name of member should be between 3 and 20 characters(both inclusive)"}
                     />
                     <InputBox
                       label="Email ID"
@@ -869,18 +878,20 @@ function TeamImpetus() {
                       error={errors1.email}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.email}
+                      tipstyle={"hidden"}
                     />
                     <div className="flex">
                       <div className="mr-1 w-1/2">
                         <InputBox
                           label="Phone Number"
                           name="phone"
-                          type="number"
+                          type="tel"
                           placeholder="phone number"
                           required
                           error={errors1.phone}
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.phone}
+                          tipstyle={"hidden"}
                         />
                       </div>
                       <div className="input-box-dropdown w-full mb-4 relative">
@@ -979,11 +990,12 @@ function TeamImpetus() {
                       label="College"
                       name={"college"}
                       type="text"
-                      placeholder="college name"
+                      placeholder="Name of member should be between 3 and 20 characters(both inclusive)"
                       required
                       onChange={(e) => handleInputChange2(e)}
                       value={form2.college}
                       error={errors2.college}
+                      tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters."}
                     />
                   </div>
                   <div className="mx-1 my-2">
@@ -998,6 +1010,7 @@ function TeamImpetus() {
                       value={
                         form2.isInternational === "0" ? "India" : form2.country
                       }
+                      tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
                     />
                   </div>
                   <div className="flex mx-1 ">
@@ -1011,6 +1024,7 @@ function TeamImpetus() {
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.state}
                         error={errors2.state}
+                        tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
                       />
                     </div>
                     <div className="ml-1 w-1/2">
@@ -1023,6 +1037,7 @@ function TeamImpetus() {
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.district}
                         error={errors2.district}
+                        tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
                       />
                     </div>
                   </div>
@@ -1062,6 +1077,7 @@ function TeamImpetus() {
                     name="mode"
                     required
                     error={errors2.mode}
+                    tip={"Participants from Pune should select offline mode only."}
                   />
                   {form2.mode === "0" && (
                     <div>
@@ -1074,6 +1090,7 @@ function TeamImpetus() {
                         error={errors2.reason_of_mode}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.reason_of_mode}
+                        tip={"Reason of mode if applicable, should be between 2 and 20 characters(both inclusive)"}
                       ></InputBox>
                     </div>
                   )}
@@ -1082,10 +1099,10 @@ function TeamImpetus() {
                     label="Referral"
                     name="referral"
                     placeholder="Referral ID given by Campus Ambassador"
-                    required
                     onChange={(e) => handleInputChange2(e)}
                     error={errors2.referral}
                     value={form2.referral}
+                    tip={"Referral should not be empty and should be between 3-50 characters long"}
                   />
                 </>
               )}

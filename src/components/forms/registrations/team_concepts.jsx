@@ -184,7 +184,7 @@ const initialErrorsForm2 = {
   mode: "",
   reason_of_mode: "",
   referral: "",
-  year : "",
+  year: "",
 };
 
 const initialErrorsForm3 = {
@@ -492,12 +492,12 @@ function TeamConcepts() {
     {
       value: "1",
       label: "Yes",
-      onChange : handleInputChange2
+      onChange: handleInputChange2
     },
     {
       value: "0",
       label: "No",
-      onChange : handleInputChange2
+      onChange: handleInputChange2
     },
   ];
 
@@ -517,8 +517,8 @@ function TeamConcepts() {
   const [errors3, setErrors3] = useState(initialErrorsForm3);
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "concepts");
 
-    //steps for whole form
-    const [formStep, setFormStep] = useState(0);
+  //steps for whole form
+  const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -655,8 +655,10 @@ function TeamConcepts() {
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.title}
                 minlenght="10"
-                error = {errors0.title}
+                error={errors0.title}
+                tip={"The project title should be between 10 and 100 characters long.(both inclusive)"}
               ></InputBox>
+              
               <Dropdown
                 label="Domain of the project"
                 options={[
@@ -667,7 +669,8 @@ function TeamConcepts() {
                 state={form0}
                 setState={setForm0}
                 required
-                error = {errors0.domain}
+                error={errors0.domain}
+                
               />
               <Dropdown
                 label=" Project Type"
@@ -679,7 +682,7 @@ function TeamConcepts() {
                 state={form0}
                 setState={setForm0}
                 required
-                error = {errors0.project_type}
+                error={errors0.project_type}
               />
               <InputBox
                 type="text"
@@ -689,7 +692,8 @@ function TeamConcepts() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_name}
-                error = {errors0.guide_name}
+                error={errors0.guide_name}
+                tip={"Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters."}
               ></InputBox>
               <InputBox
                 type="email"
@@ -699,7 +703,8 @@ function TeamConcepts() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_email}
-                error = {errors0.guide_email}
+                error={errors0.guide_email}
+                tipstyle={"hidden"}
               ></InputBox>
               <InputBox
                 type="tel"
@@ -709,7 +714,8 @@ function TeamConcepts() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.guide_phone}
-                error = {errors0.guide_phone}
+                error={errors0.guide_phone}
+                tipstyle={"hidden"}
               ></InputBox>
               <InputBox
                 type="email"
@@ -719,7 +725,8 @@ function TeamConcepts() {
                 required
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.hod_email}
-                error = {errors0.hod_email}
+                error={errors0.hod_email}
+                tipstyle={"hidden"}
               ></InputBox>
               <RadioButtons
                 label="Is the project sponsored or not?"
@@ -728,7 +735,7 @@ function TeamConcepts() {
                 setState={setForm0}
                 name="sponsored"
                 required
-                error = {errors0.sponsored}
+                error={errors0.sponsored}
               />
               {form0.sponsored === "1" && (
                 <>
@@ -740,7 +747,8 @@ function TeamConcepts() {
                     required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.company}
-                    error = {errors0.company}
+                    error={errors0.company}
+                    tip={"Company name if applicable, should be between 3 and 100 characters(both inclusive)"}
                   ></InputBox>
                   <RadioButtons
                     label=" NDA signed or not?"
@@ -749,7 +757,7 @@ function TeamConcepts() {
                     setState={setForm0}
                     name="nda"
                     required
-                    error = {errors0.nda}
+                    error={errors0.nda}
                   />
                 </>
               )}
@@ -760,10 +768,11 @@ function TeamConcepts() {
                 name={"abstract"}
                 placeholder={"In 300 words or less"}
                 required
-                error = {errors0.abstract}
+                error={errors0.abstract}
                 onChange={(e) => handleInputChange0(e)}
                 value={form0.abstract}
                 minlenght="50"
+                tip={"Abstract should be between 50 and 1000 characters long(both inclusive)"}
               ></InputBox>
             </>
           )}
@@ -791,9 +800,10 @@ function TeamConcepts() {
                       type="text"
                       placeholder="name "
                       required
-                      error = {errors1.name}
+                      error={errors1.name}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.name}
+                      tip={"Name of member should be between 3 and 20 characters(both inclusive)"}
                     />
                     <InputBox
                       label="Email ID"
@@ -801,21 +811,23 @@ function TeamConcepts() {
                       type="text"
                       placeholder="email "
                       required
-                      error = {errors1.email}
+                      error={errors1.email}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.email}
+                      tipstyle={"hidden"}
                     />
                     <div className="flex">
                       <div className="mr-1 w-1/2">
                         <InputBox
                           label="Phone No"
                           name="phone"
-                          type="number"
+                          type="tel"
                           placeholder="phone number"
                           required
-                          error = {errors1.phone}
+                          error={errors1.phone}
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.phone}
+                          tipstyle={"hidden"}
                         />
                       </div>
                       <div className="input-box-dropdown w-full mb-4 relative">
@@ -831,16 +843,15 @@ function TeamConcepts() {
                             value={formFields.gender}
                             onChange={(event) => handleFormChange(event, index)}
                             required
-                            error = {errors1.gender}
+                            error={errors1.gender}
                             className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
                           >
                             {gender_type.map((option) => (
                               <option
                                 key={option?.value}
                                 value={option?.value}
-                                className={`py-1 bg-[#0B1E47] ${
-                                  option?.className || ""
-                                }`}
+                                className={`py-1 bg-[#0B1E47] ${option?.className || ""
+                                  }`}
                               >
                                 {option?.label}
                               </option>
@@ -864,7 +875,7 @@ function TeamConcepts() {
                       onChange={(e) => handleImageChange(e, index)}
                       label="Upload Screenshot of ID"
                       required
-                      error = {errors1.member_id}
+                      error={errors1.member_id}
                     />
 
                     {/* {membersCount <= index && (<Buttons
@@ -880,153 +891,160 @@ function TeamConcepts() {
           )}
           {/* form 2 */}
           {formStep === 2 &&
-          (
+            (
 
-            <>
-              <NoteBox
-                title="Note"
-                text="Please complete the payment within 60 minutes before your session expires."
-              />
-              <RadioButtons
-                label=" Are you PICTian or not?"
-                options={country_arr}
-                state={form2}
-                setState={setForm2}
-                name="isPICT"
-                required
-                error = {errors2.isPICT}
-              />
-              {form2.isPICT === "0" && (
-                <>
-                  <RadioButtons
-                    label="Is International ?"
-                    options={country_arr}
-                    state={form2}
-                    setState={setForm2}
-                    name="isInternational"
-                    required
-                    error = {errors2.isInternational}
-                  />
-                  <div className=" mx-1 my-2">
-                    <InputBox
-                      label="College"
-                      name={"college"}
-                      type="text"
-                      placeholder="college name"
+              <>
+                <NoteBox
+                  title="Note"
+                  text="Please complete the payment within 60 minutes before your session expires."
+                />
+                <RadioButtons
+                  label=" Are you PICTian or not?"
+                  options={country_arr}
+                  state={form2}
+                  setState={setForm2}
+                  name="isPICT"
+                  required
+                  error={errors2.isPICT}
+                />
+                {form2.isPICT === "0" && (
+                  <>
+                    <RadioButtons
+                      label="Is International ?"
+                      options={country_arr}
+                      state={form2}
+                      setState={setForm2}
+                      name="isInternational"
                       required
-                      onChange={(e) => handleInputChange2(e)}
-                      value={form2.college}
-                      error = {errors2.college}
+                      error={errors2.isInternational}
                     />
-                  </div>
-                  <div className="mx-1 my-2">
-                    <InputBox
-                      className={ form2.isInternational === "0" ? "pointer-events-none" : ""}
-                      label="Country"
-                      name={"country"}
-                      type="text"
-                      placeholder="country"
-                      readonly={form2.isInternational === "0"}
+                    <div className=" mx-1 my-2">
+                      <InputBox
+                        label="College"
+                        name={"college"}
+                        type="text"
+                        placeholder="college name"
+                        required
+                        onChange={(e) => handleInputChange2(e)}
+                        value={form2.college}
+                        error={errors2.college}
+                        tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
+                      />
+                    </div>
+                    <div className="mx-1 my-2">
+                      <InputBox
+                        className={form2.isInternational === "0" ? "pointer-events-none" : ""}
+                        label="Country"
+                        name={"country"}
+                        type="text"
+                        placeholder="country"
+                        readonly={form2.isInternational === "0"}
+                        required
+                        error={errors2.country}
+                        onChange={(e) => handleInputChange2(e)}
+                        value={
+                          form2.isInternational === "0" ? "India" : form2.country
+                        }
+                        tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                      />
+                    </div>
+                    <div className="flex mx-1 ">
+                      <div className="mr-1 w-1/2">
+                        <InputBox
+                          label="State"
+                          type="text"
+                          name={"state"}
+                          placeholder="state"
+                          required
+                          error={errors2.state}
+                          onChange={(e) => handleInputChange2(e)}
+                          value={form2.state}
+                          tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                        />
+                      </div>
+                      <div className="ml-1 w-1/2">
+                        <InputBox
+                          label="District"
+                          name={"district"}
+                          type="text"
+                          placeholder="district"
+                          required
+                          error={errors2.district}
+                          onChange={(e) => handleInputChange2(e)}
+                          value={form2.district}
+                          tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex mx-1 ">
+                      <div className="mr-1 w-1/2">
+                        <InputBox
+                          label="City"
+                          type="text"
+                          name={"city"}
+                          placeholder="city"
+                          required
+                          error={errors2.city}
+                          onChange={(e) => handleInputChange2(e)}
+                          value={form2.city}
+                          tipstyle={"hidden"}
+                        />
+                      </div>
+                      <div className="ml-1 w-1/2">
+                        <Dropdown
+                          label="Localtiy"
+                          options={[
+                            { value: "SEL", label: "Select", selected: true },
+                            ...localTypes,
+                          ]}
+                          name={"locality"}
+                          state={form2}
+                          setState={setForm2}
+                          required
+                          error={errors2.locality}
+                        />
+                      </div>
+                    </div>
+
+                    <RadioButtons
+                      label="  Preferred mode of presentation"
+                      options={mode_arr}
+                      state={form2}
+                      setState={setForm2}
+                      name="mode"
                       required
-                      error = {errors2.country}
-                      onChange={(e) => handleInputChange2(e)}
-                      value={
-                        form2.isInternational === "0" ? "India" : form2.country
-                      }
+                      error={errors2.mode}
+                      tip={"Participants from Pune should select offline mode only."}
                     />
-                  </div>
-                  <div className="flex mx-1 ">
-                    <div className="mr-1 w-1/2">
-                      <InputBox
-                        label="State"
-                        type="text"
-                        name={"state"}
-                        placeholder="state"
-                        required
-                        error = {errors2.state}
-                        onChange={(e) => handleInputChange2(e)}
-                        value={form2.state}
-                      />
-                    </div>
-                    <div className="ml-1 w-1/2">
-                      <InputBox
-                        label="District"
-                        name={"district"}
-                        type="text"
-                        placeholder="district"
-                        required
-                        error = {errors2.district}
-                        onChange={(e) => handleInputChange2(e)}
-                        value={form2.district}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex mx-1 ">
-                    <div className="mr-1 w-1/2">
-                      <InputBox
-                        label="City"
-                        type="text"
-                        name={"city"}
-                        placeholder="city"
-                        required
-                        error = {errors2.city}
-                        onChange={(e) => handleInputChange2(e)}
-                        value={form2.city}
-                      />
-                    </div>
-                    <div className="ml-1 w-1/2">
-                      <Dropdown
-                        label="Localtiy"
-                        options={[
-                          { value: "SEL", label: "Select", selected: true },
-                          ...localTypes,
-                        ]}
-                        name={"locality"}
-                        state={form2}
-                        setState={setForm2}
-                        required
-                        error = {errors2.locality}
-                      />
-                    </div>
-                  </div>
 
-                  <RadioButtons
-                    label="  Preferred mode of presentation"
-                    options={mode_arr}
-                    state={form2}
-                    setState={setForm2}
-                    name="mode"
-                    required
-                    error = {errors2.mode}
-                  />
-
-                  {form2.mode === "0" && (
-                    <div>
-                      <InputBox
-                        type="textarea"
-                        label={"Reason for Online"}
-                        name={"reason_of_mode"}
-                        placeholder={"reason"}
-                        required
-                        error = {errors2.reason_of_mode}
-                        onChange={(e) => handleInputChange2(e)}
-                        value={form2.reason_of_mode}
-                      ></InputBox>
-                    </div>
-                  )}
-                  <InputBox
-                    type="text"
-                    label="Referral"
-                    name="referral"
-                    placeholder="Referral ID given by Campus Ambassador"
-                    onChange={(e) => handleInputChange2(e)}
-                    value={form2.referral}
-                    error = {errors2.referral}
-                  />
-                </>
-              )}
-            </>
-          )}
+                    {form2.mode === "0" && (
+                      <div>
+                        <InputBox
+                          type="textarea"
+                          label={"Reason for Online"}
+                          name={"reason_of_mode"}
+                          placeholder={"reason"}
+                          required
+                          error={errors2.reason_of_mode}
+                          onChange={(e) => handleInputChange2(e)}
+                          value={form2.reason_of_mode}
+                        ></InputBox>
+                      </div>
+                    )}
+                    <InputBox
+                      type="text"
+                      label="Referral"
+                      name="referral"
+                      placeholder="Referral ID given by Campus Ambassador"
+                      onChange={(e) => handleInputChange2(e)}
+                      value={form2.referral}
+                      error={errors2.referral}
+                      tip={"Referral should not be empty and should be between 3-50 characters long"}
+                    />
+                  </>
+                )}
+              </>
+            )}
           {formStep === 3 &&
             (paymentStatus ? (
               <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
