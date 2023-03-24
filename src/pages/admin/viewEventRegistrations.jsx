@@ -26,24 +26,24 @@ function ViewEventRegistrations() {
     const columns = [
         {
             name: 'Team ID',
-            selector: (row) => row.pid,
+            selector: 'pid',
             sortable: true,
         },
         {
             name: 'College',
-            selector: (row) => row.college,
+            selector: 'college',
         },
         {
             name: 'Leader Email',
-            selector: (row) => row.email,
+            selector: 'email',
         },
         {
             name: 'Leader Phone',
-            selector: (row) => row.phone,
+            selector: 'phone',
         },
         {
             name: 'Datetime',
-            selector: (row) => row.date,
+            selector: 'date',
         },
     ]
 

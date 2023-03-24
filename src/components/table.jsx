@@ -1,5 +1,6 @@
 import DataTable, { createTheme } from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
+import 'react-data-table-component-extensions/dist/index.css';
 
 const theme = createTheme('inc_table_dark', {
   text: {
