@@ -79,15 +79,7 @@ function Navbar() {
               >
                 Events
               </a>
-              <a
-                href="/#team"
-                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#team"
-                    ? "border-light_blue/80 text-gold"
-                    : "hover:text-gold border-transparent"
-                  }`}
-              >
-                Team
-              </a>
+              
               <a
                 href="/#sponsors"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#contact"
@@ -96,6 +88,15 @@ function Navbar() {
                   }`}
               >
                 Sponsors
+              </a>
+              <a
+                href="/#team"
+                className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#team"
+                    ? "border-light_blue/80 text-gold"
+                    : "hover:text-gold border-transparent"
+                  }`}
+              >
+                Team
               </a>
               <select
                 className="py-4 px-6 text-white font-semibold hover:text-gold border-transparent hover:border-light_blue/80 bg-faint_blue/30 hover:bg-faint_blue/10 rounded-xl border transition duration-300"
@@ -170,15 +171,7 @@ function Navbar() {
             >
               Events
             </a>
-            <a
-              href="#team"
-              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#team"
-                  ? "border-sky-800/80 text-gold"
-                  : "hover:text-gold border-transparent"
-                }`}
-            >
-              Team
-            </a>
+            
             <a
               href="#sponsors"
               className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#contact"
@@ -188,6 +181,19 @@ function Navbar() {
             >
               Sponsors
             </a>
+
+            <a
+              href="#team"
+              className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#team"
+                  ? "border-sky-800/80 text-gold"
+                  : "hover:text-gold border-transparent"
+                }`}
+            >
+              Team
+            </a>
+
+            
+            
             <select
               className="mt-2 py-4 px-4 font-semibold hover:text-gold border-transparent hover:border-sky-800/80 bg-blue-600/30 hover:bg-blue-600/10 rounded-xl border transition duration-300"
               defaultValue={"Register"}

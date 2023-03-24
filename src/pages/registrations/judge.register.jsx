@@ -66,7 +66,7 @@ function JudgeForm() {
             <FormsBanner eventName='JUDGES REGISTRATION' eventDescription="Register to join us to make InC'23 a grand success for us and all" />
             <div className='mx-5 my-5 md:mx-20 placeholder:'>
                 <form onSubmit={handleSubmit} className='shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full'>
-                    <NoteBox title='Note' text='This form is for judges only. If you are a participant, please register for the event you are participating in.' />
+                    <NoteBox title='Note' text='This registration form is to be filled by the judges only for judging the impetus and concepts event..' />
                     <InputBox label='Name' type='text' name='name' value={judge.name} placeholder='Enter Full Name' onChange={handleInputChange} error={errors.name} required />
                     <InputBox label='Email' type='email' name='email' value={judge.email} placeholder='Enter Email' onChange={handleInputChange} error={errors.email} required />
                     <InputBox label='Phone' type='tel' name='phone' value={judge.phone} placeholder='Enter Phone Number' onChange={handleInputChange} error={errors.phone} required />

@@ -1175,7 +1175,7 @@ function TeamImpetus() {
               ) : (
                 <Buttons
                   className=" mx-2 my-2  "
-                  value="Pay (Rs.300)"
+                  value="Pay (Rs.100)"
                   onClick={nextForm}
                   loading={
                     registerUserMutationForm0.isLoading ||
