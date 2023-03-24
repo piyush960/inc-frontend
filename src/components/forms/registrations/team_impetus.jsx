@@ -649,9 +649,6 @@ function TeamImpetus() {
       );
     }
 
-    // console.log(formFields);
-    // console.log(form0);
-    console.log(form2);
     // setFormStep((currentStep) => currentStep + 1);
     // setActiveStep(activeStep + 1);
   };
