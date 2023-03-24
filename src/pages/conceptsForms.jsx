@@ -38,10 +38,8 @@ function ConceptsForm() {
                 </div>
                 <div className="relative p-6 flex-auto">
                   <ul>
-                    <li>Instruction No 1</li>
-                    <li>Instruction No 2</li>
-                    <li>Instruction No 3</li>
-                    <li>Instruction No 4</li>
+                  <li>Only after clicking add members, the member will be added</li>
+                  <li>Each step will be completed only after clicking on next step</li>
                   </ul>
                 </div>
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">

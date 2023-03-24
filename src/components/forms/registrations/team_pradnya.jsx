@@ -513,6 +513,7 @@ function TeamPradnya() {
                       error={errors1.name}
                       onChange={(event) => handleFormChange(event, index)}
                       value={form.name}
+                      tip={'Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters.'}
                     />
                     <InputBox
                       label="Email ID"
@@ -577,7 +578,7 @@ function TeamPradnya() {
                       required
                       error={errors1.member_id}
                     />
-
+                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb"/>
                     {form1.length > 1 && (
                       <>
                         <Buttons
@@ -633,6 +634,7 @@ function TeamPradnya() {
                       onChange={(e) => handleInputChange2(e)}
                       value={form2.college}
                       error={errors2.college}
+                      tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters."}
                     />
                   </div>
                   <div className="mx-1 my-2">
@@ -653,6 +655,7 @@ function TeamPradnya() {
                       value={
                         form2.isInternational === "0" ? "India" : form2.country
                       }
+                      tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
                     />
                   </div>
                   <div className="flex mx-1 ">
@@ -666,6 +669,7 @@ function TeamPradnya() {
                         error={errors2.state}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.state}
+                        tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
                       />
                     </div>
                     <div className="ml-1 w-1/2">
@@ -678,6 +682,7 @@ function TeamPradnya() {
                         error={errors2.district}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.district}
+                        tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
                       />
                     </div>
                   </div>
@@ -718,6 +723,7 @@ function TeamPradnya() {
                     name="mode"
                     required
                     error={errors2.mode}
+                    tip={"Participants from Pune should select offline mode only"}
                   />
 
                   {form2.mode === "0" && (
@@ -731,6 +737,7 @@ function TeamPradnya() {
                         error={errors2.reason_of_mode}
                         onChange={(e) => handleInputChange2(e)}
                         value={form2.reason_of_mode}
+                        tip={"Reason of mode if applicable, should be between 2 and 20 characters(both inclusive)"}
                       ></InputBox>
                     </div>
                   )}
@@ -742,6 +749,7 @@ function TeamPradnya() {
                     onChange={(e) => handleInputChange2(e)}
                     value={form2.referral}
                     error={errors2.referral}
+                    tip={"Referral should not be empty and should be between 3-50 characters long"}
                   />
                 </>
               )}

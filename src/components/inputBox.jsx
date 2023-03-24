@@ -1,13 +1,23 @@
 import './styles/inputBox.css';
+import { useState } from 'react';
 
 // function InputBox({ label, name, type, value, placeholder, min, max, inputRef, onChange, classNames, required, error }) {
 function InputBox(props) {
+    const [showTooltip, setShowTooltip] = useState(false);
     return (
         <div className='input-box w-full mb-4 relative'>
             <label htmlFor={props.label.toLowerCase().replace(/ /g, "_")} className={`input-label font-medium  text-white text-lg before: ${props.required && 'after:content-["*"] after:ml-0.5 after:text-gold'}`}>{props.label}</label>
-            <div class="tooltip" data-tip={props.tip}>
-                <button className={`bg-faint_blue rounded-full mb-3 ml-5 px-5 ${props.tipstyle}`}>i</button>
-            </div>
+            
+                {props.tip && <button onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)} className="bg-faint_blue text-white ml-3 px-5 rounded-full mb-1 hover:bg-light_blue">
+                    i
+                </button>}
+                {showTooltip &&  (
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 px-2 py-1 bg-light_blue text-white rounded">
+                        {props.tip}
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-2 border-gold"></div>
+                    </div>
+                )}
+            
             <input
                 {...props}
                 id={props.label.toLowerCase().replace(/ /g, "_")}

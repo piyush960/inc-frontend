@@ -637,7 +637,7 @@ function TeamConcepts() {
           </StepWrapper>
         ))}
       </StepContainer>
-      <div className=" md:mx-16 my-6">
+      <div className="md:mx-16 my-6">
         <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
           {/* form 0 */}
           {formStep === 0 && (
@@ -877,7 +877,8 @@ function TeamConcepts() {
                       required
                       error={errors1.member_id}
                     />
-
+                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb"/>
+                   {/* <Notebox /> */}
                     {/* {membersCount <= index && (<Buttons
                                             value="remove member"
                                             onClick={removefields(index)}

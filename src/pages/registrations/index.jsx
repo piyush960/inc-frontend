@@ -4,6 +4,7 @@ import JudgeForm from './judge.register';
 import EventsForm from './events.register';
 import AdminForm from './admin.register';
 import scrollToTop from '../../utils/scrollToTop';
+import { NoteBox } from '../../components';
 // const JudgeForm = lazy(() => import('./judge.register'));
 // const EventsForm = lazy(() => import('./events.register'));
 // const AdminForm = lazy(() => import('./admin.register'));
@@ -20,6 +21,11 @@ function RegistrationsForms() {
                 <Route path='/events/:eventName' element={<EventsForm />} />
                 <Route path='/admin' element={<AdminForm />} />
             </Routes>
+            <div className='md:mx-32'>
+            <NoteBox title="Contact"
+                    text="For any technical queries please contact Abhishek Jhadhav : +91 70304 05299" />
+            </div>
+            
         </div>
     );
 }

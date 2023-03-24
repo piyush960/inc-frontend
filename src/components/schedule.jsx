@@ -22,7 +22,7 @@ function Schedule() {
 
               </div>
               <div class='mt-3  sm:pr-8'>
-                <h3 class='text-3xl font-semibold text-gold dark:text-gold'>IMPETUS</h3>
+                <h3 class='text-3xl font-semibold text-gold dark:text-gold'>DAY 1</h3>
                 <time class='block mb-1 text-xl font-normal leading-none text-gold dark:text-gold'>8th April'23</time>
                 <p class='block text-xl font-normal leading-none text-gold dark:text-gold'>Time-10 am</p>
                 {/* <p class='text-base font-normal text-white dark:text-white'>Get started with dozens of web components and interactive elements.</p> */}
@@ -37,7 +37,7 @@ function Schedule() {
                 <div class='hidden sm:flex w-full bg-light_blue/40 h-1  dark:bg-light_blue/40'></div>
               </div>
               <div class='mt-3 sm:pr-8'>
-                <h3 class='text-3xl font-semibold text-gold dark:text-gold'>PRADNYA</h3>
+                <h3 class='text-3xl font-semibold text-gold dark:text-gold'>DAY 2</h3>
                 <time class='block mb-1 text-xl font-normal leading-none text-gold dark:text-gold'>9th April'23</time>
                 {/* <p class='text-base font-normal text-white dark:text-white'>Get started with dozens of web components and interactive elements.</p> */}
                 <p class='block text-xl font-normal leading-none text-gold dark:text-gold'>Time-10 am</p>
@@ -51,7 +51,7 @@ function Schedule() {
                 {/* <div class='hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700'></div> */}
               </div>
               <div class='mt-3 sm:pr-8 '>
-                <h3 class='text-3xl font-semibold text-gold dark:text-gold'>CONCEPTS</h3>
+                <h3 class='text-3xl font-semibold text-gold dark:text-gold'>DAY3</h3>
                 <time class='block mb-1 text-xl font-normal leading-none text-gold dark:text-gold'>10th April'23</time>
                 <p class='block text-xl font-normal leading-none text-gold dark:text-gold'>Time-10 am</p>
                 {/* <p class='text-base font-normal text-white dark:text-white'>Get started with dozens of web components and interactive elements.</p> */}
