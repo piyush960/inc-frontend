@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useMemo } from 'react';
 import { FormsBanner, RadioButtons } from '../../components';
 import { useGetRegistrations } from '../../hooks/admin.hooks';
 
@@ -23,29 +23,52 @@ function ViewEventRegistrations() {
         },
     ]
 
-    const columns = [
+    const columns = useMemo(() => [
         {
             name: 'Team ID',
             selector: 'pid',
+            width: '130px',
             sortable: true,
         },
         {
+            name: 'Title',
+            selector: 'title',
+            width: '240px',
+            wrap: true,
+            omit: event.eventName === 'pradnya',
+        },
+        {
+            name: 'Abstract',
+            selector: 'abstract',
+            width: '300px',
+            omit: event.eventName === 'pradnya',
+        },
+        {
             name: 'College',
+            width: '300px',
             selector: 'college',
         },
         {
             name: 'Leader Email',
+            width: '260px',
             selector: 'email',
         },
         {
             name: 'Leader Phone',
+            width: '160px',
             selector: 'phone',
         },
         {
+            name: 'Mode',
+            selector: 'mode',
+            width: '120px',
+        },
+        {
             name: 'Datetime',
+            width: '140px',
             selector: 'date',
         },
-    ]
+    ], [event.eventName])
 
     return (
         <>
