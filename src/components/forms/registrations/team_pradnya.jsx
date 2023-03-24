@@ -18,7 +18,7 @@ import styled from "styled-components";
 import Dropdown from "../../dropdown";
 import RadioButtons from "../../radioButtons";
 import { useRef } from "react";
-import { paymentLinks } from "../../../static/data";
+import { year_arr , localTypes , paymentLinks } from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -218,19 +218,9 @@ const initialErrorsForm3 = {
   payment_id: "",
 };
 
-const local_arr = [
-  { value: "SEL", label: "Select", disabled: true },
-  { value: "1", label: "Urban" },
-  { value: "0", label: "Rural" },
-];
 
-const year_arr = [
-  { value: "SEL", label: "Select" },
-  { value: "FE", label: "1st year" },
-  { value: "SE", label: "2nd year" },
-  { value: "TE", label: "3rd year" },
-  { value: "BE", label: "4th year" },
-];
+
+
 
 function TeamPradnya() {
   const [activeStep, setActiveStep] = React.useState(1);
@@ -706,8 +696,11 @@ function TeamPradnya() {
                     </div>
                     <div className="ml-1 w-1/2">
                       <Dropdown
-                        label="Localtiy"
-                        options={local_arr}
+                        label="Locality"
+                        options={[
+                          { value: "SEL", label: "Select", selected: true },
+                          ...localTypes,
+                        ]}
                         name={"locality"}
                         state={form2}
                         setState={setForm2}
@@ -754,7 +747,10 @@ function TeamPradnya() {
               )}
                 <Dropdown
                 label=" Which year are you in?"
-                options={year_arr}
+                options={[
+                  { value: "SEL", label: "Select", selected: true },
+                  ...year_arr,
+                ]}
                 name={"year"}
                 state={form2}
                 setState={setForm2}

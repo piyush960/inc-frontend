@@ -20,6 +20,7 @@ import {
   paymentLinks,
   projectDomains,
   projectTypes,
+  localTypes
 } from "../../../static/data";
 
 const MainContainer = styled.div`
@@ -288,11 +289,7 @@ const gender_type = [
 
 // ]
 
-const local_arr = [
-  { value: "SEL", label: "Select", disabled: true },
-  { value: "1", label: "Urban" },
-  { value: "0", label: "Rural" },
-];
+
 
 function TeamConcepts() {
   //form0
@@ -980,7 +977,10 @@ function TeamConcepts() {
                     <div className="ml-1 w-1/2">
                       <Dropdown
                         label="Localtiy"
-                        options={local_arr}
+                        options={[
+                          { value: "SEL", label: "Select", selected: true },
+                          ...localTypes,
+                        ]}
                         name={"locality"}
                         state={form2}
                         setState={setForm2}
