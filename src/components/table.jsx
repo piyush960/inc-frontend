@@ -227,12 +227,12 @@ const customStyles = {
   },
 }
 
-function Table({ data, keyField, columns, title, loading, conditionalRowStyles, expandableRows, className }) {
+function Table(props) {
 
   return (
-    <div className={`${className}`}>
-      <DataTableExtensions columns={columns} data={data} fileName={title} exportHeaders>
-        <DataTable columns={columns} data={data} keyField={keyField} pagination fixedHeader fixedHeaderScrollHeight='400px' highlightOnHover theme='inc_table_dark' progressPending={loading} customStyles={customStyles} conditionalRowStyles={conditionalRowStyles} expandableRows={expandableRows} title={title} />
+    <div className={props.outerClassName}>
+      <DataTableExtensions {...props} fileName={props.title} exportHeaders>
+        <DataTable {...props} pagination fixedHeader fixedHeaderScrollHeight='400px' highlightOnHover theme='inc_table_dark' progressPending={props.loading} customStyles={customStyles} />
       </DataTableExtensions>
     </div>
   );
