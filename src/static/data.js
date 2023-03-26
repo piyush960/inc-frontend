@@ -18,10 +18,12 @@ export const projectTypes = [
 ]
 
 export const slots = [
-    { value: '1', label: 'Saturday 8th April (9:00 AM - 11:59 AM)' },
-    { value: '2', label: 'Saturday 8th April (1:00 PM - 6:00 PM)' },
-    { value: '3', label: 'Sunday 9th April (9:00 AM - 11:59 AM)' },
-    { value: '4', label: 'Sunday 9th April (1:00 PM - 6:00 PM)' }
+    { value: '1', label: 'Friday 21st April (10:00 AM - 1:00 PM)' },
+    { value: '2', label: 'Friday 21st April (2:00 PM - 5:00 PM)' },
+    { value: '3', label: 'Friday 21st April (5:00 PM - 7:00 PM)' },
+    { value: '4', label: 'Saturday 22nd April (9:00 AM - 12:00 PM)' },
+    { value: '5', label: 'Saturday 22nd April (2:00 PM - 5:00 PM)' },
+    { value: '6', label: 'Saturday 22nd April (5:00 PM - 7:00 PM)' }
 ]
 
 export const localTypes = [
