@@ -74,7 +74,7 @@ function VerifyEventRegistration() {
             </div>
             {event.eventName &&
                 <Suspense fallback={<h1>Loading...</h1>}>
-                    <Table columns={columns} loading={!event.eventName || isLoading} conditionalRowStyles={conditionalRowStyles} data={data?.data} keyField='payment_id' className='md:mx-20 mb-3 mx-5 mb-10' />
+                    <Table columns={columns} loading={!event.eventName || isLoading} conditionalRowStyles={conditionalRowStyles} data={data?.data} keyField='payment_id' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
                 </Suspense>
             }
         </>
