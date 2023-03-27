@@ -27,90 +27,97 @@ function ViewEventRegistrations() {
     const columns = useMemo(() => [
         {
             name: 'Ticket',
-            selector: 'ticket',
+            selector: row => row['ticket'],
+            cellExport: row => row['ticket'],
             width: '140px',
             wrap: true,
             sortable: true,
         },
         {
             name: 'Team ID',
-            selector: 'pid',
+            selector: row => row['pid'],
+            cellExport: row => row['pid'],
             width: '130px',
             sortable: true,
         },
         {
             name: 'Title',
-            selector: 'title',
+            selector: row => row['title'],
+            cellExport: row => row['title'],
             width: '240px',
             wrap: true,
             omit: event.eventName === 'pradnya',
         },
         {
             name: 'Abstract',
-            selector: 'abstract',
+            selector: row => row['abstract'],
+            cellExport: row => row['abstract'],
             width: '300px',
             omit: event.eventName === 'pradnya',
         },
         {
             name: 'Domain',
-            selector: 'pid',
+            selector: row => row['pid'],
             width: '140px',
+            cell: row => projectDomains.find(({ value }) => value === row.pid.split('-')[0])?.label,
             omit: event.eventName === 'pradnya',
-            cell: row => projectDomains.find(({ value }) => value === row.pid.split('-')[0]).label,
         },
         {
             name: 'Project Type',
-            selector: 'project_type',
+            selector: row => row['project_type'],
+            cellExport: row => row['project_type'],
             width: '180px',
             omit: event.eventName === 'pradnya',
         },
         {
             name: 'Sponsored',
-            selector: 'sponsored',
+            selector: row => row['sponsored'],
             width: '120px',
             omit: event.eventName === 'pradnya',
             cell: row => row.sponsored === '1' ? 'Yes' : 'No',
         },
         {
             name: 'Company',
-            selector: 'company',
+            selector: row => row['company'],
+            cellExport: row => row['company'],
             width: '200px',
             omit: event.eventName === 'pradnya',
         },
         {
             name: 'NDA',
-            selector: 'nda',
+            selector: row => row['nda'],
             width: '80px',
             omit: event.eventName === 'pradnya',
             cell: row => row.nda === '1' ? 'Yes' : 'No',
         },
         {
             name: 'Members Name',
-            selector: 'name',
-            cell: row => <ol className='list-disc'>{row.name.split(',').map((name, index) => <li key={index}>{name}</li>)}</ol>,
+            selector: row => row['name'],
+            cell: row => <ol className='list-disc'>{row.name.split(',').map((name, index) => <li key={index}>{name}<span className='hidden'> , </span></li>)}</ol>,
             width: '200px',
         },
         {
             name: 'Members Phone',
-            selector: 'phone',
-            cell: row => <ol className='list-disc'>{row.phone.split(',').map((phone, index) => <li key={index}>{phone}</li>)}</ol>,
+            selector: row => row['phone'],
+            cell: row => <ol className='list-disc'>{row.phone.split(',').map((phone, index) => <li key={index}>{phone}<span className='hidden'> , </span></li>)}</ol>,
             width: '180px',
         },
         {
             name: 'Members Email',
-            selector: 'email',
-            cell: row => <ol className='list-disc'>{row.email.split(',').map((email, index) => <li key={index}>{email}</li>)}</ol>,
+            selector: row => row['email'],
+            cell: row => <ol className='list-disc'>{row.email.split(',').map((email, index) => <li key={index}>{email}<span className='hidden'> , </span></li>)}</ol>,
             width: '240px',
         },
         {
             name: 'College',
             width: '300px',
-            selector: 'college',
+            selector: row => row['college'],
+            cellExport: row => row['college'],
         },
         {
             name: 'Year',
             width: '90px',
-            selector: 'year',
+            selector: row => row['year'],
             omit: event.eventName === 'concepts',
             cell: row => {
                 switch (row.year) {
@@ -128,47 +135,52 @@ function ViewEventRegistrations() {
         {
             name: 'City',
             width: '130px',
-            selector: 'city',
+            selector: row => row['city'],
+            cellExport: row => row['city'],
         },
         {
             name: 'District',
             width: '130px',
-            selector: 'district',
+            selector: row => row['district'],
+            cellExport: row => row['district'],
         },
         {
             name: 'Locality',
             width: '100px',
-            selector: 'locality',
+            selector: row => row['locality'],
             cell: row => row.locality === '1' ? 'Urban' : 'Rural',
         },
         {
             name: 'Guide Name',
             width: '200px',
-            selector: 'guide_name',
+            selector: row => row['guide_name'],
+            cellExport: row => row['guide_name'],
             omit: event.eventName === 'pradnya',
         },
         {
             name: 'Guide Email',
             width: '240px',
-            selector: 'guide_email',
+            selector: row => row['guide_email'],
+            cellExport: row => row['guide_email'],
             omit: event.eventName === 'pradnya',
         },
         {
             name: 'Guide Phone',
             width: '150px',
-            selector: 'guide_phone',
+            selector: row => row['guide_phone'],
             omit: event.eventName === 'pradnya',
             cell: row => row.guide_phone === '' ? 'Unavailable' : row.guide_phone,
         },
         {
             name: 'HOD Email',
             width: '240px',
-            selector: 'hod_email',
+            selector: row => row['hod_email'],
+            cellExport: row => row['hod_email'],
             omit: event.eventName === 'pradnya',
         },
         {
             name: 'Mode',
-            selector: 'mode',
+            selector: row => row['mode'],
             width: '130px',
             cell: row => {
                 switch (row.mode) {
@@ -186,7 +198,8 @@ function ViewEventRegistrations() {
         {
             name: 'Date',
             width: '160px',
-            selector: 'date',
+            selector: row => row['date'],
+            cellExport: row => row['date'],
             sortable: true,
         },
     ], [event.eventName])
@@ -201,7 +214,7 @@ function ViewEventRegistrations() {
             </div>
             {event.eventName &&
                 <Suspense fallback={<h1>Loading...</h1>}>
-                    <Table title={`Event Registrations ${new Date().toISOString().split('T')[0]}`} columns={columns} loading={!event.eventName || isLoading} data={data?.data} expandableRows expandableRowsComponent={expandableRowsComponent} keyField='pid' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
+                    <Table title={`${event.eventName.charAt(0).toUpperCase()}${event.eventName.slice(1)} Registrations ${new Date().toISOString().split('T')[0]}`} columns={columns} loading={!event.eventName || isLoading} data={data?.data} expandableRows={event.eventName !== 'pradnya'} expandableRowsComponent={expandableRowsComponent} keyField='pid' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
                 </Suspense>
             }
         </>
