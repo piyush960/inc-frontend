@@ -51,7 +51,7 @@ const eventSponsors = [
 const eventSponsors2 = [
   {
     name: 'Veritas',
-    logo: 'https://drive.google.com/uc?export=view&id=1KmAmtM6bhre8GCgOFMk4AXNtT2BowRbw',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914537/Veritas_Logo_RED_1000x197_wzcrl7.jpg',
     website: 'https://www.veritas.com/',
   },
 ];
@@ -59,7 +59,7 @@ const eventSponsors2 = [
 const Other = [
   {
     name: 'Foldhealth',
-    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914537/Veritas_Logo_RED_1000x197_wzcrl7.jpg',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914533/foldhealth.jpeg_onmmqj.jpg',
     website: 'https://www.fold.health/',
   },
   {
