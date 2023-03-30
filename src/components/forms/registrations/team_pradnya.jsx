@@ -396,7 +396,7 @@ function TeamPradnya() {
   const [errors3, setErrors3] = useState(initialErrorsForm3);
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "pradnya");
   //steps for whole form
-  const [formStep, setFormStep] = React.useState(2);
+  const [formStep, setFormStep] = React.useState(1);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -766,7 +766,7 @@ function TeamPradnya() {
                     
                     tip={"Referral should not be empty and should be between 3-50 characters long"}
                   />
-                  console.log(referral)
+                
                 </>
               )}
                 <Dropdown
