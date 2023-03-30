@@ -1,12 +1,15 @@
 // import './styles/eventDetails.css';
 // import EventCards from '../components/eventCards';
+import impetus_logo from "../assets/images/impetus_logo.png";
+import concepts_logo from "../assets/images/concepts_logo.png";
+import pradnya_logo from "../assets/images/pradnya_logo.png";
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
     function EventDetails(props){
       const [eventDetail,setEventDetail]=useState('');
       const eventsData = {
         impetus: {
-            logo: 'impetus_logo',
+            logo: impetus_logo,
             name: 'IMPETUS',
             short_desc: 'International Level Project Competition cum Exhibition',
             desc: 'Impetus is an inter-collegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, were closely associated with this event. During the 3 days event, first year, second year and third year students from various colleges across India and abroad showcase their projects.',
@@ -36,13 +39,45 @@ import { useNavigate, useParams } from 'react-router-dom';
             rules: [
                 'The decision of judges will be final and binding to one and all',
             ],
-            button_link: 'https://pictinc.org/impetus_register23/',
+            contact:['Apoorvaraj : 8530191073 ','Mrugank : 7083823772',' Vrushali : 9766176681', 'Aarti : 9405119460'],
+            button_link: 'https://pictinc.org/register/events/impetus',
+            schedule:''
         },
         concepts: {
-
+          logo: concepts_logo,
+          name:'CONCEPTS',
+          short_desc:'Concepts',
+          desc:'',
+          domains: [
+            {
+                domain: 'APPLICATION DEVELOPMENT',
+                sub_domains: 'Mobile Applications-Android, Web Applications, Database applications, others),(Big Earth Data Analytics, Geo Informatics, Data Mining on Big Data, Digital marketing optimization, Data exploration and discovery, Fraud detection and prevention, Social network and relationship analysis, Machine generated data analytics, Data retention, Others)'
+            },
+            {
+                domain: 'COMMUNICATION NETWORKS & SECURITY SYSTEMS',
+                sub_domains: '(Computer networks, Internet of Things, Software Defined Network, Vehicular Networks, Wireless and Mobile Networks, Information and Network Security, GPS | GSM Projects, Wireless Communication, Antenna & RF Communication, Optical Communication & Network, Others), (Blockchain applications: cryptocurrency systems, healthcare system, advertising processes, insurance processes, copyright protection system, energy system, tracking system, monitoring system, Security system, societal applications, others), (Virtualization and Autonomic Computing, High Speed Network, Security in Cloud, Cloud Computing, Data center Management, Handling Big Data on Cloud, Mobile Cloud, Cloud Forensics, Fog Computing, Others)'
+            },
+            {
+                domain: 'DIGITAL / IMAGE/ SPEECH / VIDEO PROCESSING',
+                sub_domains: '(Digital Signal processing, Image processing, Speech recognition, Video processing, Speech to text / Text to speech, Others)'
+            },
+            {
+                domain: 'EMBEDDED/VLSI SYSTEMS',
+                sub_domains: '(Image Processing & Remote Sensing, Machine Learning for Embedded Systems, Embedded Vision, Internet of Things, others), (Analog & Mixed Signal VLSI Design, Testing & Verification of VLSI Design, others)'
+            },
+        ],
+        registrations: {
+          fees: 100,
+          team_size: 5
+      },
+      prizes: 'InC announces a total cash prize of ₹6 Lakhs and a special prize of ₹1 Lakh for Project related to Online Teaching Aids (InC 2023 Theme).',
+      rules: [
+          'The decision of judges will be final and binding to one and all',
+      ],
+      button_link: 'https://pictinc.org/register/events/concepts',
         },
         pradnya: {
-            logo: 'pradnya_logo',
+            logo: pradnya_logo,
             name: 'PRADNYA',
             short_desc: 'Competitive Programming',
             desc: 'PRADNYA is a one of a kind programming event meticulously forged by our finest, catering to rookies and veterans alike, from all over the world. This Contest puts the programmer’s logical thinking and Problem solving skills to the test using programming languages, which guarantees to appraise their skills as a programmer.',
@@ -76,7 +111,7 @@ import { useNavigate, useParams } from 'react-router-dom';
             rules: [
                 'The decision of judges will be final and binding.',
             ],
-            button_link: 'https://pictinc.org/subevents_register23/online/index_org.php',
+            button_link: 'https://pictinc.org/register/events/pradnya',
         },
       }
       
@@ -95,14 +130,14 @@ import { useNavigate, useParams } from 'react-router-dom';
       useEffect(()=>fetchName(),[]) 
         return (
             <>
-               (
+               
                 <div>
                 {
                   eventDetail!==''
                 ?
                 <div className="grid md:grid-cols-2 min-h-screen md:p-8 gap-8 backdrop-blur-xl bg-gradient-to-b from-gray-900/40 to-gray-600/80">
-                  <div className="my-auto text-center space-y-4 text-white md:h-full p-4 py-8  ">
-                    <div className=" w-3/4 max-w-[380px] h-[380px] mx-auto">
+                  <div className=" text-center  text-white  px-4   ">
+                    <div className=" w-[60%] max-w-[380px]  mx-auto">
                       <img
                         src={eventDetail.logo} 
                         alt="event-logo"
@@ -115,7 +150,7 @@ import { useNavigate, useParams } from 'react-router-dom';
                       {/* {console.log(eventDetail.name)} */}
                     </div>
                     <div className=" border-b border-gray-500"></div>
-                    <div className="font-light text-gray-400 text-justify">
+                    <div className="font-light text-gray-400 justify py-4 justify-center">
                       {eventDetail.short_desc}
                       {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat dolor amet eum rem, magnam velit quam vero fugit quis reprehenderit animi laudantium temporibus! Tenetur temporibus odio nesciunt minus, sint consequuntur! */}
                     </div>
@@ -139,9 +174,9 @@ import { useNavigate, useParams } from 'react-router-dom';
                       >
                         <a href={eventDetail.button_link}>Register</a>
                       </button>
-                    <p className="text-red-400 font-medium event-register-buttons disabled">
+                    {/* <p className="text-red-400 font-medium event-register-buttons disabled">
                         Registrations closed! Try with other events.
-                      </p>          
+                      </p>           */}
                   </div>
                   {/* event details description */}
                   <div className="space-y-4  p-8 h-full overflow-auto bg-black/20 shadow-lg border border-gray-700 max-h-screen font-thin text-gray-200">
@@ -278,7 +313,7 @@ import { useNavigate, useParams } from 'react-router-dom';
                           Contact Help
                         </div>
                         <div className="border-t pt-2 border-slate-600">
-                          {/* {eventData?.contact?.map((data) => (
+                          {eventsData?.contact?.map((data) => (
                             <div>
                               <span className="text-blue-300 px-3">
                                 {(data?.split(" ")?.[0] || " ") +
@@ -293,7 +328,7 @@ import { useNavigate, useParams } from 'react-router-dom';
                                 </a>
                               </p>
                             </div>
-                          ))} */}
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -304,7 +339,7 @@ import { useNavigate, useParams } from 'react-router-dom';
                 ''}
                 
                 </div>
-              )
+              
             </>
         )
     }
