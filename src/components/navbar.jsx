@@ -79,7 +79,7 @@ function Navbar() {
               >
                 Events
               </a>
-              
+
               <a
                 href="/#sponsors"
                 className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#contact"
@@ -107,7 +107,6 @@ function Navbar() {
                 <option>Impetus</option>
                 <option>Concepts</option>
                 <option>Pradnya</option>
-                <option>Judge</option>
               </select>
             </div>
 
@@ -171,7 +170,7 @@ function Navbar() {
             >
               Events
             </a>
-            
+
             <a
               href="#sponsors"
               className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#contact"
@@ -192,8 +191,8 @@ function Navbar() {
               Team
             </a>
 
-            
-            
+
+
             <select
               className="mt-2 py-4 px-4 font-semibold hover:text-gold border-transparent hover:border-sky-800/80 bg-blue-600/30 hover:bg-blue-600/10 rounded-xl border transition duration-300"
               defaultValue={"Register"}

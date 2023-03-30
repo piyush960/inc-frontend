@@ -3,7 +3,7 @@ import logo from '../assets/images/logo.png'
 function Footer() {
     return (
         <div className='footer'>
-            
+
 <footer class="p-4 bg-gray-800 border-t-2 border-t-gold sm:p-6 ">
                 <div class="md:flex md:justify-between lg:px-52 sm:m-10">
                     <div className="Address md:mb-6">
@@ -16,13 +16,13 @@ function Footer() {
         <div class="my-8 md:mb-0 lg:pr-14">
             <a href="#/home" class="flex items-center">
                 <img src={logo} className="h-20 w-20 mr-3" alt="INC logo" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">InC <span className="self-center text-xs font-semibold whitespace-nowrap dark:text-white">Impetus And Concepts</span></span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">InC <span className="self-center text-xs font-semibold whitespace-nowrap dark:text-white">Impetus and Concepts</span></span>
             </a>
-        </div>      
+        </div>
 
                     <div className="Email lg:mt-8">
                         <h1 className="mb-2 text-2xl text-gray-900 uppercase dark:text-white">EMAIL</h1>
-                        <p className="text-md text-gray-900 uppercase dark:text-white">inc@pict.edu</p>
+                        <p className="text-md text-gray-900 dark:text-white">inc@pict.edu</p>
                     </div>
     </div>
     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
