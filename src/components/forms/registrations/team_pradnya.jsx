@@ -317,7 +317,7 @@ function TeamPradnya() {
     setForm1(data);
   };
   const handleInputChange2 = (e) => {
-    
+
     console.log(form2);
     const { name, value } = e.target;
     if (name === "isPICT" && value === "1") {
@@ -348,7 +348,7 @@ function TeamPradnya() {
         locality: "",
         isInternational: "",
         year: "",
-     
+
       }));
     } else if (name === "isInternational" && value === "0") {
       setForm2((form2) => ({
@@ -436,7 +436,7 @@ function TeamPradnya() {
       for (const property in form2) {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
-          
+
           if (property === "referral") continue;
           toast.warn("Please enter all fields!");
           return;
@@ -763,7 +763,7 @@ function TeamPradnya() {
                     onChange={(e) => handleInputChange2(e)}
                     value={form2.referral}
                     error={errors2.referral}
-                    
+
                     tip={"Referral should not be empty and should be between 3-50 characters long"}
                   />
                   console.log(referral)
@@ -773,7 +773,7 @@ function TeamPradnya() {
                 label=" Which year are you in?"
                 options={[
                   { value: "SEL", label: "Select", selected: true },
-                  ...year_arr,
+                  [...year_arr, { value: "BE", label: "4th year" }],
                 ]}
                 name={"year"}
                 state={form2}
