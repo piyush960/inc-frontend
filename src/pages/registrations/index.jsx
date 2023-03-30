@@ -17,7 +17,7 @@ function RegistrationsForms() {
     return (
         <div className=''>
             <Routes>
-                <Route path='/judge' element={<JudgeForm />} />
+                <Route path='/judge/:eventName' element={<JudgeForm />} />
                 <Route path='/events/:eventName' element={<EventsForm />} />
                 <Route path='/admin' element={<AdminForm />} />
             </Routes>
@@ -25,7 +25,7 @@ function RegistrationsForms() {
             <NoteBox title="Contact"
                     text="For any technical queries please contact Abhishek Jadhav : +91 70304 05299" />
             </div>
-            
+
         </div>
     );
 }
