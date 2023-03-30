@@ -241,7 +241,7 @@ function TeamPradnya() {
   const registerUserMutationForm1 = useRegisterStep2(setErrors1, "pradnya");
 
   const handleFormChange = (event, index) => {
-    console.log(form1)
+    
     const { name, value } = event.target;
     setForm1((prevState) => {
       errors1[name] !== "" &&
@@ -318,7 +318,6 @@ function TeamPradnya() {
   };
   const handleInputChange2 = (e) => {
 
-    console.log(form2);
     const { name, value } = e.target;
     if (name === "isPICT" && value === "1") {
       setForm2((form2) => ({
@@ -396,7 +395,7 @@ function TeamPradnya() {
   const [errors3, setErrors3] = useState(initialErrorsForm3);
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "pradnya");
   //steps for whole form
-  const [formStep, setFormStep] = React.useState(2);
+  const [formStep, setFormStep] = React.useState(1);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -816,7 +815,7 @@ function TeamPradnya() {
               </div>
             ))}
             <div className="flex justify-between">
-              {formStep > 0 && formStep < 4 && (
+              {formStep > 1 && formStep < 4 && (
                 <Buttons
                   className="mx-2 my-2"
                   value=" Previous Step"

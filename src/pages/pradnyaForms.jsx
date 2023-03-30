@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { FormsBanner, ProgressBar, Modals, Buttons } from '../components';
 import TeamPradnya from '../components/forms/registrations/team_pradnya';
 import './styles/forms.css';
-const implogo=require('../assets/images/pradnya_logo.png')
+const implogo = require('../assets/images/pradnya_logo.png')
 function PradnyaForms() {
     const [showModal, setShowModal] = useState(false)
     function toggleInstructionsModal() {
@@ -32,10 +32,8 @@ function PradnyaForms() {
                                 </div>
                                 <div className="relative p-6 flex-auto">
                                     <ul>
-                                        <li>Instruction No 1</li>
-                                        <li>Instruction No 2</li>
-                                        <li>Instruction No 3</li>
-                                        <li>Instruction No 4</li>
+                                        <li>Only after clicking add members, the member will be added</li>
+                                        <li>Each step will be completed only after clicking on next step</li>
                                     </ul>
                                 </div>
                                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
@@ -52,7 +50,7 @@ function PradnyaForms() {
                     </div>
                 </>
             </Modals>
-             <TeamPradnya />
+            <TeamPradnya />
         </div>
     );
 }
