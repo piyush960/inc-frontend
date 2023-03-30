@@ -23,7 +23,7 @@ function RegistrationsForms() {
             </Routes>
             <div className='md:mx-32'>
             <NoteBox title="Contact"
-                    text="For any technical queries please contact Abhishek Jhadhav : +91 70304 05299" />
+                    text="For any technical queries please contact Abhishek Jadhav : +91 70304 05299" />
             </div>
 
         </div>

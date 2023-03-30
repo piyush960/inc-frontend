@@ -241,6 +241,7 @@ function TeamPradnya() {
   const registerUserMutationForm1 = useRegisterStep2(setErrors1, "pradnya");
 
   const handleFormChange = (event, index) => {
+    console.log(form1)
     const { name, value } = event.target;
     setForm1((prevState) => {
       errors1[name] !== "" &&
@@ -316,6 +317,7 @@ function TeamPradnya() {
     setForm1(data);
   };
   const handleInputChange2 = (e) => {
+    
     console.log(form2);
     const { name, value } = e.target;
     if (name === "isPICT" && value === "1") {
@@ -346,6 +348,7 @@ function TeamPradnya() {
         locality: "",
         isInternational: "",
         year: "",
+     
       }));
     } else if (name === "isInternational" && value === "0") {
       setForm2((form2) => ({
@@ -393,7 +396,7 @@ function TeamPradnya() {
   const [errors3, setErrors3] = useState(initialErrorsForm3);
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "pradnya");
   //steps for whole form
-  const [formStep, setFormStep] = React.useState(1);
+  const [formStep, setFormStep] = React.useState(2);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -433,6 +436,7 @@ function TeamPradnya() {
       for (const property in form2) {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
+          
           if (property === "referral") continue;
           toast.warn("Please enter all fields!");
           return;
@@ -759,8 +763,10 @@ function TeamPradnya() {
                     onChange={(e) => handleInputChange2(e)}
                     value={form2.referral}
                     error={errors2.referral}
+                    
                     tip={"Referral should not be empty and should be between 3-50 characters long"}
                   />
+                  console.log(referral)
                 </>
               )}
                 <Dropdown

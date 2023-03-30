@@ -3,13 +3,13 @@ import './styles/sponsors.css';
 const titleSponsors = [
   {
     name: 'Uptiq',
-    logo: 'https://drive.google.com/uc?export=view&id=1nMyMSeV2GxwmikZcm-a1LGQUEZCBNafd',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1678003690/Uptiq_logo_web_address_full_color_1_d40kui.svg',
     website: 'https://www.uptiq.ai/',
   },
 
   {
     name: 'eQ Technologic',
-    logo: 'https://drive.google.com/uc?export=view&id=1aIkXVwq1fn669OsmkKzJQ1s4je9n-Hps',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914533/eq_logo_transparent_highres_fagqvq.png',
     website: 'https://www.1eq.com/',
   },
 ];
@@ -17,7 +17,7 @@ const titleSponsors = [
 const coSponsors = [
   {
     name: 'Bajaj Finserv',
-    logo: 'https://drive.google.com/uc?export=view&id=1aeQVY01k-PjY8Rueva06KMtd4-bHLNEs',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914535/BFS_Logo-03_r19rxg.png',
     website: 'https://www.bajajfinserv.in/',
   },
 ];
@@ -25,17 +25,17 @@ const coSponsors = [
 const educationSponsors = [
   {
     name: 'Imocha',
-    logo: 'https://drive.google.com/uc?export=view&id=1a19W1JWRjSMKRwmQut76fbTk-S0CI3hg',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914534/iMocha-New-Logo_hhndvh.png',
     website: 'https://www.imocha.io/',
   },
   {
     name: 'Sarvatra',
-    logo: 'https://drive.google.com/uc?export=view&id=1_z5nKoWl7ka3WFbv3N6Dadt79PlLQXjC',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914537/logo_sarvatra_ww7sgb.png',
     website: 'https://sarvatra.tech/',
   },
   {
     name: 'Airavana',
-    logo: 'https://drive.google.com/uc?export=view&id=1add614SJWsdD_MM2JPLs0HvtbxyDV0fO',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914534/Airavana-Logo_cju0x1.png',
     website: 'https://airavana.ai/',
   },
 ];
@@ -51,7 +51,7 @@ const eventSponsors = [
 const eventSponsors2 = [
   {
     name: 'Veritas',
-    logo: 'https://drive.google.com/uc?export=view&id=1KmAmtM6bhre8GCgOFMk4AXNtT2BowRbw',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914537/Veritas_Logo_RED_1000x197_wzcrl7.jpg',
     website: 'https://www.veritas.com/',
   },
 ];
@@ -59,7 +59,7 @@ const eventSponsors2 = [
 const Other = [
   {
     name: 'Foldhealth',
-    logo: 'https://drive.google.com/uc?export=view&id=17JKWKnysEwogKmsfAtLKGbj-QzHSpcAO',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914533/foldhealth.jpeg_onmmqj.jpg',
     website: 'https://www.fold.health/',
   },
   {
@@ -69,7 +69,7 @@ const Other = [
   },
   {
     name: 'AlgoAnalytics',
-    logo: 'https://drive.google.com/uc?export=view&id=1sQVfyycKbZt53KjD9ELH75Kc3kCThPxM',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914536/AlgoAnalytics_Logo_1_j2xxp4.png',
     website: 'https://www.algoanalytics.com/',
   },
 ];
@@ -77,12 +77,12 @@ const Other = [
 const Association = [
   {
     name: 'IEEE',
-    logo: 'https://drive.google.com/uc?export=view&id=1efqYW5q3PWhXVXPaYv0s_zWzW2dj_EEx',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914533/PISB_color_qbyv80.png',
     website: 'https://pictieee.in/',
   },
   {
     name: 'ACM',
-    logo: 'https://drive.google.com/uc?export=view&id=1lYLoIpQ2YYcsBi0iwbrYEtuLoyvRz-ca',
+    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914536/Pasc_gafhcj.png',
     website: 'https://pict.acm.org/',
   },
   {
