@@ -97,7 +97,7 @@ function Card(props) {
   const redirectEvents = useNavigate()
 
   return (
-    <div className="card hover:cursor-pointer" onClick={() => redirectEvents('/event-details/' + props.name.toLowerCase())}>
+    <div className="card hover:cursor-pointer" onClick={() => window.open('/event-details/' + props.name.toLowerCase(),'_blank')}>
       {/* my card*/}
       <div className="py-8 mx-5 md:mx-0">
         <div className="md:h-[670px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
