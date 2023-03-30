@@ -58,7 +58,7 @@ const eventSponsors2 = [
 
 const Other = [
   {
-    name: 'Foldhealth',
+    name: 'Foldhealth',        
     logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914533/foldhealth.jpeg_onmmqj.jpg',
     website: 'https://www.fold.health/',
   },
@@ -71,6 +71,16 @@ const Other = [
     name: 'AlgoAnalytics',
     logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914536/AlgoAnalytics_Logo_1_j2xxp4.png',
     website: 'https://www.algoanalytics.com/',
+  },
+  {
+    name: 'BNY MELLON',
+    logo: 'https://res.cloudinary.com/dsoid12mi/image/upload/v1680198601/bnym_logo_horiz_teal_rgb_3_q5npvc.png',
+    website: 'https://www.bnymellon.com/',
+  },
+  {
+    name: 'Diacto',
+    logo: 'https://res.cloudinary.com/dsoid12mi/image/upload/v1680201291/Screenshot_2023-03-31_000335_tvhbkj.png',
+    website: 'https://www.diacto.com/',
   },
 ];
 
