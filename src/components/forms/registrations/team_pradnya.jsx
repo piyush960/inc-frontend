@@ -18,7 +18,7 @@ import styled from "styled-components";
 import Dropdown from "../../dropdown";
 import RadioButtons from "../../radioButtons";
 import { useRef } from "react";
-import { year_arr , localTypes , paymentLinks } from "../../../static/data";
+import { year_arr , localTypes , paymentLinks, year_array } from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -223,7 +223,7 @@ const initialErrorsForm3 = {
 
 
 function TeamPradnya() {
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
 
   //form1
@@ -396,7 +396,7 @@ function TeamPradnya() {
   const [errors3, setErrors3] = useState(initialErrorsForm3);
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "pradnya");
   //steps for whole form
-  const [formStep, setFormStep] = React.useState(2);
+  const [formStep, setFormStep] = React.useState(1);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -431,8 +431,10 @@ function TeamPradnya() {
       //   });
       setFormStep((currentStep) => currentStep + 1);
       setActiveStep((activeStep) => activeStep + 1);
+      console.log(form1);
     }
     if (formStep === 2) {
+      console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
@@ -467,6 +469,7 @@ function TeamPradnya() {
       });
     }
     if (formStep === 3) {
+    
       if (paymentRef.current.value.length < 8) {
         toast.warn("Please enter valid Transaction ID !");
         return;
@@ -766,14 +769,15 @@ function TeamPradnya() {
 
                     tip={"Referral should not be empty and should be between 3-50 characters long"}
                   />
-                  console.log(referral)
+                
                 </>
               )}
                 <Dropdown
                 label=" Which year are you in?"
                 options={[
                   { value: "SEL", label: "Select", selected: true },
-                  [...year_arr, { value: "BE", label: "4th year" }],
+                  ...year_array
+
                 ]}
                 name={"year"}
                 state={form2}
