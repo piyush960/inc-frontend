@@ -49,7 +49,6 @@ function JudgeForm() {
             errors[name] !== '' && setErrors(prevState => ({ ...prevState, [name]: '' }))
             return { ...prevState, [name]: value }
         })
-        console.log(judge)
     }
 
     function handleSubmit(e) {
