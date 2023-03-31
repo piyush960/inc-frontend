@@ -81,7 +81,7 @@ function JudgeForm() {
                     <Checkboxes label='Select Domain(s)' name='domains' state={judge} setState={setJudge} options={projectDomains} error={errors.domains} required />
                     <Checkboxes label='Select Slot(s) (tentative)' name='slots' state={judge} setState={setJudge} options={slots} error={errors.slots} required />
                     <InputBox label='Minimum Number of Projects want to Judge' type='number' name='min_projects' value={judge.min_projects} placeholder='Enter Minimum Number of Projects' min={3} max={10} onChange={handleInputChange} error={errors.min_projects} required />
-                    <RadioButtons label='Are you PICT alumni ?' name='isPICT' state={judge} setState={setJudge} options={[{ label: 'Yes', value: '1' }]} error={errors.isPICT} required />
+                    <RadioButtons label='Are you PICT alumni ?' name='isPICT' state={judge} setState={setJudge} options={[{ label: 'Yes', value: '1' }]} error={errors.isPICT} />
                     <InputBox label='Referral' type='text' name='referral' value={judge.referral} placeholder="Enter Referral's Name" onChange={handleInputChange} error={errors.referral} />
                     <Buttons value='Submit' type='submit' loading={registerJudgeMutation.isLoading} />
                 </form>
