@@ -1,9 +1,9 @@
 import impetus_logo from "../assets/images/impetus_logo.png";
 import concepts_logo from "../assets/images/concepts_logo.png";
 import pradnya_logo from "../assets/images/pradnya_logo.png";
-import concepts_img from "../assets/images/concepts-hero-image.jpg";
-import impetus_img from "../assets/images/impetus-hero-image.webp";
-import pradnya_img from "../assets/images/pradnya-hero-image.webp";
+import concepts_bg from '../assets/images/32.jpeg';
+import impetus_bg from '../assets/images/4.jpeg';
+import pradnya_bg from '../assets/images/6.jpeg';
 import { Cube } from "./index";
 import { useEffect, useRef } from "react";
 import "./styles/hero.css";
@@ -54,21 +54,21 @@ function Hero() {
             Impetus
             <img src={impetus_logo} alt="impetus-logo" />
           </span>
-          <img src={impetus_img} alt="impetus-bg" />
+          <img src={impetus_bg} alt="impetus-bg" />
         </span>
         <span className="event">
           <span>
             Concepts
             <img src={concepts_logo} alt="concepts-logo" />
           </span>
-          <img src={concepts_img} alt="concepts-bg" />
+          <img src={concepts_bg} alt="concepts-bg" />
         </span>
         <span className="event">
           <span>
             Pradnya
             <img src={pradnya_logo} alt="pradnya-logo" />
           </span>
-          <img src={pradnya_img} alt="pradnya-bg" />
+          <img src={pradnya_bg} alt="pradnya-bg" />
         </span>
       </div>
       <div className="flex justify-evenly" >
