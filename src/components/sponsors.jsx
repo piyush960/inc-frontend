@@ -58,7 +58,7 @@ const eventSponsors2 = [
 
 const Other = [
   {
-    name: 'Foldhealth',        
+    name: 'Foldhealth',
     logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914533/foldhealth.jpeg_onmmqj.jpg',
     website: 'https://www.fold.health/',
   },
@@ -175,7 +175,7 @@ export default function Sponsors() {
       <div className='sponsors-head  title-sponsors'>Co Sponsors And Concept Sponsor</div>
       <div className='sponsors-list  title-sponsors'>{coSponsorsList}</div>
       <div className='sponsors-head  title-sponsors'>CO Sponsors OF INC</div>
-      <div className='sponsors-list'>{educationSponsorsList}</div>
+      <div className='sponsors-list title-cosponsors'>{educationSponsorsList}</div>
       <div className='sponsors-head'>Impetus Sponsor</div>
       <div className='sponsors-list'>{ImpetusSponsorsList}</div>
       <div className='sponsors-head'>Pradnya Sponsor</div>
