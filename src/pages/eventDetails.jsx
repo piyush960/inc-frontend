@@ -12,7 +12,7 @@ function EventDetails(props) {
       logo: impetus_logo,
       name: 'IMPETUS',
       short_desc: 'International Level Project Competition cum Exhibition',
-      desc: 'Impetus is an inter-collegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, were closely associated with this event. During the 3 days event, first year, second year and third year students from various colleges across India and abroad showcase their projects.',
+      desc: 'Impetus is an inter-collegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, were closely associated with this event. During the 3 days event, first year, second year and third year students from various colleges across India and abroad showcase their projects. students from various colleges across India and abroad showcase their projects in domains lik 🔸Application Development🔸 Communication, Networking, Security 🔸 Machine Learning, Pattern Recognition, Artificial Intelligence🔸 Embedded systems, VLSI, IoT, Remote Sensing 🔸 Blockchain, Cloud Computing, and 🔶 Others',
       domains: [
         {
           domain: 'APPLICATION DEVELOPMENT',
@@ -35,13 +35,13 @@ function EventDetails(props) {
         fees: 100,
         team_size: 5
       },
-      prizes: 'InC announces a total cash prize of ₹6 Lakhs and a special prize of ₹1 Lakh for Project related to Online Teaching Aids (InC 2023 Theme).',
+      prizes: 'InC announces a total cash prize of ₹6 Lakhs',
       rules: [
         'The decision of judges will be final and binding to one and all',
       ],
       contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: 'https://pictinc.org/register/events/impetus',
-      schedule: ''
+      schedule: 'Project presentation on 21st and 22nd'
     },
     concepts: {
       contact: [
@@ -51,6 +51,7 @@ function EventDetails(props) {
         "Vishakha 9011628404"
       ],
       logo: concepts_logo,
+      schedule:"Project exhibition 21 and 22 and Prize distribution 23rd",
       name: 'CONCEPTS',
       short_desc: 'The most grand project exhibition event Concepts for final year student',
       desc: '',
@@ -73,7 +74,7 @@ function EventDetails(props) {
         },
       ],
       registrations: {
-        fees: 100,
+        fees: 300,
         team_size: 5
       },
       prizes: 'InC announces a total cash prize of ₹6 Lakhs and a special prize of ₹1 Lakh for Project related to Online Teaching Aids (InC 2023 Theme).',
@@ -233,11 +234,6 @@ function EventDetails(props) {
                   <div className="">
                     <div className="text-2xl font-bold pb-2 bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500 space-x-2">
                       <label>Schedule</label>
-                      {/* <img
-                        className="h-[24px] w-[24px] inline-block "
-                        src={"https://cdn-icons-png.flaticon.com/512/3652/3652191.png"}
-                        alt=""
-                      /> */}
                       <i class="far fa-calendar"></i>
                     </div>
                     <div className="border-t pt-2 border-slate-600">
@@ -247,8 +243,8 @@ function EventDetails(props) {
                                 <li>
                                   Round {data.round} : {data.datetime !== "" ? <a href="https://www.pcsbxenia.com/schedule">{data.datetime}</a> : <a href="https://www.pcsbxenia.com/schedule">Check Schedule Page</a>}
                                 </li>
-                              ))} */}
-
+                              ))} */
+                              eventDetail.schedule}                              
                       </ol>
                     </div>
                   </div>
@@ -279,9 +275,10 @@ function EventDetails(props) {
                               </ul>
                             </div>
                           ))} */}
-                      <div className="text-blue-300  font-bold font-2xl">
-                        <label>{eventDetail.name}</label>
-                         <div className="border-t pt-2 border-slate-600 text-lg font-light"> </div>
+                      <div className="text-2xl font-bold  bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">
+                      {eventDetail.name}
+                    </div>
+                    <div className="border-t pt-2 border-slate-600"> 
                       
                         {eventDetail.desc}
                         {/* <ul className="text-white list-disc list-inside">
