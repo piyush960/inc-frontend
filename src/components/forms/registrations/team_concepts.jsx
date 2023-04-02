@@ -766,7 +766,7 @@ function TeamConcepts() {
                 type="textarea"
                 label={"Abstract"}
                 name={"abstract"}
-                placeholder={"In 300 words or less"}
+                placeholder={"In 1000 characters or less"}
                 required
                 error={errors0.abstract}
                 onChange={(e) => handleInputChange0(e)}
