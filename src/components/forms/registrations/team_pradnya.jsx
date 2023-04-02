@@ -241,7 +241,7 @@ function TeamPradnya() {
   const registerUserMutationForm1 = useRegisterStep2(setErrors1, "pradnya");
 
   const handleFormChange = (event, index) => {
-    
+
     const { name, value } = event.target;
     setForm1((prevState) => {
       errors1[name] !== "" &&
@@ -468,7 +468,7 @@ function TeamPradnya() {
       });
     }
     if (formStep === 3) {
-    
+
       if (paymentRef.current.value.length < 8) {
         toast.warn("Please enter valid Transaction ID !");
         return;
@@ -766,9 +766,9 @@ function TeamPradnya() {
                     value={form2.referral}
                     error={errors2.referral}
 
-                    tip={"Referral should not be empty and should be between 3-50 characters long"}
+                    tip={"Referral should be between 3-50 characters long (if any)"}
                   />
-                
+
                 </>
               )}
                 <Dropdown

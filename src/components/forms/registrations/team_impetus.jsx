@@ -1100,7 +1100,7 @@ function TeamImpetus() {
                     onChange={(e) => handleInputChange2(e)}
                     error={errors2.referral}
                     value={form2.referral}
-                    tip={"Referral should not be empty and should be between 3-50 characters long"}
+                    tip={"Referral should be between 3-50 characters long (if any)"}
                   />
                 </>
               )}
