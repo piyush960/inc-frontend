@@ -804,7 +804,7 @@ function TeamImpetus() {
                 type="textarea"
                 label={"Abstract"}
                 name={"abstract"}
-                placeholder={"In 300 words or less"}
+                placeholder={"In 1000 characters or less"}
                 classNames=""
                 required
                 onChange={(e) => handleInputChange0(e)}
