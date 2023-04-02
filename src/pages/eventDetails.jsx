@@ -262,8 +262,8 @@ function EventDetails(props) {
                       /> */}
                       <i class="far fa-clipboard-list-check"></i>
                     </div>
-                   
-                      {/* {eventData?.rules?.map((data) => (
+
+                    {/* {eventData?.rules?.map((data) => (
                             <div>
                               <p className="text-blue-300  font-bold font-xl">
                                 {data?.roundName}
@@ -287,7 +287,7 @@ function EventDetails(props) {
                                 <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus itaque perspiciatis porro eligendi temporibus optio, unde exercitationem tempore quaerat harum incidunt quos, dolorem blanditiis animi voluptas sapiente sequi!</li>
 
                               </ul> */}
-                      </div>
+                    </div>
                   </div>
                   <>{eventDetail.rounds ? <div className="col-span-2">
                     <div className="text-2xl font-bold bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">

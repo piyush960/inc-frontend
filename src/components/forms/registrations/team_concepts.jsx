@@ -658,7 +658,7 @@ function TeamConcepts() {
                 error={errors0.title}
                 tip={"The project title should be between 10 and 100 characters long.(both inclusive)"}
               ></InputBox>
-              
+
               <Dropdown
                 label="Domain of the project"
                 options={[
@@ -670,7 +670,7 @@ function TeamConcepts() {
                 setState={setForm0}
                 required
                 error={errors0.domain}
-                
+
               />
               <Dropdown
                 label=" Project Type"
@@ -1040,7 +1040,7 @@ function TeamConcepts() {
                       onChange={(e) => handleInputChange2(e)}
                       value={form2.referral}
                       error={errors2.referral}
-                      tip={"Referral should not be empty and should be between 3-50 characters long"}
+                      tip={"Referral should be between 3-50 characters long (if any)"}
                     />
                   </>
                 )}

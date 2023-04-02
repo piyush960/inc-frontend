@@ -39,7 +39,7 @@ function JudgeForm() {
 
     const [errors, setErrors] = useState(initialErrors)
 
-    const registerJudgeMutation = useRegisterJudge(setErrors, 'judge')
+    const registerJudgeMutation = useRegisterJudge(setErrors, eventName)
 
     const onSuccessNavigator = useNavigate()
 
@@ -49,7 +49,6 @@ function JudgeForm() {
             errors[name] !== '' && setErrors(prevState => ({ ...prevState, [name]: '' }))
             return { ...prevState, [name]: value }
         })
-        console.log(judge)
     }
 
     function handleSubmit(e) {
@@ -78,11 +77,11 @@ function JudgeForm() {
                     <InputBox label='Company/Organization' type='text' name='company' value={judge.company} placeholder='Enter Company Name' onChange={handleInputChange} error={errors.company} required />
                     <InputBox label='Industry Experience' type='number' name='exp' value={judge.exp} placeholder='Enter Industry Experience' min={0} onChange={handleInputChange} error={errors.exp} required />
                     {/* <Checkboxes label='Select Event(s)' name='events' state={judge} setState={setJudge} options={events} error={errors.events} required /> */}
-                    <Checkboxes label='Select Domain(s)' name='domains' state={judge} setState={setJudge} options={projectDomains} error={errors.domains} required />
+                    <Checkboxes label='Select Domain(s) for Judging' name='domains' state={judge} setState={setJudge} options={projectDomains} error={errors.domains} required />
                     <Checkboxes label='Select Slot(s) (tentative)' name='slots' state={judge} setState={setJudge} options={slots} error={errors.slots} required />
                     <InputBox label='Minimum Number of Projects want to Judge' type='number' name='min_projects' value={judge.min_projects} placeholder='Enter Minimum Number of Projects' min={3} max={10} onChange={handleInputChange} error={errors.min_projects} required />
-                    <RadioButtons label='Are you PICT alumni ?' name='isPICT' state={judge} setState={setJudge} options={[{ label: 'Yes', value: '1' }]} error={errors.isPICT} required />
-                    <InputBox label='Referral' type='text' name='referral' value={judge.referral} placeholder="Enter Referral's Name" onChange={handleInputChange} error={errors.referral} />
+                    <RadioButtons label='Are you PICT alumni ?' name='isPICT' state={judge} setState={setJudge} options={[{ label: 'Yes', value: '1' }]} error={errors.isPICT} />
+                    <InputBox label='Referral' type='text' name='referral' value={judge.referral} placeholder="Enter Referral's Name (if any)" onChange={handleInputChange} error={errors.referral} />
                     <Buttons value='Submit' type='submit' loading={registerJudgeMutation.isLoading} />
                 </form>
             </div>
