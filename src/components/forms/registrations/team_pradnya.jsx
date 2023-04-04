@@ -806,7 +806,7 @@ function TeamPradnya() {
                   text="Please complete the payment within 60 minutes before your session expires."
                 />
                 <InputBox
-                  label="Transaction ID"
+                  label="Transaction ID (received on email)"
                   type="text"
                   name="payment_id"
                   placeholder="Enter Transaction ID"
