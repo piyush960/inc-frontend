@@ -18,7 +18,7 @@ import styled from "styled-components";
 import Dropdown from "../../dropdown";
 import RadioButtons from "../../radioButtons";
 import { useRef } from "react";
-import { year_arr , localTypes , paymentLinks, year_array } from "../../../static/data";
+import { year_arr, localTypes, paymentLinks, year_array } from "../../../static/data";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -509,6 +509,10 @@ function TeamPradnya() {
           {/* form 1 */}
           {formStep === 1 && (
             <>
+              <NoteBox
+                title="Note"
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+              />
               {memberCount < 2 && (
                 <>
                   <Buttons
@@ -575,9 +579,8 @@ function TeamPradnya() {
                               <option
                                 key={option?.value}
                                 value={option?.value}
-                                className={`py-1 bg-[#0B1E47] ${
-                                  option?.className || ""
-                                }`}
+                                className={`py-1 bg-[#0B1E47] ${option?.className || ""
+                                  }`}
                               >
                                 {option?.label}
                               </option>
@@ -595,7 +598,7 @@ function TeamPradnya() {
                       required
                       error={errors1.member_id}
                     />
-                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb"/>
+                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
                     {form1.length > 1 && (
                       <>
                         <Buttons
@@ -612,13 +615,12 @@ function TeamPradnya() {
               })}
             </>
           )}
-
           {/* form 2 */}
           {formStep === 2 && (
             <>
               <NoteBox
                 title="Note"
-                text="Please complete the payment within 60 minutes before your session expires."
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
               />
               <RadioButtons
                 label=" Are you PICTian or not?"
@@ -771,7 +773,7 @@ function TeamPradnya() {
 
                 </>
               )}
-                <Dropdown
+              <Dropdown
                 label=" Which year are you in?"
                 options={[
                   { value: "SEL", label: "Select", selected: true },
@@ -782,44 +784,43 @@ function TeamPradnya() {
                 state={form2}
                 setState={setForm2}
                 required
-                error = {errors2.year}
+                error={errors2.year}
               />
             </>
 
           )}
-          {formStep === 3 &&
-            (paymentStatus ? (
-              <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
-                <p className="text-xl text-center text-gold font-bold mb-3">
-                  Thank you for registering in InC'23. Looking forward to have
-                  you in person
-                </p>
-                <NoteBox
-                  title="Note"
-                  text="Registration payment will be verified and will be informed by email."
-                />
-              </div>
-            ) : (
-              <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
-                <NoteBox
-                  title="Note"
-                  text="Please complete the payment within 60 minutes before your session expires."
-                />
-                <InputBox
-                  label="Transaction ID"
-                  type="text"
-                  name="payment_id"
-                  placeholder="Enter Transaction ID"
-                  inputref={paymentRef}
-                  minlenght="8"
-                  error={errors3.payment_id}
-                  className="tracking-widest"
-                  required
-                />
-              </div>
-            ))}
-            <div className="flex justify-between">
-              {formStep > 1 && formStep < 4 && (
+          {formStep === 3 && (paymentStatus ? (
+            <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+              <p className="text-xl text-center text-gold font-bold mb-3">
+                Thank you for registering in InC'23. Looking forward to have
+                you in person
+              </p>
+              <NoteBox
+                title="Note"
+                text="Registration payment will be verified and will be informed by email."
+              />
+            </div>
+          ) : (
+            <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+              <NoteBox
+                title="Note"
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+              />
+              <InputBox
+                label="Transaction ID"
+                type="text"
+                name="payment_id"
+                placeholder="Enter Transaction ID"
+                inputref={paymentRef}
+                minlenght="8"
+                error={errors3.payment_id}
+                className="tracking-widest"
+                required
+              />
+            </div>
+          ))}
+          <div className="flex justify-between">
+            {/* {formStep > 1 && formStep < 4 && (
                 <Buttons
                   className="mx-2 my-2"
                   value=" Previous Step"
@@ -829,55 +830,55 @@ function TeamPradnya() {
                     registerUserMutationForm2.isLoading
                   }
                 />
-              )}
+              )} */}
 
-              {formStep === 3 ? (
-                paymentStatus ? (
-                  <></>
-                ) : (
-                  <Buttons
-                    className=" mx-2 my-2 "
-                    value="Submit"
-                    onClick={nextForm}
-                    loading={registerUserMutationForm3.isLoading}
-                  />
-                )
+            {formStep === 3 ? (
+              paymentStatus ? (
+                <></>
               ) : (
-                formStep === 2 &&
-                (paymentStatus ? (
-                  <Buttons
-                    className=" mx-2 my-2  "
-                    value="Submit"
-                    onClick={nextForm}
-                    loading={
-                      registerUserMutationForm1.isLoading ||
-                      registerUserMutationForm2.isLoading
-                    }
-                  />
-                ) : (
-                  <Buttons
-                    className=" mx-2 my-2  "
-                    value="Pay (Rs.100)"
-                    onClick={nextForm}
-                    loading={
-                      registerUserMutationForm1.isLoading ||
-                      registerUserMutationForm2.isLoading
-                    }
-                  />
-                ))
-              )}
-              {formStep < 2 && (
+                <Buttons
+                  className=" mx-2 my-2 "
+                  value="Submit"
+                  onClick={nextForm}
+                  loading={registerUserMutationForm3.isLoading}
+                />
+              )
+            ) : (
+              formStep === 2 &&
+              (paymentStatus ? (
                 <Buttons
                   className=" mx-2 my-2  "
-                  value="Next Step"
+                  value="Submit"
                   onClick={nextForm}
                   loading={
                     registerUserMutationForm1.isLoading ||
                     registerUserMutationForm2.isLoading
                   }
                 />
-              )}
-            </div>
+              ) : (
+                <Buttons
+                  className=" mx-2 my-2  "
+                  value="Pay (Rs.100)"
+                  onClick={nextForm}
+                  loading={
+                    registerUserMutationForm1.isLoading ||
+                    registerUserMutationForm2.isLoading
+                  }
+                />
+              ))
+            )}
+            {formStep < 2 && (
+              <Buttons
+                className=" mx-2 my-2  "
+                value="Next Step"
+                onClick={nextForm}
+                loading={
+                  registerUserMutationForm1.isLoading ||
+                  registerUserMutationForm2.isLoading
+                }
+              />
+            )}
+          </div>
         </form>
         {/* <Buttons
                 value="submit"

@@ -644,7 +644,7 @@ function TeamConcepts() {
             <>
               <NoteBox
                 title="Note"
-                text="Please complete the payment within 60 minutes before your session expires."
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
               />
               <InputBox
                 type="text"
@@ -781,7 +781,7 @@ function TeamConcepts() {
             <>
               <NoteBox
                 title="Note"
-                text="Please complete the payment within 60 minutes before your session expires."
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
               />
               <Buttons
                 value="Add Members"
@@ -877,8 +877,8 @@ function TeamConcepts() {
                       required
                       error={errors1.member_id}
                     />
-                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb"/>
-                   {/* <Notebox /> */}
+                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
+                    {/* <Notebox /> */}
                     {/* {membersCount <= index && (<Buttons
                                             value="remove member"
                                             onClick={removefields(index)}
@@ -891,161 +891,159 @@ function TeamConcepts() {
             </>
           )}
           {/* form 2 */}
-          {formStep === 2 &&
-            (
-
-              <>
-                <NoteBox
-                  title="Note"
-                  text="Please complete the payment within 60 minutes before your session expires."
-                />
-                <RadioButtons
-                  label=" Are you PICTian or not?"
-                  options={country_arr}
-                  state={form2}
-                  setState={setForm2}
-                  name="isPICT"
-                  required
-                  error={errors2.isPICT}
-                />
-                {form2.isPICT === "0" && (
-                  <>
-                    <RadioButtons
-                      label="Is International ?"
-                      options={country_arr}
-                      state={form2}
-                      setState={setForm2}
-                      name="isInternational"
-                      required
-                      error={errors2.isInternational}
-                    />
-                    <div className=" mx-1 my-2">
-                      <InputBox
-                        label="College"
-                        name={"college"}
-                        type="text"
-                        placeholder="college name"
-                        required
-                        onChange={(e) => handleInputChange2(e)}
-                        value={form2.college}
-                        error={errors2.college}
-                        tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
-                      />
-                    </div>
-                    <div className="mx-1 my-2">
-                      <InputBox
-                        className={form2.isInternational === "0" ? "pointer-events-none" : ""}
-                        label="Country"
-                        name={"country"}
-                        type="text"
-                        placeholder="country"
-                        readonly={form2.isInternational === "0"}
-                        required
-                        error={errors2.country}
-                        onChange={(e) => handleInputChange2(e)}
-                        value={
-                          form2.isInternational === "0" ? "India" : form2.country
-                        }
-                        tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
-                      />
-                    </div>
-                    <div className="flex mx-1 ">
-                      <div className="mr-1 w-1/2">
-                        <InputBox
-                          label="State"
-                          type="text"
-                          name={"state"}
-                          placeholder="state"
-                          required
-                          error={errors2.state}
-                          onChange={(e) => handleInputChange2(e)}
-                          value={form2.state}
-                          tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
-                        />
-                      </div>
-                      <div className="ml-1 w-1/2">
-                        <InputBox
-                          label="District"
-                          name={"district"}
-                          type="text"
-                          placeholder="district"
-                          required
-                          error={errors2.district}
-                          onChange={(e) => handleInputChange2(e)}
-                          value={form2.district}
-                          tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex mx-1 ">
-                      <div className="mr-1 w-1/2">
-                        <InputBox
-                          label="City"
-                          type="text"
-                          name={"city"}
-                          placeholder="city"
-                          required
-                          error={errors2.city}
-                          onChange={(e) => handleInputChange2(e)}
-                          value={form2.city}
-                          tipstyle={"hidden"}
-                        />
-                      </div>
-                      <div className="ml-1 w-1/2">
-                        <Dropdown
-                          label="Localtiy"
-                          options={[
-                            { value: "SEL", label: "Select", selected: true },
-                            ...localTypes,
-                          ]}
-                          name={"locality"}
-                          state={form2}
-                          setState={setForm2}
-                          required
-                          error={errors2.locality}
-                        />
-                      </div>
-                    </div>
-
-                    <RadioButtons
-                      label="  Preferred mode of presentation"
-                      options={mode_arr}
-                      state={form2}
-                      setState={setForm2}
-                      name="mode"
-                      required
-                      error={errors2.mode}
-                      tip={"Participants from Pune should select offline mode only."}
-                    />
-
-                    {form2.mode === "0" && (
-                      <div>
-                        <InputBox
-                          type="textarea"
-                          label={"Reason for Online"}
-                          name={"reason_of_mode"}
-                          placeholder={"reason"}
-                          required
-                          error={errors2.reason_of_mode}
-                          onChange={(e) => handleInputChange2(e)}
-                          value={form2.reason_of_mode}
-                        ></InputBox>
-                      </div>
-                    )}
+          {formStep === 2 && (
+            <>
+              <NoteBox
+                title="Note"
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+              />
+              <RadioButtons
+                label=" Are you PICTian or not?"
+                options={country_arr}
+                state={form2}
+                setState={setForm2}
+                name="isPICT"
+                required
+                error={errors2.isPICT}
+              />
+              {form2.isPICT === "0" && (
+                <>
+                  <RadioButtons
+                    label="Is International ?"
+                    options={country_arr}
+                    state={form2}
+                    setState={setForm2}
+                    name="isInternational"
+                    required
+                    error={errors2.isInternational}
+                  />
+                  <div className=" mx-1 my-2">
                     <InputBox
+                      label="College"
+                      name={"college"}
                       type="text"
-                      label="Referral"
-                      name="referral"
-                      placeholder="Referral ID given by Campus Ambassador"
+                      placeholder="college name"
+                      required
                       onChange={(e) => handleInputChange2(e)}
-                      value={form2.referral}
-                      error={errors2.referral}
-                      tip={"Referral should be between 3-50 characters long (if any)"}
+                      value={form2.college}
+                      error={errors2.college}
+                      tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
                     />
-                  </>
-                )}
-              </>
-            )}
+                  </div>
+                  <div className="mx-1 my-2">
+                    <InputBox
+                      className={form2.isInternational === "0" ? "pointer-events-none" : ""}
+                      label="Country"
+                      name={"country"}
+                      type="text"
+                      placeholder="country"
+                      readonly={form2.isInternational === "0"}
+                      required
+                      error={errors2.country}
+                      onChange={(e) => handleInputChange2(e)}
+                      value={
+                        form2.isInternational === "0" ? "India" : form2.country
+                      }
+                      tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                    />
+                  </div>
+                  <div className="flex mx-1 ">
+                    <div className="mr-1 w-1/2">
+                      <InputBox
+                        label="State"
+                        type="text"
+                        name={"state"}
+                        placeholder="state"
+                        required
+                        error={errors2.state}
+                        onChange={(e) => handleInputChange2(e)}
+                        value={form2.state}
+                        tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                      />
+                    </div>
+                    <div className="ml-1 w-1/2">
+                      <InputBox
+                        label="District"
+                        name={"district"}
+                        type="text"
+                        placeholder="district"
+                        required
+                        error={errors2.district}
+                        onChange={(e) => handleInputChange2(e)}
+                        value={form2.district}
+                        tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex mx-1 ">
+                    <div className="mr-1 w-1/2">
+                      <InputBox
+                        label="City"
+                        type="text"
+                        name={"city"}
+                        placeholder="city"
+                        required
+                        error={errors2.city}
+                        onChange={(e) => handleInputChange2(e)}
+                        value={form2.city}
+                        tipstyle={"hidden"}
+                      />
+                    </div>
+                    <div className="ml-1 w-1/2">
+                      <Dropdown
+                        label="Localtiy"
+                        options={[
+                          { value: "SEL", label: "Select", selected: true },
+                          ...localTypes,
+                        ]}
+                        name={"locality"}
+                        state={form2}
+                        setState={setForm2}
+                        required
+                        error={errors2.locality}
+                      />
+                    </div>
+                  </div>
+
+                  <RadioButtons
+                    label="  Preferred mode of presentation"
+                    options={mode_arr}
+                    state={form2}
+                    setState={setForm2}
+                    name="mode"
+                    required
+                    error={errors2.mode}
+                    tip={"Participants from Pune should select offline mode only."}
+                  />
+
+                  {form2.mode === "0" && (
+                    <div>
+                      <InputBox
+                        type="textarea"
+                        label={"Reason for Online"}
+                        name={"reason_of_mode"}
+                        placeholder={"reason"}
+                        required
+                        error={errors2.reason_of_mode}
+                        onChange={(e) => handleInputChange2(e)}
+                        value={form2.reason_of_mode}
+                      ></InputBox>
+                    </div>
+                  )}
+                  <InputBox
+                    type="text"
+                    label="Referral"
+                    name="referral"
+                    placeholder="Referral ID given by Campus Ambassador"
+                    onChange={(e) => handleInputChange2(e)}
+                    value={form2.referral}
+                    error={errors2.referral}
+                    tip={"Referral should be between 3-50 characters long (if any)"}
+                  />
+                </>
+              )}
+            </>
+          )}
           {formStep === 3 &&
             (paymentStatus ? (
               <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
@@ -1062,7 +1060,7 @@ function TeamConcepts() {
               <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
                 <NoteBox
                   title="Note"
-                  text="Please complete the payment within 60 minutes before your session expires."
+                  text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
                 />
                 <InputBox
                   label="Transaction ID"
@@ -1078,7 +1076,7 @@ function TeamConcepts() {
               </div>
             ))}
           <div className="flex justify-between">
-            {formStep > 0 && formStep < 4 && (
+            {/* {formStep > 0 && formStep < 4 && (
               <Buttons
                 className="mx-2 my-2"
                 value=" Previous Step"
@@ -1088,7 +1086,7 @@ function TeamConcepts() {
                   registerUserMutationForm2.isLoading
                 }
               />
-            )}
+            )} */}
             {formStep === 3 ? (
               paymentStatus ? (
                 <></>
