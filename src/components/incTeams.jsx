@@ -11,11 +11,11 @@ function InCTeamsSection() {
                 <blockquote className='italic md:text-4xl text-lg tracking-wide p-2'>The strength of the team is each individual member. The strength of each member is the team.</blockquote>
                 <figcaption className='md:text-xl'>- Phil Jackson</figcaption>
             </figure>
-            <div className='w-full md:w-2/5 relative flex justify-center items-center gap-6 md:p-6'>
+            {/* <div className='w-full md:w-2/5 relative flex justify-center items-center gap-6 md:p-6'>
                 <Buttons value={'Student Team'} onClick={() => navigate('/')} />
                 <Buttons value={'Faculty Team'} onClick={() => navigate('/')} />
                 <Buttons value={'Gallery'} onClick={() => navigate('/')} />
-            </div>
+            </div> */}
         </div>
     )
 }

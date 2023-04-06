@@ -67,9 +67,7 @@ const AboutUs = () => (
           <br />
           Accordingly,Impetus Project Competition FE to TE students, All Engineering Branches confined to specific Domains,Concepts Projects CompetitionFinal Year Students,All Engineering Branches confined Specific Domains & Pradnya - International Coding Competition.
           <br />
-          <br />
-          InC announces a total cash prize of ₹6 Lakhs and a special prize of ₹1 Lakh for Project related to "Online Teaching Aids" (InC 2023 Theme).
-          <br />
+          
         </div>
 
         <div className="tag-list w-full blur-sm hover:blur-none transition duration-300">

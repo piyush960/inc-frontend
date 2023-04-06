@@ -766,7 +766,7 @@ function TeamConcepts() {
                 type="textarea"
                 label={"Abstract"}
                 name={"abstract"}
-                placeholder={"In 300 words or less"}
+                placeholder={"In 1000 characters or less"}
                 required
                 error={errors0.abstract}
                 onChange={(e) => handleInputChange0(e)}
@@ -1063,7 +1063,7 @@ function TeamConcepts() {
                   text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
                 />
                 <InputBox
-                  label="Transaction ID"
+                  label="Transaction ID (received on email)"
                   type="text"
                   name="payment_id"
                   placeholder="Enter Transaction ID"

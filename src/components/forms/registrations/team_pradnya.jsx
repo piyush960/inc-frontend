@@ -789,36 +789,37 @@ function TeamPradnya() {
             </>
 
           )}
-          {formStep === 3 && (paymentStatus ? (
-            <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
-              <p className="text-xl text-center text-gold font-bold mb-3">
-                Thank you for registering in InC'23. Looking forward to have
-                you in person
-              </p>
-              <NoteBox
-                title="Note"
-                text="Registration payment will be verified and will be informed by email."
-              />
-            </div>
-          ) : (
-            <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
-              <NoteBox
-                title="Note"
-                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-              />
-              <InputBox
-                label="Transaction ID"
-                type="text"
-                name="payment_id"
-                placeholder="Enter Transaction ID"
-                inputref={paymentRef}
-                minlenght="8"
-                error={errors3.payment_id}
-                className="tracking-widest"
-                required
-              />
-            </div>
-          ))}
+          {formStep === 3 &&
+            (paymentStatus ? (
+              <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+                <p className="text-xl text-center text-gold font-bold mb-3">
+                  Thank you for registering in InC'23. Looking forward to have
+                  you in person
+                </p>
+                <NoteBox
+                  title="Note"
+                  text="Registration payment will be verified and will be informed by email."
+                />
+              </div>
+            ) : (
+              <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+                <NoteBox
+                  title="Note"
+                  text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                />
+                <InputBox
+                  label="Transaction ID (received on email)"
+                  type="text"
+                  name="payment_id"
+                  placeholder="Enter Transaction ID"
+                  inputref={paymentRef}
+                  minlenght="8"
+                  error={errors3.payment_id}
+                  className="tracking-widest"
+                  required
+                />
+              </div>
+            ))}
           <div className="flex justify-between">
             {/* {formStep > 1 && formStep < 4 && (
                 <Buttons
