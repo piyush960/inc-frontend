@@ -680,6 +680,10 @@ function TeamImpetus() {
           {/* form 0 */}
           {formStep === 0 && (
             <>
+              <NoteBox
+                title="Note"
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+              />
               <InputBox
                 type="text"
                 label={"Project Title"}
@@ -804,7 +808,7 @@ function TeamImpetus() {
                 type="textarea"
                 label={"Abstract"}
                 name={"abstract"}
-                placeholder={"In 300 words or less"}
+                placeholder={"In 1000 characters or less"}
                 classNames=""
                 required
                 onChange={(e) => handleInputChange0(e)}
@@ -843,6 +847,10 @@ function TeamImpetus() {
           {/* form 1 */}
           {formStep === 1 && (
             <>
+              <NoteBox
+                title="Note"
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+              />
               <Buttons
                 value="add members"
                 onClick={addFields}
@@ -938,7 +946,7 @@ function TeamImpetus() {
                       required
                       error={errors1.member_id}
                     />
-                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb"/>
+                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
                     {formFields.length > 1 && (
                       <>
                         <Buttons
@@ -954,13 +962,12 @@ function TeamImpetus() {
               })}
             </>
           )}
-
           {/* form 2 */}
           {formStep === 2 && (
             <>
               <NoteBox
                 title="Note"
-                text="Please complete the payment within 60 minutes before your session expires."
+                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
               />
               <RadioButtons
                 label=" Are you PICTian or not?"
@@ -1135,10 +1142,10 @@ function TeamImpetus() {
               <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
                 <NoteBox
                   title="Note"
-                  text="Please complete the payment within 60 minutes before your session expires."
+                  text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
                 />
                 <InputBox
-                  label="Transaction ID"
+                  label="Transaction ID (received on email)"
                   type="text"
                   name="payment_id"
                   placeholder="Enter Transaction ID"
@@ -1151,7 +1158,7 @@ function TeamImpetus() {
               </div>
             ))}
           <div className="flex justify-between">
-            {formStep > 0 && formStep < 4 && (
+            {/* {formStep > 0 && formStep < 4 && (
               <Buttons
                 className="mx-2 my-2"
                 value=" Previous Step"
@@ -1161,7 +1168,7 @@ function TeamImpetus() {
                   registerUserMutationForm2.isLoading
                 }
               />
-            )}
+            )} */}
 
             {formStep === 3 ? (
               paymentStatus ? (
