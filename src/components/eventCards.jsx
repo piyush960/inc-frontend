@@ -11,7 +11,7 @@ const eventData = [
     fees: 200,
     members: "2-5 members",
     prize: 1000,
-    ct: "First year,Second year and third year students",
+    ct: "First ,second and third year students",
     logo: impetus_logo,
     nt: "₹ 100/- For National Entries",
     it: "Free for International Entries",
@@ -41,7 +41,7 @@ const eventData = [
     fees: 300,
     members: "2-5 members",
     prize: 1000,
-    ct: "Final year students only    ",
+    ct: "Final year students only.    ",
     logo: concepts_logo,
 
     nt: "₹ 300/- For National Entries",
@@ -96,7 +96,7 @@ function Card(props) {
     <div className="card hover:cursor-pointer" onClick={() => window.open('/event-details/' + props.name.toLowerCase(), '_blank')}>
       {/* my card*/}
       <div className="py-8 mx-5 md:mx-0">
-        <div className="md:h-[750px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
+        <div className="md:h-[800px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
           <div className='flex'>
             <div className=''>
               <img src={props.logo}
@@ -161,7 +161,7 @@ function Card(props) {
                   {
                     props.contact.map((item) => {
                       return (
-                        <li className="my-1 px-4" >
+                        <li className="my-1 pl-2" >
                           <p className="text-lg md:text-xl font-medium">{item.name} : </p >{item.phone}
                         </li>
                       )
