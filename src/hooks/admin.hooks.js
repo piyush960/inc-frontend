@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
@@ -52,7 +52,11 @@ function useVerifyAdmin() {
 }
 
 function useVerifyPayment(eventName) {
+  const queryClient = useQueryClient()
   const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(verifyPayment(eventName), {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pendingPayments', eventName] })
+    },
     onError: (err) => {
       const parsedError = errorParser(err)
       if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })

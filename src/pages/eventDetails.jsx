@@ -51,7 +51,7 @@ function EventDetails(props) {
         "Vishakha 9011628404"
       ],
       logo: concepts_logo,
-      schedule:"Project exhibition 21 and 22 and Prize distribution 23rd",
+      schedule: "Project exhibition 21 and 22 and Prize distribution 23rd",
       name: 'CONCEPTS',
       short_desc: 'The most grand project exhibition event Concepts for final year student',
       desc: '',
@@ -84,8 +84,10 @@ function EventDetails(props) {
       button_link: 'https://pictinc.org/register/events/concepts',
     },
     pradnya: {
-      contact: ["Pratik 9145439727",
-        "Neha 9579678142"],
+      contact: [
+        "Pratik 9145439727",
+        "Neha 9579678142"
+      ],
       prizes: 'InC announces a total cash prize of ₹6 Lakhs',
       logo: pradnya_logo,
       name: 'PRADNYA',
@@ -99,19 +101,19 @@ function EventDetails(props) {
       rounds: [
         {
           name: 'Wild Card Round',
-          details: 'Wildcard round is held on online platform Such as Hackerank, Hackerearth, codechef etc. This is a programming round. It is scheduled 2-3 days before the Pradnya event. The top 3 teams in the wildcard round can directly participate in final programming round. Stay tuned on PICT-INC Website to know dates for Wild card Round and its completely free.'
+          details: 'The wildcard round is open to both junior and senior teams, and the top 5 teams from each category will enter directly to the programming round (Round 2). This round will be conducted online on CODECHEF platform.The wildcard round will include programming questions where the participants can code using any programming language  of their preference.Teams that qualify wildcard round will be exempted from participating in the multiple-choice questions round (Round 1). '
         },
         {
           name: 'Round -1 : MCQ based round Day-1',
-          details: 'This is MCQ based round conducted Online. The MCQs are based on general logic based questions in C, C++, Java, Python. This round is conducted for both the levels by using a web platform specially designed by PICT Pradnya team. The login information and scheduled slots for this round will be communicated to the participants One day before event.'
+          details: 'The first round is the MCQ round where the participants will be given a mix of multiple-choice and short answer questions. This round is conducted for both the levels by using a web platform specially designed by PICT Pradnya team.All students whose colleges are located within the Pune district are required to attend this round in person at the PICT Campus on April 21st. For students residing outside of Pune district, there is an option to take the round in hybrid mode. The information regarding scheduled slots for this round will be communicated to the participants One day before event.'
         },
         {
           name: 'Round-2 : Programming Round- Day-2',
-          details: 'Winners in MCQ based round, and wild card winners are eligible for the Programming contest. Five Problem statements are allotted to each level i.e. Junior and Senior level. The participants test their mettle in this round as they are challenged with a series of mind boggling problems designed to test their efficiency and capability. This round is held on an online programming platform. The login information and scheduled slots for this round will be communicated after Round-1.'
+          details: 'Winners in MCQ based round, and wild card winners are eligible for the Programming contest. Five Problem statements are allotted to each level i.e. Junior and Senior level. The participants test their mettle in this round as they are challenged with a series of mind boggling problems designed to test their efficiency and capability. This round is held on an online programming platform. All students whose colleges are located within the Pune district are required to attend this round in person at the PICT Campus on April 22nd. For students residing outside of Pune district, there is an option to take the round in hybrid mode. The information regarding scheduled slots for this round will be communicated to the participants One day before event.'
         },
         {
           name: 'Round-3 : Judges Round- Day-2',
-          details: 'Winners of Round-2 from each level who were able to solve maximum test cases are eligible for this round. Judges from reputed industries are invited to judge this round. Judges will select 3 winner teams. Winners of Round-2 would be informed about the time slot for interaction with judges, where they have to demonstrate their code. The interaction will be conducted online on Zoom/Webx/any online meeting platform. The schedule will be sent to winners after the declaration of Round-2 results.'
+          details: 'In the final round, the top 5 teams qualifying the round 2 will enter in the judging round. Esteemed industry professionals are invited to serve as judges for this stage of the competition.During the judging round, the five teams will be evaluated by the judges based on their solutions from round 2. The judges will then select the top three winning teams. All students whose colleges are located within the Pune district are required to attend this round in person at the PICT Campus on April 22nd.For students residing outside of Pune district, there is an option to take the round in hybrid mode.'
         },
       ],
       registrations: {
@@ -166,9 +168,12 @@ function EventDetails(props) {
                 </div>
                 <div className="event-fees text-blue-400 text-lg font-bold text-left  tracking-widest grid grid-cols-2 place-items-center">
                   <div className="flex space-x-2">
-                    <div className="text-gray-200 font-thin">Fees: </div>
-                    {/* Rs 40 */}
-                    {eventDetail.registrations.fees}
+                    <span className="text-gray-200 font-thin">Fees: </span>
+                    <span>
+                      Rs. {eventDetail.registrations.fees}
+                    </span>
+                    <br />
+                    <p>Free for PICT and International Students</p>
                   </div>
                   <div className="flex space-x-2">
                     <div className="text-gray-200 font-thin">Team Size: </div>
@@ -244,7 +249,7 @@ function EventDetails(props) {
                                   Round {data.round} : {data.datetime !== "" ? <a href="https://www.pcsbxenia.com/schedule">{data.datetime}</a> : <a href="https://www.pcsbxenia.com/schedule">Check Schedule Page</a>}
                                 </li>
                               ))} */
-                              eventDetail.schedule}                              
+                          eventDetail.schedule}
                       </ol>
                     </div>
                   </div>
@@ -275,13 +280,13 @@ function EventDetails(props) {
                               </ul>
                             </div>
                           ))} */}
-                      <div className="text-2xl font-bold  bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">
+                    <div className="text-2xl font-bold  bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">
                       {eventDetail.name}
                     </div>
-                    <div className="border-t pt-2 border-slate-600"> 
-                      
-                        {eventDetail.desc}
-                        {/* <ul className="text-white list-disc list-inside">
+                    <div className="border-t pt-2 border-slate-600">
+
+                      {eventDetail.desc}
+                      {/* <ul className="text-white list-disc list-inside">
                                 <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis placeat a inventore, quidem unde voluptatibus delectus, esse odio non veniam velit magnam optio ipsum. Reiciendis nesciunt error possimus repudiandae accusantium, tempora voluptatibus?</li>
                                 <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vel, exercitationem vitae officia quam omnis consequuntur rerum aperiam dolorem nobis aliquid.</li>
                                 <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus itaque perspiciatis porro eligendi temporibus optio, unde exercitationem tempore quaerat harum incidunt quos, dolorem blanditiis animi voluptas sapiente sequi!</li>
