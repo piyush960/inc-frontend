@@ -67,7 +67,11 @@ const AboutUs = () => (
           <br />
           Accordingly,Impetus Project Competition FE to TE students, All Engineering Branches confined to specific Domains,Concepts Projects CompetitionFinal Year Students,All Engineering Branches confined Specific Domains & Pradnya - International Coding Competition.
           <br />
-          
+          <br/>
+          Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.<br />
+          🔹Judge's decision will be final.<br />
+          🔹Project status must be in "Ready to Use"<br />
+          🔹Already registered candidatess need not register again.
         </div>
 
         <div className="tag-list w-full blur-sm hover:blur-none transition duration-300">
