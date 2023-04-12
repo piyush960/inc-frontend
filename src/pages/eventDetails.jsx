@@ -36,10 +36,14 @@ function EventDetails(props) {
         fees: 100,
         team_size: 5
       },
-      prizes: 'InC announces a total cash prize of ₹6 Lakhs',
+      prizes: `InC announces a total cash prize of ₹6 Lakhs. `,
       rules: [
         'The decision of judges will be final and binding to one and all',
       ],
+      note:` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
+      note1:`🔹Judge's decision will be final.`,
+      note2:`🔹Project status must be in "Ready to Use"`,
+      note3:`🔹Already registered candidatess need not register again.`,
       contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: 'https://pictinc.org/register/events/impetus',
       schedule: 'Project presentation on 21st and 22nd'
@@ -80,6 +84,10 @@ function EventDetails(props) {
         team_size: 5
       },
       prizes: 'InC announces a total cash prize of ₹6 Lakhs.',
+      note:` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
+      note1:`🔹Judge's decision will be final.`,
+      note2:`🔹Project status must be in "Ready to Use"`,
+      note3:`🔹Already registered candidatess need not register again.`,
       rules: [
         'The decision of judges will be final and binding to one and all',
       ],
@@ -91,6 +99,9 @@ function EventDetails(props) {
         "Neha 9579678142"
       ],
       prizes: 'InC announces a total cash prize of ₹6 Lakhs',
+      note1:`🔹Judge's decision will be final.`,
+      note3:`🔹Already registered candidatess need not register again.`,
+      schedule:'21st, 22nd mentioned below in detail',
       criteria:`Junior Level- This category is open for all students who are pursuing first or second year of any undergraduate  degree/course. Senior Level- Third year engineering, final year engineering of any undergraduate degree/course.`,
       logo: pradnya_logo,
       name: 'PRADNYA',
@@ -150,7 +161,7 @@ function EventDetails(props) {
         {
           eventDetail !== ''
             ?
-            <div className="grid md:grid-cols-2 min-h-screen md:p-8 gap-8 backdrop-blur-xl bg-gradient-to-b from-gray-900/40 to-gray-600/80">
+            <div className="grid md:grid-cols-2 min-h-screen md:p-8 gap-8 backdrop-blur-xl ">
               <div className=" text-center  text-white  px-4   ">
                 <div className=" w-[60%] max-w-[380px]  mx-auto">
                   <img
@@ -159,7 +170,7 @@ function EventDetails(props) {
                     className="event-logo"
                   />
                 </div>
-                <div className="py-3 text-6xl mx-auto font-bold text-purple-600 border-gray-500 bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">
+                <div className="py-3 text-6xl mx-auto font-bold text-gold  bg-clip-text ">
                   {/* Impetus */}
                   {eventDetail.name}
                   {/* {console.log(eventDetail.name)} */}
@@ -188,7 +199,7 @@ function EventDetails(props) {
                       inconvenience:(
                     </p> */}
                 <button
-                  className="border-2 border-solid p-2"
+                  className="px-5 font-xl md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 hover:text-gold hover:border-light_blue hover:bg-faint_blue/10"
                 >
                   <a href={eventDetail.button_link}>Register</a>
                 </button>
@@ -197,13 +208,13 @@ function EventDetails(props) {
                       </p>           */}
               </div>
               {/* event details description */}
-              <div className="space-y-4  p-8 h-full overflow-auto bg-black/20 shadow-lg border rounded-lg border-gray-700 max-h-screen font-thin text-gray-200">
-                <div className="text-4xl font-bold text-purple-400 mb-8 border-b border-purple-400/20 pb-2">
+              <div className="space-y-4  p-8 h-full overflow-auto bg-black/20 shadow-lg bg-light_blue/30 rounded-xl  border-light_blue shadow-light_blue/20 hover:bg-light_blue/10 border  max-h-screen font-thin ">
+                <div className="text-4xl text-gold font-bold mb-8 border-b border-white pb-2">
                   Description
                 </div>
                 <div className=" grid md:grid-cols-2 gap-4">
                   <div className="">
-                    <div className="text-2xl font-bold pb-2 bg-clip-text  bg-gradient-to-r from-green-200 via-green-400 to-green-500 space-x-2">
+                    <div className="text-2xl text-gold font-bold pb-2 bg-clip-text  space-x-2">
                       <label>Prizes</label> <i class='fa fa-trophy yellow-color' />
                     </div>
                     <div className="border-t pt-2 border-slate-600">
@@ -240,7 +251,7 @@ function EventDetails(props) {
                   </div>
 
                   <div className="">
-                    <div className="text-2xl font-bold pb-2 bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500 space-x-2">
+                    <div className="text-2xl font-bold pb-2 text-gold bg-clip-text  space-x-2">
                       <label>Schedule</label>
                       <i class="far fa-calendar"></i>
                     </div>
@@ -259,14 +270,27 @@ function EventDetails(props) {
 
 
                   <div className="space-y-2 col-span-2">
-                  <div className="text-2xl font-bold  bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500 space-x-2">
+                  {/* if(eventName === 'concepts' || eventName === 'impetus') */}
+                      <div className="text-2xl font-bold  bg-clip-text text-gold space-x-2">
+                      <label>Event prize</label>
+                      {/* <i class="far fa-phone"></i> */}
+                    </div>
+                    <div className="border-t pt-2 pb-2 border-slate-600">
+                        {eventDetail.note}<br/>
+                        {eventDetail.note1}<br/>
+                        {eventDetail.note2}<br/>
+                        {eventDetail.note3}
+                    </div>
+                
+                  
+                  <div className="text-2xl font-bold text-gold bg-clip-text  space-x-2">
                       <label>Criteria</label>
                       <i class="far fa-phone"></i>
                     </div>
                     <div className="border-t pt-2 pb-2 border-slate-600">
                         {eventDetail.criteria}
                     </div>
-                  <div className="text-2xl font-bold  bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500 space-x-2">
+                  <div className="text-2xl font-bold  bg-clip-text text-gold space-x-2">
                       <label>Rules</label>
                       <i class="far fa-phone"></i>
                     </div>
@@ -274,7 +298,7 @@ function EventDetails(props) {
                         {eventDetail.rules}
                     </div>
 
-                      <div className="text-2xl font-bold  bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">
+                      <div className="text-2xl text-gold font-bold  bg-clip-text ">
                       {eventDetail.name}
                     </div>
                     <div className="border-t pt-2 border-slate-600">
@@ -289,10 +313,10 @@ function EventDetails(props) {
                     </div>
                   </div>
                   <>{eventDetail.rounds ? <div className="col-span-2">
-                    <div className="text-2xl font-bold bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">
+                    <div className="text-2xl text-gold font-bold bg-clip-text">
                       {/* Platforms :MCQ */}
                       Rounds
-                      <div className="mt-2 pt-1 font-light text-blue-200 border-t border-slate-600">
+                      <div className="mt-2 pt-1 text-white font-light text-blue-200 border-t border-slate-600">
                         {eventDetail.rounds.map((data) => (
                           <div >
                             <ul className="text-white list-disc  list-inside">
@@ -313,7 +337,7 @@ function EventDetails(props) {
 
 
                   <div className="col-span-2">
-                    <div className="text-2xl font-bold pb-2 mt-5 bg-clip-text bg-gradient-to-r from-green-200 via-green-400 to-green-500">
+                    <div className="text-2xl text-gold font-bold pb-2 mt-5 bg-clip-text ">
                       Contact Help
                     </div>
                     <div className="border-t pt-2 border-slate-600">
