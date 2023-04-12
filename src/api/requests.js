@@ -11,7 +11,8 @@ const backend = axios.create({
 
 const loginAdmin = async (data) => await backend.post('/admin/login', data);
 const verifyAdmin = async () => await backend.get('/admin/verify');
-const registerJudge = (eventName) => async (data) => await backend.post(`/judge/register/${eventName}`, data);
+const registerJudge = (eventName) => async (data) => await backend.post(`/judge/register/${eventName}`, data)
+const viewJudge  = async (eventName) => await backend.get(`/judge/view/${eventName}`);
 const registerEventStep1 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_1`, data);
 const registerEventStep2 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_2`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
 const registerEventStep3 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_3`, data);
@@ -19,6 +20,7 @@ const registerEventStep4 = (eventName) => async (data) => await backend.post(`/e
 const verifyPayment = (eventName) => async (data) => await backend.post(`/events/verify/payment/${eventName}`, data);
 const getPendingPayments = (eventName) => async () => await backend.get(`/events/verify/payment/${eventName}`);
 const getRegistrations = (eventName) => async () => await backend.get(`/events/registrations/${eventName}`);
+
 
 export {
     loginAdmin,
@@ -31,4 +33,5 @@ export {
     verifyPayment,
     getPendingPayments,
     getRegistrations,
+    viewJudge
 }

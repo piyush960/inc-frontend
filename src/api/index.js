@@ -9,4 +9,5 @@ export {
     verifyAdmin,
     getPendingPayments,
     getRegistrations,
+    viewJudge
 } from './requests';

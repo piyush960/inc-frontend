@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations } from '../api';
+import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations, viewJudge } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
 
@@ -81,10 +81,25 @@ function useGetRegistrations(eventName) {
   return { isLoading, data }
 }
 
+function useGetJudgeRegistrations(eventName) {
+  const { isLoading, isError, data, error } = useQuery({ queryKey: ['judge', 'registrations', eventName], queryFn: viewJudge(eventName), enabled: !!eventName })
+  if (isError) {
+    const parsedError = errorParser(error)
+    if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+    else {
+      parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+      toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
+    }
+  }
+  return { isLoading, data }
+}
+
+
 export {
   useLoginAdmin,
   usePendingPayments,
   useVerifyPayment,
   useVerifyAdmin,
   useGetRegistrations,
+  useGetJudgeRegistrations
 }
