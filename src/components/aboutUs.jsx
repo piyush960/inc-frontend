@@ -55,23 +55,50 @@ const Tag = ({ text }) => (
 );
 
 const AboutUs = () => (
-  <div id="about" >
+  <div id="about">
     <Fade>
       <header className="header-about my-10">
         <h1 className="text-center">About Us</h1>
       </header>
       <div className="about-body relative overflow-hidden py-12">
         <div className="about-content text-left w-[90%] md:w-8/12 z-10 p-8 md:px-12 text-lg shadow-2xl shadow-light_blue/20 bg-[#000]/80 rounded-xl border border-light_blue/30">
-          Impetus and Concepts (InC) is a flagship technical event of SCTR's Pune Institute of Computer Technology (PICT) Pune, which will be held in during 3rd week of April 2023. InC is an intercollegiate International level competition which has been catching the attention of corporate giants for Quality of projects and an opportunity to recruit/mentor young talented budding entrepreneurs. Every year InC sets a New Benchmark and provides an opportunity to students to realize their ideas into effective product. Over the years, it has become most popular & awaited event with continuous improvement in Footfall, Number and Quality of projects/papers, etc. This event also sets a platform for students to design, exhibit and watch their ideas come true. This technical fest has Inventive events namely - Impetus, Concepts, Pradnya.
+          Impetus and Concepts (InC) is a flagship technical event of SCTR's
+          Pune Institute of Computer Technology (PICT) Pune, which will be held
+          in during 3rd week of April 2023. InC is an intercollegiate
+          International level competition which has been catching the attention
+          of corporate giants for Quality of projects and an opportunity to
+          recruit/mentor young talented budding entrepreneurs. Every year InC
+          sets a New Benchmark and provides an opportunity to students to
+          realize their ideas into effective product. Over the years, it has
+          become most popular & awaited event with continuous improvement in
+          Footfall, Number and Quality of projects/papers, etc. This event also
+          sets a platform for students to design, exhibit and watch their ideas
+          come true. This technical fest has Inventive events namely - Impetus,
+          Concepts, Pradnya.
           <br />
           <br />
-          Accordingly,Impetus Project Competition FE to TE students, All Engineering Branches confined to specific Domains,Concepts Projects CompetitionFinal Year Students,All Engineering Branches confined Specific Domains & Pradnya - International Coding Competition.
+          Accordingly,Impetus Project Competition FE to TE students, All
+          Engineering Branches confined to specific Domains,Concepts Projects
+          CompetitionFinal Year Students,All Engineering Branches confined
+          Specific Domains & Pradnya - International Coding Competition.
           <br />
-          <br/>
-          Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.<br />
-          🔹Judge's decision will be final.<br />
-          🔹Project status must be in "Ready to Use"<br />
-          🔹Already registered candidatess need not register again.
+          <br />
+          <span className="">
+            Events are invited with the Project addressing the societal needs
+            like Health, Agriculture, Kids/Women Safety, Education etc , and the
+            best project judged by the juries will be awarded with a cash prize
+            of{" "}
+            <span className="font-extrabold underline italic text-white">
+              Rs. 1 Lac Cash Prize
+            </span>{" "}
+            from PICT
+            <br />
+            🔹Judge's decision will be final.
+            <br />
+            🔹Project status must be in "Ready to Use"
+            <br />
+            🔹Already registered candidatess need not register again.
+          </span>
         </div>
 
         <div className="tag-list w-full blur-sm hover:blur-none transition duration-300">

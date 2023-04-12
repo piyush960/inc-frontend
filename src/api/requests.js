@@ -10,9 +10,9 @@ const backend = axios.create({
 })
 
 const loginAdmin = async (data) => await backend.post('/admin/login', data);
-const verifyAdmin = async () => await backend.get('/admin/verify');
+const verifyAdmin =  async () => await backend.get('/admin/verify');
 const registerJudge = (eventName) => async (data) => await backend.post(`/judge/register/${eventName}`, data)
-const viewJudge  = async (eventName) => await backend.get(`/judge/view/${eventName}`);
+const viewJudge  = (eventName) => async () => await backend.get(`/judge/registration/view/${eventName}`);
 const registerEventStep1 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_1`, data);
 const registerEventStep2 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_2`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
 const registerEventStep3 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_3`, data);

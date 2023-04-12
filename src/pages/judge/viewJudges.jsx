@@ -5,7 +5,7 @@ import React from 'react'
 import { useState, lazy, Suspense, useMemo } from 'react';
 import { FormsBanner, RadioButtons } from '../../components';
 import { useGetJudgeRegistrations} from '../../hooks/admin.hooks';
-import { projectDomains } from '../../static/data';
+import { projectDomains ,slots } from '../../static/data';
 
 const Table = lazy(() => import('../../components/table.jsx'));
 
@@ -24,13 +24,13 @@ function ViewJudges() {
         },
         
     ]
-
+    // !isLoading && console.log(Object.keys(data?.data[2]?.events).map(index => data?.data[2]?.events[index]))
     const columns = useMemo(() => [
         {
             name: 'Judge ID',
             selector: row => row['jid'],
             cellExport: row => row['jid'],
-            width: '140px',
+            width: '160px',
             wrap: true,
             sortable: true,
         },
@@ -38,28 +38,22 @@ function ViewJudges() {
             name: 'Name',
             selector: row => row['name'],
             cellExport: row => row['name'],
-            width: '130px',
+            width: '160px',
             sortable: true,
         },
         {
             name: 'Email',
             selector: row => row['email'],
             cellExport: row => row['email'],
-            width: '140px',
+            width: '240px',
         
         },
         {
             name: 'Contact No',
             selector: row => row['phone'],
             cellExport: row => row['phone'],
-            width: '140px',
+            width: '200px',
         
-        },
-        {
-            name: 'Address',
-            selector: row => row['address'],
-            cellExport: row => row['address'],
-            width: '300px',
         },
         {
             name: 'Company',
@@ -68,28 +62,38 @@ function ViewJudges() {
             width: '200px',
         },
         {
+            name: 'Address',
+            selector: row => row['address'],
+            cellExport: row => row['address'],
+            width: '300px',
+        },
+        
+        {
             name: 'Experience',
-            selector: row => row['experience'],
-            cellExport: row => row['experience'],
-            width: '80px',
+            selector: row => row['exp'],
+            cellExport: row => row['exp'],
+            width: '100px',
         },
         {
             name: 'Events',
             selector: row => row['events'],
-            cell: row => <ol className='list-disc'>{row.events.split(',').map((name, index) => <li key={index}>{name}<span className='hidden'> , </span></li>)}</ol>,
-            width: '200px',
+            cell: row => <ol className='list-disc'>{Object.keys(row['events']).map(index => <li key={index}>{row['events'][index]}<span className='hidden'> , </span></li>)}</ol>,
+            width: '120px',
+            
         },
         {
             name: 'Domains',
             selector: row => row['domains'],
-            cell: row => <ol className='list-disc'>{row.domains.split(',').map((phone, index) => <li key={index}>{phone}<span className='hidden'> , </span></li>)}</ol>,
-            width: '180px',
+            cell: row =>  <ol className='list-disc'>{Object.keys(row['domains']).map(index => <li key={index}>{row['domains'][index]}<span className='hidden'> , </span></li>)}</ol>,
+
+            width: '80px',
         },
         {
             name: 'Slots',
             selector: row => row['slots'],
-            cell: row => <ol className='list-disc'>{row.slots.split(',').map((email, index) => <li key={index}>{email}<span className='hidden'> , </span></li>)}</ol>,
-            width: '240px',
+            cell: row =>  <ol className='list-disc'>{Object.keys(row['slots']).map(index => <li key={index}>{slots[row['slots'][index] - 1 ].label}<span className='hidden'> , </span></li>)}</ol>,
+
+            width: '350px',
         },
         {
             name: 'Mininmum Projects',
@@ -107,7 +111,7 @@ function ViewJudges() {
 
         {
             name: 'Date',
-            width: '160px',
+            width: '300px',
             selector: row => row['date'],
             cellExport: row => row['date'],
             sortable: true,
@@ -125,7 +129,7 @@ function ViewJudges() {
             </div>
             {event.eventName &&
                 <Suspense fallback={<h1>Loading...</h1>}>
-                    <Table title={`${event.eventName.charAt(0).toUpperCase()}${event.eventName.slice(1)} Registrations ${new Date().toISOString().split('T')[0]}`} columns={columns} loading={!event.eventName || isLoading} data={data?.data}  keyField='jid' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
+                    <Table title={`${event.eventName.charAt(0).toUpperCase()}${event.eventName.slice(1)} Judges Registrations ${new Date().toISOString().split('T')[0]}`} columns={columns} loading={!event.eventName || isLoading} data={data?.data}  keyField='jid' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
                 </Suspense>
             }
         </>
