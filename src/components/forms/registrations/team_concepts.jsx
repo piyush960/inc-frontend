@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import {
   InputBox,
+  CloseMessage,
   Buttons,
   Dropdown,
   FileInputBox,
@@ -621,529 +622,537 @@ function TeamConcepts() {
 
   return (
     <MainContainer>
-      <StepContainer width={width}>
-        {steps.map(({ step, label }) => (
-          <StepWrapper key={step}>
-            <StepStyle step={activeStep >= step ? "completed" : "incomplete"}>
-              {activeStep > step ? (
-                <CheckMark>L</CheckMark>
-              ) : (
-                <StepCount>{step}</StepCount>
-              )}
-            </StepStyle>
-            <StepsLabelContainer>
-              <StepLabel key={step}>{label}</StepLabel>
-            </StepsLabelContainer>
-          </StepWrapper>
-        ))}
-      </StepContainer>
-      <div className="md:mx-16 my-6">
-        <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
-          {/* form 0 */}
-          {formStep === 0 && (
-            <>
-              <NoteBox
-                title="Note"
-                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-              />
-              <InputBox
-                type="text"
-                label={"Project Title"}
-                name={"title"}
-                placeholder={"Project title"}
-                required
-                onChange={(e) => handleInputChange0(e)}
-                value={form0.title}
-                minlenght="10"
-                error={errors0.title}
-                tip={"The project title should be between 10 and 100 characters long.(both inclusive)"}
-              ></InputBox>
-
-              <Dropdown
-                label="Domain of the project"
-                options={[
-                  { value: "SEL", label: "Select", selected: true },
-                  ...projectDomains,
-                ]}
-                name={"domain"}
-                state={form0}
-                setState={setForm0}
-                required
-                error={errors0.domain}
-
-              />
-              <Dropdown
-                label=" Project Type"
-                options={[
-                  { value: "SEL", label: "Select", selected: true },
-                  ...projectTypes,
-                ]}
-                name={"project_type"}
-                state={form0}
-                setState={setForm0}
-                required
-                error={errors0.project_type}
-              />
-              <InputBox
-                type="text"
-                label={"Guide_Name"}
-                name={"guide_name"}
-                placeholder={"Name"}
-                required
-                onChange={(e) => handleInputChange0(e)}
-                value={form0.guide_name}
-                error={errors0.guide_name}
-                tip={"Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters."}
-              ></InputBox>
-              <InputBox
-                type="email"
-                label={"Guide_Email"}
-                name={"guide_email"}
-                placeholder={"Email"}
-                required
-                onChange={(e) => handleInputChange0(e)}
-                value={form0.guide_email}
-                error={errors0.guide_email}
-                tipstyle={"hidden"}
-              ></InputBox>
-              <InputBox
-                type="tel"
-                label={"Guide_Phone"}
-                name={"guide_phone"}
-                placeholder={"Phone"}
-                required
-                onChange={(e) => handleInputChange0(e)}
-                value={form0.guide_phone}
-                error={errors0.guide_phone}
-                tipstyle={"hidden"}
-              ></InputBox>
-              <InputBox
-                type="email"
-                label={"Hod_email"}
-                name={"hod_email"}
-                placeholder={"Hod email"}
-                required
-                onChange={(e) => handleInputChange0(e)}
-                value={form0.hod_email}
-                error={errors0.hod_email}
-                tipstyle={"hidden"}
-              ></InputBox>
-              <RadioButtons
-                label="Is the project sponsored or not?"
-                options={sponsor_arr}
-                state={form0}
-                setState={setForm0}
-                name="sponsored"
-                required
-                error={errors0.sponsored}
-              />
-              {form0.sponsored === "1" && (
+      {false ?
+        <>
+          <StepContainer width={width}>
+            {steps.map(({ step, label }) => (
+              <StepWrapper key={step}>
+                <StepStyle step={activeStep >= step ? "completed" : "incomplete"}>
+                  {activeStep > step ? (
+                    <CheckMark>L</CheckMark>
+                  ) : (
+                    <StepCount>{step}</StepCount>
+                  )}
+                </StepStyle>
+                <StepsLabelContainer>
+                  <StepLabel key={step}>{label}</StepLabel>
+                </StepsLabelContainer>
+              </StepWrapper>
+            ))}
+          </StepContainer>
+          <div className="md:mx-16 my-6">
+            <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
+              {/* form 0 */}
+              {formStep === 0 && (
                 <>
+                  <NoteBox
+                    title="Note"
+                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                  />
                   <InputBox
                     type="text"
-                    label={"If yes, then name of company?"}
-                    placeholder={"Company name"}
-                    name={"company"}
+                    label={"Project Title"}
+                    name={"title"}
+                    placeholder={"Project title"}
                     required
                     onChange={(e) => handleInputChange0(e)}
-                    value={form0.company}
-                    error={errors0.company}
-                    tip={"Company name if applicable, should be between 3 and 100 characters(both inclusive)"}
+                    value={form0.title}
+                    minlenght="10"
+                    error={errors0.title}
+                    tip={"The project title should be between 10 and 100 characters long.(both inclusive)"}
                   ></InputBox>
-                  <RadioButtons
-                    label=" NDA signed or not?"
-                    options={nda_arr}
+
+                  <Dropdown
+                    label="Domain of the project"
+                    options={[
+                      { value: "SEL", label: "Select", selected: true },
+                      ...projectDomains,
+                    ]}
+                    name={"domain"}
                     state={form0}
                     setState={setForm0}
-                    name="nda"
                     required
-                    error={errors0.nda}
+                    error={errors0.domain}
+
                   />
+                  <Dropdown
+                    label=" Project Type"
+                    options={[
+                      { value: "SEL", label: "Select", selected: true },
+                      ...projectTypes,
+                    ]}
+                    name={"project_type"}
+                    state={form0}
+                    setState={setForm0}
+                    required
+                    error={errors0.project_type}
+                  />
+                  <InputBox
+                    type="text"
+                    label={"Guide_Name"}
+                    name={"guide_name"}
+                    placeholder={"Name"}
+                    required
+                    onChange={(e) => handleInputChange0(e)}
+                    value={form0.guide_name}
+                    error={errors0.guide_name}
+                    tip={"Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters."}
+                  ></InputBox>
+                  <InputBox
+                    type="email"
+                    label={"Guide_Email"}
+                    name={"guide_email"}
+                    placeholder={"Email"}
+                    required
+                    onChange={(e) => handleInputChange0(e)}
+                    value={form0.guide_email}
+                    error={errors0.guide_email}
+                    tipstyle={"hidden"}
+                  ></InputBox>
+                  <InputBox
+                    type="tel"
+                    label={"Guide_Phone"}
+                    name={"guide_phone"}
+                    placeholder={"Phone"}
+                    required
+                    onChange={(e) => handleInputChange0(e)}
+                    value={form0.guide_phone}
+                    error={errors0.guide_phone}
+                    tipstyle={"hidden"}
+                  ></InputBox>
+                  <InputBox
+                    type="email"
+                    label={"Hod_email"}
+                    name={"hod_email"}
+                    placeholder={"Hod email"}
+                    required
+                    onChange={(e) => handleInputChange0(e)}
+                    value={form0.hod_email}
+                    error={errors0.hod_email}
+                    tipstyle={"hidden"}
+                  ></InputBox>
+                  <RadioButtons
+                    label="Is the project sponsored or not?"
+                    options={sponsor_arr}
+                    state={form0}
+                    setState={setForm0}
+                    name="sponsored"
+                    required
+                    error={errors0.sponsored}
+                  />
+                  {form0.sponsored === "1" && (
+                    <>
+                      <InputBox
+                        type="text"
+                        label={"If yes, then name of company?"}
+                        placeholder={"Company name"}
+                        name={"company"}
+                        required
+                        onChange={(e) => handleInputChange0(e)}
+                        value={form0.company}
+                        error={errors0.company}
+                        tip={"Company name if applicable, should be between 3 and 100 characters(both inclusive)"}
+                      ></InputBox>
+                      <RadioButtons
+                        label=" NDA signed or not?"
+                        options={nda_arr}
+                        state={form0}
+                        setState={setForm0}
+                        name="nda"
+                        required
+                        error={errors0.nda}
+                      />
+                    </>
+                  )}
+
+                  <InputBox
+                    type="textarea"
+                    label={"Abstract"}
+                    name={"abstract"}
+                    placeholder={"In 1000 characters or less"}
+                    required
+                    error={errors0.abstract}
+                    onChange={(e) => handleInputChange0(e)}
+                    value={form0.abstract}
+                    minlenght="50"
+                    tip={"Abstract should be between 50 and 1000 characters long(both inclusive)"}
+                  ></InputBox>
                 </>
               )}
+              {/* form 1 */}
+              {formStep === 1 && (
+                <>
+                  <NoteBox
+                    title="Note"
+                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                  />
+                  <Buttons
+                    value="Add Members"
+                    onClick={addFields}
+                    classNames=" my-2"
+                    loading={registerUserMutationForm1.isLoading}
+                    disabled={formFields.length >= 5}
+                  />
 
-              <InputBox
-                type="textarea"
-                label={"Abstract"}
-                name={"abstract"}
-                placeholder={"In 1000 characters or less"}
-                required
-                error={errors0.abstract}
-                onChange={(e) => handleInputChange0(e)}
-                value={form0.abstract}
-                minlenght="50"
-                tip={"Abstract should be between 50 and 1000 characters long(both inclusive)"}
-              ></InputBox>
-            </>
-          )}
-          {/* form 1 */}
-          {formStep === 1 && (
-            <>
-              <NoteBox
-                title="Note"
-                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-              />
-              <Buttons
-                value="Add Members"
-                onClick={addFields}
-                classNames=" my-2"
-                loading={registerUserMutationForm1.isLoading}
-                disabled={formFields.length >= 5}
-              />
-
-              {formFields.map((form, index) => {
-                return (
-                  <div key={index}>
-                    <InputBox
-                      label="Name"
-                      name="name"
-                      type="text"
-                      placeholder="name "
-                      required
-                      error={errors1.name}
-                      onChange={(event) => handleFormChange(event, index)}
-                      value={form.name}
-                      tip={"Name of member should be between 3 and 20 characters(both inclusive)"}
-                    />
-                    <InputBox
-                      label="Email ID"
-                      name="email"
-                      type="text"
-                      placeholder="email "
-                      required
-                      error={errors1.email}
-                      onChange={(event) => handleFormChange(event, index)}
-                      value={form.email}
-                      tipstyle={"hidden"}
-                    />
-                    <div className="flex">
-                      <div className="mr-1 w-1/2">
+                  {formFields.map((form, index) => {
+                    return (
+                      <div key={index}>
                         <InputBox
-                          label="Phone No"
-                          name="phone"
-                          type="tel"
-                          placeholder="phone number"
+                          label="Name"
+                          name="name"
+                          type="text"
+                          placeholder="name "
                           required
-                          error={errors1.phone}
+                          error={errors1.name}
                           onChange={(event) => handleFormChange(event, index)}
-                          value={form.phone}
+                          value={form.name}
+                          tip={"Name of member should be between 3 and 20 characters(both inclusive)"}
+                        />
+                        <InputBox
+                          label="Email ID"
+                          name="email"
+                          type="text"
+                          placeholder="email "
+                          required
+                          error={errors1.email}
+                          onChange={(event) => handleFormChange(event, index)}
+                          value={form.email}
                           tipstyle={"hidden"}
                         />
-                      </div>
-                      <div className="input-box-dropdown w-full mb-4 relative">
-                        <label
-                          className={`input-label font-medium mb-1 text-white text-lg flex`}
-                        >
-                          {"Gender"}
-                          <h1 className="text-gold">*</h1>
-                        </label>
-                        <div className="relative inline-block w-full">
-                          <select
-                            name={"gender"}
-                            value={formFields.gender}
-                            onChange={(event) => handleFormChange(event, index)}
-                            required
-                            error={errors1.gender}
-                            className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
-                          >
-                            {gender_type.map((option) => (
-                              <option
-                                key={option?.value}
-                                value={option?.value}
-                                className={`py-1 bg-[#0B1E47] ${option?.className || ""
-                                  }`}
+                        <div className="flex">
+                          <div className="mr-1 w-1/2">
+                            <InputBox
+                              label="Phone No"
+                              name="phone"
+                              type="tel"
+                              placeholder="phone number"
+                              required
+                              error={errors1.phone}
+                              onChange={(event) => handleFormChange(event, index)}
+                              value={form.phone}
+                              tipstyle={"hidden"}
+                            />
+                          </div>
+                          <div className="input-box-dropdown w-full mb-4 relative">
+                            <label
+                              className={`input-label font-medium mb-1 text-white text-lg flex`}
+                            >
+                              {"Gender"}
+                              <h1 className="text-gold">*</h1>
+                            </label>
+                            <div className="relative inline-block w-full">
+                              <select
+                                name={"gender"}
+                                value={formFields.gender}
+                                onChange={(event) => handleFormChange(event, index)}
+                                required
+                                error={errors1.gender}
+                                className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
                               >
-                                {option?.label}
-                              </option>
-                            ))}
-                          </select>
+                                {gender_type.map((option) => (
+                                  <option
+                                    key={option?.value}
+                                    value={option?.value}
+                                    className={`py-1 bg-[#0B1E47] ${option?.className || ""
+                                      }`}
+                                  >
+                                    {option?.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          {/* <Dropdown
+                                                  label=" Gender"
+                                                  options={gender_type}
+                                                  name={"gender"}
+                                                  state={formFields}
+                                                  setState={setFormFields}
+                                                  required
+                                              /> */}
                         </div>
+                        <FileInputBox
+                          name="member_id"
+                          accept="image/png, image/jpeg"
+                          type="file"
+                          onChange={(e) => handleImageChange(e, index)}
+                          label="Upload Screenshot of ID"
+                          required
+                          error={errors1.member_id}
+                        />
+                        <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
+                        {/* <Notebox /> */}
+                        {/* {membersCount <= index && (<Buttons
+                                              value="remove member"
+                                              onClick={removefields(index)}
+                                              classNames=" my-2"
+                                              disabled={true}
+                                          />)} */}
                       </div>
-                      {/* <Dropdown
-                                                label=" Gender"
-                                                options={gender_type}
-                                                name={"gender"}
-                                                state={formFields}
-                                                setState={setFormFields}
-                                                required
-                                            /> */}
-                    </div>
-                    <FileInputBox
-                      name="member_id"
-                      accept="image/png, image/jpeg"
-                      type="file"
-                      onChange={(e) => handleImageChange(e, index)}
-                      label="Upload Screenshot of ID"
-                      required
-                      error={errors1.member_id}
-                    />
-                    <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
-                    {/* <Notebox /> */}
-                    {/* {membersCount <= index && (<Buttons
-                                            value="remove member"
-                                            onClick={removefields(index)}
-                                            classNames=" my-2"
-                                            disabled={true}
-                                        />)} */}
-                  </div>
-                );
-              })}
-            </>
-          )}
-          {/* form 2 */}
-          {formStep === 2 && (
-            <>
-              <NoteBox
-                title="Note"
-                text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-              />
-              <RadioButtons
-                label=" Are you PICTian or not?"
-                options={country_arr}
-                state={form2}
-                setState={setForm2}
-                name="isPICT"
-                required
-                error={errors2.isPICT}
-              />
-              {form2.isPICT === "0" && (
+                    );
+                  })}
+                </>
+              )}
+              {/* form 2 */}
+              {formStep === 2 && (
                 <>
+                  <NoteBox
+                    title="Note"
+                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                  />
                   <RadioButtons
-                    label="Is International ?"
+                    label=" Are you PICTian or not?"
                     options={country_arr}
                     state={form2}
                     setState={setForm2}
-                    name="isInternational"
+                    name="isPICT"
                     required
-                    error={errors2.isInternational}
+                    error={errors2.isPICT}
                   />
-                  <div className=" mx-1 my-2">
-                    <InputBox
-                      label="College"
-                      name={"college"}
-                      type="text"
-                      placeholder="college name"
-                      required
-                      onChange={(e) => handleInputChange2(e)}
-                      value={form2.college}
-                      error={errors2.college}
-                      tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
-                    />
-                  </div>
-                  <div className="mx-1 my-2">
-                    <InputBox
-                      className={form2.isInternational === "0" ? "pointer-events-none" : ""}
-                      label="Country"
-                      name={"country"}
-                      type="text"
-                      placeholder="country"
-                      readonly={form2.isInternational === "0"}
-                      required
-                      error={errors2.country}
-                      onChange={(e) => handleInputChange2(e)}
-                      value={
-                        form2.isInternational === "0" ? "India" : form2.country
-                      }
-                      tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
-                    />
-                  </div>
-                  <div className="flex mx-1 ">
-                    <div className="mr-1 w-1/2">
-                      <InputBox
-                        label="State"
-                        type="text"
-                        name={"state"}
-                        placeholder="state"
-                        required
-                        error={errors2.state}
-                        onChange={(e) => handleInputChange2(e)}
-                        value={form2.state}
-                        tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
-                      />
-                    </div>
-                    <div className="ml-1 w-1/2">
-                      <InputBox
-                        label="District"
-                        name={"district"}
-                        type="text"
-                        placeholder="district"
-                        required
-                        error={errors2.district}
-                        onChange={(e) => handleInputChange2(e)}
-                        value={form2.district}
-                        tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex mx-1 ">
-                    <div className="mr-1 w-1/2">
-                      <InputBox
-                        label="City"
-                        type="text"
-                        name={"city"}
-                        placeholder="city"
-                        required
-                        error={errors2.city}
-                        onChange={(e) => handleInputChange2(e)}
-                        value={form2.city}
-                        tipstyle={"hidden"}
-                      />
-                    </div>
-                    <div className="ml-1 w-1/2">
-                      <Dropdown
-                        label="Localtiy"
-                        options={[
-                          { value: "SEL", label: "Select", selected: true },
-                          ...localTypes,
-                        ]}
-                        name={"locality"}
+                  {form2.isPICT === "0" && (
+                    <>
+                      <RadioButtons
+                        label="Is International ?"
+                        options={country_arr}
                         state={form2}
                         setState={setForm2}
+                        name="isInternational"
                         required
-                        error={errors2.locality}
+                        error={errors2.isInternational}
                       />
-                    </div>
-                  </div>
+                      <div className=" mx-1 my-2">
+                        <InputBox
+                          label="College"
+                          name={"college"}
+                          type="text"
+                          placeholder="college name"
+                          required
+                          onChange={(e) => handleInputChange2(e)}
+                          value={form2.college}
+                          error={errors2.college}
+                          tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
+                        />
+                      </div>
+                      <div className="mx-1 my-2">
+                        <InputBox
+                          className={form2.isInternational === "0" ? "pointer-events-none" : ""}
+                          label="Country"
+                          name={"country"}
+                          type="text"
+                          placeholder="country"
+                          readonly={form2.isInternational === "0"}
+                          required
+                          error={errors2.country}
+                          onChange={(e) => handleInputChange2(e)}
+                          value={
+                            form2.isInternational === "0" ? "India" : form2.country
+                          }
+                          tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                        />
+                      </div>
+                      <div className="flex mx-1 ">
+                        <div className="mr-1 w-1/2">
+                          <InputBox
+                            label="State"
+                            type="text"
+                            name={"state"}
+                            placeholder="state"
+                            required
+                            error={errors2.state}
+                            onChange={(e) => handleInputChange2(e)}
+                            value={form2.state}
+                            tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                          />
+                        </div>
+                        <div className="ml-1 w-1/2">
+                          <InputBox
+                            label="District"
+                            name={"district"}
+                            type="text"
+                            placeholder="district"
+                            required
+                            error={errors2.district}
+                            onChange={(e) => handleInputChange2(e)}
+                            value={form2.district}
+                            tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex mx-1 ">
+                        <div className="mr-1 w-1/2">
+                          <InputBox
+                            label="City"
+                            type="text"
+                            name={"city"}
+                            placeholder="city"
+                            required
+                            error={errors2.city}
+                            onChange={(e) => handleInputChange2(e)}
+                            value={form2.city}
+                            tipstyle={"hidden"}
+                          />
+                        </div>
+                        <div className="ml-1 w-1/2">
+                          <Dropdown
+                            label="Localtiy"
+                            options={[
+                              { value: "SEL", label: "Select", selected: true },
+                              ...localTypes,
+                            ]}
+                            name={"locality"}
+                            state={form2}
+                            setState={setForm2}
+                            required
+                            error={errors2.locality}
+                          />
+                        </div>
+                      </div>
 
-                  <RadioButtons
-                    label="  Preferred mode of presentation"
-                    options={mode_arr}
-                    state={form2}
-                    setState={setForm2}
-                    name="mode"
-                    required
-                    error={errors2.mode}
-                    tip={"Participants from Pune should select offline mode only."}
-                  />
-
-                  {form2.mode === "0" && (
-                    <div>
-                      <InputBox
-                        type="textarea"
-                        label={"Reason for Online"}
-                        name={"reason_of_mode"}
-                        placeholder={"reason"}
+                      <RadioButtons
+                        label="  Preferred mode of presentation"
+                        options={mode_arr}
+                        state={form2}
+                        setState={setForm2}
+                        name="mode"
                         required
-                        error={errors2.reason_of_mode}
+                        error={errors2.mode}
+                        tip={"Participants from Pune should select offline mode only."}
+                      />
+
+                      {form2.mode === "0" && (
+                        <div>
+                          <InputBox
+                            type="textarea"
+                            label={"Reason for Online"}
+                            name={"reason_of_mode"}
+                            placeholder={"reason"}
+                            required
+                            error={errors2.reason_of_mode}
+                            onChange={(e) => handleInputChange2(e)}
+                            value={form2.reason_of_mode}
+                          ></InputBox>
+                        </div>
+                      )}
+                      <InputBox
+                        type="text"
+                        label="Referral"
+                        name="referral"
+                        placeholder="Referral ID given by Campus Ambassador"
                         onChange={(e) => handleInputChange2(e)}
-                        value={form2.reason_of_mode}
-                      ></InputBox>
-                    </div>
+                        value={form2.referral}
+                        error={errors2.referral}
+                        tip={"Referral should be between 3-50 characters long (if any)"}
+                      />
+                    </>
                   )}
-                  <InputBox
-                    type="text"
-                    label="Referral"
-                    name="referral"
-                    placeholder="Referral ID given by Campus Ambassador"
-                    onChange={(e) => handleInputChange2(e)}
-                    value={form2.referral}
-                    error={errors2.referral}
-                    tip={"Referral should be between 3-50 characters long (if any)"}
-                  />
                 </>
               )}
-            </>
-          )}
-          {formStep === 3 &&
-            (paymentStatus ? (
-              <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
-                <p className="text-xl text-center text-gold font-bold mb-3">
-                  Thank you for registering in InC'23. Looking forward to have
-                  you in person
-                </p>
-                <NoteBox
-                  title="Note"
-                  text="Registration payment will be verified and will be informed by email."
-                />
-              </div>
-            ) : (
-              <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
-                <NoteBox
-                  title="Note"
-                  text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-                />
-                <InputBox
-                  label="Transaction ID (received on email)"
-                  type="text"
-                  name="payment_id"
-                  placeholder="Enter Transaction ID"
-                  inputref={paymentRef}
-                  minlenght="8"
-                  error={errors3.payment_id}
-                  className="tracking-widest"
-                  required
-                />
-              </div>
-            ))}
-          <div className="flex justify-between">
-            {/* {formStep > 0 && formStep < 4 && (
-              <Buttons
-                className="mx-2 my-2"
-                value=" Previous Step"
-                onClick={prevForm}
-                loading={
-                  registerUserMutationForm1.isLoading ||
-                  registerUserMutationForm2.isLoading
-                }
-              />
-            )} */}
-            {formStep === 3 ? (
-              paymentStatus ? (
-                <></>
-              ) : (
+              {formStep === 3 &&
+                (paymentStatus ? (
+                  <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
+                    <p className="text-xl text-center text-gold font-bold mb-3">
+                      Thank you for registering in InC'23. Looking forward to have
+                      you in person
+                    </p>
+                    <NoteBox
+                      title="Note"
+                      text="Registration payment will be verified and will be informed by email."
+                    />
+                  </div>
+                ) : (
+                  <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
+                    <NoteBox
+                      title="Note"
+                      text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                    />
+                    <InputBox
+                      label="Transaction ID (received on email)"
+                      type="text"
+                      name="payment_id"
+                      placeholder="Enter Transaction ID"
+                      inputref={paymentRef}
+                      minlenght="8"
+                      error={errors3.payment_id}
+                      className="tracking-widest"
+                      required
+                    />
+                  </div>
+                ))}
+              <div className="flex justify-between">
+                {/* {formStep > 0 && formStep < 4 && (
                 <Buttons
-                  className=" mx-2 my-2 "
-                  value="Submit"
-                  onClick={nextForm}
-                  loading={registerUserMutationForm3.isLoading}
-                />
-              )
-            ) : (
-              formStep === 2 &&
-              (paymentStatus ? (
-                <Buttons
-                  className=" mx-2 my-2  "
-                  value="Submit"
-                  onClick={nextForm}
+                  className="mx-2 my-2"
+                  value=" Previous Step"
+                  onClick={prevForm}
                   loading={
-                    registerUserMutationForm0.isLoading ||
                     registerUserMutationForm1.isLoading ||
                     registerUserMutationForm2.isLoading
                   }
                 />
-              ) : (
-                <Buttons
-                  className=" mx-2 my-2  "
-                  value="Pay (Rs.300)"
-                  onClick={nextForm}
-                  loading={
-                    registerUserMutationForm0.isLoading ||
-                    registerUserMutationForm1.isLoading ||
-                    registerUserMutationForm2.isLoading
-                  }
-                />
-              ))
-            )}
-            {formStep < 2 && (
-              <Buttons
-                className=" mx-2 my-2  "
-                value="Next Step"
-                onClick={nextForm}
-                loading={
-                  registerUserMutationForm0.isLoading ||
-                  registerUserMutationForm1.isLoading ||
-                  registerUserMutationForm2.isLoading
-                }
-              />
-            )}
+              )} */}
+                {formStep === 3 ? (
+                  paymentStatus ? (
+                    <></>
+                  ) : (
+                    <Buttons
+                      className=" mx-2 my-2 "
+                      value="Submit"
+                      onClick={nextForm}
+                      loading={registerUserMutationForm3.isLoading}
+                    />
+                  )
+                ) : (
+                  formStep === 2 &&
+                  (paymentStatus ? (
+                    <Buttons
+                      className=" mx-2 my-2  "
+                      value="Submit"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm0.isLoading ||
+                        registerUserMutationForm1.isLoading ||
+                        registerUserMutationForm2.isLoading
+                      }
+                    />
+                  ) : (
+                    <Buttons
+                      className=" mx-2 my-2  "
+                      value="Pay (Rs.300)"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm0.isLoading ||
+                        registerUserMutationForm1.isLoading ||
+                        registerUserMutationForm2.isLoading
+                      }
+                    />
+                  ))
+                )}
+                {formStep < 2 && (
+                  <Buttons
+                    className=" mx-2 my-2  "
+                    value="Next Step"
+                    onClick={nextForm}
+                    loading={
+                      registerUserMutationForm0.isLoading ||
+                      registerUserMutationForm1.isLoading ||
+                      registerUserMutationForm2.isLoading
+                    }
+                  />
+                )}
+              </div>
+            </form>
+            {/* <Buttons
+                  value="submit"
+                  onClick={submit}
+                  classNames='mx-2 my-2'
+              /> */}
           </div>
-        </form>
-        {/* <Buttons
-                value="submit"
-                onClick={submit}
-                classNames='mx-2 my-2'
-            /> */}
-      </div>
+        </>
+        :
+        <div className="md:mx-16 my-20">
+          <CloseMessage />
+        </div>
+      }
     </MainContainer>
   );
 }

@@ -98,7 +98,7 @@ function Navbar() {
               >
                 Team
               </a>
-              <select
+              {/* <select
                 className="py-4 px-6 text-white font-semibold hover:text-gold border-transparent hover:border-light_blue/80 bg-faint_blue/30 hover:bg-faint_blue/10 rounded-xl border transition duration-300"
                 defaultValue={"Register"}
                 onClick={handleSelect}
@@ -107,7 +107,7 @@ function Navbar() {
                 <option>Impetus</option>
                 <option>Concepts</option>
                 <option>Pradnya</option>
-              </select>
+              </select> */}
             </div>
 
             <div className="lg:hidden flex items-center">
