@@ -10,7 +10,7 @@ function EventDetails(props) {
   const eventsData = {
     impetus: {
       logo: impetus_logo,
-      criteria:"First, Second and Third Year Students enrolled in any BE/BTech, BSc, BCA, Diploma Degree.",
+      criteria: "First, Second and Third Year Students enrolled in any BE/BTech, BSc, BCA, Diploma Degree.",
       name: 'IMPETUS',
       short_desc: 'International Level Project Competition cum Exhibition',
       desc: 'Impetus is an inter-collegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, were closely associated with this event. During the 3 days event, first year, second year and third year students from various colleges across India and abroad showcase their projects. students from various colleges across India and abroad showcase their projects in domains lik 🔸Application Development🔸 Communication, Networking, Security 🔸 Machine Learning, Pattern Recognition, Artificial Intelligence🔸 Embedded systems, VLSI, IoT, Remote Sensing 🔸 Blockchain, Cloud Computing, and 🔶 Others',
@@ -40,10 +40,10 @@ function EventDetails(props) {
       rules: [
         'The decision of judges will be final and binding to one and all',
       ],
-      note:` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
-      note1:`🔹Judge's decision will be final.`,
-      note2:`🔹Project status must be in "Ready to Use"`,
-      note3:`🔹Already registered candidatess need not register again.`,
+      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
+      note1: `🔹Judge's decision will be final.`,
+      note2: `🔹Project status must be in "Ready to Use"`,
+      note3: `🔹Already registered candidatess need not register again.`,
       contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: 'https://pictinc.org/register/events/impetus',
       schedule: 'Project presentation on 21st and 22nd'
@@ -56,9 +56,10 @@ function EventDetails(props) {
         "Vishakha 9011628404"
       ],
       logo: concepts_logo,
-      criteria:'Final year students enrolled in BE/ BTech degree.',
+      criteria: 'Final year students enrolled in BE/ BTech degree.',
       schedule: "Project exhibition 21 and 22 and Prize distribution 23rd",
       name: 'CONCEPTS',
+      notices: ["1. The Participants should be present on campus and the allocated labs during the time period indicated.", "2. At least 2 judges will be judging each project. However there will be judges from other organizations who will be evaluating projects for probable hiring or for special prizes etc. Hence none of the groups should leave the campus unless informed officially by the judging team.", "3. The judging criteria includes the following points. i. Innovative Ideas Involved. ii. Approach to Exploit Ideas. iii. Approach towards Implementing the system and Future Applications. iv. Implementation of engineering Principles. v. Presentation and Q & A", "4. We request all the group members to visit the stalls put up in the campus.", "5. For any judging related queries contact the student organizer associated with the respective lab only. Their contact details are written on each lab white board."],
       short_desc: 'The most grand project exhibition event Concepts for final year student',
       desc: 'Concepts is an inter-collegiate international-level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. This event has been catching the attention of corporate giants for guiding and mentoring the participants for their Quality products/projects and providing on spot job offers & internships. It offers Patent registration fees for Innovative and Patentable projects. During the 3 days event, Final Year students from various colleges across India and abroad showcase their projects.',
       domains: [
@@ -84,10 +85,10 @@ function EventDetails(props) {
         team_size: 5
       },
       prizes: 'InC announces a total cash prize of ₹6 Lakhs.',
-      note:` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
-      note1:`🔹Judge's decision will be final.`,
-      note2:`🔹Project status must be in "Ready to Use"`,
-      note3:`🔹Already registered candidatess need not register again.`,
+      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
+      note1: `🔹Judge's decision will be final.`,
+      note2: `🔹Project status must be in "Ready to Use"`,
+      note3: `🔹Already registered candidatess need not register again.`,
       rules: [
         'The decision of judges will be final and binding to one and all',
       ],
@@ -99,10 +100,10 @@ function EventDetails(props) {
         "Neha 9579678142"
       ],
       prizes: 'InC announces a total cash prize of ₹6 Lakhs',
-      note1:`🔹Judge's decision will be final.`,
-      note3:`🔹Already registered candidatess need not register again.`,
-      schedule:'21st, 22nd mentioned below in detail',
-      criteria:`Junior Level- This category is open for all students who are pursuing first or second year of any undergraduate  degree/course. Senior Level- Third year engineering, final year engineering of any undergraduate degree/course.`,
+      note1: `🔹Judge's decision will be final.`,
+      note3: `🔹Already registered candidatess need not register again.`,
+      schedule: '21st, 22nd mentioned below in detail',
+      criteria: `Junior Level- This category is open for all students who are pursuing first or second year of any undergraduate  degree/course. Senior Level- Third year engineering, final year engineering of any undergraduate degree/course.`,
       logo: pradnya_logo,
       name: 'PRADNYA',
       short_desc: 'Competitive Programming',
@@ -267,38 +268,56 @@ function EventDetails(props) {
                       </ol>
                     </div>
                   </div>
-
+                  <>{eventDetail.notices ? <div className="col-span-2">
+                    <div className="text-2xl text-gold font-bold bg-clip-text">
+                      {/* Platforms :MCQ */}
+                      Instructions to participants for Concepts
+                      <div className="mt-2 text-base pt-1 text-white font-light text-blue-200 border-t border-slate-600">
+                        
+                          <div >
+                            <ul>
+                              {eventDetail.notices.map((notice, index) => (
+                                <li classNames="text-xl" key={index}>{notice}</li>
+                              ))}
+                            </ul>
+                          </div>
+                       
+                      </div>
+                    </div>
+                  </div> : ''}</>
 
                   <div className="space-y-2 col-span-2">
-                  {/* if(eventName === 'concepts' || eventName === 'impetus') */}
+                    <>{eventDetail.note ? <div>
                       <div className="text-2xl font-bold  bg-clip-text text-gold space-x-2">
-                      <label>Event prize</label>
-                      {/* <i class="far fa-phone"></i> */}
-                    </div>
-                    <div className="border-t pt-2 pb-2 border-slate-600">
-                        {eventDetail.note}<br/>
-                        {eventDetail.note1}<br/>
-                        {eventDetail.note2}<br/>
+                        <label>Event prize</label>
+                        {/* <i class="far fa-phone"></i> */}
+                      </div>
+                      <div className="border-t pt-2 pb-2 border-slate-600">
+                        {eventDetail.note}<br />
+                        {eventDetail.note1}<br />
+                        {eventDetail.note2}<br />
                         {eventDetail.note3}
-                    </div>
-                
-                  
-                  <div className="text-2xl font-bold text-gold bg-clip-text  space-x-2">
+                      </div>
+                    </div> : ''}</>
+
+
+
+                    <div className="text-2xl font-bold text-gold bg-clip-text  space-x-2">
                       <label>Criteria</label>
                       <i class="far fa-phone"></i>
                     </div>
                     <div className="border-t pt-2 pb-2 border-slate-600">
-                        {eventDetail.criteria}
+                      {eventDetail.criteria}
                     </div>
-                  <div className="text-2xl font-bold  bg-clip-text text-gold space-x-2">
+                    <div className="text-2xl font-bold  bg-clip-text text-gold space-x-2">
                       <label>Rules</label>
                       <i class="far fa-phone"></i>
                     </div>
                     <div className="border-t pt-2 pb-2 border-slate-600">
-                        {eventDetail.rules}
+                      {eventDetail.rules}
                     </div>
 
-                      <div className="text-2xl text-gold font-bold  bg-clip-text ">
+                    <div className="text-2xl text-gold font-bold  bg-clip-text ">
                       {eventDetail.name}
                     </div>
                     <div className="border-t pt-2 border-slate-600">
