@@ -8,6 +8,7 @@ export { default as InCTeamsSection } from './incTeams.jsx';
 export { default as Footer } from './footer.jsx';
 export { default as Cube } from './cube.jsx';
 export { default as Modals } from './modals.jsx';
+export { default as CloseMessage } from './closeMessage.jsx';
 export { default as Buttons } from './buttons.jsx';
 export { default as InputBox } from './inputBox.jsx';
 export { default as RadioButtons } from './radioButtons.jsx';

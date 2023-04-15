@@ -8,8 +8,9 @@ function errorParser(err) {
                 message.forEach(e => {
                     if (e instanceof Object) {
                         for (const key in e) {
-                            if (key === 'ticket') return { error: 'Ticket is required or session expired. Please try again.' }
-                            parsedError[key] = e[key]
+                            if (key === 'ticket') parsedError.error = 'Ticket is required or session expired. Please try again.'
+                            else if (key === 'admin_data') parsedError.error = 'Session expired. Please login again.'
+                            else parsedError[key] = e[key]
                         }
                     } else parsedError = { error: e }
                 })
