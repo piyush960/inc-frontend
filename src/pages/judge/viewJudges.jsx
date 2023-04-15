@@ -38,14 +38,14 @@ function ViewJudges() {
             name: 'Name',
             selector: row => row['name'],
             cellExport: row => row['name'],
-            width: '160px',
+            width: '300px',
             sortable: true,
         },
         {
             name: 'Email',
             selector: row => row['email'],
             cellExport: row => row['email'],
-            width: '240px',
+            width: '300px',
         
         },
         {
