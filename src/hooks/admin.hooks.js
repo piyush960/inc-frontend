@@ -31,8 +31,10 @@ function usePendingPayments(eventName) {
     const parsedError = errorParser(error)
     if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
     else {
-      parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
-      toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
+      parsedError.error ?
+        toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+        :
+        toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
     }
   }
   return { isLoading, data }
@@ -74,8 +76,10 @@ function useGetRegistrations(eventName) {
     const parsedError = errorParser(error)
     if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
     else {
-      parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
-      toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
+      parsedError.error ?
+        toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+        :
+        toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
     }
   }
   return { isLoading, data }
@@ -87,8 +91,10 @@ function useGetJudgeRegistrations(eventName) {
     const parsedError = errorParser(error)
     if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
     else {
-      parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
-      toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
+      parsedError.error ?
+        toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+        :
+        toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
     }
   }
   return { isLoading, data }
