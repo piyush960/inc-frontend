@@ -1,4 +1,5 @@
 import './styles/sponsors.css';
+import imocha_logo from '../assets/images/iMochablack.png'
 
 const titleSponsors = [
   {
@@ -24,8 +25,8 @@ const coSponsors = [
 
 const educationSponsors = [
   {
-    name: 'Imocha',
-    logo: 'https://res.cloudinary.com/job-kart/image/upload/v1677914534/iMocha-New-Logo_hhndvh.png',
+    name: 'iMocha',
+    logo: 'https://res.cloudinary.com/dwhoc05ug/image/upload/v1681740341/iMocha_black_dj0jpu.png',
     website: 'https://www.imocha.io/',
   },
   {

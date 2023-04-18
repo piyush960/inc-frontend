@@ -13,7 +13,7 @@ function WebTeam(){
             team: 'Web Team', members: [
               { name: 'Abhishek Jadhav', post: 'Web Head', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://www.linkedin.com/in/', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
               { name: 'Manas Kshatriya', post: 'Web Head', email: 'manaskshatriya01@gmail.com', linkedin: 'https://www.linkedin.com/in/manas-kshatriya-32a776210/', github: 'https://github.com/manaskshatriya', photo: "http://drive.google.com/uc?export=view&id=15HAwm5dcJXFt_KVkehzYLDsd41xYwkIr" },
-              { name: 'Adwait Naik', post: 'Web Team', email: 'naikadvait1610@gmail.com ', linkedin: 'https://www.linkedin.com/in/advait-naik-277379199', github: 'https://github.com/advait1610', photo: "http://drive.google.com/uc?export=view&id=1KMySqcKhzG9P0M3vanE8Ucd0pmQzV-b7" },
+              { name: 'Advait Naik', post: 'Web Team', email: 'naikadvait1610@gmail.com ', linkedin: 'https://www.linkedin.com/in/advait-naik-277379199', github: 'https://github.com/advait1610', photo: "http://drive.google.com/uc?export=view&id=1KMySqcKhzG9P0M3vanE8Ucd0pmQzV-b7" },
               { name: 'Haripriya Kulkarni', post: 'Web Team', email: 'haripriyakulkarni13@gmail.com', linkedin: 'https://www.linkedin.com/in/haripriya-kulkarni-7841b81b4/', github: 'https://github.com/hpkoolkarni', photo: "http://drive.google.com/uc?export=view&id=1f_LfrRQrWcqhMzwJP_FNfpQSuV1ctcgQ" },
               { name: 'Maithili Tawde', post: 'Web Team', email: 'maithileetawde@gmail.com', linkedin: 'https://www.linkedin.com/in/maithili-tawde-bbb672206/', github: 'https://github.com/maithilitawde', photo: "http://drive.google.com/uc?export=view&id=13q3M_pKg76eRSGA02lkeeTb64z-5onLg" },
               

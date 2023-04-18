@@ -63,6 +63,7 @@ function InCTeams() {
     {
       team: 'Publicity Team', members: [
         { name: 'Aditya Kamble', post: 'Publicity Head', email: 'adityakamble615@gmail.com	 ', linkedin: 'https://www.linkedin.com/in/adityakamble615/', github: 'https://github.com', photo: "http://drive.google.com/uc?export=view&id=1rQ3nb-v4lGw7v96Ur5IXewVpVr2-O6v0" },
+        { name: 'Reva Dalal', post: 'Publicity Team', email: 'reva.dalal.197167@gmail.com', linkedin: 'https://www.linkedin.com/in/reva-dalal-200b44250', github: 'https://github.com', photo: "http://drive.google.com/uc?export=view&id=1KYiZD95hfs_Oi29fchrcSjUjtsQx9nan" },
         { name: ' Mahaveer Navlakha', post: 'Publicity Head', email: 'mahavirnn@gmail.com	', linkedin: 'https://www.linkedin.com/in/mahaveer-navlakha-844b5a156/', github: 'https://github.com/Mahavirnn', photo: "http://drive.google.com/uc?export=view&id=16YkHH3F3hCb1oaESqjcPpqw-Z1jZhgsm" },
       ]
     },
