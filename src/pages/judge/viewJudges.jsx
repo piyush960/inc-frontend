@@ -28,10 +28,23 @@ function ViewJudges() {
     const columns = useMemo(() => [
         {
             name: 'Judge ID',
+            selector: row => {
+                let zeros = row['sr_no'] < 10 ? '00' : row['sr_no'] < 100 ? '0' : ''
+                return `J-${zeros + row['sr_no']}`
+            },
+            cellExport: row => {
+                let zeros = row['sr_no'] < 10 ? '00' : row['sr_no'] < 100 ? '0' : ''
+                return `J-${zeros + row['sr_no']}`
+            },
+            width: '120px',
+            wrap: true,
+            sortable: true,
+        },
+        {
+            name: 'Username',
             selector: row => row['jid'],
             cellExport: row => row['jid'],
-            width: '160px',
-            wrap: true,
+            width: '120px',
             sortable: true,
         },
         {
