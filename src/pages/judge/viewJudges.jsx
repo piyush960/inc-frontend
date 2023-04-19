@@ -1,11 +1,7 @@
-import React from 'react'
-
-
-
 import { useState, lazy, Suspense, useMemo } from 'react';
 import { FormsBanner, RadioButtons } from '../../components';
-import { useGetJudgeRegistrations} from '../../hooks/admin.hooks';
-import { projectDomains ,slots } from '../../static/data';
+import { useGetJudgeRegistrations } from '../../hooks/admin.hooks';
+import { slots } from '../../static/data';
 
 const Table = lazy(() => import('../../components/table.jsx'));
 
@@ -22,7 +18,7 @@ function ViewJudges() {
             label: 'Impetus',
             value: 'impetus',
         },
-        
+
     ]
     // !isLoading && console.log(Object.keys(data?.data[2]?.events).map(index => data?.data[2]?.events[index]))
     const columns = useMemo(() => [
@@ -59,14 +55,14 @@ function ViewJudges() {
             selector: row => row['email'],
             cellExport: row => row['email'],
             width: '300px',
-        
+
         },
         {
             name: 'Contact No',
             selector: row => row['phone'],
             cellExport: row => row['phone'],
             width: '200px',
-        
+
         },
         {
             name: 'Company',
@@ -80,7 +76,7 @@ function ViewJudges() {
             cellExport: row => row['address'],
             width: '300px',
         },
-        
+
         {
             name: 'Experience',
             selector: row => row['exp'],
@@ -92,19 +88,19 @@ function ViewJudges() {
             selector: row => row['events'],
             cell: row => <ol className='list-disc'>{Object.keys(row['events']).map(index => <li key={index}>{row['events'][index]}<span className='hidden'> , </span></li>)}</ol>,
             width: '120px',
-            
+
         },
         {
             name: 'Domains',
             selector: row => row['domains'],
-            cell: row =>  <ol className='list-disc'>{Object.keys(row['domains']).map(index => <li key={index}>{row['domains'][index]}<span className='hidden'> , </span></li>)}</ol>,
+            cell: row => <ol className='list-disc'>{Object.keys(row['domains']).map(index => <li key={index}>{row['domains'][index]}<span className='hidden'> , </span></li>)}</ol>,
 
             width: '80px',
         },
         {
             name: 'Slots',
             selector: row => row['slots'],
-            cell: row =>  <ol className='list-disc'>{Object.keys(row['slots']).map(index => <li key={index}>{slots[row['slots'][index] - 1 ].label}<span className='hidden'> , </span></li>)}</ol>,
+            cell: row => <ol className='list-disc'>{Object.keys(row['slots']).map(index => <li key={index}>{slots[row['slots'][index] - 1].label}<span className='hidden'> , </span></li>)}</ol>,
 
             width: '350px',
         },
@@ -118,7 +114,7 @@ function ViewJudges() {
             name: 'Pict Alumni',
             selector: row => row['isPICT'],
             cellExport: row => row['min_projects'],
-            width: '80px',  
+            width: '80px',
             cell: row => row.isPICT === '1' ? 'Yes' : 'No',
         },
 
@@ -129,20 +125,17 @@ function ViewJudges() {
             cellExport: row => row['date'],
             sortable: true,
         },
-    ], [event.eventName])
-
-    const expandableRowsComponent = ({ data: { abstract } }) => <p className='px-6 py-2 text-sm'><strong className='text-lg'>Abstract : </strong><pre className='whitespace-pre-wrap'>{abstract}</pre></p>
+    ], [])
 
     return (
         <>
-        
             <FormsBanner eventName='View Judge Registrations' />
             <div className='flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:px-8 md:pt-6 border border-light_blue md:mx-20 mx-5 my-6'>
                 <RadioButtons name='eventName' label='Select Event' options={options} state={event} setState={setEvent} />
             </div>
             {event.eventName &&
                 <Suspense fallback={<h1>Loading...</h1>}>
-                    <Table title={`${event.eventName.charAt(0).toUpperCase()}${event.eventName.slice(1)} Judges Registrations ${new Date().toISOString().split('T')[0]}`} columns={columns} loading={!event.eventName || isLoading} data={data?.data}  keyField='jid' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
+                    <Table title={`${event.eventName.charAt(0).toUpperCase()}${event.eventName.slice(1)} Judges Registrations ${new Date().toISOString().split('T')[0]}`} columns={columns} loading={!event.eventName || isLoading} data={data?.data} keyField='jid' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
                 </Suspense>
             }
         </>

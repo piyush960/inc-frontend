@@ -3,7 +3,7 @@ import Dashboard from '../dashboard';
 import VerifyEventRegistration from './verifyEventRegistrations';
 import ViewEventRegistrations from './viewEventRegistrations';
 import ViewJudges from '../judge/viewJudges';
-import Allocations from './allocations';
+import Allocations from './allocations/allocations';
 
 function Admin() {
     return (
@@ -12,7 +12,7 @@ function Admin() {
             <Route path='/events/registrations/verify' element={<VerifyEventRegistration />} />
             <Route path='/events/registrations/view' element={<ViewEventRegistrations />} />
             <Route path='/judges/registrations/view' element={<ViewJudges />} />
-            <Route path='/allocations/:event_name' element={<Allocations />} />
+            <Route path='/allocations/:eventName' element={<Allocations />} />
         </Routes>
     );
 }

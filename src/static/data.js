@@ -1,4 +1,3 @@
-
 export const events = [
   { value: "concepts", label: "Concepts" },
   { value: "impetus", label: "Impetus" },
@@ -51,5 +50,3 @@ export const paymentLinks = new Map([
   ["impetus", "https://easebuzz.in/quickpay/jkxuiptnhq"],
   ["pradnya", "https://easebuzz.in/quickpay/cwxuyvrypr"],
 ]);
-
-
