@@ -1,7 +1,7 @@
 import { useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastUtils, Navbar, Loader, Footer } from './components';
-import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, WebTeam, Homepage, Auth, FacultyTeam, ResultForms } from './pages';
+import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, WebTeam, Homepage, Auth, FacultyTeam } from './pages';
 import Test from './test/test.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
@@ -29,7 +29,7 @@ function App() {
         <Route path='/inc-teams' element={<InCTeams />} />
         <Route path='/web-teams' element={<WebTeam />} />
         <Route path='/faculty-teams' element={<FacultyTeam />} />
-        <Route path='/result-concepts' element={<ResultForms />} />
+       
        
         {process.env.REACT_APP_ENVIRONMENT === 'development' &&
           <Route path='/test' element={
