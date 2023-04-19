@@ -73,7 +73,7 @@ function InCTeams() {
         { name: ' Riya Pendse', post: 'Design Team', email: 'riyapendse@gmail.com ', linkedin: '', github: 'https://github.com', photo: "http://drive.google.com/uc?export=view&id=1buB6Ab46G7qAk0nOHhtp2bcgMDbFen7Z" },
         { name: 'Neha Waghchoure', post: 'Campus Decor', email: 'neha.waghchoure8@gmail.com', linkedin: 'https://www.linkedin.com/in/neha-w-ba150820b', github: 'https://github.com/neha8w', photo: "http://drive.google.com/uc?export=view&id=1PYD4bFcA3r296yz3xhNZugokAXegK_o2" },
         { name: 'Smita Naik', post: 'Design Team', email: 'smitanaik3004@gmail.com', linkedin: 'www.linkedin.com/in/smita-naik-3ba133206	', github: 'https://github.com', photo: "http://drive.google.com/uc?export=view&id=1dUm9Tibf3ofhAqL7t7k6a5ouxPu4sWGX" },
-        { name: 'Giaa Potdar', post: 'Campus Decor', email: 'neha.waghchoure8@gmail.com', linkedin: 'https://www.linkedin.com/in/neha-w-ba150820b', github: 'https://github.com/neha8w', photo: "http://drive.google.com/uc?export=view&id=1S-Hmp9vvMvY0mfy4RQ8FzVLSIsi4wzFB" },
+        { name: 'Giaa Poddar', post: 'Campus Decor', email: 'neha.waghchoure8@gmail.com', linkedin: 'https://www.linkedin.com/in/neha-w-ba150820b', github: 'https://github.com/neha8w', photo: "http://drive.google.com/uc?export=view&id=1S-Hmp9vvMvY0mfy4RQ8FzVLSIsi4wzFB" },
 
       ]
     },

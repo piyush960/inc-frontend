@@ -50,3 +50,30 @@ export const paymentLinks = new Map([
   ["impetus", "https://easebuzz.in/quickpay/jkxuiptnhq"],
   ["pradnya", "https://easebuzz.in/quickpay/cwxuyvrypr"],
 ]);
+
+export const galleryPhotos = [
+  {
+    src: 'https://source.unsplash.com/random/800x600',
+    images: [
+      { src: 'https://source.unsplash.com/random/400x300' },
+      { src: 'https://source.unsplash.com/random/600x450' },
+      { src: 'https://source.unsplash.com/random/800x600' },
+    ],
+  },
+  {
+    src: 'https://source.unsplash.com/random/800x600',
+    images: [
+      { src: 'https://source.unsplash.com/random/400x300' },
+      { src: 'https://source.unsplash.com/random/600x450' },
+      { src: 'https://source.unsplash.com/random/800x600' },
+    ],
+  },
+  {
+    src: 'https://source.unsplash.com/random/800x600',
+    images: [
+      { src: 'https://source.unsplash.com/random/400x300' },
+      { src: 'https://source.unsplash.com/random/600x450' },
+      { src: 'https://source.unsplash.com/random/800x600' },
+    ],
+  },
+];
