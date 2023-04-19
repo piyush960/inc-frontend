@@ -20,7 +20,7 @@ const registerEventStep4 = (eventName) => async (data) => await backend.post(`/e
 const verifyPayment = (eventName) => async (data) => await backend.post(`/events/verify/payment/${eventName}`, data);
 const getPendingPayments = (eventName) => async () => await backend.get(`/events/verify/payment/${eventName}`);
 const getRegistrations = (eventName) => async () => await backend.get(`/events/registrations/${eventName}`);
-
+const allocateJudge = (eventName) => async (data) => await backend.post(`/allocations/${eventName}/allocate`, data)
 
 export {
     loginAdmin,
@@ -33,5 +33,6 @@ export {
     verifyPayment,
     getPendingPayments,
     getRegistrations,
-    viewJudge
+    viewJudge,
+    allocateJudge
 }

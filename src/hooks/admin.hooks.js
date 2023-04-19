@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations, viewJudge } from '../api';
+import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations, viewJudge, allocateJudge } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
 
@@ -100,6 +100,21 @@ function useGetJudgeRegistrations(eventName) {
   return { isLoading, data }
 }
 
+function useAllocate(eventName) {
+  const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(allocateJudge(eventName), {
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({ queryKey: ['judge', 'registrations', eventName] })
+    // },
+    onError: (err) => {
+      const parsedError = errorParser(err)
+      if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+      else {
+        toast.error(`Errors while allocating projects: ${parsedError[Object.keys(parsedError)[0]]}`, { autoClose: 5000 })
+      }
+    }
+  })
+  return { mutate, isLoading, isSuccess, isError, data, error }
+}
 
 export {
   useLoginAdmin,
@@ -107,5 +122,6 @@ export {
   useVerifyPayment,
   useVerifyAdmin,
   useGetRegistrations,
-  useGetJudgeRegistrations
+  useGetJudgeRegistrations,
+  useAllocate
 }
