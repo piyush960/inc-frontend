@@ -40,13 +40,13 @@ function ResultImpetus() {
             <FormsBanner eventName='Evaluation' eventDescription={`Enter Results for Impetus - ${pid}`} />
             <div className=" md:mx-20 mx-4 my-6">
                 <form className="flex flex-col shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border border-light_blue items-center p-4 md:p-8 mt-10 w-full">
-                    <Dropdown label="Ability To Execute Projects As a Start-up or Start-up Enrollment" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 15)]} state={form} setState={setForm} name="startUp" required />
-                    <Dropdown label="Impact and Applications" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 20)]} state={form} setState={setForm} name="impact" required />
-                    <Dropdown label="Originality, Creativity, Clarity & Innovation in Project " options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 20)]} state={form} setState={setForm} name="original" required />
-                    <Dropdown label="Patent or Product Readiness from Project" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="patent" required />
-                    <Dropdown label="Presentation and Q & A" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 15)]} state={form} setState={setForm} name="presentation" required />
-                    <Dropdown label="Relevance to Society" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="relevance" required />
-                    <Dropdown label="Testing or Demonstration" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="test" required />
+                    <Dropdown label="Ability To Execute Projects As a Start-up or Start-up Enrollment - (1-15) " options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 15)]} state={form} setState={setForm} name="startUp" required />
+                    <Dropdown label="Impact and Applications - (1-20)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 20)]} state={form} setState={setForm} name="impact" required />
+                    <Dropdown label="Originality, Creativity, Clarity & Innovation in Project - (1-20)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 20)]} state={form} setState={setForm} name="original" required />
+                    <Dropdown label="Patent or Product Readiness from Project - (1-10)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="patent" required />
+                    <Dropdown label="Presentation and Q & A - (1-15)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 15)]} state={form} setState={setForm} name="presentation" required />
+                    <Dropdown label="Relevance to Society - (1-10)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="relevance" required />
+                    <Dropdown label="Testing or Demonstration - (1-10)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="test" required />
                     <Buttons
                         className="mx-2 my-2"
                         onClick={handleSubmit}
