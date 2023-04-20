@@ -36,7 +36,7 @@ function ResultForms() {
 
     return (
         <>
-            <FormsBanner eventName='Evaluation' eventDescription='Enter Results for Concepts' />
+            <FormsBanner eventName='Evaluation' eventDescription= {`Enter Results for Concepts- ${pid} `} />
             <div className=" md:mx-24 mx-3 my-6">
                 <form className="flex flex-col shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border border-light_blue items-center p-4 md:p-8 mt-10 w-full">
                     <Dropdown label="Innovative Ideas Involved" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="innovation" required />
@@ -56,4 +56,5 @@ function ResultForms() {
         </>
     );
 };
+
 export default ResultForms;
