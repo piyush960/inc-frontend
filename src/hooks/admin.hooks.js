@@ -129,6 +129,8 @@ function useDeallocate(eventName) {
   return { mutate, isLoading, isSuccess, isError, data, error }
 }
 
+
+
 export {
   useLoginAdmin,
   usePendingPayments,
@@ -137,5 +139,6 @@ export {
   useGetRegistrations,
   useGetJudgeRegistrations,
   useAllocate,
-  useDeallocate
+  useDeallocate,
+
 }

@@ -24,6 +24,7 @@ const allocateJudge = (eventName) => async (data) => await backend.post(`/alloca
 const getJudgeAllocations = (jid) => async () => await backend.get(`/judge/allocations/${jid}`)
 const deallocateJudge = (eventName) => async (data) => await backend.patch(`/allocations/${eventName}/deallocate`, data)
 const evaluateProject = (eventName) => async (data) => await backend.post(`/judge/${eventName}/evaluate`, data)
+const getJudge = (jid) => async () => await backend.get(`/judge/${jid}`)
 
 export {
     loginAdmin,
@@ -40,5 +41,6 @@ export {
     allocateJudge,
     getJudgeAllocations,
     deallocateJudge,
-    evaluateProject
+    evaluateProject,
+    getJudge
 }
