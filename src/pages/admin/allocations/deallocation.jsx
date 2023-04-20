@@ -1,19 +1,20 @@
 import { Fragment, Suspense, lazy, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAllocate, useGetJudgeRegistrations, useGetRegistrations } from '../../../hooks/admin.hooks';
+import { useAllocate, useGetJudgeRegistrations, useGetRegistrations, useDeallocate  } from '../../../hooks/admin.hooks';
+import { useGetJudgeAllocations } from '../../../hooks/judge.hooks';
 import { Buttons, FormsBanner, RadioButtons, toast } from '../../../components';
 import { projectDomains, slots } from '../../../static/data';
 
 const Table = lazy(() => import('../../../components/table.jsx'))
 
-function Allocations() {
+function Deallocations() {
   const { eventName } = useParams()
   const [method, setMethod] = useState('')
   const [pids, setPIDS] = useState([])
   const [jids, setJIDS] = useState([])
-  const { isLoading: isProjectsLoading, data: projectsData } = useGetRegistrations(eventName)
+  const { isLoading: isProjectsLoading, data: projectsData } = useGetJudgeAllocations(jids[0])
   const { isLoading: isJudgesLoading, data: judgesData } = useGetJudgeRegistrations(eventName)
-  const { mutate: allocate, isLoading: isAllocating } = useAllocate(eventName)
+  const { mutate: deallocate, isLoading: isAllocating } = useDeallocate(eventName)
 
   const judgesColumns = useMemo(() => [
     {
@@ -149,105 +150,20 @@ function Allocations() {
       omit: eventName === 'pradnya',
     },
     {
-      name: 'Project Type',
-      selector: row => row['project_type'],
-      cellExport: row => row['project_type'],
-      width: '180px',
-      omit: eventName === 'pradnya',
+        name: 'Slots',
+        selector: row => row['slots'],
+        cell: row => <ol className='list-disc'>{Object.keys(row['slots']).map(index => <li key={index}>{slots[row['slots'][index] - 1].label}<span className='hidden'> , </span></li>)}</ol>,
+  
+        width: '350px',
     },
-    {
-      name: 'Sponsored',
-      selector: row => row['sponsored'],
-      width: '120px',
-      omit: eventName === 'pradnya',
-      cell: row => row.sponsored === '1' ? 'Yes' : 'No',
-    },
-    {
-      name: 'Company',
-      selector: row => row['company'],
-      cellExport: row => row['company'],
-      width: '200px',
-      omit: eventName === 'pradnya',
-    },
-    {
-      name: 'NDA',
-      selector: row => row['nda'],
-      width: '80px',
-      omit: eventName === 'pradnya',
-      cell: row => row.nda === '1' ? 'Yes' : 'No',
-    },
-    {
-      name: 'Members Name',
-      selector: row => row['name'],
-      cell: row => <ol className='list-disc'>{row.name?.split(',').map((name, index) => <li key={index}>{name}<span className='hidden'> , </span></li>)}</ol>,
-      width: '200px',
-    },
-    {
-      name: 'Members Phone',
-      selector: row => row['phone'],
-      cell: row => <ol className='list-disc'>{row.phone?.split(',').map((phone, index) => <li key={index}>{phone}<span className='hidden'> , </span></li>)}</ol>,
-      width: '180px',
-    },
-    {
-      name: 'Members Email',
-      selector: row => row['email'],
-      cell: row => <ol className='list-disc'>{row.email?.split(',').map((email, index) => <li key={index}>{email}<span className='hidden'> , </span></li>)}</ol>,
-      width: '240px',
-    },
-    {
-      name: 'College',
-      width: '300px',
-      selector: row => row['college'],
-      cellExport: row => row['college'],
-    },
-    {
-      name: 'Year',
-      width: '90px',
-      selector: row => row['year'],
-      omit: eventName === 'concepts',
-      cell: row => {
-        switch (row.year) {
-          case 'Se':
-            return 'Senior'
 
-          case 'Ju':
-            return 'Junior'
-
-          default:
-            return row.year
-        }
-      }
-    },
     {
-      name: 'City',
-      width: '130px',
-      selector: row => row['city'],
-      cellExport: row => row['city'],
-    },
-    {
-      name: 'Mode',
-      selector: row => row['mode'],
-      width: '130px',
-      cell: row => {
-        switch (row.mode) {
-          case '1':
-            return 'Offline'
-
-          case '0':
-            return 'Online'
-
-          default:
-            return 'Unavailable'
-        }
+        name: 'EventName',
+        width: '160px',
+        selector: row => row['event_name'],
+        cellExport: row => row['event_name'],
+        sortable: true,
       },
-    },
-    {
-      name: 'Date',
-      width: '160px',
-      selector: row => row['date'],
-      cellExport: row => row['date'],
-      sortable: true,
-    },
   ], [eventName])
 
   const options = [
@@ -283,7 +199,7 @@ function Allocations() {
     outerTitle: method === 'judge_to_projects' ? 'Projects' : 'Judges',
     columns: method === 'judge_to_projects' ? projectsColumns : judgesColumns,
     keyField: method === 'judge_to_projects' ? 'pid' : 'jid',
-    data: method === 'judge_to_projects' ? projectsData?.data : judgesData?.data,
+    data: method === 'judge_to_projects' ? projectsData?.data[eventName] : judgesData?.data,
     loading: !eventName || method === 'judge_to_projects' ? isProjectsLoading : isJudgesLoading,
     selectableRows: 'selectableRows',
     selectableRowsHighlight: 'selectableRowsHighlight',
@@ -338,9 +254,9 @@ function Allocations() {
         return
       }
 
-      allocate({ pids, jids, slots: judgesData.data.find(judge => judge.jid === jids[0]).slots }, {
+      deallocate({ pids, jids }, {
         onSuccess: () => {
-          toast('Allocation Successful', { type: 'success' })
+          toast('Deallocation Successful', { type: 'success' })
           setJIDS([])
           setPIDS([])
         }
@@ -353,7 +269,7 @@ function Allocations() {
 
   return (
     <>
-      <FormsBanner eventName='Allocations' eventDescription={`Allocate ${method === 'judge_to_projects' ? 'Judge to Projects' : 'Projects to Judge'}`} />
+      <FormsBanner eventName='Deallocations' eventDescription={`Deallocate ${method === 'judge_to_projects' ? 'Judge to Projects' : 'Projects to Judge'}`} />
       <div className='flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:px-8 md:pt-6 border border-light_blue md:mx-20 mx-5 my-6'>
         <RadioButtons name='method' label='Select Method' options={options} state={{ method }} setState={setMethod} />
       </div>
@@ -372,9 +288,11 @@ function Allocations() {
             </div>
             <div className='flex flex-col items-center md:w-[40%] w-full relative'>
               <h1 className='text-3xl font-bold text-gold'>{rightTableProps.outerTitle}</h1>
+              { jids.length === 1 && (
               <Suspense fallback={<div>Loading...</div>}>
-                <Table {...rightTableProps} onRowDoubleClicked={selectOne} data={projectsData?.data} loading={!eventName || isProjectsLoading} outerClassName='w-full' />
+                <Table {...rightTableProps} onRowDoubleClicked={selectOne} data={projectsData?.data[eventName]} loading={!eventName || isProjectsLoading} outerClassName='w-full' />
               </Suspense>
+                )}   
             </div>
           </div>
           {jids && (
@@ -438,4 +356,4 @@ function Allocations() {
   )
 }
 
-export default Allocations;
+export default Deallocations;

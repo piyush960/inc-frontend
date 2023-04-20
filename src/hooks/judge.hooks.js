@@ -1,5 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
-import { registerJudge } from '../api';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { registerJudge , getJudgeAllocations} from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
 
@@ -25,6 +25,22 @@ function useRegisterJudge(setErrors, eventName) {
     return { mutate, isLoading, isSuccess, isError, data, error }
 }
 
+function useGetJudgeAllocations(jid) {
+    const { isLoading, isError, data, error } = useQuery({ queryKey: ['judgeAllocations', jid], queryFn: getJudgeAllocations(jid), enabled: !!jid })
+    if (isError) {
+        const parsedError = errorParser(error)
+        if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+        else {
+            parsedError.error ?
+                toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+                :
+                toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
+        }
+    }
+    return { isLoading, data }
+}
+
 export {
     useRegisterJudge,
+    useGetJudgeAllocations
 }

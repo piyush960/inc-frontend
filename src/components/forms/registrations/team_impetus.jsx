@@ -660,7 +660,7 @@ function TeamImpetus() {
 
   return (
     <MainContainer>
-      {false ?
+      {true ?
         <>
           <StepContainer width={width}>
             {steps.map(({ step, label }) => (

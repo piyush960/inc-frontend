@@ -16,7 +16,7 @@ const Popup = ({ handleClose }) => {
           <div className="bg-faint_blue text-white font-bold px-4 py-2 rounded-t-lg mb-4">
               Important Notice for Concepts 2023
             </div>
-            
+            <p className="text-xl font-bold text-gold mb-4">Check Schedule for latest updates!!</p>
             <p className="text-sm text-white mb-4">
               1. The Participants should be present on campus and the allocated labs during the time period indicated.
               <br />

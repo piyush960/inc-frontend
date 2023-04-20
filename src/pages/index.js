@@ -8,7 +8,6 @@ export { default as Dashboard } from './dashboard.jsx';
 export { default as InCTeams } from './incTeams.jsx';
 export { default as WebTeam } from './webTeam.jsx';
 export { default as FacultyTeam } from './facultyTeam.jsx';
-// export { default as Gallery } from './gallery.jsx';
-export { default as ResultForms } from './resultForms.jsx';
+// export {default as Gallery} from './gallery.jsx';
 export { default as Admin } from './admin';
 
