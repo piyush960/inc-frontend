@@ -4,6 +4,8 @@ import VerifyEventRegistration from './verifyEventRegistrations';
 import ViewEventRegistrations from './viewEventRegistrations';
 import ViewJudges from '../judge/viewJudges';
 import Allocations from './allocations/allocations';
+import Deallocation from './allocations/deallocation';
+
 
 function Admin() {
     return (
@@ -13,6 +15,7 @@ function Admin() {
             <Route path='/events/registrations/view' element={<ViewEventRegistrations />} />
             <Route path='/judges/registrations/view' element={<ViewJudges />} />
             <Route path='/allocations/:eventName' element={<Allocations />} />
+            <Route path='/deallocation/:eventName' element={<Deallocation />} />
         </Routes>
     );
 }

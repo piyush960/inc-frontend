@@ -10,5 +10,8 @@ export {
     getPendingPayments,
     getRegistrations,
     viewJudge,
-    allocateJudge
+    allocateJudge,
+    getJudgeAllocations,
+    deallocateJudge
+    
 } from './requests';

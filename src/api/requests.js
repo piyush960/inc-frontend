@@ -21,6 +21,9 @@ const verifyPayment = (eventName) => async (data) => await backend.post(`/events
 const getPendingPayments = (eventName) => async () => await backend.get(`/events/verify/payment/${eventName}`);
 const getRegistrations = (eventName) => async () => await backend.get(`/events/registrations/${eventName}`);
 const allocateJudge = (eventName) => async (data) => await backend.post(`/allocations/${eventName}/allocate`, data)
+const getJudgeAllocations = (jid) => async () => await backend.get(`/judge/allocations/${jid}`)
+const deallocateJudge = (eventName) => async (data) => await backend.patch(`/allocations/${eventName}/deallocate`, data)
+
 
 export {
     loginAdmin,
@@ -34,5 +37,7 @@ export {
     getPendingPayments,
     getRegistrations,
     viewJudge,
-    allocateJudge
+    allocateJudge,
+    getJudgeAllocations,
+    deallocateJudge
 }
