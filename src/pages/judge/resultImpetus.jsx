@@ -1,4 +1,4 @@
-import { react, useState } from "react";
+import { useState } from "react";
 import { FormsBanner, InputBox, RadioButtons, Buttons, Dropdown, NoteBox } from "../../components/";
 import { projectDomains } from "../../static/data";
 import { toast } from "../../components/";
@@ -10,79 +10,65 @@ const score_arr = [{ value: 0, label: "0" }, { value: 1, label: "1" }, { value: 
 function ResultImpetus() {
     const [form, setForm] = useState({
         startUp: "",
-        impact:"",
+        impact: "",
         original: "",
         patent: "",
-        presentation:"",
-        relevance:"",
-        test:"",
+        presentation: "",
+        relevance: "",
+        test: "",
     });
 
 
-    const handleInputChange1 = (e) => {  
-        const {name, value} = e.target; 
+    const handleInputChange1 = (e) => {
+        const { name, value } = e.target;
 
-        if( (value >= 0 && value <= 20)){
+        if ((value >= 0 && value <= 20)) {
 
             setForm((prevState) => {
                 return { ...prevState, [name]: value };
             });
-            
+
             console.log(form);
-        } 
+        }
         else {
             toast.warn("Please enter marks in given range!")
             return;
         }
         // setForm((prevState) => {
         //     return { ...prevState, [name]: value };
-        
+
         // });
-        
+
     }
 
-    const handleInputChange2 = (e) => {  
-        const {name, value} = e.target; 
-
-        if( (value >= 0 && value <= 15)){
-
-            setForm((prevState) => {
-                return { ...prevState, [name]: value };
-            });
-            
-            console.log(form);
-        } 
-        else {
-            toast.warn("Please enter marks in given range!")
-            return;
-        }
-        // setForm((prevState) => {
-        //     return { ...prevState, [name]: value };
-        
-        // });
-        
+    // const regex = new RegExp(/^(?:[0-9]|1[0-9]|15)?(?:\b|\x7F)*$/);
+    const handleInputChange2 = (e) => {
+        let { name, value, min, max } = e.target
+        const validValue = Math.max(min, Math.min(max, Number(value)))
+        setForm((prevState) => ({ ...prevState, [name]: validValue }))
+        // toast.warn("Please enter marks in given range!")
     }
 
-    const handleInputChange3 = (e) => {  
-        const {name, value} = e.target; 
+    const handleInputChange3 = (e) => {
+        const { name, value } = e.target;
 
-        if( (value >= 0 && value <= 10)){
+        if ((value >= 0 && value <= 10)) {
 
             setForm((prevState) => {
                 return { ...prevState, [name]: value };
             });
-            
+
             console.log(form);
-        } 
+        }
         else {
             toast.warn("Please enter marks in given range!")
             return;
         }
         // setForm((prevState) => {
         //     return { ...prevState, [name]: value };
-        
+
         // });
-        
+
     }
     const handleSubmit = (e) => {
 
@@ -92,16 +78,15 @@ function ResultImpetus() {
                 toast.warn("Please enter all fields!");
                 return;
             }
-          }
+        }
         console.log(form);
-      };
+    };
     return (
 
         <>
             <FormsBanner eventName='Impetus Results' eventDescription='Enter Results for Impetus' />
-            <div className=" md:mx-24 mx-2 my-6">
-
-                <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
+            <div className=" md:mx-24 mx-3 my-6">
+                <form className="flex flex-col shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border border-light_blue items-center p-4 md:p-8 mt-10 w-full">
                     <InputBox
                         type="number"
                         label={"Ability to Execute projects as a Startups or Startup Enrollment (score: 0-15)"}
@@ -110,12 +95,10 @@ function ResultImpetus() {
                         classNames=""
                         required
                         onChange={(e) => handleInputChange2(e)}
-                        value={form.startUp}
                         maxLength={2}
-                        min = {0}
-                        max = {15}
+                        min={0}
+                        max={15}
                         tip={"Enter Score"} />
-
                     <InputBox
                         type="number"
                         label={"Impact and Applications (score: 0-20)"}
@@ -126,8 +109,8 @@ function ResultImpetus() {
                         onChange={(e) => handleInputChange1(e)}
                         value={form.impact}
                         maxLength={2}
-                        min = {0}
-                        max = {20}
+                        min={0}
+                        max={20}
                         // error={errors.title}
                         tip={"Enter Score"} />
 
@@ -141,8 +124,8 @@ function ResultImpetus() {
                         onChange={(e) => handleInputChange1(e)}
                         value={form.original}
                         maxLength={2}
-                        min = {0}
-                        max = {20}
+                        min={0}
+                        max={20}
                         // error={errors.title}
                         tip={"Enter Score"} />
 
@@ -154,10 +137,10 @@ function ResultImpetus() {
                         classNames=""
                         required
                         onChange={(e) => handleInputChange3(e)}
-                        value={form.patent} 
+                        value={form.patent}
                         //maxLength={2}
-                        min = {0}
-                        max = {10}
+                        min={0}
+                        max={10}
                         tip={"Enter Score"} />
 
                     <InputBox
@@ -168,10 +151,10 @@ function ResultImpetus() {
                         classNames=""
                         required
                         onChange={(e) => handleInputChange2(e)}
-                        value={form.presentation}         
+                        value={form.presentation}
                         maxLength={2}
-                        min = {0}
-                        max = {15}
+                        min={0}
+                        max={15}
                         tip={"Enter Score"} />
 
                     <InputBox
@@ -182,10 +165,10 @@ function ResultImpetus() {
                         classNames=""
                         required
                         onChange={(e) => handleInputChange3(e)}
-                        value={form.relevance}   
+                        value={form.relevance}
                         maxLength={2}
-                        min = {0}
-                        max = {10}
+                        min={0}
+                        max={10}
                         tip={"Enter Score"} />
 
                     <InputBox
@@ -196,12 +179,12 @@ function ResultImpetus() {
                         classNames=""
                         required
                         onChange={(e) => handleInputChange3(e)}
-                        value={form.test} 
+                        value={form.test}
                         maxLength={2}
-                        min = {0}
-                        max = {10}
+                        min={0}
+                        max={10}
                         tip={"Enter Score"} />
-                    
+
                     <Buttons
                         className="mx-2 my-2"
                         onClick={(e) => handleSubmit(e)}

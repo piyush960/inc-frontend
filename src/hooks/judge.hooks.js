@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { registerJudge , getJudgeAllocations} from '../api';
+import { registerJudge, getJudgeAllocations, evaluateProject } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
 
@@ -40,7 +40,22 @@ function useGetJudgeAllocations(jid) {
     return { isLoading, data }
 }
 
+function useEvaluateProject(eventName) {
+    const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(evaluateProject(eventName), {
+        onError: (err) => {
+            const parsedError = errorParser(err)
+            if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+            else {
+                parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+                toast.error('Errors in the submitting form. Please check the form and try again.', { autoClose: 5000 })
+            }
+        }
+    })
+    return { mutate, isLoading, isSuccess, isError, data, error }
+}
+
 export {
     useRegisterJudge,
-    useGetJudgeAllocations
+    useGetJudgeAllocations,
+    useEvaluateProject
 }

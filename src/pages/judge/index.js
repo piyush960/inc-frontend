@@ -1,18 +1,20 @@
 import { Route, Routes } from 'react-router-dom';
 import ResultImpetus from "./resultImpetus";
 import JudgeAllocation from './judgeAllocation';
-import ResultForms from './resultConcept';
-//import ViewJudges from './viewJudges';
-
+import ResultConcepts from './resultConcept';
+import { Suspense } from 'react';
 
 function Judge() {
 
     return (
         <Routes>
-            <Route path='/resultImpetus' element={<ResultImpetus />} />
-            <Route path='/allocations' element={<JudgeAllocation />} />
-            <Route path='/evaluate/:jid/:pid' element={<ResultForms />} /> 
-            
+            <Route path='/impetus/evaluate/:jid/:pid' element={<ResultImpetus />} />
+            <Route path='/:jid' element={
+                <Suspense>
+                    <JudgeAllocation />
+                </Suspense>
+            } />
+            <Route path='/concepts/evaluate/:jid/:pid' element={<ResultConcepts />} />
         </Routes>
     );
 }
