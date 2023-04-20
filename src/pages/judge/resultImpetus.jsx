@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { FormsBanner, Buttons, Dropdown, NoteBox } from "../../components/";
-import { toast } from "../../components/";
-import generateOptions from "../../utils/generateOptions";
 import { useNavigate, useParams } from "react-router";
+import { FormsBanner, Buttons, Dropdown, NoteBox, toast } from "../../components/";
+import generateOptions from "../../utils/generateOptions";
 import { useEvaluateProject } from "../../hooks/judge.hooks";
 
 function ResultImpetus() {
     const { pid, jid } = useParams()
     const { mutate, isLoading } = useEvaluateProject('impetus')
     const navigate = useNavigate()
+
     const [form, setForm] = useState({
         startUp: "",
         impact: "",
@@ -33,24 +33,24 @@ function ResultImpetus() {
                 navigate(-1, { replace: true })
             }
         })
-        console.log(form);
     }
 
     return (
         <>
             <FormsBanner eventName='Evaluation' eventDescription={`Enter Results for Impetus - ${pid}`} />
-            <div className=" md:mx-24 mx-3 my-6">
+            <div className=" md:mx-20 mx-4 my-6">
                 <form className="flex flex-col shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border border-light_blue items-center p-4 md:p-8 mt-10 w-full">
                     <Dropdown label="Ability To Execute Projects As a Start-up or Start-up Enrollment" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 15)]} state={form} setState={setForm} name="startUp" required />
                     <Dropdown label="Impact and Applications" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 20)]} state={form} setState={setForm} name="impact" required />
                     <Dropdown label="Originality, Creativity, Clarity & Innovation in Project " options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 20)]} state={form} setState={setForm} name="original" required />
-                    <Dropdown label="Patentent or Product Readiness from Project" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="patent" required />
+                    <Dropdown label="Patent or Product Readiness from Project" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="patent" required />
                     <Dropdown label="Presentation and Q & A" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 15)]} state={form} setState={setForm} name="presentation" required />
                     <Dropdown label="Relevance to Society" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="relevance" required />
                     <Dropdown label="Testing or Demonstration" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="test" required />
                     <Buttons
                         className="mx-2 my-2"
                         onClick={handleSubmit}
+                        isLoading={isLoading}
                         value="Submit" />
                     <br />
                     <NoteBox title="Note"

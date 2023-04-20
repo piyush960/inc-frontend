@@ -1,10 +1,14 @@
+import { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import scrollToTop from '../../utils/scrollToTop';
 import ResultImpetus from "./resultImpetus";
 import JudgeAllocation from './judgeAllocation';
 import ResultConcepts from './resultConcept';
-import { Suspense } from 'react';
 
 function Judge() {
+    useEffect(() => {
+        scrollToTop()
+    }, [])
 
     return (
         <Routes>
