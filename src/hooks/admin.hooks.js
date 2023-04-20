@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations, viewJudge, allocateJudge } from '../api';
+import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations, viewJudges, allocateJudge, deallocateJudge , getJudgeAllocations } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
 
@@ -86,7 +86,7 @@ function useGetRegistrations(eventName) {
 }
 
 function useGetJudgeRegistrations(eventName) {
-  const { isLoading, isError, data, error } = useQuery({ queryKey: ['judge', 'registrations', eventName], queryFn: viewJudge(eventName), enabled: !!eventName })
+  const { isLoading, isError, data, error } = useQuery({ queryKey: ['judge', 'registrations', eventName], queryFn: viewJudges(eventName), enabled: !!eventName })
   if (isError) {
     const parsedError = errorParser(error)
     if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
@@ -116,6 +116,19 @@ function useAllocate(eventName) {
   return { mutate, isLoading, isSuccess, isError, data, error }
 }
 
+function useDeallocate(eventName) {
+  const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(deallocateJudge(eventName), {
+    onError: (err) => {
+      const parsedError = errorParser(err)
+      if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+      else {
+        toast.error(`Errors while deallocating projects: ${parsedError[Object.keys(parsedError)[0]]}`, { autoClose: 5000 })
+      }
+    }
+  })
+  return { mutate, isLoading, isSuccess, isError, data, error }
+}
+
 export {
   useLoginAdmin,
   usePendingPayments,
@@ -123,5 +136,6 @@ export {
   useVerifyAdmin,
   useGetRegistrations,
   useGetJudgeRegistrations,
-  useAllocate
+  useAllocate,
+  useDeallocate
 }
