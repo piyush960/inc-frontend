@@ -45,8 +45,8 @@ function Schedule() {
                 <time class='block mb-1 text-xl font-normal leading-none text-gold dark:text-gold'>22nd April'23</time>
                 {/* <p class='text-base font-normal text-white dark:text-white'>Get started with dozens of web components and interactive elements.</p> */}
                 <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'>🔷9:00 AM to 7:00 PM - Judging/Exhibition</p> 
-                <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'> 🔷11:30 AM to 7:00 PM –Concepts : Judging & Exhibition.</p>
-                <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'> 🔷11:30 AM to 7:00 PM –Impetus : Judging.</p>
+                <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'> 🔷9:00 AM to 7:00 PM –Concepts : Judging & Exhibition.</p>
+                <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'> 🔷9:00 AM to 7:00 PM –Impetus : Judging.</p>
                 <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'>🔷9:00 AM to 3 PM -Pradnya : Round 2</p>
               <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'>🔷4 PM -Pradnya : Judging Round</p>
               </div> {/* </li>
