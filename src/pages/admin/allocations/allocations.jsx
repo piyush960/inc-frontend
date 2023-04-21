@@ -20,23 +20,41 @@ function Allocations() {
       name: 'Judge ID',
       selector: row => row['jid'],
       cellExport: row => row['jid'],
-      width: '80px',
-      wrap: true,
-      sortable: true,
-    },
-    {
-      name: 'Username',
-      selector: row => row['jid'],
-      cellExport: row => row['jid'],
       width: '120px',
+      wrap: true,
       sortable: true,
     },
     {
       name: 'Name',
       selector: row => row['name'],
       cellExport: row => row['name'],
-      width: '220px',
+      width: '180px',
       sortable: true,
+      wrap: true
+    },
+    {
+      name: 'Total Judged',
+      selector: row => row['total_judged'],
+      cellExport: row => row['total_judged'],
+      width: '160px',
+      sortable: true,
+      wrap: true
+    },
+    {
+      name: 'Allocated Projects',
+      selector: row => row['allocated_projects'],
+      cellExport: row => row['allocated_projects'],
+      width: '160px',
+      sortable: true,
+      wrap: true
+    },
+    {
+      name: 'Judged within Allocations',
+      selector: row => row['judged_within_allocations'],
+      cellExport: row => row['judged_within_allocations'],
+      width: '160px',
+      sortable: true,
+      wrap: true
     },
     {
       name: 'Email',
