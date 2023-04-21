@@ -135,17 +135,25 @@ function Allocations() {
       omit: eventName === 'pradnya',
     },
     {
-      name: 'Abstract',
-      selector: row => row['abstract'],
-      cellExport: row => row['abstract'],
-      width: '300px',
-      omit: eventName === 'pradnya',
-    },
-    {
       name: 'Domain',
       selector: row => row['pid'],
       width: '140px',
       cell: row => projectDomains.find(({ value }) => value === row.pid?.split('-')[0])?.label,
+      omit: eventName === 'pradnya',
+    },
+    {
+      name: 'Judges Count',
+      selector: row => row['judges_count'],
+      cellExport: row => row['judges_count'],
+      width: '120px',
+      sortable: true,
+      omit: eventName === 'pradnya',
+    },
+    {
+      name: 'Abstract',
+      selector: row => row['abstract'],
+      cellExport: row => row['abstract'],
+      width: '300px',
       omit: eventName === 'pradnya',
     },
     {
