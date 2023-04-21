@@ -38,11 +38,11 @@ function ResultForms() {
             <FormsBanner eventName='Evaluation' eventDescription= {`Enter Results for Concepts- ${pid} `} />
             <div className=" md:mx-20 mx-4 my-6">
                 <form className="flex flex-col shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border border-light_blue items-center p-4 md:p-8 mt-10 w-full">
-                    <Dropdown label="Innovative Ideas Involved" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="innovation" required />
-                    <Dropdown label="Approach To Exploit Ideas" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="approachToIdeas" required />
-                    <Dropdown label="Approach Towards Implementing The System and Future Applications" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="approachToImplementation" required />
-                    <Dropdown label="Implementation of Engineering Principles" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="principles" required />
-                    <Dropdown label="Presentation and Q & A" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="presentation" required />
+                    <Dropdown label="Innovative Ideas Involved - (1-10)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="innovation" required />
+                    <Dropdown label="Approach To Exploit Ideas - (1-10)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="approachToIdeas" required />
+                    <Dropdown label="Approach Towards Implementing The System and Future Applications - (1-10)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="approachToImplementation" required />
+                    <Dropdown label="Implementation of Engineering Principles - (1-10)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="principles" required />
+                    <Dropdown label="Presentation and Q & A - (1-10)" options={[{ label: 'Select Score', value: '' }, ...generateOptions(1, 10)]} state={form} setState={setForm} name="presentation" required />
                     <Buttons
                         className="mx-2 my-2"
                         onClick={handleSubmit}
