@@ -10,9 +10,9 @@ const backend = axios.create({
 })
 
 const loginAdmin = async (data) => await backend.post('/admin/login', data);
-const verifyAdmin =  async () => await backend.get('/admin/verify');
+const verifyAdmin = async () => await backend.get('/admin/verify');
 const registerJudge = (eventName) => async (data) => await backend.post(`/judge/register/${eventName}`, data)
-const viewJudges  = (eventName) => async () => await backend.get(`/judge/registration/view/${eventName}`);
+const viewJudges = (eventName) => async () => await backend.get(`/judge/registration/view/${eventName}`);
 const registerEventStep1 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_1`, data);
 const registerEventStep2 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_2`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
 const registerEventStep3 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_3`, data);
@@ -25,6 +25,7 @@ const getJudgeAllocations = (jid) => async () => await backend.get(`/judge/alloc
 const deallocateJudge = (eventName) => async (data) => await backend.patch(`/allocations/${eventName}/deallocate`, data)
 const evaluateProject = (eventName) => async (data) => await backend.post(`/judge/${eventName}/evaluate`, data)
 const getJudge = (jid) => async () => await backend.get(`/judge/${jid}`)
+const getLabAllocations = (eventName) => async () => await backend.get(`/allocations/${eventName}/labs`)
 
 export {
     loginAdmin,
@@ -42,5 +43,6 @@ export {
     getJudgeAllocations,
     deallocateJudge,
     evaluateProject,
-    getJudge
+    getJudge,
+    getLabAllocations
 }

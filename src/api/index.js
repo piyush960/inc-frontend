@@ -14,5 +14,6 @@ export {
     getJudgeAllocations,
     deallocateJudge,
     evaluateProject,
-    getJudge
+    getJudge,
+    getLabAllocations,
 } from './requests';
