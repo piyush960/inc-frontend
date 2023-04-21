@@ -2,7 +2,7 @@ import { Fragment, Suspense, lazy, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAllocate, useGetJudgeRegistrations, useGetRegistrations } from '../../../hooks/admin.hooks';
 import { Buttons, FormsBanner, RadioButtons, toast } from '../../../components';
-import { projectDomains, slots } from '../../../static/data';
+import { slots } from '../../../static/data';
 
 const Table = lazy(() => import('../../../components/table.jsx'))
 
@@ -18,14 +18,8 @@ function Allocations() {
   const judgesColumns = useMemo(() => [
     {
       name: 'Judge ID',
-      selector: row => {
-        let zeros = row['sr_no'] < 10 ? '00' : row['sr_no'] < 100 ? '0' : ''
-        return `J-${zeros + row['sr_no']}`
-      },
-      cellExport: row => {
-        let zeros = row['sr_no'] < 10 ? '00' : row['sr_no'] < 100 ? '0' : ''
-        return `J-${zeros + row['sr_no']}`
-      },
+      selector: row => row['jid'],
+      cellExport: row => row['jid'],
       width: '80px',
       wrap: true,
       sortable: true,
@@ -57,6 +51,25 @@ function Allocations() {
       width: '140px',
     },
     {
+      name: 'Domains',
+      selector: row => row['domains'],
+      cell: row => <ol className='list-disc'>{Object.keys(row['domains']).map(index => <li key={index}>{row['domains'][index]}<span className='hidden'> , </span></li>)}</ol>,
+      width: '80px',
+    },
+    {
+      name: 'Slots',
+      selector: row => row['slots'],
+      cell: row => <ol className='list-disc'>{Object.keys(row['slots']).map(index => <li key={index}>{slots[row['slots'][index] - 1].label}<span className='hidden'> , </span></li>)}</ol>,
+
+      width: '350px',
+    },
+    {
+      name: 'Minimum Projects',
+      width: '120px',
+      selector: row => row['min_projects'],
+      cellExport: row => row['min_projects'],
+    },
+    {
       name: 'Company',
       selector: row => row['company'],
       cellExport: row => row['company'],
@@ -75,40 +88,12 @@ function Allocations() {
       width: '100px',
     },
     {
-      name: 'Events',
-      selector: row => row['events'],
-      cell: row => <ol className='list-disc'>{Object.keys(row['events']).map(index => <li key={index}>{row['events'][index]}<span className='hidden'> , </span></li>)}</ol>,
-      width: '120px',
-
-    },
-    {
-      name: 'Domains',
-      selector: row => row['domains'],
-      cell: row => <ol className='list-disc'>{Object.keys(row['domains']).map(index => <li key={index}>{row['domains'][index]}<span className='hidden'> , </span></li>)}</ol>,
-
-      width: '80px',
-    },
-    {
-      name: 'Slots',
-      selector: row => row['slots'],
-      cell: row => <ol className='list-disc'>{Object.keys(row['slots']).map(index => <li key={index}>{slots[row['slots'][index] - 1].label}<span className='hidden'> , </span></li>)}</ol>,
-
-      width: '350px',
-    },
-    {
-      name: 'Minimum Projects',
-      width: '120px',
-      selector: row => row['min_projects'],
-      cellExport: row => row['min_projects'],
-    },
-    {
       name: 'Pict Alumni',
       selector: row => row['isPICT'],
       cellExport: row => row['min_projects'],
       width: '80px',
       cell: row => row.isPICT === '1' ? 'Yes' : 'No',
     },
-
     {
       name: 'Date',
       width: '200px',
@@ -127,33 +112,48 @@ function Allocations() {
       sortable: true,
     },
     {
+      name: 'Lab',
+      selector: row => row['lab'],
+      cellExport: row => row['lab'],
+      width: '140px',
+      omit: eventName === 'pradnya',
+    },
+    {
+      name: 'Total Allocations',
+      selector: row => row['total_allocations'],
+      cellExport: row => row['total_allocations'],
+      width: '160px',
+      sortable: true,
+      omit: eventName === 'pradnya',
+    },
+    {
+      name: 'Total Evaluations',
+      selector: row => row['evaluations'],
+      cellExport: row => row['evaluations'],
+      width: '160px',
+      sortable: true,
+      omit: eventName === 'pradnya',
+    },
+    {
+      name: 'Evaluated Allocations',
+      selector: row => row['judging_within_allocations'],
+      cellExport: row => row['judging_within_allocations'],
+      width: '160px',
+      sortable: true,
+      omit: eventName === 'pradnya',
+    },
+    {
       name: 'Title',
       selector: row => row['title'],
       cellExport: row => row['title'],
       width: '240px',
-      wrap: true,
-      omit: eventName === 'pradnya',
-    },
-    {
-      name: 'Domain',
-      selector: row => row['pid'],
-      width: '140px',
-      cell: row => projectDomains.find(({ value }) => value === row.pid?.split('-')[0])?.label,
-      omit: eventName === 'pradnya',
-    },
-    {
-      name: 'Judges Count',
-      selector: row => row['judges_count'],
-      cellExport: row => row['judges_count'],
-      width: '120px',
-      sortable: true,
       omit: eventName === 'pradnya',
     },
     {
       name: 'Abstract',
       selector: row => row['abstract'],
       cellExport: row => row['abstract'],
-      width: '300px',
+      width: '200px',
       omit: eventName === 'pradnya',
     },
     {
@@ -164,43 +164,22 @@ function Allocations() {
       omit: eventName === 'pradnya',
     },
     {
-      name: 'Sponsored',
-      selector: row => row['sponsored'],
-      width: '120px',
-      omit: eventName === 'pradnya',
-      cell: row => row.sponsored === '1' ? 'Yes' : 'No',
-    },
-    {
-      name: 'Company',
-      selector: row => row['company'],
-      cellExport: row => row['company'],
-      width: '200px',
-      omit: eventName === 'pradnya',
-    },
-    {
-      name: 'NDA',
-      selector: row => row['nda'],
-      width: '80px',
-      omit: eventName === 'pradnya',
-      cell: row => row.nda === '1' ? 'Yes' : 'No',
-    },
-    {
       name: 'Members Name',
       selector: row => row['name'],
-      cell: row => <ol className='list-disc'>{row.name?.split(',').map((name, index) => <li key={index}>{name}<span className='hidden'> , </span></li>)}</ol>,
-      width: '200px',
+      cell: row => <ol className='list-disc text-sm'>{row.name?.split(',').map((name, index) => <li key={index}>{name}<span className='hidden'> , </span></li>)}</ol>,
+      width: '120px',
     },
     {
       name: 'Members Phone',
       selector: row => row['phone'],
-      cell: row => <ol className='list-disc'>{row.phone?.split(',').map((phone, index) => <li key={index}>{phone}<span className='hidden'> , </span></li>)}</ol>,
+      cell: row => <ol className='list-disc text-sm'>{row.phone?.split(',').map((phone, index) => <li key={index}>{phone}<span className='hidden'> , </span></li>)}</ol>,
       width: '180px',
     },
     {
       name: 'Members Email',
       selector: row => row['email'],
-      cell: row => <ol className='list-disc'>{row.email?.split(',').map((email, index) => <li key={index}>{email}<span className='hidden'> , </span></li>)}</ol>,
-      width: '240px',
+      cell: row => <ol className='list-disc text-sm'>{row.email?.split(',').map((email, index) => <li key={index}>{email}<span className='hidden'> , </span></li>)}</ol>,
+      width: '140px',
     },
     {
       name: 'College',

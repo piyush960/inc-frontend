@@ -48,7 +48,7 @@ const customStyles = {
   headRow: {
     style: {
       backgroundColor: 'rgba(7, 89, 133, 0.3)',
-      fontSize: '1.25rem',
+      fontSize: '1.05rem',
       minHeight: '52px',
       borderRadius: '0.75rem 0.75rem 0 0',
       marginBottom: '4px',
@@ -62,7 +62,8 @@ const customStyles = {
     style: {
       paddingLeft: '16px',
       paddingRight: '16px',
-      color: 'rgba(200, 162, 13, 0.9)'
+      color: 'rgba(200, 162, 13, 0.9)',
+      whiteSpace: 'normal',
     },
     draggingStyle: {
       cursor: 'move',
