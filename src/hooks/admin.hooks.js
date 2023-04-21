@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations, viewJudges, allocateJudge, deallocateJudge , getJudgeAllocations } from '../api';
+import { getPendingPayments, verifyPayment, verifyAdmin, loginAdmin, getRegistrations, viewJudges, allocateJudge, deallocateJudge, getLabAllocations } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
 
@@ -129,7 +129,20 @@ function useDeallocate(eventName) {
   return { mutate, isLoading, isSuccess, isError, data, error }
 }
 
-
+function useGetLabAllocations(eventName) {
+  const { isLoading, isError, data, error } = useQuery({ queryKey: ['labAllocations', eventName], queryFn: getLabAllocations(eventName), enabled: !!eventName })
+  if (isError) {
+    const parsedError = errorParser(error)
+    if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+    else {
+      parsedError.error ?
+        toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+        :
+        toast.error('Errors while fetching data. Please check and try again.', { autoClose: 5000 })
+    }
+  }
+  return { isLoading, data }
+}
 
 export {
   useLoginAdmin,
@@ -140,5 +153,5 @@ export {
   useGetJudgeRegistrations,
   useAllocate,
   useDeallocate,
-
+  useGetLabAllocations,
 }
