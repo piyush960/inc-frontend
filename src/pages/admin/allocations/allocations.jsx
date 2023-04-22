@@ -57,6 +57,14 @@ function Allocations() {
       wrap: true
     },
     {
+      name: 'Labs',
+      selector: row => row['lab'],
+      cellExport: row => row['lab'],
+      width: '160px',
+      sortable: true,
+      wrap: true
+    },
+    {
       name: 'Email',
       selector: row => row['email'],
       cellExport: row => row['email'],
