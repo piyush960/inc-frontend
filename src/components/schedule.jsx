@@ -60,7 +60,7 @@ function Schedule() {
               <div class='mt-3 sm:pr-8 '>
                 <h3 class='text-3xl font-semibold text-gold dark:text-gold md:text-justify text-center'>DAY3</h3>
                 <time class='block mb-1 text-xl font-normal leading-none text-gold dark:text-gold text-justify'>23rdApril'23</time>
-                <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'>🔷9:00 AM to 11:30 AM – Judging</p>
+                
                 <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'>🔷11:30 AM to 4:30 PM – Consolidation and preparation of winner's list</p>
                 <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'>🔷4:30 PM – Reporting to Shamiyana</p>
                 <p class='block text-xl font-normal leading-none text-gold dark:text-gold py-1'>🔷5:00 PM to 7:20 PM – Closing Ceremony</p>
