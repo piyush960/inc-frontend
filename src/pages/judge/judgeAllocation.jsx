@@ -1,13 +1,15 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetJudgeAllocations, useGetJudge } from "../../hooks/judge.hooks";
-import { Buttons } from "../../components";
+import { Buttons, InputBox } from "../../components";
 import { projectDomains } from "../../static/data";
+import { useRef } from "react";
 
 function JudgeAllocation() {
   const { jid } = useParams();
   const { data, isLoading } = useGetJudgeAllocations(jid);
   const { data: judgeData, isLoading: isJudgeLoading } = useGetJudge(jid)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const pidRef = useRef()
 
   return (
     <>
@@ -15,9 +17,9 @@ function JudgeAllocation() {
         {!isJudgeLoading ?
           <header className="flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border w-full md:w-[90%] border-light_blue items-center p-4 md:p-8 md:mx-20 mx-5 mt-10">
             <div className="flex flex-col text-gold justify-center gap-3">
-              <h2 className="text-base md:text-2xl border-l-2  border-gold md:font-light md:leading-6 pl-2">Email: <span className="text-white mx-2 " >{judgeData.data?.email}</span> </h2>
-              <h2 className="text-base md:text-2xl border-l-2 border-gold md:font-light md:leading-6 pl-2">Name: <span className="text-white mx-2 " >{judgeData.data?.name}</span> </h2>
-              <h2 className="text-base md:text-2xl border-l-2 border-gold md:font-light md:leading-6 pl-2">Domains: <span className="text-white mx-2 " >{judgeData.data?.domains.join(',')}</span>   </h2>
+              <h2 className="text-base md:text-2xl border-l-2  border-gold md:font-light md:leading-6 pl-2">Email: <span className="text-white mx-2 " >{judgeData.data?.email}</span></h2>
+              <h2 className="text-base md:text-2xl border-l-2 border-gold md:font-light md:leading-6 pl-2">Name: <span className="text-white mx-2 " >{judgeData.data?.name}</span></h2>
+              <h2 className="text-base md:text-2xl border-l-2 border-gold md:font-light md:leading-6 pl-2">Domains: <span className="text-white mx-2 " >{judgeData.data?.domains.join(',')}</span></h2>
             </div>
           </header> :
           <div className="flex flex-col items-center">
@@ -25,6 +27,14 @@ function JudgeAllocation() {
             <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-light_blue"></div>
           </div>
         }
+        <form className="mt-6">
+          <InputBox label='Enter Project ID (for extra evaluation)' type='text' name='pid' placeholder='Enter Project ID' inputref={pidRef} required />
+          <Buttons
+            onClick={() => navigate(`/judge/concepts/evaluate/${jid}/${pidRef.current?.value}`)}
+            type='submit'
+            value='Evaluate'
+          />
+        </form>
         {isLoading ? (
           <div className="flex flex-col items-center">
             <h1 className="text-2xl font-bold text-gold">Loading Allocated Projects...</h1>
