@@ -41,6 +41,13 @@ function ViewEventRegistrations() {
             sortable: true,
         },
         {
+            name: 'Judged By',
+            selector: row => row['evaluations'],
+            cell: row => row['evaluations'],
+            width: '220px',
+            omit: event.eventName === 'pradnya' || event.eventName === 'impetus'
+        },
+        {
             name: 'Title',
             selector: row => row['title'],
             cellExport: row => row['title'],

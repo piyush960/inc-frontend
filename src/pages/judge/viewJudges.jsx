@@ -37,6 +37,12 @@ function ViewJudges() {
             sortable: true,
         },
         {
+            name: 'Projects Judged',
+            selector: row => row['total_judged'],
+            cell: row => row['total_judged'],
+            width: '180px',
+        },
+        {
             name: 'Username',
             selector: row => row['jid'],
             cellExport: row => row['jid'],
@@ -105,21 +111,20 @@ function ViewJudges() {
             width: '350px',
         },
         {
-            name: 'Mininmum Projects',
+            name: 'Minimum Projects',
             width: '180px',
             selector: row => row['min_projects'],
             cellExport: row => row['min_projects'],
         },
         {
-            name: 'Pict Alumni',
+            name: 'PICT Alumni',
             selector: row => row['isPICT'],
             cellExport: row => row['min_projects'],
             width: '80px',
             cell: row => row.isPICT === '1' ? 'Yes' : 'No',
         },
-
         {
-            name: 'Date',
+            name: 'Registration Date',
             width: '300px',
             selector: row => row['date'],
             cellExport: row => row['date'],
