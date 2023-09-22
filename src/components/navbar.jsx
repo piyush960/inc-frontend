@@ -42,7 +42,7 @@ function Navbar() {
                 >
                   <img src={inc_logo} alt="inc_Logo" className="h-12 w-12 mr-2" />
                   <span className="font-black text-white text-2xl">
-                    PICT InC 2023
+                    PICT InC 2024
                   </span>
                 </a>
               </div>
