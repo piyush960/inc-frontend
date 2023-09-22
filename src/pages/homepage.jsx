@@ -23,7 +23,7 @@ function Homepage() {
              {showPopup && <Popup handleClose={handleClosePopup} />}
             <Hero  />
             <AboutUs/>
-            <Schedule />
+            {/* <Schedule /> */}
             <EventCards />
             <Sponsors />
             <InCTeamsSection />
