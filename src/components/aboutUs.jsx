@@ -64,7 +64,7 @@ const AboutUs = () => (
         <div className="about-content text-left w-[90%] md:w-8/12 z-10 p-8 md:px-12 text-lg shadow-2xl shadow-light_blue/20 bg-[#000]/80 rounded-xl border border-light_blue/30">
           Impetus and Concepts (InC) is a flagship technical event of SCTR's
           Pune Institute of Computer Technology (PICT) Pune, which will be held
-          in during 3rd week of April 2023. InC is an intercollegiate
+          in during 3rd week of March 2024. InC is an intercollegiate
           International level competition which has been catching the attention
           of corporate giants for Quality of projects and an opportunity to
           recruit/mentor young talented budding entrepreneurs. Every year InC
