@@ -10,7 +10,7 @@ function Homepage() {
   useEffect(() => {
     const popupShown = localStorage.getItem('popupShown');
     if (!popupShown) {
-      setShowPopup(true);
+      // setShowPopup(true);
       localStorage.setItem('popupShown', true);
     }
   }, []);
