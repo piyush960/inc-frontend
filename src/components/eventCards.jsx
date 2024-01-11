@@ -14,6 +14,7 @@ const eventData = [
     ct: "First ,second and third year students",
     logo: impetus_logo,
     nt: "₹ 100/- For National Entries",
+    //nt: "Will be displayed Soon...",
     it: "Free for International Entries",
     contact: [{
       name: "Apoorvaraj",
@@ -44,7 +45,8 @@ const eventData = [
     ct: "Final year students only.    ",
     logo: concepts_logo,
 
-    nt: "₹ 300/- For National Entries",
+     nt: "₹ 300/- For National Entries",
+    //nt: "Will be displayed Soon...",
     it: "Free for International Entries",
     contact: [{
       name: "Siddharth",
@@ -75,6 +77,7 @@ const eventData = [
     ct: "First, second, third and forth year students",
     logo: pradnya_logo,
     nt: "₹ 100/- For National Entries",
+    //nt: "Will be displayed Soon...",
     it: "Free for International Entries",
     contact: [{
       name: "Pratik",
@@ -96,7 +99,7 @@ function Card(props) {
     <div className="card hover:cursor-pointer" onClick={() => window.open('/event-details/' + props.name.toLowerCase(), '_blank')}>
       {/* my card*/}
       <div className="py-8 mx-5 md:mx-0">
-        <div className="md:h-[800px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
+        <div className="md:h-[550px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
           <div className='flex'>
             <div className=''>
               <img src={props.logo}
@@ -154,18 +157,18 @@ function Card(props) {
             <div className=" flex gap-3  ">
               <p className=" my-1 text-lg md:text-xl flex place-items-center   border-l-2 border-gold md:font-light md:-leading-6   pl-2">
                 {" "}
-                <span className="font-bold -rotate-90 w-20 "> CONTACT </span>
+                {/* <span className="font-bold -rotate-90 w-20 "> CONTACT </span> */}
               </p>
               <div className="border-dotted border-l-2  border-light_blue/20 ">
                 <ul>
                   {
-                    props.contact.map((item) => {
-                      return (
-                        <li className="my-1 pl-2" >
-                          <p className="text-lg md:text-xl font-medium">{item.name} : </p >{item.phone}
-                        </li>
-                      )
-                    })
+                    // props.contact.map((item) => {
+                    //   return (
+                    //     <li className="my-1 pl-2" >
+                    //       <p className="text-lg md:text-xl font-medium">{item.name} : </p >{item.phone}
+                    //     </li>
+                    //   )
+                    // })
                   }
                   {/* <li className="my-1 px-4" >
                     <strong>Apoorvaraj : </strong>8530191073

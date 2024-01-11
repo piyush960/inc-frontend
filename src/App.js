@@ -6,7 +6,7 @@ import Test from './test/test.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 import Judge from './pages/judge';
-
+import winners_inc23 from './pages/winners_inc23.jsx';
 // const Test = lazy(() => import('./test/test.jsx'))
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/admin/*' element={<ProtectedRoutes children={<Admin />} />} />
         <Route path='/judge/*' element={<ProtectedRoutes children={<Judge />} />} />
-
+        <Route path= '/winners' element={<winners_inc23 />} />
         <Route path='/inc-teams' element={<InCTeams />} />
         <Route path='/web-teams' element={<WebTeam />} />
         <Route path='/faculty-teams' element={<FacultyTeam />} />

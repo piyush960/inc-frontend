@@ -65,7 +65,7 @@ const Other = [
   },
   {
     name: 'Zbyte',
-    logo: 'https://drive.google.com/uc?export=view&id=1d9g1gGyF7fNUFaNCJqj77ADdZk77uCKQ',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaYFPO8ZH4KTkju3ki8oS9g3gZFCeA8YFeN4YYAKsng&s',
     website: 'https://zbyte.io/',
   },
   {
@@ -169,7 +169,7 @@ export default function Sponsors() {
   return (
     <div id='sponsors' className='sponsors'>
       <div className='text-6xl font-semibold text-center text-white pb-12'>
-        Sponsors
+        Previous Year Sponsors
       </div>
       <h1 className='sponsors-head'>Title Sponsor</h1>
       <div className='sponsors-list  title-sponsors'>{titleSponsorsList}</div>
