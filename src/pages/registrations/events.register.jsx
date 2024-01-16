@@ -18,7 +18,7 @@ function EventsForms() {
             return (
                 <>
                     <FormsBanner logo={conlogo} eventName='Concepts' eventDescription='Register for the most grand project exhibition event Concepts for final year student' />
-                    {/* <ConceptsForms /> */}
+                    <ConceptsForms />
                 </>
             )
 
@@ -34,7 +34,7 @@ function EventsForms() {
             return (
                 <>
                     <FormsBanner logo={pralogo} eventName='Pradnya' eventDescription='Register for the most competitive live coding event Pradnya' />
-                    {/* <PradnyaForms /> */}
+                    <PradnyaForms />
                 </>
             )
         case 'winners' :
