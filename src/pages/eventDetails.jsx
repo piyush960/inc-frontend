@@ -12,9 +12,13 @@ function EventDetails(props) {
       logo: impetus_logo,
       criteria:
         "First, Second and Third Year Students enrolled in any BE/BTech, BSc, BCA, Diploma Degree.",
-      name: "IMPETUS",
-      short_desc: "International Level Project Competition cum Exhibition",
-      desc: "Impetus is an inter-collegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, were closely associated with this event. During the 3 days event, first year, second year and third year students from various colleges across India and abroad showcase their projects. students from various colleges across India and abroad showcase their projects in domains lik 🔸Application Development🔸 Communication, Networking, Security 🔸 Machine Learning, Pattern Recognition, Artificial Intelligence🔸 Embedded systems, VLSI, IoT, Remote Sensing 🔸 Blockchain, Cloud Computing, and 🔶 Others",
+      main_name: "IMPETUS",
+      name: "Impetus",
+      short_desc: "International Level Project Exhibition and Competition ",
+     
+      desc: ["Impetus is an intercollegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, were closely associated with this event. During the 3 day event, first year, second year and third year students from various colleges across India and abroad showcase their projects in domains like" ,<br/>,`🔹Application Development `,<br/>,`🔹 Communication, Networking, Security `,<br/>,`🔹 Machine Learning, Pattern Recognition, Artificial Intelligence`,<br/>,`🔹 Embedded systems, VLSI, IoT, Remote Sensing`,<br/>, `🔹 Blockchain, Cloud Computing`,<br/>,`🔹Others`],
+     
+      
       domains: [
         {
           domain: "APPLICATION DEVELOPMENT",
@@ -38,17 +42,22 @@ function EventDetails(props) {
         },
       ],
       registrations: {
-        fees: "₹ 100/- For National Entries",
-        team_size: 5,
+        fees: [
+          `🔹 For National Entries: ₹100 /-`,<br/>,
+          `🔹 For International Entries: Free`,
+        ],
+        team_size: "max 5",
       },
-      prizes: `InC announces a total cash prize of ₹6 Lakhs. `,
+      prizes: `Cash prize worth ₹7 Lakh.`,
       rules: [
-        "The decision of judges will be final and binding to one and all Priyanshu ",
+        `🔹Judge's decision will be final.`,
+        <br/>,
+        `🔹Project status must be in "Ready to Use".`,
+        <br/>,
+        `🔹Already registered candidates need not register again.`,
       ],
-      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
-      note1: `🔹Judge's decision will be final.`,
-      note2: `🔹Project status must be in "Ready to Use"`,
-      note3: `🔹Already registered candidatess need not register again.`,
+      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded ₹1 Lakh Cash Prize from PICT.`,
+      
       // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: "https://pictinc.org/register/events/impetus",
       schedule: "Dates will be out soon",
@@ -210,7 +219,7 @@ function EventDetails(props) {
               </div>
               <div className="py-3 text-6xl mx-auto font-bold text-gold  bg-clip-text ">
                 {/* Impetus */}
-                {eventDetail.name}
+               {eventDetail.main_name}
                 {/* {console.log(eventDetail.name)} */}
               </div>
               <div className=" border-b border-gray-500"></div>
