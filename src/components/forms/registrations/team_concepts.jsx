@@ -24,6 +24,8 @@ import {
   localTypes
 } from "../../../static/data";
 
+import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
+
 const MainContainer = styled.div`
   width: 100%;
   max-width: 1000px;
@@ -589,10 +591,10 @@ function TeamConcepts() {
             });
           } else {
             toast.success("Completed Step 3️⃣ !", { icon: "✅" });
-            const win = window.open(paymentLinks.get("concepts"), "_blank");
+            // const win = window.open(paymentLinks.get("concepts"), "_blank");
             setFormStep((currentStep) => currentStep + 1);
             setActiveStep((activeStep) => activeStep + 1);
-            win.focus();
+            // win.focus();
           }
         },
       });
@@ -622,7 +624,7 @@ function TeamConcepts() {
 
   return (
     <MainContainer>
-      {false ?
+      {true ?
         <>
           <StepContainer width={width}>
             {steps.map(({ step, label }) => (
@@ -1061,10 +1063,14 @@ function TeamConcepts() {
                   </div>
                 ) : (
                   <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
-                    <NoteBox
-                      title="Note"
-                      text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-                    />
+                    <div className="justify-center items-center flex my-6">
+                      <div className="z-10 bg-light_blue p-6 rounded-xl">
+                        <div className="flex justify-between items-center mb-2">
+                          <h1 className="text-xl font-bold text-white">Scan the QR to pay</h1>
+                        </div>
+                        <img src={payment_qr} className="w-96 border-8 rounded-lg shadow-lg" alt="Payment QR Code" />
+                      </div>
+                    </div>
                     <InputBox
                       label="Transaction ID (received on email)"
                       type="text"
@@ -1117,7 +1123,7 @@ function TeamConcepts() {
                   ) : (
                     <Buttons
                       className=" mx-2 my-2  "
-                      value="Pay (Rs.300)"
+                      value="Next Step"
                       onClick={nextForm}
                       loading={
                         registerUserMutationForm0.isLoading ||
