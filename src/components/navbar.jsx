@@ -23,6 +23,10 @@ function Navbar() {
       navigate('/register/judge')
       return
     };
+     if (e.target.value === "Hackathon"){
+      window.location.href="https://inc-hackathon.vercel.app/register"
+      return
+    };
     navigate(`/register/events/${e.target.value.toLowerCase()}`);
   };
 
@@ -129,6 +133,7 @@ function Navbar() {
                   <option>Impetus</option>
                   <option>Concepts</option>
                   <option>Pradnya</option>
+                  <option>Hackathon</option>
                   {/* <option>Winners</option> */}
                   
                 </select>
