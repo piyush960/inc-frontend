@@ -2,6 +2,7 @@ import "./styles/eventCards.css";
 import concepts_logo from "../assets/images/concepts_logo.png";
 import impetus_logo from "../assets/images/impetus_logo.png";
 import pradnya_logo from "../assets/images/pradnya_logo.png";
+
 import { useNavigate } from "react-router";
 
 const eventData = [
@@ -74,7 +75,7 @@ const eventData = [
     fees: 100,
     members: "Max 2 Members",
     prize: 1000,
-    ct: "First, second, third and forth year students",
+    ct: "First , second, third and fourth year students",
     logo: pradnya_logo,
     nt: "₹ 100/- For National Entries",
     //nt: "Will be displayed Soon...",
@@ -90,21 +91,51 @@ const eventData = [
     },
     ]
   },
+  {
+  id : 4,
+    name : "HACKATHON",
+    fees : 1000,
+    members: "4-6 Members",
+    ct: "First, second, third and forth year students",
+  //  logo: Hackathon_logo,
+    nt: "₹ 1000/- For National Entries",
+    it: "Free for International Entries",
+
+    contact: [{
+      name: "Pratik",
+      phone: "9145439727",
+    },
+    {
+      name: "Neha",
+      phone: "9579678142"
+
+    },
+    ]
+
+
+  }
 ];
 
 function Card(props) {
   const redirectEvents = useNavigate()
 
   return (
-    <div className="card hover:cursor-pointer" onClick={() => window.open('/event-details/' + props.name.toLowerCase(), '_blank')}>
+    <div className="card hover:cursor-pointer" onClick={() =>{if(props.name=="HACKATHON"){
+     window.open( 'https://inc-hackathon.vercel.app/');
+
+    }
+    else{
+      window.open('/event-details/' + props.name.toLowerCase(), '_blank');
+    }
+    }  } >
       {/* my card*/}
-      <div className="py-8 mx-5 md:mx-0">
-        <div className="md:h-[550px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
-          <div className='flex'>
+      <div className="py-10 mx-5 md:mx-0 ">
+        <div className="md:h-[450px] md:w-full max-w-[35rem] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
+          <div className='flex '>
             <div className=''>
               <img src={props.logo}
                 alt=""
-                className="w-full" />
+                className="w-20" />
             </div>
             <div className="my-auto text-xl mr-10 md:text-3xl font-poppins group text-gold font-bold tracking-wider decoration-1 decoration-light_blue uppercase">{props.name}</div>
 
@@ -114,7 +145,7 @@ function Card(props) {
             <hr className="mt-2 text-light_blue" />
 
             {/* <p className="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio magni dolorem libero pariatur nisi fugit voluptate perferendis, harum sapiente sit eius excepturi, similique repellendus explicabo dicta a ipsa iure temporibus dolorum, accusantium consequatur sequi possimus! Quas non veniam aliquid et?</p> */}
-            <p className="my-4  text-lg md:text-xl border-l-2 border-gold md:font-light md:leading-6  pl-2">
+            <p className="my-4  text-lg md:text-xl border-l-2 border-gold md:font-light md:leading-6  pl-2 ">
               {" "}
               <div className="flex"><span className="font-bold "> TEAM</span> 
               <div className="border-dotted border-l-2 border-light_blue/20 ml-9 pl-2">{props.team}</div> </div>
@@ -153,7 +184,8 @@ function Card(props) {
                 </p>
               </div>
             </div>
-
+            
+   
             <div className=" flex gap-3  ">
               <p className=" my-1 text-lg md:text-xl flex place-items-center   border-l-2 border-gold md:font-light md:-leading-6   pl-2">
                 {" "}
@@ -182,7 +214,9 @@ function Card(props) {
                   </li>
                   <li className="my-1 px-4" >
                     <strong>Aarti : </strong>9405119460
-                  </li> */}
+                  </li> */
+                  
+                  }
                 </ul>
               </div>
             </div>
@@ -202,7 +236,7 @@ function EventCards() {
         Events
       </h1>
       <hr className="w-1/5 mx-auto mb-5 " />
-      <div className="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 lg:gap-3 justify-items-center">
+      <div className="grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 lg:gap-2 justify-items-center">
         {eventData.map((eva) => {
           return (
             <Card
