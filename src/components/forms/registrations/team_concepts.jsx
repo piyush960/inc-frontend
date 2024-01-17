@@ -902,10 +902,7 @@ function TeamConcepts() {
               {/* form 2 */}
               {formStep === 2 && (
                 <>
-                  <NoteBox
-                    title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-                  />
+
                   <RadioButtons
                     label=" Are you PICTian or not?"
                     options={country_arr}
@@ -1057,12 +1054,11 @@ function TeamConcepts() {
                 (paymentStatus ? (
                   <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
                     <p className="text-xl text-center text-gold font-bold mb-3">
-                      Thank you for registering in InC'24. Looking forward to have
-                      you in person
+                      Thank you for registering in InC'24!
                     </p>
                     <NoteBox
                       title="Note"
-                      text="Registration payment will be verified and will be informed by email within 7 days."
+                      text="Your registration payment will be verified and a confirmation will be sent to you by email within 7 days."
                     />
                   </div>
                 ) : (
