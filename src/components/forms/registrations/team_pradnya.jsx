@@ -292,8 +292,10 @@ function TeamPradnya() {
 
   const removefields = (index) => {
     let data = [...form1];
+    console.log(...form1);
     data.splice(index, 1);
     setForm1(data);
+    memberCount--;
   };
 
   //form 2
@@ -471,15 +473,17 @@ function TeamPradnya() {
       });
     }
     if (formStep === 3) {
-
-      if (paymentRef.current.value.length < 8) {
-        toast.warn("Please enter valid Transaction ID !");
+      
+      if (paymentRef.current.value.length !== 12) {
+        toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }
+      
       registerUserMutationForm3.mutate(
         { payment_id: paymentRef.current.value?.trim() },
         {
           onSuccess: () => {
+            console.log(paymentRef.current.value?.trim())
             toast.success("Completed Step 4️⃣ !", { icon: "✅" });
             setActiveStep((activeStep) => activeStep + 1);
             setPaymentStatus(true);
@@ -516,17 +520,8 @@ function TeamPradnya() {
                 <>
                   <NoteBox
                     title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                    text="After filling details of each member click the Add members button to add the details and then you can also add more members."
                   />
-                  {memberCount < 2 && (
-                    <>
-                      <Buttons
-                        value="add members"
-                        onClick={addfields}
-                        classNames=" my-2"
-                      />
-                    </>
-                  )}
                   {form1.map((form, index) => {
                     return (
                       <div key={index}>
@@ -604,29 +599,29 @@ function TeamPradnya() {
                           error={errors1.member_id}
                         />
                         <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
-                        {form1.length > 1 && (
-                          <>
-                            <Buttons
-                              value="remove member"
-                              onClick={() => removefields(index)}
-                              classNames=" my-2"
-                              disabled={true}
-                              loading={registerUserMutationForm1.isLoading}
-                            />
-                          </>
-                        )}
+                        
+
                       </div>
                     );
                   })}
+                  {memberCount < 2 && (
+                    <>
+                      <Buttons
+                        value="add members"
+                        onClick={addfields}
+                        classNames=" my-2"
+                      />
+                    </>
+                  )}
                 </>
               )}
               {/* form 2 */}
               {formStep === 2 && (
                 <>
-                  <NoteBox
+                  {/* <NoteBox
                     title="Note"
                     text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-                  />
+                  /> */}
                   <RadioButtons
                     label=" Are you PICTian or not?"
                     options={country_arr}
@@ -798,12 +793,11 @@ function TeamPradnya() {
                 (paymentStatus ? (
                   <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
                     <p className="text-xl text-center text-gold font-bold mb-3">
-                      Thank you for registering in InC'23. Looking forward to have
-                      you in person
+                      Thank you for registering in InC'24!
                     </p>
                     <NoteBox
                       title="Note"
-                      text="Registration payment will be verified and will be informed by email."
+                      text="Your registration payment will be verified and a confirmation will be sent to you by email within 7 days."
                     />
                   </div>
                 ) : (
@@ -816,21 +810,21 @@ function TeamPradnya() {
                         <img src={payment_qr} className="w-96 border-8 rounded-lg shadow-lg" alt="Payment QR Code" />
                       </div>
                     </div>
-                      <InputBox
-                        label="Transaction ID (received on email)"
-                        type="text"
-                        name="payment_id"
-                        placeholder="Enter Transaction ID"
-                        inputref={paymentRef}
-                        minlenght="8"
-                        error={errors3.ment_id}
-                        className="tracking-widest"
-                        required
-                      />
-                    </div>
+                    <InputBox
+                      label="Transaction ID (received on email)"
+                      type="text"
+                      name="payment_id"
+                      placeholder="Enter Transaction ID"
+                      inputref={paymentRef}
+                      minlenght="8"
+                      error={errors3.ment_id}
+                      className="tracking-widest"
+                      required
+                    />
+                  </div>
                 ))}
-                    <div className="flex justify-between">
-                      {/* {formStep > 1 && formStep < 4 && (
+              <div className="flex justify-between">
+                {/* {formStep > 1 && formStep < 4 && (
                 <Buttons
                   className="mx-2 my-2"
                   value=" Previous Step"
@@ -842,54 +836,54 @@ function TeamPradnya() {
                 />
               )} */}
 
-                      {formStep === 3 ? (
-                        paymentStatus ? (
-                          <></>
-                        ) : (
-                          <Buttons
-                            className=" mx-2 my-2 "
-                            value="Submit"
-                            onClick={nextForm}
-                            loading={registerUserMutationForm3.isLoading}
-                          />
-                        )
-                      ) : (
-                        formStep === 2 &&
-                        (paymentStatus ? (
-                          <Buttons
-                            className=" mx-2 my-2  "
-                            value="Submit"
-                            onClick={nextForm}
-                            loading={
-                              registerUserMutationForm1.isLoading ||
-                              registerUserMutationForm2.isLoading
-                            }
-                          />
-                        ) : (
-                          <Buttons
-                            className=" mx-2 my-2  "
-                            value="Next Step"
-                            onClick={nextForm}
-                            loading={
-                              registerUserMutationForm1.isLoading ||
-                              registerUserMutationForm2.isLoading
-                            }
-                          />
-                        ))
-                      )}
-                      {formStep < 2 && (
-                        <Buttons
-                          className=" mx-2 my-2  "
-                          value="Next Step"
-                          onClick={nextForm}
-                          loading={
-                            registerUserMutationForm1.isLoading ||
-                            registerUserMutationForm2.isLoading
-                          }
-                        />
-                      )}
-                    </div>
-                  </form>
+                {formStep === 3 ? (
+                  paymentStatus ? (
+                    <></>
+                  ) : (
+                    <Buttons
+                      className=" mx-2 my-2 "
+                      value="Submit"
+                      onClick={nextForm}
+                      loading={registerUserMutationForm3.isLoading}
+                    />
+                  )
+                ) : (
+                  formStep === 2 &&
+                  (paymentStatus ? (
+                    <Buttons
+                      className=" mx-2 my-2  "
+                      value="Submit"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm1.isLoading ||
+                        registerUserMutationForm2.isLoading
+                      }
+                    />
+                  ) : (
+                    <Buttons
+                      className=" mx-2 my-2  "
+                      value="Next Step"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm1.isLoading ||
+                        registerUserMutationForm2.isLoading
+                      }
+                    />
+                  ))
+                )}
+                {formStep < 2 && (
+                  <Buttons
+                    className=" mx-2 my-2  "
+                    value="Next Step"
+                    onClick={nextForm}
+                    loading={
+                      registerUserMutationForm1.isLoading ||
+                      registerUserMutationForm2.isLoading
+                    }
+                  />
+                )}
+              </div>
+            </form>
             {/* <Buttons
                 value="submit"
                 onClick={submit}

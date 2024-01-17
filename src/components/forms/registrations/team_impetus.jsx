@@ -635,8 +635,8 @@ function TeamImpetus() {
       });
     }
     if (formStep === 3) {
-      if (paymentRef.current.value.length < 8) {
-        toast.warn("Please enter valid Transaction ID !");
+      if (paymentRef.current.value.length !== 12) {
+        toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }
       registerUserMutationForm3.mutate(
@@ -851,19 +851,10 @@ function TeamImpetus() {
               {/* form 1 */}
               {formStep === 1 && (
                 <>
-                  <NoteBox
+                <NoteBox
                     title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                    text="After filling details of each member click the Add members button to add the details and then you can also add more members."
                   />
-                  <Buttons
-                    value="add members"
-                    onClick={addFields}
-                    classNames=" my-2"
-                    loading={registerUserMutationForm1.isLoading}
-                    disabled={formFields.length >= 5}
-
-                  />
-
                   {formFields.map((form, index) => {
                     return (
                       <div key={index}>
@@ -951,28 +942,46 @@ function TeamImpetus() {
                           error={errors1.member_id}
                         />
                         <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
+
+
                         {formFields.length > 1 && (
                           <>
-                            <Buttons
-                              value="remove member"
-                              onClick={() => removefields(index)}
-                              classNames=" my-2"
-                              disabled={true}
-                            />
+                            {/* <div className="flex justify-content-between"> */}
+                              {/* Content on the left side */}
+                              {/* Add any additional content or spacing as needed */}
+                              {/* <></> */}
+
+                              {/* <div className="ml-auto"> */}
+                                {/* Button aligned to the right */}
+                                {/* <Buttons
+                                  value="remove member"
+                                  onClick={() => removefields(index)}
+                                  classNames="my-2"
+                                  disabled={true}
+                                  loading={registerUserMutationForm1.isLoading} */}
+                                {/* /> */}
+                              {/* </div> */}
+                            {/* </div> */}
                           </>
                         )}
                       </div>
                     );
                   })}
+
+                  <Buttons
+                    value="add members"
+                    onClick={addFields}
+                    classNames=" my-2"
+                    loading={registerUserMutationForm1.isLoading}
+                    disabled={formFields.length >= 5}
+
+                  />
                 </>
               )}
               {/* form 2 */}
               {formStep === 2 && (
                 <>
-                  <NoteBox
-                    title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-                  />
+
                   <RadioButtons
                     label=" Are you PICTian or not?"
                     options={country_arr}
@@ -1134,12 +1143,11 @@ function TeamImpetus() {
                 (paymentStatus ? (
                   <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl items-center p-4 md:p-8 border border-light_blue w-full">
                     <p className="text-xl text-center text-gold font-bold mb-3">
-                      Thank you for registering in InC'24. Looking forward to have
-                      you in person
+                      Thank you for registering in InC'24! 
                     </p>
                     <NoteBox
                       title="Note"
-                      text="Registration payment will be verified and will be informed by email."
+                      text="Your registration payment will be verified and a confirmation will be sent to you by email within 7 days."
                     />
                   </div>
                 ) : (
