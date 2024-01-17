@@ -600,8 +600,8 @@ function TeamConcepts() {
       });
     }
     if (formStep === 3) {
-      if (paymentRef.current.value.length < 8) {
-        toast.warn("Please enter valid Transaction ID !");
+      if (paymentRef.current.value.length !== 12) {
+        toast.warn("Please enter valid 12 digit Transaction ID of !");
         return;
       }
       registerUserMutationForm3.mutate(
@@ -1058,7 +1058,7 @@ function TeamConcepts() {
                     </p>
                     <NoteBox
                       title="Note"
-                      text="Registration payment will be verified and will be informed by email."
+                      text="Registration payment will be verified and will be informed by email within 7 days."
                     />
                   </div>
                 ) : (
