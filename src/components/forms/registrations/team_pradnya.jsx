@@ -812,7 +812,7 @@ function TeamPradnya() {
                 (paymentStatus ? (
                   <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
                     <p className="text-xl text-center text-gold font-bold mb-3">
-                      Thank you for registering in InC'23. Looking forward to have
+                      Thank you for registering in InC'24. Looking forward to have
                       you in person
                     </p>
                     <NoteBox
