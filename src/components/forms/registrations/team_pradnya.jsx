@@ -475,7 +475,7 @@ function TeamPradnya() {
     if (formStep === 3) {
       
       if (paymentRef.current.value.length !== 12) {
-        toast.warn("Please enter valid 12 digit Transaction ID of !");
+        toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }
       
@@ -599,26 +599,7 @@ function TeamPradnya() {
                           error={errors1.member_id}
                         />
                         <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
-                        {form1.length > 1 && (
-                          <>
-                            <div className="flex justify-content-between">
-                              {/* Content on the left side */}
-                              {/* Add any additional content or spacing as needed */}
-                              <></>
-
-                              <div className="ml-auto">
-                                {/* Button aligned to the right */}
-                                <Buttons
-                                  value="remove member"
-                                  onClick={() => removefields(index)}
-                                  classNames="my-2"
-                                  disabled={true}
-                                  loading={registerUserMutationForm1.isLoading}
-                                />
-                              </div>
-                            </div>
-                          </>
-                        )}
+                        
 
                       </div>
                     );

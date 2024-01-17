@@ -535,7 +535,7 @@ function TeamConcepts() {
     e.preventDefault();
 
     if (formStep === 0) {
-      console.log("form0", form0);
+      // console.log("form0", form0);
       for (const property in form0) {
         if (form0[property] === "") {
           if (property === "company" && form0["sponsored"] === "0") continue;
@@ -566,7 +566,7 @@ function TeamConcepts() {
       setActiveStep((activeStep) => activeStep + 1);
     }
     if (formStep === 2) {
-      console.log(form2);
+      // console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
@@ -601,7 +601,7 @@ function TeamConcepts() {
     }
     if (formStep === 3) {
       if (paymentRef.current.value.length !== 12) {
-        toast.warn("Please enter valid 12 digit Transaction ID of !");
+        toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }
       registerUserMutationForm3.mutate(
@@ -647,9 +647,9 @@ function TeamConcepts() {
               {/* form 0 */}
               {formStep === 0 && (
                 <>
-                  <NoteBox
+                <NoteBox
                     title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                    text="After filling details of each member click the Add members button to add the details and then you can also add more members."
                   />
                   <InputBox
                     type="text"
@@ -788,13 +788,7 @@ function TeamConcepts() {
                     title="Note"
                     text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
                   />
-                  <Buttons
-                    value="Add Members"
-                    onClick={addFields}
-                    classNames=" my-2"
-                    loading={registerUserMutationForm1.isLoading}
-                    disabled={formFields.length >= 5}
-                  />
+
 
                   {formFields.map((form, index) => {
                     return (
@@ -884,15 +878,25 @@ function TeamConcepts() {
                         />
                         <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
                         {/* <Notebox /> */}
-                        {/* {membersCount <= index && (<Buttons
-                                              value="remove member"
-                                              onClick={removefields(index)}
-                                              classNames=" my-2"
-                                              disabled={true}
-                                          />)} */}
+                        {/* Button aligned to the right */}
+                        {/* <Buttons
+                          value="remove member"
+                          onClick={() => removefields(index)}
+                          classNames="my-2"
+                          disabled={true}
+                          loading={registerUserMutationForm1.isLoading}
+                        /> */}
                       </div>
                     );
                   })}
+
+                  <Buttons
+                    value="Add Members"
+                    onClick={addFields}
+                    classNames=" my-2"
+                    loading={registerUserMutationForm1.isLoading}
+                    disabled={formFields.length >= 5}
+                  />
                 </>
               )}
               {/* form 2 */}
