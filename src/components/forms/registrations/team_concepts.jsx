@@ -600,7 +600,7 @@ function TeamConcepts() {
       });
     }
     if (formStep === 3) {
-      if (paymentRef.current.value.length !== 12) {
+      if (paymentRef.current.value.length < 8) {
         toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }

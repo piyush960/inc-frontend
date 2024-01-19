@@ -474,8 +474,8 @@ function TeamPradnya() {
     }
     if (formStep === 3) {
       
-      if (paymentRef.current.value.length !== 12) {
-        toast.warn("Please enter valid 12 digit Transaction ID!");
+      if (paymentRef.current.value.length < 8) {
+        toast.warn("Please enter valid Transaction ID!");
         return;
       }
       
