@@ -1,7 +1,14 @@
 import './styles/incTeams.css';
 import { useEffect } from 'react';
 import scrollToTop from '../utils/scrollToTop';
-import test_image from '../assets/images/Abhishek_Jadhav-text-image.png';
+import test_image from '../assets/images/abhishek1.jpeg';
+import test_image1 from '../assets/images/Viraj.jpeg';
+import test_image2 from '../assets/images/om.jpeg';
+import test_image3 from '../assets/images/parth.jpg';
+import test_image4 from '../assets/images/sarthak.jpeg';
+import test_image5 from '../assets/images/manasi1.jpeg';
+import test_image6 from '../assets/images/siddhi1.jpeg';
+import test_image7 from '../assets/images/manas.jpeg';
 import member_bg from '../assets/images/member_bg.jpg';
 import { EmailIcon, LinkedinIcon, GithubIcon } from '../assets/icons';
 function WebTeam(){
@@ -9,16 +16,30 @@ function WebTeam(){
     scrollToTop();
   }, [])
     const teamData=[
-        {
-            team: 'Web Team', members: [
-              { name: 'Abhishek Jadhav', post: 'Web Head', email: 'www.abhishek3jadhav@gmail.com', linkedin: 'https://www.linkedin.com/in/', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
-              { name: 'Manas Kshatriya', post: 'Web Head', email: 'manaskshatriya01@gmail.com', linkedin: 'https://www.linkedin.com/in/manas-kshatriya-32a776210/', github: 'https://github.com/manaskshatriya', photo: "http://drive.google.com/uc?export=view&id=15HAwm5dcJXFt_KVkehzYLDsd41xYwkIr" },
-              { name: 'Advait Naik', post: 'Web Team', email: 'naikadvait1610@gmail.com ', linkedin: 'https://www.linkedin.com/in/advait-naik-277379199', github: 'https://github.com/advait1610', photo: "http://drive.google.com/uc?export=view&id=1KMySqcKhzG9P0M3vanE8Ucd0pmQzV-b7" },
-              { name: 'Haripriya Kulkarni', post: 'Web Team', email: 'haripriyakulkarni13@gmail.com', linkedin: 'https://www.linkedin.com/in/haripriya-kulkarni-7841b81b4/', github: 'https://github.com/hpkoolkarni', photo: "http://drive.google.com/uc?export=view&id=1f_LfrRQrWcqhMzwJP_FNfpQSuV1ctcgQ" },
-              { name: 'Maithili Tawde', post: 'Web Team', email: 'maithileetawde@gmail.com', linkedin: 'https://www.linkedin.com/in/maithili-tawde-bbb672206/', github: 'https://github.com/maithilitawde', photo: "http://drive.google.com/uc?export=view&id=13q3M_pKg76eRSGA02lkeeTb64z-5onLg" },
-              
-            ]
-          },
+      {
+        team: 'Support & Guide', members: [
+          { name: 'Abhishek Jadhav', post: 'Support & Guide', email: 'abhishek3jadhav@gmail.com', linkedin: 'https://www.linkedin.com/in/', github: 'https://github.com/AbhishekJadhav2002', photo: test_image },
+          { name: 'Manas Kshatriya', post: 'Support & Guide', email: 'manaskshatriya01@gmail.com', linkedin: 'https://www.linkedin.com/in/manas-kshatriya/', github: 'https://github.com/manaskshatriya', photo: test_image7 }
+        ],
+        
+
+      },
+      {
+        team: 'Web Head', members: [
+          { name: 'Viraj Sonawane', post: 'Web Head', email: 'virajssonawane324@gmail.com', linkedin: 'https://www.linkedin.com/in/viraj-sonawane-5518851a7/', github: 'https://github.com/Viraj324/', photo: test_image1 },
+          { name: 'Om Panchwate', post: 'Web Head', email: 'ompanchwate2003@gmail.com', linkedin: 'https://linkedin.com/in/om-panchwate-a80a88233/', github: 'https://github.com/ompanchwate', photo: test_image2 },
+        
+        ]
+      },
+      {
+        team: 'Web Team', members: [
+          { name: 'Parth Sali', post: 'Web Team', email: 'parthsali04@gmail.com', linkedin: 'https://www.linkedin.com/in/parthsali/', github: ' https://github.com/parthsali', photo: test_image3 },
+          { name: 'Sarthak Chaudhari', post: 'Web Team', email: 'Sarthakchaudhari401@gmail.com', linkedin: 'https://www.linkedin.com/in/sarthak-chaudhari-0b920722a/', github: 'https://github.com/JusticeChaudhari', photo: test_image4 },
+          { name: 'Manasi Lavekar', post: 'Web Team', email: 'manasilavekar1@gmail.com', linkedin: 'https://www.linkedin.com/in/manasi-lavekar-b3213922b/', github: 'https://github.com/Manasi-Lavekar', photo: test_image5},
+          { name: 'Siddhi Ove', post: 'Web Team', email: 'siddhiove0407@gmail.com',linkedin: 'https://www.linkedin.com/in/siddhi-ove-304596250/',github: 'https://github.com/sid040703', photo: test_image6 },
+        ]
+      }
+      
     ]
     return (
         <div className='inc-teams flex flex-col justify-center gap-14'>
