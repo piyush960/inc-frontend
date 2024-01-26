@@ -16,9 +16,9 @@ function Payment() {
       <div className="payment-container pt-12 grid p-10 text-gold shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-b-xl border border-light_blue grid-cols-3 justify-items-center">
         <img src={logo} alt="img" className="h-20 w-20" />
         <h1 className="mb-2 text-center capitalize text-4xl font-bold ">
-          PICT InC'23
+          PICT InC'24
           <span className="text-sm font-bold ">
-            <p>April 21st - 23rd</p>
+            <p>April 5th - 7rd</p>
           </span>
         </h1>
         <img src={pictLogo} alt="img" className="h-20 rounded-md w-20" />
@@ -183,7 +183,7 @@ function Payment() {
           </div>
           <div className="w-full mt-10 col-span-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-2 py-2 bg-faint_blue/10 ">
             <h2 className=" p-2 text-center text-2xl font-semibold text-white">
-              Thank You For Participating in InC'23
+              Thank You For Participating in InC'24
             </h2>
           </div>
         </div>}
@@ -192,9 +192,9 @@ function Payment() {
         <br />
         Team INC,
         <br />
-        queries.pictinc2023@gmail.com
+        queries.pictinc2024@gmail.com
         <br />
-        7030405299
+        7507224919
       </div>
       <Buttons value='Print' onClick={() => { window.print() }} />
       {/* <button class="mt-10 mb-3 bg-light_blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-2xl">
