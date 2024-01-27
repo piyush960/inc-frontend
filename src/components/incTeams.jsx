@@ -14,6 +14,9 @@ function InCTeamsSection() {
 
   const closePopup = () => {
     setShowPopup(false);
+
+
+    
   };
 
   return (
