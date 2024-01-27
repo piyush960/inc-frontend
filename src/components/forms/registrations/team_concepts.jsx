@@ -600,7 +600,7 @@ function TeamConcepts() {
       });
     }
     if (formStep === 3) {
-      if (paymentRef.current.value.length < 8) {
+      if (paymentRef.current.value.length != 12) {
         toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }
@@ -995,7 +995,7 @@ function TeamConcepts() {
                             tipstyle={"hidden"}
                           />
                         </div>
-                        <div className="ml-1 w-1/2">
+                        <div className="ml-1 w-1/2 mt-1">
                           <Dropdown
                             label="Localtiy"
                             options={[
@@ -1072,7 +1072,7 @@ function TeamConcepts() {
                       </div>
                     </div>
                     <InputBox
-                      label="Transaction ID (received on email)"
+                      label="Transaction ID (12 digit)"
                       type="text"
                       name="payment_id"
                       placeholder="Enter Transaction ID"

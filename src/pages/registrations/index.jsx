@@ -23,7 +23,7 @@ function RegistrationsForms() {
             </Routes>
             <div className='md:mx-32 px-8'>
             <NoteBox title="Contact"
-                    text="For any technical queries please contact Viraj Sonawane : +91 7972034035" />
+                    text="For any technical queries please contact Viraj Sonawane : +91 7972034035 / Om Panchwate : +91 7507224919" />
             </div>
 
         </div>

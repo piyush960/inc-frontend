@@ -1,5 +1,5 @@
-import { useState, lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState, lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ToastUtils, Navbar, Loader, Footer } from './components';
 import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, WebTeam, Homepage, Auth, Gallery, FacultyTeam, ProjectsLabsAllocations } from './pages';
 import Test from './test/test.jsx';
@@ -7,15 +7,21 @@ import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 import Judge from './pages/judge';
 import winners_inc23 from './pages/winners_inc23.jsx';
-// const Test = lazy(() => import('./test/test.jsx'))
 
-function App() {
+function MainApp() {
   const [loading, setLoading] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+
+  useEffect(() => {
+    const isAdminRoute = window.location.pathname.startsWith('/admin');
+    setShowNavbar(!isAdminRoute);
+  }, []);
+  
 
   return (
     <BrowserRouter>
       <ToastUtils />
-      <Navbar />
+      {showNavbar && <Navbar />}
       {loading ? <Loader /> : <></>}
       <Routes>
         <Route index element={<Homepage />} />
@@ -43,6 +49,14 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
+  );
+}
+
+function App() {
+  return (
+    <Suspense fallback={<>Loading...</>}>
+      <MainApp />
+    </Suspense>
   );
 }
 
