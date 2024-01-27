@@ -19,23 +19,24 @@ const eventData = [
     nt: "₹ 100/- For National Entries",
     //nt: "Will be displayed Soon...",
     it: "Free for International Entries",
-    contact: [{
-      name: "Apoorvaraj",
-      phone: "8530191073",
-    },
+    contact: [
     {
-      name: "Mrugank",
-      phone: "7083823772"
+      name: "Naman",
+      phone: "8446455659",
+    },
+    // {
+    //   name: "Mrugank",
+    //   phone: "7083823772"
 
-    },
-    {
-      name: "Vrushali",
-      phone: "9766176681"
-    },
-    {
-      name: "Aarti",
-      phone: "9405119460",
-    }
+    // },
+    // {
+    //   name: "Vrushali",
+    //   phone: "9766176681"
+    // },
+    // {
+    //   name: "Aarti",
+    //   phone: "9405119460",
+    // }
     ]
   },
 
@@ -51,23 +52,24 @@ const eventData = [
      nt: "₹ 300/- For National Entries",
     //nt: "Will be displayed Soon...",
     it: "Free for International Entries",
-    contact: [{
-      name: "Siddharth",
-      phone: "8237892072",
+    contact: [
+      {
+      name: "Vedant",
+      phone: "8459228089",
     },
-    {
-      name: "Kalpesh",
-      phone: "7769945077"
+    // {
+    //   name: "Kalpesh",
+    //   phone: "7769945077"
 
-    },
-    {
-      name: "Yamini",
-      phone: "7385190784"
-    },
-    {
-      name: "Vishakha",
-      phone: "9011628404",
-    },
+    // },
+    // {
+    //   name: "Yamini",
+    //   phone: "7385190784"
+    // },
+    // {
+    //   name: "Vishakha",
+    //   phone: "9011628404",
+    // },
     ]
   },
 
@@ -82,15 +84,16 @@ const eventData = [
     nt: "₹ 100/- For National Entries",
     //nt: "Will be displayed Soon...",
     it: "Free for International Entries",
-    contact: [{
-      name: "Pratik",
-      phone: "9145439727",
+    contact: [
+      {
+      name: "Manavi",
+      phone: "7499953568",
     },
-    {
-      name: "Neha",
-      phone: "9579678142"
+    // {
+    //   name: "Neha",
+    //   phone: "9579678142"
 
-    },
+    // },
     ]
   },
   {
@@ -104,14 +107,10 @@ const eventData = [
     it: "Free for International Entries",
 
     contact: [{
-      name: "Pratik",
-      phone: "9145439727",
+      name: "Naman",
+      phone: "8446455659",
     },
-    {
-      name: "Neha",
-      phone: "9579678142"
-
-    },
+    
     ]
 
 
@@ -138,19 +137,9 @@ const eventData = [
 
       contact: [{
 
-        name: "Saurav Shinde",
+        name: "Saurav",
 
         phone: "9373270878",
-
-      },
-
-      {
-
-        name: "Mohammad Amir Rayyan",
-
-        phone: "9049065533"
-
- 
 
       },
 
@@ -235,18 +224,18 @@ function Card(props) {
             <div className=" flex gap-3  ">
               <p className=" my-1 text-lg md:text-xl flex place-items-center   border-l-2 border-gold md:font-light md:-leading-6   pl-2">
                 {" "}
-                {/* <span className="font-bold -rotate-90 w-20 "> CONTACT </span> */}
+                <span className="font-bold -rotate-90 w-20 "> CONTACT </span>
               </p>
               <div className="border-dotted border-l-2  border-light_blue/20 ">
                 <ul>
                   {
-                    // props.contact.map((item) => {
-                    //   return (
-                    //     <li className="my-1 pl-2" >
-                    //       <p className="text-lg md:text-xl font-medium">{item.name} : </p >{item.phone}
-                    //     </li>
-                    //   )
-                    // })
+                    props.contact.map((item) => {
+                      return (
+                        <li className="my-1 pl-2" >
+                          <p className="text-lg md:text-xl font-medium">{item.name} : {item.phone}</p > 
+                        </li>
+                      )
+                    })
                   }
                   {/* <li className="my-1 px-4" >
                     <strong>Apoorvaraj : </strong>8530191073
