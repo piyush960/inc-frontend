@@ -2,6 +2,8 @@ import "./styles/eventCards.css";
 import concepts_logo from "../assets/images/concepts_logo.png";
 import impetus_logo from "../assets/images/impetus_logo.png";
 import pradnya_logo from "../assets/images/pradnya_logo.png";
+import hackathon_logo from "../assets/images/tech_fiesta.png";
+import game_jam_logo from "../assets/images/game_jam_logo.png";
 
 import { useNavigate } from "react-router";
 
@@ -97,7 +99,7 @@ const eventData = [
     fees : 1000,
     members: "4-6 Members",
     ct: "First, second, third and fourth year students",
-  //  logo: Hackathon_logo,
+    logo: hackathon_logo,
     nt: "₹ 1000/- For National Entries",
     it: "Free for International Entries",
 
@@ -113,6 +115,47 @@ const eventData = [
     ]
 
 
+  },
+  {
+
+    id : 5,
+
+    name: "GAME JAM",
+
+    fees : 200,
+
+    members: "1-4 Members",
+
+    ct: "First, second, third and fourth year students",
+
+     logo: game_jam_logo,
+
+      nt: "₹ 200/- For National Entries",
+
+      it: "Free for International Entries",
+
+ 
+
+      contact: [{
+
+        name: "Saurav Shinde",
+
+        phone: "9373270878",
+
+      },
+
+      {
+
+        name: "Mohammad Amir Rayyan",
+
+        phone: "9049065533"
+
+ 
+
+      },
+
+      ]
+
   }
 ];
 
@@ -120,9 +163,12 @@ function Card(props) {
   const redirectEvents = useNavigate()
 
   return (
-    <div className="card hover:cursor-pointer" onClick={() =>{if(props.name=="HACKATHON"){
+    <div className="card hover:cursor-pointer" onClick={() =>{if(props.name==="HACKATHON"){
      window.open( 'https://inc-hackathon.vercel.app/');
 
+    }
+    else if (props.name==="GAME JAM"){
+      window.open('https://unstop.com/p/game-jam24-sctrs-pune-institute-of-computer-technology-dhankawadi-pune-878729?lb=A1YJYb6a&utm_medium=Share&utm_source=WhatsApp');
     }
     else{
       window.open('/event-details/' + props.name.toLowerCase(), '_blank');
@@ -130,12 +176,12 @@ function Card(props) {
     }  } >
       {/* my card*/}
       <div className="py-10 mx-5 md:mx-0 ">
-        <div className="md:h-[450px] md:w-full max-w-[35rem] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
-          <div className='flex '>
-            <div className=''>
+        <div className="md:h-[550px]  shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
+          <div className='flex items-center justify-evenly'>
+            <div className='my-4'>
               <img src={props.logo}
                 alt=""
-                className="w-20" />
+                className="w-10" />
             </div>
             <div className="my-auto text-xl mr-10 md:text-3xl font-poppins group text-gold font-bold tracking-wider decoration-1 decoration-light_blue uppercase">{props.name}</div>
 
@@ -230,14 +276,15 @@ function Card(props) {
 }
 
 function EventCards() {
+  
   return (
     <div id="events" className="eventCards my-10 ">
       <h1 className="mt-10 mb-2 text-center capitalize text-4xl font-bold text-white">
         Events
       </h1>
       <hr className="w-1/5 mx-auto mb-5 " />
-      <div className="grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 lg:gap-2 justify-items-center">
-        {eventData.map((eva) => {
+      <div className="grid md:grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 lg:gap-2 place-content-center">
+        {eventData.slice(0,-2).map((eva) => {
           return (
             <Card
               name={eva.name}
@@ -250,7 +297,23 @@ function EventCards() {
             />
           );
         })}
+        
       </div>
+      <div className="alignitems">
+        {eventData.slice(-2).map((eva) => {
+          return (
+            <Card
+              name={eva.name}
+              logo={eva.logo}
+              team={eva.members}
+              ne={eva.nt}
+              ie={eva.it}
+              contact={eva.contact}
+              ct={eva.ct}
+            />
+          );
+        })}
+        </div>
     </div>
   );
 }
