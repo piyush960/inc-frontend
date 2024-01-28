@@ -88,7 +88,7 @@ function Navbar() {
                   Events
                 </a>
                       <a
-        href="https://inc-hackathon.vercel.app/"
+        href="https://techfiesta.pict.edu/"
         className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#winners"
           ? "border-sky-800/80 text-gold"
           : "hover:text-gold border-transparent"

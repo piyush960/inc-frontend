@@ -99,16 +99,16 @@ const eventData = [
   {
   id : 4,
     name : "HACKATHON",
-    fees : 1000,
+    fees : 400,
     members: "4-6 Members",
     ct: "First, second, third and fourth year students",
     logo: hackathon_logo,
-    nt: "₹ 1000/- For National Entries",
+    nt: "₹ 400/- For National Entries",
     it: "Free for International Entries",
 
     contact: [{
-      name: "Naman",
-      phone: "8446455659",
+      name: "Atharva Litke",
+      phone: "82370 95572",
     },
     
     ]
@@ -153,7 +153,7 @@ function Card(props) {
 
   return (
     <div className="card hover:cursor-pointer" onClick={() =>{if(props.name==="HACKATHON"){
-     window.open( 'https://inc-hackathon.vercel.app/');
+     window.open( 'https://techfiesta.pict.edu/');
 
     }
     else if (props.name==="GAME JAM"){
