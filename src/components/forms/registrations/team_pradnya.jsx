@@ -1,4 +1,3 @@
-
 import "../styles/event_registrations.css";
 import React from "react";
 import { useState } from "react";
@@ -21,8 +20,6 @@ import Dropdown from "../../dropdown";
 import RadioButtons from "../../radioButtons";
 import { useRef } from "react";
 import { year_arr, localTypes, paymentLinks, year_array } from "../../../static/data";
-
-import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
 
 import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
 
@@ -826,8 +823,8 @@ function TeamPradnya() {
                     />
                   </div>
                 ))}
-                    <div className="flex justify-between">
-                      {/* {formStep > 1 && formStep < 4 && (
+              <div className="flex justify-between">
+                {/* {formStep > 1 && formStep < 4 && (
                 <Buttons
                   className="mx-2 my-2"
                   value=" Previous Step"
@@ -839,54 +836,54 @@ function TeamPradnya() {
                 />
               )} */}
 
-                      {formStep === 3 ? (
-                        paymentStatus ? (
-                          <></>
-                        ) : (
-                          <Buttons
-                            className=" mx-2 my-2 "
-                            value="Submit"
-                            onClick={nextForm}
-                            loading={registerUserMutationForm3.isLoading}
-                          />
-                        )
-                      ) : (
-                        formStep === 2 &&
-                        (paymentStatus ? (
-                          <Buttons
-                            className=" mx-2 my-2  "
-                            value="Submit"
-                            onClick={nextForm}
-                            loading={
-                              registerUserMutationForm1.isLoading ||
-                              registerUserMutationForm2.isLoading
-                            }
-                          />
-                        ) : (
-                          <Buttons
-                            className=" mx-2 my-2  "
-                            value="Next Step"
-                            onClick={nextForm}
-                            loading={
-                              registerUserMutationForm1.isLoading ||
-                              registerUserMutationForm2.isLoading
-                            }
-                          />
-                        ))
-                      )}
-                      {formStep < 2 && (
-                        <Buttons
-                          className=" mx-2 my-2  "
-                          value="Next Step"
-                          onClick={nextForm}
-                          loading={
-                            registerUserMutationForm1.isLoading ||
-                            registerUserMutationForm2.isLoading
-                          }
-                        />
-                      )}
-                    </div>
-                  </form>
+                {formStep === 3 ? (
+                  paymentStatus ? (
+                    <></>
+                  ) : (
+                    <Buttons
+                      className=" mx-2 my-2 "
+                      value="Submit"
+                      onClick={nextForm}
+                      loading={registerUserMutationForm3.isLoading}
+                    />
+                  )
+                ) : (
+                  formStep === 2 &&
+                  (paymentStatus ? (
+                    <Buttons
+                      className=" mx-2 my-2  "
+                      value="Submit"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm1.isLoading ||
+                        registerUserMutationForm2.isLoading
+                      }
+                    />
+                  ) : (
+                    <Buttons
+                      className=" mx-2 my-2  "
+                      value="Next Step"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm1.isLoading ||
+                        registerUserMutationForm2.isLoading
+                      }
+                    />
+                  ))
+                )}
+                {formStep < 2 && (
+                  <Buttons
+                    className=" mx-2 my-2  "
+                    value="Next Step"
+                    onClick={nextForm}
+                    loading={
+                      registerUserMutationForm1.isLoading ||
+                      registerUserMutationForm2.isLoading
+                    }
+                  />
+                )}
+              </div>
+            </form>
             {/* <Buttons
                 value="submit"
                 onClick={submit}
@@ -904,5 +901,4 @@ function TeamPradnya() {
 }
 
 export default TeamPradnya;
-
 
