@@ -82,7 +82,7 @@ function VerifyEventRegistration() {
     return (
         <>
             <FormsBanner eventName='Verify Event Registrations' />
-            <div className='flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:px-8 md:pt-6 border border-light_blue md:mx-20 mx-5 my-6'>
+            <div className='flex shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:px-8 md:pt-6 border md:mx-20 mx-5 my-6'>
                 <RadioButtons name='eventName' label='Select Event' options={options} state={event} setState={setEvent} />
             </div>
             {event.eventName &&

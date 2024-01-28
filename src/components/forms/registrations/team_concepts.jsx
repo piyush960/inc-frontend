@@ -1702,7 +1702,7 @@ function TeamConcepts() {
     e.preventDefault();
 
     if (formStep === 0) {
-      console.log("form0", form0);
+      // console.log("form0", form0);
       for (const property in form0) {
         if (form0[property] === "") {
           if (property === "company" && form0["sponsored"] === "0") continue;
@@ -1733,7 +1733,7 @@ function TeamConcepts() {
       setActiveStep((activeStep) => activeStep + 1);
     }
     if (formStep === 2) {
-      console.log(form2);
+      // console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
@@ -1767,8 +1767,8 @@ function TeamConcepts() {
       });
     }
     if (formStep === 3) {
-      if (paymentRef.current.value.length < 8) {
-        toast.warn("Please enter valid Transaction ID !");
+      if (paymentRef.current.value.length != 12) {
+        toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }
       registerUserMutationForm3.mutate(
@@ -1814,9 +1814,9 @@ function TeamConcepts() {
               {/* form 0 */}
               {formStep === 0 && (
                 <>
-                  <NoteBox
+                <NoteBox
                     title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                    text="After filling details of each member click the Add members button to add the details and then you can also add more members."
                   />
                   <InputBox
                     type="text"
@@ -1955,13 +1955,7 @@ function TeamConcepts() {
                     title="Note"
                     text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
                   />
-                  <Buttons
-                    value="Add Members"
-                    onClick={addFields}
-                    classNames=" my-2"
-                    loading={registerUserMutationForm1.isLoading}
-                    disabled={formFields.length >= 5}
-                  />
+
 
                   {formFields.map((form, index) => {
                     return (
@@ -2051,24 +2045,31 @@ function TeamConcepts() {
                         />
                         <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
                         {/* <Notebox /> */}
-                        {/* {membersCount <= index && (<Buttons
-                                              value="remove member"
-                                              onClick={removefields(index)}
-                                              classNames=" my-2"
-                                              disabled={true}
-                                          />)} */}
+                        {/* Button aligned to the right */}
+                        {/* <Buttons
+                          value="remove member"
+                          onClick={() => removefields(index)}
+                          classNames="my-2"
+                          disabled={true}
+                          loading={registerUserMutationForm1.isLoading}
+                        /> */}
                       </div>
                     );
                   })}
+
+                  <Buttons
+                    value="Add Members"
+                    onClick={addFields}
+                    classNames=" my-2"
+                    loading={registerUserMutationForm1.isLoading}
+                    disabled={formFields.length >= 5}
+                  />
                 </>
               )}
               {/* form 2 */}
               {formStep === 2 && (
                 <>
-                  <NoteBox
-                    title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-                  />
+
                   <RadioButtons
                     label=" Are you PICTian or not?"
                     options={country_arr}
@@ -2161,7 +2162,7 @@ function TeamConcepts() {
                             tipstyle={"hidden"}
                           />
                         </div>
-                        <div className="ml-1 w-1/2">
+                        <div className="ml-1 w-1/2 mt-1">
                           <Dropdown
                             label="Localtiy"
                             options={[
@@ -2220,12 +2221,11 @@ function TeamConcepts() {
                 (paymentStatus ? (
                   <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
                     <p className="text-xl text-center text-gold font-bold mb-3">
-                      Thank you for registering in InC'23. Looking forward to have
-                      you in person
+                      Thank you for registering in InC'24!
                     </p>
                     <NoteBox
                       title="Note"
-                      text="Registration payment will be verified and will be informed by email."
+                      text="Your registration payment will be verified and a confirmation will be sent to you by email within 7 days."
                     />
                   </div>
                 ) : (
@@ -2239,7 +2239,7 @@ function TeamConcepts() {
                       </div>
                     </div>
                     <InputBox
-                      label="Transaction ID (received on email)"
+                      label="Transaction ID (12 digit)"
                       type="text"
                       name="payment_id"
                       placeholder="Enter Transaction ID"

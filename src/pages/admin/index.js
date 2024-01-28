@@ -5,18 +5,23 @@ import ViewEventRegistrations from './viewEventRegistrations';
 import ViewJudges from '../judge/viewJudges';
 import Allocations from './allocations/allocations';
 import Deallocation from './allocations/deallocation';
+import AdminNavBar from './navbar';
 
 
 function Admin() {
     return (
-        <Routes>
-            <Route path='/' element={<Dashboard />} />
-            <Route path='/events/registrations/verify' element={<VerifyEventRegistration />} />
-            <Route path='/events/registrations/view' element={<ViewEventRegistrations />} />
-            <Route path='/judges/registrations/view' element={<ViewJudges />} />
-            <Route path='/allocations/:eventName' element={<Allocations />} />
-            <Route path='/deallocation/:eventName' element={<Deallocation />} />
-        </Routes>
+        <>
+            <AdminNavBar />
+            <Routes>
+                <Route path='/' element={<Dashboard />} />
+                <Route path='/events/registrations/verify' element={<VerifyEventRegistration />} />
+                <Route path='/events/registrations/view' element={<ViewEventRegistrations />} />
+                <Route path='/judges/registrations/view' element={<ViewJudges />} />
+                <Route path='/allocations/:eventName' element={<Allocations />} />
+                <Route path='/deallocation/:eventName' element={<Deallocation />} />
+            </Routes>
+        </>
+
     );
 }
 

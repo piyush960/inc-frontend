@@ -12,9 +12,13 @@ function EventDetails(props) {
       logo: impetus_logo,
       criteria:
         "First, Second and Third Year Students enrolled in any BE/BTech, BSc, BCA, Diploma Degree.",
-      name: "IMPETUS",
-      short_desc: "International Level Project Competition cum Exhibition",
-      desc: "Impetus is an inter-collegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, were closely associated with this event. During the 3 days event, first year, second year and third year students from various colleges across India and abroad showcase their projects. students from various colleges across India and abroad showcase their projects in domains lik 🔸Application Development🔸 Communication, Networking, Security 🔸 Machine Learning, Pattern Recognition, Artificial Intelligence🔸 Embedded systems, VLSI, IoT, Remote Sensing 🔸 Blockchain, Cloud Computing, and 🔶 Others",
+      main_name: "IMPETUS",
+      name: "Impetus",
+      short_desc: "International Level Project Exhibition and Competition ",
+     
+      desc: ["Impetus is an intercollegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, were closely associated with this event. During the 3 day event, first year, second year and third year students from various colleges across India and abroad showcase their projects in domains like" ,<br/>,`🔹Application Development `,<br/>,`🔹 Communication, Networking, Security `,<br/>,`🔹 Machine Learning, Pattern Recognition, Artificial Intelligence`,<br/>,`🔹 Embedded systems, VLSI, IoT, Remote Sensing`,<br/>, `🔹 Blockchain, Cloud Computing`,<br/>,`🔹Others`],
+     
+      
       domains: [
         {
           domain: "APPLICATION DEVELOPMENT",
@@ -38,22 +42,27 @@ function EventDetails(props) {
         },
       ],
       registrations: {
-        fees: "₹ 100/- For National Entries",
-        team_size: 5,
+        fees: [
+          `🔹 For National Entries: ₹100 /-`,<br/>,
+          `🔹 For International Entries: Free`,
+        ],
+        team_size: "max 5",
       },
-      prizes: `InC announces a total cash prize of ₹6 Lakhs. `,
+      prizes: `Cash prize worth ₹7 Lakh.`,
       rules: [
-        "The decision of judges will be final and binding to one and all Priyanshu ",
+        `🔹Judge's decision will be final.`,
+        <br/>,
+        `🔹Project status must be in "Ready to Use".`,
+        <br/>,
+        `🔹Already registered candidates need not register again.`,
       ],
-      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
-      note1: `🔹Judge's decision will be final.`,
-      note2: `🔹Project status must be in "Ready to Use"`,
-      note3: `🔹Already registered candidatess need not register again.`,
+      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded ₹1 Lakh Cash Prize from PICT.`,
+      
       // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: "https://pictinc.org/register/events/impetus",
       schedule: "Dates will be out soon",
     },
-    concepts: {
+   concepts: {
       // contact: [
       //   "Siddharth 8237892072",
       //   "Kalpesh 7769945077",
@@ -63,17 +72,18 @@ function EventDetails(props) {
       logo: concepts_logo,
       criteria: "Final year students enrolled in BE/ BTech degree.",
       schedule: "Dates will be out soon",
-      name: "CONCEPTS",
+      main_name: "CONCEPTS",
+      name:"Concepts",
       notices: [
-        "1. The Participants should be present on campus and the allocated labs during the time period indicated.",
+        "1. The Participants should be present on campus and the labs during the time period allocated.",
         "2. At least 2 judges will be judging each project. However there will be judges from other organizations who will be evaluating projects for probable hiring or for special prizes etc. Hence none of the groups should leave the campus unless informed officially by the judging team.",
-        "3. The judging criteria includes the following points. i. Innovative Ideas Involved. ii. Approach to Exploit Ideas. iii. Approach towards Implementing the system and Future Applications. iv. Implementation of engineering Principles. v. Presentation and Q & A",
+        "3. The judging criteria includes the following points :- ", <p>i. Innovative Ideas Involved.</p> , <p>ii. Approach to Exploit Ideas.</p>, <p> iii. Approach towards Implementing the system and Future Applications.</p> ,<p> iv. Implementation of engineering Principles. </p> ,<p>v. Presentation and Q & A</p>,
         "4. We request all the group members to visit the stalls put up in the campus.",
-        "5. For any judging related queries contact the student organizer associated with the respective lab only. Their contact details are written on each lab white board.",
+        "5. For any judging related queries contact the lab coordinator associated with the respective lab only. Their contact details are written on each lab white board.",
       ],
       short_desc:
         "The most grand project exhibition event Concepts for final year student",
-      desc: "Concepts is an inter-collegiate international-level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. This event has been catching the attention of corporate giants for guiding and mentoring the participants for their Quality products/projects and providing on spot job offers & internships. It offers Patent registration fees for Innovative and Patentable projects. During the 3 days event, Final Year students from various colleges across India and abroad showcase their projects.",
+      desc: "Concepts is an inter-collegiate international-level competition and has been attracting corporate giants for not only sponsorship but also  for guiding and mentoring the participants for their Quality products/projects and providing on spot job offers & internships. It offers Patent registration fees for Innovative and Patentable projects. During the 3 day event, Final Year students from various colleges across India and abroad showcase their projects.",
       domains: [
         {
           domain: "APPLICATION DEVELOPMENT",
@@ -97,16 +107,19 @@ function EventDetails(props) {
         },
       ],
       registrations: {
-        fees: "₹ 300/- For National Entries",
-        team_size: 5,
+        fees: ['🔹For National Entries :    ₹300/- ',<br/>,
+      '🔹 For International Students : Free entry'],
+     
+        team_size: "max 5",
       },
-      prizes: "InC announces a total cash prize of ₹6 Lakhs.",
-      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & related selected projects shall be awarded Rs. 1 Lacs Cash Prize from PICT.`,
-      note1: `🔹Judge's decision will be final.`,
-      note2: `🔹Project status must be in "Ready to Use"`,
-      note3: `🔹Already registered candidatess need not register again.`,
+      prizes: "Cash prize worth ₹7 Lakh.",
+      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded ₹ 1 Lakh Cash Prize from PICT.`,
+    
       rules: [
-        "The decision of judges will be final and binding to one and all",
+       
+         <p> 🔹Judge's decision will be final.</p>,
+         <p>🔹Project status must be in "Ready to Use"</p>,
+         <p>🔹Already registered candidatess need not register again.</p>,
       ],
       button_link: "https://pictinc.org/register/events/concepts",
     },
@@ -115,13 +128,15 @@ function EventDetails(props) {
       //   "Pratik 9145439727",
       //   "Neha 9579678142"
       // ],
-      prizes: "InC announces a total cash prize of ₹6 Lakhs",
+      prizes: "Cash prize worth ₹7 Lakh",
       note1: `🔹Judge's decision will be final.`,
       note3: `🔹Already registered candidatess need not register again.`,
       schedule: "Dates will be out soon",
-      criteria: `Junior Level- This category is open for all students who are pursuing first or second year of any undergraduate  degree/course. Senior Level- Third year engineering, final year engineering of any undergraduate degree/course.`,
+      criteria: [`Junior Level - This category is open for all students who are pursuing first or second year of any undergraduate  degree/course.`,<br/>,
+      `Senior Level - Third year engineering, final year engineering of any undergraduate degree/course.`],
       logo: pradnya_logo,
-      name: "PRADNYA",
+      main_name: "PRADNYA",
+      name:"Pradnya",
       short_desc: "Competitive Programming",
       desc: "PRADNYA is a one of a kind programming event meticulously forged by our finest, catering to rookies and veterans alike, from all over the world. This Contest puts the programmer’s logical thinking and Problem solving skills to the test using programming languages, which guarantees to appraise their skills as a programmer.",
       eligibility: [
@@ -141,26 +156,31 @@ function EventDetails(props) {
         {
           name: "Wild Card Round",
           details:
-            "The wildcard round is open to both junior and senior teams, and the top 5 teams from each category will enter directly into the programming round (Round 2). This round will be conducted online on the CODECHEF platform. The wildcard round will include programming questions where the participants can code using any programming language they prefer. Teams that qualify for the wildcard round are exempted from participating in the multiple-choice questions round (Round 1).",
+            "The wildcard round is open to both junior and senior teams, and the top 5 teams from each category will enter directly into the programming round (Round 2). This round will be conducted online on the CODECHEF platform. The wildcard round will include programming questions where the participants can code using any programming language they prefer.",
         },
         {
-          name: "Round -1: MCQ based round Day-1",
+          name:[ "Round 1 : MCQ Round [ Day 1 ] ", 
+        
+        ],
+     
           details:
-            "The first is the MCQ round, where the participants are given multiple-choice and short-answer questions. This round is conducted for both levels using a web platform specially designed by the PICT Pradnya team. The team will communicate information regarding scheduled slots for this round to the participants One day before the event.",
+            "In this event the participants are given multiple-choice and short-answer questions. This round is conducted for both levels using a web platform specially designed by the PICT Pradnya team. The team will communicate information regarding scheduled slots for this round to the participants one day before the event.",
         },
         {
-          name: "Round 2: Programming Round- Day 2",
+          name: "Round 2: Programming Round [ Day 2 ]",
           details:
-            "Winners in the MCQ-based round and wild card winners are eligible for the programming contest. Five problem statements are allotted to each level, i.e., the junior and senior levels. The participants test their mettle in this round as they are challenged with a series of mind-boggling problems designed to test their efficiency and capability. This round is held on an online programming platform. The team will communicate information regarding scheduled slots for this round to the participants One day before the event.",
+            "Winners in the MCQ-based round and wild card winners are eligible for the programming contest. Five problem statements are allotted to each level, i.e., the junior and senior levels.  This round is held on an online programming platform. The team will communicate information regarding scheduled slots for this round to the participants one day before the event.",
         },
         {
-          name: "Round 3: Judges Round- Day 2",
+          name: "Round 3: Judges Round  [ Day 2 ]",
           details:
-            "In the final round, the top 5 teams qualifying for round 2 will enter the judging round. Esteemed industry professionals are invited to serve as judges for this competition stage. During the judging round, the judges will evaluate the five teams based on their solutions from round 2. The judges will then select the top three winning teams.",
+            "In the final round, the top 5 teams qualified for round 2 will enter the judging round. Esteemed industry professionals are invited to serve as judges for this competition stage. During the judging round, the judges will evaluate the five teams based on their solutions from round 2. The judges will then select the top three winning teams.",
         },
       ],
       registrations: {
-        fees: "₹ 100/- For National Entries",
+        fees: ["🔹 For National Entries : ₹ 100/-",<br/>,
+        "🔹 For International Students : Free entry"
+      ],
         team_size: 2,
       },
       rules: [
@@ -168,6 +188,8 @@ function EventDetails(props) {
       ],
       button_link: "https://pictinc.org/register/events/pradnya",
     },
+  
+    
   };
 
   let { eventName } = useParams();
@@ -197,7 +219,7 @@ function EventDetails(props) {
               </div>
               <div className="py-3 text-6xl mx-auto font-bold text-gold  bg-clip-text ">
                 {/* Impetus */}
-                {eventDetail.name}
+               {eventDetail.main_name}
                 {/* {console.log(eventDetail.name)} */}
               </div>
               <div className=" border-b border-gray-500"></div>
