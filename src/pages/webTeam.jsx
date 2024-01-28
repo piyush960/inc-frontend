@@ -7,9 +7,10 @@ import { EmailIcon, LinkedinIcon, GithubIcon } from '../assets/icons';
 function WebTeam(){
   useEffect(() => {
     scrollToTop();
-
+    //Siddhya 
 
     //Teams
+    //Changes
   }, [])
     const teamData=[
         {
