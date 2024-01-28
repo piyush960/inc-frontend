@@ -99,16 +99,16 @@ const eventData = [
   {
   id : 4,
     name : "HACKATHON",
-    fees : 1000,
+    fees : 400,
     members: "4-6 Members",
     ct: "First, second, third and fourth year students",
     logo: hackathon_logo,
-    nt: "₹ 1000/- For National Entries",
+    nt: "₹ 400/- For National Entries",
     it: "Free for International Entries",
 
     contact: [{
-      name: "Naman",
-      phone: "8446455659",
+      name: "Atharva Litke",
+      phone: "82370 95572",
     },
     
     ]
