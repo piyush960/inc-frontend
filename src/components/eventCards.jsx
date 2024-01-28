@@ -153,7 +153,7 @@ function Card(props) {
 
   return (
     <div className="card hover:cursor-pointer" onClick={() =>{if(props.name==="HACKATHON"){
-     window.open( 'https://inc-hackathon.vercel.app/');
+     window.open( 'https://techfiesta.pict.edu/');
 
     }
     else if (props.name==="GAME JAM"){
