@@ -47,8 +47,10 @@ export const year_array = [
 export const paymentLinks = new Map([
   ["test", "https://easebuzz.in/quickpay/owhseppfut"],
   ["concepts", "https://easebuzz.in/quickpay/pkwfmmpssi"],
-  ["impetus", "https://easebuzz.in/quickpay/jkxuiptnhq"],
+  ["impetus", "upi://pay?pa=scrtspuneinstofcompu.62803997@hdfcbank&pn=PictInc24&cu=INR&am=100"],
   ["pradnya", "https://easebuzz.in/quickpay/cwxuyvrypr"],
+
+  //upi://pay?pa=scrtspuneinstofcompu.62803997@hdfcbank&pn=PictInc24&cu=INR&am=100
 ]);
 
 export const galleryPhotos = [
