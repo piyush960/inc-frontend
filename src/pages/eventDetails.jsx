@@ -60,7 +60,7 @@ function EventDetails(props) {
       
       // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: "https://pictinc.org/register/events/impetus",
-      schedule: "Dates will be out soon",
+      schedule: "5th 6th & 7th of April",
     },
    concepts: {
       // contact: [
@@ -71,7 +71,7 @@ function EventDetails(props) {
       // ],
       logo: concepts_logo,
       criteria: "Final year students enrolled in BE/ BTech degree.",
-      schedule: "Dates will be out soon",
+      schedule: "5th 6th & 7th of April",
       main_name: "CONCEPTS",
       name:"Concepts",
       notices: [
@@ -131,7 +131,7 @@ function EventDetails(props) {
       prizes: "Cash prize worth ₹7 Lakh",
       note1: `🔹Judge's decision will be final.`,
       note3: `🔹Already registered candidatess need not register again.`,
-      schedule: "Dates will be out soon",
+      schedule: "5th 6th & 7th of April",
       criteria: [`Junior Level - This category is open for all students who are pursuing first or second year of any undergraduate  degree/course.`,<br/>,
       `Senior Level - Third year engineering, final year engineering of any undergraduate degree/course.`],
       logo: pradnya_logo,
