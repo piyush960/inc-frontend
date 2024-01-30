@@ -10,7 +10,7 @@ function Dashboard() {
       className="w-full min-h-screen bg-cover bg-fixed"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div className="flex flex-wrap md:flex-nowrap space-y-4 md:space-y-0 px-6 backdrop-blur-sm rounded-3xl mx-3 my-4 py-4 items-center bg-[#31536a]/50 justify-center md:justify-start">
+      {/* <div className="flex flex-wrap md:flex-nowrap space-y-4 md:space-y-0 px-6 backdrop-blur-sm rounded-3xl mx-3 my-4 py-4 items-center bg-[#31536a]/50 justify-center md:justify-start">
         <div className="inclogo w-full md:w-auto flex justify-center items-center md:block">
           <img src={logo} alt="" className="h-16 w-16 object-contain" />
         </div>
@@ -18,7 +18,7 @@ function Dashboard() {
           <select
             name="operations"
             id=""
-            className="px-5 py-2 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-40 bg-indigo-100 w-full"
+            className="px-5 py-2 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-40 bg-indigo-100 w-full text-black"
             defaultValue={1}
           >
             <option value="1">Print Sheet</option>
@@ -32,7 +32,7 @@ function Dashboard() {
           <select
             name="operations"
             id=""
-            className="px-5 py-2 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-56 bg-indigo-100 min-w-52 w-full"
+            className="px-5 py-2 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-56 bg-indigo-100 min-w-52 w-full text-black"
             defaultValue={0}
           >
             <option value="0">Select Events</option>
@@ -50,15 +50,15 @@ function Dashboard() {
             type="date"
             name="event-date"
             id="event-date"
-            className="px-5 py-2 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-indigo-100 w-full md:w-auto"
+            className="px-5 py-2 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-indigo-100 w-full md:w-auto text-black"
           />
         </div>
         <button className="px-5 py-2 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-indigo-100 md:w-26 h-10 md:ml-auto ">
           Logout
         </button>
-      </div>
+      </div> */}
 
-      <div className="bg-slate-500/50 rounded-2xl mx-5 mt-14 mb-5 px-5 py-4">
+      <div className="bg-slate-500/50 rounded-2xl mx-5  mb-5 px-5 py-4">
         <AdminData />
       </div>
     </div>

@@ -438,7 +438,7 @@ function TeamPradnya() {
       console.log(form1);
     }
     if (formStep === 2) {
-      console.log(form2);
+      // console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
