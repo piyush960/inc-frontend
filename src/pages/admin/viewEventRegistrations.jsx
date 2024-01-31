@@ -8,6 +8,7 @@ const Table = lazy(() => import('../../components/table.jsx'));
 function ViewEventRegistrations() {
     const [event, setEvent] = useState({ eventName: '' })
     const { isLoading, data } = useGetRegistrations(event.eventName)
+    
 
     const options = [
         {
