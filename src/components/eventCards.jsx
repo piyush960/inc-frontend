@@ -165,7 +165,7 @@ function Card(props) {
     }  } >
       {/* my card*/}
       <div className="py-10 mx-5 md:mx-0 ">
-        <div className="md:h-[550px]  shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
+        <div className="md:h-[600px]  shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out  bg-light_blue/30 rounded-xl  border-light_blue items-center p-4 md:p-8 border md:mx-5  mt-10">
           <div className='flex items-center justify-evenly'>
             <div className='my-4'>
               <img src={props.logo}
@@ -272,7 +272,7 @@ function EventCards() {
         Events
       </h1>
       <hr className="w-1/5 mx-auto mb-5 " />
-      <div className="grid md:grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 lg:gap-2 place-content-center">
+      <div className="grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 lg:gap-2">
         {eventData.slice(0,-2).map((eva) => {
           return (
             <Card
@@ -288,7 +288,7 @@ function EventCards() {
         })}
         
       </div>
-      <div className="alignitems">
+      <div className="flex flex-col lg:flex-row md:w-[68%] md:m-auto">
         {eventData.slice(-2).map((eva) => {
           return (
             <Card
