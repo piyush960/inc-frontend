@@ -408,7 +408,7 @@ function TeamImpetus() {
   };
 
   const addFields = () => {
-    if (formFields.length < 5) {
+    if (formFields.length < 6) {
       for (const property in formFields.at(-1)) {
         if (formFields.at(-1)[property] === "") {
           toast.warn("Please fill all the fields");
@@ -425,15 +425,18 @@ function TeamImpetus() {
         onSuccess: () => {
           setErrors1(initialErrorsForm1);
           toast.success("Completed Step 2️⃣ !", { icon: "✅" });
-          let object = {
-            name: "",
-            email: "",
-            phone: "",
-            gender: "",
-            member_id: "",
-          };
-          setFormFields([...formFields, object]);
-          SetMemberCount((memberCount) => memberCount + 1);
+          if (formFields.length < 5) {
+            let object = {
+              name: "",
+              email: "",
+              phone: "",
+              gender: "",
+              member_id: "",
+            };
+            setFormFields([...formFields, object]);
+            SetMemberCount((memberCount) => memberCount + 1);
+          }
+          if(formFields.length == 5)  SetMemberCount((memberCount) => memberCount + 1);
         },
         onError: () => {
           if (formFields.length === 1) {
@@ -525,7 +528,7 @@ function TeamImpetus() {
       });
       setPaymentStatus(false);
     }
-    console.log(form2);
+    // console.log(form2);
   };
 
 
@@ -572,18 +575,18 @@ function TeamImpetus() {
   const nextForm = (e) => {
     e.preventDefault();
     if (formStep === 0) {
-      console.log("form0", form0);
-      for (const property in form0) {
-        if (form0[property] === "") {
-          if (property === "company" && form0["sponsored"] === "0") continue;
-          if (property === "reason_of_demo" && form0["demo"] === "1") continue;
-          if (property === "nda" && form0["sponsored"] === "0") continue;
-          else {
-            toast.warn("Please enter all fields!");
-            return;
-          }
-        }
-      }
+      // console.log("form0", form0);
+      // for (const property in form0) {
+      //   if (form0[property] === "") {
+      //     if (property === "company" && form0["sponsored"] === "0") continue;
+      //     if (property === "reason_of_demo" && form0["demo"] === "1") continue;
+      //     if (property === "nda" && form0["sponsored"] === "0") continue;
+      //     else {
+      //       toast.warn("Please enter all fields!");
+      //       return;
+      //     }
+      //   }
+      // }
       registerUserMutationForm0.mutate(form0, {
         onSuccess: () => {
           setErrors0(initialErrorsForm0);
@@ -654,10 +657,7 @@ function TeamImpetus() {
     // setFormStep((currentStep) => currentStep + 1);
     // setActiveStep(activeStep + 1);
   };
-
-  //dropdown
-
-  //const [option, setOption] = useState();
+  
 
   return (
     <MainContainer>
@@ -684,10 +684,6 @@ function TeamImpetus() {
               {/* form 0 */}
               {formStep === 0 && (
                 <>
-                  <NoteBox
-                    title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
-                  />
                   <InputBox
                     type="text"
                     label={"Project Title"}
@@ -730,7 +726,6 @@ function TeamImpetus() {
                     name={"guide_name"}
                     placeholder={"Name"}
                     classNames=""
-                    required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.guide_name}
                     error={errors0.guide_name}
@@ -742,7 +737,6 @@ function TeamImpetus() {
                     name={"guide_email"}
                     placeholder={"Email"}
                     classNames=""
-                    required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.guide_email}
                     error={errors0.guide_email}
@@ -754,7 +748,6 @@ function TeamImpetus() {
                     name={"guide_phone"}
                     placeholder={"Phone"}
                     classNames=""
-                    required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.guide_phone}
                     error={errors0.guide_phone}
@@ -851,7 +844,7 @@ function TeamImpetus() {
               {/* form 1 */}
               {formStep === 1 && (
                 <>
-                <NoteBox
+                  <NoteBox
                     title="Note"
                     text="After filling details of each member click the Add members button to add the details and then you can also add more members."
                   />
@@ -947,35 +940,37 @@ function TeamImpetus() {
                         {formFields.length > 1 && (
                           <>
                             {/* <div className="flex justify-content-between"> */}
-                              {/* Content on the left side */}
-                              {/* Add any additional content or spacing as needed */}
-                              {/* <></> */}
+                            {/* Content on the left side */}
+                            {/* Add any additional content or spacing as needed */}
+                            {/* <></> */}
 
-                              {/* <div className="ml-auto"> */}
-                                {/* Button aligned to the right */}
-                                {/* <Buttons
+                            {/* <div className="ml-auto"> */}
+                            {/* Button aligned to the right */}
+                            {/* <Buttons
                                   value="remove member"
                                   onClick={() => removefields(index)}
                                   classNames="my-2"
                                   disabled={true}
                                   loading={registerUserMutationForm1.isLoading} */}
-                                {/* /> */}
-                              {/* </div> */}
+                            {/* /> */}
+                            {/* </div> */}
                             {/* </div> */}
                           </>
                         )}
                       </div>
                     );
                   })}
-
-                  <Buttons
-                    value="add members"
-                    onClick={addFields}
-                    classNames=" my-2"
-                    loading={registerUserMutationForm1.isLoading}
-                    disabled={formFields.length >= 5}
-
-                  />
+                  {/* {console.log(memberCount)} */}
+                  {memberCount < 5 ? (
+                    <>
+                      <Buttons
+                        value="Add Members"
+                        onClick={addFields}
+                        classNames=" my-2"
+                        loading={registerUserMutationForm1.isLoading}
+                      />Click after filling details of each member
+                    </>) : (<></>
+                  )}
                 </>
               )}
               {/* form 2 */}
@@ -1143,7 +1138,7 @@ function TeamImpetus() {
                 (paymentStatus ? (
                   <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl items-center p-4 md:p-8 border border-light_blue w-full">
                     <p className="text-xl text-center text-gold font-bold mb-3">
-                      Thank you for registering in InC'24! 
+                      Thank you for registering in InC'24!
                     </p>
                     <NoteBox
                       title="Note"

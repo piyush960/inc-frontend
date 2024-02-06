@@ -175,7 +175,7 @@ export default function Sponsors() {
       <div className='sponsors-list  title-sponsors'>{titleSponsorsList}</div>
       <div className='sponsors-head  title-sponsors'>Co-Sponsors And Concept Sponsor</div>
       <div className='sponsors-list  title-sponsors'>{coSponsorsList}</div>
-      <div className='sponsors-head  title-sponsors'>Co-Sponsors OF InC</div>
+      <div className='sponsors-head  title-sponsors'>Co-Sponsors Of InC</div>
       <div className='sponsors-list title-cosponsors'>{educationSponsorsList}</div>
       <div className='sponsors-head'>Impetus Sponsor</div>
       <div className='sponsors-list'>{ImpetusSponsorsList}</div>

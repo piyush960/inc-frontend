@@ -36,7 +36,7 @@ function Footer() {
           </span>
 
           <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-            <a href="https://www.facebook.com/groups/226545634202520/user/100054611612171/" className="text-white hover:text-gray-900">
+            <a href="https://www.facebook.com/groups/226545634202520/user/100054611612171/" target='_blank' className="text-white hover:text-gray-900">
               <svg
                 className="w-5 h-5"
                 fill="currentColor"
@@ -51,7 +51,7 @@ function Footer() {
               </svg>
               <span className="sr-only">Facebook page</span>
             </a>
-            <a href="https://www.instagram.com/pict_inc_2023/" className="text-white hover:text-gray-900">
+            <a href="https://www.instagram.com/pict_inc_2024/" target='_blank' className="text-white hover:text-gray-900">
               <svg
                 className="w-5 h-5"
                 fill="currentColor"
@@ -66,7 +66,7 @@ function Footer() {
               </svg>
               <span className="sr-only">Instagram page</span>
             </a>
-            <a href="https://twitter.com/punepict?lang=en" className="text-white hover:text-gray-900">
+            <a href="https://twitter.com/punepict?lang=en" target='_blank' className="text-white hover:text-gray-900">
               <svg
                 className="w-5 h-5"
                 fill="currentColor"

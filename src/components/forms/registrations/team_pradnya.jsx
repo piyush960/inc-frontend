@@ -19,7 +19,7 @@ import styled from "styled-components";
 import Dropdown from "../../dropdown";
 import RadioButtons from "../../radioButtons";
 import { useRef } from "react";
-import { year_arr, localTypes, paymentLinks, year_array } from "../../../static/data";
+import { year_arr, localTypes, paymentLinks, year_array, state_arr } from "../../../static/data";
 
 import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
 
@@ -264,6 +264,13 @@ function TeamPradnya() {
         }
       }
 
+      // Check the length of the phone number
+      const phoneNumber = form1.at(-1).phone;
+      if (phoneNumber.length !== 10) {
+        toast.warn("Please enter a valid phone number");
+        return;
+      }
+
       const memberFormData = new FormData();
       memberFormData.append("member_id", form1.at(-1).member_id);
       const tempMemberDetails = { ...form1.at(-1) };
@@ -274,15 +281,19 @@ function TeamPradnya() {
           setErrors1(initialErrorsForm1);
 
           toast.success("Added member to the team !", { icon: "✅" });
-          let object = {
-            name: "",
-            email: "",
-            phone: "",
-            gender: "",
-            member_id: "",
-          };
-          setForm1([...form1, object]);
-          setMemberCount((memberCount) => memberCount + 1);
+          if (form1.length < 2) {
+            let object = {
+              name: "",
+              email: "",
+              phone: "",
+              gender: "",
+              member_id: "",
+            };
+            setForm1([...form1, object]);
+            setMemberCount((memberCount) => memberCount + 1);
+          }
+
+          if(form1.length == 2) setMemberCount((memberCount) => memberCount + 1);
         },
       });
       return;
@@ -290,9 +301,10 @@ function TeamPradnya() {
     toast.warn("Maximum 2 members are allowed");
   };
 
+
   const removefields = (index) => {
     let data = [...form1];
-    console.log(...form1);
+    // console.log(...form1);
     data.splice(index, 1);
     setForm1(data);
     memberCount--;
@@ -378,7 +390,7 @@ function TeamPradnya() {
       });
       setPaymentStatus(false);
     }
-    console.log(form2);
+    // console.log(form2);
   };
 
   const country_arr = [
@@ -435,7 +447,6 @@ function TeamPradnya() {
       //   });
       setFormStep((currentStep) => currentStep + 1);
       setActiveStep((activeStep) => activeStep + 1);
-      console.log(form1);
     }
     if (formStep === 2) {
       // console.log(form2);
@@ -473,17 +484,17 @@ function TeamPradnya() {
       });
     }
     if (formStep === 3) {
-      
+
       if (paymentRef.current.value.length != 12) {
         toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }
-      
+
       registerUserMutationForm3.mutate(
         { payment_id: paymentRef.current.value?.trim() },
         {
           onSuccess: () => {
-            console.log(paymentRef.current.value?.trim())
+            // console.log(paymentRef.current.value?.trim())
             toast.success("Completed Step 4️⃣ !", { icon: "✅" });
             setActiveStep((activeStep) => activeStep + 1);
             setPaymentStatus(true);
@@ -546,8 +557,8 @@ function TeamPradnya() {
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.email}
                         />
-                        <div className="flex">
-                          <div className="mr-1 w-1/2">
+                        <div className="md:flex">
+                          <div className="mr-1 w-full md:w-1/2">
                             <InputBox
                               label="Phone No"
                               name="phone"
@@ -599,19 +610,19 @@ function TeamPradnya() {
                           error={errors1.member_id}
                         />
                         <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
-                        
+
 
                       </div>
                     );
                   })}
-                  {memberCount < 2 && (
+                  {memberCount < 2 ? (
                     <>
                       <Buttons
                         value="add members"
                         onClick={addfields}
                         classNames=" my-2"
-                      />
-                    </>
+                      /> Click after filling details of each member
+                    </>) : (<></>
                   )}
                 </>
               )}
@@ -644,7 +655,7 @@ function TeamPradnya() {
                       />
                       <div className=" mx-1 my-2">
                         <InputBox
-                          label="College"
+                          label="College (enter full form)"
                           name={"college"}
                           type="text"
                           placeholder="college name"
@@ -677,17 +688,18 @@ function TeamPradnya() {
                         />
                       </div>
                       <div className="flex mx-1 ">
-                        <div className="mr-1 w-1/2">
-                          <InputBox
+                        <div className="mr-1 w-1/2 mt-1">
+                          <Dropdown
                             label="State"
-                            type="text"
-                            name={"state"}
-                            placeholder="state"
+                            options={[
+                              { value: "SEL", label: "Select", selected: true },
+                              ...state_arr,
+                            ]}
+                            name={"locality"}
+                            state={form2}
+                            setState={setForm2}
                             required
-                            error={errors2.state}
-                            onChange={(e) => handleInputChange2(e)}
-                            value={form2.state}
-                            tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                            error={errors2.locality}
                           />
                         </div>
                         <div className="ml-1 w-1/2">
@@ -884,11 +896,6 @@ function TeamPradnya() {
                 )}
               </div>
             </form>
-            {/* <Buttons
-                value="submit"
-                onClick={submit}
-                classNames='mx-2 my-2'
-            /> */}
           </div>
         </>
         :

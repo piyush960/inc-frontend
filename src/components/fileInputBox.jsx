@@ -2,7 +2,8 @@
 function FileInputBox({ label,name,accept,type, placeholder, inputRef, onChange , classNames, required, error }) {
     return (
         <div className='input-box w-full mb-3 relative'>
-            <label htmlFor={label.toLowerCase().replace(/ /g, "_")} className='input-label font-medium mb-3 text-white text-lg'>{label}</label>
+                    <label htmlFor={label.toLowerCase().replace(/ /g, "_")} className={`input-label font-medium  text-white text-lg before: ${required && 'after:content-["*"] after:ml-0.5 after:text-gold'}`}>{label}</label>
+            {/* <label htmlFor={label.toLowerCase().replace(/ /g, "_")} className='input-label font-medium mb-3 text-white text-lg '>{label}</label> */}
             <input
                 type={type}
                 name={name}
