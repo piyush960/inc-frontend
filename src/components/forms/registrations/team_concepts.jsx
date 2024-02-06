@@ -894,7 +894,7 @@ function TeamConcepts() {
                         onClick={addFields}
                         classNames=" my-2"
                         loading={registerUserMutationForm1.isLoading}
-                      />Click after filling details of each member
+                      />
                     </>) : (<></>
                   )}
 
@@ -956,18 +956,17 @@ function TeamConcepts() {
                         />
                       </div>
                       <div className="flex mx-1 ">
-                        <div className="mr-1 w-1/2">
-                          <Dropdown
+                        <div className="mr-1 w-1/2 mt-1">
+                        <Dropdown
                             label="State"
                             options={[
                               { value: "SEL", label: "Select", selected: true },
                               ...state_arr,
                             ]}
-                            name={"locality"}
+                            name={"state"}
                             state={form2}
                             setState={setForm2}
                             required
-                            error={errors2.locality}
                           />
                         </div>
                         <div className="ml-1 w-1/2">
@@ -1075,7 +1074,7 @@ function TeamConcepts() {
                       </div>
                     </div>
                     <InputBox
-                      label="Transaction ID (12 digit)"
+                      label="Transaction ID / UTR ID (12 digit)"
                       type="text"
                       name="payment_id"
                       placeholder="Enter Transaction ID"

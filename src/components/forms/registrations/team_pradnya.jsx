@@ -621,7 +621,7 @@ function TeamPradnya() {
                         value="add members"
                         onClick={addfields}
                         classNames=" my-2"
-                      /> Click after filling details of each member
+                      /> 
                     </>) : (<></>
                   )}
                 </>
@@ -695,11 +695,10 @@ function TeamPradnya() {
                               { value: "SEL", label: "Select", selected: true },
                               ...state_arr,
                             ]}
-                            name={"locality"}
+                            name={"state"}
                             state={form2}
                             setState={setForm2}
                             required
-                            error={errors2.locality}
                           />
                         </div>
                         <div className="ml-1 w-1/2">

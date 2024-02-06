@@ -10,7 +10,7 @@ import {
   CloseMessage,
 } from "../../index.js";
 import styled from "styled-components";
-import { paymentLinks, year_arr } from "../../../static/data";
+import { paymentLinks, state_arr, year_arr } from "../../../static/data";
 import Dropdown from "../../dropdown";
 import RadioButtons from "../../radioButtons";
 import {
@@ -436,7 +436,7 @@ function TeamImpetus() {
             setFormFields([...formFields, object]);
             SetMemberCount((memberCount) => memberCount + 1);
           }
-          if(formFields.length == 5)  SetMemberCount((memberCount) => memberCount + 1);
+          if (formFields.length == 5) SetMemberCount((memberCount) => memberCount + 1);
         },
         onError: () => {
           if (formFields.length === 1) {
@@ -657,7 +657,7 @@ function TeamImpetus() {
     // setFormStep((currentStep) => currentStep + 1);
     // setActiveStep(activeStep + 1);
   };
-  
+
 
   return (
     <MainContainer>
@@ -968,7 +968,7 @@ function TeamImpetus() {
                         onClick={addFields}
                         classNames=" my-2"
                         loading={registerUserMutationForm1.isLoading}
-                      />Click after filling details of each member
+                      />
                     </>) : (<></>
                   )}
                 </>
@@ -1027,17 +1027,18 @@ function TeamImpetus() {
                         />
                       </div>
                       <div className="flex mx-1 ">
-                        <div className="mr-1 w-1/2">
-                          <InputBox
+                        <div className="mr-1 w-1/2 mt-1">
+                          <Dropdown
                             label="State"
-                            type="text"
+                            options={[
+                              { value: "SEL", label: "Select", selected: true },
+                              ...state_arr,
+                            ]}
                             name={"state"}
-                            placeholder="state"
+                            state={form2}
+                            setState={setForm2}
                             required
-                            onChange={(e) => handleInputChange2(e)}
-                            value={form2.state}
                             error={errors2.state}
-                            tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
                           />
                         </div>
                         <div className="ml-1 w-1/2">
@@ -1157,7 +1158,7 @@ function TeamImpetus() {
                     </div>
 
                     <InputBox
-                      label="Transaction/UTR ID (12 digit)"
+                      label="Transaction / UTR ID (12 digit)"
                       type="text"
                       name="payment_id"
                       placeholder="Enter Transaction ID"
