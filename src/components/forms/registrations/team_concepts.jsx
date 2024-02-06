@@ -21,7 +21,8 @@ import {
   paymentLinks,
   projectDomains,
   projectTypes,
-  localTypes
+  localTypes,
+  state_arr
 } from "../../../static/data";
 
 import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
@@ -261,34 +262,34 @@ const gender_type = [
 ];
 
 // const state_arr = [
-//     { value: 'SEL', label: 'Select', disabled: true },
-//     { value: 'AP', label: "Arunachal Pradesh" },
-//     { value: 'AS', label: "Assam" },
-//     { value: 'BI', label: "Bihar" },
-//     { value: 'CH', label: "Chhattisgarh" },
-//     { value: 'DEL', label: "Delhi" },
-//     { value: 'G', label: "Goa" },
-//     { value: 'GUJ', label: "Gujarat" },
-//     { value: 'HAR', label: "Haryana" },
-//     { value: 'HP', label: "Himachal Pradesh" },
-//     { value: 'JK', label: "Jammu &amp; Kashmir" },
-//     { value: 'JH', label: "Jharkhand" },
-//     { value: 'KAR', label: "Karnataka" },
-//     { value: 'KR', label: "Kerala" },
-//     { value: 'MP', label: "Madhya Pradesh" },
-//     { value: 'MAH', label: "Maharashtra" },
-//     { value: 'MN', label: "Manipur" },
-//     { value: 'MG', label: "Meghalaya" },
-//     { value: 'MZ', label: "Mizoram" },
-//     { value: 'OR', label: "Orissa" },
-//     { value: 'PN', label: "Punjab" },
-//     { value: 'RJ', label: "Rajasthan" },
-//     { value: 'TN', label: "Tamil Nadu" },
-//     { value: 'TL', label: "Telangana" },
-//     { value: 'TR', label: "Tripura" },
-//     { value: 'UP', label: "Uttar Pradesh" },
-//     { value: 'UT', label: "Uttarakhand" },
-//     { value: 'WB', label: "West Bengal" },
+//   { value: 'SEL', label: 'Select', disabled: true },
+//   { value: 'AP', label: "Arunachal Pradesh" },
+//   { value: 'AS', label: "Assam" },
+//   { value: 'BI', label: "Bihar" },
+//   { value: 'CH', label: "Chhattisgarh" },
+//   { value: 'DEL', label: "Delhi" },
+//   { value: 'G', label: "Goa" },
+//   { value: 'GUJ', label: "Gujarat" },
+//   { value: 'HAR', label: "Haryana" },
+//   { value: 'HP', label: "Himachal Pradesh" },
+//   { value: 'JK', label: "Jammu &amp; Kashmir" },
+//   { value: 'JH', label: "Jharkhand" },
+//   { value: 'KAR', label: "Karnataka" },
+//   { value: 'KR', label: "Kerala" },
+//   { value: 'MP', label: "Madhya Pradesh" },
+//   { value: 'MAH', label: "Maharashtra" },
+//   { value: 'MN', label: "Manipur" },
+//   { value: 'MG', label: "Meghalaya" },
+//   { value: 'MZ', label: "Mizoram" },
+//   { value: 'OR', label: "Orissa" },
+//   { value: 'PN', label: "Punjab" },
+//   { value: 'RJ', label: "Rajasthan" },
+//   { value: 'TN', label: "Tamil Nadu" },
+//   { value: 'TL', label: "Telangana" },
+//   { value: 'TR', label: "Tripura" },
+//   { value: 'UP', label: "Uttar Pradesh" },
+//   { value: 'UT', label: "Uttarakhand" },
+//   { value: 'WB', label: "West Bengal" },
 
 // ]
 
@@ -370,7 +371,7 @@ function TeamConcepts() {
   };
 
   const addFields = () => {
-    if (formFields.length < 5) {
+    if (memberCount < 6) {
       for (const property in formFields.at(-1)) {
         if (formFields.at(-1)[property] === "") {
           toast.warn("Please fill all the fields");
@@ -387,15 +388,18 @@ function TeamConcepts() {
         onSuccess: () => {
           setErrors1(initialErrorsForm1);
           toast.success("Added member to the team !", { icon: "✅" });
-          let object = {
-            name: "",
-            email: "",
-            phone: "",
-            gender: "",
-            member_id: "",
-          };
-          setFormFields([...formFields, object]);
-          SetMemberCount((memberCount) => memberCount + 1);
+          if (formFields.length < 5) {
+            let object = {
+              name: "",
+              email: "",
+              phone: "",
+              gender: "",
+              member_id: "",
+            };
+            setFormFields([...formFields, object]);
+            SetMemberCount((memberCount) => memberCount + 1);
+          }
+          if (formFields.length == 5) SetMemberCount((memberCount) => memberCount + 1);
         },
         onError: () => {
           if (formFields.length === 1) {
@@ -436,7 +440,7 @@ function TeamConcepts() {
     const { name, value } = e.target;
 
     if (name === "isPICT" && value === "1") {
-      console.log("is pict");
+      // console.log("is pict");
       setForm2((form2) => ({
         ...form2,
         isPICT: "1",
@@ -487,7 +491,7 @@ function TeamConcepts() {
       });
       setPaymentStatus(false);
     }
-    console.log(form2)
+    // console.log(form2)
   };
 
 
@@ -536,16 +540,16 @@ function TeamConcepts() {
 
     if (formStep === 0) {
       // console.log("form0", form0);
-      for (const property in form0) {
-        if (form0[property] === "") {
-          if (property === "company" && form0["sponsored"] === "0") continue;
-          if (property === "nda" && form0["sponsored"] === "0") continue;
-          else {
-            toast.warn("Please enter all fields!");
-            return;
-          }
-        }
-      }
+      // for (const property in form0) {
+      //   if (form0[property] === "") {
+      //     if (property === "company" && form0["sponsored"] === "0") continue;
+      //     if (property === "nda" && form0["sponsored"] === "0") continue;
+      //     else {
+      //       toast.warn("Please enter all fields!");
+      //       return;
+      //     }
+      //   }
+      // }
       registerUserMutationForm0.mutate(form0, {
         onSuccess: () => {
           setErrors0(initialErrorsForm0);
@@ -647,10 +651,6 @@ function TeamConcepts() {
               {/* form 0 */}
               {formStep === 0 && (
                 <>
-                <NoteBox
-                    title="Note"
-                    text="After filling details of each member click the Add members button to add the details and then you can also add more members."
-                  />
                   <InputBox
                     type="text"
                     label={"Project Title"}
@@ -694,7 +694,6 @@ function TeamConcepts() {
                     label={"Guide_Name"}
                     name={"guide_name"}
                     placeholder={"Name"}
-                    required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.guide_name}
                     error={errors0.guide_name}
@@ -705,7 +704,6 @@ function TeamConcepts() {
                     label={"Guide_Email"}
                     name={"guide_email"}
                     placeholder={"Email"}
-                    required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.guide_email}
                     error={errors0.guide_email}
@@ -716,7 +714,6 @@ function TeamConcepts() {
                     label={"Guide_Phone"}
                     name={"guide_phone"}
                     placeholder={"Phone"}
-                    required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.guide_phone}
                     error={errors0.guide_phone}
@@ -786,7 +783,7 @@ function TeamConcepts() {
                 <>
                   <NoteBox
                     title="Note"
-                    text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
+                    text="After filling details of each member click the Add members button to add the details and then you can also add more members."
                   />
 
 
@@ -890,13 +887,18 @@ function TeamConcepts() {
                     );
                   })}
 
-                  <Buttons
-                    value="Add Members"
-                    onClick={addFields}
-                    classNames=" my-2"
-                    loading={registerUserMutationForm1.isLoading}
-                    disabled={formFields.length >= 5}
-                  />
+                  {memberCount < 5 ? (
+                    <>
+                      <Buttons
+                        value="Add Members"
+                        onClick={addFields}
+                        classNames=" my-2"
+                        loading={registerUserMutationForm1.isLoading}
+                      />
+                    </>) : (<></>
+                  )}
+
+
                 </>
               )}
               {/* form 2 */}
@@ -954,17 +956,17 @@ function TeamConcepts() {
                         />
                       </div>
                       <div className="flex mx-1 ">
-                        <div className="mr-1 w-1/2">
-                          <InputBox
+                        <div className="mr-1 w-1/2 mt-1">
+                        <Dropdown
                             label="State"
-                            type="text"
+                            options={[
+                              { value: "SEL", label: "Select", selected: true },
+                              ...state_arr,
+                            ]}
                             name={"state"}
-                            placeholder="state"
+                            state={form2}
+                            setState={setForm2}
                             required
-                            error={errors2.state}
-                            onChange={(e) => handleInputChange2(e)}
-                            value={form2.state}
-                            tip={"State should be between 3 and 20 characters(both inclusive) and contains only alphabetical characters."}
                           />
                         </div>
                         <div className="ml-1 w-1/2">
@@ -1072,7 +1074,7 @@ function TeamConcepts() {
                       </div>
                     </div>
                     <InputBox
-                      label="Transaction ID (12 digit)"
+                      label="Transaction ID / UTR ID (12 digit)"
                       type="text"
                       name="payment_id"
                       placeholder="Enter Transaction ID"
