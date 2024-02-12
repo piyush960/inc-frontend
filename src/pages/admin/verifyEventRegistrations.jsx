@@ -10,6 +10,9 @@ function VerifyEventRegistration() {
     const { isLoading, data } = usePendingPayments(event.eventName)
     const verifyPaymentMutation = useVerifyPayment(event.eventName)
 
+
+    if(data) console.log(data)
+
     const options = [
         {
             label: 'Concepts',
@@ -52,8 +55,16 @@ function VerifyEventRegistration() {
             name: 'Email',
             width: '360px',
             wrap: true,
-            selector: row => row['email'],
-            cellExport: row => row['email'],
+            cell: row => (
+                <span>
+                    {row['step_2'].map(member => (
+                        <div key={member.email}>
+                            <li>{member.email}</li>
+                        </div>
+                    ))}
+                </span>
+            ),
+            cellExport: row => row['step_2'].map(member => `${member.email}`).join(', '),
             sortable: true,
         },
         {
@@ -64,11 +75,39 @@ function VerifyEventRegistration() {
         },
         {
             name: 'Date',
-            width: '270px',
+            width: '150px',
             selector: row => row['date'],
-            cellExport: row => row['date'],
+            cell : row => {
+                const date = new Date(row['date']);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}-${month}-${year}`;
+            },
+            cellExport: row => {
+                const date = new Date(row['date']);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}-${month}-${year}`;
+            },
             sortable: true,
         },
+        {
+            name: 'Team Members',
+            width: '200px',
+            selector: row => row['step_2'],
+            cell: row => (
+                <span>
+                    {row['step_2'].map(member => (
+                        <div key={member.email}>
+                            <li>{member.name}</li>
+                        </div>
+                    ))}
+                </span>
+            ),
+            cellExport: row => row['step_2'].map(member => `${member.name}`).join(', '),
+        }
     ], [verifyPaymentMutation, handleButtonClick])
 
     const conditionalRowStyles = [{

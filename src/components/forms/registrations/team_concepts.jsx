@@ -340,12 +340,21 @@ function TeamConcepts() {
       name: "",
       email: "",
       phone: "",
-      gender: "",
+      gender: "SEL",
       member_id: "",
     },
   ]);
 
   const handleImageChange = (event, index) => {
+    const file = event.target.files[0];
+    const maxSizeInBytes = 200 * 1024; // MAX 200 KB
+
+    if (file.size > maxSizeInBytes) {
+      toast.warn('Selected image size must be less than 200KB.');
+      event.target.value = '';
+      return;
+    }
+
     let data = [...formFields];
     data[index][event.target.name] = event.target.files[0];
     setFormFields(data);
@@ -371,10 +380,22 @@ function TeamConcepts() {
   };
 
   const addFields = () => {
-    if (memberCount < 6) {
+    if (formFields.length < 6) {
       for (const property in formFields.at(-1)) {
-        if (formFields.at(-1)[property] === "") {
-          toast.warn("Please fill all the fields");
+        if (property === "name" && formFields.at(-1)[property] === "") {
+          toast.warn("Please enter name");
+          return;
+        } else if (property === "email" && formFields.at(-1)[property] === "") {
+          toast.warn("Please enter E-mail address");
+          return;
+        } else if (property === "phone" && formFields.at(-1)[property].length !== 10) {
+          toast.warn("Please enter a valid phone number");
+          return;
+        } else if (property === "gender" && formFields.at(-1)[property] === "SEL") {
+          toast.warn("Please enter your gender");
+          return;
+        } else if (property === "member_id" && formFields.at(-1)[property] === "") {
+          toast.warn("Please upload the ID");
           return;
         }
       }
@@ -393,7 +414,7 @@ function TeamConcepts() {
               name: "",
               email: "",
               phone: "",
-              gender: "",
+              gender: "SEL",
               member_id: "",
             };
             setFormFields([...formFields, object]);
@@ -423,6 +444,7 @@ function TeamConcepts() {
     isPICT: "",
     isInternational: "",
     college: "",
+    department: "",
     country: "",
     state: "",
     district: "",
@@ -446,6 +468,7 @@ function TeamConcepts() {
         isPICT: "1",
         college: "Pune Institute Of Computer Technology",
         country: "India",
+        department: "",
         city: "Pune",
         state: "Maharashtra",
         district: "Pune",
@@ -460,6 +483,7 @@ function TeamConcepts() {
         ...form2,
         isPICT: "0",
         college: "",
+        department: "",
         country: "",
         state: "",
         city: "",
@@ -493,6 +517,77 @@ function TeamConcepts() {
     }
     // console.log(form2)
   };
+  const handleDeptChange = (e) => {
+
+    const { name, value } = e.target;
+    // console.log(name, value)
+    if (name === "department" && value === 0) {
+      setForm2((form2) => ({
+        ...form2,
+        isPICT: "1",
+        college: "Pune Institute Of Computer Technology",
+        department: "0",
+        country: "India",
+        city: "Pune",
+        state: "Maharashtra",
+        district: "Pune",
+        locality: "1",
+        mode: "1",
+        reason_of_mode: "",
+        isInternational: "0",
+      }));
+    } else if (name === "department" && value === 1) {
+      setForm2((form2) => ({
+        ...form2,
+        isPICT: "1",
+        college: "Pune Institute Of Computer Technology",
+        department: "1",
+        country: "India",
+        city: "Pune",
+        state: "Maharashtra",
+        district: "Pune",
+        locality: "1",
+        mode: "1",
+        reason_of_mode: "",
+        isInternational: "0",
+      }));
+    } else if (name === "department" && value === 2) {
+      setForm2((form2) => ({
+        ...form2,
+        isPICT: "1",
+        college: "Pune Institute Of Computer Technology",
+        department: "2",
+        country: "India",
+        city: "Pune",
+        state: "Maharashtra",
+        district: "Pune",
+        locality: "1",
+        mode: "1",
+        reason_of_mode: "",
+        isInternational: "0",
+      }));
+    }
+
+    setPaymentStatus(true);
+  }
+
+  const dept_arr = [
+    {
+      value: "0",
+      label: "Computer",
+      onChange: handleDeptChange
+    },
+    {
+      value: "1",
+      label: "IT",
+      onChange: handleDeptChange
+    },
+    {
+      value: "2",
+      label: "EnTC",
+      onChange: handleDeptChange
+    },
+  ];
 
 
   const country_arr = [
@@ -575,11 +670,14 @@ function TeamConcepts() {
         if (form2[property] === "") {
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
           else if (property === "referral") continue;
+          else if (property === "department") continue;
+          // console.log(property)
           toast.warn("Please enter all fields!");
           return;
         }
       }
       registerUserMutationForm2.mutate(form2, {
+
         onSuccess: () => {
           setErrors2(initialErrorsForm2);
           if (form2.isPICT === "1" || form2.isInternational === "1") {
@@ -786,76 +884,79 @@ function TeamConcepts() {
                     text="After filling details of each member click the Add members button to add the details and then you can also add more members."
                   />
 
-
                   {formFields.map((form, index) => {
                     return (
-                      <div key={index}>
-                        <InputBox
-                          label="Name"
-                          name="name"
-                          type="text"
-                          placeholder="name "
-                          required
-                          error={errors1.name}
-                          onChange={(event) => handleFormChange(event, index)}
-                          value={form.name}
-                          tip={"Name of member should be between 3 and 20 characters(both inclusive)"}
-                        />
-                        <InputBox
-                          label="Email ID"
-                          name="email"
-                          type="text"
-                          placeholder="email "
-                          required
-                          error={errors1.email}
-                          onChange={(event) => handleFormChange(event, index)}
-                          value={form.email}
-                          tipstyle={"hidden"}
-                        />
-                        <div className="flex">
-                          <div className="mr-1 w-1/2">
-                            <InputBox
-                              label="Phone No"
-                              name="phone"
-                              type="tel"
-                              placeholder="phone number"
-                              required
-                              error={errors1.phone}
-                              onChange={(event) => handleFormChange(event, index)}
-                              value={form.phone}
-                              tipstyle={"hidden"}
-                            />
-                          </div>
-                          <div className="input-box-dropdown w-full mb-4 relative">
-                            <label
-                              className={`input-label font-medium mb-1 text-white text-lg flex`}
-                            >
-                              {"Gender"}
-                              <h1 className="text-gold">*</h1>
-                            </label>
-                            <div className="relative inline-block w-full">
-                              <select
-                                name={"gender"}
-                                value={formFields.gender}
-                                onChange={(event) => handleFormChange(event, index)}
+                      <>
+                        <h1 className="input-label font-medium text-white border-red-500 p-2 w-28 border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2">
+                          Member {index + 1}
+                        </h1>
+                        <div key={index}>
+                          <InputBox
+                            label="Name"
+                            name="name"
+                            type="text"
+                            placeholder="name "
+                            required
+                            error={errors1.name}
+                            onChange={(event) => handleFormChange(event, index)}
+                            value={form.name}
+                            tip={"Name of member should be between 3 and 20 characters(both inclusive)"}
+                          />
+                          <InputBox
+                            label="Email ID"
+                            name="email"
+                            type="text"
+                            placeholder="email "
+                            required
+                            error={errors1.email}
+                            onChange={(event) => handleFormChange(event, index)}
+                            value={form.email}
+                            tipstyle={"hidden"}
+                          />
+                          <div className="flex">
+                            <div className="mr-1 w-1/2">
+                              <InputBox
+                                label="Phone No"
+                                name="phone"
+                                type="tel"
+                                placeholder="phone number"
                                 required
-                                error={errors1.gender}
-                                className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
-                              >
-                                {gender_type.map((option) => (
-                                  <option
-                                    key={option?.value}
-                                    value={option?.value}
-                                    className={`py-1 bg-[#0B1E47] ${option?.className || ""
-                                      }`}
-                                  >
-                                    {option?.label}
-                                  </option>
-                                ))}
-                              </select>
+                                error={errors1.phone}
+                                onChange={(event) => handleFormChange(event, index)}
+                                value={form.phone}
+                                tipstyle={"hidden"}
+                              />
                             </div>
-                          </div>
-                          {/* <Dropdown
+                            <div className="input-box-dropdown w-full mb-4 relative">
+                              <label
+                                className={`input-label font-medium mb-1 text-white text-lg flex`}
+                              >
+                                {"Gender"}
+                                <h1 className="text-gold">*</h1>
+                              </label>
+                              <div className="relative inline-block w-full">
+                                <select
+                                  name={"gender"}
+                                  value={formFields.gender}
+                                  onChange={(event) => handleFormChange(event, index)}
+                                  required
+                                  error={errors1.gender}
+                                  className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
+                                >
+                                  {gender_type.map((option) => (
+                                    <option
+                                      key={option?.value}
+                                      value={option?.value}
+                                      className={`py-1 bg-[#0B1E47] ${option?.className || ""
+                                        }`}
+                                    >
+                                      {option?.label}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                            {/* <Dropdown
                                                   label=" Gender"
                                                   options={gender_type}
                                                   name={"gender"}
@@ -863,27 +964,31 @@ function TeamConcepts() {
                                                   setState={setFormFields}
                                                   required
                                               /> */}
-                        </div>
-                        <FileInputBox
-                          name="member_id"
-                          accept="image/png, image/jpeg"
-                          type="file"
-                          onChange={(e) => handleImageChange(e, index)}
-                          label="Upload Screenshot of ID"
-                          required
-                          error={errors1.member_id}
-                        />
-                        <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
-                        {/* <Notebox /> */}
-                        {/* Button aligned to the right */}
-                        {/* <Buttons
+                          </div>
+                          <FileInputBox
+                            name="member_id"
+                            accept="image/png, image/jpeg"
+                            type="file"
+                            onChange={(e) => handleImageChange(e, index)}
+                            label="Upload Screenshot of ID"
+                            required
+                            error={errors1.member_id}
+                          />
+                          <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
+                          {/* <Notebox /> */}
+                          {/* Button aligned to the right */}
+                          {/* <Buttons
                           value="remove member"
                           onClick={() => removefields(index)}
                           classNames="my-2"
                           disabled={true}
                           loading={registerUserMutationForm1.isLoading}
                         /> */}
-                      </div>
+
+                          <hr className="my-5 border-dashed border-gold" />
+
+                        </div>
+                      </>
                     );
                   })}
 
@@ -914,7 +1019,10 @@ function TeamConcepts() {
                     required
                     error={errors2.isPICT}
                   />
-                  {form2.isPICT === "0" && (
+
+                  { }
+
+                  {form2.isPICT === "0" ? (
                     <>
                       <RadioButtons
                         label="Is International ?"
@@ -957,7 +1065,7 @@ function TeamConcepts() {
                       </div>
                       <div className="flex mx-1 ">
                         <div className="mr-1 w-1/2 mt-1">
-                        <Dropdown
+                          <Dropdown
                             label="State"
                             options={[
                               { value: "SEL", label: "Select", selected: true },
@@ -1049,7 +1157,20 @@ function TeamConcepts() {
                         tip={"Referral should be between 3-50 characters long (if any)"}
                       />
                     </>
+                  ) : (
+                    <>
+                      <RadioButtons
+                        label="Department"
+                        options={dept_arr}
+                        state={form2}
+                        setState={setForm2}
+                        name="department"
+                      // error={error}
+                      />
+                    </>
                   )}
+
+
                 </>
               )}
               {formStep === 3 &&

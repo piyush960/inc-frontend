@@ -23,8 +23,8 @@ function Navbar() {
       navigate('/register/judge')
       return
     };
-     if (e.target.value === "Hackathon"){
-      window.location.href="https://inc-hackathon.vercel.app/register"
+    if (e.target.value === "Hackathon") {
+      window.location.href = "https://techfiesta.pict.edu/register"
       return
     };
     navigate(`/register/events/${e.target.value.toLowerCase()}`);
@@ -87,15 +87,15 @@ function Navbar() {
                 >
                   Events
                 </a>
-                      <a
-        href="https://techfiesta.pict.edu/"
-        className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#winners"
-          ? "border-sky-800/80 text-gold"
-          : "hover:text-gold border-transparent"
-        }`}
-      >
-        Hackathon
-      </a>
+                <a
+                  href="https://techfiesta.pict.edu/"
+                  className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#winners"
+                    ? "border-sky-800/80 text-gold"
+                    : "hover:text-gold border-transparent"
+                    }`}
+                >
+                  Hackathon
+                </a>
 
                 <a
                   href="/#sponsors"
@@ -116,14 +116,14 @@ function Navbar() {
                   Team
                 </a>
                 <a
-                href="/register/events/winners"
-                className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#winners"
-                  ? "border-sky-800/80 text-gold"
-                  : "hover:text-gold border-transparent"
-                  }`}
-              >
-                Winners
-              </a>
+                  href="/register/events/winners"
+                  className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#winners"
+                    ? "border-sky-800/80 text-gold"
+                    : "hover:text-gold border-transparent"
+                    }`}
+                >
+                  Winners
+                </a>
                 <select
                   className="py-4 px-6 text-white font-semibold hover:text-gold border-transparent hover:border-light_blue/80 bg-faint_blue/30 hover:bg-faint_blue/10 rounded-xl border transition duration-300"
                   defaultValue={"Register"}
@@ -134,8 +134,9 @@ function Navbar() {
                   <option>Concepts</option>
                   <option>Pradnya</option>
                   <option>Hackathon</option>
+                  <option>Judges</option>
                   {/* <option>Winners</option> */}
-                  
+
                 </select>
               </div>
 
