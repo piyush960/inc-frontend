@@ -1020,9 +1020,19 @@ function TeamConcepts() {
                     error={errors2.isPICT}
                   />
 
-                  { }
 
-                  {form2.isPICT === "0" ? (
+                  {form2.isPICT === "1" && <>
+                    <RadioButtons
+                      label="Department"
+                      options={dept_arr}
+                      state={form2}
+                      setState={setForm2}
+                      name="department"
+                    // error={error}
+                    />
+                  </>}
+
+                  {form2.isPICT === "0" && (
                     <>
                       <RadioButtons
                         label="Is International ?"
@@ -1155,17 +1165,6 @@ function TeamConcepts() {
                         value={form2.referral}
                         error={errors2.referral}
                         tip={"Referral should be between 3-50 characters long (if any)"}
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <RadioButtons
-                        label="Department"
-                        options={dept_arr}
-                        state={form2}
-                        setState={setForm2}
-                        name="department"
-                      // error={error}
                       />
                     </>
                   )}
