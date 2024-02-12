@@ -169,13 +169,21 @@
 
 .hero-title {
   position: absolute;
-  top: 46%;
+  top: 40%; /* Initial top position */
   transform: translateY(-80%);
   margin: 0 auto;
   color: white;
   text-align: center;
   z-index: 3;
 }
+
+/* Media query for viewport width greater than or equal to 768px */
+@media (min-width: 768px) {
+  .hero-title {
+    top: 40%; /* New top position */
+  }
+}
+
 
 .hero-title h4 {
   /* font-size: 2rem; */
@@ -279,7 +287,7 @@
 
 .hero-cube {
   margin: 2% 0 0;
-  transform: scale(1.2);
+  /* transform: scale(1.1); */
   animation: hero-cube-first-animation 5000ms ease-out,
     hero-cube-second-animation 2000ms 5000ms ease-in-out;
     z-index: 2;

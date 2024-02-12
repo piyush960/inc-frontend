@@ -50,6 +50,7 @@ function useRegisterStep2(setErrors, eventName) {
 function useRegisterStep3(setErrors, eventName) {
     const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(registerEventStep3(eventName), {
         onError: (err) => {
+            
             const parsedError = errorParser(err)
             if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
             else {

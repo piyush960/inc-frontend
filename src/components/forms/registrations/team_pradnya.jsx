@@ -236,8 +236,9 @@ function TeamPradnya() {
       name: "",
       email: "",
       phone: "",
-      gender: "",
+      gender: "SEL",
       member_id: "",
+      codechef_id: ""
     },
   ]);
   const [errors1, setErrors1] = useState(initialErrorsForm1);
@@ -246,6 +247,7 @@ function TeamPradnya() {
   const handleFormChange = (event, index) => {
 
     const { name, value } = event.target;
+    console.log(name, value);
     setForm1((prevState) => {
       errors1[name] !== "" &&
         setErrors1((prevState) => ({ ...prevState, [name]: "" }));
@@ -256,20 +258,30 @@ function TeamPradnya() {
   };
 
   const addfields = () => {
+    // console.log(form1)
     if (form1.length < 3) {
       for (const property in form1.at(-1)) {
-        if (form1.at(-1)[property] === "") {
-          toast.warn("Please fill all the fields");
+        if (property === "name" && form1.at(-1)[property] === "") {
+          toast.warn("Please enter name");
+          return;
+        } else if (property === "email" && form1.at(-1)[property] === "") {
+          toast.warn("Please enter E-mail address");
+          return;
+        } else if (property === "phone" && form1.at(-1)[property].length !== 10) {
+          toast.warn("Please enter a valid phone number");
+          return;
+        } else if (property === "gender" && form1.at(-1)[property] === "SEL") {
+          toast.warn("Please enter your gender");
+          return;
+        } else if (property === "member_id" && form1.at(-1)[property] === "") {
+          toast.warn("Please upload the ID");
+          return;
+        } else if (property === "codechef_id" && form1.at(-1)[property] === "") {
+          toast.warn("Plese add Codechef ID");
           return;
         }
       }
 
-      // Check the length of the phone number
-      const phoneNumber = form1.at(-1).phone;
-      if (phoneNumber.length !== 10) {
-        toast.warn("Please enter a valid phone number");
-        return;
-      }
 
       const memberFormData = new FormData();
       memberFormData.append("member_id", form1.at(-1).member_id);
@@ -286,14 +298,15 @@ function TeamPradnya() {
               name: "",
               email: "",
               phone: "",
-              gender: "",
+              gender: "SEL",
               member_id: "",
+              codechef_id: ""
             };
             setForm1([...form1, object]);
             setMemberCount((memberCount) => memberCount + 1);
           }
 
-          if(form1.length == 2) setMemberCount((memberCount) => memberCount + 1);
+          if (form1.length == 2) setMemberCount((memberCount) => memberCount + 1);
         },
       });
       return;
@@ -328,7 +341,18 @@ function TeamPradnya() {
 
   const [errors2, setErrors2] = useState(initialErrorsForm2);
   const registerUserMutationForm2 = useRegisterStep3(setErrors2, "pradnya");
+
+  // File upload 
   const handleImageChange = (event, index) => {
+    const file = event.target.files[0];
+    const maxSizeInBytes = 200 * 1024; // MAX 200 KB
+
+    if (file.size > maxSizeInBytes) {
+      toast.warn('Selected image size must be less than 200KB.');
+      event.target.value = '';
+      return;
+    }
+
     let data = [...form1];
     data[index][event.target.name] = event.target.files[0];
     setForm1(data);
@@ -535,84 +559,103 @@ function TeamPradnya() {
                   />
                   {form1.map((form, index) => {
                     return (
-                      <div key={index}>
-                        <InputBox
-                          label="Name"
-                          name="name"
-                          type="text"
-                          placeholder="name "
-                          required
-                          error={errors1.name}
-                          onChange={(event) => handleFormChange(event, index)}
-                          value={form.name}
-                          tip={'Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters.'}
-                        />
-                        <InputBox
-                          label="Email ID"
-                          name="email"
-                          type="text"
-                          placeholder="email "
-                          required
-                          error={errors1.email}
-                          onChange={(event) => handleFormChange(event, index)}
-                          value={form.email}
-                        />
-                        <div className="md:flex">
-                          <div className="mr-1 w-full md:w-1/2">
-                            <InputBox
-                              label="Phone No"
-                              name="phone"
-                              type="tel"
-                              placeholder="phone number"
-                              required
-                              error={errors1.phone}
-                              onChange={(event) => handleFormChange(event, index)}
-                              value={form.phone}
-                            />
-                          </div>
-                          <div className="input-box-dropdown w-full mb-4 relative">
-                            <label
-                              className={`input-label font-medium mb-1 text-white text-lg flex`}
-                            >
-                              {"Gender"}
-                              <h1 className="text-gold">*</h1>
-                            </label>
-                            <div className="relative inline-block w-full">
-                              <select
-                                name={"gender"}
-                                value={form.gender}
-                                onChange={(event) => handleFormChange(event, index)}
+                      <>
+                        <h1 className="input-label font-medium text-white border-red-500 p-2 w-28 border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2">
+                          Member {index + 1}
+                        </h1>
+
+                        <div key={index}>
+                          <InputBox
+                            label="Name"
+                            name="name"
+                            type="text"
+                            placeholder="name "
+                            required
+                            error={errors1.name}
+                            onChange={(event) => handleFormChange(event, index)}
+                            value={form.name}
+                            tip={'Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters.'}
+                          />
+                          <InputBox
+                            label="Email ID"
+                            name="email"
+                            type="text"
+                            placeholder="email "
+                            required
+                            error={errors1.email}
+                            onChange={(event) => handleFormChange(event, index)}
+                            value={form.email}
+                          />
+                          <div className="md:flex">
+                            <div className="mr-1 w-full md:w-1/2">
+                              <InputBox
+                                label="Phone No"
+                                name="phone"
+                                type="tel"
+                                placeholder="phone number"
                                 required
-                                error={errors1.gender}
-                                className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
+                                error={errors1.phone}
+                                onChange={(event) => handleFormChange(event, index)}
+                                value={form.phone}
+                              />
+                            </div>
+                            <div className="input-box-dropdown w-full mb-4 relative">
+                              <label
+                                className={`input-label font-medium mb-1 text-white text-lg flex`}
                               >
-                                {gender_type.map((option) => (
-                                  <option
-                                    key={option?.value}
-                                    value={option?.value}
-                                    className={`py-1 bg-[#0B1E47] ${option?.className || ""
-                                      }`}
-                                  >
-                                    {option?.label}
-                                  </option>
-                                ))}
-                              </select>
+                                {"Gender"}
+                                <h1 className="text-gold">*</h1>
+                              </label>
+                              <div className="relative inline-block w-full">
+                                <select
+                                  name={"gender"}
+                                  value={form.gender}
+                                  onChange={(event) => handleFormChange(event, index)}
+                                  required
+                                  error={errors1.gender}
+                                  className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
+                                >
+                                  {gender_type.map((option) => (
+                                    <option
+                                      key={option?.value}
+                                      value={option?.value}
+                                      className={`py-1 bg-[#0B1E47] ${option?.className || ""
+                                        }`}
+                                    >
+                                      {option?.label}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
                             </div>
                           </div>
+                          <FileInputBox
+                            name="member_id"
+                            accept="image/png, image/jpeg"
+                            type="file"
+                            onChange={(e) => handleImageChange(e, index)}
+                            label="Upload Screenshot of ID"
+                            required
+                            error={errors1.member_id}
+                          />
+                          <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
+
+                          <InputBox
+                            label="CodeChef ID"
+                            name="codechef_id"
+                            type="text"
+                            placeholder="CodeChef ID"
+                            required
+                            error={errors1.codechef_id}
+                            onChange={(event) => handleFormChange(event, index)}
+                            value={form.codechef_id}
+                            tip={'Codechef ID can be Alphanumeric'}
+                          />
+
+                          <hr className="my-5 border-dashed border-gold" />
+
                         </div>
-                        <FileInputBox
-                          name="member_id"
-                          accept="image/png, image/jpeg"
-                          type="file"
-                          onChange={(e) => handleImageChange(e, index)}
-                          label="Upload Screenshot of ID"
-                          required
-                          error={errors1.member_id}
-                        />
-                        <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
-
-
-                      </div>
+                      </>
                     );
                   })}
                   {memberCount < 2 ? (
@@ -621,7 +664,7 @@ function TeamPradnya() {
                         value="add members"
                         onClick={addfields}
                         classNames=" my-2"
-                      /> 
+                      />
                     </>) : (<></>
                   )}
                 </>
