@@ -445,6 +445,7 @@ function TeamConcepts() {
     isInternational: "",
     college: "",
     department: "",
+    group_id: "",
     country: "",
     state: "",
     district: "",
@@ -460,6 +461,7 @@ function TeamConcepts() {
 
   const handleInputChange2 = (e) => {
     const { name, value } = e.target;
+    // console.log(form2.group_id)
 
     if (name === "isPICT" && value === "1") {
       // console.log("is pict");
@@ -477,13 +479,14 @@ function TeamConcepts() {
         reason_of_mode: "",
         isInternational: "0",
       }));
-      setPaymentStatus(true);
+      // setPaymentStatus(true);
     } else if (name === "isPICT" && value === "0") {
       setForm2((form2) => ({
         ...form2,
         isPICT: "0",
         college: "",
         department: "",
+        group_id: "",
         country: "",
         state: "",
         city: "",
@@ -527,6 +530,7 @@ function TeamConcepts() {
         isPICT: "1",
         college: "Pune Institute Of Computer Technology",
         department: "0",
+        group_id: "",
         country: "India",
         city: "Pune",
         state: "Maharashtra",
@@ -542,6 +546,7 @@ function TeamConcepts() {
         isPICT: "1",
         college: "Pune Institute Of Computer Technology",
         department: "1",
+        group_id: "",
         country: "India",
         city: "Pune",
         state: "Maharashtra",
@@ -557,6 +562,7 @@ function TeamConcepts() {
         isPICT: "1",
         college: "Pune Institute Of Computer Technology",
         department: "2",
+        group_id: "",
         country: "India",
         city: "Pune",
         state: "Maharashtra",
@@ -568,6 +574,15 @@ function TeamConcepts() {
       }));
     }
 
+    setPaymentStatus(true);
+  }
+
+  const handleGroupIDChange = (e) => {
+    const { name, value } = e.target;
+    setForm2((form2) => ({
+      ...form2,
+      [name]: value
+    }));
     setPaymentStatus(true);
   }
 
@@ -635,16 +650,16 @@ function TeamConcepts() {
 
     if (formStep === 0) {
       // console.log("form0", form0);
-      // for (const property in form0) {
-      //   if (form0[property] === "") {
-      //     if (property === "company" && form0["sponsored"] === "0") continue;
-      //     if (property === "nda" && form0["sponsored"] === "0") continue;
-      //     else {
-      //       toast.warn("Please enter all fields!");
-      //       return;
-      //     }
-      //   }
-      // }
+      for (const property in form0) {
+        if (form0[property] === "") {
+          if (property === "company" && form0["sponsored"] === "0") continue;
+          if (property === "nda" && form0["sponsored"] === "0") continue;
+          else {
+            toast.warn("Please enter all fields!");
+            return;
+          }
+        }
+      }
       registerUserMutationForm0.mutate(form0, {
         onSuccess: () => {
           setErrors0(initialErrorsForm0);
@@ -793,6 +808,7 @@ function TeamConcepts() {
                     name={"guide_name"}
                     placeholder={"Name"}
                     onChange={(e) => handleInputChange0(e)}
+                    required
                     value={form0.guide_name}
                     error={errors0.guide_name}
                     tip={"Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters."}
@@ -803,6 +819,7 @@ function TeamConcepts() {
                     name={"guide_email"}
                     placeholder={"Email"}
                     onChange={(e) => handleInputChange0(e)}
+                    required
                     value={form0.guide_email}
                     error={errors0.guide_email}
                     tipstyle={"hidden"}
@@ -813,6 +830,7 @@ function TeamConcepts() {
                     name={"guide_phone"}
                     placeholder={"Phone"}
                     onChange={(e) => handleInputChange0(e)}
+                    required
                     value={form0.guide_phone}
                     error={errors0.guide_phone}
                     tipstyle={"hidden"}
@@ -1011,7 +1029,7 @@ function TeamConcepts() {
                 <>
 
                   <RadioButtons
-                    label=" Are you PICTian or not?"
+                    label=" Are you PICTian ?"
                     options={country_arr}
                     state={form2}
                     setState={setForm2}
@@ -1028,7 +1046,19 @@ function TeamConcepts() {
                       state={form2}
                       setState={setForm2}
                       name="department"
+                      required
                     // error={error}
+                    />
+                    <InputBox
+                      label="Group ID"
+                      name={"group_id"}
+                      type="text"
+                      placeholder="Enter your Group ID"
+                      required
+                      onChange={(e) => handleGroupIDChange(e)}
+                      value={form2.group_id}
+                      // error={errors2.group_id}
+                      tip={"Alphanumeric Group ID can be between 3 and 100 characters(both inclusive) and can contain  value. "}
                     />
                   </>}
 

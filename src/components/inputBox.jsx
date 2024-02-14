@@ -1,14 +1,20 @@
 import './styles/inputBox.css';
 import { useState } from 'react';
-// function InputBox({ label, name, type, value, placeholder, min, max, inputRef, onChange, classNames, required, error }) {
+
 function InputBox(props) {
     const [showTooltip, setShowTooltip] = useState(false);
     const InputComponent = props.type === "textarea" ? "textarea" : "input";
+
+    const handleTooltipClick = (e) => {
+        e.preventDefault(); // Prevent the default behavior of the button click
+        setShowTooltip(!showTooltip);
+    };
+
     return (
         <div className='input-box w-full mb-4 relative'>
             <label htmlFor={props.label.toLowerCase().replace(/ /g, "_")} className={`input-label font-medium  text-white text-lg before: ${props.required && 'after:content-["*"] after:ml-0.5 after:text-gold'}`}>{props.label}</label>
 
-            {props.tip && <button onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)} className="bg-faint_blue text-white ml-3 px-5 rounded-full mb-1 hover:bg-light_blue">
+            {props.tip && <button onClick={handleTooltipClick} className="bg-faint_blue text-white ml-3 px-5 rounded-full mb-1 hover:bg-light_blue">
                 i
             </button>}
             {showTooltip && (
