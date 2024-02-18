@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import UnderConstructionPopup from './UnderConstructionPopup';
 import { Buttons } from '../components';
 import './styles/incTeams.css';
+import { useNavigate } from 'react-router-dom';
 
 function InCTeamsSection() {
+  const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
 
   const openPopup = () => {
@@ -23,9 +25,9 @@ function InCTeamsSection() {
         <figcaption className='md:text-xl'>- Phil Jackson</figcaption>
       </figure>
       <div className='w-full md:w-2/5 relative flex justify-center items-center gap-6 md:p-6'>
-        <Buttons value={'Student Team'} onClick={openPopup} />
-        <Buttons value={'Web Team'} onClick={openPopup} />
-        <Buttons value={'Faculty Team'} onClick={openPopup} />
+        {/* <Buttons value={'Student Team'} onClick={() => navigate('/inc-teams')} /> */}
+        <Buttons value={'Web Team'} onClick={() => navigate('/web-teams')} />
+        <Buttons value={'Faculty Team'} onClick={() => navigate('/faculty-teams')} />
       </div>
 
       {showPopup && (
