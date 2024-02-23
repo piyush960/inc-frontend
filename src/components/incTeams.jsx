@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import UnderConstructionPopup from './UnderConstructionPopup';
 import { Buttons } from '../components';
 import './styles/incTeams.css';
+import { useNavigate } from 'react-router-dom';
 
 function InCTeamsSection() {
+
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
 
@@ -28,6 +30,9 @@ function InCTeamsSection() {
         {/* <Buttons value={'Student Team'} onClick={() => navigate('/inc-teams')} /> */}
         <Buttons value={'Web Comittie'} onClick={() => navigate('/web-teams')} />
         <Buttons value={'Faculty Comitties'} onClick={() => navigate('/faculty-teams')}/>
+        {/* <Buttons value={'Student Team'} onClick={() => navigate('/inc-teams')} /> */}
+        <Buttons value={'Web Team'} onClick={() => navigate('/web-teams')} />
+        <Buttons value={'Faculty Team'} onClick={() => navigate('/faculty-teams')} />
       </div>
 
       {showPopup && (

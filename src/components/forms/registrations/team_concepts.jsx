@@ -379,15 +379,19 @@ function TeamConcepts() {
     setFormFields(data);
   };
 
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
   const addFields = () => {
     if (formFields.length < 6) {
       for (const property in formFields.at(-1)) {
         if (property === "name" && formFields.at(-1)[property] === "") {
           toast.warn("Please enter name");
           return;
-        } else if (property === "email" && formFields.at(-1)[property] === "") {
-          toast.warn("Please enter E-mail address");
-          return;
+        } else if (property === "email" && !validateEmail(formFields.at(-1)[property])) {
+          toast.warn("Please enter a valid E-mail address");
         } else if (property === "phone" && formFields.at(-1)[property].length !== 10) {
           toast.warn("Please enter a valid phone number");
           return;
@@ -408,38 +412,37 @@ function TeamConcepts() {
       registerUserMutationForm1.mutate(memberFormData, {
         onSuccess: () => {
           setErrors1(initialErrorsForm1);
-          toast.success("Added member to the team !", { icon: "✅" });
-          if (formFields.length < 5) {
-            let object = {
-              name: "",
-              email: "",
-              phone: "",
-              gender: "SEL",
-              member_id: "",
-            };
-            setFormFields([...formFields, object]);
-            SetMemberCount((memberCount) => memberCount + 1);
-          }
-          if (formFields.length == 5) SetMemberCount((memberCount) => memberCount + 1);
-        },
-        onError: () => {
-          if (formFields.length === 1) {
-            return;
-          }
-          setFormFields((formFields) => formFields.slice(0, -1));
-        },
+          SetMemberCount((memberCount) => memberCount + 1);
+          toast.success(`member ${memberCount + 1} added !`, { icon: "✅" });
+        }
       });
       return;
     }
     toast.warn("Maximum 5 members are allowed");
   };
 
+  const addAnotherMember = () => {
+    if (formFields.length > 5) {
+      toast.warn("Limit Reached !");
+      return;
+    }
+    let object = {
+      name: "",
+      email: "",
+      phone: "",
+      gender: "SEL",
+      member_id: "",
+      codechef_id: ""
+    };
+    setFormFields([...formFields, object]);
+  }
+
+
   const removefields = (index) => {
     setFormFields((data) => data.slice(index, 1));
   };
 
   //form 2
-
   const [form2, setForm2] = useState({
     isPICT: "",
     isInternational: "",
@@ -527,50 +530,18 @@ function TeamConcepts() {
     if (name === "department" && value === 0) {
       setForm2((form2) => ({
         ...form2,
-        isPICT: "1",
-        college: "Pune Institute Of Computer Technology",
-        department: "0",
-        group_id: "",
-        country: "India",
-        city: "Pune",
-        state: "Maharashtra",
-        district: "Pune",
-        locality: "1",
-        mode: "1",
-        reason_of_mode: "",
-        isInternational: "0",
+        [name]: "0",
+
       }));
     } else if (name === "department" && value === 1) {
       setForm2((form2) => ({
         ...form2,
-        isPICT: "1",
-        college: "Pune Institute Of Computer Technology",
-        department: "1",
-        group_id: "",
-        country: "India",
-        city: "Pune",
-        state: "Maharashtra",
-        district: "Pune",
-        locality: "1",
-        mode: "1",
-        reason_of_mode: "",
-        isInternational: "0",
+        [name]: "1"
       }));
     } else if (name === "department" && value === 2) {
       setForm2((form2) => ({
         ...form2,
-        isPICT: "1",
-        college: "Pune Institute Of Computer Technology",
-        department: "2",
-        group_id: "",
-        country: "India",
-        city: "Pune",
-        state: "Maharashtra",
-        district: "Pune",
-        locality: "1",
-        mode: "1",
-        reason_of_mode: "",
-        isInternational: "0",
+        [name]: "2",
       }));
     }
 
@@ -651,13 +622,33 @@ function TeamConcepts() {
     if (formStep === 0) {
       // console.log("form0", form0);
       for (const property in form0) {
-        if (form0[property] === "") {
-          if (property === "company" && form0["sponsored"] === "0") continue;
-          if (property === "nda" && form0["sponsored"] === "0") continue;
-          else {
-            toast.warn("Please enter all fields!");
-            return;
-          }
+        if (property === "title" && form0[property].length < 10) {
+          toast.warn("Please enter project title between 10 and 100 character.");
+          return;
+        } else if (property === "domain" && form0[property] === "") {
+          toast.warn("Please enter project domain");
+          return;
+        } else if (property === "project_type" && form0[property] === "") {
+          toast.warn("Please enter project type");
+          return;
+        } else if (property === "guide_name" && form0[property] === "") {
+          toast.warn("Please enter guide name");
+          return;
+        } else if (property === "guide_email" && !validateEmail(form0[property])) {
+          toast.warn("Please enter a valid guide E-mail address");
+          return;
+        } else if (property === "guide_phone" && form0[property].length !== 10) {
+          toast.warn("Please enter valid phone number");
+          return;
+        } else if (property === "hod_email" && !validateEmail(form0[property])) {
+          toast.warn("Please enter a valid HOD E-mail address");
+          return;
+        } else if (property === "abstract" && (form0[property].length < 100 || form0[property].length > 1000)) {
+          toast.warn("Please enter abstract between 100 to 1000 characters");
+          return;
+        } else if (property === "demo" && form0[property] === "") {
+          toast.warn("Please enter abstract between 50 to 1000 characters");
+          return;
         }
       }
       registerUserMutationForm0.mutate(form0, {
@@ -683,12 +674,22 @@ function TeamConcepts() {
       // console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
-          if (property === "reason_of_mode" && form2["mode"] === "1") continue;
-          else if (property === "referral") continue;
-          else if (property === "department") continue;
-          // console.log(property)
-          toast.warn("Please enter all fields!");
-          return;
+          if (form2.isPICT === "1") {
+            if (property === "referral") continue;
+            if (property === "reason_of_mode") continue;
+            console.log(property)
+            toast.warn("Please enter all fields!");
+            return;
+          } else {
+            if (property === "reason_of_mode" && form2["mode"] === "1") continue;
+            if (property === "referral") continue;
+            if (property === "department") continue;
+            if (property === "group_id") continue;
+            console.log(property)
+            console.log(form2)
+            toast.warn("Please enter all fields!");
+            return;
+          }
         }
       }
       registerUserMutationForm2.mutate(form2, {
@@ -726,18 +727,13 @@ function TeamConcepts() {
         {
           onSuccess: () => {
             toast.success("Completed Step 4️⃣ !", { icon: "✅" });
-            setActiveStep((activeStep) => activeStep + 1);
+            // setActiveStep((activeStep) => activeStep + 1);
             setPaymentStatus(true);
           },
         }
       );
     }
-
   };
-
-  //dropdown
-
-  //const [option, setOption] = useState();
 
   return (
     <MainContainer>
@@ -908,6 +904,7 @@ function TeamConcepts() {
                         <h1 className="input-label font-medium text-white border-red-500 p-2 w-28 border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2">
                           Member {index + 1}
                         </h1>
+
                         <div key={index}>
                           <InputBox
                             label="Name"
@@ -918,7 +915,7 @@ function TeamConcepts() {
                             error={errors1.name}
                             onChange={(event) => handleFormChange(event, index)}
                             value={form.name}
-                            tip={"Name of member should be between 3 and 20 characters(both inclusive)"}
+                            tip={'Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters.'}
                           />
                           <InputBox
                             label="Email ID"
@@ -929,10 +926,9 @@ function TeamConcepts() {
                             error={errors1.email}
                             onChange={(event) => handleFormChange(event, index)}
                             value={form.email}
-                            tipstyle={"hidden"}
                           />
-                          <div className="flex">
-                            <div className="mr-1 w-1/2">
+                          <div className="md:flex">
+                            <div className="mr-1 w-full md:w-1/2">
                               <InputBox
                                 label="Phone No"
                                 name="phone"
@@ -942,7 +938,6 @@ function TeamConcepts() {
                                 error={errors1.phone}
                                 onChange={(event) => handleFormChange(event, index)}
                                 value={form.phone}
-                                tipstyle={"hidden"}
                               />
                             </div>
                             <div className="input-box-dropdown w-full mb-4 relative">
@@ -955,7 +950,7 @@ function TeamConcepts() {
                               <div className="relative inline-block w-full">
                                 <select
                                   name={"gender"}
-                                  value={formFields.gender}
+                                  value={form.gender}
                                   onChange={(event) => handleFormChange(event, index)}
                                   required
                                   error={errors1.gender}
@@ -974,60 +969,49 @@ function TeamConcepts() {
                                 </select>
                               </div>
                             </div>
-                            {/* <Dropdown
-                                                  label=" Gender"
-                                                  options={gender_type}
-                                                  name={"gender"}
-                                                  state={formFields}
-                                                  setState={setFormFields}
-                                                  required
-                                              /> */}
                           </div>
                           <FileInputBox
                             name="member_id"
                             accept="image/png, image/jpeg"
                             type="file"
                             onChange={(e) => handleImageChange(e, index)}
-                            label="Upload Screenshot of ID"
+                            label="Upload college ID"
                             required
                             error={errors1.member_id}
                           />
-                          <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
-                          {/* <Notebox /> */}
-                          {/* Button aligned to the right */}
-                          {/* <Buttons
-                          value="remove member"
-                          onClick={() => removefields(index)}
-                          classNames="my-2"
-                          disabled={true}
-                          loading={registerUserMutationForm1.isLoading}
-                        /> */}
+                          <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
 
+                          {memberCount < 6 ? (
+                            <Buttons
+                              value={
+                                <>
+                                  <span>
+                                    {`add member- `}
+                                    <span style={{ color: 'gold', fontWeight: 'bold', textTransform: 'uppercase' }}>
+
+                                      {form.name.split(' ')[0]}
+                                    </span>
+                                  </span>
+                                </>
+                              }
+                              onClick={addFields}
+                              classNames="my-2"
+                              loading={registerUserMutationForm1.isLoading}
+                            />
+
+
+                          ) : <></>}
                           <hr className="my-5 border-dashed border-gold" />
-
                         </div>
-                      </>
-                    );
+
+                      </>)
                   })}
-
-                  {memberCount < 5 ? (
-                    <>
-                      <Buttons
-                        value="Add Members"
-                        onClick={addFields}
-                        classNames=" my-2"
-                        loading={registerUserMutationForm1.isLoading}
-                      />
-                    </>) : (<></>
-                  )}
-
 
                 </>
               )}
               {/* form 2 */}
               {formStep === 2 && (
                 <>
-
                   <RadioButtons
                     label=" Are you PICTian ?"
                     options={country_arr}
@@ -1075,7 +1059,7 @@ function TeamConcepts() {
                       />
                       <div className=" mx-1 my-2">
                         <InputBox
-                          label="College"
+                          label="College (Full form)"
                           name={"college"}
                           type="text"
                           placeholder="college name"
@@ -1103,8 +1087,8 @@ function TeamConcepts() {
                           tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
                         />
                       </div>
-                      <div className="flex mx-1 ">
-                        <div className="mr-1 w-1/2 mt-1">
+                      <div className="md:flex md:mx-1 ">
+                        <div className="md:mr-1 md:w-1/2 md:mt-1">
                           <Dropdown
                             label="State"
                             options={[
@@ -1117,9 +1101,9 @@ function TeamConcepts() {
                             required
                           />
                         </div>
-                        <div className="ml-1 w-1/2">
+                        <div className="md:ml-1 md:w-1/2">
                           <InputBox
-                            label="District"
+                            label="District in which college is located"
                             name={"district"}
                             type="text"
                             placeholder="district"
@@ -1131,10 +1115,10 @@ function TeamConcepts() {
                           />
                         </div>
                       </div>
-                      <div className="flex mx-1 ">
-                        <div className="mr-1 w-1/2">
+                      <div className="md:flex md:mx-1 ">
+                        <div className="md:mr-1 md:w-1/2">
                           <InputBox
-                            label="City"
+                            label="City in which college is located"
                             type="text"
                             name={"city"}
                             placeholder="city"
@@ -1145,9 +1129,9 @@ function TeamConcepts() {
                             tipstyle={"hidden"}
                           />
                         </div>
-                        <div className="ml-1 w-1/2 mt-1">
+                        <div className="md:ml-1 md:w-1/2 md:mt-1">
                           <Dropdown
-                            label="Localtiy"
+                            label="Locality in which college is located"
                             options={[
                               { value: "SEL", label: "Select", selected: true },
                               ...localTypes,
@@ -1236,56 +1220,42 @@ function TeamConcepts() {
                     />
                   </div>
                 ))}
-              <div className="flex justify-between">
-                {/* {formStep > 0 && formStep < 4 && (
-                <Buttons
-                  className="mx-2 my-2"
-                  value=" Previous Step"
-                  onClick={prevForm}
-                  loading={
-                    registerUserMutationForm1.isLoading ||
-                    registerUserMutationForm2.isLoading
-                  }
-                />
-              )} */}
-                {formStep === 3 ? (
-                  paymentStatus ? (
-                    <></>
-                  ) : (
-                    <Buttons
-                      className=" mx-2 my-2 "
-                      value="Submit"
-                      onClick={nextForm}
-                      loading={registerUserMutationForm3.isLoading}
-                    />
-                  )
+
+
+              {/* <div className="flex justify-between"> */}
+
+
+              {formStep === 3 ? (
+                paymentStatus ? (
+                  <></>
                 ) : (
-                  formStep === 2 &&
-                  (paymentStatus ? (
-                    <Buttons
-                      className=" mx-2 my-2  "
-                      value="Submit"
-                      onClick={nextForm}
-                      loading={
-                        registerUserMutationForm0.isLoading ||
-                        registerUserMutationForm1.isLoading ||
-                        registerUserMutationForm2.isLoading
-                      }
-                    />
-                  ) : (
-                    <Buttons
-                      className=" mx-2 my-2  "
-                      value="Next Step"
-                      onClick={nextForm}
-                      loading={
-                        registerUserMutationForm0.isLoading ||
-                        registerUserMutationForm1.isLoading ||
-                        registerUserMutationForm2.isLoading
-                      }
-                    />
-                  ))
-                )}
-                {formStep < 2 && (
+                  <Buttons
+                    className=" mx-2 my-2 "
+                    value="Submit"
+                    onClick={nextForm}
+                    loading={registerUserMutationForm3.isLoading}
+                  />
+                )
+              ) : (
+                formStep === 2 &&
+                (paymentStatus ? (<div className=" text-right">
+                  <Buttons
+                    className="mx-2"
+                    value=" Previous Step"
+                    onClick={prevForm}
+                  />
+                  <Buttons
+                    className=" mx-2 my-2  "
+                    value="Submit"
+                    onClick={nextForm}
+                    loading={
+                      registerUserMutationForm0.isLoading ||
+                      registerUserMutationForm1.isLoading ||
+                      registerUserMutationForm2.isLoading
+                    }
+                  />
+                </div>
+                ) : (
                   <Buttons
                     className=" mx-2 my-2  "
                     value="Next Step"
@@ -1296,8 +1266,45 @@ function TeamConcepts() {
                       registerUserMutationForm2.isLoading
                     }
                   />
-                )}
+                ))
+              )}
+              {formStep < 2 && (<div className="md:flex justify-between">
+                <div>
+                  {formStep == 1 && formFields.length < 5 ? (
+                    <>
+                      <Buttons
+                        className=" mx-2  "
+                        value="add another member"
+                        onClick={addAnotherMember}
+                      />
+                    </>) : (<></>
+                  )}
+                </div>
+
+                <div>
+                  <div className="text-right">
+                    {formStep > 0 && formStep < 4 && !(formStep === 3 && paymentStatus) && (
+                      <Buttons
+                        className="mx-2"
+                        value=" Previous Step"
+                        onClick={prevForm}
+                      />
+                    )}
+                    <Buttons
+                      className=" mx-2  "
+                      value="Next Step"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm0.isLoading ||
+                        registerUserMutationForm2.isLoading ||
+                        registerUserMutationForm3.isLoading
+                      }
+                    />
+                  </div>
+                </div>
               </div>
+              )}
+
             </form>
             {/* <Buttons
                   value="submit"

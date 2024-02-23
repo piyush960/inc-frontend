@@ -185,53 +185,27 @@ const mode_arr = [
     label: "Online",
   },
 ];
-// const state_arr = [
-//     { value: 'SEL', label: 'Select' },
-//     { value: 'AP', label: "Arunachal Pradesh" },
-//     { value: 'AS', label: "Assam" },
-//     { value: 'BI', label: "Bihar" },
-//     { value: 'CH', label: "Chhattisgarh" },
-//     { value: 'DEL', label: "Delhi" },
-//     { value: 'G', label: "Goa" },
-//     { value: 'GUJ', label: "Gujarat" },
-//     { value: 'HAR', label: "Haryana" },
-//     { value: 'HP', label: "Himachal Pradesh" },
-//     { value: 'JK', label: "Jammu &amp; Kashmir" },
-//     { value: 'JH', label: "Jharkhand" },
-//     { value: 'KAR', label: "Karnataka" },
-//     { value: 'KR', label: "Kerala" },
-//     { value: 'MP', label: "Madhya Pradesh" },
-//     { value: 'MAH', label: "Maharashtra" },
-//     { value: 'MN', label: "Manipur" },
-//     { value: 'MG', label: "Meghalaya" },
-//     { value: 'MZ', label: "Mizoram" },
-//     { value: 'OR', label: "Orissa" },
-//     { value: 'PN', label: "Punjab" },
-//     { value: 'RJ', label: "Rajasthan" },
-//     { value: 'TN', label: "Tamil Nadu" },
-//     { value: 'TL', label: "Telangana" },
-//     { value: 'TR', label: "Tripura" },
-//     { value: 'UP', label: "Uttar Pradesh" },
-//     { value: 'UT', label: "Uttarakhand" },
-//     { value: 'WB', label: "West Bengal" },
-
-// ]
 
 const initialErrorsForm3 = {
   payment_id: "",
 };
-
-
-
-
 
 function TeamPradnya() {
   const [activeStep, setActiveStep] = React.useState(0);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
 
   //form1
-
   const [form1, setForm1] = useState([
+    {
+      name: "",
+      email: "",
+      phone: "",
+      gender: "SEL",
+      member_id: "",
+      codechef_id: ""
+    },
+  ]);
+  const [tempform1, settempForm1] = useState([
     {
       name: "",
       email: "",
@@ -247,7 +221,7 @@ function TeamPradnya() {
   const handleFormChange = (event, index) => {
 
     const { name, value } = event.target;
-    console.log(name, value);
+    // console.log(name, value);
     setForm1((prevState) => {
       errors1[name] !== "" &&
         setErrors1((prevState) => ({ ...prevState, [name]: "" }));
@@ -257,6 +231,12 @@ function TeamPradnya() {
     });
   };
 
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+
   const addfields = () => {
     // console.log(form1)
     if (form1.length < 3) {
@@ -264,8 +244,8 @@ function TeamPradnya() {
         if (property === "name" && form1.at(-1)[property] === "") {
           toast.warn("Please enter name");
           return;
-        } else if (property === "email" && form1.at(-1)[property] === "") {
-          toast.warn("Please enter E-mail address");
+        } else if (property === "email" && !validateEmail(form1.at(-1)[property])) {
+          toast.warn("Please enter a valid E-mail address");
           return;
         } else if (property === "phone" && form1.at(-1)[property].length !== 10) {
           toast.warn("Please enter a valid phone number");
@@ -282,7 +262,6 @@ function TeamPradnya() {
         }
       }
 
-
       const memberFormData = new FormData();
       memberFormData.append("member_id", form1.at(-1).member_id);
       const tempMemberDetails = { ...form1.at(-1) };
@@ -291,40 +270,42 @@ function TeamPradnya() {
       registerUserMutationForm1.mutate(memberFormData, {
         onSuccess: () => {
           setErrors1(initialErrorsForm1);
-
-          toast.success("Added member to the team !", { icon: "✅" });
-          if (form1.length < 2) {
-            let object = {
-              name: "",
-              email: "",
-              phone: "",
-              gender: "SEL",
-              member_id: "",
-              codechef_id: ""
-            };
-            setForm1([...form1, object]);
-            setMemberCount((memberCount) => memberCount + 1);
-          }
-
-          if (form1.length == 2) setMemberCount((memberCount) => memberCount + 1);
-        },
+          setMemberCount((memberCount) => memberCount + 1);
+          toast.success(`member ${memberCount + 1} added !`, { icon: "✅" });
+        }
       });
       return;
     }
     toast.warn("Maximum 2 members are allowed");
   };
 
+  const addAnotherMember = () => {
+    if (form1.length > 1) {
+      toast.warn("Limit Reached !");
+      return;
+    }
+    let object = {
+      name: "",
+      email: "",
+      phone: "",
+      gender: "SEL",
+      member_id: "",
+      codechef_id: ""
+    };
+    setForm1([...form1, object]);
+  }
 
-  const removefields = (index) => {
-    let data = [...form1];
-    // console.log(...form1);
-    data.splice(index, 1);
-    setForm1(data);
-    memberCount--;
-  };
+
+
+  // const removefields = (index) => {
+  //   let data = [...form1];
+  //   // console.log(...form1);
+  //   data.splice(index, 1);
+  //   setForm1(data);
+  //   memberCount--;
+  // };
 
   //form 2
-
   const [form2, setForm2] = useState({
     isPICT: "",
     isInternational: "",
@@ -443,14 +424,7 @@ function TeamPradnya() {
     setFormStep((currentStep) => currentStep - 1);
     setActiveStep(activeStep - 1);
   };
-  const handleSelectChange2 = (e) => {
-    const { name, value } = e.target;
-    setForm2((prevState) => {
-      errors2[name] !== "" &&
-        setErrors2((prevState) => ({ ...prevState, [name]: "" }));
-      return { ...prevState, [name]: value };
-    });
-  };
+
   const [memberCount, setMemberCount] = useState(0);
   const nextForm = (e) => {
     e.preventDefault();
@@ -460,15 +434,6 @@ function TeamPradnya() {
         return;
       }
 
-      //   registerUserMutationForm1.mutate(form1, {
-      //     onSuccess: () => {
-      //       setErrors1(initialErrorsForm1);
-      //       toast.success("Completed Step 1️⃣ !", { icon: "✅" });
-      //       setFormStep((currentStep) => currentStep + 1);
-      //       setActiveStep((activeStep) => activeStep + 1);
-      //       return;
-      //     },
-      //   });
       setFormStep((currentStep) => currentStep + 1);
       setActiveStep((activeStep) => activeStep + 1);
     }
@@ -499,17 +464,15 @@ function TeamPradnya() {
             });
           } else {
             toast.success("Completed Step 3️⃣ !", { icon: "✅" });
-            // const win = window.open(paymentLinks.get("pradnya"), "_blank");
             setFormStep((currentStep) => currentStep + 1);
             setActiveStep((activeStep) => activeStep + 1);
-            // win.focus();
           }
         },
       });
     }
     if (formStep === 3) {
 
-      if (paymentRef.current.value.length != 12) {
+      if (paymentRef.current.value.length !== 12) {
         toast.warn("Please enter valid 12 digit Transaction ID!");
         return;
       }
@@ -518,7 +481,6 @@ function TeamPradnya() {
         { payment_id: paymentRef.current.value?.trim() },
         {
           onSuccess: () => {
-            // console.log(paymentRef.current.value?.trim())
             toast.success("Completed Step 4️⃣ !", { icon: "✅" });
             setActiveStep((activeStep) => activeStep + 1);
             setPaymentStatus(true);
@@ -551,124 +513,133 @@ function TeamPradnya() {
           <div className=" md:mx-16 my-6">
             <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
               {/* form 1 */}
-              {formStep === 1 && (
-                <>
-                  <NoteBox
-                    title="Note"
-                    text="After filling details of each member click the Add members button to add the details and then you can also add more members."
-                  />
-                  {form1.map((form, index) => {
-                    return (
-                      <>
-                        <h1 className="input-label font-medium text-white border-red-500 p-2 w-28 border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2">
-                          Member {index + 1}
-                        </h1>
+              {formStep === 1 && (<>
+                <NoteBox
+                  title="Note"
+                  text="After filling details of each member click the Add member-name button to add the details. And you can add more members by clicking on Add another member."
+                />
+                {form1.map((form, index) => {
+                  return (
+                    <>
+                      <h1 className="input-label font-medium text-white border-red-500 p-2 w-28 border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2">
+                        Member {index + 1}
+                      </h1>
 
-                        <div key={index}>
-                          <InputBox
-                            label="Name"
-                            name="name"
-                            type="text"
-                            placeholder="name "
-                            required
-                            error={errors1.name}
-                            onChange={(event) => handleFormChange(event, index)}
-                            value={form.name}
-                            tip={'Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters.'}
-                          />
-                          <InputBox
-                            label="Email ID"
-                            name="email"
-                            type="text"
-                            placeholder="email "
-                            required
-                            error={errors1.email}
-                            onChange={(event) => handleFormChange(event, index)}
-                            value={form.email}
-                          />
-                          <div className="md:flex">
-                            <div className="mr-1 w-full md:w-1/2">
-                              <InputBox
-                                label="Phone No"
-                                name="phone"
-                                type="tel"
-                                placeholder="phone number"
-                                required
-                                error={errors1.phone}
+                      <div key={index}>
+                        <InputBox
+                          label="Name"
+                          name="name"
+                          type="text"
+                          placeholder="name "
+                          required
+                          error={errors1.name}
+                          onChange={(event) => handleFormChange(event, index)}
+                          value={form.name}
+                          tip={'Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters.'}
+                        />
+                        <InputBox
+                          label="Email ID"
+                          name="email"
+                          type="text"
+                          placeholder="email "
+                          required
+                          error={errors1.email}
+                          onChange={(event) => handleFormChange(event, index)}
+                          value={form.email}
+                        />
+                        <div className="md:flex">
+                          <div className="mr-1 w-full md:w-1/2">
+                            <InputBox
+                              label="Phone No"
+                              name="phone"
+                              type="tel"
+                              placeholder="phone number"
+                              required
+                              error={errors1.phone}
+                              onChange={(event) => handleFormChange(event, index)}
+                              value={form.phone}
+                            />
+                          </div>
+                          <div className="input-box-dropdown w-full mb-4 relative">
+                            <label
+                              className={`input-label font-medium mb-1 text-white text-lg flex`}
+                            >
+                              {"Gender"}
+                              <h1 className="text-gold">*</h1>
+                            </label>
+                            <div className="relative inline-block w-full">
+                              <select
+                                name={"gender"}
+                                value={form.gender}
                                 onChange={(event) => handleFormChange(event, index)}
-                                value={form.phone}
-                              />
-                            </div>
-                            <div className="input-box-dropdown w-full mb-4 relative">
-                              <label
-                                className={`input-label font-medium mb-1 text-white text-lg flex`}
+                                required
+                                error={errors1.gender}
+                                className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
                               >
-                                {"Gender"}
-                                <h1 className="text-gold">*</h1>
-                              </label>
-                              <div className="relative inline-block w-full">
-                                <select
-                                  name={"gender"}
-                                  value={form.gender}
-                                  onChange={(event) => handleFormChange(event, index)}
-                                  required
-                                  error={errors1.gender}
-                                  className={`w-full h-10 pl-4 pr-8 bg-[#0B1E47] text-base text-gold placeholder-gray-500 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue`}
-                                >
-                                  {gender_type.map((option) => (
-                                    <option
-                                      key={option?.value}
-                                      value={option?.value}
-                                      className={`py-1 bg-[#0B1E47] ${option?.className || ""
-                                        }`}
-                                    >
-                                      {option?.label}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
+                                {gender_type.map((option) => (
+                                  <option
+                                    key={option?.value}
+                                    value={option?.value}
+                                    className={`py-1 bg-[#0B1E47] ${option?.className || ""
+                                      }`}
+                                  >
+                                    {option?.label}
+                                  </option>
+                                ))}
+                              </select>
                             </div>
                           </div>
-                          <FileInputBox
-                            name="member_id"
-                            accept="image/png, image/jpeg"
-                            type="file"
-                            onChange={(e) => handleImageChange(e, index)}
-                            label="Upload Screenshot of ID"
-                            required
-                            error={errors1.member_id}
-                          />
-                          <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
-
-                          <InputBox
-                            label="CodeChef ID"
-                            name="codechef_id"
-                            type="text"
-                            placeholder="CodeChef ID"
-                            required
-                            error={errors1.codechef_id}
-                            onChange={(event) => handleFormChange(event, index)}
-                            value={form.codechef_id}
-                            tip={'Codechef ID can be Alphanumeric'}
-                          />
-
-                          <hr className="my-5 border-dashed border-gold" />
-
                         </div>
-                      </>
-                    );
-                  })}
-                  {memberCount < 2 ? (
-                    <>
-                      <Buttons
-                        value="add members"
-                        onClick={addfields}
-                        classNames=" my-2"
-                      />
-                    </>) : (<></>
-                  )}
-                </>
-              )}
+                        <FileInputBox
+                          name="member_id"
+                          accept="image/png, image/jpeg"
+                          type="file"
+                          onChange={(e) => handleImageChange(e, index)}
+                          label="Upload college ID"
+                          required
+                          error={errors1.member_id}
+                        />
+                        <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
+
+                        <InputBox
+                          label="CodeChef ID"
+                          name="codechef_id"
+                          type="text"
+                          placeholder="CodeChef ID"
+                          required
+                          error={errors1.codechef_id}
+                          onChange={(event) => handleFormChange(event, index)}
+                          value={form.codechef_id}
+                          tip={'Codechef ID can be Alphanumeric'}
+                        />
+
+                        {memberCount < 2 ? (
+                          <Buttons
+                            value={
+                              <>
+                                <span>
+                                  {`add member- `}
+                                  <span style={{ color: 'gold', fontWeight: 'bold', textTransform: 'uppercase' }}>
+
+                                    {form.name.split(' ')[0]}
+                                  </span>
+                                </span>
+                              </>
+                            }
+                            onClick={addfields}
+                            classNames="my-2"
+                            loading={registerUserMutationForm1.isLoading}
+                          />
+                        ) : <></>}
+                        <hr className="my-5 border-dashed border-gold" />
+                      </div>
+
+                    </>)
+                })
+                }
+              </>)}
+
+
               {/* form 2 */}
               {formStep === 2 && (
                 <>
@@ -677,7 +648,7 @@ function TeamPradnya() {
                     text="Please complete the payment within 60 minutes before your session expires. Don't refresh the window or close the tab."
                   /> */}
                   <RadioButtons
-                    label=" Are you PICTian or not?"
+                    label=" Are you PICTian?"
                     options={country_arr}
                     state={form2}
                     setState={setForm2}
@@ -696,9 +667,9 @@ function TeamPradnya() {
                         required
                         error={errors2.isInternational}
                       />
-                      <div className=" mx-1 my-2">
+                      <div className=" md:mx-1 my-2">
                         <InputBox
-                          label="College (enter full form)"
+                          label="College (Full form)"
                           name={"college"}
                           type="text"
                           placeholder="college name"
@@ -709,7 +680,7 @@ function TeamPradnya() {
                           tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters."}
                         />
                       </div>
-                      <div className="mx-1 my-2">
+                      <div className="md:mx-1 my-2">
                         <InputBox
                           className={
                             form2.isInternational === "0"
@@ -730,8 +701,8 @@ function TeamPradnya() {
                           tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
                         />
                       </div>
-                      <div className="flex mx-1 ">
-                        <div className="mr-1 w-1/2 mt-1">
+                      <div className="md:flex mx-1 ">
+                        <div className="md:mr-1 md:w-1/2 mt-1">
                           <Dropdown
                             label="State"
                             options={[
@@ -744,9 +715,9 @@ function TeamPradnya() {
                             required
                           />
                         </div>
-                        <div className="ml-1 w-1/2">
+                        <div className="md:ml-1 md:w-1/2">
                           <InputBox
-                            label="District"
+                            label="District in which college is located"
                             name={"district"}
                             type="text"
                             placeholder="district"
@@ -758,10 +729,10 @@ function TeamPradnya() {
                           />
                         </div>
                       </div>
-                      <div className="flex mx-1 ">
-                        <div className="mr-1 w-1/2">
+                      <div className="md:flex mx-1 ">
+                        <div className="md:mr-1 md:w-1/2">
                           <InputBox
-                            label="City"
+                            label="City in which college is located"
                             type="text"
                             name={"city"}
                             placeholder="city"
@@ -771,9 +742,9 @@ function TeamPradnya() {
                             value={form2.city}
                           />
                         </div>
-                        <div className="ml-1 w-1/2 mt-1">
+                        <div className="ml-1 md:w-1/2 mt-1">
                           <Dropdown
-                            label="Locality"
+                            label="Locality in which college is located"
                             options={[
                               { value: "SEL", label: "Select", selected: true },
                               ...localTypes,
@@ -788,7 +759,7 @@ function TeamPradnya() {
                       </div>
 
                       <RadioButtons
-                        label="  Preferred mode of presentation"
+                        label="Preferred mode of presentation"
                         options={mode_arr}
                         state={form2}
                         setState={setForm2}
@@ -822,7 +793,7 @@ function TeamPradnya() {
                         value={form2.referral}
                         error={errors2.referral}
 
-                        tip={"Referral should be between 3-50 characters long (if any)"}
+                        tip={"Referral should be between 3-50 characters long (if any)"}
                       />
 
                     </>
@@ -877,55 +848,40 @@ function TeamPradnya() {
                     />
                   </div>
                 ))}
-              <div className="flex justify-between">
-                {/* {formStep > 1 && formStep < 4 && (
+              {/* <div className="flex justify-between"> */}
+              {formStep > 1 && formStep < 4 && !(formStep === 3 && paymentStatus) && (
                 <Buttons
                   className="mx-2 my-2"
                   value=" Previous Step"
                   onClick={prevForm}
-                  loading={
-                    registerUserMutationForm1.isLoading ||
-                    registerUserMutationForm2.isLoading
-                  }
                 />
-              )} */}
+              )}
 
-                {formStep === 3 ? (
-                  paymentStatus ? (
-                    <></>
-                  ) : (
-                    <Buttons
-                      className=" mx-2 my-2 "
-                      value="Submit"
-                      onClick={nextForm}
-                      loading={registerUserMutationForm3.isLoading}
-                    />
-                  )
+
+              {formStep === 3 ? (
+                paymentStatus ? (
+                  <></>
                 ) : (
-                  formStep === 2 &&
-                  (paymentStatus ? (
-                    <Buttons
-                      className=" mx-2 my-2  "
-                      value="Submit"
-                      onClick={nextForm}
-                      loading={
-                        registerUserMutationForm1.isLoading ||
-                        registerUserMutationForm2.isLoading
-                      }
-                    />
-                  ) : (
-                    <Buttons
-                      className=" mx-2 my-2  "
-                      value="Next Step"
-                      onClick={nextForm}
-                      loading={
-                        registerUserMutationForm1.isLoading ||
-                        registerUserMutationForm2.isLoading
-                      }
-                    />
-                  ))
-                )}
-                {formStep < 2 && (
+                  <Buttons
+                    className=" mx-2 my-2 "
+                    value="Submit"
+                    onClick={nextForm}
+                    loading={registerUserMutationForm3.isLoading}
+                  />
+                )
+              ) : (
+                formStep === 2 &&
+                (paymentStatus ? (
+                  <Buttons
+                    className=" mx-2 my-2  "
+                    value="Submit"
+                    onClick={nextForm}
+                    loading={
+                      registerUserMutationForm1.isLoading ||
+                      registerUserMutationForm2.isLoading
+                    }
+                  />
+                ) : (
                   <Buttons
                     className=" mx-2 my-2  "
                     value="Next Step"
@@ -935,8 +891,37 @@ function TeamPradnya() {
                       registerUserMutationForm2.isLoading
                     }
                   />
-                )}
+                ))
+              )}
+
+              {formStep < 2 && (<div className="space-y-5 md:space-y-0 md:flex justify-between">
+                <div className="text-center">
+                  {formStep == 1 && form1.length < 2 ? (
+                    <>
+                      <Buttons
+                        className=" mx-2 w-52 md:w-56"
+                        value="add another member"
+                        onClick={addAnotherMember}
+                      />
+                    </>) : (<></>
+                  )}
+                </div>
+
+                <div className="text-center md:text-start">
+                  <>
+                    <Buttons
+                      className=" mx-2 w-52 md:w-32"
+                      value="Next Step"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm2.isLoading
+                      }
+                    />
+                  </>
+                </div>
               </div>
+              )}
+              {/* </div> */}
             </form>
           </div>
         </>
@@ -945,7 +930,7 @@ function TeamPradnya() {
           <CloseMessage />
         </div>
       }
-    </MainContainer>
+    </MainContainer >
   );
 }
 
