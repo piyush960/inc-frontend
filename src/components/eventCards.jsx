@@ -22,7 +22,7 @@ const eventData = [
     contact: [
     {
       name: "Naman",
-      phone: "8446455659",
+      phone: "84464 55659",
     },
     // {
     //   name: "Mrugank",
@@ -54,8 +54,8 @@ const eventData = [
     it: "Free for International Entries",
     contact: [
       {
-      name: "Vedant",
-      phone: "8459228089",
+      name: "Srushti",
+      phone: "99231 49170",
     },
     // {
     //   name: "Kalpesh",
@@ -89,11 +89,6 @@ const eventData = [
       name: "Manavi",
       phone: "7499953568",
     },
-    // {
-    //   name: "Neha",
-    //   phone: "9579678142"
-
-    // },
     ]
   },
   {
@@ -103,11 +98,11 @@ const eventData = [
     members: "4-6 Members",
     ct: "First, second, third and fourth year students",
     logo: hackathon_logo,
-    nt: "₹ 400/- For National Entries",
-    it: "Free for International Entries",
+    nt: "Registrations Closed.",
+    it: "Last Date for Registration was 19/02/2024",
 
     contact: [{
-      name: "Atharva Litke",
+      name: "Atharva",
       phone: "82370 95572",
     },
     
