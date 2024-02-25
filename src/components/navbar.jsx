@@ -113,7 +113,7 @@ function Navbar() {
                     : "hover:text-gold border-transparent"
                     }`}
                 >
-                  Comitties
+                  Committees
                 </a>
                 <a
                   href="/register/events/winners"
