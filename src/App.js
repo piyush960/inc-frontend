@@ -7,6 +7,7 @@ import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 import Judge from './pages/judge';
 import winners_inc23 from './pages/winners_inc23.jsx';
+import JudgeProtectedRoutes from './routes/JudgeProtectedRoutes.js';
 
 function MainApp() {
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,7 @@ function MainApp() {
         {/* <Route path='/gallery' element={<Gallery />} /> */}
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/admin/*' element={<ProtectedRoutes children={<Admin />} />} />
-        <Route path='/judge/*' element={<ProtectedRoutes children={<Judge />} />} />
+        <Route path='/judge/*' element={<JudgeProtectedRoutes children={<Judge />} />} />
         <Route path= '/winners' element={<winners_inc23 />} />
         <Route path='/inc-teams' element={<InCTeams />} />
         <Route path='/web-teams' element={<WebTeam />} />

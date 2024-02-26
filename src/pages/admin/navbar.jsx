@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import inc_logo from "../../assets/images/logo.png";
 import "../../components/styles/navbar.css";
+import { logoutAdmin } from "../../api";
+import { toast } from "../../components/index.js";
 
 function Navbar() {
   const [selected, setSelected] = useState("#home");
@@ -21,8 +23,13 @@ function Navbar() {
   };
 
   const handleLogout = () => {
-    navigate('/auth');
+    logoutAdmin()
+    toast.success('logged out')
+    navigate('/auth')
   };
+
+
+
 
   return (
     <nav className="navbar sticky w-full">

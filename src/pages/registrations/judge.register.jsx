@@ -58,7 +58,7 @@ function JudgeForm() {
                 setErrors(initialErrors)
                 toast.success('Successfully Registered', { icon: '💐' })
                 setTimeout(() => {
-                    onSuccessNavigator('/')
+                    onSuccessNavigator('/auth')
                 }, 2000)
             },
         })

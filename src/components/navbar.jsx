@@ -133,8 +133,8 @@ function Navbar() {
                   <option>Impetus</option>
                   <option>Concepts</option>
                   <option>Pradnya</option>
-                  {/* <option>Hackathon</option>
-                  <option>Judges</option> */}
+                  <option>Judge</option>
+                  {/* <option>Hackathon</option> */}
 
                   {/* <option>Winners</option> */}
 
@@ -239,7 +239,7 @@ function Navbar() {
                 <option >Impetus</option>
                 <option>Concepts</option>
                 <option>Pradnya</option>
-                {/* <option>Judges</option> */}
+                <option>Judges</option>
               </select>
             </div>
           </div>

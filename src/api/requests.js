@@ -9,8 +9,12 @@ const backend = axios.create({
     }
 })
 
+
+
 const loginAdmin = async (data) => await backend.post('/admin/login', data);
 const verifyAdmin = async () => await backend.get('/admin/verify');
+const verifyJudge = async () => await backend.get('/judge/verify');
+const logoutAdmin = async () => await backend.get('/admin/logout');
 const registerJudge = (eventName) => async (data) => await backend.post(`/judge/register/${eventName}`, data)
 const viewJudges = (eventName) => async () => await backend.get(`/judge/registration/view/${eventName}`);
 const registerEventStep1 = (eventName) => async (data) => await backend.post(`/events/${eventName}/step_1`, data);
@@ -30,6 +34,8 @@ const getMemberDetails = (eventName) => async () => await backend.get(`/events/$
 export {
     loginAdmin,
     verifyAdmin,
+    verifyJudge,
+    logoutAdmin,
     registerJudge,
     registerEventStep1,
     registerEventStep2,

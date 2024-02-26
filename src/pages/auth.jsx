@@ -23,8 +23,9 @@ function Auth() {
                 console.log(data)
                 setErrors(initialErrors)
                 toast.success('Login Successful', { icon: '👍' })
-                if (data.jid) loginNavigator(`/judge/${data.jid}`, { replace: true })
-                else loginNavigator(-1, { replace: true })
+                console.log(data.data.jid)
+                if (data.data.jid) loginNavigator(`/judge/${data.data.jid}`, { replace: true })
+                else loginNavigator('/admin')
                 return
             }
         })
@@ -32,7 +33,7 @@ function Auth() {
 
     return (
         <>
-            <FormsBanner eventName='Login' eventDescription='Login with credentials provided with specific admin role' />
+            <FormsBanner eventName='Login' eventDescription='Login with credentials provided with specific user role' />
             <form onSubmit={handleSubmit} className='shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center mx-5 my-6 md:mx-20 p-4 md:p-8 border border-light_blue'>
                 <NoteBox type='info' className='mx-5 md:mx-20 my-4 p-4 md:p-8' text='Please allow 3rd-party cookies for successful login' />
                 <InputBox label='Email' type='text' name='username' placeholder='Enter Email Address' inputref={usernameRef} error={errors.username} required />
