@@ -8,6 +8,7 @@ import './App.css';
 import Judge from './pages/judge';
 import winners_inc23 from './pages/winners_inc23.jsx';
 import JudgeProtectedRoutes from './routes/JudgeProtectedRoutes.js';
+import Cookies from 'js-cookie'
 
 function MainApp() {
   const [loading, setLoading] = useState(false);
@@ -15,9 +16,10 @@ function MainApp() {
 
   useEffect(() => {
     const isAdminRoute = window.location.pathname.startsWith('/admin');
-    setShowNavbar(!isAdminRoute);
+    setShowNavbar(!isAdminRoute);  
+
   }, []);
-  
+
 
   return (
     <BrowserRouter>
@@ -34,7 +36,7 @@ function MainApp() {
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/admin/*' element={<ProtectedRoutes children={<Admin />} />} />
         <Route path='/judge/*' element={<JudgeProtectedRoutes children={<Judge />} />} />
-        <Route path= '/winners' element={<winners_inc23 />} />
+        <Route path='/winners' element={<winners_inc23 />} />
         <Route path='/inc-teams' element={<InCTeams />} />
         <Route path='/web-teams' element={<WebTeam />} />
         <Route path='/faculty-teams' element={<FacultyTeam />} />

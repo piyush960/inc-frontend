@@ -87,7 +87,7 @@ function Navbar() {
                 >
                   Events
                 </a>
-                <a
+                {/* <a
                   href="https://techfiesta.pict.edu/"
                   className={`py-2 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#winners"
                     ? "border-sky-800/80 text-gold"
@@ -95,7 +95,7 @@ function Navbar() {
                     }`}
                 >
                   Hackathon
-                </a>
+                </a> */}
 
                 <a
                   href="/#sponsors"
@@ -113,7 +113,7 @@ function Navbar() {
                     : "hover:text-gold border-transparent"
                     }`}
                 >
-                  Comitties
+                  Committee
                 </a>
                 <a
                   href="/register/events/winners"

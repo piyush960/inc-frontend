@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import inc_logo from "../../assets/images/logo.png";
 import "../../components/styles/navbar.css";
-import { logoutAdmin } from "../../api";
+import { logoutAdmin } from "../../api/index.js";
 import { toast } from "../../components/index.js";
 
-function Navbar() {
+function AdminNavbar() {
   const [selected, setSelected] = useState("#home");
   const mobileMenuRef = useRef(null);
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function Navbar() {
   const handleLogout = () => {
     logoutAdmin()
     toast.success('logged out')
-    navigate('/auth')
+    navigate('/')
   };
 
 
@@ -100,4 +100,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default AdminNavbar;
