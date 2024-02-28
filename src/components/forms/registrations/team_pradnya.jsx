@@ -588,7 +588,7 @@ function TeamPradnya() {
                           required
                           error={errors1.member_id}
                         />
-                        <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
+                        <NoteBox title ="please take note" text="accepted format: jpeg, png and less than 200kb" />
 
                         {/*  <InputBox
                           label="CodeChef ID"

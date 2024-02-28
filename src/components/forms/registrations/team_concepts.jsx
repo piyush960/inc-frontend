@@ -677,7 +677,7 @@ function TeamConcepts() {
             if (property === "Transaction_id") continue;
             if (property === "reason_of_mode" && form2["mode"] === "1") continue;
             if (property === "referral") continue;
-            console.log(property)
+            // console.log(property)
             toast.warn("Please enter all fields!");
             return;
           }
@@ -692,7 +692,7 @@ function TeamConcepts() {
             if (property === "tech_Transaction_id") continue;
             if (property === "techfiesta") continue;
 
-            console.log(property)
+            // console.log(property)
             toast.warn("Please enter all fields!");
             return;
           }

@@ -16,9 +16,10 @@
 }
 
 .team-name {
-  position: relative;
-  display: block;
-  font-size: 2rem;
+  /* position: relative;
+  display: block; */
+ 
+  font-size: 1.5rem;
   margin-top: -4.4rem;
   text-transform: uppercase;
   max-width: 100%; 
@@ -31,9 +32,10 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 30%;
-  height: 3.4rem;
-  background-color: rgb(17 24 39 / 0.8);
+  /* top: 1.65rem; */
+  /* width: 60%; */
+  /* height: 3.4rem; */
+  background-color: rgb(17 24 39 / 1);
   border: 1px solid rgb(12 74 110 / 0.4);
   border-radius: 0.5rem;
   z-index: -1;
@@ -41,16 +43,33 @@
 }
 
 .members {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
 }
 
 .member {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+}
+
+.team:nth-child(1) > .team-name:before{
+  height: 6rem;
+}
+
+@media (min-width: 768px) {
+  .team:nth-child(1) > .team-name:before {
+    height: 3.4rem; /* Change the height to 6rem for viewport widths greater than or equal to 768px */
+  }
+
+  .team-name{
+    font-size: 2rem;
+  }
+}
+
+.member:nth-child(1), .member:nth-child(3), .member:nth-child(2), .member:nth-child(4){
+  
+  /* width: 50%;  */
 }
 
 .apple {
@@ -113,7 +132,7 @@
 .post {
   font-size: 1rem;
   font-style: italic;
-  margin-top: 4px;
+  margin-bottom: 2px;
 }
 
 .member-icons {
