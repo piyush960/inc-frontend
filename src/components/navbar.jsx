@@ -113,7 +113,11 @@ function Navbar() {
                     : "hover:text-gold border-transparent"
                     }`}
                 >
+<<<<<<< HEAD
                   Committee
+=======
+                  Committees
+>>>>>>> be19cec1f07ad575b7e73a674669f40f7e8032e2
                 </a>
                 <a
                   href="/register/events/winners"
