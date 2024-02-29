@@ -100,14 +100,15 @@ const customStyles = {
       letterSpacing: '0.8px',
       backgroundColor: 'rgba(7, 89, 133, .15)',
       minHeight: '1.75rem',
-      borderBottom: '1px solid rgba(7, 89, 133, .2)',
+      borderBottom: '2px solid black',
       '&:last-of-type': {
-        borderBottom: 'none',
+        borderBottom: '2px solid  black'
       },
       '&:not(:last-of-type)': {
-        borderBottomColor: 'rgba(7, 89, 133, 0.2)',
+        borderBottom: '2px solid black '
       },
     },
+    
     denseStyle: {
       minHeight: '1.75rem',
     },
@@ -128,6 +129,7 @@ const customStyles = {
       outlineStyle: 'solid',
       outlineWidth: '1px',
       outlineColor: theme.background.default,
+      borderBottom: '2px solid  #00008B', // Add this line
     },
     stripedStyle: {
       color: theme.striped.text,
