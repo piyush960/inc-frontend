@@ -47,7 +47,7 @@ function ViewEventRegistrations() {
             name: 'Team ID',
             selector: row => row['pid'],
             cellExport: row => row['pid'],
-            width: '130px',
+            width: '150px',
             sortable: true,
         },
         {
