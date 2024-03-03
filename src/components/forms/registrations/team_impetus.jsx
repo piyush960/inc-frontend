@@ -585,11 +585,8 @@ function TeamImpetus() {
         } else if (property === "project_type" && form0[property] === "") {
           toast.warn("Please enter project type");
           return;
-        } else if (property === "abstract" && (wordCount < 250 || wordCount > 300)) {
-          toast.warn("Please enter abstract between 250 and 300 words");
-          return;
-        } else if (property === "demo" && form0[property] === "") {
-          toast.warn("Please enter abstract between 50 to 1000 characters");
+        } else if (property === "abstract" && (wordCount <= 200 || wordCount >= 250)) {
+          toast.warn("Please enter abstract between 200 and 250 words");
           return;
         }
       }
@@ -673,12 +670,16 @@ function TeamImpetus() {
         onSuccess: () => {
           setErrors2(initialErrorsForm2);
           setErrors2(initialErrorsForm2);
-          if (form2.isPICT === "1" || form2.isInternational === "1" || form2.techfiesta === "1") {
-            const temp =
-              form2.isPICT === "1" ? { isPICT: "1" } :
-                form2.isInternational === "1" ? { isInternational: "1" } :
-                  { payment_id: form2.tech_Transaction_id };
+          if (form2.isPICT === "1" || form2.isInternational === "1" || form2.techfiesta === "1" || form2.state !== "MH") {
+            let temp;
 
+            if (form2.isPICT === "1") {
+              temp = { isPICT: "1" };
+            } else if (form2.isInternational === "1") {
+              temp = { isInternational: "1" };
+            } else if (form2.techfiesta === "1" || form2.state !== "MH") {
+              temp = { payment_id: form2.state !== "MH" ? "out of state" : form2.tech_Transaction_id };
+            }
             registerUserMutationForm3.mutate(temp, {
               onSuccess: () => {
                 toast.success("Completed Registration !", { icon: "✅" });
@@ -917,17 +918,17 @@ function TeamImpetus() {
                     type="textarea"
                     label={"Abstract"}
                     name={"abstract"}
-                    placeholder={"Enter abstract here (must be between 250 and 300 words)"}
+                    placeholder={"Enter abstract here (must be between 200 and 250 words)"}
                     required
                     error={errors0.abstract}
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.abstract}
                     minlenght="50"
-                    tip={"Abstract should be between 250 and 300 words"}
+                    tip={"Abstract should be between 200 and 250 words"}
                     showWordCountCondition="true"
 
                   ></InputBox>
-                  <p className={`text-gray-500 px-2 py-1 rounded-lg flex justify-end -mt-5 md:-my-5`}>{wordCount}/300 words</p>
+                  <p className={`text-gray-500 px-2 py-1 rounded-lg flex justify-end -mt-5 md:-my-5`}>{wordCount}/250 words</p>
                   <RadioButtons
                     label="  Can you show a demo of your project?"
                     options={demo_arr}
@@ -941,8 +942,7 @@ function TeamImpetus() {
                   {form0.demo === "0" && (
                     <div>
                       <InputBox
-                        type="textarea"
-                        label={"Reason for demo"}
+                        label={"Reason for not showing demo"}
                         name={"reason_of_demo"}
                         placeholder={"reason"}
                         classNames=""
@@ -950,7 +950,7 @@ function TeamImpetus() {
                         onChange={(e) => handleInputChange0(e)}
                         value={form0.reason_of_demo}
                         error={errors0.reason_of_demo}
-                        tip={"Reason of demo if applicable, should be between 5 and 100 characters(both inclusive)"}
+                        tip={"Please mention the reason if demo is not available."}
                       ></InputBox>
                     </div>
                   )}

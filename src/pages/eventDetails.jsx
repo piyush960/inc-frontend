@@ -119,7 +119,7 @@ function EventDetails(props) {
 
         <p> 🔹Judge's decision will be final.</p>,
         <p>🔹Project status must be in "Ready to Use"</p>,
-        <p>🔹Already registered candidatess need not register again.</p>,
+        <p>🔹Already registered candidates need not register again.</p>,
       ],
       button_link: "https://pictinc.org/register/events/concepts",
     },
