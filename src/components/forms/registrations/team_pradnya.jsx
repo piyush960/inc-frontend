@@ -22,6 +22,9 @@ import { useRef } from "react";
 import { year_arr, localTypes, paymentLinks, year_array, state_arr } from "../../../static/data";
 
 import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
+import { MdInfoOutline } from "react-icons/md";
+import { CgClose } from "react-icons/cg";
+import { EventDetails } from '../../../pages'
 
 const MainContainer = styled.div`
   width: 100%;
@@ -247,8 +250,8 @@ function TeamPradnya() {
         } else if (property === "email" && !validateEmail(form1.at(-1)[property])) {
           toast.warn("Please enter a valid E-mail address");
           return;
-        } else if (property === "phone" && form1.at(-1)[property].length !== 10) {
-          toast.warn("Please enter a valid phone number");
+        } else if (property === "phone" && form1.at(-1)[property].length < 11) {
+          toast.warn("Please enter a valid phone number with country code");
           return;
         } else if (property === "gender" && form1.at(-1)[property] === "SEL") {
           toast.warn("Please enter your gender");
@@ -430,8 +433,17 @@ function TeamPradnya() {
       // console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
+          if (form2.isInternational === "1") {
+            if (property === "locality") continue;
+            if (property === "state") continue;
+            if (property === "reason_of_mode" && form2["mode"] === "1") continue;
+            if (property === "referral") continue;
+            if (property === "district") continue;
+            console.log(property)
+            toast.warn("Please enter all fields!");
+            return;
+          }
           if (property === "reason_of_mode" && form2["mode"] === "1") continue;
-
           if (property === "referral") continue;
           toast.warn("Please enter all fields!");
           return;
@@ -458,6 +470,7 @@ function TeamPradnya() {
           }
         },
       });
+
     }
     if (formStep === 3) {
 
@@ -471,13 +484,40 @@ function TeamPradnya() {
         {
           onSuccess: () => {
             toast.success("Completed Step 4️⃣ !", { icon: "✅" });
+            setFormStep((currentStep) => currentStep + 1);
             setActiveStep((activeStep) => activeStep + 1);
             setPaymentStatus(true);
           },
         }
       );
+
     }
   };
+
+  const [showModal, setshowModal] = useState(false)
+  const ModalToggle = () => {
+    setIsOpen(true)
+  }
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  const [showPopup, setShowPopup] = useState(false);
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  const event_detail_toggle = () => {
+    setShowPopup(true)
+  }
+  const event = "Pradnya";
+
 
   return (
     <MainContainer>
@@ -501,17 +541,80 @@ function TeamPradnya() {
           </StepContainer>
           <div className=" md:mx-16 my-6">
             <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
+
+              {/* NOTEBOX  */}
+              {formStep < 3 &&
+                < div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center text-[0.9rem] md:text-lg">
+                  <div className="flex space-y-2 md:space-y-0 flex-col md:flex-row md:space-x-5 justify-center items-center">
+                    <div className=" md:my-0 px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={event_detail_toggle}>
+                      Show event details
+                    </div>
+                    {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1" />Instructions</div> : ""}
+
+                    <div className="">
+                      <li className="  md:font-light md:leading-6  pl-2">₹ 100/- For National Entries
+                      </li>
+                      <li className="  md:font-light md:leading-6  pl-2">
+                        Free for International Entries
+                      </li>
+                    </div>
+
+                  </div>
+                </div>
+              }
+
+
               {/* form 1 */}
               {formStep === 1 && (<>
-                <NoteBox
-                  title="Note"
-                  text="After filling details of each member click the Add member-name button to add the details. And you can add more members by clicking on Add another member."
-                />
+                {isOpen && (
+                  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+                    <div className="w-80 md:w-1/3 bg-light_blue p-6 rounded-xl border border-white border-3">
+                      <div className="flex justify-between items-center">
+                        <h1 className="text-3xl font-bold text-white">Instructions</h1>
+                        <button onClick={closeModal} className="text-white font-bold text-4xl">&times;</button>
+                      </div>
+                      <div className="w-68 md:w-[28rem] text-white mt-5">
+                        <ul className="list-disc list-inside text-lg md:text-xl">
+                          <li className="pl-2">
+                            After filling details of each member, <b>click</b>
+                          </li>
+
+                          <div className=' mt-2 opacity-100 flex items-center  justify-center text-lg'>
+                            <div className='bg-[#0b1e47] rounded-xl border-2 border-gold'>
+                              <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'><span>
+                                {`add member- `}
+                                <span style={{ color: 'gold', fontWeight: 'bold', textTransform: 'uppercase' }}>
+                                  Om
+                                </span>
+                              </span></button>
+
+                            </div>
+                          </div>
+                          <br />
+                          <li className="pl-2 w-68">
+                            To add a new member, click
+
+                          </li>
+                          <div className='mt-2 w-full opacity-100 flex items-center   justify-center text-lg'>
+                            <div className='bg-[#0b1e47] mb-2 rounded-xl border-2 border-gold'>
+                              <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'>
+                                add another member
+                              </button>
+                            </div>
+                          </div>
+                          <li>For any errors in the form try clearing browser cookies </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {form1.map((form, index) => {
                   return (
                     <>
-                      <h1 className="input-label font-medium text-white border-red-500 p-2 w-28 border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2">
-                        Member {index + 1}
+
+                      <h1 className={`input-label font-medium text-white border-red-500 p-2 ${index === 0 ? 'w-56' : 'w-28'} border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2`}>
+                        Member {index + 1} {index === 0 ? "- Team Leader" : ""}
                       </h1>
 
                       <div key={index}>
@@ -542,11 +645,12 @@ function TeamPradnya() {
                               label="Phone No"
                               name="phone"
                               type="tel"
-                              placeholder="phone number"
+                              placeholder="+917507224919"
                               required
                               error={errors1.phone}
                               onChange={(event) => handleFormChange(event, index)}
                               value={form.phone}
+                              tip={`Enter Country Code (eg. +91) eg. +917507224919`}
                             />
                           </div>
                           <div className="input-box-dropdown w-full mb-4 relative">
@@ -588,7 +692,7 @@ function TeamPradnya() {
                           required
                           error={errors1.member_id}
                         />
-                        <NoteBox title ="please take note" text="accepted format: jpeg, png and less than 200kb" />
+                        <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
 
                         {/*  <InputBox
                           label="CodeChef ID"
@@ -602,14 +706,13 @@ function TeamPradnya() {
                           tip={'Codechef ID can be Alphanumeric'}
                         /> */}
 
-                        {memberCount < 2 ? (
+                        {index == form1.length - 1 && memberCount < 2 ? (
                           <Buttons
                             value={
                               <>
                                 <span>
                                   {`add member- `}
                                   <span style={{ color: 'gold', fontWeight: 'bold', textTransform: 'uppercase' }}>
-
                                     {form.name.split(' ')[0]}
                                   </span>
                                 </span>
@@ -656,96 +759,147 @@ function TeamPradnya() {
                         required
                         error={errors2.isInternational}
                       />
-                      <div className=" md:mx-1 my-2">
-                        <InputBox
-                          label="College (Full form)"
-                          name={"college"}
-                          type="text"
-                          placeholder="college name"
-                          required
-                          onChange={(e) => handleInputChange2(e)}
-                          value={form2.college}
-                          error={errors2.college}
-                          tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters."}
-                        />
-                      </div>
-                      <div className="md:mx-1 my-2">
-                        <InputBox
-                          className={
-                            form2.isInternational === "0"
-                              ? "pointer-events-none"
-                              : ""
-                          }
-                          label="Country"
-                          name={"country"}
-                          type="text"
-                          placeholder="country"
-                          readonly={form2.isInternational === "0"}
-                          required
-                          error={errors2.country}
-                          onChange={(e) => handleInputChange2(e)}
-                          value={
-                            form2.isInternational === "0" ? "India" : form2.country
-                          }
-                          tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
-                        />
-                      </div>
-                      <div className="md:flex mx-1 ">
-                        <div className="md:mr-1 md:w-1/2 mt-1">
-                          <Dropdown
-                            label="State"
-                            options={[
-                              { value: "SEL", label: "Select", selected: true },
-                              ...state_arr,
-                            ]}
-                            name={"state"}
-                            state={form2}
-                            setState={setForm2}
-                            required
-                          />
-                        </div>
-                        <div className="md:ml-1 md:w-1/2">
+
+
+                      {form2.isInternational === "1" ? (
+                        <>
+                          <div className=" mx-1 my-2">
+                            <InputBox
+                              label="College (Full form)"
+                              name={"college"}
+                              type="text"
+                              placeholder="college name"
+                              required
+                              onChange={(e) => handleInputChange2(e)}
+                              value={form2.college}
+                              error={errors2.college}
+                              tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
+                            />
+                          </div>
+                          <div className="md:flex md:space-x-3">
+                            <InputBox
+                              className={form2.isInternational === "0" ? "pointer-events-none" : ""}
+                              label="Country"
+                              name={"country"}
+                              type="text"
+                              placeholder="Country"
+                              readonly={form2.isInternational === "0"}
+                              required
+                              error={errors2.country}
+                              onChange={(e) => handleInputChange2(e)}
+                              value={form2.isInternational === "0" ? "India" : form2.country}
+                              tip={"Country should be between 2 and 20 characters (both inclusive) and contains only alphabetical characters."}
+                            />
+
+                            <div className="mt-1 flex-grow">
+                              <InputBox
+                                label="City in which college is located"
+                                type="text"
+                                name={"city"}
+                                placeholder="City"
+                                required
+                                error={errors2.city}
+                                onChange={(e) => handleInputChange2(e)}
+                                value={form2.city}
+                                tipstyle={"hidden"}
+                              />
+                            </div>
+
+
+
+
+
+                          </div> </>) : <>
+                        <div className="my-2">
                           <InputBox
-                            label="District in which college is located"
-                            name={"district"}
+                            label="College (Full form)"
+                            name={"college"}
                             type="text"
-                            placeholder="district"
+                            placeholder="college name"
                             required
-                            error={errors2.district}
                             onChange={(e) => handleInputChange2(e)}
-                            value={form2.district}
-                            tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                            value={form2.college}
+                            error={errors2.college}
+                            tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
                           />
                         </div>
-                      </div>
-                      <div className="md:flex mx-1 ">
-                        <div className="md:mr-1 md:w-1/2">
+                        <div className=" my-2">
                           <InputBox
-                            label="City in which college is located"
+                            className={form2.isInternational === "0" ? "pointer-events-none" : ""}
+                            label="Country"
+                            name={"country"}
                             type="text"
-                            name={"city"}
-                            placeholder="city"
+                            placeholder="country"
+                            readonly={form2.isInternational === "0"}
                             required
-                            error={errors2.city}
+                            error={errors2.country}
                             onChange={(e) => handleInputChange2(e)}
-                            value={form2.city}
+                            value={
+                              form2.isInternational === "0" ? "India" : form2.country
+                            }
+                            tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
                           />
                         </div>
-                        <div className="ml-1 md:w-1/2 mt-1">
-                          <Dropdown
-                            label="Locality in which college is located"
-                            options={[
-                              { value: "SEL", label: "Select", selected: true },
-                              ...localTypes,
-                            ]}
-                            name={"locality"}
-                            state={form2}
-                            setState={setForm2}
-                            required
-                            error={errors2.locality}
-                          />
+                        <div className="md:flex md:mx-1 ">
+                          <div className="md:mr-1 md:w-1/2 md:mt-1">
+                            <Dropdown
+                              label="State"
+                              options={[
+                                { value: "SEL", label: "Select", selected: true },
+                                ...state_arr,
+                              ]}
+                              name={"state"}
+                              state={form2}
+                              setState={setForm2}
+                              required
+                            />
+                          </div>
+
+                          <div className="md:ml-1 md:w-1/2">
+                            <InputBox
+                              label="District in which college is located"
+                              name={"district"}
+                              type="text"
+                              placeholder="district"
+                              required
+                              error={errors2.district}
+                              onChange={(e) => handleInputChange2(e)}
+                              value={form2.district}
+                              tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                            />
+                          </div>
+
                         </div>
-                      </div>
+                        <div className="md:flex ">
+                          <div className="md:mr-1 md:w-1/2">
+                            <InputBox
+                              label="City in which college is located"
+                              type="text"
+                              name={"city"}
+                              placeholder="city"
+                              required
+                              error={errors2.city}
+                              onChange={(e) => handleInputChange2(e)}
+                              value={form2.city}
+                              tipstyle={"hidden"}
+                            />
+                          </div>
+                          <div className="md:ml-1 md:w-1/2 md:mt-1">
+                            <Dropdown
+                              label="Locality in which college is located"
+                              options={[
+                                { value: "SEL", label: "Select", selected: true },
+                                ...localTypes,
+                              ]}
+                              name={"locality"}
+                              state={form2}
+                              setState={setForm2}
+                              required
+                              error={errors2.locality}
+                            />
+                          </div>
+                        </div></>}
+
 
                       <RadioButtons
                         label="Preferred mode of presentation"
@@ -806,8 +960,9 @@ function TeamPradnya() {
               {formStep === 3 &&
                 (paymentStatus ? (
                   <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border border-light_blue w-full">
+
                     <p className="text-xl text-center text-gold font-bold mb-3">
-                      Thank you for registering in InC'24!
+                      Thank you for registering in Pradnya InC'24!
                     </p>
                     <NoteBox
                       title="Note"
@@ -816,10 +971,28 @@ function TeamPradnya() {
                   </div>
                 ) : (
                   <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
+                    {/* NOTEBOX  */}
+                    <div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center text-[0.9rem] md:text-lg">
+                      <div className="flex space-y-2 md:space-y-0 flex-col md:flex-row md:space-x-5 justify-center items-center">
+                        <div className=" md:my-0 px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={event_detail_toggle}>
+                          Show event details
+                        </div>
+                        {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1" />Instructions</div> : ""}
+
+                        <div className="">
+                          <li className="  md:font-light md:leading-6  pl-2">₹ 100/- For National Entries
+                          </li>
+                          <li className="  md:font-light md:leading-6  pl-2">
+                            Free for International Entries
+                          </li>
+                        </div>
+
+                      </div>
+                    </div>
                     <div className="justify-center items-center flex my-6">
                       <div className="z-10 bg-light_blue p-6 rounded-xl">
                         <div className="flex justify-between items-center mb-2">
-                          <h1 className="text-xl font-bold text-white">Scan the QR to pay</h1>
+                          <h1 className="text-xl font-bold text-white">Scan the QR to pay ₹ 100/-</h1>
                         </div>
                         <img src={payment_qr} className="w-96 border-8 rounded-lg shadow-lg" alt="Payment QR Code" />
                       </div>
@@ -837,80 +1010,85 @@ function TeamPradnya() {
                     />
                   </div>
                 ))}
-              {/* <div className="flex justify-between"> */}
-              {formStep > 1 && formStep < 4 && !(formStep === 3 && paymentStatus) && (
-                <Buttons
-                  className="mx-2 my-2"
-                  value=" Previous Step"
-                  onClick={prevForm}
-                />
-              )}
 
 
-              {formStep === 3 ? (
-                paymentStatus ? (
-                  <></>
-                ) : (
+
+              <div className="flex justify-end">
+                {formStep > 1 && formStep < 4 && !(formStep === 3 && paymentStatus) && (
                   <Buttons
-                    className=" mx-2 my-2 "
-                    value="Submit"
-                    onClick={nextForm}
-                    loading={registerUserMutationForm3.isLoading}
+                    className="mx-2 my-2"
+                    value=" Previous Step"
+                    onClick={prevForm}
                   />
-                )
-              ) : (
-                formStep === 2 &&
-                (paymentStatus ? (
-                  <Buttons
-                    className=" mx-2 my-2  "
-                    value="Submit"
-                    onClick={nextForm}
-                    loading={
-                      registerUserMutationForm1.isLoading ||
-                      registerUserMutationForm2.isLoading
-                    }
-                  />
-                ) : (
-                  <Buttons
-                    className=" mx-2 my-2  "
-                    value="Next Step"
-                    onClick={nextForm}
-                    loading={
-                      registerUserMutationForm1.isLoading ||
-                      registerUserMutationForm2.isLoading
-                    }
-                  />
-                ))
-              )}
+                )}
 
-              {formStep < 2 && (<div className="space-y-5 md:space-y-0 md:flex justify-between">
-                <div className="text-center">
-                  {formStep == 1 && form1.length < 2 ? (
-                    <>
-                      <Buttons
-                        className=" mx-2 w-52 md:w-56"
-                        value="add another member"
-                        onClick={addAnotherMember}
-                      />
-                    </>) : (<></>
-                  )}
-                </div>
 
-                <div className="text-center md:text-start">
-                  <>
+                {formStep === 3 ? (
+                  paymentStatus || form1.state !== "MH" ? (
+                    <></>
+                  ) : (
                     <Buttons
-                      className=" mx-2 w-52 md:w-32"
-                      value="Next Step"
+                      className=" mx-2 my-2 "
+                      value="Submit"
+                      onClick={nextForm}
+                      loading={registerUserMutationForm3.isLoading}
+                    />
+                  )
+                ) : (
+                  formStep === 2 &&
+                  (paymentStatus || form2.state !== "MH" ? (
+                    <Buttons
+                      className=" mx-2 my-2  "
+                      value="Submit"
                       onClick={nextForm}
                       loading={
+                        registerUserMutationForm1.isLoading ||
                         registerUserMutationForm2.isLoading
                       }
                     />
-                  </>
+                  ) : (
+                    <Buttons
+                      className=" mx-2 my-2  "
+                      value="Next Step"
+                      onClick={nextForm}
+                      loading={
+                        registerUserMutationForm1.isLoading ||
+                        registerUserMutationForm2.isLoading
+                      }
+                    />
+                  ))
+                )}
+
+                {formStep === 1 && (<div className="space-y-5 md:space-y-0 md:flex justify-between">
+                  <div className="text-center">
+                    {formStep == 1 && form1.length < 2 ? (
+                      <>
+                        <Buttons
+                          className=" mx-2 w-52 md:w-56"
+                          value="add another member"
+                          onClick={addAnotherMember}
+                        />
+                      </>) : (<></>
+                    )}
+                  </div>
+
+
+
+                  <div className="text-center md:text-start">
+                    <>
+                      <Buttons
+                        className=" mx-2 w-52 md:w-32"
+                        value="Next Step"
+                        onClick={nextForm}
+                        loading={
+                          registerUserMutationForm2.isLoading
+                        }
+                      />
+                    </>
+                  </div>
                 </div>
+                )}
               </div>
-              )}
-              {/* </div> */}
             </form>
           </div>
         </>
@@ -918,6 +1096,16 @@ function TeamPradnya() {
         <div className="md:mx-16 my-20">
           <CloseMessage />
         </div>
+      }
+      {
+        showPopup && (
+          <div className="popup w-[98%] h-[98%] fixed">
+            <button onClick={closePopup} className="absolute right-2 lg:right-5 rounded-md top-3 p-[0.05rem] z-50 border-2 border-white bg-[#000000]" title="Close"><CgClose className="text-3xl" /></button>
+            <div className="popup-content w-[98%] h-[98%] overflow-scroll md:overflow-hidden" >
+              <EventDetails event={event} />
+            </div>
+          </div>
+        )
       }
     </MainContainer >
   );

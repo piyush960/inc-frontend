@@ -37,9 +37,10 @@ function ConceptsForm() {
                   </button>
                 </div>
                 <div className="relative p-6 flex-auto">
-                  <ul>
+                  <ul className='list-disc list-inside'>
                   <li>Only after clicking add members, the member will be added</li>
                   <li>Each step will be completed only after clicking on next step</li>
+                  <li>For any errors in the form try clearing browser cookies </li>
                   </ul>
                 </div>
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">

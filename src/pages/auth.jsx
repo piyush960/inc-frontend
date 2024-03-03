@@ -44,9 +44,9 @@ function Auth() {
             </form>
             <div className="flex justify-center mx-7 md:mx-40">
 
-            <NoteBox title="Contact"
+                <NoteBox title="Contact"
                     text="For any technical queries please contact Viraj Sonawane : +91 7972034035 / Om Panchwate : +91 7507224919" />
-                    </div>
+            </div>
         </>
     );
 }

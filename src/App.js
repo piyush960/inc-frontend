@@ -1,13 +1,16 @@
 import { useState, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { ToastUtils, Navbar, Loader, Footer } from './components';
+import { ToastUtils, Navbar, Loader, Footer, EventCards, Sponsors } from './components';
 import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, WebTeam, Homepage, Auth, Gallery, FacultyTeam, ProjectsLabsAllocations } from './pages';
 import Test from './test/test.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
 import Judge from './pages/judge';
-import winners_inc23 from './pages/winners_inc23.jsx';
+import Winners from './pages/winners_inc23.jsx';
 import JudgeProtectedRoutes from './routes/JudgeProtectedRoutes.js';
+import AboutUs from './components/aboutUs.jsx';
+import Committee from './components/committee.jsx';
+import ReferralConcepts from './pages/referral/referralConcepts.jsx';
 
 
 function MainApp() {
@@ -16,7 +19,7 @@ function MainApp() {
 
   useEffect(() => {
     const isAdminRoute = window.location.pathname.startsWith('/admin');
-    setShowNavbar(!isAdminRoute);  
+    setShowNavbar(!isAdminRoute);
 
   }, []);
 
@@ -36,10 +39,17 @@ function MainApp() {
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/admin/*' element={<ProtectedRoutes children={<Admin />} />} />
         <Route path='/judge/*' element={<JudgeProtectedRoutes children={<Judge />} />} />
-        <Route path='/winners' element={<winners_inc23 />} />
+        <Route path='/winners' element={<Winners />} />
         <Route path='/inc-teams' element={<InCTeams />} />
         <Route path='/web-teams' element={<WebTeam />} />
         <Route path='/faculty-teams' element={<FacultyTeam />} />
+        <Route path='/events' element={<EventCards />} />
+        <Route path='/sponsors' element={<Sponsors />} />
+        <Route path='/about' element={<AboutUs />} />
+        <Route path='/committee' element={<Committee />} />
+        {/* REFERRAL FORMS  */}
+        <Route path='/referral/concepts' element={<ReferralConcepts />} />
+        <Route path='/referral/impetus' element={<ReferralConcepts />} />
 
 
         {process.env.REACT_APP_ENVIRONMENT === 'development' &&
