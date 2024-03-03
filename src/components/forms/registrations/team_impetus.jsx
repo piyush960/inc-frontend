@@ -1,7 +1,5 @@
 import "../styles/event_registrations.css";
-import React, { useEffect, useRef } from "react";
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   InputBox,
   Buttons,
