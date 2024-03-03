@@ -253,7 +253,7 @@ function EventDetails(props) {
                       </p>           */}
             </div>
             {/* event details description */}
-            <div className="space-y-4  p-8 h-full overflow-auto bg-black/20 shadow-lg bg-light_blue/30 rounded-xl  border-light_blue shadow-light_blue/20 hover:bg-light_blue/10 border  md:max-h-screen font-thin ">
+            <div className="space-y-4  p-8 md:h-[80%]  overflow-auto bg-black/20 shadow-lg bg-light_blue/30 rounded-xl  border-light_blue shadow-light_blue/20 hover:bg-light_blue/10 border  md:max-h-screen font-thin ">
               <div className="text-4xl text-gold font-bold mb-8 border-b border-white pb-2">
                 Description
               </div>

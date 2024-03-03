@@ -1,5 +1,5 @@
 import "../styles/event_registrations.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   InputBox,
@@ -26,6 +26,9 @@ import {
 } from "../../../static/data";
 
 import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
+import { MdInfoOutline } from "react-icons/md";
+import { CgClose } from "react-icons/cg";
+import { EventDetails } from '../../../pages'
 
 const MainContainer = styled.div`
   width: 100%;
@@ -327,6 +330,7 @@ function TeamConcepts() {
   };
   const [errors1, setErrors1] = useState(initialErrorsForm1);
   const registerUserMutationForm1 = useRegisterStep2(setErrors1, "concepts");
+  const [wordCount, setWordCount] = useState(0);
 
   const handleFormChange = (event, index) => {
     const { name, value } = event.target;
@@ -338,6 +342,18 @@ function TeamConcepts() {
       return data;
     });
   };
+
+  useEffect(() => {
+    const countWords = () => {
+      const words = form0.abstract.split(/\s+/).filter(Boolean).length;
+      setWordCount(words);
+    };
+
+    // Call countWords whenever the specific state is updated
+    // Replace 'specificState' with the actual state you want to monitor
+    countWords();
+  }, [form0.abstract]);
+
 
   const handleSelectChange1 = (event, index) => {
     let data = [...formFields];
@@ -359,8 +375,8 @@ function TeamConcepts() {
         } else if (property === "email" && !validateEmail(formFields.at(-1)[property])) {
           toast.warn("Please enter a valid E-mail address");
           return;
-        } else if (property === "phone" && formFields.at(-1)[property].length !== 10) {
-          toast.warn("Please enter a valid phone number");
+        } else if (property === "phone" && formFields.at(-1)[property].length < 11) {
+          toast.warn("Please enter a valid phone number with country code");
           return;
         } else if (property === "gender" && formFields.at(-1)[property] === "SEL") {
           toast.warn("Please enter your gender");
@@ -502,6 +518,7 @@ function TeamConcepts() {
       });
       setPaymentStatus(false);
     }
+
     // console.log(form2)
   };
   const handleDeptChange = (e) => {
@@ -625,8 +642,8 @@ function TeamConcepts() {
         } else if (property === "hod_email" && !validateEmail(form0[property])) {
           toast.warn("Please enter a valid HOD E-mail address");
           return;
-        } else if (property === "abstract" && (form0[property].length < 100 || form0[property].length > 1000)) {
-          toast.warn("Please enter abstract between 100 to 1000 characters");
+        } else if (property === "abstract" && (wordCount < 250 || wordCount > 300)){
+          toast.warn("Please enter abstract between 250 and 300 words");
           return;
         } else if (property === "demo" && form0[property] === "") {
           toast.warn("Please enter abstract between 50 to 1000 characters");
@@ -667,7 +684,7 @@ function TeamConcepts() {
             // console.log(property)
             toast.warn("Please enter all fields!");
             return;
-          } else if (form2.techfiesta === "0") {
+          } else if (form2.techfiesta === "0" && form2.isInternational === "1") {
             if (property === "department") continue;
             if (property === "group_id") continue;
             if (property === "group_leader_email") continue;
@@ -677,10 +694,24 @@ function TeamConcepts() {
             if (property === "Transaction_id") continue;
             if (property === "reason_of_mode" && form2["mode"] === "1") continue;
             if (property === "referral") continue;
-            // console.log(property)
+            if (property === "techfiesta") continue;
+            if (property === "state") continue;
+            if (property === "district") continue;
+            if (property === "locality") continue;
+            console.log("tech inter", property)
+            toast.warn("Please enter all fields!");
+            return;
+          } else if (form2.techfiesta === "1") {
+            if (property === "isInternational") continue;
+            if (property === "referral") continue;
+            if (property === "department") continue;
+            if (property === "group_id") continue;
+            if (property === "reason_of_mode" && form2["mode"] === "1") continue;
+            console.log("tech", property)
             toast.warn("Please enter all fields!");
             return;
           }
+
           else {
             if (property === "reason_of_mode" && form2["mode"] === "1") continue;
             if (property === "referral") continue;
@@ -692,7 +723,7 @@ function TeamConcepts() {
             if (property === "tech_Transaction_id") continue;
             if (property === "techfiesta") continue;
 
-            // console.log(property)
+            console.log("else ", property)
             toast.warn("Please enter all fields!");
             return;
           }
@@ -744,6 +775,30 @@ function TeamConcepts() {
     }
   };
 
+  const [showModal, setshowModal] = useState(false)
+  const ModalToggle = () => {
+    setIsOpen(true)
+  }
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  const [showPopup, setShowPopup] = useState(false);
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  const event_detail_toggle = () => {
+    setShowPopup(true)
+  }
+  const event = "Concepts";
+
   return (
     <MainContainer>
       {true ?
@@ -766,6 +821,28 @@ function TeamConcepts() {
           </StepContainer>
           <div className="md:mx-16 my-6">
             <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
+
+
+              {/* NOTEBOX  */}
+              {formStep < 3 &&
+                < div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center  md:text-md">
+                  <div className="flex space-y-2 md:space-y-0 flex-col md:flex-row md:space-x-5 justify-center items-center">
+                    <div className=" md:my-0 px-2 flex justify-center items-center md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer text-md" onClick={event_detail_toggle}>
+                      Show event details
+                    </div>
+                    {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className=" mr-1" />Instructions</div> : ""}
+                    <div className="">
+                      <li className="  md:font-light md:leading-6 ">₹ 300/- For National Entries
+                      </li>
+                      <li className="  md:font-light md:leading-6 ">
+                        Free for International Entries
+                      </li>
+                    </div>
+
+                  </div>
+                </div>
+              }
+
               {/* form 0 */}
               {formStep === 0 && (
                 <>
@@ -889,24 +966,64 @@ function TeamConcepts() {
                     type="textarea"
                     label={"Abstract"}
                     name={"abstract"}
-                    placeholder={"In 1000 characters or less"}
+                    placeholder={"Enter abstract here (must be between 250 and 300 words)"}
                     required
                     error={errors0.abstract}
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.abstract}
                     minlenght="50"
-                    tip={"Abstract should be between 50 and 1000 characters long(both inclusive)"}
+                    tip={"Abstract should be between 250 and 300 words"}
+                    showWordCountCondition="true"
+                    wordClass={`mb-1`}
                   ></InputBox>
+                  <p className={`text-gray-500 px-2 py-1 rounded-lg flex justify-end -mt-5 md:-mt-5 md: mb-3`}>{wordCount}/300 words</p>
                 </>
               )}
               {/* form 1 */}
               {formStep === 1 && (
                 <>
-                  <NoteBox
-                    title="Note"
-                    text="After filling details of each member click the Add members button to add the details and then you can also add more members."
-                  />
+                  {isOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+                      <div className="w-80 md:w-1/3 bg-light_blue p-6 rounded-xl border border-white border-3">
+                        <div className="flex justify-between items-center">
+                          <h1 className="text-3xl font-bold text-white">Instructions</h1>
+                          <button onClick={closeModal} className="text-white font-bold text-4xl">&times;</button>
+                        </div>
+                        <div className="w-68 md:w-[28rem] text-white mt-5">
+                          <ul className="list-disc list-inside text-lg md:text-xl">
+                            <li className="pl-2">
+                              After filling details of each member, <b>click</b>
+                            </li>
 
+                            <div className=' mt-2 opacity-100 flex items-center  justify-center text-lg'>
+                              <div className='bg-[#0b1e47] rounded-xl border-2 border-gold'>
+                                <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'><span>
+                                  {`add member- `}
+                                  <span style={{ color: 'gold', fontWeight: 'bold', textTransform: 'uppercase' }}>
+                                    Om
+                                  </span>
+                                </span></button>
+
+                              </div>
+                            </div>
+                            <br />
+                            <li className="pl-2 w-68">
+                              To add a new member, click
+
+                            </li>
+                            <div className='mt-2 w-full opacity-100 flex items-center   justify-center text-lg'>
+                              <div className='bg-[#0b1e47] mb-2 rounded-xl border-2 border-gold'>
+                                <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'>
+                                  add another member
+                                </button>
+                              </div>
+                            </div>
+                            <li>For any errors in the form try clearing browser cookies </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   {formFields.map((form, index) => {
                     return (
                       <>
@@ -924,7 +1041,6 @@ function TeamConcepts() {
                             error={errors1.name}
                             onChange={(event) => handleFormChange(event, index)}
                             value={form.name}
-                            tip={'Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters.'}
                           />
                           <InputBox
                             label="Email ID"
@@ -939,14 +1055,15 @@ function TeamConcepts() {
                           <div className="md:flex">
                             <div className="mr-1 w-full md:w-1/2">
                               <InputBox
-                                label="Phone No"
+                                label="Phone No."
                                 name="phone"
                                 type="tel"
-                                placeholder="phone number"
+                                placeholder="+917507224919"
                                 required
                                 error={errors1.phone}
                                 onChange={(event) => handleFormChange(event, index)}
                                 value={form.phone}
+                                tip={`Enter Country Code (eg. +91) eg. +917507224919`}
                               />
                             </div>
                             <div className="input-box-dropdown w-full mb-4 relative">
@@ -990,7 +1107,7 @@ function TeamConcepts() {
                           />
                           <NoteBox title="please take note" text="accepted format: jpeg, png and less than 200kb" />
 
-                          {memberCount < 6 ? (
+                          {index == formFields.length - 1 && memberCount < 6 ? (
                             <Buttons
                               value={
                                 <>
@@ -1109,96 +1226,149 @@ function TeamConcepts() {
                         setState={setForm2}
                         name="isInternational"
                         required
-                        error={errors2.isInternational}
                       />)}
 
-                      <div className=" mx-1 my-2">
-                        <InputBox
-                          label="College (Full form)"
-                          name={"college"}
-                          type="text"
-                          placeholder="college name"
-                          required
-                          onChange={(e) => handleInputChange2(e)}
-                          value={form2.college}
-                          error={errors2.college}
-                          tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
-                        />
-                      </div>
-                      <div className="mx-1 my-2">
-                        <InputBox
-                          className={form2.isInternational === "0" ? "pointer-events-none" : ""}
-                          label="Country"
-                          name={"country"}
-                          type="text"
-                          placeholder="country"
-                          readonly={form2.isInternational === "0"}
-                          required
-                          error={errors2.country}
-                          onChange={(e) => handleInputChange2(e)}
-                          value={
-                            form2.isInternational === "0" ? "India" : form2.country
-                          }
-                          tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
-                        />
-                      </div>
-                      <div className="md:flex md:mx-1 ">
-                        <div className="md:mr-1 md:w-1/2 md:mt-1">
-                          <Dropdown
-                            label="State"
-                            options={[
-                              { value: "SEL", label: "Select", selected: true },
-                              ...state_arr,
-                            ]}
-                            name={"state"}
-                            state={form2}
-                            setState={setForm2}
-                            required
-                          />
-                        </div>
-                        <div className="md:ml-1 md:w-1/2">
+
+                      {form2.isInternational === "1" ? (
+                        <>
+                          <div className=" mx-1 my-2">
+                            <InputBox
+                              label="College (Full form)"
+                              name={"college"}
+                              type="text"
+                              placeholder="college name"
+                              required
+                              onChange={(e) => handleInputChange2(e)}
+                              value={form2.college}
+                              error={errors2.college}
+                              tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
+                            />
+                          </div>
+                          <div className="md:flex md:space-x-3">
+                            <InputBox
+                              className={form2.isInternational === "0" ? "pointer-events-none" : ""}
+                              label="Country"
+                              name={"country"}
+                              type="text"
+                              placeholder="Country"
+                              readonly={form2.isInternational === "0"}
+                              required
+                              error={errors2.country}
+                              onChange={(e) => handleInputChange2(e)}
+                              value={form2.isInternational === "0" ? "India" : form2.country}
+                              tip={"Country should be between 2 and 20 characters (both inclusive) and contains only alphabetical characters."}
+                            />
+
+                            <div className="mt-1 flex-grow">
+                              <InputBox
+                                label="City in which college is located"
+                                type="text"
+                                name={"city"}
+                                placeholder="City"
+                                required
+                                error={errors2.city}
+                                onChange={(e) => handleInputChange2(e)}
+                                value={form2.city}
+                                tipstyle={"hidden"}
+                              />
+                            </div>
+
+
+
+
+
+                          </div> </>) : <>
+                        <div className="my-2">
                           <InputBox
-                            label="District in which college is located"
-                            name={"district"}
+                            label="College (Full form)"
+                            name={"college"}
                             type="text"
-                            placeholder="district"
+                            placeholder="college name"
                             required
-                            error={errors2.district}
                             onChange={(e) => handleInputChange2(e)}
-                            value={form2.district}
-                            tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                            value={form2.college}
+                            error={errors2.college}
+                            tip={"College name should be between 3 and 100 characters(both inclusive) and contains only alphabetical characters. "}
                           />
                         </div>
-                      </div>
-                      <div className="md:flex md:mx-1 ">
-                        <div className="md:mr-1 md:w-1/2">
+                        <div className=" my-2">
                           <InputBox
-                            label="City in which college is located"
+                            className={form2.isInternational === "0" ? "pointer-events-none" : ""}
+                            label="Country"
+                            name={"country"}
                             type="text"
-                            name={"city"}
-                            placeholder="city"
+                            placeholder="country"
+                            readonly={form2.isInternational === "0"}
                             required
-                            error={errors2.city}
+                            error={errors2.country}
                             onChange={(e) => handleInputChange2(e)}
-                            value={form2.city}
-                            tipstyle={"hidden"}
+                            value={
+                              form2.isInternational === "0" ? "India" : form2.country
+                            }
+                            tip={"Country should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
                           />
                         </div>
-                        <div className="md:ml-1 md:w-1/2 md:mt-1">
-                          <Dropdown
-                            label="Locality in which college is located"
-                            options={[
-                              { value: "SEL", label: "Select", selected: true },
-                              ...localTypes,
-                            ]}
-                            name={"locality"}
-                            state={form2}
-                            setState={setForm2}
-                            required
-                            error={errors2.locality}
-                          />
+                        <div className="md:flex md:mx-1 ">
+                          <div className="md:mr-1 md:w-1/2 md:mt-1">
+                            <Dropdown
+                              label="State"
+                              options={[
+                                { value: "SEL", label: "Select", selected: true },
+                                ...state_arr,
+                              ]}
+                              name={"state"}
+                              state={form2}
+                              setState={setForm2}
+                              required
+                            />
+                          </div>
+
+                          <div className="md:ml-1 md:w-1/2">
+                            <InputBox
+                              label="District in which college is located"
+                              name={"district"}
+                              type="text"
+                              placeholder="district"
+                              required
+                              error={errors2.district}
+                              onChange={(e) => handleInputChange2(e)}
+                              value={form2.district}
+                              tip={"District should be between 2 and 20 characters(both inclusive) and contains only alphabetical characters."}
+                            />
+                          </div>
+
                         </div>
-                      </div>
+                        <div className="md:flex ">
+                          <div className="md:mr-1 md:w-1/2">
+                            <InputBox
+                              label="City in which college is located"
+                              type="text"
+                              name={"city"}
+                              placeholder="city"
+                              required
+                              error={errors2.city}
+                              onChange={(e) => handleInputChange2(e)}
+                              value={form2.city}
+                              tipstyle={"hidden"}
+                            />
+                          </div>
+                          <div className="md:ml-1 md:w-1/2 md:mt-1">
+                            <Dropdown
+                              label="Locality in which college is located"
+                              options={[
+                                { value: "SEL", label: "Select", selected: true },
+                                ...localTypes,
+                              ]}
+                              name={"locality"}
+                              state={form2}
+                              setState={setForm2}
+                              required
+                              error={errors2.locality}
+                            />
+                          </div>
+                        </div></>}
+
+
 
                       <RadioButtons
                         label="  Preferred mode of presentation"
@@ -1254,10 +1424,27 @@ function TeamConcepts() {
                   </div>
                 ) : (
                   <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
+                    <div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center text-[0.9rem] md:text-lg">
+                      <div className="flex space-y-2 md:space-y-0 flex-col md:flex-row md:space-x-5 justify-center items-center">
+                        <div className=" md:my-0 px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={event_detail_toggle}>
+                          Show event details
+                        </div>
+                        {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1" />Instructions</div> : ""}
+
+                        <div className="">
+                          <li className="  md:font-light md:leading-6  pl-2">₹ 300/- For National Entries
+                          </li>
+                          <li className="  md:font-light md:leading-6  pl-2">
+                            Free for International Entries
+                          </li>
+                        </div>
+
+                      </div>
+                    </div>
                     <div className="justify-center items-center flex my-6">
                       <div className="z-10 bg-light_blue p-6 rounded-xl">
                         <div className="flex justify-between items-center mb-2">
-                          <h1 className="text-xl font-bold text-white">Scan the QR to pay</h1>
+                          <h1 className="text-xl font-bold text-white">Scan the QR to pay ₹ 300/- </h1>
                         </div>
                         <img src={payment_qr} className="w-96 border-8 rounded-lg shadow-lg" alt="Payment QR Code" />
                       </div>
@@ -1290,14 +1477,14 @@ function TeamConcepts() {
                 )
               ) : (
                 formStep === 2 &&
-                (paymentStatus || form2.techfiesta === "1" ? (<div className=" text-right">
+                (paymentStatus || form2.techfiesta === "1" || form2.state !== "MH" || form2.isInternational === "1" ? (<div className=" text-right">
                   <Buttons
                     className="mx-2"
                     value=" Previous Step"
                     onClick={prevForm}
                   />
                   <Buttons
-                    className=" mx-2 my-2  "
+                    className="mx-2 my-2"
                     value="Submit"
                     onClick={nextForm}
                     loading={
@@ -1315,7 +1502,7 @@ function TeamConcepts() {
                       onClick={prevForm}
                     />
                     <Buttons
-                      className=" mx-2 my-2  "
+                      className=" mx-2 my-2 px-10 "
                       value="Next Step"
                       onClick={nextForm}
                       loading={
@@ -1377,7 +1564,17 @@ function TeamConcepts() {
           <CloseMessage />
         </div>
       }
-    </MainContainer>
+      {
+        showPopup && (
+          <div className="popup w-[98%] h-[98%] fixed">
+            <button onClick={closePopup} className="absolute right-2 lg:right-5 rounded-md top-3 p-[0.05rem] z-50 border-2 border-white bg-[#000000]" title="Close"><CgClose className="text-3xl" /></button>
+            <div className="popup-content w-[98%] h-[98%] overflow-scroll md:overflow-hidden" >
+              <EventDetails event={event} />
+            </div>
+          </div>
+        )
+      }
+    </MainContainer >
   );
 }
 

@@ -16,5 +16,6 @@ export {
     evaluateProject,
     getJudge,
     getLabAllocations,
-    logoutAdmin
+    logoutAdmin,
+    referralConcepts
 } from './requests';

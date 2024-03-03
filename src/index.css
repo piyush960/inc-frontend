@@ -123,3 +123,8 @@ input:hover ~ .label {
     transform: rotate(360deg);
   }
 }
+
+.active{
+  color : #ffd700;
+  border-bottom : 4px solid #ffd700;
+}

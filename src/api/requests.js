@@ -9,8 +9,6 @@ const backend = axios.create({
     }
 })
 
-
-
 const loginAdmin = async (data) => await backend.post('/admin/login', data);
 const verifyAdmin = async () => await backend.get('/admin/verify');
 const verifyJudge = async () => await backend.get('/judge/verify');
@@ -31,6 +29,12 @@ const evaluateProject = (eventName) => async (data) => await backend.post(`/judg
 const getJudge = (jid) => async () => await backend.get(`/judge/${jid}`)
 const getLabAllocations = (eventName) => async () => await backend.get(`/allocations/${eventName}/labs`);
 const getMemberDetails = (eventName) => async () => await backend.get(`/events/${eventName}/getmemberdetails`);
+
+
+// Referral 
+const referralConcepts = () => async (data) => await backend.post(`/referral/concepts`, data);
+
+
 export {
     loginAdmin,
     verifyAdmin,
@@ -51,5 +55,6 @@ export {
     evaluateProject,
     getJudge,
     getLabAllocations,
-    getMemberDetails
+    getMemberDetails,
+    referralConcepts
 }
