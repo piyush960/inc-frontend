@@ -559,7 +559,7 @@ function TeamImpetus() {
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "impetus");
 
   //steps for whole form
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
     // e.preventDefault();
