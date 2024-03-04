@@ -51,7 +51,7 @@ export default function FacultyTeam() {
             <div className="my-10 md:mt-28 mt-20">
                 <div className="flex justify-center items-center ">
 
-                    <h2 className='team-name2 md:before:w-[80rem] before:w-80 before:h-10 md:before:h-[3.4rem]'>Staff Committee Team</h2>
+                    <h2 className='team-name2 md:before:w-[80rem] before:w-80 before:h-10 md:before:h-[3.4rem]'>Faculty Committee</h2>
                 </div>
             </div>
             {faculty.map(fac => (

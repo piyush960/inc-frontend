@@ -1029,7 +1029,7 @@ function TeamConcepts() {
                     return (
                       <>
                         <h1 className="input-label font-medium text-white border-red-500 p-2 w-28 border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2">
-                          Member {index + 1}
+                          Member {index + 1} {index === 0 ? "- Team Leader" : ""}
                         </h1>
 
                         <div key={index}>
@@ -1042,6 +1042,7 @@ function TeamConcepts() {
                             error={errors1.name}
                             onChange={(event) => handleFormChange(event, index)}
                             value={form.name}
+                            tip={"Name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters."}
                           />
                           <InputBox
                             label="Email ID"
