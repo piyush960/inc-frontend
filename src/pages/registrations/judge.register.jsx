@@ -108,7 +108,7 @@ function JudgeForm() {
                     <InputBox label='Company/Organization' type='text' name='company' value={judge.company} placeholder='Enter Company Name' onChange={handleInputChange} error={errors.company} required />
                     <InputBox label='Company/Organization Address' type='text' name='commercial_address' value={judge.commercial_address} placeholder='Enter Company Address' onChange={handleInputChange} error={errors.commercial_address} required />
                     <InputBox label='Residential Address' type='text' name='residential_address' value={judge.residential_address} placeholder='Enter Residential Address' onChange={handleInputChange} error={errors.commercial_address} required />
-                    <InputBox label='Industry Experience' type='number' name='exp' value={judge.exp} placeholder='Enter Industry Experience' min={eventName === "comcepts" ? 3 : 0} max={100} onChange={handleInputChange} error={errors.exp} required />
+                    <InputBox label='Industry Experience (in years)' type='number' name='exp' value={judge.exp} placeholder='Enter Industry Experience' min={eventName === "comcepts" ? 3 : 0} max={100} onChange={handleInputChange} error={errors.exp} required />
                     {/* <Checkboxes label='Select Event(s)' name='events' state={judge} setState={setJudge} options={events} error={errors.events} required /> */}
                     <Checkboxes label='Select Domain(s) for Judging' name='domains' state={judge} setState={setJudge} options={projectDomains} error={errors.domains} required />
                     <Checkboxes label='Select Slot(s) (tentative)' name='slots' state={judge} setState={setJudge} options={slots} error={errors.slots} required />
