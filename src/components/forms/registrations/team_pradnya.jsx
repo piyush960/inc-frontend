@@ -627,7 +627,7 @@ function TeamPradnya() {
                           error={errors1.name}
                           onChange={(event) => handleFormChange(event, index)}
                           value={form.name}
-                          tip={'Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters.'}
+                          tip={"Name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters."}
                         />
                         <InputBox
                           label="Email ID"
