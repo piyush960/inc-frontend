@@ -266,7 +266,7 @@ const gender_type = [
 
 function TeamConcepts() {
   //form0
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
   const [form0, setForm0] = useState({
     title: "",
@@ -807,8 +807,8 @@ function TeamConcepts() {
           <StepContainer width={width}>
             {steps.map(({ step, label }) => (
               <StepWrapper key={step}>
-                <StepStyle step={activeStep >= step ? "completed" : "incomplete"}>
-                  {activeStep > step ? (
+                <StepStyle step={activeStep > step ? "completed" : "incomplete"}>
+                  {activeStep >= step ? (
                     <CheckMark>L</CheckMark>
                   ) : (
                     <StepCount>{step}</StepCount>
@@ -1028,7 +1028,7 @@ function TeamConcepts() {
                   {formFields.map((form, index) => {
                     return (
                       <>
-                        <h1 className="input-label font-medium text-white border-red-500 p-2 w-28 border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2">
+                        <h1 className={`input-label font-medium text-white border-red-500 p-2 ${index === 0 ? 'w-56' : 'w-28'} border-2 text-lg after:ml-0.5 after:text-gold rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-500 text-center my-2`}>
                           Member {index + 1} {index === 0 ? "- Team Leader" : ""}
                         </h1>
 
@@ -1528,7 +1528,7 @@ function TeamConcepts() {
                 </div>
 
                 <div>
-                  <div className="text-right">
+                  <div className="flex justify-between md:text-right mt-5 md:mt-0">
                     {formStep > 0 && formStep < 4 && !(formStep === 3 && paymentStatus) && (
                       <Buttons
                         className="mx-2"

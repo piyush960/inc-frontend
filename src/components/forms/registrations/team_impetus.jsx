@@ -559,7 +559,7 @@ function TeamImpetus() {
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "impetus");
 
   //steps for whole form
-  const [formStep, setFormStep] = useState(0);
+  const [formStep, setFormStep] = useState(1);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -584,8 +584,8 @@ function TeamImpetus() {
         } else if (property === "project_type" && form0[property] === "") {
           toast.warn("Please enter project type");
           return;
-        } else if (property === "abstract" && (wordCount <= 200 || wordCount >= 250)) {
-          toast.warn("Please enter abstract between 200 and 250 words");
+        } else if (property === "abstract" && (wordCount <= 150 || wordCount >= 200)) {
+          toast.warn("Please enter abstract between 150 and 200 words");
           return;
         }
       }
@@ -917,13 +917,13 @@ function TeamImpetus() {
                     type="textarea"
                     label={"Abstract"}
                     name={"abstract"}
-                    placeholder={"Enter abstract here (must be between 200 and 250 words)"}
+                    placeholder={"Enter abstract here (must be between 150 and 200 words)"}
                     required
                     error={errors0.abstract}
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.abstract}
                     minlenght="50"
-                    tip={"Abstract should be between 200 and 250 words"}
+                    tip={"Abstract should be between 150 and 200 words"}
                     showWordCountCondition="true"
 
                   ></InputBox>
