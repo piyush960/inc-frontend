@@ -559,7 +559,7 @@ function TeamImpetus() {
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "impetus");
 
   //steps for whole form
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -927,7 +927,7 @@ function TeamImpetus() {
                     showWordCountCondition="true"
 
                   ></InputBox>
-                  <p className={`text-gray-500 px-2 py-1 rounded-lg flex justify-end -mt-5 md:-my-5`}>{wordCount}/250 words</p>
+                  <p className={`text-gray-500 px-2 py-1 rounded-lg flex justify-end -mt-5 md:-my-5`}>{wordCount}/200 words</p>
                   <RadioButtons
                     label="  Can you show a demo of your project?"
                     options={demo_arr}

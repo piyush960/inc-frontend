@@ -12,6 +12,7 @@ function AdminData() {
 
   const useEventData = (eventName) => {
     const { isLoading, data } = useGetRegistrations(eventName);
+    console.log(data)
     const [compCount, setCompCount] = useState(0);
     const [itCount, setItCount] = useState(0);
     const [entcCount, setEntcCount] = useState(0);

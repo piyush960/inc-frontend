@@ -27,7 +27,7 @@ function Auth() {
                 toast.success('Login Successful', { icon: '👍' })
                 console.log(data.data.jid)
                 if (data.data.jid) loginNavigator(`/judge/${data.data.jid}`, { replace: true })
-                else loginNavigator('/admin')
+                else loginNavigator('/admin/stats')
                 return
             }
         })

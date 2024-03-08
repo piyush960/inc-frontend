@@ -27,6 +27,19 @@ function ViewEventRegistrations() {
     ]
 
     const columns = useMemo(() => [
+        
+        {
+            name: 'T',
+            selector: row => row['techfiesta'] === "" ? "0" : row['techfiesta'],
+            cell: row => row['techfiesta'],
+            width: '70px',
+            wrap: true,
+            sortable: true,
+            omit: event.eventName === "pradnya"
+        }
+        
+        ,
+        
         {
             name: 'Payment ID',
             selector: row => row['payment_id'],
@@ -35,14 +48,7 @@ function ViewEventRegistrations() {
             wrap: true,
             sortable: true,
         },
-        // {
-        //     name: 'Techfiesta',
-        //     selector: row => row['techfiesta'],
-        //     cellExport: row => row['techfiesta'],
-        //     width: '100px',
-        //     wrap: true,
-        //     sortable: true,
-        // },
+ 
         {
             name: 'Team ID',
             selector: row => row['pid'],
