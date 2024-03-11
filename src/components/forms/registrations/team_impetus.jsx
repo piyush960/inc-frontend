@@ -284,7 +284,7 @@ const demo_arr = [
 ];
 function TeamImpetus() {
   //form0
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
   const [form0, setForm0] = useState({
     title: "",
