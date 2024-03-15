@@ -617,7 +617,6 @@ function TeamPradnya() {
     }
   }, [data])
 
-
   return (
     <MainContainer>
       {true ?
@@ -645,16 +644,13 @@ function TeamPradnya() {
               {/* NOTEBOX  */}
               {formStep < 3 &&
                 <div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center text-[0.9rem] lg:text-md">
-                  <div className="flex flex-col md:flex-row lg:grid md:grid-cols-2 gap-2 md:gap-0 lg:grid-cols-2 space-y-2 md:space-y-0 md:space-x-5 justify-center items-center">
-                    <div className="flex space-x-2 sm:space-x-5 ">
-                      <div className=" md:my-0 px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={event_detail_toggle}>
-                        Event details
-                      </div>
-                      {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1 " />Instructions</div> : ""}
+                  <div className="flex flex-col md:flex-row lg:grid md:grid-cols-3 gap-2 md:gap-0 lg:grid-cols-5 space-y-2 md:space-y-0 md:space-x-5 justify-center items-center">
+                    <div className=" md:my-0 px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={event_detail_toggle}>
+                      Event details
                     </div>
+                    {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1 " />Instructions</div> : ""}
 
-
-                    <div className="">
+                    <div className="md:col-span-3">
                       <li className="  md:font-light md:leading-6  pl-2">₹ 100/- For National Entries
                       </li>
                       <li className="  md:font-light md:leading-6  pl-2">

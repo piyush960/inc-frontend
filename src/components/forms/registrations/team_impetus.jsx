@@ -575,7 +575,7 @@ function TeamImpetus() {
   const registerUserMutationForm3 = useRegisterStep4(setErrors3, "impetus");
 
   //steps for whole form
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
     // e.preventDefault();
@@ -877,16 +877,13 @@ function TeamImpetus() {
               {/* NOTEBOX  */}
               {formStep < 3 &&
                 <div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center text-[0.9rem] lg:text-md">
-                  <div className="flex flex-col md:flex-row lg:grid md:grid-cols-2 gap-2 md:gap-0 lg:grid-cols-2 space-y-2 md:space-y-0 md:space-x-5 justify-center items-center">
-                    <div className="flex space-x-2 sm:space-x-5 ">
-                      <div className=" md:my-0 px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={event_detail_toggle}>
-                        Event details
-                      </div>
-                      {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1 " />Instructions</div> : ""}
+                  <div className="flex flex-col md:flex-row lg:grid md:grid-cols-3 gap-2 md:gap-0 lg:grid-cols-5 space-y-2 md:space-y-0 md:space-x-5 justify-center items-center">
+                    <div className=" md:my-0 px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={event_detail_toggle}>
+                      Event details
                     </div>
+                    {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1 " />Instructions</div> : ""}
 
-
-                    <div className="">
+                    <div className="md:col-span-3">
                       <li className="  md:font-light md:leading-6  pl-2">₹ 100/- For National Entries
                       </li>
                       <li className="  md:font-light md:leading-6  pl-2">
@@ -1065,32 +1062,32 @@ function TeamImpetus() {
 
                   {/* MODAL  */}
                   {isOpen && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
-                      <div className="w-[22rem] sm:w-[30rem] bg-light_blue p-6 rounded-xl border border-white border-3">
-                        <div className="flex justify-between items-center">
-                          <h1 className="text-3xl font-bold text-white">Instructions</h1>
-                          <button onClick={closeModal} className="text-white font-bold text-4xl">&times;</button>
-                        </div>
-                        <div className="w-68 md:w-[28rem] text-white mt-5">
-                          <ul className="list-disc list-inside text-lg md:text-xl">
-                            <li className="pl-2">
-                              After filling details of each member, <b>click</b>
-                            </li>
+                  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+                    <div className="w-[22rem] sm:w-[30rem] bg-light_blue p-6 rounded-xl border border-white border-3">
+                      <div className="flex justify-between items-center">
+                        <h1 className="text-3xl font-bold text-white">Instructions</h1>
+                        <button onClick={closeModal} className="text-white font-bold text-4xl">&times;</button>
+                      </div>
+                      <div className="w-68 md:w-[28rem] text-white mt-5">
+                        <ul className="list-disc list-inside text-lg md:text-xl">
+                          <li className="pl-2">
+                            After filling details of each member, <b>click</b>
+                          </li>
 
-                            <div className=' mt-2 opacity-100 flex items-center  justify-center text-lg'>
-                              <div className='bg-[#0b1e47] rounded-xl border-2 border-gold'>
-                                <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'><span>
-                                  {`add member `}
-                                </span></button>
-                              </div>
+                          <div className=' mt-2 opacity-100 flex items-center  justify-center text-lg'>
+                            <div className='bg-[#0b1e47] rounded-xl border-2 border-gold'>
+                              <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'><span>
+                                {`add member `}
+                              </span></button>
                             </div>
-                            <br />
-                            <li>For any errors in the form try clearing browser cookies </li>
-                          </ul>
-                        </div>
+                          </div>
+                          <br />
+                          <li>For any errors in the form try clearing browser cookies </li>
+                        </ul>
                       </div>
                     </div>
-                  )}
+                  </div>
+                )}
 
                   {/* {formFields.map((form, index) => {
                     return (
