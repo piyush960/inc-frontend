@@ -12,6 +12,8 @@ import test_image7 from '../assets/images/Web Team/manas.jpeg';
 import test_image8 from '../assets/images/Web Team/SairajMane.png';
 import member_bg from '../assets/images/member_bg.jpg';
 import { EmailIcon, LinkedinIcon, GithubIcon } from '../assets/icons';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { toast } from 'react-toastify';
 function WebTeam() {
   useEffect(() => {
     scrollToTop();
@@ -77,6 +79,9 @@ function WebTeam() {
                 <div className='name'>{member.name}</div>
                 <div className='post'>{member.post}</div>
                 <div className='member-icons'>
+                <CopyToClipboard text={member.email} onCopy={()=>{
+                  toast.success("Email Copied!!");
+                }}>
                   <a
                     href="#"
                     onClick={(e) => {
@@ -87,6 +92,7 @@ function WebTeam() {
                   >
                     <EmailIcon className="w-12 h-12" />
                   </a>
+                  </CopyToClipboard>
                   <a href={member.linkedin} target='_blank' className='hover:bg-blue-900/60 hover:border-transparent hover:opacity-100'><LinkedinIcon className='w-12 h-12' /></a>
                   <a href={member.github} target='_blank' className='hover:bg-blue-900/60 hover:border-transparent hover:opacity-100'><GithubIcon className='w-12 h-12' /></a>
                 </div>
