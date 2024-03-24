@@ -1,7 +1,8 @@
 import { useState, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ToastUtils, Navbar, Loader, Footer, EventCards, Sponsors } from './components';
-import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, WebTeam, Homepage, Auth, Gallery, FacultyTeam, ProjectsLabsAllocations } from './pages';
+import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, WebTeam, Homepage, Auth, Gallery, FacultyTeam, ProjectsLabsAllocations} from './pages';
+import Slots from './pages/slots.jsx';
 import Test from './test/test.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import './App.css';
@@ -12,6 +13,7 @@ import AboutUs from './components/aboutUs.jsx';
 import Committee from './components/committee.jsx';
 import ReferralConcepts from './pages/referral/referralConcepts.jsx';
 import Referral from './pages/referral/index.js';
+import Schedule from './components/schedule.jsx';
 
 
 
@@ -51,10 +53,13 @@ function MainApp() {
         <Route path='/core-teams' element={<InCTeams/>} />
         <Route path='/events' element={<EventCards />} />
         <Route path='/sponsors' element={<Sponsors />} />
+        <Route path='/slots' element={<Slots/>} />
         <Route path='/about' element={<AboutUs />} />
         <Route path='/committee' element={<Committee />} />
+        <Route path='/schedule' element={<Schedule />} />
         {/* REFERRAL FORMS  */}
         <Route path='/referral/*' element={<Referral />} />
+
 
         {process.env.REACT_APP_ENVIRONMENT === 'development' &&
           <Route path='/test' element={
