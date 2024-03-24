@@ -9,7 +9,7 @@ function Dashboard() {
       className="w-full min-h-screen bg-cover bg-fixed"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div className="bg-slate-500/50 rounded-2xl mx-5  mb-5 px-5 py-4">
+      <div className="bg-slate-500/50 rounded-2xl mb-5 px-2 py-4">
         <AdminData />
       </div>
     </div>

@@ -5,6 +5,12 @@ import concepts_logo from "../assets/images/concepts_logo.png";
 import pradnya_logo from "../assets/images/pradnya_logo.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import PradnyaRuleBook from "../assets/rulebooks/PradnyaRuleBook.pdf";
+import ImpetusRuleBook from "../assets/rulebooks/ImpetusRuleBook.pdf";
+import ConceptsRuleBook from "../assets/rulebooks/ConceptsRuleBook.pdf";
+import { toast } from "../components/index.js";
+import { FaDownload } from "react-icons/fa";
+
 function EventDetails(props) {
   const [eventDetail, setEventDetail] = useState("");
   const eventsData = {
@@ -63,12 +69,6 @@ function EventDetails(props) {
       schedule: "5th 6th & 7th of April",
     },
     concepts: {
-      // contact: [
-      //   "Siddharth 8237892072",
-      //   "Kalpesh 7769945077",
-      //   "Yamini 7385190784",
-      //   "Vishakha 9011628404"
-      // ],
       logo: concepts_logo,
       criteria: "Final year students enrolled in BE/ BTech degree.",
       schedule: "5th 6th & 7th of April",
@@ -108,7 +108,7 @@ function EventDetails(props) {
       ],
       registrations: {
         fees: ['🔹For National Entries :    ₹300/- ', <br />,
-          '🔹 For International Entries : Free entry'],
+          '🔹For International Entries : Free entry'],
 
         team_size: "max 5",
       },
@@ -204,12 +204,35 @@ function EventDetails(props) {
     else _404Navigator("/404");
   };
   // eslint-disable-next-line
+
+
+  const handleDownload = (eventName) => {
+    // Create a dummy link element
+    const link = document.createElement('a');
+    // Set the href attribute to the PDF file path
+    if (eventName === "CONCEPTS") {
+      link.href = ConceptsRuleBook;
+      link.setAttribute('download', 'ConceptsRuleBook.pdf');
+    } else if (eventName === "IMPETUS") {
+      link.href = ImpetusRuleBook;
+      link.setAttribute('download', 'ImpetusRuleBook.pdf');
+    } else {
+      link.href = PradnyaRuleBook;
+      link.setAttribute('download', 'PradnyaRuleBook.pdf');
+    }
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success(`${eventName.toLowerCase()} Rulebook successfully downloaded`)
+  };
+
   useEffect(() => fetchName(), []);
+
   return (
     <>
       <div className="text-justify">
         {eventDetail !== "" ? (
-          <div className="grid md:grid-cols-2 min-h-screen md:p-8 gap-8 backdrop-blur-xl mt-5">
+          <div className="grid lg:grid-cols-2 min-h-screen md:p-8 gap-8 backdrop-blur-xl mt-5">
             <div className=" text-center  text-white  px-4   ">
               <div className="w-[50%] md:w-[35%]  mx-auto">
                 <img
@@ -219,16 +242,14 @@ function EventDetails(props) {
                 />
               </div>
               <div className="py-3 text-5xl md:text-6xl mx-auto font-bold text-gold  bg-clip-text  ">
-                {/* Impetus */}
                 {eventDetail.main_name}
-                {/* {console.log(eventDetail.name)} */}
               </div>
               <div className=" border-b border-gray-500"></div>
               <div className="font-light text-gray-400 justify py-4 justify-center">
                 {eventDetail.short_desc}
-                {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat dolor amet eum rem, magnam velit quam vero fugit quis reprehenderit animi laudantium temporibus! Tenetur temporibus odio nesciunt minus, sint consequuntur! */}
+
               </div>
-              <div className="event-fees text-blue-400 text-lg flex flex-col md:flex-row font-bold text-left md:space-x-28 items-center md:justify-center">
+              <div className="event-fees text-blue-400 text-lg flex flex-col xl:flex-row font-bold text-left xl:space-x-28 items-center md:justify-center">
                 <div>
                   <span className="text-gray-200 font-thin">Fees: </span> <br />
                   <span>{eventDetail.registrations.fees}</span>
@@ -241,14 +262,24 @@ function EventDetails(props) {
                   </div>
                   <br />
                 </div>
-                {/* <p className="text-green-400">
-                      Registrations are currently being done manually. Sorry for
-                      inconvenience:(
-                    </p> */}
-                <button className=" h-18 px-5 font-xl md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 hover:text-gold hover:border-light_blue hover:bg-faint_blue/10">
-                  <a href={eventDetail.button_link}>Register</a>
-                </button>
+
+                <div className="flex flex-col ">
+                  <button className=" h-18 px-5 font-xl md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 hover:text-gold hover:border-light_blue hover:bg-faint_blue/10">
+                    <a href={eventDetail.button_link}>Register</a>
+                  </button>
+
+                  <button
+                    className="h-18 mt-5 px-5 font-xl md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 hover:text-gold hover:border-light_blue hover:bg-faint_blue/10"
+                    onClick={() => handleDownload(eventDetail.main_name)}
+                  >
+                    <span className="flex justify-center items-center"> <FaDownload className="mr-2" /> Rule Book</span>
+                  </button>
+                </div>
+
+
               </div>
+
+
               {/* <p className="text-red-400 font-medium event-register-buttons disabled">
                         Registrations closed! Try with other events.
                       </p>           */}

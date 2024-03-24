@@ -12,14 +12,14 @@ const eventData = [
     id: 1,
     name: "DAY 1",
     members: "5th April, 2024",
-    t1 : "🔷9:30 AM",
+    t1: "🔷9:30 AM",
     ct: "Registration & Reporting to Shamiyana",
-    t2 : "🔷10:00 AM to 11:00 AM",
+    t2: "🔷10:00 AM to 11:00 AM",
     ct2: "Inauguration of InC'24",
-    t3 : "🔷11:30 AM to 7:00 PM",
-    ct3 : "Impetus & Concepts: Judging & Exhibition of projects",
-    t5 : "🔷11:30 AM to 7:00 PM",
-    ct5 : "Pradnya : Round 1",
+    t3: "🔷11:30 AM to 7:00 PM",
+    ct3: "Impetus & Concepts: Judging & Exhibition of projects",
+    t5: "🔷11:30 AM to 7:00 PM",
+    ct5: "Pradnya : Round 1",
     logo: pradnya_logo,
   },
 
@@ -27,10 +27,10 @@ const eventData = [
     id: 2,
     name: "Day 2",
     members: "6th April, 2024",
-    t2 : "🔷9:00 AM to 7:00 PM",
+    t2: "🔷9:00 AM to 7:00 PM",
     ct2: "Impetus & Concepts: Judging & Exhibition of projects",
-    t4 : "🔷9:00 AM to 7:00 PM",
-    ct4 : "Pradnya : Round 2",
+    t4: "🔷9:00 AM to 7:00 PM",
+    ct4: "Pradnya : Round 2",
 
     logo: concepts_logo,
   },
@@ -39,15 +39,15 @@ const eventData = [
     id: 3,
     name: "Day 3",
     members: "7th April, 2024",
-    t1 : "🔷9:30 AM",
+    t1: "🔷9:30 AM",
     ct: "Consolidation and preparation of winner's list",
-    t2 : "🔷4:30 PM",
+    t2: "🔷4:30 PM",
     ct2: "Reporting to Shamiyana",
-    t3 : "🔷5:00 PM to 7:20 PM",
-    ct3 : "Valedictory & Closing Ceremony",
+    t3: "🔷5:00 PM to 7:20 PM",
+    ct3: "Valedictory & Closing Ceremony",
     logo: day2,
   },
-  
+
 ];
 
 
@@ -56,12 +56,9 @@ function Card(props) {
   return (
     <div>
       {/* my card*/}
-      <div className="py-10 mx-5 md:mx-0 ">
+      <div className="py-5 mx-5 md:mx-0 ">
         <div className="md:h-[600px] shadow-md shadow-light_blue/20 hover:bg-light_blue hover:scale-105 transition ease-in-out bg-light_blue/30 rounded-xl border-light_blue items-center p-4 md:p-8 border md:mx-5 mt-10">
           <div className="flex items-center justify-evenly">
-            {/* <div className="my-4">
-              <img src={props.logo} alt="" className="w-10" />
-            </div> */}
             <div className="my-auto text-xl mr-10 md:text-3xl font-poppins group text-gold font-bold tracking-wider decoration-1 decoration-light_blue uppercase">
               {props.name}
             </div>
@@ -151,7 +148,7 @@ function Schedule() {
         </Fade>
         <hr className="w-1/5 mx-auto mt-3 mb-2 " />
       </span>
-      <div className="grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 lg:gap-2">
+      <div className="grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-2">
         {eventData.map((eva) => {
           return (
             <Card
