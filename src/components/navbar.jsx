@@ -5,6 +5,7 @@ import "./styles/navbar.css";
 import { IoClose } from "react-icons/io5";
 import Buttons from "./buttons";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import Schedule from "./schedule";
 
 function Navbar() {
   const [selected, setSelected] = useState("#home");
@@ -86,14 +87,14 @@ function Navbar() {
                 >
                   About
                 </NavLink>
-                {/* <NavLink to='/schedule'
+                <NavLink to='/schedule'
                   className={`py-4 px-2 border-b-4 font-semibold transition duration-300 ${selected === "#schedule"
                     ? "border-light_blue/80 text-gold"
                     : "hover:text-gold border-transparent"
                     }`}
                 >
                   Schedule
-                </NavLink> */}
+                </NavLink> 
                 <NavLink to='/events'
                   className={`py-4 px-2  font-semibold transition duration-300`}
                 >
@@ -124,6 +125,11 @@ function Navbar() {
                   className={`py-2 px-2 font-semibold transition duration-300 `}
                 >
                   Winners
+                </NavLink>
+                <NavLink to='/slots'
+                  className={`py-2 px-2 font-semibold transition duration-300 `}
+                >
+                  Slots
                 </NavLink>
                 <select
                   className="py-4 px-6 text-white font-semibold hover:text-gold border-transparent hover:border-light_blue/80 bg-faint_blue/30 hover:bg-faint_blue/10 rounded-xl border transition duration-300"
@@ -290,7 +296,7 @@ function Navbar() {
 
           </div>
         </div>
-      </nav >
+      </nav>
     </>
   );
 }
