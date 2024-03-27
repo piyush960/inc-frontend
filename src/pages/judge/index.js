@@ -14,8 +14,6 @@ function Judge() {
         scrollToTop()
     }, [])
 
-
-
     return (
         <>
             <JudgeNavbar />
@@ -24,12 +22,11 @@ function Judge() {
                 <Route path='/:jid' element={
                     <Suspense fallback={<div>Loading...</div>}>
                         <JudgeDashboard />
-                    </Suspense>
-                } />
+                    </Suspense>} />
                 <Route path='/concepts/evaluate/:jid/:pid' element={<ResultConcepts />} />
                 <Route path='/:jid/allocation-details' element={<AllocationDetails />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/allocation-details" element={<AllocationDetails/>} />
+                <Route path="/allocation-details" element={<AllocationDetails />} />
                 {/* <Route path="/select-domain-slots" component={<SelectDomainSlots/>} /> */}
                 {/* <Route path="/marks-entry" component={MarksEntry} /> */}
             </Routes>
