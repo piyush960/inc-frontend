@@ -3,6 +3,7 @@ import imperial from "../assets/images/imperial.png"
 import Aayan from "../assets/images/Aayan.png.jpg"
 import intangle from "../assets/images/intangles.png.jpg"
 import pict from "../assets/images/pict19961.jpg"
+import eq from "../assets/images/er_technologic.png"
 const titleSponsors = [
   {
     name: "Sarvatra Technologies",
@@ -12,7 +13,7 @@ const titleSponsors = [
 
   {
     name: "eQ Technologic",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914533/eq_logo_transparent_highres_fagqvq.png",
+    logo: eq,
     website: "https://www.1eq.com/",
   },
 ];
@@ -68,7 +69,7 @@ const eventSponsors2 = [
 
 const Other = [
   {
-    name: "Imperial",
+    name: "Imperial Overseas",
     logo: imperial,
     website: "https://www.imperial-overseas.com/",
   }
