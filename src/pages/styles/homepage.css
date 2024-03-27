@@ -9,6 +9,7 @@
     font-size: 18px;
     animation: moveNotice 15s linear infinite;
     color: #010642;
+    overflow: hidden;
 }
 
 @keyframes moveNotice {

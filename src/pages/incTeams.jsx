@@ -253,7 +253,7 @@ function InCTeams() {
       ],
     },
     {
-      team: "Social Media Head",
+      team: "Social Media Heads",
       members: [
         {
           name: "Isha Verma",
