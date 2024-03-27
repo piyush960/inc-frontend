@@ -4,12 +4,17 @@ import inc_logo from "../../assets/images/logo.png";
 import "../../components/styles/navbar.css";
 import { logoutAdmin } from "../../api/index.js";
 import { toast } from "../../components/index.js";
+import { IoClose } from "react-icons/io5";
 
 function AdminNavbar() {
   const [selected, setSelected] = useState("#home");
   const mobileMenuRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const [navbar, setNavbar] = useState(true)
+
+  const [showOptions, setShowOptions] = useState(false);
+  const [showCommitteeOptions, setshowCommitteeOptions] = useState(false);
 
   useEffect(() => {
     // Update selected based on the current path
@@ -27,6 +32,18 @@ function AdminNavbar() {
     toast.success('logged out')
     navigate('/auth')
   };
+
+  const closeNavbar = () => {
+    setShowOptions(false)
+    mobileMenuRef.current.classList.toggle("hidden");
+    navbar ? setNavbar(false) : setNavbar(true)
+  };
+  function toggleMenu() {
+    setShowOptions(false)
+    setshowCommitteeOptions(false)
+    mobileMenuRef.current.classList.toggle("hidden");
+    navbar ? setNavbar(false) : setNavbar(true)
+  }
 
 
   return (
@@ -77,15 +94,81 @@ function AdminNavbar() {
                 </select>
               </div>
             </div>
-            <div className='flex justify-center items-center'>
+            <div className='justify-center items-center hidden lg:flex'>
               <button onClick={handleLogout} className="py-4 px-6 text-white font-semibold hover:text-gold border-transparent hover:border-light_blue/80 bg-faint_blue/30 hover:bg-faint_blue/10 rounded-xl border transition duration-300">
+                Logout
+              </button>
+            </div>
+            <div className="lg:hidden flex items-center">
+              {navbar ? <button
+                className="outline-none menu-button"
+                onClick={(_) => toggleMenu()}
+              >
+                <svg
+                  className="w-8 h-8 text-light_blue/80"
+                  x-show="! showMenu"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 00 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="m4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </button> : <button
+                className="outline-none menu-button"
+                onClick={(_) => toggleMenu()}>
+                <IoClose className=" text-3xl font-extrabold text-light_blue/80" />
+              </button>}
+
+            </div>
+          </div>
+
+          <div
+            className="hidden lg:hidden mobile-menu text-center flex item-center flex-col m-auto w-1/2"
+            ref={mobileMenuRef}
+          >
+            <NavLink
+              to="/admin/stats"
+              className={`py-4 px-2 font-semibold transition duration-300`}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/admin/events/registrations/view"
+              className={`py-4 px-2 font-semibold transition duration-300`}
+            >
+              View registrations
+            </NavLink>
+
+            <NavLink
+              to="/admin/events/registrations/verify"
+              className={`py-4 px-2 font-semibold transition duration-300`}
+            >
+              Verify registrations
+            </NavLink>
+
+            <div className="flex flex-col justify-center items-center">
+              <select
+                className="mt-2 w-40 py-4 px-4 font-semibold text-gold border-transparent bg-faint_blue/30 hover:border-sky-800/80 bg-blue-600/30 hover:bg-blue-600/10 rounded-xl border transition duration-300"
+                defaultValue={"Allocations"}
+                onClick={handleSelect}
+              >
+                <option disabled>Allocations</option>
+                <option>Impetus</option>
+                <option>Concepts</option>
+                <option>Pradnya</option>
+              </select>
+
+              <button onClick={handleLogout} className="py-4 my-2 px-6 text-white font-semibold hover:text-gold border-transparent hover:border-light_blue/80 bg-faint_blue/30 hover:bg-faint_blue/10 rounded-xl border transition duration-300">
                 Logout
               </button>
             </div>
           </div>
         </div>
       </div>
-    </nav>
+    </nav >
   );
 }
 

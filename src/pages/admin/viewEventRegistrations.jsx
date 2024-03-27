@@ -29,6 +29,24 @@ function ViewEventRegistrations() {
     const columns = useMemo(() => [
 
         {
+            name: 'Mode',
+            selector: row => row['mode'],
+            width: '130px',
+            cell: row => {
+                switch (row.mode) {
+                    case '1':
+                        return 'Offline'
+
+                    case '0':
+                        return 'Online'
+
+                    default:
+                        return 'Unavailable'
+                }
+            },
+        },
+
+        {
             name: 'T',
             selector: row => row['tech_group_id'] === "" ? "0" : row['tech_group_id'],
             cell: row => row['tech_group_id'],
@@ -38,7 +56,9 @@ function ViewEventRegistrations() {
             omit: event.eventName === "pradnya"
         },
 
-        
+
+
+
         {
             name: 'Payment ID',
             selector: row => row['payment_id'],
