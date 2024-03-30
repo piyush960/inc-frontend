@@ -3,6 +3,8 @@ import imperial from "../assets/images/imperial.png"
 import Aayan from "../assets/images/Aayan.png.jpg"
 import intangle from "../assets/images/intangles.png.jpg"
 import pict from "../assets/images/pict1997.jpg"
+import cloudhedge from "../assets/images/CloudHedge.png"
+import eQ from "../assets/images/eq_technologic_rectangle_logo.png"
 const titleSponsors = [
   {
     name: "Sarvatra Technologies",
@@ -12,7 +14,7 @@ const titleSponsors = [
 
   {
     name: "eQ Technologic",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914533/eq_logo_transparent_highres_fagqvq.png",
+    logo: eQ,
     website: "https://www.1eq.com/",
   },
 ];
@@ -68,7 +70,12 @@ const eventSponsors2 = [
 
 const Other = [
   {
-    name: "Imperial",
+    name: "Cloud Hedge",
+    logo: cloudhedge,
+    website: "https://cloudhedge.io/",
+  },
+  {
+    name: "Imperial Overseas",
     logo: imperial,
     website: "https://www.imperial-overseas.com/",
   }
@@ -208,7 +215,7 @@ export default function Sponsors() {
       <div className="sponsors-head mt-5">Special Prize Sponsor</div>
       <div className="sponsors-list ">{specialprizeList}</div>
 
-      <div className="sponsors-head">Other Sponsor</div>
+      <div className="sponsors-head">Other Sponsors</div>
       <div className="sponsors-list">{OtherSponsorsList}</div>
       <div className="sponsors-head">In Association With</div>
       <div className="sponsors-list">{AssociationSponsorsList}</div>
