@@ -48,11 +48,11 @@ function useEvaluateProject(eventName) {
             const parsedError = errorParser(err)
             if (parsedError.server) toast.error(err.data.msg, { autoClose: 5000 })
             else {
-                // parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
+                parsedError.error && toast.error(parsedError[Object.keys(parsedError)[0]], { autoClose: 5000 })
                 if (err.response.status === 401) {
                     toast.error("Project already Evaluated");
                 }
-                // toast.error('Errors in the submitting form. Please check the form and try again.', { autoClose: 5000 })
+                toast.error('Errors in the submitting form. Please check the form and try again.', { autoClose: 5000 })
             }
         }
     })
