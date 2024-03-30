@@ -8,6 +8,7 @@ const Table = lazy(() => import('../../components/table.jsx'));
 function ViewJudges() {
     const [event, setEvent] = useState({ eventName: '' })
     const { isLoading, data } = useGetJudgeRegistrations(event.eventName)
+    if(data) console.log(data)
 
     const options = [
         {
@@ -140,7 +141,7 @@ function ViewJudges() {
             </div>
             {event.eventName &&
                 <Suspense fallback={<h1>Loading...</h1>}>
-                    <Table title={`${event.eventName.charAt(0).toUpperCase()}${event.eventName.slice(1)} Judges Registrations ${new Date().toISOString().split('T')[0]}`} columns={columns} loading={!event.eventName || isLoading} data={data?.data} keyField='jid' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
+                    <Table title={`${event.eventName.charAt(0).toUpperCase()}${event.eventName.slice(1)} Judges`} columns={columns} loading={!event.eventName || isLoading} data={data?.data} keyField='jid' outerClassName='md:mx-20 mb-3 mx-5 mb-10' />
                 </Suspense>
             }
         </>

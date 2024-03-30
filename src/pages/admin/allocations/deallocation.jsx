@@ -16,6 +16,8 @@ function Deallocations() {
   const { isLoading: isJudgesLoading, data: judgesData } = useGetJudgeRegistrations(eventName)
   const { mutate: deallocate, isLoading: isAllocating } = useDeallocate(eventName)
 
+  console.log(jids)
+
   const judgesColumns = useMemo(() => [
     {
       name: 'Judge ID',
@@ -149,13 +151,7 @@ function Deallocations() {
       cell: row => projectDomains.find(({ value }) => value === row.pid?.split('-')[0])?.label,
       omit: eventName === 'pradnya',
     },
-    {
-        name: 'Slots',
-        selector: row => row['slots'],
-        cell: row => <ol className='list-disc'>{Object.keys(row['slots']).map(index => <li key={index}>{slots[row['slots'][index] - 1].label}<span className='hidden'> , </span></li>)}</ol>,
-  
-        width: '350px',
-    },
+
 
     {
         name: 'EventName',
