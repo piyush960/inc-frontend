@@ -14,6 +14,9 @@ import Committee from './components/committee.jsx';
 import ReferralConcepts from './pages/referral/referralConcepts.jsx';
 import Referral from './pages/referral/index.js';
 import Schedule from './components/schedule.jsx';
+import InsideTeamConcepts from './components/forms/registrations/inside_team_concepts.jsx';
+import InsideTeamPradnya from './components/forms/registrations/inside_team_pradnya.jsx';
+import InsideTeamImpetus from './components/forms/registrations/inside_team_impetus.jsx';
 
 
 
@@ -42,6 +45,10 @@ function MainApp() {
         <Route path='/allocations/labs' element={<ProjectsLabsAllocations />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/register/*' element={<RegistrationsForms />} />
+        <Route path='/event/register/concepts' element={<InsideTeamConcepts />} />
+        <Route path='/event/register/pradnya' element={<InsideTeamPradnya />} />
+        <Route path='/event/register/impetus' element={<InsideTeamImpetus />} />
+
         {/* <Route path='/gallery' element={<Gallery />} /> */}
         <Route path='/payment/:id' element={<Payment />} />
         <Route path='/admin/*' element={<ProtectedRoutes children={<Admin />} />} />
