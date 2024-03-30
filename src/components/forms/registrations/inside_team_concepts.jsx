@@ -11,6 +11,7 @@ import {
   toast,
   NoteBox,
   Table,
+  FormsBanner,
 } from "../../index.js";
 import {
   useDeleteMemberDetails,
@@ -32,6 +33,10 @@ import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
 import { MdDelete, MdInfoOutline } from "react-icons/md";
 import { CgClose } from "react-icons/cg";
 import { EventDetails } from '../../../pages'
+
+const conlogo = require('../../../assets/images/concepts_logo.png');
+// const implogo = require('../../assets/images/impetus_logo.png')
+// const pralogo = require('../../assets/images/pradnya_logo.png')
 
 const MainContainer = styled.div`
   width: 100%;
@@ -928,7 +933,8 @@ function InsideTeamConcepts() {
     <MainContainer>
       {true ?
         <div className="my-10">
-          <StepContainer width={width}>
+          <FormsBanner logo={conlogo} eventName='Concepts' eventDescription='Register for the most grand project exhibition event Concepts for final year student' />
+          <StepContainer width={width} className="my-10">
             {steps.map(({ step, label }) => (
               <StepWrapper key={step}>
                 <StepStyle step={activeStep > step ? "completed" : "incomplete"}>

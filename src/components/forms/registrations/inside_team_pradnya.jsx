@@ -9,6 +9,7 @@ import {
   NoteBox,
   CloseMessage,
   Table,
+  FormsBanner,
 } from "../../index.js";
 import {
   useDeleteMemberDetails,
@@ -31,6 +32,7 @@ import { CgClose } from "react-icons/cg";
 import { EventDetails } from '../../../pages'
 import axios from "axios";
 import { deleteMemberDetails } from "../../../api/requests.js";
+const pralogo = require('../../../assets/images/pradnya_logo.png')
 
 const MainContainer = styled.div`
   width: 100%;
@@ -621,7 +623,8 @@ function InsideTeamPradnya() {
     <MainContainer>
       {true ?
         <div className="my-10">
-          <StepContainer width={width}>
+          <FormsBanner logo={pralogo} eventName='Pradnya' eventDescription='Register for the most competitive live coding event Pradnya' />
+          <StepContainer width={width} className="my-5">
             {steps.map(({ step, label }) => {
               const isActive = activeStep === step;
               const isCompleted = activeStep > step;

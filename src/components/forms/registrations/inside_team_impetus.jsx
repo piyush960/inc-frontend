@@ -8,6 +8,7 @@ import {
   NoteBox,
   CloseMessage,
   Table,
+  FormsBanner,
 } from "../../index.js";
 import styled from "styled-components";
 import { paymentLinks, state_arr, year_arr } from "../../../static/data";
@@ -31,6 +32,8 @@ import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
 import { MdDelete, MdInfoOutline } from "react-icons/md";
 import { CgClose } from "react-icons/cg";
 import { EventDetails } from '../../../pages'
+
+const implogo=require('../../../assets/images/impetus_logo.png')
 
 const MainContainer = styled.div`
   width: 100%;
@@ -854,7 +857,8 @@ function InsideTeamImpetus() {
 
       {true ?
         <div className="my-10">
-          <StepContainer width={width}>
+          <FormsBanner logo={implogo} eventName='Impetus' eventDescription='Register for the most grand project exhibition event impetus for all students from First to Third Year' />
+          <StepContainer width={width} className="my-5">
             {steps.map(({ step, label }) => (
               <StepWrapper key={step}>
                 <StepStyle step={activeStep >= step ? "completed" : "incomplete"}>
@@ -1062,32 +1066,32 @@ function InsideTeamImpetus() {
 
                   {/* MODAL  */}
                   {isOpen && (
-                  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
-                    <div className="w-[22rem] sm:w-[30rem] bg-light_blue p-6 rounded-xl border border-white border-3">
-                      <div className="flex justify-between items-center">
-                        <h1 className="text-3xl font-bold text-white">Instructions</h1>
-                        <button onClick={closeModal} className="text-white font-bold text-4xl">&times;</button>
-                      </div>
-                      <div className="w-68 md:w-[28rem] text-white mt-5">
-                        <ul className="list-disc list-inside text-lg md:text-xl">
-                          <li className="pl-2">
-                            After filling details of each member, <b>click</b>
-                          </li>
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+                      <div className="w-[22rem] sm:w-[30rem] bg-light_blue p-6 rounded-xl border border-white border-3">
+                        <div className="flex justify-between items-center">
+                          <h1 className="text-3xl font-bold text-white">Instructions</h1>
+                          <button onClick={closeModal} className="text-white font-bold text-4xl">&times;</button>
+                        </div>
+                        <div className="w-68 md:w-[28rem] text-white mt-5">
+                          <ul className="list-disc list-inside text-lg md:text-xl">
+                            <li className="pl-2">
+                              After filling details of each member, <b>click</b>
+                            </li>
 
-                          <div className=' mt-2 opacity-100 flex items-center  justify-center text-lg'>
-                            <div className='bg-[#0b1e47] rounded-xl border-2 border-gold'>
-                              <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'><span>
-                                {`add member `}
-                              </span></button>
+                            <div className=' mt-2 opacity-100 flex items-center  justify-center text-lg'>
+                              <div className='bg-[#0b1e47] rounded-xl border-2 border-gold'>
+                                <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'><span>
+                                  {`add member `}
+                                </span></button>
+                              </div>
                             </div>
-                          </div>
-                          <br />
-                          <li>For any errors in the form try clearing browser cookies </li>
-                        </ul>
+                            <br />
+                            <li>For any errors in the form try clearing browser cookies </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
                   {/* {formFields.map((form, index) => {
                     return (
