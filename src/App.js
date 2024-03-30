@@ -1,7 +1,7 @@
 import { useState, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ToastUtils, Navbar, Loader, Footer, EventCards, Sponsors } from './components';
-import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, WebTeam, Homepage, Auth, Gallery, FacultyTeam, ProjectsLabsAllocations} from './pages';
+import { EventDetails, RegistrationsForms, Payment, Admin, InCTeams, WebTeam, Homepage, Auth, Gallery, FacultyTeam, ProjectsLabsAllocations } from './pages';
 import Slots from './pages/slots.jsx';
 import Test from './test/test.jsx';
 import ProtectedRoutes from './routes/ProtectedRoutes';
@@ -15,9 +15,6 @@ import ReferralConcepts from './pages/referral/referralConcepts.jsx';
 import Referral from './pages/referral/index.js';
 import Schedule from './components/schedule.jsx';
 import InsideTeamConcepts from './components/forms/registrations/inside_team_concepts.jsx';
-import InsideTeamPradnya from './components/forms/registrations/inside_team_pradnya.jsx';
-import InsideTeamImpetus from './components/forms/registrations/inside_team_impetus.jsx';
-
 
 
 function MainApp() {
@@ -25,7 +22,6 @@ function MainApp() {
   const [showNavbar, setShowNavbar] = useState(true);
 
   useEffect(() => {
-
     const isAuth = window.location.pathname.startsWith('/auth');
     const isJudgeRoute = window.location.pathname.startsWith('/judge');
     const isAdminRoute = window.location.pathname.startsWith('/admin');
@@ -45,9 +41,8 @@ function MainApp() {
         <Route path='/allocations/labs' element={<ProjectsLabsAllocations />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/register/*' element={<RegistrationsForms />} />
+        {/* even after the Registrations are closed  */}
         <Route path='/event/register/concepts' element={<InsideTeamConcepts />} />
-        <Route path='/event/register/pradnya' element={<InsideTeamPradnya />} />
-        <Route path='/event/register/impetus' element={<InsideTeamImpetus />} />
 
         {/* <Route path='/gallery' element={<Gallery />} /> */}
         <Route path='/payment/:id' element={<Payment />} />
@@ -57,10 +52,10 @@ function MainApp() {
         <Route path='/inc-teams' element={<InCTeams />} />
         <Route path='/web-teams' element={<WebTeam />} />
         <Route path='/faculty-teams' element={<FacultyTeam />} />
-        <Route path='/core-teams' element={<InCTeams/>} />
+        <Route path='/core-teams' element={<InCTeams />} />
         <Route path='/events' element={<EventCards />} />
         <Route path='/sponsors' element={<Sponsors />} />
-        <Route path='/slots' element={<Slots/>} />
+        <Route path='/slots' element={<Slots />} />
         <Route path='/about' element={<AboutUs />} />
         <Route path='/committee' element={<Committee />} />
         <Route path='/schedule' element={<Schedule />} />

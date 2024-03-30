@@ -116,38 +116,38 @@ const eventData = [
     closed: "Registration closed."
 
 
-  },
-  {
-
-    id: 5,
-
-    name: "GAME JAM",
-
-    fees: 200,
-
-    members: "1-4 Members",
-
-    ct: "First, second, third and fourth year students",
-
-    logo: game_jam_logo,
-
-    nt: "₹ 200/- For National Entries",
-
-    it: "Free for International Entries",
-
-
-
-    contact: [{
-
-      name: "Saurav",
-
-      phone: "9373270878",
-
-    },
-
-    ]
-
   }
+  // {
+
+  //   id: 5,
+
+  //   name: "GAME JAM",
+
+  //   fees: 200,
+
+  //   members: "1-4 Members",
+
+  //   ct: "First, second, third and fourth year students",
+
+  //   logo: game_jam_logo,
+
+  //   nt: "₹ 200/- For National Entries",
+
+  //   it: "Free for International Entries",
+
+
+
+  //   contact: [{
+
+  //     name: "Saurav",
+
+  //     phone: "9373270878",
+
+  //   },
+
+  //   ]
+
+  // }
 ];
 
 function Card(props) {
@@ -240,21 +240,6 @@ function Card(props) {
                       )
                     })
                   }
-                  {/* <li className="my-1 px-4" >
-                    <strong>Apoorvaraj : </strong>8530191073
-                  </li>
-                  <li className="my-1 px-4" >
-                    <strong>Mrugank : </strong>7083823772
-                  </li>
-
-                  <li className="my-1 px-4" >
-                    <strong>Vrushali : </strong>9766176681
-                  </li>
-                  <li className="my-1 px-4" >
-                    <strong>Aarti : </strong>9405119460
-                  </li> */
-
-                  }
                 </ul>
               </div>
             </div>
@@ -263,7 +248,6 @@ function Card(props) {
               {props.closed ? <h1>{props.closed}</h1> : <></>}
             </div>
             <br />
-            {/* <button className="bg-transparent text-white hover:text-blue-300 font-semibold hover:text-green-300 px-2">View More</button> */}
           </div>
         </div>
       </div>
@@ -279,24 +263,8 @@ function EventCards() {
         Events
       </h1>
       <hr className="w-1/5 mx-auto mb-5 " />
-      <div className="grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 lg:gap-2">
-        {eventData.slice(0, -2).map((eva) => {
-          return (
-            <Card
-              name={eva.name}
-              logo={eva.logo}
-              team={eva.members}
-              ne={eva.nt}
-              ie={eva.it}
-              contact={eva.contact}
-              ct={eva.ct}
-            />
-          );
-        })}
-
-      </div>
-      <div className="flex flex-col lg:flex-row md:w-[68%] md:m-auto">
-        {eventData.slice(-2).map((eva) => {
+      <div className="grid md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 lg:gap-2 xl:mx-52">
+        {eventData.map((eva) => {
           return (
             <Card
               name={eva.name}
@@ -310,7 +278,24 @@ function EventCards() {
             />
           );
         })}
+
       </div>
+      {/* <div className="flex flex-col lg:flex-row md:w-[68%] md:m-auto">
+        {eventData.slice().map((eva) => {
+          return (
+            <Card
+              name={eva.name}
+              logo={eva.logo}
+              team={eva.members}
+              ne={eva.nt}
+              ie={eva.it}
+              contact={eva.contact}
+              ct={eva.ct}
+              closed={eva.closed}
+            />
+          );
+        })}
+      </div> */}
     </div>
   );
 }
