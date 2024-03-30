@@ -82,6 +82,13 @@ function AdminNavbar() {
                   Verify registrations
                 </NavLink>
 
+                <NavLink
+                  to="/admin/judges/registrations/view"
+                  className={`py-4 px-2 font-semibold transition duration-300`}
+                >
+                  View Judges
+                </NavLink>
+
                 <select
                   className="mt-2 w-40 py-4 px-4 font-semibold text-gold border-transparent bg-faint_blue/30 hover:border-sky-800/80 bg-blue-600/30 hover:bg-blue-600/10 rounded-xl border transition duration-300"
                   defaultValue={"Allocations"}
@@ -147,6 +154,13 @@ function AdminNavbar() {
               className={`py-4 px-2 font-semibold transition duration-300`}
             >
               Verify registrations
+            </NavLink>
+
+            <NavLink
+              to="/admin/judges/registrations/view"
+              className={`py-4 px-2 font-semibold transition duration-300`}
+            >
+              View judges
             </NavLink>
 
             <div className="flex flex-col justify-center items-center">
