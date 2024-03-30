@@ -853,7 +853,7 @@ function InsideTeamImpetus() {
     <MainContainer>
 
       {true ?
-        <>
+        <div className="my-10">
           <StepContainer width={width}>
             {steps.map(({ step, label }) => (
               <StepWrapper key={step}>
@@ -1624,7 +1624,7 @@ function InsideTeamImpetus() {
                   classNames='mx-2 my-2'
               /> */}
           </div>
-        </>
+        </div>
         :
         <div className="md:mx-16 my-20">
           <CloseMessage />

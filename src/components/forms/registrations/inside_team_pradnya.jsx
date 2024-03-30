@@ -620,7 +620,7 @@ function InsideTeamPradnya() {
   return (
     <MainContainer>
       {true ?
-        <div className="my-5">
+        <div className="my-10">
           <StepContainer width={width}>
             {steps.map(({ step, label }) => {
               const isActive = activeStep === step;
