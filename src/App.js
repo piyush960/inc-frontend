@@ -15,6 +15,7 @@ import ReferralConcepts from './pages/referral/referralConcepts.jsx';
 import Referral from './pages/referral/index.js';
 import Schedule from './components/schedule.jsx';
 import InsideTeamConcepts from './components/forms/registrations/inside_team_concepts.jsx';
+import InsideTeamImpetus from './components/forms/registrations/inside_team_impetus.jsx';
 
 
 function MainApp() {
@@ -43,6 +44,7 @@ function MainApp() {
         <Route path='/register/*' element={<RegistrationsForms />} />
         {/* even after the Registrations are closed  */}
         <Route path='/event/register/concepts' element={<InsideTeamConcepts />} />
+        <Route path='/event/register/impetus' element={<InsideTeamImpetus />} />
 
         {/* <Route path='/gallery' element={<Gallery />} /> */}
         <Route path='/payment/:id' element={<Payment />} />

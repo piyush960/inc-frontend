@@ -15,7 +15,7 @@ const AllocationDetails = () => {
   useEffect(() => {
     setProjects(data?.data?.projectsNotEvaluated)
     setEvaluatedProjects(data?.data?.projectsEvaluated)
-    console.log(projects)
+    // console.log(projects)
   }, [data])
 
 
@@ -56,7 +56,6 @@ const AllocationDetails = () => {
                     <tr key={index} className={index % 2 === 0 ? "bg-faint_blue/20" : "bg-faint_blue"}>
                       <td className="text-center p-2">{project}</td>
                       <td className="p-2 flex justify-center items-center">
-                        {/* You can add the button or link for marks entry here */}
                         <Buttons
                           type='submit'
                           value={`Evaluate ${project}`}
@@ -68,15 +67,13 @@ const AllocationDetails = () => {
                   ))
                 ) : (
                   <tr>
-                    {isLoading ? <td>Loading...</td> :
+                    {data.length === 0 && 
                       <td colSpan="2" className="text-center p-2 border-r-[1px] border-l-[1px] border-b-[1px] border-gold">No projects allocated</td>
                     }
                   </tr>
                 )}
               </tbody>
             </table>
-
-
 
 
             <h1 className="rounded-lg p-2 text-center text-xl text-gold mb-2">Evaluated projects</h1>
