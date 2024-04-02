@@ -16,6 +16,7 @@ import Referral from './pages/referral/index.js';
 import Schedule from './components/schedule.jsx';
 import InsideTeamConcepts from './components/forms/registrations/inside_team_concepts.jsx';
 import InsideTeamImpetus from './components/forms/registrations/inside_team_impetus.jsx';
+import UpdateAbstract from './pages/abstract/updateAbstract.jsx';
 
 
 function MainApp() {
@@ -63,7 +64,8 @@ function MainApp() {
         <Route path='/schedule' element={<Schedule />} />
         {/* REFERRAL FORMS  */}
         <Route path='/referral/*' element={<Referral />} />
-
+        {/* UPDATE ABSTRACT  */}
+        <Route path='/update/abstract' element={<UpdateAbstract />} />
 
         {process.env.REACT_APP_ENVIRONMENT === 'development' &&
           <Route path='/test' element={

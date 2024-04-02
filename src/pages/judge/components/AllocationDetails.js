@@ -67,7 +67,7 @@ const AllocationDetails = () => {
                   ))
                 ) : (
                   <tr>
-                    {data.length === 0 && 
+                    {data?.length === 0 && 
                       <td colSpan="2" className="text-center p-2 border-r-[1px] border-l-[1px] border-b-[1px] border-gold">No projects allocated</td>
                     }
                   </tr>
