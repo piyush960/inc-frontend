@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { registerEventStep1, registerEventStep2, registerEventStep3, registerEventStep4 } from '../api';
 import errorParser from '../utils/errorParser';
 import { toast } from '../components';
-import { deleteMemberDetails, getAddedMembers, getMemberDetails } from '../api/requests';
+import { deleteMemberDetails, getAbstract, getAddedMembers, getMemberDetails, updateAbstract } from '../api/requests';
 
 function useRegisterStep1(setErrors, eventName) {
     const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(registerEventStep1(eventName), {
@@ -124,6 +124,28 @@ function useDeleteMemberDetails(eventName) {
 }
 
 
+function useGetAbstract(pid) {
+    const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(getAbstract(pid) )
+
+    if (isError) {
+        const parsedError = errorParser(error)
+        if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+    }
+    return { mutate, isLoading, isSuccess, isError, data, error }
+}
+
+function useUpdateAbstract(updatedAbstractdata) {
+    const { mutate, isLoading, isSuccess, isError, data, error } = useMutation(updateAbstract(updatedAbstractdata) )
+
+    if (isError) {
+        const parsedError = errorParser(error)
+        if (parsedError.server) toast.error(parsedError.server, { autoClose: 5000 })
+    }
+    return { mutate, isLoading, isSuccess, isError, data, error }
+}
+
+
+
 export {
     useRegisterStep1,
     useRegisterStep2,
@@ -131,5 +153,7 @@ export {
     useRegisterStep3,
     useRegisterStep4,
     useGetMemberDetails,
-    useDeleteMemberDetails
+    useDeleteMemberDetails,
+    useGetAbstract,
+    useUpdateAbstract
 }

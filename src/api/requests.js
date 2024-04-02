@@ -33,6 +33,8 @@ const getMemberDetails = (eventName) => async () => await backend.get(`/events/$
 const getAllocatedProjects = (jid) => async () => await backend.get(`/allocations/projects/${jid}`)
 // Referral 
 const referralConcepts = () => async (data) => await backend.post(`/referral/concepts`, data);
+const getAbstract = () => async (pid) => await backend.post(`/events/getabstract`, {pid});
+const updateAbstract = () => async (data) => await backend.post(`/events/updateabstract`, data);
 
 const deleteMemberDetails = (eventName) => async (index) => {
     await backend.post(`/events/${eventName}/deletememberdetails`, { index });
@@ -62,5 +64,7 @@ export {
     getMemberDetails,
     referralConcepts,
     getAllocatedProjects,
-    deleteMemberDetails
+    deleteMemberDetails,
+    getAbstract,
+    updateAbstract
 }
