@@ -16,7 +16,9 @@ const titleSponsors = [
     name: "Sarvatra Technologies",
     logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914537/logo_sarvatra_ww7sgb.png",
     website: "https://sarvatra.tech/",
-  } 
+  }
+
+
 ];
 
 const coSponsors = [
@@ -43,11 +45,11 @@ const educationSponsors = [
 ];
 
 const eventSponsors = [
-  // {
-  //   name: "AGCO",
-  //   logo: "https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png",
-  //   website: "https://www.agcocorp.com/",
-  // },
+  {
+    name: "AGCO",
+    logo: "https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png",
+    website: "https://www.agcocorp.com/",
+  },
 ];
 const specialprize = [
   {
@@ -59,7 +61,6 @@ const specialprize = [
     website: "https://pict.edu/",
   },
 ];
-
 const eventSponsors2 = [
   {
     name: "Veritas",
