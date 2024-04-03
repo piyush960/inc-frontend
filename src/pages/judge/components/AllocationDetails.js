@@ -9,13 +9,14 @@ const AllocationDetails = () => {
   const [projects, setProjects] = useState([]);
   const [evaluatedProjects, setEvaluatedProjects] = useState([]);
   const judge = Cookies.get('jid')
+
   const { data, isLoading } = useGetAllocatedProjects(judge);
   const navigate = useNavigate()
 
   useEffect(() => {
     setProjects(data?.data?.projectsNotEvaluated)
     setEvaluatedProjects(data?.data?.projectsEvaluated)
-    // console.log(projects)
+    console.log(data)
   }, [data])
 
 
