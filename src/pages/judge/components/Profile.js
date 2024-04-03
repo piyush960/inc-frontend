@@ -11,7 +11,7 @@ const Profile = () => {
   useEffect(() => {
     if (data) {
       setjudgeData(data.data);
-      console.log(judgeData)
+      // console.log(judgeData)
     }
   }, [data]);
 
@@ -34,9 +34,10 @@ const Profile = () => {
                 </div>
 
                 <div className="w-1/2 pl-2">
-                  <p className=" font-semibold text-gray-500">Last Name:</p>
-                  <p className=" font-bold">{judgeData?.name?.split(" ")[1]}</p>
+                  <p className="font-semibold text-gray-500">Last Name:</p>
+                  <p className="font-bold">{judgeData?.name?.split(" ")[judgeData?.name?.split(" ").length - 1]}</p>
                 </div>
+
               </div>
 
               <div className="flex mb-2">
@@ -75,7 +76,7 @@ const Profile = () => {
                   <p className='font-bold text-md'>
                     {judgeData?.slots?.map((slot, index) => {
                       const selectedSlot = slots.find((s) => s.value === slot);
-                      return <span key={index} className='text-[0.95rem] lg:text-lg'>{index === 0 ? '' : <br />}{selectedSlot ? selectedSlot.label.split(" ")[0].substring(0,3)+' '+ selectedSlot?.label.split(" ").slice(1).join(" ") : 'Unknown Slot'}</span>;
+                      return <span key={index} className='text-[0.95rem] lg:text-lg'>{index === 0 ? '' : <br />}{selectedSlot ? selectedSlot.label.split(" ")[0].substring(0, 3) + ' ' + selectedSlot?.label.split(" ").slice(1).join(" ") : 'Unknown Slot'}</span>;
                     })}
                   </p>
                 </div>

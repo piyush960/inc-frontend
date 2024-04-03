@@ -32,7 +32,8 @@ function InputBox(props) {
                 className={`input w-full bg-faint_blue/30 font-gilroy text-gold text-lg px-4 py-2 outline-0 border-1 border-transparent rounded-xl hover:border-light_blue focus:border-transparent focus:ring-1 focus:ring-light_blue focus:bg-faint_blue/20 ${props.className}`}
                 autoComplete='off'
                 ref={props.inputref ?? null}
-                rows={props.type === "textarea" ? 5 : undefined}
+                rows={props.rows ? props.rows : props.type === "textarea" ? 5 : undefined}
+                // rows={props.type === "textarea" ? 5 : undefined}
             />
 
             {props.error && <span className='text-red-500 bg-black px-2 py-1 rounded-lg absolute right-3 mt-8'>{props.error}</span>}

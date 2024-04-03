@@ -29,11 +29,7 @@ function Homepage() {
       {showPopup && <Popup handleClose={handleClosePopup} />}
       <div className="notice">
         <div className="notice-content">
-<<<<<<< HEAD
-         <span >🛑 Last date of registration is 26th March 2024 (Tuesday) </span>
-=======
-         <span >⚠️ Extended Registration deadline: March 29, 2024 (Friday) until 11:59 PM 🕛 </span>
->>>>>>> 077f723282167f105de61478640d7955765b456e
+          <span >⚠️ Only Pradnya Registrations are open. Other Registrations have been closed. </span>
         </div>
       </div>
       <Hero />

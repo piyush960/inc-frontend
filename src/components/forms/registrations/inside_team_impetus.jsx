@@ -8,6 +8,7 @@ import {
   NoteBox,
   CloseMessage,
   Table,
+  FormsBanner,
 } from "../../index.js";
 import styled from "styled-components";
 import { paymentLinks, state_arr, year_arr } from "../../../static/data";
@@ -31,6 +32,8 @@ import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
 import { MdDelete, MdInfoOutline } from "react-icons/md";
 import { CgClose } from "react-icons/cg";
 import { EventDetails } from '../../../pages'
+
+const implogo = require('../../../assets/images/impetus_logo.png')
 
 const MainContainer = styled.div`
   width: 100%;
@@ -286,7 +289,7 @@ const demo_arr = [
   },
 ];
 
-function TeamImpetus() {
+function InsideTeamImpetus() {
   //form0
   const [activeStep, setActiveStep] = useState(1);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
@@ -852,9 +855,10 @@ function TeamImpetus() {
   return (
     <MainContainer>
 
-      {false ?
-        <>
-          <StepContainer width={width}>
+      {true ?
+        <div className="my-10">
+        <FormsBanner logo={implogo} eventName='Impetus' eventDescription='Register for the most grand project exhibition event impetus for all students from First to Third Year' />
+          <StepContainer width={width} className="my-10">
             {steps.map(({ step, label }) => (
               <StepWrapper key={step}>
                 <StepStyle step={activeStep >= step ? "completed" : "incomplete"}>
@@ -1624,7 +1628,7 @@ function TeamImpetus() {
                   classNames='mx-2 my-2'
               /> */}
           </div>
-        </>
+        </div>
         :
         <div className="md:mx-16 my-20">
           <CloseMessage />
@@ -1645,4 +1649,4 @@ function TeamImpetus() {
   );
 }
 
-export default TeamImpetus;
+export default InsideTeamImpetus;

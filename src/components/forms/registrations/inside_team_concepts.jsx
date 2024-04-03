@@ -1,18 +1,18 @@
 import "../styles/event_registrations.css";
 import { useEffect, useMemo, useRef, useState } from "react";
+import styled from "styled-components";
 import {
   InputBox,
+  CloseMessage,
   Buttons,
+  Dropdown,
   FileInputBox,
+  RadioButtons,
   toast,
   NoteBox,
-  CloseMessage,
   Table,
+  FormsBanner,
 } from "../../index.js";
-import styled from "styled-components";
-import { paymentLinks, state_arr, year_arr } from "../../../static/data";
-import Dropdown from "../../dropdown";
-import RadioButtons from "../../radioButtons";
 import {
   useDeleteMemberDetails,
   useGetMemberDetails,
@@ -22,15 +22,21 @@ import {
   useRegisterStep4,
 } from "../../../hooks/events.hooks";
 import {
+  paymentLinks,
   projectDomains,
   projectTypes,
-  localTypes
+  localTypes,
+  state_arr
 } from "../../../static/data";
 
 import payment_qr from "../../../assets/payment QR/payment_qr.jpg";
 import { MdDelete, MdInfoOutline } from "react-icons/md";
 import { CgClose } from "react-icons/cg";
 import { EventDetails } from '../../../pages'
+
+const conlogo = require('../../../assets/images/concepts_logo.png');
+// const implogo = require('../../assets/images/impetus_logo.png')
+// const pralogo = require('../../assets/images/pradnya_logo.png')
 
 const MainContainer = styled.div`
   width: 100%;
@@ -161,6 +167,7 @@ const steps = [
   },
 ];
 const totalSteps = steps.length;
+
 const initialErrorsForm0 = {
   title: "",
   domain: "",
@@ -169,12 +176,10 @@ const initialErrorsForm0 = {
   guide_email: "",
   guide_phone: "",
   hod_email: "",
-  sponsored: "",
   company: "",
   abstract: "",
   nda: "",
-  demo: "",
-  reason_of_demo: "",
+  sponsored: "",
 };
 const initialErrorsForm1 = {
   name: "",
@@ -185,16 +190,20 @@ const initialErrorsForm1 = {
 };
 const initialErrorsForm2 = {
   isPICT: "",
-  isInternational: "0",
+  isInternational: "",
   college: "",
   country: "",
   state: "",
   district: "",
-  locality: "1",
-  mode: "1",
+  locality: "",
+  mode: "",
   reason_of_mode: "",
   referral: "",
   year: "",
+};
+
+const initialErrorsForm3 = {
+  payment_id: "",
 };
 
 const sponsor_arr = [
@@ -220,9 +229,6 @@ const nda_arr = [
     label: "No",
   },
 ];
-const initialErrorsForm3 = {
-  payment_id: "",
-};
 
 const pict_arr = [
   {
@@ -258,15 +264,6 @@ const country_arr = [
     label: "No",
   },
 ];
-const proj_domain = [
-  { value: "SEL", label: "Select" },
-  { value: "AD", label: "Application Development" },
-  { value: "CN", label: "Communication Networks and Security Systems" },
-  { value: "DSP", label: "Digital / Image/ Speech / Video Processing" },
-  { value: "ES", label: "Embedded/VLSI Systems" },
-  { value: "ML", label: "Machine Learning and Pattern Recognition" },
-  { value: "OT", label: "Others" },
-];
 
 const gender_type = [
   { value: "SEL", label: "Select", disabled: true },
@@ -275,20 +272,9 @@ const gender_type = [
   { value: "Other", label: "Other" },
 ];
 
-const demo_arr = [
-  {
-    value: "1",
-    label: "Yes",
-  },
-  {
-    value: "0",
-    label: "No",
-  },
-];
-
-function TeamImpetus() {
+function InsideTeamConcepts() {
   //form0
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
   const [form0, setForm0] = useState({
     title: "",
@@ -298,18 +284,15 @@ function TeamImpetus() {
     guide_email: "",
     guide_phone: "",
     hod_email: "",
-    sponsored: "0",
     company: "",
     abstract: "",
     nda: "0",
-    demo: "1",
-    reason_of_demo: "",
+    sponsored: "0",
   });
   const [errors0, setErrors0] = useState(initialErrorsForm0);
-  const registerUserMutationForm0 = useRegisterStep1(setErrors0, "impetus");
-  const [wordCount, setWordCount] = useState(0);
+  const registerUserMutationForm0 = useRegisterStep1(setErrors0, "concepts");
   const [formData, setformData] = useState([])
-  const { data } = useGetMemberDetails("impetus");
+  const { data } = useGetMemberDetails("concepts");
   const handleInputChange0 = (e) => {
     const { name, value } = e.target;
     setForm0((prevState) => {
@@ -317,21 +300,17 @@ function TeamImpetus() {
         setErrors0((prevState) => ({ ...prevState, [name]: "" }));
       return { ...prevState, [name]: value };
     });
-
   };
 
-
-  useEffect(() => {
-    const countWords = () => {
-      const words = form0.abstract.split(/\s+/).filter(Boolean).length;
-      setWordCount(words);
-    };
-
-    // Call countWords whenever the specific state is updated
-    // Replace 'specificState' with the actual state you want to monitor
-    countWords();
-  }, [form0.abstract]);
-
+  const handleSelectChange0 = (e) => {
+    const { name, value } = e.target;
+    setForm0((prevState) => {
+      errors0[name] !== "" &&
+        setErrors0((prevState) => ({ ...prevState, [name]: "" }));
+      return { ...prevState, [name]: value };
+    });
+    //setForm0(form0);
+  };
 
   //form1
   const [formFields, setFormFields] = useState(
@@ -360,7 +339,8 @@ function TeamImpetus() {
   };
 
   const [errors1, setErrors1] = useState(initialErrorsForm1);
-  const registerUserMutationForm1 = useRegisterStep2(setErrors1, "impetus");
+  const registerUserMutationForm1 = useRegisterStep2(setErrors1, "concepts");
+  const [wordCount, setWordCount] = useState(0);
 
   const handleFormChange = (event, index) => {
     const { name, value } = event.target;
@@ -369,6 +349,18 @@ function TeamImpetus() {
       [name]: value
     }));
   };
+
+  useEffect(() => {
+    const countWords = () => {
+      const words = form0.abstract.split(/\s+/).filter(Boolean).length;
+      setWordCount(words);
+    };
+
+    // Call countWords whenever the specific state is updated
+    // Replace 'specificState' with the actual state you want to monitor
+    countWords();
+  }, [form0.abstract]);
+
 
   const handleSelectChange1 = (event, index) => {
     let data = [...formFields];
@@ -380,7 +372,6 @@ function TeamImpetus() {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   }
-
 
   const addFields = () => {
     // console.log(form1)
@@ -419,8 +410,7 @@ function TeamImpetus() {
               email: "",
               phone: "",
               gender: "SEL",
-              member_id: "",
-              codechef_id: ""
+              member_id: ""
             });
             SetMemberCount((prevCount) => prevCount + 1);
             toast.success(`Member ${memberCount + 1} added!`, { icon: "✅" });
@@ -446,10 +436,10 @@ function TeamImpetus() {
       phone: "",
       gender: "SEL",
       member_id: "",
-      codechef_id: ""
     };
     setFormFields([...formFields, object]);
   }
+
 
   const removefields = (index) => {
     setFormFields((data) => data.slice(index, 1));
@@ -460,25 +450,29 @@ function TeamImpetus() {
     isPICT: "",
     isInternational: "",
     college: "",
-    country: "",
+    department: "",
+    group_id: "",
     techfiesta: "",
     group_leader_email: "",
     tech_group_id: "",
     tech_Transaction_id: "",
+    country: "",
     state: "",
     district: "",
+    city: "",
     locality: "1",
     mode: "1",
     reason_of_mode: "",
     referral: "",
-    year: "",
+
   });
   const [errors2, setErrors2] = useState(initialErrorsForm2);
-  const registerUserMutationForm2 = useRegisterStep3(setErrors2, "impetus");
-
+  const registerUserMutationForm2 = useRegisterStep3(setErrors2, "concepts");
 
   const handleInputChange2 = (e) => {
     const { name, value } = e.target;
+    // console.log(name, value)
+
     if (name === "isPICT" && value === "1") {
       // console.log("is pict");
       setForm2((form2) => ({
@@ -486,6 +480,7 @@ function TeamImpetus() {
         isPICT: "1",
         college: "Pune Institute Of Computer Technology",
         country: "India",
+        department: "",
         Transaction_id: "",
         city: "Pune",
         state: "Maharashtra",
@@ -501,6 +496,8 @@ function TeamImpetus() {
         ...form2,
         isPICT: "0",
         college: "",
+        department: "",
+        group_id: "",
         country: "",
         state: "",
         city: "",
@@ -541,8 +538,61 @@ function TeamImpetus() {
       });
       setPaymentStatus(false);
     }
-    // console.log(form2);
+
+    // console.log(form2)
   };
+  const handleDeptChange = (e) => {
+
+    const { name, value } = e.target;
+    // console.log(name, value)
+    if (name === "department" && value === 0) {
+      setForm2((form2) => ({
+        ...form2,
+        [name]: "0",
+
+      }));
+    } else if (name === "department" && value === 1) {
+      setForm2((form2) => ({
+        ...form2,
+        [name]: "1"
+      }));
+    } else if (name === "department" && value === 2) {
+      setForm2((form2) => ({
+        ...form2,
+        [name]: "2",
+      }));
+    }
+
+    setPaymentStatus(true);
+  }
+
+  const handleGroupIDChange = (e) => {
+    const { name, value } = e.target;
+    setForm2((form2) => ({
+      ...form2,
+      [name]: value
+    }));
+    setPaymentStatus(true);
+  }
+
+
+  const dept_arr = [
+    {
+      value: "0",
+      label: "Computer",
+      onChange: handleDeptChange
+    },
+    {
+      value: "1",
+      label: "IT",
+      onChange: handleDeptChange
+    },
+    {
+      value: "2",
+      label: "EnTC",
+      onChange: handleDeptChange
+    },
+  ];
 
 
   const country_arr = [
@@ -572,22 +622,21 @@ function TeamImpetus() {
   const [paymentStatus, setPaymentStatus] = useState(true);
   const paymentRef = useRef("");
   const [errors3, setErrors3] = useState(initialErrorsForm3);
-  const registerUserMutationForm3 = useRegisterStep4(setErrors3, "impetus");
+  const registerUserMutationForm3 = useRegisterStep4(setErrors3, "concepts");
 
   //steps for whole form
   const [formStep, setFormStep] = useState(0);
 
   const prevForm = (e) => {
-    // e.preventDefault();
     setFormStep((currentStep) => currentStep - 1);
     setActiveStep(activeStep - 1);
   };
 
   const [memberCount, SetMemberCount] = useState(0);
 
-
   const nextForm = (e) => {
     e.preventDefault();
+
     if (formStep === 0) {
       // console.log("form0", form0);
       for (const property in form0) {
@@ -600,8 +649,20 @@ function TeamImpetus() {
         } else if (property === "project_type" && form0[property] === "") {
           toast.warn("Please enter project type");
           return;
-        } else if (property === "abstract" && (wordCount <= 150 || wordCount >= 200)) {
-          toast.warn("Please enter abstract between 150 and 200 words");
+        } else if (property === "guide_name" && form0[property] === "") {
+          toast.warn("Please enter guide name");
+          return;
+        } else if (property === "guide_email" && !validateEmail(form0[property])) {
+          toast.warn("Please enter a valid guide E-mail address");
+          return;
+        } else if (property === "guide_phone" && form0[property].length !== 10) {
+          toast.warn("Please enter valid phone number");
+          return;
+        } else if (property === "hod_email" && !validateEmail(form0[property])) {
+          toast.warn("Please enter a valid HOD E-mail address");
+          return;
+        } else if (property === "abstract" && (wordCount <= 200 || wordCount >= 250)) {
+          toast.warn("Please enter abstract between 200 and 250 words");
           return;
         }
       }
@@ -620,11 +681,12 @@ function TeamImpetus() {
         toast.warn("At least two member needed!");
         return;
       }
+
       setFormStep((currentStep) => currentStep + 1);
       setActiveStep((activeStep) => activeStep + 1);
     }
-
     if (formStep === 2) {
+      // console.log(form2);
       for (const property in form2) {
         if (form2[property] === "") {
           if (form2.isPICT === "1") {
@@ -639,8 +701,8 @@ function TeamImpetus() {
             toast.warn("Please enter all fields!");
             return;
           } else if (form2.techfiesta === "0" && form2.isInternational === "1") {
-            // if (property === "department") continue;
-            // if (property === "group_id") continue;
+            if (property === "department") continue;
+            if (property === "group_id") continue;
             if (property === "group_leader_email") continue;
             if (property === "tech_group_id") continue;
             if (property === "tech_Transaction_id") continue;
@@ -658,24 +720,26 @@ function TeamImpetus() {
           } else if (form2.techfiesta === "1") {
             if (property === "isInternational") continue;
             if (property === "referral") continue;
-            if (property === "Transaction_id") continue;
-            // if (property === "department") continue;
-            // if (property === "group_id") continue;
+            if (property === "department") continue;
+            if (property === "group_id") continue;
             if (property === "reason_of_mode" && form2["mode"] === "1") continue;
             // console.log("tech", property)
             toast.warn("Please enter all fields!");
             return;
           }
+
           else {
             if (property === "reason_of_mode" && form2["mode"] === "1") continue;
             if (property === "referral") continue;
+            if (property === "department") continue;
+            if (property === "group_id") continue;
             if (property === "Transaction_id") continue;
             if (property === "tech_group_id") continue;
             if (property === "group_leader_email") continue;
             if (property === "tech_Transaction_id") continue;
             if (property === "techfiesta") continue;
 
-            // console.log(property)
+            // console.log("else ", property)
             toast.warn("Please enter all fields!");
             return;
           }
@@ -684,10 +748,8 @@ function TeamImpetus() {
       registerUserMutationForm2.mutate(form2, {
         onSuccess: () => {
           setErrors2(initialErrorsForm2);
-          setErrors2(initialErrorsForm2);
           if (form2.isPICT === "1" || form2.isInternational === "1" || form2.techfiesta === "1" || form2.state !== "MH") {
             let temp;
-
             if (form2.isPICT === "1") {
               temp = { isPICT: "1" };
             } else if (form2.isInternational === "1") {
@@ -695,6 +757,8 @@ function TeamImpetus() {
             } else if (form2.techfiesta === "1" || form2.state !== "MH") {
               temp = { payment_id: form2.state !== "MH" ? "out of state" : form2.tech_Transaction_id };
             }
+
+            // console.log(temp);
             registerUserMutationForm3.mutate(temp, {
               onSuccess: () => {
                 toast.success("Completed Registration !", { icon: "✅" });
@@ -705,8 +769,10 @@ function TeamImpetus() {
             });
           } else {
             toast.success("Completed Step 3️⃣ !", { icon: "✅" });
+            // const win = window.open(paymentLinks.get("concepts"), "_blank");
             setFormStep((currentStep) => currentStep + 1);
             setActiveStep((activeStep) => activeStep + 1);
+            // win.focus();
           }
         },
       });
@@ -727,9 +793,6 @@ function TeamImpetus() {
         }
       );
     }
-
-    // setFormStep((currentStep) => currentStep + 1);
-    // setActiveStep(activeStep + 1);
   };
 
   const [showModal, setshowModal] = useState(false)
@@ -754,9 +817,8 @@ function TeamImpetus() {
   const event_detail_toggle = () => {
     setShowPopup(true)
   }
-
-  const event = "Impetus";
-  const deleteMemberData = useDeleteMemberDetails("impetus")
+  const event = "concepts";
+  const deleteMemberData = useDeleteMemberDetails("concepts")
   const [deleteLoading, setDeleteLoading] = useState(false)
   const deleteMember = (e, index) => {
     e.preventDefault();
@@ -768,6 +830,7 @@ function TeamImpetus() {
         setformData((prevFormData) => {
           const newFormData = [...prevFormData];
           newFormData.splice(index, 1);
+          setDeleteLoading(false);
           SetMemberCount((prevCount) => prevCount - 1)
           return newFormData;
         });
@@ -797,6 +860,29 @@ function TeamImpetus() {
       wrap: true,
       sortable: true,
     },
+
+    // {
+    //   name: 'Delete',
+    //   selector: (row, index) => (
+    //     <Buttons
+    //       value={
+    //         <>
+    //           <span>
+    //             {`Del`}
+
+    //           </span>
+    //         </>
+    //       }
+    //       onClick={(e) => deleteMember(e, index)}
+    //       classNames="my-2"
+    //       loading={deleteMemberData.isLoading}
+    //     ></Buttons>
+    //   ),
+    //   cellExport: (row, index) => index + 1,
+    //   width: '300px',
+    //   wrap: true,
+    //   sortable: true,
+    // },
 
 
     {
@@ -843,22 +929,16 @@ function TeamImpetus() {
   }, [data])
 
 
-  // const handleChange = (e) => {
-  //     const inputValue = e.target.value;
-  //     setWordCount(inputValue.split(/\s+/).filter(Boolean).length);
-
-  // };
-
   return (
     <MainContainer>
-
-      {false ?
-        <>
-          <StepContainer width={width}>
+      {true ?
+        <div className="my-10">
+          <FormsBanner logo={conlogo} eventName='Concepts' eventDescription='Register for the most grand project exhibition event Concepts for final year student' />
+          <StepContainer width={width} className="my-10">
             {steps.map(({ step, label }) => (
               <StepWrapper key={step}>
-                <StepStyle step={activeStep >= step ? "completed" : "incomplete"}>
-                  {activeStep > step ? (
+                <StepStyle step={activeStep > step ? "completed" : "incomplete"}>
+                  {activeStep >= step ? (
                     <CheckMark>L</CheckMark>
                   ) : (
                     <StepCount>{step}</StepCount>
@@ -870,10 +950,10 @@ function TeamImpetus() {
               </StepWrapper>
             ))}
           </StepContainer>
-
-
-          <div className=" md:mx-16 my-6">
+          <div className="md:mx-16 my-6">
             <form className="rounded-lg px-8 pt-6 pb-8 mb-4 border">
+
+
               {/* NOTEBOX  */}
               {formStep < 3 &&
                 <div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center text-[0.9rem] lg:text-md">
@@ -884,7 +964,7 @@ function TeamImpetus() {
                     {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1 " />Instructions</div> : ""}
 
                     <div className="md:col-span-3">
-                      <li className="  md:font-light md:leading-6  pl-2">₹ 100/- For National Entries
+                      <li className="  md:font-light md:leading-6  pl-2">₹ 300/- For National Entries
                       </li>
                       <li className="  md:font-light md:leading-6  pl-2">
                         Free for out of Maharashtra and International Entries
@@ -894,7 +974,6 @@ function TeamImpetus() {
                   </div>
                 </div>
               }
-
               {/* form 0 */}
               {formStep === 0 && (
                 <>
@@ -903,13 +982,14 @@ function TeamImpetus() {
                     label={"Project Title"}
                     name={"title"}
                     placeholder={"Project title"}
-                    classNames=""
                     required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.title}
+                    minlenght="10"
                     error={errors0.title}
                     tip={"The project title should be between 10 and 100 characters long.(both inclusive)"}
                   ></InputBox>
+
                   <Dropdown
                     label="Domain of the project"
                     options={[
@@ -921,6 +1001,7 @@ function TeamImpetus() {
                     setState={setForm0}
                     required
                     error={errors0.domain}
+
                   />
                   <Dropdown
                     label=" Project Type"
@@ -939,8 +1020,8 @@ function TeamImpetus() {
                     label={"Guide_Name"}
                     name={"guide_name"}
                     placeholder={"Name"}
-                    classNames=""
                     onChange={(e) => handleInputChange0(e)}
+                    required
                     value={form0.guide_name}
                     error={errors0.guide_name}
                     tip={"Guide name should be between 3 and 50 characters(both inclusive) long and contains only alphabetical characters."}
@@ -950,28 +1031,29 @@ function TeamImpetus() {
                     label={"Guide_Email"}
                     name={"guide_email"}
                     placeholder={"Email"}
-                    classNames=""
                     onChange={(e) => handleInputChange0(e)}
+                    required
                     value={form0.guide_email}
                     error={errors0.guide_email}
                     tipstyle={"hidden"}
                   ></InputBox>
                   <InputBox
-                    type="text"
+                    type="tel"
                     label={"Guide_Phone"}
                     name={"guide_phone"}
                     placeholder={"Phone"}
-                    classNames=""
                     onChange={(e) => handleInputChange0(e)}
+                    required
                     value={form0.guide_phone}
                     error={errors0.guide_phone}
                     tipstyle={"hidden"}
                   ></InputBox>
                   <InputBox
-                    type="text"
+                    type="email"
                     label={"Hod_email"}
                     name={"hod_email"}
                     placeholder={"Hod email"}
+                    required
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.hod_email}
                     error={errors0.hod_email}
@@ -985,7 +1067,6 @@ function TeamImpetus() {
                     name="sponsored"
                     required
                     error={errors0.sponsored}
-
                   />
                   {form0.sponsored === "1" && (
                     <>
@@ -994,7 +1075,6 @@ function TeamImpetus() {
                         label={"If yes, then name of company?"}
                         placeholder={"Company name"}
                         name={"company"}
-                        classNames=""
                         required
                         onChange={(e) => handleInputChange0(e)}
                         value={form0.company}
@@ -1017,77 +1097,51 @@ function TeamImpetus() {
                     type="textarea"
                     label={"Abstract"}
                     name={"abstract"}
-                    placeholder={"Enter abstract here (must be between 150 and 200 words)"}
+                    placeholder={"Enter abstract here (must be between 200 and 250 words)"}
                     required
                     error={errors0.abstract}
                     onChange={(e) => handleInputChange0(e)}
                     value={form0.abstract}
                     minlenght="50"
-                    tip={"Abstract should be between 150 and 200 words"}
+                    tip={"Abstract should be between 200 and 250 words"}
                     showWordCountCondition="true"
-
+                    wordClass={`mb-1`}
                   ></InputBox>
-                  <p className={`text-gray-500 px-2 py-1 rounded-lg flex justify-end -mt-5 md:-my-5`}>{wordCount}/200 words</p>
-                  <RadioButtons
-                    label="  Can you show a demo of your project?"
-                    options={demo_arr}
-                    state={form0}
-                    setState={setForm0}
-                    name="demo"
-                    required
-                    error={errors0.demo}
-                  />
-
-                  {form0.demo === "0" && (
-                    <div>
-                      <InputBox
-                        label={"Reason for not showing demo"}
-                        name={"reason_of_demo"}
-                        placeholder={"reason"}
-                        classNames=""
-                        required
-                        onChange={(e) => handleInputChange0(e)}
-                        value={form0.reason_of_demo}
-                        error={errors0.reason_of_demo}
-                        tip={"Please mention the reason if demo is not available."}
-                      ></InputBox>
-                    </div>
-                  )}
+                  <p className={`text-gray-500 px-2 py-1 rounded-lg flex justify-end -mt-5 md:-mt-5 md: mb-3`}>{wordCount}/250 words</p>
                 </>
               )}
               {/* form 1 */}
               {formStep === 1 && (
                 <>
 
-
                   {/* MODAL  */}
                   {isOpen && (
-                  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
-                    <div className="w-[22rem] sm:w-[30rem] bg-light_blue p-6 rounded-xl border border-white border-3">
-                      <div className="flex justify-between items-center">
-                        <h1 className="text-3xl font-bold text-white">Instructions</h1>
-                        <button onClick={closeModal} className="text-white font-bold text-4xl">&times;</button>
-                      </div>
-                      <div className="w-68 md:w-[28rem] text-white mt-5">
-                        <ul className="list-disc list-inside text-lg md:text-xl">
-                          <li className="pl-2">
-                            After filling details of each member, <b>click</b>
-                          </li>
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+                      <div className="w-[22rem] sm:w-[30rem] bg-light_blue p-6 rounded-xl border border-white border-3">
+                        <div className="flex justify-between items-center">
+                          <h1 className="text-3xl font-bold text-white">Instructions</h1>
+                          <button onClick={closeModal} className="text-white font-bold text-4xl">&times;</button>
+                        </div>
+                        <div className="w-68 md:w-[28rem] text-white mt-5">
+                          <ul className="list-disc list-inside text-lg md:text-xl">
+                            <li className="pl-2">
+                              After filling details of each member, <b>click</b>
+                            </li>
 
-                          <div className=' mt-2 opacity-100 flex items-center  justify-center text-lg'>
-                            <div className='bg-[#0b1e47] rounded-xl border-2 border-gold'>
-                              <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'><span>
-                                {`add member `}
-                              </span></button>
+                            <div className=' mt-2 opacity-100 flex items-center  justify-center text-lg'>
+                              <div className='bg-[#0b1e47] rounded-xl border-2 border-gold'>
+                                <button disabled className='px-2 md:px-6 py-4 text-white font-semibold border border-transparent focus:outline-0 rounded-xl transition-all duration-300  bg-faint_blue/10'><span>
+                                  {`add member `}
+                                </span></button>
+                              </div>
                             </div>
-                          </div>
-                          <br />
-                          <li>For any errors in the form try clearing browser cookies </li>
-                        </ul>
+                            <br />
+                            <li>For any errors in the form try clearing browser cookies </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
                   {/* {formFields.map((form, index) => {
                     return (
@@ -1221,6 +1275,29 @@ function TeamImpetus() {
                     error={errors2.isPICT}
                   />
 
+                  {form2.isPICT === "1" && <>
+                    <RadioButtons
+                      label="Department"
+                      options={dept_arr}
+                      state={form2}
+                      setState={setForm2}
+                      name="department"
+                      required
+                    // error={error}
+                    />
+                    <InputBox
+                      label="Group ID"
+                      name={"group_id"}
+                      type="text"
+                      placeholder="Enter your Group ID"
+                      required
+                      onChange={(e) => handleGroupIDChange(e)}
+                      value={form2.group_id}
+                      // error={errors2.group_id}
+                      tip={"Alphanumeric Group ID can be between 3 and 100 characters(both inclusive) and can contain  value. "}
+                    />
+                  </>}
+
                   {form2.isPICT === "0" && (
                     <>
                       <RadioButtons
@@ -1276,7 +1353,6 @@ function TeamImpetus() {
                         setState={setForm2}
                         name="isInternational"
                         required
-                      // error={errors2.isInternational}
                       />)}
 
 
@@ -1428,7 +1504,7 @@ function TeamImpetus() {
                         setState={setForm2}
                         name="mode"
                         required
-                        // error={errors2.mode}
+                        error={errors2.mode}
                         tip={"Participants from Pune should select offline mode only."}
                       />
 
@@ -1436,7 +1512,7 @@ function TeamImpetus() {
                         <div>
                           <InputBox
                             type="textarea"
-                            label={"Reason for Online"}
+                            label={"Reason for Online mode of presentation"}
                             name={"reason_of_mode"}
                             placeholder={"reason"}
                             required
@@ -1458,29 +1534,13 @@ function TeamImpetus() {
                       />
                     </>
                   )}
-
-                  <Dropdown
-                    label=" Which year are you in?"
-                    options={[
-                      { value: "SEL", label: "Select", selected: true },
-                      ...year_arr,
-                    ]}
-                    name={"year"}
-                    state={form2}
-                    setState={setForm2}
-                    required
-                    error={errors2.year}
-                  />
-
-
                 </>
               )}
-
               {formStep === 3 &&
                 (paymentStatus ? (
-                  <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl items-center p-4 md:p-8 border border-light_blue w-full">
+                  <div className="shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
                     <p className="text-xl text-center text-gold font-bold mb-3">
-                      Thank you for registering in InC'24 for event Impetus!
+                      Thank you for registering in InC'24!
                     </p>
                     <NoteBox
                       title="Note"
@@ -1488,9 +1548,8 @@ function TeamImpetus() {
                     />
                   </div>
                 ) : (
-
-                  <div className="">
-                    < div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center text-[0.9rem] md:text-lg">
+                  <div className="mb-6 shadow-md shadow-light_blue/20 bg-light_blue/30 rounded-xl  items-center p-4 md:p-8 border border-light_blue w-full">
+                    <div className="w-full rounded-lg outline-dashed outline-2 outline-offset-[3px] outline-light_blue px-4 py-2 bg-faint_blue/10 mb-3 flex text-md justify-center items-center text-[0.9rem] md:text-lg">
                       <div className="flex space-y-2 md:space-y-0 flex-col md:flex-row md:space-x-5 justify-center items-center">
                         <div className=" md:my-0 px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={event_detail_toggle}>
                           Show event details
@@ -1498,7 +1557,7 @@ function TeamImpetus() {
                         {formStep === 1 ? <div className="px-2 flex justify-center items-center  md:px-6 py-4 font-semibold  border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 text-gold hover:border-light_blue hover:bg-faint_blue/10 border-dashed border-2 border-white cursor-pointer" onClick={ModalToggle} ><MdInfoOutline className="text-2xl mr-1" />Instructions</div> : ""}
 
                         <div className="">
-                          <li className="  md:font-light md:leading-6  pl-2">₹ 100/- For National Entries
+                          <li className="  md:font-light md:leading-6  pl-2">₹ 300/- For National Entries
                           </li>
                           <li className="  md:font-light md:leading-6  pl-2">
                             Free for International Entries
@@ -1510,14 +1569,13 @@ function TeamImpetus() {
                     <div className="justify-center items-center flex my-6">
                       <div className="z-10 bg-light_blue p-6 rounded-xl">
                         <div className="flex justify-between items-center mb-2">
-                          <h1 className="text-xl font-bold text-white">Scan the QR to pay ₹ 100/-</h1>
+                          <h1 className="text-xl font-bold text-white">Scan the QR to pay ₹ 300/- </h1>
                         </div>
                         <img src={payment_qr} className="w-96 border-8 rounded-lg shadow-lg" alt="Payment QR Code" />
                       </div>
                     </div>
-
                     <InputBox
-                      label="Transaction / UTR ID (12 digit)"
+                      label="Transaction ID / UTR ID (12 digit)"
                       type="text"
                       name="payment_id"
                       placeholder="Enter Transaction ID"
@@ -1529,6 +1587,7 @@ function TeamImpetus() {
                     />
                   </div>
                 ))}
+
 
               {formStep === 3 ? (
                 paymentStatus ? (
@@ -1543,14 +1602,14 @@ function TeamImpetus() {
                 )
               ) : (
                 formStep === 2 &&
-                (paymentStatus || form2.techfiesta === "1" || form2.state !== "MH" ? (<div className=" text-right">
+                (paymentStatus || form2.techfiesta === "1" || form2.state !== "MH" || form2.isInternational === "1" ? (<div className=" text-right">
                   <Buttons
                     className="mx-2"
                     value=" Previous Step"
                     onClick={prevForm}
                   />
                   <Buttons
-                    className=" mx-2 my-2  "
+                    className="mx-2 my-2"
                     value="Submit"
                     onClick={nextForm}
                     loading={
@@ -1568,7 +1627,7 @@ function TeamImpetus() {
                       onClick={prevForm}
                     />
                     <Buttons
-                      className=" mx-2 my-2  "
+                      className=" mx-2 my-2 px-10 "
                       value="Next Step"
                       onClick={nextForm}
                       loading={
@@ -1580,12 +1639,12 @@ function TeamImpetus() {
                   </div>
                 ))
               )}
-              {formStep < 2 && (<div className="md:flex md:justify-between items-center space-y-5 md:space-y-0">
-                <div className="flex justify-center">
+              {formStep < 2 && (<div className="md:flex justify-between">
+                <div>
                   {formStep == 1 && formFields.length < 5 ? (
                     <>
                       <Buttons
-                        className=" mx-2 my-2"
+                        className=" mx-2  "
                         value="add another member"
                         onClick={addAnotherMember}
                       />
@@ -1594,7 +1653,7 @@ function TeamImpetus() {
                 </div>
 
                 <div>
-                  <div className="text-right flex justify-end md:justify-between ">
+                  <div className="flex justify-between md:text-right mt-5 md:mt-0">
                     {formStep > 0 && formStep < 4 && !(formStep === 3 && paymentStatus) && (
                       <Buttons
                         className="mx-2"
@@ -1624,13 +1683,12 @@ function TeamImpetus() {
                   classNames='mx-2 my-2'
               /> */}
           </div>
-        </>
+        </div>
         :
         <div className="md:mx-16 my-20">
           <CloseMessage />
         </div>
       }
-
       {
         showPopup && (
           <div className="popup w-[98%] h-[98%] fixed">
@@ -1645,4 +1703,4 @@ function TeamImpetus() {
   );
 }
 
-export default TeamImpetus;
+export default InsideTeamConcepts;

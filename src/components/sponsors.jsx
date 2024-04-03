@@ -1,6 +1,17 @@
 import "./styles/sponsors.css";
-
+import imperial from "../assets/images/imperial.png"
+import Aayan from "../assets/images/Aayan.png.jpg"
+import intangle from "../assets/images/intangles.png.jpg"
+import pict from "../assets/images/pict1997.jpg"
+import cloudhedge from "../assets/images/CloudHedge.png"
+import eQ from "../assets/images/eq_technologic_rectangle_logo.png"
+import campusTimes from "../assets/images/CampusTimesPune.png"
 const titleSponsors = [
+  {
+    name: "eQ Technologic",
+    logo: eQ,
+    website: "https://www.1eq.com/",
+  },
   {
     name: "Sarvatra Technologies",
     logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914537/logo_sarvatra_ww7sgb.png",
@@ -55,30 +66,43 @@ const eventSponsors2 = [
 
 const Other = [
   {
-    name: "Foldhealth",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914533/foldhealth.jpeg_onmmqj.jpg",
-    website: "https://www.fold.health/",
+    name: "Cloud Hedge",
+    logo: cloudhedge,
+    website: "https://cloudhedge.io/",
   },
   {
-    name: "Zbyte",
-    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaYFPO8ZH4KTkju3ki8oS9g3gZFCeA8YFeN4YYAKsng&s",
-    website: "https://zbyte.io/",
-  },
+    name: "Imperial Overseas",
+    logo: imperial,
+    website: "https://www.imperial-overseas.com/",
+  }
+  // {
+  //   name: "Zbyte",
+  //   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaYFPO8ZH4KTkju3ki8oS9g3gZFCeA8YFeN4YYAKsng&s",
+  //   website: "https://zbyte.io/",
+  // },
+  // {
+  //   name: "AlgoAnalytics",
+  //   logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914536/AlgoAnalytics_Logo_1_j2xxp4.png",
+  //   website: "https://www.algoanalytics.com/",
+  // },
+  // {
+  //   name: "BNY MELLON",
+  //   logo: "https://res.cloudinary.com/dsoid12mi/image/upload/v1680198601/bnym_logo_horiz_teal_rgb_3_q5npvc.png",
+  //   website: "https://www.bnymellon.com/",
+  // },
+  // {
+  //   name: "Diacto",
+  //   logo: "https://res.cloudinary.com/dsoid12mi/image/upload/v1680201291/Screenshot_2023-03-31_000335_tvhbkj.png",
+  //   website: "https://www.diacto.com/",
+  // },
+];
+
+const onlineMedia=[
   {
-    name: "AlgoAnalytics",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914536/AlgoAnalytics_Logo_1_j2xxp4.png",
-    website: "https://www.algoanalytics.com/",
-  },
-  {
-    name: "BNY MELLON",
-    logo: "https://res.cloudinary.com/dsoid12mi/image/upload/v1680198601/bnym_logo_horiz_teal_rgb_3_q5npvc.png",
-    website: "https://www.bnymellon.com/",
-  },
-  {
-    name: "Diacto",
-    logo: "https://res.cloudinary.com/dsoid12mi/image/upload/v1680201291/Screenshot_2023-03-31_000335_tvhbkj.png",
-    website: "https://www.diacto.com/",
-  },
+    name: "Campus Times Pune",
+    logo: campusTimes,
+    website: "https://www.campustimespune.com/",
+  }
 ];
 
 const Association = [
@@ -170,6 +194,7 @@ const educationSponsorsList = getList1(educationSponsors);
 const ImpetusSponsorsList = getList1(eventSponsors);
 const PradnyaSponsorsList = getList1(eventSponsors2);
 const OtherSponsorsList = getList1(Other);
+const onlineMediaPartner = getList1(onlineMedia);
 const AssociationSponsorsList = getList1(Association);
 const specialprizeList=getList1(specialprize);
 export default function Sponsors() {
@@ -195,8 +220,10 @@ export default function Sponsors() {
       <div className="sponsors-head mt-5">Special Prize Sponsor</div>
       <div className="sponsors-list ">{specialprizeList}</div>
 
-      <div className="sponsors-head">Other Sponsor</div>
+      <div className="sponsors-head">Other Sponsors</div>
       <div className="sponsors-list">{OtherSponsorsList}</div>
+      <div className="sponsors-head">Online Media Partner</div>
+      <div className="sponsors-list">{onlineMediaPartner}</div>
       <div className="sponsors-head">In Association With</div>
       <div className="sponsors-list">{AssociationSponsorsList}</div>
     </div>

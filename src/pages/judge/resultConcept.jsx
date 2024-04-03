@@ -27,7 +27,7 @@ function ResultForms() {
         }
         mutate({ pid, jid, ...form }, {
             onSuccess: () => {
-                toast.success("Project evaluated successfully!")
+                toast.success(`${pid} evaluated successfully!`)
                 navigate(-1, { replace: true })
             }
         })
