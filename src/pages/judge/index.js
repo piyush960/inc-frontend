@@ -7,6 +7,7 @@ import JudgeDashboard from './judgeDashboard';
 import AllocationDetails from './components/AllocationDetails';
 import Profile from './components/Profile';
 import JudgeNavbar from './components/NavBar';
+import JudgeAllocation from './judgeAllocation';
 
 
 function Judge() {
@@ -26,7 +27,8 @@ function Judge() {
                 <Route path='/concepts/evaluate/:jid/:pid' element={<ResultConcepts />} />
                 <Route path='/:jid/allocation-details' element={<AllocationDetails />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/allocation-details" element={<AllocationDetails />} />
+                <Route path="/allocation-details/new" element={<AllocationDetails />} />
+                <Route path="/allocation-details" element={<JudgeAllocation />} />
                 {/* <Route path="/select-domain-slots" component={<SelectDomainSlots/>} /> */}
                 {/* <Route path="/marks-entry" component={MarksEntry} /> */}
             </Routes>
