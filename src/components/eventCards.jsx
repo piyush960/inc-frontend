@@ -34,7 +34,10 @@ const eventData = [
         name: "Advait",
         phone: "9130012196"
       }
-    ]
+    ],
+
+
+    closed: "Registration closed."
   },
 
   {
@@ -58,20 +61,9 @@ const eventData = [
         name: "Shreyash",
         phone: "7385883755"
       }
-      // {
-      //   name: "Kalpesh",
-      //   phone: "7769945077"
-
-      // },
-      // {
-      //   name: "Yamini",
-      //   phone: "7385190784"
-      // },
-      // {
-      //   name: "Vishakha",
-      //   phone: "9011628404",
-      // },
-    ]
+    ],
+    
+    closed: "Registration closed."
   },
 
   {
@@ -82,7 +74,8 @@ const eventData = [
     prize: 1000,
     ct: "First , second, third and fourth year students",
     logo: pradnya_logo,
-    nt: "₹ 100/- For National Entries",
+    // nt: "₹ 100/- For National Entries",
+    nt: "Registrations Closed.",
     //nt: "Will be displayed Soon...",
     it: "Free for International Entries",
     contact: [
@@ -94,7 +87,10 @@ const eventData = [
         name: "Atharva",
         phone: "8007370842"
       }
-    ]
+
+    ],
+    closed: "Registration closed."
+    
   },
   {
     id: 4,

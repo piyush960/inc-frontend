@@ -619,7 +619,7 @@ function TeamPradnya() {
 
   return (
     <MainContainer>
-      {flase ?
+      {false ?
         <>
           <StepContainer width={width}>
             {steps.map(({ step, label }) => {

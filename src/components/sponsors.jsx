@@ -16,13 +16,9 @@ const titleSponsors = [
     name: "Sarvatra Technologies",
     logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914537/logo_sarvatra_ww7sgb.png",
     website: "https://sarvatra.tech/",
-  },
+  }
 
-  {
-    name: "eQ Technologic",
-    logo: eq,
-    website: "https://www.1eq.com/",
-  },
+
 ];
 
 const coSponsors = [
@@ -55,7 +51,16 @@ const eventSponsors = [
     website: "https://www.agcocorp.com/",
   },
 ];
-
+const specialprize = [
+  {
+    name:    <div>
+    <span style={{ display: 'block' }}>Computer Engineering</span>
+    <span style={{ display: 'block' }}>Batch of 1997</span>
+  </div>,
+    logo: pict,
+    website: "https://pict.edu/",
+  },
+];
 const eventSponsors2 = [
   {
     name: "Veritas",
