@@ -6,7 +6,7 @@
 
 .notice-content{
     font-weight: bold;
-    font-size: 18px;
+    font-size: 17px;
     animation: moveNotice 15s linear infinite;
     color: #010642;
 }
@@ -51,19 +51,18 @@
 
 @media screen and (max-width: 471px) {
     .notice-content{
-        font-size: 65%;
+        font-size: 1.2rem;
     }
 }
 
 @media screen and (max-width: 407px) {
     .notice-content{
-        font-size: 55%;
+        font-size: 1.1rem;
     }
 }
 
 @media screen and (max-width: 343px) {
     .notice-content{
-        font-size: 48%;
+        font-size: 1.2rem;
     }
 }
-
