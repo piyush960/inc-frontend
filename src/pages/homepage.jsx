@@ -29,7 +29,7 @@ function Homepage() {
       {showPopup && <Popup handleClose={handleClosePopup} />}
       <div className="notice">
         <div className="notice-content">
-          <span >⚠️  Registrations have been closed. </span>
+          <span >⚠️  Registrations has been closed. </span>
         </div>
       </div>
       <Hero />
