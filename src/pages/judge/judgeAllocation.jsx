@@ -21,7 +21,7 @@ function JudgeAllocation() {
 
   useEffect(() => {
     setallocatedProjects(allocateddata?.data)
-    // console.log(allocatedProjects)
+    console.log(allocatedProjects)
   }, [allocateddata?.data])
 
 
