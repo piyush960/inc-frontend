@@ -110,8 +110,6 @@ function AdminNavbar() {
                   <option>Concepts</option>
                   <option>Impetus</option>
                   {/* <option>Pradnya</option> */}
-<<<<<<< HEAD
-=======
                 </select>
 
                 <select
@@ -123,19 +121,7 @@ function AdminNavbar() {
                   <option>Concepts</option>
                   <option>Impetus</option>
                   {/* <option>Pradnya</option> */}
->>>>>>> 28f55a3d347d08d989abc2e89835e4c4d7cdcf9b
                 </select>
-
-                {/* <select
-                  className="mt-2 w-40 py-4 px-4 font-semibold text-gold border-transparent bg-faint_blue/30 hover:border-sky-800/80 bg-blue-600/30 hover:bg-blue-600/10 rounded-xl border transition duration-300"
-                  defaultValue={"Deallocations"}
-                  onClick={handleDeallocationSelect}
-                >
-                  <option disabled>Deallocations</option>
-                  <option>Concepts</option>
-                  <option>Impetus</option>
-                  {/* <option>Pradnya</option> */}
-                {/* </select> }} */}
 
 
               </div>
