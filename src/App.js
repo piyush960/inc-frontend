@@ -17,7 +17,7 @@ import Schedule from './components/schedule.jsx';
 import InsideTeamConcepts from './components/forms/registrations/inside_team_concepts.jsx';
 import InsideTeamImpetus from './components/forms/registrations/inside_team_impetus.jsx';
 import UpdateAbstract from './pages/abstract/updateAbstract.jsx';
-import Attendance from './pages/admin/attendance.jsx'
+import Attendance from './pages/admin/EvaluationStats.jsx'
 import InsideTeamPradnya from './components/forms/registrations/inside_team_pradnya.jsx';
 
 function MainApp() {
@@ -64,7 +64,7 @@ function MainApp() {
         <Route path='/about' element={<AboutUs />} />
         <Route path='/committee' element={<Committee />} />
         <Route path='/schedule' element={<Schedule />} />
-        <Route path='/attendance' element={<Attendance/>}/>
+        
         {/* REFERRAL FORMS  */}
         <Route path='/referral/*' element={<Referral />} />
         {/* UPDATE ABSTRACT  */}

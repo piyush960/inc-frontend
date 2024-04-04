@@ -94,6 +94,13 @@ function AdminNavbar() {
                   View Judges
                 </NavLink>
 
+                <NavLink
+                  to="/admin/evaluationstats"
+                  className={`py-4 px-2 font-semibold transition duration-300`}
+                >
+                  Evaluation Stats
+                </NavLink>
+
                 <select
                   className="mt-2 w-40 py-4 px-4 font-semibold text-gold border-transparent bg-faint_blue/30 hover:border-sky-800/80 bg-blue-600/30 hover:bg-blue-600/10 rounded-xl border transition duration-300"
                   defaultValue={"Allocations"}
@@ -105,7 +112,7 @@ function AdminNavbar() {
                   {/* <option>Pradnya</option> */}
                 </select>
 
-                <select
+                {/* <select
                   className="mt-2 w-40 py-4 px-4 font-semibold text-gold border-transparent bg-faint_blue/30 hover:border-sky-800/80 bg-blue-600/30 hover:bg-blue-600/10 rounded-xl border transition duration-300"
                   defaultValue={"Deallocations"}
                   onClick={handleDeallocationSelect}
@@ -114,7 +121,9 @@ function AdminNavbar() {
                   <option>Concepts</option>
                   <option>Impetus</option>
                   {/* <option>Pradnya</option> */}
-                </select>
+                {/* </select> }} */}
+
+
               </div>
             </div>
             <div className='justify-center items-center hidden lg:flex'>
