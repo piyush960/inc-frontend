@@ -44,9 +44,9 @@ function MainApp() {
         <Route path='/auth' element={<Auth />} />
         <Route path='/register/*' element={<RegistrationsForms />} />
         {/* even after the Registrations are closed  */}
-        {/* <Route path='/event/register/concepts' element={<InsideTeamConcepts />} /> */}
-        {/* <Route path='/event/register/impetus' element={<InsideTeamImpetus />} /> */}
-        {/* <Route path='/event/register/pradnya' element={<InsideTeamPradnya />} /> */}
+        <Route path='/event/register/concepts' element={<InsideTeamConcepts />} /> 
+        <Route path='/event/register/impetus' element={<InsideTeamImpetus />} />
+        <Route path='/event/register/pradnya' element={<InsideTeamPradnya />} />
 
         {/* <Route path='/gallery' element={<Gallery />} /> */}
         <Route path='/payment/:id' element={<Payment />} />
