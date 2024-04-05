@@ -624,7 +624,7 @@ function InsideTeamPradnya() {
     return (
         <MainContainer>
             <FormsBanner logo={pralogo} eventName='Pradnya' eventDescription='Register for the most competitive live coding event Pradnya' />
-            {true ?
+            {false ?
                 <div className="my-5">
                     <StepContainer width={width}>
                         {steps.map(({ step, label }) => {
