@@ -3,7 +3,9 @@ import axios from 'axios';
 axios.defaults.withCredentials = true
 
 const backend = axios.create({
+    // baseURL: 'http://10.10.15.9:3001',
     baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001',
+    withCredentials: true,
     validateStatus: function (status) {
         return status >= 200 && status <= 302
     }
