@@ -44,13 +44,13 @@ const educationSponsors = [
 
 ];
 
-const eventSponsors = [
-  {
-    name: "AGCO",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png",
-    website: "https://www.agcocorp.com/",
-  },
-];
+// const eventSponsors = [
+//   {
+//     name: "AGCO",
+//     logo: "https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png",
+//     website: "https://www.agcocorp.com/",
+//   },
+// ];
 const specialprize = [
   {
     name:    <div>
@@ -196,7 +196,7 @@ const getList1 = (sponsorsArray) => {
 const titleSponsorsList = getList1(titleSponsors);
 const coSponsorsList = getList1(coSponsors);
 const educationSponsorsList = getList1(educationSponsors);
-const ImpetusSponsorsList = getList1(eventSponsors);
+// const ImpetusSponsorsList = getList1(eventSponsors);
 const PradnyaSponsorsList = getList1(eventSponsors2);
 const OtherSponsorsList = getList1(Other);
 const onlineMediaPartner = getList1(onlineMedia);
@@ -219,7 +219,7 @@ export default function Sponsors() {
         {educationSponsorsList}
       </div>
       {/* <div className="sponsors-head">Impetus Sponsor</div> */}
-      <div className="sponsors-list">{ImpetusSponsorsList}</div>
+      {/* <div className="sponsors-list">{ImpetusSponsorsList}</div> */}
       <div className="sponsors-head">Pradnya Sponsor</div>
       <div className="sponsors-list">{PradnyaSponsorsList}</div>
       <div className="sponsors-head mt-5">Special Prize Sponsor</div>
