@@ -47,7 +47,7 @@ function ViewJudges() {
             name: 'Username',
             selector: row => row['jid'],
             cellExport: row => row['jid'],
-            width: '120px',
+            width: '170px',
             sortable: true,
         },
         {
