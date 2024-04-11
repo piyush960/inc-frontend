@@ -28,12 +28,12 @@ const Popup = ({ handleClose }) => {
                 {/* 1. The Participants should be present on campus and the allocated labs during the time period indicated. */}
                 <br></br>
                 <span className='flex justify-between items-center flex-wrap'>
-                1. Concepts Winners <Buttons value="Click here" type="button" onClick={()=>{window.open(concepts_winners,'_blank')}}/></span>
+                1. Concepts Winners <button className='px-2 md:px-4 py-2 text-white font-semibold border border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 hover:text-gold hover:border-light_blue hover:bg-faint_blue/10' type="button" onClick={()=>{window.open(concepts_winners,'_blank')}}>Click here</button></span>
                 <br />
                 <br />
                 {/* 2. At least 2 judges will be judging each project. However there will be judges from other organizations who will be evaluating projects for probable hiring or for special prizes etc. Hence none of the groups should leave the campus unless informed officially by the judging team. */}
                 <span className='flex justify-between items-center flex-wrap'>
-                2. Impetus Winners <Buttons value="Click here" type="button" onClick={()=>{window.open(impetus_winners,'_blank')}}/></span>
+                2. Impetus Winners <button className='px-2 md:px-4 py-2 text-white font-semibold border border-transparent focus:outline-0 rounded-xl bg-faint_blue/30 transition-all duration-300 hover:text-gold hover:border-light_blue hover:bg-faint_blue/10'  type="button" onClick={()=>{window.open(impetus_winners,'_blank')}}>Click here</button></span>
                 <br />
                 {/* <br /> */}
                 {/* 3. The judging criteria includes the following points.
