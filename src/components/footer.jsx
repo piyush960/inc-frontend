@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import logo from '../assets/images/logo.png';
 
 function Footer() {
-  useEffect(() => {
+  // useEffect(() => {
     
-    const script = document.createElement('script');
-    script.src = "https://counter11.optistats.ovh/private/counter.js?c=34zkyln4j6j3gx9bs64tx7jcms21g9wc&down=async&FCS_coef=0.7";
-    script.async = true;
-    document.body.appendChild(script);
+  //   const script = document.createElement('script');
+  //   script.src = "https://counter11.optistats.ovh/private/counter.js?c=34zkyln4j6j3gx9bs64tx7jcms21g9wc&down=async&FCS_coef=0.7";
+  //   script.async = true;
+  //   document.body.appendChild(script);
     
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
 
 
 
@@ -20,7 +20,7 @@ function Footer() {
     <div className="footer">
       <footer className="p-4 bg-gray-800 border-t-2 border-t-gold sm:p-6 relative">
       <div className="flex flex-row lg:justify-end sm:flex-row sm:justify-start items-center  mt-4 pr-5">
-    <p className="text-2xl uppercase mb-2 sm:mb-0 sm:mr-3 sm:text-base"><pre className='text-2xl'>Visit Count : </pre></p>
+    {/* <p className="text-2xl uppercase mb-2 sm:mb-0 sm:mr-3 sm:text-base"><pre className='text-2xl'>Visit Count : </pre></p> */}
     <div className="sm:flex items-center">
       <div className="sm:w-auto sm:h-auto sm:text-base" id="sfc34zkyln4j6j3gx9bs64tx7jcms21g9wc"></div>
     </div>

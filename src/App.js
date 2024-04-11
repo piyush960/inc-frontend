@@ -44,12 +44,12 @@ function MainApp() {
         <Route path='/auth' element={<Auth />} />
         <Route path='/register/*' element={<RegistrationsForms />} />
         {/* even after the Registrations are closed  */}
-        <Route path='/event/register/concepts' element={<InsideTeamConcepts />} /> 
+        {/* <Route path='/event/register/concepts' element={<InsideTeamConcepts />} /> 
         <Route path='/event/register/impetus' element={<InsideTeamImpetus />} />
-        <Route path='/event/register/pradnya' element={<InsideTeamPradnya />} />
+        <Route path='/event/register/pradnya' element={<InsideTeamPradnya />} /> */}
 
         {/* <Route path='/gallery' element={<Gallery />} /> */}
-        <Route path='/payment/:id' element={<Payment />} />
+        {/* <Route path='/payment/:id' element={<Payment />} /> */}
         <Route path='/admin/*' element={<ProtectedRoutes children={<Admin />} />} />
         <Route path='/judge/*' element={<JudgeProtectedRoutes children={<Judge />} />} />
         <Route path='/winners' element={<Winners />} />
@@ -65,9 +65,9 @@ function MainApp() {
         <Route path='/schedule' element={<Schedule />} />
         
         {/* REFERRAL FORMS  */}
-        <Route path='/referral/*' element={<Referral />} />
+        {/* <Route path='/referral/*' element={<Referral />} /> */}
         {/* UPDATE ABSTRACT  */}
-        <Route path='/update/abstract' element={<UpdateAbstract />} />
+        {/* <Route path='/update/abstract' element={<UpdateAbstract />} /> */}
 
         {process.env.REACT_APP_ENVIRONMENT === 'development' &&
           <Route path='/test' element={

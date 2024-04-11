@@ -84,18 +84,18 @@ function Navbar() {
                 >
                   About
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                   to="/allocations/labs"
                   activeClassName="active"
                   className={`py-4 px-2  font-semibold transition duration-300`}
                 >
                   Allocated Labs
-                </NavLink>
-                <NavLink to='/schedule'
+                </NavLink> */}
+                {/* <NavLink to='/schedule'
                   className={`py-4 px-2  font-semibold transition duration-300`}
                 >
                   Schedule
-                </NavLink>
+                </NavLink> */}
                 <NavLink to='/events'
                   className={`py-4 px-2  font-semibold transition duration-300`}
                 >
@@ -185,21 +185,21 @@ function Navbar() {
             >
               About
             </NavLink>
-
+{/* 
             <NavLink
               to="/allocations/labs"
               activeClassName="active"
               className={`py-2 px-2  font-semibold transition duration-300`}
             >
               Allocated Labs
-            </NavLink>
+            </NavLink> */}
 
             {/* Add /schedule  */}
-            <NavLink to='/schedule'
+            {/* <NavLink to='/schedule'
               className={`py-4 px-2 font-semibold transition duration-300`}
             >
               Schedule
-            </NavLink>
+            </NavLink> */}
 
             <NavLink to="/events"
               className={`py-2 px-2 font-semibold transition duration-300 `}
