@@ -53,7 +53,7 @@ const About = () => {
       children={<TextGenerateEffect words={about_text} />} 
       />
     </div>
-    <div>
+    <div className='sm:hidden'>
       <motion.div variants={textVariant()}>
         <p className={styles.sectionSubText}
         >
