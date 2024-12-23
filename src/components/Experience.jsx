@@ -9,6 +9,7 @@ import { experiences } from '../constants'
 import { SectionWrapper } from '../hoc'
 import { textVariant } from "../utils/motion";
 import call from "../assets/call.svg"
+import useDimension from "../hooks/useDimension";
 
 const ExperienceCard = ({experience}) => (
   <VerticalTimelineElement
@@ -59,6 +60,9 @@ const ExperienceCard = ({experience}) => (
 )
 
 const Experience = () => {
+
+  const isMobile = useDimension();
+
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -69,7 +73,7 @@ const Experience = () => {
         <h2 className={styles.sectionHeadText}>Events.</h2>
       </motion.div>
       <div className="mt-20 flex flex-col">
-        <VerticalTimeline>
+        <VerticalTimeline animate={!isMobile}>
           {experiences.map((experience, index) => (
             <ExperienceCard key={index} experience={experience} />
           ))}
