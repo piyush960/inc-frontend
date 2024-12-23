@@ -36,8 +36,8 @@ const Earth = ({isMobile}) => {
       />
       <primitive 
         object={earth.scene} 
-        scale={isMobile ? 0.6 : 1.0} 
-        position={isMobile ? [0, 0.1, 0] : [0, -0.2, 0]} 
+        scale={1.6} 
+        position={[0, 0.1, 0]} 
         rotation-x={Math.PI / 4} 
         rotation-y={1} 
         rotation-z={0.4}
@@ -62,7 +62,7 @@ const Earth = ({isMobile}) => {
 
 const EarthCanvas = () => {
 
-  const isMobile = useDimension();
+  // const isMobile = useDimension();
 
   return (
     <Canvas
@@ -75,17 +75,15 @@ const EarthCanvas = () => {
       far: 200, 
       position: [-4, 3, 6]
     }}
-
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls 
-        autoRotate={isMobile ? true : true}
+        autoRotate={true}
         enableZoom={false}
-        enableRotate={!isMobile}
         maxPolarAngle={Math.PI/2}
         minPolarAngle={Math.PI/2}
         />
-        <Earth isMobile={isMobile}/>
+        <Earth isMobile={''}/>
       </Suspense>
     </Canvas>
   )

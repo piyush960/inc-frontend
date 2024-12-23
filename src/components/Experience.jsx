@@ -50,8 +50,8 @@ const ExperienceCard = ({experience}) => (
     <div className="flex flex-row max-sm:items-center items-end justify-start">
       <img src={call} alt="call" className="max-sm:mb-5"/>
       <div className="grid xs:grid-cols-2 grid-cols-1 ml-2 items-baseline sm:space-x-2">
-        {experience.contact.map(contact => (
-          <p>{contact}</p>
+        {experience.contact.map((contact, index) => (
+          <p key={`contact-${index}`}>{contact}</p>
         ))}
       </div>
     </div>
@@ -75,7 +75,7 @@ const Experience = () => {
       <div className="mt-20 flex flex-col">
         <VerticalTimeline animate={!isMobile}>
           {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} />
+            <ExperienceCard key={experience.title} experience={experience} />
           ))}
         </VerticalTimeline>
       </div>
