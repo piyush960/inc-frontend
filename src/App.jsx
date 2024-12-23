@@ -13,7 +13,7 @@ const App = () => {
               <Navbar />
               <div className="relative z-0">
                 <Hero />
-                <BackgroundLines />
+                <BackgroundLines className={`max-sm:hidden`}/>
               </div>  
             </div>
             <About />

@@ -46,9 +46,9 @@ const ExperienceCard = ({experience}) => (
         </li>
       ))}
     </ul>
-    <div className="flex flex-row items-end justify-start">
-      <img src={call} alt="call" className="mr-2"/>
-      <div className="grid xs:grid-cols-2 grid-cols-1 items-baseline space-x-1">
+    <div className="flex flex-row max-sm:items-center items-end justify-start">
+      <img src={call} alt="call" className="max-sm:mb-5"/>
+      <div className="grid xs:grid-cols-2 grid-cols-1 ml-2 items-baseline sm:space-x-2">
         {experience.contact.map(contact => (
           <p>{contact}</p>
         ))}

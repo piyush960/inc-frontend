@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 import { styles } from '../styles'
 import { about_text } from '../constants'
-import { zoomIn, textVariant } from '../utils/motion'
+import { zoomIn, textVariant, fadeIn } from '../utils/motion'
 
 import { SectionWrapper } from '../hoc'
 
@@ -15,15 +15,9 @@ import { ContainerScroll } from './ui/container-scroll-animation';
 
 const ServiceCard = ({index, text, icon}) => {
   return (
-    <Tilt className='w-full' 
-    options={{
-      max: 20,
-      scale: 1,
-      speed: 50,
-    }}
+    <div className='w-full'
     >
-      <motion.div
-        variants={zoomIn(0.25, 0.5)}
+      <div
         className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
       >
         <div
@@ -31,8 +25,8 @@ const ServiceCard = ({index, text, icon}) => {
         >
           <TextGenerateEffect words={about_text} /> 
         </div>
-      </motion.div>
-    </Tilt>
+      </div>
+    </div>
   ) 
 }
 
