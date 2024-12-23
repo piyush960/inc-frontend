@@ -1,38 +1,24 @@
 import React from 'react'
 
-import { motion } from 'framer-motion'
 
 import { styles } from '../styles'
-import { ComputersCanvas } from './canvas'
+import { EarthCanvas } from './canvas'
+import { FlipWords } from './ui/flip-words'
 
 const Hero = () => {
   return (
     <section className='relative w-full h-screen mx-auto'>
-      <div className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto flex flex-row items-start gap-5`}>
-        <div className='flex flex-col justify-center items-center mt-5'>
-          <div className='w-5 h-5 rounded-full bg-[#915eff]'/>
-          <div className='w-1 sm:h-80 h-40 violet-gradient'/>
-        </div>
-        <div>
-          <h1 className={`${styles.heroHeadText}`}>PICT IN<span className='text-[#e09d14]'>C</span> 2025</h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>SCTR's Pune Institute of Computer Technology</p>
-        </div>
-
+      <p className={`${styles.paddingX} lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px] absolute inset-0 mx-auto top-[100px] w-full max-w-7xl text-center font-light uppercase text-secondary tracking-wide`}>SCTR's Pune Institute of Computer Technology</p>
+      <div className='absolute mx-auto inset-0 w-full max-w-6xl h-screen flex flex-col items-center justify-center max-sm:top-[138px]'>
+        <h1 className={`w-full ${styles.paddingX} flex flex-row items-center justify-between`}>
+          <span className={`${styles.heroHeadText} tracking-wider`}>PICT</span>
+          <span className='block h-[1px] w-0 mx-14 animate-expand bg-white'></span>
+          <span className={`${styles.heroHeadText} tracking-wider`}>2k25</span>
+        </h1>
+        <FlipWords words={["Impetus", "Concepts"]} 
+        className={`sm:hidden mt-[30px] font-bold uppercase`}/>
       </div>
-      <ComputersCanvas />
-
-      <div className='absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center'>
-        <a href="#about">
-          <div className='w-[35px] h-[56px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2'>
-            <motion.dev 
-              animate={{y: [0, 24, 0]}}
-              transition={{duration: 1.5, repeat:Infinity, repeatType: 'loop'}}
-              className="w-3 h-3 rounded-full bg-secondary mb-1"
-            />
-          </div>
-        </a>
-      </div>
-
+      <EarthCanvas />
     </section>
   )
 }

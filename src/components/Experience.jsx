@@ -8,7 +8,7 @@ import { styles } from '../styles'
 import { experiences } from '../constants'
 import { SectionWrapper } from '../hoc'
 import { textVariant } from "../utils/motion";
-import { li } from "framer-motion/client";
+import call from "../assets/call.svg"
 
 const ExperienceCard = ({experience}) => (
   <VerticalTimelineElement
@@ -30,12 +30,14 @@ const ExperienceCard = ({experience}) => (
       <h3 className="text-white text-[24px] font-bold">
         {experience.title}
       </h3>
-      <p
-      className="text-secondary text-[16px] font-semibold"
-      style={{margin: 0}}
-      >
-        {experience.company_name}
-      </p>
+      <div className="flex flex-row items-center justify-between mt-[-10px]">
+        <p className='m-0 text-secondary'>
+          {experience.company_name}
+        </p>
+        <p className='m-0 text-green-500'>
+        &#8377;{experience.fees}
+        </p>
+      </div>
     </div>
     <ul className="mt-5 list-disc ml-5 space-y-2">
       {experience.points.map((point, index) => (
@@ -44,6 +46,15 @@ const ExperienceCard = ({experience}) => (
         </li>
       ))}
     </ul>
+    <div className="flex flex-row items-end justify-start">
+      <img src={call} alt="call" className="mr-2"/>
+      <div className="grid xs:grid-cols-2 grid-cols-1 items-baseline space-x-1">
+        {experience.contact.map(contact => (
+          <p>{contact}</p>
+        ))}
+      </div>
+    </div>
+    
   </VerticalTimelineElement>
 )
 
@@ -68,4 +79,4 @@ const Experience = () => {
   )
 }
 
-export default SectionWrapper(Experience, 'work')
+export default SectionWrapper(Experience, 'events')
