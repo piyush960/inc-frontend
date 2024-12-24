@@ -5,30 +5,32 @@ import { BackgroundLines } from './components/ui/background-lines'
 
 const App = () => {
   return (
-    <Routes>
-        <Route path="/" element={
-          <>
-          <div className="relative z-0 bg-primary">
-            <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-              <Navbar />
-              <div className="relative z-0">
-                <Hero />
-                <BackgroundLines className={`max-sm:hidden`}/>
-              </div>  
+    <>
+      <Navbar />
+      <Routes>
+          <Route path="/" element={
+            <>
+            <div className="relative z-0 bg-primary">
+              <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+                <div className="relative z-0">
+                  <Hero />
+                  <BackgroundLines className={`max-sm:hidden`}/>
+                </div>  
+              </div>
+              <About />
+              <Experience />
+              <Tech />
             </div>
-            <About />
-            <Experience />
-            <Tech />
-          </div>
-          </>
-          } />
-        <Route path="/register" element={
-          <div className="relative z-0">
-            <Contact />
-            <StarsCanvas />
-          </div>
-        }/>
-    </Routes>
+            </>
+            } />
+          <Route path="/register" element={
+            <div className="relative z-0">
+              <Contact />
+              <StarsCanvas />
+            </div>
+          }/>
+      </Routes>
+    </>
   )
 }
 

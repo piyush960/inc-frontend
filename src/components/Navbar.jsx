@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { styles } from '../styles'
 import { navLinks } from '../constants'
 import { logo, menu, close } from '../assets'
-import { li } from 'framer-motion/client'
 
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const scrollToElement = () => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+
+      setTimeout(scrollToElement, 300);
+    }
+  }, [location]);
 
   return (
     <nav className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 backdrop-blur-sm`}>
@@ -21,7 +35,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <li key={link.id} className={`${active == link.title ? 'text-white' : 'text-secondary'} hover:text-white text-[18px] font-medium cursor-pointer`} onClick={() => setActive(link.title)}>
               {
-                link.isHome ? <a href={`#${link.id}`}>{link.title}</a> : <Link to={link.id}>{link.title}</Link>
+                <Link to={link.isHome ? `/#${link.id}` : `/${link.id}`}>{link.title}</Link>
               }
             </li>
           ))}
@@ -37,7 +51,7 @@ const Navbar = () => {
                 setToggle(!toggle)
               }}>
                 {
-                  link.isHome ? <a href={`#${link.id}`}>{link.title}</a> : <Link to={link.id}>{link.title}</Link>
+                  <Link to={link.isHome ? `/#${link.id}` : `/${link.id}`}>{link.title}</Link>
                 }
               </li>
             ))}

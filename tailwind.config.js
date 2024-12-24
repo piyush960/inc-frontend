@@ -26,7 +26,7 @@ module.exports = {
         xs: "450px",
       },
       backgroundImage: {
-        "hero-pattern": "url('/src/assets/bg3.jpg')",
+        "hero-pattern": "url('/src/assets/bg4.png')",
       },
       animation: {
         expand: "expand 6s ease-in forwards",

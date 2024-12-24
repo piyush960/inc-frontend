@@ -8,7 +8,7 @@ import { FlipWords } from './ui/flip-words'
 const Hero = () => {
   return (
     <section className='relative w-full h-screen mx-auto'>
-      <p className={`${styles.paddingX} lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px] absolute inset-0 mx-auto          top-[19%] w-full max-w-7xl text-center font-light uppercase text-secondary tracking-wide`}>SCTR's Pune Institute of Computer Technology</p>
+      <p className={`${styles.paddingX} lg:text-[26px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px] absolute inset-0 mx-auto max-sm:top-[17%] top-[13%] w-full max-w-7xl text-center font-light uppercase text-secondary tracking-wide`}><span className='block text-sm'>SCTR's</span>Pune Institute of Computer Technology</p>
       <div className='absolute mx-auto inset-0 w-full max-w-6xl h-screen flex flex-col items-center justify-center max-sm:top-[19%] '>
         <h1 className={`w-full ${styles.paddingX} flex flex-row items-center justify-between`}>
           <span className={`${styles.heroHeadText} tracking-wider`}>PICT</span>
