@@ -27,6 +27,8 @@ import {
     threejs,
     logo,
   } from "../assets";
+
+  const notifications = ["🎉 New Update Available! Check out the latest features. 🎉", "🚀 Special Offer: 50% off all plans. Don't miss out! 🚀", "⚡ Maintenance scheduled for tonight at 10 PM. ⚡"]
   
   export const navLinks = [
     {
@@ -301,4 +303,4 @@ import {
     },
   ];
   
-  export { services, about_text, technologies, experiences, testimonials, projects, sponsors };
+  export { services, about_text, technologies, experiences, testimonials, projects, sponsors, notifications };

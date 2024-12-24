@@ -32,7 +32,8 @@ module.exports = {
         expand: "expand 6s ease-in forwards",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
-      
+        marquee: 'marquee 20s linear infinite',
+
       },
       keyframes: {
         expand: {
@@ -44,6 +45,11 @@ module.exports = {
             transform: "translate(calc(-50% - 0.5rem))",
           },
         },
+        marquee: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        
       },
     },
   },

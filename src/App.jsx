@@ -2,11 +2,16 @@ import { Routes, Route } from "react-router-dom"
 import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas } from './components';
 
 import { BackgroundLines } from './components/ui/background-lines'
+import NotificationStrip from "./components/ui/notification-strip";
+import { notifications } from './constants/index'
 
 const App = () => {
   return (
     <>
-      <Navbar />
+      <div className="fixed top-0 z-20 w-full">
+        <Navbar />
+        <NotificationStrip words={notifications} />
+      </div>
       <Routes>
           <Route path="/" element={
             <>
