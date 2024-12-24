@@ -29,7 +29,7 @@ const NotificationStrip = ({words}) => {
         <div className="whitespace-nowrap animate-marquee">
           {
             words.map((word, index) => (
-                <span key={index} className='mr-10 backdrop-blur-sm rounded-xl p-2'>{word}</span>
+                <span key={index} className='mr-10 backdrop-blur-sm rounded-xl px-2'>{word}</span>
             ))
           }
         </div>
