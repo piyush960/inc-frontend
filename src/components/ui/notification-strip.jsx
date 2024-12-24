@@ -2,7 +2,7 @@ import { span } from 'framer-motion/client';
 import React, { useState, useEffect } from 'react';
 
 const NotificationStrip = ({words}) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const handleScroll = () => {
