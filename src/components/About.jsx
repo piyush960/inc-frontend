@@ -1,11 +1,10 @@
 import React from 'react'
 
-import { Tilt } from 'react-tilt'
 import { motion } from 'framer-motion'
 
 import { styles } from '../styles'
 import { about_text } from '../constants'
-import { zoomIn, textVariant, fadeIn } from '../utils/motion'
+import { textVariant } from '../utils/motion'
 
 import { SectionWrapper } from '../hoc'
 
@@ -13,7 +12,7 @@ import { TextGenerateEffect } from './ui/text-generate-effect'
 
 import { ContainerScroll } from './ui/container-scroll-animation';
 
-const ServiceCard = ({index, text, icon}) => {
+const AboutCard = ({index, text, icon}) => {
   return (
     <div className='w-full'
     >
@@ -56,7 +55,7 @@ const About = () => {
         <h2 className={styles.sectionHeadText}>About Us.</h2>
       </motion.div>
       <div className="mt-20 flex flex-col">
-        <ServiceCard  />
+        <AboutCard  />
       </div>
     </div>
     </>

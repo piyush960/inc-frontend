@@ -2,7 +2,7 @@ import React from 'react'
 
 
 import { styles } from '../styles'
-import { EarthCanvas } from './canvas'
+import { IncCanvas } from './canvas'
 import { FlipWords } from './ui/flip-words'
 
 const Hero = () => {
@@ -21,7 +21,7 @@ const Hero = () => {
         />
       </div>
       <div className='absolute w-[250px] h-[250px] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] sm:w-[400px] sm:h-[400px]'>
-        <EarthCanvas />
+        <IncCanvas />
       </div>
     </section>
   )

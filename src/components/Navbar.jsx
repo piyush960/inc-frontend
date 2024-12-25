@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom'
 import { styles } from '../styles'
 import { navLinks } from '../constants'
 import { logo, menu, close } from '../assets'
-import NotificationStrip from './ui/notification-strip'
 
 const Navbar = () => {
   const [active, setActive] = useState("");
