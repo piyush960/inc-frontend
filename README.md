@@ -1,8 +1,8 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Things to do for InC 2025
+1. Accepting all the characters in the abstract
+2. Changing UI
+3. Display all the filled details before registrations (payment page)
+4. Send the mail mentioning all the filled details and you will receive a mail after your registration is verified after filling the mail.
+5. After verifying, change the content of the mail.
+6. Changing the judges login UI
+7. After evaluating the project in judge panel, show the score of the project at last of the page.
