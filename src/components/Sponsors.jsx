@@ -12,7 +12,12 @@ const Sponsors = () => {
 
   return (
     <div className='h-screen w-full flex flex-col items-center justify-evenly'>
-      <motion.div variants={textVariant()}>
+      <motion.div 
+      initial={{ y: 100, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ ease: "easeInOut", duration: 0.75}}
+      >
         <h2 className={`${styles.sectionHeadText}`}>Our Sponsors.</h2>
       </motion.div>
       <InfiniteMovingCards items={sponsors} pauseOnHover={!isMobile}/>

@@ -9,8 +9,11 @@ import { HeroParallax } from "./components/HeroParallax";
 import { AuroraHero } from "./components/AuroraHero";
 import { AboutParallax } from "./components/AboutParallax";
 import Footer from "./components/Footer";
-import { Events } from "./components/Events";
+import Events from "./components/Events";
 import SwipeGallery from "./components/Gallery";
+import EventDetails from "./components/EventDetails";
+import Notification from './components/ui/modal';
+
 
 // import { Stars } from "@react-three/drei";
 // import { Canvas } from "@react-three/fiber";
@@ -46,9 +49,9 @@ const App = () => {
             <>
             <div className="relative z-0 bg-primary">
               <HeroParallax />
+              <Notification />
               <About />
-              {/* <Events /> */}
-              <Timeline />
+              <Events />
               <SwipeGallery />
               <Sponsors />
               <Footer />
@@ -58,6 +61,12 @@ const App = () => {
           <Route path="/register" element={
             <div className="relative z-0">
               <Register />
+              <StarsCanvas />
+            </div>
+          }/>
+          <Route path="/events/:id" element={
+            <div className="relative z-0 bg-primary">
+              <EventDetails />
               <StarsCanvas />
             </div>
           }/>

@@ -33,31 +33,19 @@ const About = () => {
 
   return(
     <>
-    <div className=''>
+    <div className='px-1 max-sm:pt-16'>
       <ContainerScroll 
       titleComponent={
-      <h1 className={`${styles.sectionSubText}`}>
+      <h2 className={`${styles.sectionSubText}`}>
         What is Impetus and Concepts? <br />
         <span className={`${styles.sectionHeadText}`}>
           About Us.
         </span>
-      </h1>
+      </h2>
       } 
       children={about_text} 
       />
     </div>
-    {/* <div className='sm:hidden'>
-      <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}
-        >
-          What is Impetus and Concepts?
-        </p>
-        <h2 className={styles.sectionHeadText}>About Us.</h2>
-      </motion.div>
-      <div className="mt-20 flex flex-col">
-        <AboutCard  />
-      </div>
-    </div> */}
     </>
   )
   

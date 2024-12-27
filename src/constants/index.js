@@ -6,6 +6,9 @@ import {
     eq,
     imocha,
     logo,
+    impetus,
+    concepts,
+    pradnya,
   } from "../assets";
 
   const notifications = ["🎉 New Update Available! Check out the latest features. 🎉", "🚀 Special Offer: 50% off all plans. Don't miss out! 🚀", "⚡ Maintenance scheduled for tonight at 10 PM. ⚡"]
@@ -56,6 +59,12 @@ import {
       src: meta,
     },
   ]
+
+  const events = [
+    { id: 'impetus', title: "Impetus", description: "Participate in the National Level Competitive Programming Contest.", logo: impetus, color:"bg-blue-900", team_size: '4-5 members', type: 'Idea Competition', date: '14-01-2025' },
+    { id: 'concepts', title: "Concepts", description: "Join us for an exciting coding competition at the national level.", logo: concepts, color:"bg-cyan-900", team_size: '4-5 members', type: 'Idea Competition', date: '14-01-2025' },
+    { id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-orange-900", team_size: '4-5 members', type: 'Coding Competition', date: '14-01-2025' },
+  ];
 
   
   const timeline = [
@@ -118,4 +127,4 @@ import {
   ];
   
   
-  export { about_text, timeline, navLinks, sponsors, notifications };
+  export { about_text, events, timeline, navLinks, sponsors, notifications };

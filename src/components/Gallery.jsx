@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
-import { SectionWrapper } from "../hoc";
+import React, { useEffect, useState, useRef } from "react";
+import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { styles } from "../styles";
+
+import { gal1, gal2, gal3, gal4, gal5, gal6, gal7 } from "../assets";
 
 const imgs = [
-  "/imgs/nature/1.jpg",
-  "/imgs/nature/2.jpg",
-  "/imgs/nature/3.jpg",
-  "/imgs/nature/4.jpg",
-  "/imgs/nature/5.jpg",
-  "/imgs/nature/6.jpg",
-  "/imgs/nature/7.jpg",
+  gal1,
+  gal2,
+  gal3,
+  gal4,
+  gal5,
+  gal6,
+  gal7,
 ];
 
 const ONE_SECOND = 1000;
@@ -24,6 +26,41 @@ const SPRING_OPTIONS = {
 };
 
 const SwipeGallery = () => {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start end", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0.7, 1, 1, 0.8]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0, 1, 1, 0.5]);
+
+  return (
+    <motion.div 
+    ref={targetRef}
+    style={{
+      scale, opacity
+    }}
+    className={`h-full sm:my-16 sm:py-16 py-10`}>
+      <motion.div 
+      initial={{ y: 100, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ ease: "easeInOut", duration: 0.75}}
+      >
+        <h2 className={`${styles.sectionSubText}`}>
+          Gallery <br />
+          <span className={`${styles.sectionHeadText}`}>
+            InC'24.
+          </span>
+        </h2>
+      </motion.div>
+      <SwipeGalleryContent />
+    </motion.div>
+  )
+}
+
+const SwipeGalleryContent = () => {
   const [imgIndex, setImgIndex] = useState(0);
 
   const dragX = useMotionValue(0);
@@ -93,12 +130,13 @@ const Images = ({ imgIndex }) => {
               backgroundImage: `url(${imgSrc})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
             }}
             animate={{
               scale: imgIndex === idx ? 0.95 : 0.85,
             }}
             transition={SPRING_OPTIONS}
-            className="aspect-video w-screen shrink-0 rounded-xl bg-neutral-800 object-cover"
+            className="aspect-auto max-sm:aspect-video w-screen sm:h-[85vh] shrink-0 rounded-2xl"
           />
         );
       })}
@@ -127,8 +165,8 @@ const Dots = ({ imgIndex, setImgIndex }) => {
 const GradientEdges = () => {
   return (
     <>
-      <div className="pointer-events-none absolute bottom-0 left-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-r from-neutral-950/50 to-neutral-950/0" />
-      <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-l from-neutral-950/50 to-neutral-950/0" />
+      <div className="pointer-events-none absolute bottom-0 left-0 top-0 w-[15vw] max-w-[100px] bg-gradient-to-r from-neutral-950/70 to-neutral-950/0" />
+      <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-[15vw] max-w-[100px] bg-gradient-to-l from-neutral-950/70 to-neutral-950/0" />
     </>
   );
 };

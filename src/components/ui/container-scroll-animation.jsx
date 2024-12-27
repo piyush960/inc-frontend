@@ -24,24 +24,29 @@ export const ContainerScroll = ({
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.7, 0.9] : [1.25, 1.10];
+    return isMobile ? [0.8, 1] : [1.25, 1.10];
   };
+
+  const translateDimensions = () => {
+    return isMobile ? [1, 1] : [40, -120];
+  }
+
 
   const rotate = useTransform(scrollYProgress, [0, 1], [40, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translateh = useTransform(scrollYProgress, [0, 0.65], [40, -120]);
+  const translateh = useTransform(scrollYProgress, [0, 0.65], translateDimensions());
 
   return (
     (<div
-      className="h-[135vh] flex items-center justify-center relative p-2"
+      className="h-full sm:h-[135vh] flex items-center justify-center relative"
       ref={containerRef}>
       <div
-        className="py-10 w-full absolute bottom-[8%]"
+        className="sm:py-10 w-full md:absolute bottom-[8%]"
         style={{
           perspective: "1000px",
         }}>
         <Header translate={translateh} titleComponent={titleComponent} />
-        <Card rotate={rotate} scale={scale}>
+        <Card rotate={isMobile ? 0 : rotate} scale={scale}>
           {children}
         </Card>
       </div>
@@ -80,7 +85,7 @@ export const Card = ({
       }}
       className="max-w-5xl -mt-12 mx-auto w-full px-2 rounded-[30px] shadow-2xl">
       <div
-        className="h-full w-full overflow-hidden rounded-2xl bg-zinc-900 md:rounded-2xl md:p-4 ">
+        className="h-full w-full overflow-hidden rounded-2xl bg-zinc-900 md:rounded-2xl p-4 ">
         {children}
       </div>
     </motion.div>)
