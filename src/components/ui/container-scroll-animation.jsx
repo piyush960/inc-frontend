@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 
+
 export const ContainerScroll = ({
   titleComponent,
   children
@@ -23,24 +24,24 @@ export const ContainerScroll = ({
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.7, 0.9] : [1.05, 1];
+    return isMobile ? [0.7, 0.9] : [1.25, 1.10];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [40, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const translateh = useTransform(scrollYProgress, [0, 0.65], [40, -120]);
 
   return (
     (<div
-      className="h-[60rem] flex items-center justify-center relative p-2"
+      className="h-[135vh] flex items-center justify-center relative p-2"
       ref={containerRef}>
       <div
-        className="py-10 w-full relative"
+        className="py-10 w-full absolute bottom-[8%]"
         style={{
           perspective: "1000px",
         }}>
-        <Header translate={translate} titleComponent={titleComponent} />
-        <Card rotate={rotate} translate={translate} scale={scale}>
+        <Header translate={translateh} titleComponent={titleComponent} />
+        <Card rotate={rotate} scale={scale}>
           {children}
         </Card>
       </div>
@@ -66,6 +67,7 @@ export const Header = ({
 export const Card = ({
   rotate,
   scale,
+  translate,
   children
 }) => {
   return (

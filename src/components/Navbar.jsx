@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <nav className={`${styles.paddingX} m-0 flex items-center py-5 backdrop-blur-sm`}>
-      <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
+      <div className='w-full flex justify-between items-center mx-auto'>
         <Link to={'/'} className='flex items-center gap-2' onClick={() => {setActive("");}}>
           <img src={logo} alt="logo" className='w-9 h-9 object-contain' />
           <p className='text-white text-[18px] font-bold cursor-pointer'>PICT INC 2025</p>

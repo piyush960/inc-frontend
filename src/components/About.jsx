@@ -33,7 +33,7 @@ const About = () => {
 
   return(
     <>
-    <div className='max-sm:hidden'>
+    <div className=''>
       <ContainerScroll 
       titleComponent={
       <h1 className={`${styles.sectionSubText}`}>
@@ -43,10 +43,10 @@ const About = () => {
         </span>
       </h1>
       } 
-      children={<TextGenerateEffect words={about_text} />} 
+      children={about_text} 
       />
     </div>
-    <div className='sm:hidden'>
+    {/* <div className='sm:hidden'>
       <motion.div variants={textVariant()}>
         <p className={styles.sectionSubText}
         >
@@ -57,7 +57,7 @@ const About = () => {
       <div className="mt-20 flex flex-col">
         <AboutCard  />
       </div>
-    </div>
+    </div> */}
     </>
   )
   

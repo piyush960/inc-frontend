@@ -1,10 +1,19 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom"
-import { About, Register, Timeline, Hero, Navbar, Sponsors, StarsCanvas } from './components';
+import { About, Register, Timeline, Navbar, Sponsors, StarsCanvas } from './components';
 
 import { BackgroundLines } from './components/ui/background-lines'
 import NotificationStrip from "./components/ui/notification-strip";
 import { notifications } from './constants/index'
+import { HeroParallax } from "./components/HeroParallax";
+import { AuroraHero } from "./components/AuroraHero";
+import { AboutParallax } from "./components/AboutParallax";
+import Footer from "./components/Footer";
+import { Events } from "./components/Events";
+import SwipeGallery from "./components/Gallery";
+
+// import { Stars } from "@react-three/drei";
+// import { Canvas } from "@react-three/fiber";
 
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,21 +39,19 @@ const App = () => {
     <>
       <div className={`fixed top-0 z-20 w-full transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
         <Navbar />
-        <NotificationStrip words={notifications} />
+        {/* <NotificationStrip words={notifications} /> */}
       </div>
       <Routes>
           <Route path="/" element={
             <>
             <div className="relative z-0 bg-primary">
-              <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-                <div className="relative z-0">
-                  <Hero />
-                  <BackgroundLines className={`max-sm:hidden`}/>
-                </div>  
-              </div>
+              <HeroParallax />
               <About />
+              {/* <Events /> */}
               <Timeline />
+              <SwipeGallery />
               <Sponsors />
+              <Footer />
             </div>
             </>
             } />

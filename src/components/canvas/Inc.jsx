@@ -14,22 +14,22 @@ const Earth = () => {
     
     <mesh>
       <hemisphereLight 
-        intensity={2.2}
+        intensity={2.5}
         color="white"
         groundColor="black"
       />
       <spotLight 
-        position={[100, 50, 10]}
+        position={[0, 60, 10]}
         angle={0.3}
         penumbra={0.5}
-        intensity={6000} 
+        intensity={3000} 
         castShadow
         shadow-mapSize={2048}
         shadow-bias={-0.0001}
       />
       <pointLight 
-        position={[0, -50, 0]} 
-        intensity={600} 
+        position={[0, -40, 0]} 
+        intensity={1200} 
         color="white" 
         castShadow
       />
