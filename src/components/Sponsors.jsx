@@ -11,7 +11,7 @@ const Sponsors = () => {
   const isMobile = useDimension();
 
   return (
-    <div className='h-screen w-full flex flex-col items-center justify-evenly'>
+    <div className='h-[50vh] w-full flex flex-col items-center justify-evenly'>
       <motion.div 
       initial={{ y: 100, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}

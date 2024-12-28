@@ -92,17 +92,17 @@ const Card = ({
           hovered ? 'opacity-100' : 'opacity-0'
         }`}>
           <img src={details.logo} alt={`${title} logo`} className="w-16 h-16 mb-4" />
-          <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
+          <h2 className="text-2xl font-bold text-white-100 mb-2">{title}</h2>
           <div className="flex flex-row space-x-2 mb-8">
             <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.type}</p>
             <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
           </div>
-          <p className="text-white/90 text-md text-center mb-4">{details.description}</p>
+          <p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
           <span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date)}</span>
           
           <div className="relative group">
             <button
-              className="relative inline-block p-px font-semibold leading-6 text-white bg-tertiary shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+              className="relative inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
               onClick={() => handleViewDetails(details.id)}
             >
               <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
@@ -130,7 +130,7 @@ const Card = ({
           </div>
         </div>
 
-        <h2 className={`dark:text-white text-xl relative z-10 text-black mt-4 font-bold transition duration-200 ${
+        <h2 className={`dark:text-white-100 text-xl relative z-10 text-black mt-4 font-bold transition duration-200 ${
           hovered ? 'opacity-0' : 'opacity-100'
         }`}>
           {title}

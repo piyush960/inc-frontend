@@ -3,7 +3,7 @@
 const NotificationStrip = ({words}) => {
   return (
     <div
-      className={`w-full bg-transparent text-white`}
+      className={`w-full bg-transparent text-white-100`}
     >
       <div className="overflow-hidden">
         <div className="whitespace-nowrap animate-marquee">

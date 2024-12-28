@@ -51,7 +51,7 @@ const EventDetails = () => {
       onMouseLeave={() => setHovered(false)}
       className="h-screen flex flex-col items-center justify-center overflow-hidden relative"
     >
-      <p className="md:text-2xl text-2xl font-medium text-center text-white relative z-20 max-w-2xl mx-auto">
+      <p className="md:text-2xl text-2xl font-medium text-center text-white-100 relative z-20 max-w-2xl mx-auto">
         {event.title}
       </p>
       <AnimatePresence>
@@ -77,7 +77,7 @@ const EventDetails = () => {
       </AnimatePresence>
       {/* Radial gradient for the cute fade */}
       <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/90" />
-      <CardContainer className="bg-gray-900 text-white shadow-md p-10 max-w-6xl w-full relative z-10 flex flex-row overflow-hidden perspective-1000 border border-gray-700 rounded-lg">
+      <CardContainer className="bg-gray-900 text-white-100 shadow-md p-10 max-w-6xl w-full relative z-10 flex flex-row overflow-hidden perspective-1000 border border-gray-700 rounded-lg">
         <CardBody className="flex flex-row w-full transition-transform duration-300 transform group-hover/card:scale-105 h-full ">
           <CardItem className="w-1/2 pr-10">
             <div className={`transition-transform duration-300 ${hovered ? 'transform translate-y-[-10px] scale-105' : ''}`}>
@@ -85,8 +85,8 @@ const EventDetails = () => {
               <h2 className="text-3xl font-bold mb-2 text-center">{event.title}</h2>
             </div>
             <div className="mt-4 flex justify-between">
-              <button className="bg-blue-500 text-white py-2 px-6 rounded">Button 1</button>
-              <button className="bg-green-500 text-white py-2 px-6 rounded">Button 2</button>
+              <button className="bg-blue-500 text-white-100 py-2 px-6 rounded">Button 1</button>
+              <button className="bg-green-500 text-white-100 py-2 px-6 rounded">Button 2</button>
             </div>
           </CardItem>
           <CardItem className="w-1/2 pl-10">

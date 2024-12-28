@@ -142,7 +142,7 @@ const Schedule = () => {
   return (
     <section
       id="launch-schedule"
-      className="mx-auto max-w-5xl px-4 py-48 text-white"
+      className="mx-auto max-w-5xl px-4 py-48 text-white-100"
     >
       <motion.h1
         initial={{ y: 48, opacity: 0 }}

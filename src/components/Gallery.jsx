@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
 import { styles } from "../styles";
 
 import { gal1, gal2, gal3, gal4, gal5, gal6, gal7 } from "../assets";
+import MobileContext from "../hooks/MobileContext";
 
 const imgs = [
   gal1,
@@ -32,15 +33,17 @@ const SwipeGallery = () => {
     offset: ["start end", "end start"],
   });
 
+  const isMobile = useContext(MobileContext)
+
   const scale = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0.7, 1, 1, 0.8]);
   const opacity = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0, 1, 1, 0.5]);
+
+  const style_attr = !isMobile && {scale, opacity}
 
   return (
     <motion.div 
     ref={targetRef}
-    style={{
-      scale, opacity
-    }}
+    style={style_attr}
     className={`h-full sm:my-16 sm:py-16 py-10`}>
       <motion.div 
       initial={{ y: 100, opacity: 0 }}

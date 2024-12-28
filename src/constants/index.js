@@ -25,6 +25,11 @@ import {
       title: "Events",
     },
     {
+      id: "committee",
+      isHome: false,
+      title: "Committee",
+    },
+    {
       id: "register",
       isHome: false,
       title: "Register",

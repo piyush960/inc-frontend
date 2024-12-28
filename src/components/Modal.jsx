@@ -1,18 +1,23 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { notification } from "../../assets";
-import NotificationStrip from "./notification-strip";
+import { notification } from "../assets";
+import NotificationStrip from "./ui/notification-strip";
 
-import { notifications } from "../../constants";
+import { notifications } from "../constants";
 
 const ExampleWrapper = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
-		<div className="fixed z-10 bottom-8 right-10">
+		<div className="fixed z-10 bottom-6 right-6">
 			<button
-				onClick={() => setIsOpen(true)}
+			className="relative inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-full shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+			onClick={() => setIsOpen(prev => !prev)}
 			>
-				<img src={notification} alt="notification" className="w-14 h-14 p-2 rounded-full bg-tertiary bg-cover"/>
+			<span className="absolute inset-0 rounded-full bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px]"></span>
+
+			<span className="relative z-10 block px-4 py-4 rounded-full bg-gray-950">
+				<img src={notification} alt="notification" />
+			</span>
 			</button>
 			<SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
 		</div>
@@ -31,11 +36,11 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
 					className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
 				>
 					<motion.div
-						initial={{ scale: 0, rotate: "12.5deg" }}
-						animate={{ scale: 1, rotate: "0deg" }}
-						exit={{ scale: 0, rotate: "0deg" }}
+						initial={{ scale: 0 }}
+						animate={{ scale: 1 }}
+						exit={{ scale: 0 }}
 						onClick={(e) => e.stopPropagation()}
-						className="bg-tertiary text-white p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+						className="bg-tertiary text-white-100 p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
 					>
 						<div className="relative z-10 mb-4">
 							<NotificationStrip words={notifications} />
@@ -50,7 +55,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
 							<div className="flex gap-2">
 								<button
 									onClick={() => setIsOpen(false)}
-									className="bg-transparent hover:bg-white/10 transition-colors text-white font-semibold w-full py-2 rounded"
+									className="bg-transparent hover:bg-white-100/10 transition-colors text-white-100 font-semibold w-full py-2 rounded"
 								>
 									Close
 								</button>

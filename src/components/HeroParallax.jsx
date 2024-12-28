@@ -52,9 +52,9 @@ const Text = () => {
       ref={targetRef}
       className="absolute mx-auto inset-0 left-0 top-0 flex flex-row items-center justify-between w-full max-w-5xl  h-screen overflow-hidden"
     >
-      <p className="text-white text-4xl font-bold md:text-7xl">{`PICT`}</p>
-      <span className='max-sm:hidden block h-[1px] w-0 mx-14 animate-expand bg-white'></span>
-      <p className="text-white text-4xl font-bold md:text-7xl">{`2k25`}</p>
+      <p className="text-white-100 text-4xl font-bold md:text-7xl">{`PICT`}</p>
+      <span className='max-sm:hidden block h-[1px] w-0 mx-14 animate-expand bg-white-100'></span>
+      <p className="text-white-100 text-4xl font-bold md:text-7xl">{`2k25`}</p>
     </motion.h1>
   );
 };

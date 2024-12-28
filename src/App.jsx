@@ -1,27 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { Routes, Route } from "react-router-dom"
-import { About, Register, Timeline, Navbar, Sponsors, StarsCanvas } from './components';
+import { About, Register, Navbar, Sponsors, StarsCanvas } from './components';
 
-import { BackgroundLines } from './components/ui/background-lines'
-import NotificationStrip from "./components/ui/notification-strip";
-import { notifications } from './constants/index'
 import { HeroParallax } from "./components/HeroParallax";
-import { AuroraHero } from "./components/AuroraHero";
-import { AboutParallax } from "./components/AboutParallax";
 import Footer from "./components/Footer";
 import Events from "./components/Events";
 import SwipeGallery from "./components/Gallery";
 import EventDetails from "./components/EventDetails";
-import Notification from './components/ui/modal';
-
-
-// import { Stars } from "@react-three/drei";
-// import { Canvas } from "@react-three/fiber";
+import Notification from './components/Modal';
+import useDimension from "./hooks/useDimension";
+import MobileContext from './hooks/MobileContext'
 
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-  
+
+  const isMobile = useDimension();
+
   const handleScroll = () => {
     if (window.scrollY > lastScrollY) {
       setIsVisible(true);
@@ -39,27 +34,25 @@ const App = () => {
   }, [lastScrollY]);
 
   return (
-    <>
+    <MobileContext.Provider value={isMobile}>
       <div className={`fixed top-0 z-20 w-full transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
         <Navbar />
         {/* <NotificationStrip words={notifications} /> */}
       </div>
       <Routes>
           <Route path="/" element={
-            <>
             <div className="relative z-0 bg-primary">
-              <HeroParallax />
               <Notification />
+              <HeroParallax />
               <About />
-              <Events />
+              <Events isMobile={isMobile} />
               <SwipeGallery />
               <Sponsors />
               <Footer />
             </div>
-            </>
             } />
           <Route path="/register" element={
-            <div className="relative z-0">
+            <div className="relative z-0 bg-primary">
               <Register />
               <StarsCanvas />
             </div>
@@ -71,7 +64,7 @@ const App = () => {
             </div>
           }/>
       </Routes>
-    </>
+    </MobileContext.Provider>
   )
 }
 
