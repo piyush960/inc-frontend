@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import menu from "./menu.svg";
 import close from "./close.svg";
 import notification from './notification.svg'
+import light from './light.png'
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
@@ -14,6 +15,12 @@ import concepts from './logos/concepts.png'
 import impetus from './logos/impetus.png'
 import pradnya from './logos/pradnya.png'
 
+import concepts_b from './logos/concepts_bubble.png'
+import impetus_b from './logos/impetus_bubble.png'
+import inc_b from './logos/inc_bubble.png'
+import pradnya_b from './logos/pradnya_bubble.png'
+import techfiesta_b from './logos/techfiesta_bubble.png'
+
 import gal1 from './gallery/1.jpeg'
 import gal2 from './gallery/2.jpeg'
 import gal3 from './gallery/3.jpeg'
@@ -22,4 +29,4 @@ import gal5 from './gallery/5.jpeg'
 import gal6 from './gallery/6.jpeg'
 import gal7 from './gallery/7.jpeg'
 
-export { logo, menu, notification, concepts, impetus, pradnya, close, meta, shopify, starbucks, tesla, eq, imocha, gal1, gal2, gal3, gal4, gal5, gal6, gal7 };
+export { logo, menu, notification, light, concepts, impetus, pradnya, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, meta, shopify, starbucks, tesla, eq, imocha, gal1, gal2, gal3, gal4, gal5, gal6, gal7 };

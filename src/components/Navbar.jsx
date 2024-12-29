@@ -25,8 +25,8 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav className={`max-md:px-4 m-0 w-full max-w-7xl mx-auto flex items-center py-5 backdrop-blur-sm`}>
-      <div className='w-full flex justify-between items-center mx-auto'>
+    <nav className={`max-md:px-4 m-0 w-full mx-auto flex items-center py-5 backdrop-blur-sm`}>
+      <div className='w-full flex justify-between items-center mx-auto max-w-7xl'>
         <Link to={'/'} className='flex items-center gap-2' onClick={() => {setActive("");}}>
           <img src={logo} alt="logo" className='w-9 h-9 object-contain' />
           <p className='text-white-100 text-[18px] font-bold cursor-pointer'>PICT INC 2025</p>

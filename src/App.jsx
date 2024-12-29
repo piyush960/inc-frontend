@@ -2,7 +2,7 @@ import { useState, useEffect, createContext } from "react";
 import { Routes, Route } from "react-router-dom"
 import { About, Register, Navbar, Sponsors, StarsCanvas } from './components';
 
-import { HeroParallax } from "./components/HeroParallax";
+import Hero from "./components/HeroParallax";
 import Footer from "./components/Footer";
 import Events from "./components/Events";
 import SwipeGallery from "./components/Gallery";
@@ -43,7 +43,7 @@ const App = () => {
           <Route path="/" element={
             <div className="relative z-0 bg-primary">
               <Notification />
-              <HeroParallax />
+              <Hero />
               <About />
               <Events isMobile={isMobile} />
               <SwipeGallery />

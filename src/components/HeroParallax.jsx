@@ -1,121 +1,100 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { IncCanvas } from "./canvas";
-import { Stars } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { IncCanvas, StarsCanvas } from './canvas'
+import { 
+  useMotionTemplate,
+  useMotionValue,
+  motion,
+  animate, } from 'framer-motion'
+import { TextHoverEffect } from "./ui/text-hover-effect";
+import ShiftingCountdown from './ui/countdown';
 
-export const HeroParallax = () => {
+import { light, concepts_b, impetus_b, pradnya_b, inc_b, techfiesta_b } from '../assets'
+
+const COLORS_TOP = ["#1746A2", "#5F9DF7", "#FFF7E9", "#D4621C"];
+
+const Hero = () => {
+
+  const color = useMotionValue(COLORS_TOP[0]);
+  const [isAnimeComplete, setIsAnimeComplete] = useState(false);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    animate(color, COLORS_TOP, {
+      ease: "easeInOut",
+      duration: 5,
+      repeat: Infinity,
+      repeatType: "mirror",
+    });
+  }, []);
+
+  const border = useMotionTemplate`1px solid ${color}`;
+  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
+
+  const handleNavigate = (src) => {
+    if(src==='inc'){
+      return
+    }
+    else if(src==='techfiesta'){
+      window.open('https://techfiesta.pict.edu/', '_blank');
+    }
+    else navigate(`/events/${src}`);
+  }
+
   return (
-    <div className="bg-primary">
-      <TextParallaxContent
-        imgUrl="/src/assets/bg4.png"
-				/>
-    </div>
-  );
-};
-
-const IMG_PADDING = 0
-
-const TextParallaxContent = ({ imgUrl }) => {
-  return (
-    <div
-      style={{
-        paddingLeft: IMG_PADDING,
-        paddingRight: IMG_PADDING,
-      }}
-    >
-      <div className="relative h-[150vh]">
-				<StickyImage imgUrl={imgUrl} />
-				<Text />
-				<OverlayCopy />
+    <section className={`relative sm:px-12 px-6 w-full h-screen mx-auto flex flex-col-reverse overflow-hidden justify-center sm:flex-row items-center sm:justify-between bg-grid-orange-100/[0.2] max-sm:pt-10`}>
+      <img src={light} alt="light" className='absolute object-cover pointer-events-none top-[-10%] sm:right-[8%] z-10 opacity-35'/>
+      <img src={inc_b} alt="inc_b" className='absolute animate-spin-slow sm:w-28 sm:h-28 w-12 h-12 object-cover pointer-events-none max-sm:bottom-[20%] max-sm:right-[25%] bottom-[27.5%] right-[33%]' onClick={() => handleNavigate('inc')}/>
+      <img src={techfiesta_b} alt="techfiesta_b" className='max-sm:hidden absolute animate-wiggle sm:w-28 sm:h-28 w-12 h-12 object-cover cursor-pointer z-10 top-[16%] right-[5%]' onClick={() => handleNavigate('techfiesta')}/>
+      <p className='absolute sm:left-[50%] top-[11%] sm:translate-x-[-50%] uppercase text-slate-400 font-light text-center text-md sm:text-lg'><span className=''>SCTR's Pune Institute of Computer Technology</span><span className='sm:block text-center'>&nbsp;Presents</span></p>
+      <div className='relative max-sm:h-full max-sm:justify-start flex flex-col max-sm:-space-y-4 items-center sm:mt-12'>
+        <img src={concepts_b} alt="concepts_b" className='absolute animate-pulse sm:w-28 sm:h-28 w-12 h-12 object-cover cursor-pointer max-sm:bottom-[71%] max-sm:right-[12%] bottom-[47.5%] right-[5%]' onClick={() => handleNavigate('concepts')}/>
+        <img src={impetus_b} alt="impetus_b" className='absolute animate-pulse sm:w-28 sm:h-28 w-12 h-12 object-cover cursor-pointer max-sm:bottom-[51%] max-sm:left-[16.5%] bottom-[25%] left-[8.5%]' onClick={() => handleNavigate('impetus')}/>
+        <img src={pradnya_b} alt="pradnya_b" className='absolute animate-bounce sm:w-28 sm:h-28 w-12 h-12 object-cover cursor-pointer max-sm:top-0 top-[15.5%] left-[44%]' onClick={() => handleNavigate('pradnya')}/>
+        <h1 className='relative'>
+          <span className='text-white font-bold text-lg sm:text-5xl absolute top-[8%] left-[20%] sm:top-[20%] sm:left-[12%] pointer-events-none'>PICT</span>
+          <TextHoverEffect text={'INC'} />
+          <span className='text-white font-bold text-lg sm:text-5xl absolute bottom-[20%] right-[20%] sm:bottom-[29%] sm:right-[12%] pointer-events-none'>2K25</span>
+        </h1>
+        <motion.button
+          style={{
+            border,
+            boxShadow,
+          }}
+          whileHover={{
+            scale: 1.015,
+          }}
+          whileTap={{
+            scale: 0.985,
+          }}
+          className="rounded-xl sm:absolute sm:bottom-[22%] bg-gray-950/10 px-4 py-2 text-white-100 transition-colors hover:bg-gray-950/50"
+        >
+          Register Now
+        </motion.button>
       </div>
-    </div>
-  );
-};
-
-const Text = () => {
-	const targetRef = useRef(null);
-	const { scrollYProgress } = useScroll({
-		target: targetRef,
-		offset: ["start end", "end start"],
-	});
-
-	const y = useTransform(scrollYProgress, [0, 1], [250, -250]);
-	const opacity = useTransform(scrollYProgress, [0.25, 0.5, 0.75], [0, 1, 0]);
-
-	return (
-    <motion.h1
-      style={{
-        y,
-        opacity,
-      }}
-      ref={targetRef}
-      className="absolute mx-auto inset-0 left-0 top-0 flex flex-row items-center justify-between w-full max-w-5xl  h-screen overflow-hidden"
-    >
-      <p className="text-white-100 text-4xl font-bold md:text-7xl">{`PICT`}</p>
-      <span className='max-sm:hidden block h-[1px] w-0 mx-14 animate-expand bg-white-100'></span>
-      <p className="text-white-100 text-4xl font-bold md:text-7xl">{`2k25`}</p>
-    </motion.h1>
-  );
-};
-
-
-const StickyImage = ({ imgUrl }) => {
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["end end", "end start"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.60]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
-  return (
-    <motion.div
-      style={{
-        backgroundImage: `url(${imgUrl})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: `calc(100vh - ${IMG_PADDING * 2}px)`,
-        top: IMG_PADDING,
-        scale,
-      }}
-      ref={targetRef}
-      className="sticky z-0 overflow-hidden rounded-3xl"
-    >
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          opacity,
+      <div className='flex flex-col-reverse max-sm:h-full sm:flex-col justify-start sm:justify-center items-center sm:mt-10'>
+        <div className='w-[250px] h-[250px] sm:w-[400px] sm:h-[400px]'>
+          <IncCanvas />
+        </div>
+        <motion.div 
+        initial={{ scale: 2, y: '-150%', x: '-100%' }}
+        animate={{ scale: 1, x: 0, y: 0}}
+        transition={{
+          duration: 1,
+          ease: "easeInOut",
+          delay: 2
         }}
-      />
-			<div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-b from-[#000609]/0 to-[#000609]" />
-    </motion.div>
-  );
-};
+        onAnimationComplete={() => setIsAnimeComplete(true)}
+        className='w-full max-sm:hidden'>
+          <ShiftingCountdown isAnimeComplete={isAnimeComplete} />
+        </motion.div>
+      </div>
+      <div>
+    </div>
+    <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-[#000609]/0 to-[#000609]" />
+    </section>
+  )
+}
 
-const OverlayCopy = ({ subheading, heading }) => {
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start end", "end start"],
-  });
+export default Hero
 
-  const y = useTransform(scrollYProgress, [0, 1], [250, -250]);
-  const opacity = useTransform(scrollYProgress, [0.25, 0.5, 0.75], [0, 1, 0]);
-
-  return (
-    <motion.div
-		style={{
-			y,
-			opacity,
-		}}
-		ref={targetRef}
-		className="absolute inset-0 h-screen flex flex-col justify-center items-center overflow-hidden"
-	>
-		<div className="w-[250px] h-[250px] sm:w-[400px] sm:h-[400px]">
-			<IncCanvas />
-		</div>
-	</motion.div>
-  );
-};
