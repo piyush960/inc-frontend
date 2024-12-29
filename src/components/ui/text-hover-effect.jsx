@@ -45,7 +45,7 @@ export const TextHoverEffect = ({
             <>
               <stop offset="0%" stopColor={"var(--dark-blue-500)"} />
               <stop offset="25%" stopColor={"var(--blue-500)"} />
-              <stop offset="50%" stopColor={"var(--red-500)"} />
+              <stop offset="50%" stopColor={"var(--cyan-500)"} />
               <stop offset="75%" stopColor={"var(--orange-500)"} />
               <stop offset="100%" stopColor={"var(--orange-500)"} />
             </>
@@ -81,7 +81,7 @@ export const TextHoverEffect = ({
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        strokeWidth="0.5"
+        strokeWidth="0.4"
         className="font-[helvetica] font-bold text-8xl fill-transparent stroke-white-100"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
@@ -100,7 +100,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         stroke="url(#textGradient)"
-        strokeWidth="1.2"
+        strokeWidth="2.0"
         mask="url(#textMask)"
         className="font-[helvetica] max-sm:hidden font-bold fill-transparent text-8xl">
         {text}

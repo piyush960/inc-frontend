@@ -7,6 +7,8 @@ import { events } from "../constants/index.js";
 
 import { styles } from '../styles.js'
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
+import MobileContext from "../hooks/MobileContext.js";
+import SwipeCards from "./ui/SwipeCards.jsx";
 
 function dateToWords(dateStr) {
   const [day, month, year] = dateStr.split('-');
@@ -17,6 +19,10 @@ function dateToWords(dateStr) {
 }
 
 function Events(){
+
+  const isMobile = useContext(MobileContext);
+
+  console.log('in events', isMobile)
 
   return (
     <>
@@ -30,7 +36,7 @@ function Events(){
       >
         <h2 className={`${styles.sectionHeadText}`}>Events.</h2>
       </motion.div>
-      <EventCards />
+      {isMobile ? <SwipeCards events={events} /> : <EventCards />}
     </motion.div>
     </>
   )

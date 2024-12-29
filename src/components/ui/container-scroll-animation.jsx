@@ -82,9 +82,9 @@ export const Card = ({
   return (
     (<motion.div
       style={attributes}
-      className="max-w-6xl p-px sm:-mt-12 mt-12 mx-auto w-full rounded-2xl  bg-gradient-to-br from-dark-blue via-light-blue to-orange-100">
+      className="max-w-7xl p-px sm:-mt-12 mt-12 mx-auto w-full  bg-gradient-to-br from-dark-blue via-yellow-500 to-orange-100">
       <div
-        className="h-full w-full rounded-2xl bg-tertiary md:rounded-2xl p-4">
+        className="h-full w-full bg-tertiary p-4 text-[16px] sm:text-lg">
         {children}
       </div>
     </motion.div>)

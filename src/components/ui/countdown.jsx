@@ -11,7 +11,6 @@ const DAY = HOUR * 24;
 
 const ShiftingCountdown = ({ isAnimeComplete }) => {
 
-  console.log(isAnimeComplete)
 
   return (
     <div className={`${isAnimeComplete ? `bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px` : `border-white-100 backdrop-blur-sm border-[1px]`}`}

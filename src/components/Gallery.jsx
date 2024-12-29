@@ -3,7 +3,6 @@ import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
 import { styles } from "../styles";
 
 import { gal1, gal2, gal3, gal4, gal5, gal6, gal7 } from "../assets";
-import MobileContext from "../hooks/MobileContext";
 
 const imgs = [
   gal1,
@@ -27,23 +26,8 @@ const SPRING_OPTIONS = {
 };
 
 const SwipeGallery = () => {
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start end", "end start"],
-  });
-
-  const isMobile = useContext(MobileContext)
-
-  const scale = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0.7, 1, 1, 0.8]);
-  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0, 1, 1, 0.5]);
-
-  const style_attr = !isMobile && {scale, opacity}
-
   return (
-    <motion.div 
-    ref={targetRef}
-    style={style_attr}
+    <div
     className={`h-full sm:my-16 sm:py-16 py-10`}>
       <motion.div 
       initial={{ y: 100, opacity: 0 }}
@@ -59,7 +43,7 @@ const SwipeGallery = () => {
         </h2>
       </motion.div>
       <SwipeGalleryContent />
-    </motion.div>
+    </div>
   )
 }
 

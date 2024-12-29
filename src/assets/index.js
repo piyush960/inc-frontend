@@ -3,6 +3,7 @@ import menu from "./menu.svg";
 import close from "./close.svg";
 import notification from './notification.svg'
 import light from './light.png'
+import aboutbg from './about-bg.png'
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
@@ -29,4 +30,4 @@ import gal5 from './gallery/5.jpeg'
 import gal6 from './gallery/6.jpeg'
 import gal7 from './gallery/7.jpeg'
 
-export { logo, menu, notification, light, concepts, impetus, pradnya, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, meta, shopify, starbucks, tesla, eq, imocha, gal1, gal2, gal3, gal4, gal5, gal6, gal7 };
+export { logo, menu, notification, light, concepts, impetus, pradnya, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, meta, shopify, starbucks, tesla, eq, imocha, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, };

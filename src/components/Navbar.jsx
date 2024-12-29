@@ -5,11 +5,16 @@ import { styles } from '../styles'
 import { navLinks } from '../constants'
 import { logo, menu, close } from '../assets'
 
+import useScrollVisibility from '../hooks/useScrollVisibility'
+
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
+  const isVisible = useScrollVisibility();
 
   const location = useLocation();
+
+  console.log('in nav', isVisible)
 
   useEffect(() => {
     if (location.hash) {
@@ -25,7 +30,7 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav className={`max-md:px-4 m-0 w-full mx-auto flex items-center py-5 backdrop-blur-sm`}>
+    <nav className={`max-md:px-4 w-full mx-auto flex items-center py-5 backdrop-blur-sm fixed top-0 z-20 transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
       <div className='w-full flex justify-between items-center mx-auto max-w-7xl'>
         <Link to={'/'} className='flex items-center gap-2' onClick={() => {setActive("");}}>
           <img src={logo} alt="logo" className='w-9 h-9 object-contain' />

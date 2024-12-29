@@ -1,37 +1,34 @@
-import React from 'react'
-
-import { motion } from 'framer-motion'
+import React, { useMemo } from 'react'
 
 import { styles } from '../styles'
-import { about_text } from '../constants'
-import { textVariant } from '../utils/motion'
 
 import { SectionWrapper } from '../hoc'
 
-import { TextGenerateEffect } from './ui/text-generate-effect'
-
 import { ContainerScroll } from './ui/container-scroll-animation';
-import { p } from 'framer-motion/client'
 
-const AboutCard = ({index, text, icon}) => {
-  return (
-    <div className='w-full'
-    >
-      <div
-        className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
-      >
-        <div
-          className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
-        >
-          <TextGenerateEffect words={about_text} /> 
-        </div>
-      </div>
-    </div>
-  ) 
-}
+const DURATION = 50000;
+const ROWS = 6;
+const TAGS_PER_ROW = 10;
+
+const TAGS = [
+  "INC",
+  "Impetus",
+  "Concepts",
+  "Pradnya",
+  "Project",
+  "Presentation",
+  "Embeded Systems",
+  "Web Development",
+  "IOT",
+  "Hardware",
+  "Application Development",
+  "Project Management",
+];
+
+const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+const shuffle = (arr) => [...arr].sort(() => 0.5 - Math.random());
 
 const Text = () => {
-
   return (
     <p className='text-white-100'>
       <span className='block pb-4'>
@@ -47,23 +44,71 @@ const Text = () => {
   )
 
 }
-const About = () => {
-  return(
-    <>
-    <div className='md:mt-16 px-5 py-16 overflow-hidden'>
-      <ContainerScroll 
-      titleComponent={
-      <h2 className={`${styles.sectionSubText}`}>
-        What is Impetus and Concepts? <br />
-        <span className={`${styles.sectionHeadText}`}>
-          About Us.
-        </span>
-      </h2>
-      } 
-      children={<Text />} 
-      />
+
+const Tag = ({ text }) => (
+  <li className='text-secondary text-nowrap bg-tertiary p-4 text-lg mr-4 rounded-md font-light opacity-85'><span className='text-yellow-500'>#</span>&nbsp;{text}</li>
+);
+
+const InfiniteLoopSlider = ({ children, duration, reverse = false }) => {
+  return (
+    <div
+      className="flex w-fit animate-loop"
+      style={{
+        "--duration": `${duration}ms`,
+        "--direction": reverse ? "reverse" : "normal",
+      }}
+    >
+      <ul className="flex">
+        {children}
+        {children}
+      </ul>
     </div>
-    </>
+  );
+};
+
+const About = () => {
+
+  const rows = useMemo(() => {
+    return [...new Array(ROWS)].map((_, i) => ({
+      id: i,
+      duration: random(DURATION - 5000, DURATION + 5000),
+      reverse: i % 2,
+      tags: shuffle(TAGS).slice(0, TAGS_PER_ROW),
+    }));
+  }, []);
+
+  return(
+    <div className='relative group'>
+      <div className='md:mt-16 px-5 sm:pt-24 py-4 overflow-hidden'
+      >
+        <ContainerScroll 
+        titleComponent={
+        <h2 className={`${styles.sectionSubText}`}>
+          What is Impetus and Concepts? <br />
+          <span className={`${styles.sectionHeadText}`}>
+            About Us.
+          </span>
+        </h2>
+        } 
+        children={<Text />} 
+        />
+      </div>
+      <div className="absolute top-0 -z-10 w-full inset-0 overflow-hidden flex flex-col py-2 justify-between blur-sm group-hover:blur-none duration-300">
+        {rows.map((row) => (
+          <InfiniteLoopSlider
+            key={row.id}
+            duration={row.duration}
+            reverse={row.reverse}
+          >
+            {row.tags.map((tag) => (
+              <Tag text={tag} key={tag} />
+            ))}
+          </InfiniteLoopSlider>
+        ))}
+      </div>
+      <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-r from-primary/0 to-primary/100" />
+      <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-l from-primary/0 to-primary/100" />
+    </div>
   )
   
 }

@@ -66,9 +66,9 @@ import {
   ]
 
   const events = [
-    { id: 'impetus', title: "Impetus", description: "Participate in the National Level Competitive Programming Contest.", logo: impetus, color:"bg-blue-900", team_size: '4-5 members', type: 'Idea Competition', date: '14-01-2025' },
-    { id: 'concepts', title: "Concepts", description: "Join us for an exciting coding competition at the national level.", logo: concepts, color:"bg-cyan-900", team_size: '4-5 members', type: 'Idea Competition', date: '14-01-2025' },
-    { id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-orange-900", team_size: '4-5 members', type: 'Coding Competition', date: '14-01-2025' },
+    { id: 1, _id: 'impetus', title: "Impetus", description: "Participate in the National Level Competitive Programming Contest.", logo: impetus, color:"bg-blue-900", team_size: '4-5 members', type: 'Idea Competition', date: '14-01-2025' },
+    { id: 2, _id: 'concepts', title: "Concepts", description: "Join us for an exciting coding competition at the national level.", logo: concepts, color:"bg-cyan-900", team_size: '4-5 members', type: 'Idea Competition', date: '14-01-2025' },
+    { id: 3, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-orange-900", team_size: '4-5 members', type: 'Coding Competition', date: '14-01-2025' },
   ];
 
   

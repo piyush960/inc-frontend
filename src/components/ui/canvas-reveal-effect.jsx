@@ -16,9 +16,7 @@ export const CanvasRevealEffect = ({
   return (
     <div className={twMerge(clsx("h-full relative bg-primary w-full", containerClassName))}>
       <div className="h-full w-full">
-        {showGradient && (
-        <div className="absolute inset-0 max-sm:hidden bg-gradient-to-b from-gray-950 to-[20%]" />
-        )}
+        
         <div className="max-sm:hidden h-full w-full">
           <DotMatrix
             colors={colors ?? [[0, 255, 255]]}

@@ -37,6 +37,7 @@ module.exports = {
         marquee: 'marquee 20s linear infinite',
         'spin-slow': 'spin 6s linear infinite',
         wiggle: 'wiggle 1s ease-in-out infinite',
+        loop: 'loop var(--duration) linear infinite var(--direction)',
       },
       keyframes: {
         expand: {
@@ -49,13 +50,17 @@ module.exports = {
           },
         },
         marquee: {
-          '0%': { transform: 'translateX(100%)' },
+          '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' },
         },
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
-        }
+        },
+        loop: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
     },
   },

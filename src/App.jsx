@@ -1,4 +1,3 @@
-import { useState, useEffect, createContext } from "react";
 import { Routes, Route } from "react-router-dom"
 import { About, Register, Navbar, Sponsors, StarsCanvas } from './components';
 
@@ -12,43 +11,24 @@ import useDimension from "./hooks/useDimension";
 import MobileContext from './hooks/MobileContext'
 
 const App = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  
+  const isMobile = useDimension(); // Assuming useDimension is already implemented
 
-  const isMobile = useDimension();
-
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-    setLastScrollY(window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
+  console.log('in app', isMobile)
 
   return (
     <MobileContext.Provider value={isMobile}>
-      <div className={`fixed top-0 z-20 w-full transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
-        <Navbar />
-        {/* <NotificationStrip words={notifications} /> */}
-      </div>
+      <Navbar />
       <Routes>
           <Route path="/" element={
             <div className="relative z-0 bg-primary">
-              <Notification />
               <Hero />
               <About />
-              <Events isMobile={isMobile} />
+              <Events />
               <SwipeGallery />
               <Sponsors />
               <Footer />
+              <Notification />
             </div>
             } />
           <Route path="/register" element={
@@ -61,8 +41,9 @@ const App = () => {
             <div className="relative z-0 bg-primary">
               <EventDetails />
               <StarsCanvas />
-            </div>
-          }/>
+            </div> 
+          }
+          />
       </Routes>
     </MobileContext.Provider>
   )
