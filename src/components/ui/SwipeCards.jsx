@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import move from "lodash-move";
 
 import { events } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 const CARD_OFFSET = 20;
 const SCALE_FACTOR = 0.06;
@@ -18,12 +19,15 @@ function dateToWords(dateStr) {
 
 const CardStack = ({ }) => {
 
+  const navigate = useNavigate()
+
   const [cards, setCards] = React.useState(events);
   const moveToEnd = (from) => {
     setCards(move(cards, from, cards.length - 1));
   };
 
 	const handleViewDetails = (id) => {
+    console.log(id)
     navigate(`/events/${id}`);
   };
 
@@ -49,7 +53,11 @@ const CardStack = ({ }) => {
                 left: 0,
                 right: 0,
               }}
-              onDragEnd={() => moveToEnd(index)}
+              onDragEnd={(e, info) => {
+                if(Math.abs(info.offset.x) > 75){
+                  moveToEnd(index)
+                }
+              }}
 							className={`absolute w-[300px] h-[400px] origin-center list-none bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px`}
             >
 							<div className="bg-primary h-full w-full flex flex-col px-3 py-2 overflow-hidden justify-center items-center">
@@ -65,7 +73,7 @@ const CardStack = ({ }) => {
 
 							<button
 								className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
-								onClick={() => handleViewDetails(details.id)}
+								onClick={() => handleViewDetails(details._id)}
 							>
 								<span className="absolute inset-0 rounded-xl bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
 

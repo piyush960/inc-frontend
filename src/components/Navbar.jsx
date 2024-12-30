@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import { styles } from '../styles'
@@ -11,10 +11,13 @@ const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const isVisible = useScrollVisibility();
+  const menuRef = useRef(null);
 
   const location = useLocation();
 
   console.log('in nav', isVisible)
+
+  console.log('toggle', toggle)
 
   useEffect(() => {
     if (location.hash) {
@@ -28,6 +31,18 @@ const Navbar = () => {
       setTimeout(scrollToElement, 300);
     }
   }, [location]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setToggle(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className={`max-md:px-4 w-full mx-auto flex items-center py-5 backdrop-blur-sm fixed top-0 z-20 transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
@@ -46,9 +61,10 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
-          <img src={toggle ? close : menu} alt="menu" className='w-[28px] h-[28px] object-contain cursor-pointer' onClick={() => {setToggle(!toggle)}}/>
-          <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-tertiary absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
+        <div className='sm:hidden flex flex-1 justify-end items-center' ref={menuRef}>
+          <img src={toggle ? close : menu} alt="menu" className='w-[28px] h-[28px] object-contain cursor-pointer' 
+          onClick={() => setToggle(!toggle)}/>
+          <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-tertiary absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10`}>
           <ul className='list-none flex justify-end items-start flex-col gap-4'>
             {navLinks.map((link) => (
               <li key={link.id} className={`${active == link.title ? 'text-white-100' : 'text-orange-100'} font-poppins font-medium cursor-pointer text-[16px]`} onClick={() => {

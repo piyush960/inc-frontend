@@ -26,7 +26,7 @@ function Events(){
 
   return (
     <>
-    <motion.div 
+    <div
     className='w-full flex flex-col items-center justify-evenly'>
       <motion.div 
       initial={{ y: 100, opacity: 0 }}
@@ -37,7 +37,7 @@ function Events(){
         <h2 className={`${styles.sectionHeadText}`}>Events.</h2>
       </motion.div>
       {isMobile ? <SwipeCards events={events} /> : <EventCards />}
-    </motion.div>
+    </div>
     </>
   )
 }
@@ -57,7 +57,7 @@ function EventCards({ }) {
           index={index}
           title={event.title} 
           details={{
-            id: event.id,
+            id: event._id,
             logo: event.logo,
             description: event.description,
             team_size: event.team_size,
@@ -90,10 +90,10 @@ const Card = ({
     whileInView={{opacity: 1}}
     viewport={{ once: true, amount: 0.5 }}
     transition={{ ease: "easeInOut", duration: 0.6, delay:index*0.25}}
-    className="border-2 border-white-100 border-dotted hover:border-opacity-0 transition duration-200 group/canvas-card flex flex-col items-center justify-between max-w-sm w-full mx-auto p-4 relative h-[28rem]"
+    className="bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 transition duration-200 group/canvas-card flex flex-col items-center justify-between max-w-sm w-full mx-auto p-px relative h-[28rem]"
     >
       <AnimatePresence>
-        {(hovered) && (
+        {(!hovered) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -104,32 +104,19 @@ const Card = ({
         )}
       </AnimatePresence>
 
-      <div className="h-full flex flex-col items-center justify-center">
-        <div className="absolute group-hover/canvas-card:-translate-y-8 group-hover/canvas-card:opacity-0 transition duration-200">
+      <div className="h-full flex flex-col items-center justify-center bg-primary p-4">
+        <div className="absolute opacity-0 z-10 -translate-y-8 group-hover/canvas-card:translate-y-0 group-hover/canvas-card:opacity-100 transition duration-200 w-full h-full flex flex-col items-center justify-evenly">
           <img src={details.logo} alt={`${title} logo`} className="w-24 h-24" />
-        </div>
-        
-        
-        <div className={`relative inset-0 flex flex-col items-center justify-center p-6 transition-all duration-300 ${
-          (hovered) ? 'opacity-100' : 'opacity-0'
-        }`}>
-          <img src={details.logo} alt={`${title} logo`} className="w-16 h-16 mb-4" />
-          <h2 className="text-2xl font-bold text-white-100 mb-2">{title}</h2>
-          <div className="flex flex-row space-x-2 mb-8">
-            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.type}</p>
-            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
-          </div>
-          <p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
-          <span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date)}</span>
-
-
+          <h2 className={`text-white-100 text-2xl font-bold`}>
+            {title}
+          </h2>
           <button
-            className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+            className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
             onClick={() => handleViewDetails(details.id)}
           >
-            <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+            <span className="absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
 
-            <span className="relative z-10 block px-4 py-2 rounded-xl bg-gray-950">
+            <span className="relative z-10 block px-4 py-2 bg-gray-950">
               <div className="relative z-10 flex items-center space-x-2">
                 <span className="transition-all duration-500 group-hover:translate-x-1">View Details</span>
                 <svg
@@ -149,14 +136,23 @@ const Card = ({
               </div>
             </span>
           </button>
-          
         </div>
-
-        <h2 className={`text-white-100 absolute bottom-[10%] text-2xl z-10 font-bold transition duration-200 ${
-          hovered ? 'opacity-0' : 'opacity-100'
+        
+        
+        
+        <div className={`relative inset-0 flex flex-col items-center justify-center p-6 transition-all duration-300 ${
+          (!hovered) ? 'opacity-100' : 'opacity-0'
         }`}>
-          {title}
-        </h2>
+          <img src={details.logo} alt={`${title} logo`} className="w-16 h-16 mb-4" />
+          <h2 className="text-2xl font-bold text-white-100 mb-2">{title}</h2>
+          <div className="flex flex-row space-x-2 mb-8">
+            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.type}</p>
+            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
+          </div>
+          <p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
+          <span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date)}</span>
+
+        </div>
       </div>
     </motion.div>
   );

@@ -1,5 +1,6 @@
 import { useAnimate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 // NOTE: Change this date to whatever date you want to countdown to :)
 const COUNTDOWN_FROM = "2025-01-14";
@@ -9,21 +10,47 @@ const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
-const ShiftingCountdown = ({ isAnimeComplete }) => {
+const ShiftingCountdown = () => {
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
+  console.log('loaded', isLoaded, ' animated', hasAnimated)
 
-  return (
-    <div className={`${isAnimeComplete ? `bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px` : `border-white-100 backdrop-blur-sm border-[1px]`}`}
+  useEffect(() => {
+    const hasTimerAnimated = sessionStorage.getItem("hasTimerAnimated");
+    if (!hasTimerAnimated) {
+      setHasAnimated(true);
+      sessionStorage.setItem("hasTimerAnimated", true);
+    }
+    setIsLoaded(true);
+  }, []);
+
+  const animationVariants = {
+    initial: { scale: 2, x: "-68%", y: "-150%" },
+    animate: { scale: 1, x: 0, y: 0 },
+  };
+
+  return isLoaded ? (
+    <motion.div
+      initial={hasAnimated ? "initial" : "animate"}
+      animate="animate"
+      variants={animationVariants}
+      transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
+      onAnimationComplete={() => setHasAnimated(false)}
+      className="w-[90%] max-sm:hidden z-20"
     >
-      <div className={`mx-auto flex w-full max-w-5xl items-center ${isAnimeComplete ? `bg-primary` : `bg-transparent`}`}>
-        <CountdownItem unit="Day" text="days" cn={'border-r-[1px]'}/>
-        <CountdownItem unit="Hour" text="hours" cn={'border-r-[1px]'} />
-        <CountdownItem unit="Minute" text="minutes" cn={'border-r-[1px]'} />
-        <CountdownItem unit="Second" text="seconds" />
+      <div className={hasAnimated ? "border-white-100 border-[1px]" : "bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px"}>
+        <div className={`mx-auto flex w-full max-w-5xl items-center ${hasAnimated ? `backdrop-blur-sm` : `bg-primary`}`}>
+          <CountdownItem unit="Day" text="days" cn={"border-r-[1px]"} />
+          <CountdownItem unit="Hour" text="hours" cn={"border-r-[1px]"} />
+          <CountdownItem unit="Minute" text="minutes" cn={"border-r-[1px]"} />
+          <CountdownItem unit="Second" text="seconds" />
+        </div>
       </div>
-    </div>
-  );
+    </motion.div>
+  ) : null;
 };
+
 
 const CountdownItem = ({ unit, text, cn }) => {
   const { ref, time } = useTimer(unit);
@@ -79,7 +106,6 @@ const useTimer = (unit) => {
     }
 
     if (newTime !== timeRef.current) {
-      // Exit animation
       await animate(
         ref.current,
         { y: ["0%", "-50%"], opacity: [1, 0] },
@@ -89,7 +115,6 @@ const useTimer = (unit) => {
       timeRef.current = newTime;
       setTime(newTime);
 
-      // Enter animation
       await animate(
         ref.current,
         { y: ["50%", "0%"], opacity: [0, 1] },

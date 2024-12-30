@@ -8,7 +8,7 @@ import { notifications } from "../constants";
 const ExampleWrapper = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
-		<div className="fixed z-10 bottom-6 right-6">
+		<div className="fixed z-50 bottom-6 right-6">
 			<button
 			className="relative inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-full shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
 			onClick={() => setIsOpen(prev => !prev)}
@@ -40,7 +40,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
 						animate={{ scale: 1 }}
 						exit={{ scale: 0 }}
 						onClick={(e) => e.stopPropagation()}
-						className="bg-tertiary text-white-100 p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+						className="bg-tertiary text-white-100 p-6 w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
 					>
 						<div className="relative z-10 mb-4">
 							<NotificationStrip words={notifications} />
@@ -55,7 +55,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
 							<div className="flex gap-2">
 								<button
 									onClick={() => setIsOpen(false)}
-									className="bg-transparent hover:bg-white-100/10 transition-colors text-white-100 font-semibold w-full py-2 rounded"
+									className="bg-transparent hover:bg-white-100/10 transition-colors text-white-100 font-semibold w-full py-2"
 								>
 									Close
 								</button>

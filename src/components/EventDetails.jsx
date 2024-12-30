@@ -1,117 +1,159 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { CanvasRevealEffect } from "./ui/canvas-reveal-effect";
-import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
+import { Tabs } from "./ui/tabs";
 
-const EventDetails = () => {
-  const { id } = useParams();
-  const [shinePosition, setShinePosition] = useState({ x: 0, y: 0 });
-  const [hovered, setHovered] = useState(false);
+import { eventsData } from '../constants';
 
-  // Sample data for demonstration purposes
-  const events = [
+import { IconCalendarFilled, IconCheckupList, IconCurrencyDollar, IconDiamondsFilled, IconDownload, IconFileDescription, IconTrophy, IconUserCheck, IconUserEdit, IconUsersGroup } from '@tabler/icons-react'
+import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './ui/accordian';
+
+
+function TabsDemo() {
+
+  const { id } = useParams()
+
+  const tabs = [
     {
-      id: 1,
-      title: "IMPETUS",
-      description: "International Level Project Exhibition and Competition",
-      fees: {
-        national: "₹100 /-",
-        international: "Free"
-      },
-      teamSize: "Max 5 members",
-      schedule: "5th, 6th & 7th of April",
-      prizes: "Cash prize worth ₹7 Lakh. Selected projects addressing societal needs will be awarded ₹1 Lakh Cash Prize from PICT.",
-      criteria: "First, Second and Third Year Students enrolled in any BE/BTech, BSc, BCA, Diploma Degree.",
-      rules: [
-        "Judge's decision will be final.",
-        "Project status must be in 'Ready to Use'.",
-        "Already registered candidates need not register again."
-      ]
+      title: "Impetus",
+      value: "impetus",
+      content: (
+        <div
+          className="w-full overflow-y-scroll overflow-x-hidden relative h-screen p-4 bg-tertiary">
+          <EventDetails data={eventsData.impetus} />
+        </div>
+      ),
     },
-    // Other events...
+    {
+      title: "Concepts",
+      value: "concepts",
+      content: (
+        <div
+          className="w-full overflow-y-scroll overflow-x-hidden relative h-screen p-4 bg-tertiary">
+          <EventDetails data={eventsData.concepts}/>
+        </div>
+      ),
+    },
+    {
+      title: "Pradnya",
+      value: "pradnya",
+      content: (
+        <div
+          className="w-full overflow-y-scroll overflow-x-hidden relative h-screen p-4 bg-tertiary">
+          <EventDetails data={eventsData.pradnya}/>
+        </div>
+      ),
+    },
   ];
 
-  // Find the event details based on the ID
-  const event = events.find(event => event.id === parseInt(id));
+  return (
+    (<div
+      className="pt-20 max-sm:px-2 max-w-7xl w-full h-[150vh] mx-auto">
+      <Tabs tabs={tabs} activeId={id}/>
+    </div>)
+  );
+}
 
-  if (!event) {
-    return <div className="p-4">Event not found</div>;
-  }
+export default TabsDemo; 
 
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    setShinePosition({ x: clientX, y: clientY });
-  };
+const EventDetails = ({ data }) => {
+  const { id } = useParams();
+  
+  console.log(data)
 
   return (
     <div
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="h-screen flex flex-col items-center justify-center overflow-hidden relative"
+    className='flex flex-col w-full h-[90vh] justify-between items-center p-1 sm:p-5 gap-3'
     >
-      <p className="md:text-2xl text-2xl font-medium text-center text-white relative z-20 max-w-2xl mx-auto">
-        {event.title}
-      </p>
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="h-full w-full absolute inset-0"
-          >
-            <CanvasRevealEffect
-              animationSpeed={5}
-              containerClassName="bg-transparent"
-              colors={[
-                [59, 130, 246],
-                [139, 92, 346],
-              ]}
-              opacities={[0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.4, 0.4, 0.4, 1]}
-              dotSize={2}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {/* Radial gradient for the cute fade */}
-      <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/90" />
-      <CardContainer className="bg-gray-900 text-white shadow-md p-10 max-w-6xl w-full relative z-10 flex flex-row overflow-hidden perspective-1000 border border-gray-700 rounded-lg">
-        <CardBody className="flex flex-row w-full transition-transform duration-300 transform group-hover/card:scale-105 h-full ">
-          <CardItem className="w-1/2 pr-10">
-            <div className={`transition-transform duration-300 ${hovered ? 'transform translate-y-[-10px] scale-105' : ''}`}>
-              <img src="src/assets/impetuslogo.png" alt="Event Logo" className="w-1/3 h-auto mb-4 mx-auto" />
-              <h2 className="text-3xl font-bold mb-2 text-center">{event.title}</h2>
-            </div>
-            <div className="mt-4 flex justify-between">
-              <button className="bg-blue-500 text-white py-2 px-6 rounded">Button 1</button>
-              <button className="bg-green-500 text-white py-2 px-6 rounded">Button 2</button>
-            </div>
-          </CardItem>
-          <CardItem className="w-1/2 pl-10">
-            <h2 className="text-3xl font-bold mb-4">Event Details</h2>
-            <p className="mt-2 text-gray-300">{event.description}</p>
-            <div className="mt-6">
-              <p className="font-semibold"><strong>Fees:</strong></p>
-              <p>🔹 National Entries: <span className="font-medium">{event.fees.national}</span></p>
-              <p>🔹 International Entries: <span className="font-medium">{event.fees.international}</span></p>
-              <p className="font-semibold"><strong>Team Size:</strong> <span className="font-medium">{event.teamSize}</span></p>
-              <p className="font-semibold"><strong>Schedule:</strong> <span className="font-medium">{event.schedule}</span></p>
-              <p className="font-semibold"><strong>Prizes:</strong> <span className="font-medium">{event.prizes}</span></p>
-              <p className="font-semibold"><strong>Criteria:</strong> <span className="font-medium">{event.criteria}</span></p>
-              <p className="font-semibold"><strong>Rules:</strong></p>
-              <ul className="list-disc list-inside ml-4">
-                {event.rules.map((rule, index) => (
-                  <li key={index} className="text-gray-300">{rule}</li>
-                ))}
-              </ul>
-            </div>
-          </CardItem>
-        </CardBody>
-      </CardContainer>
+      <div className='flex flex-col sm:flex-row sm:justify-start items-center justify-center w-full border-b-[1px] max-sm:gap-3'>
+        <div className='flex flex-col items-center sm:border-r-[1px] border-white-100 sm:w-[43%] sm:mr-10'>
+          <img src={data.logo} alt={`${data.id}_logo`} className='sm:w-[180px] sm:h-[180px] w-[140px] h-[140px]'/>
+          <h2 className='text-3xl font-bold my-4 text-orange-100'>{data.name}</h2>
+          <p className='font-bold text-xl sm:max-w-[70%] text-center'>{data.short_desc}</p>
+          <div className='pt-4 flex w-full justify-center items-center gap-4 mb-2'>
+            <p className='px-2 py-1 text-sm bg-slate-800 font-semibold rounded-md flex items-center gap-2'><IconCalendarFilled /> {data.schedule}</p>
+            <p className='px-2 py-1 text-sm bg-slate-800 font-semibold rounded-md flex items-center gap-2'><IconUsersGroup /> Max {data.registrations.max_team_size} members</p>
+          </div>
+        </div>
+        <div className='flex flex-col max-sm:gap-3 sm:w-1/2 items-start h-full justify-between'>
+        <div className='flex flex-col items-start'>
+          <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconUserCheck /> Criteria</h3>
+          <ul className='list-disc list-inside'>
+            {data.criteria.split('#$').map(c => (
+              <li key={c.slice(0, 10)} className='pt-2 font-medium'>{c}</li>
+            ))}
+          </ul>
+        </div>
+        <div className='flex flex-col items-start gap-2'>
+          <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconCurrencyDollar /> Fees</h3>
+          <ul className='flex sm:gap-8 gap-1'>
+            <li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>National: {data.registrations.fees.national}</li>
+            <li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>International: {data.registrations.fees.international}</li>
+          </ul>
+        </div>
+        <h4 className='flex gap-2 text-xl text-yellow-400'><IconTrophy /> {data.prize}</h4>
+          <div className='flex max-sm:w-full max-sm:justify-between sm:gap-4 mb-2'>
+            <Button children={<><IconUserEdit /> Register</>} />
+            <Button children={<><IconDownload /> Rule Book</>} />
+          </div>
+        </div>
+      </div>
+      <div>
+      </div>
+      
+      <div className='flex flex-col items-start gap-2'>
+        <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconFileDescription /> Description</h3>
+        <ul className='[&>*:first-child]:list-disc list-inside space-y-2'>
+          <li key={data.description[0].slice(0, 19)}>{data.description[0]}</li>
+        </ul>
+      </div>
+
+     {data.domains && <div className='flex flex-col items-start w-full'>
+        <h3 className='font-semibold text-orange-100 text-xl'>Domains</h3>
+        <ul className='flex animate-marquee'>
+          {
+            data.domains?.map(domain => (
+              <li className='text-nowrap text-sm mr-2 bg-slate-800 px-2 py-1 rounded-md flex items-end gap-1 uppercase'><IconDiamondsFilled className='text-orange-100'/> {domain}</li>
+            ))
+          }
+        </ul>
+      </div>}
+
+      {data.rounds && <div className='flex flex-col items-start w-full gap-2'>
+        <h3 className='font-semibold text-orange-100 text-xl'>Rounds</h3>
+        <Accordion>
+          {
+            data.rounds?.map(round => (
+            <AccordionItem key={round.name}>
+              <AccordionHeader>{round.name}</AccordionHeader>
+              <AccordionPanel>
+                {round.details}
+              </AccordionPanel>
+            </AccordionItem>
+            ))
+          }
+        </Accordion>
+      </div>}
+
+      <div className='flex flex-col items-start w-full pb-10 gap-2'>
+        <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconCheckupList /> Rules</h3>
+        <ul className='list-inside list-disc'>
+          {
+            data.rules?.map(rule => (
+              <li className=''>{rule}</li>
+            ))
+          }
+        </ul>
+      </div>
+
     </div>
   );
 };
 
-export default EventDetails; 
+
+const Button = ({children}) => {
+  return (
+    <button className='bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px hover:scale-105 duration-300'>
+      <span className='py-3 px-3 sm:px-6 sm:text-xl bg-primary flex gap-2 h-full'>{children}</span>
+    </button>
+  )
+}

@@ -40,7 +40,6 @@ const App = () => {
           <Route path="/events/:id" element={
             <div className="relative z-0 bg-primary">
               <EventDetails />
-              <StarsCanvas />
             </div> 
           }
           />

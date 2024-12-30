@@ -6,6 +6,13 @@ import { styles } from '../styles'
 import { SectionWrapper } from '../hoc'
 import { fadeIn } from '../utils/motion'
 
+const DummyContent = () => {
+  return (
+    <Register />
+  );
+};
+
+
 const Register = () => {
   const formRef = useRef()
   const [form, setForm] = useState({
@@ -23,6 +30,7 @@ const Register = () => {
   }
 
   return (
+    <>
     <div className='flex flex-col overflow-hidden'>
       <p className={styles.sectionSubText}>Register Now</p>
       <h3 className={styles.sectionHeadText}>Fill the Form.</h3>
@@ -61,8 +69,17 @@ const Register = () => {
           </button>
         </form>
       </motion.div>
-    </div>
+      </div>
+    </>
   )
 }
 
-export default SectionWrapper(Register, "register")
+export default Register
+
+
+
+
+
+/*
+
+*/
