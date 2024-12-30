@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { styles } from "../styles";
-import { SectionWrapper } from "../hoc";
-import FormsBanner from "./forms/formBanner";
-import implogo from "../assets/eventLogos/impetus_logo.png";
-import ProjectDetailsFormStep from "./forms/steps/projectDetails";
-import AddMemberStep from "./forms/steps/addMembersStep";
-import CollegeDetailsStep from "./forms/steps/collegeDetailStep";
-import PaymentStep from "./forms/steps/paymentStep";
-import StepProgressBar from "./forms/stepProgress";
+import { SectionWrapper } from "../../hoc";
+import FormsBanner from "./formBanner";
+import implogo from "../../assets/eventLogos/impetus_logo.png";
+import AddMemberStep from "./steps/addMembersStep";
+import CollegeDetailsStep from "./steps/collegeDetailStep";
+import PaymentStep from "./steps/paymentStep";
+import StepProgressBar from "./stepProgress";
 
 const steps = [
-  { id: 1, label: "Project Details" },
-  { id: 2, label: "Add Members" },
-  { id: 3, label: "College Details" },
-  { id: 4, label: "Payment" },
+  { id: 1, label: "Add Members" },
+  { id: 2, label: "College Details" },
+  { id: 3, label: "Payment" },
 ];
 
 const Register = () => {
@@ -42,20 +39,11 @@ const Register = () => {
           transition={{ duration: 0.5 }}
           className="mt-8"
         >
-          {currentStep === 0 && ( 
-            <ProjectDetailsFormStep nextStep={nextStep} />
+          {currentStep === 0 && (
+            <AddMemberStep minMembers={2} maxMembers={5} nextStep={nextStep} />
           )}
-          {currentStep === 1 && (
-            <AddMemberStep
-              minMembers={2}
-              maxMembers={5}
-              nextStep={nextStep}
-            />
-          )}
+          {currentStep === 1 && <CollegeDetailsStep nextStep={nextStep} />}
           {currentStep === 2 && (
-            <CollegeDetailsStep nextStep={nextStep} />
-          )}
-          {currentStep === 3 && (
             <PaymentStep
               amount={100}
               imagePath={"src/assets/company/tesla.png"}

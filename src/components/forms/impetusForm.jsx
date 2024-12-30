@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { styles } from "../styles";
-import { SectionWrapper } from "../hoc";
-import FormsBanner from "./forms/formBanner";
-import implogo from "../assets/eventLogos/impetus_logo.png";
-import ProjectDetailsFormStep from "./forms/steps/projectDetails";
-import AddMemberStep from "./forms/steps/addMembersStep";
-import CollegeDetailsStep from "./forms/steps/collegeDetailStep";
-import PaymentStep from "./forms/steps/paymentStep";
-import StepProgressBar from "./forms/stepProgress";
+import { SectionWrapper } from "../../hoc";
+import FormsBanner from "./formBanner";
+import implogo from "../../assets/eventLogos/impetus_logo.png";
+import ProjectDetailsFormStep from "./steps/projectDetails";
+import AddMemberStep from "./steps/addMembersStep";
+import CollegeDetailsStep from "./steps/collegeDetailStep";
+import PaymentStep from "./steps/paymentStep";
+import StepProgressBar from "./stepProgress";
 
 const steps = [
   { id: 1, label: "Project Details" },
