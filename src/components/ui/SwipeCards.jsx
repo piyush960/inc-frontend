@@ -75,9 +75,9 @@ const CardStack = ({ }) => {
 								className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
 								onClick={() => handleViewDetails(details._id)}
 							>
-								<span className="absolute inset-0 rounded-xl bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+								<span className="absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
 
-								<span className="relative z-10 block px-4 py-2 rounded-xl bg-gray-950">
+								<span className="relative z-10 block px-4 py-2 bg-gray-950">
 									<div className="relative z-10 flex items-center space-x-2">
 										<span className="transition-all duration-500 group-hover:translate-x-1">View Details</span>
 										<svg
