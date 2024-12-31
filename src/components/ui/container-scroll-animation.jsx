@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 
+
 export const ContainerScroll = ({
   titleComponent,
   children
@@ -8,6 +9,7 @@ export const ContainerScroll = ({
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
+    offset: ["start end", "center center"]
   });
   const [isMobile, setIsMobile] = React.useState(false);
 
@@ -22,25 +24,21 @@ export const ContainerScroll = ({
     };
   }, []);
 
-  const scaleDimensions = () => {
-    return isMobile ? [0.7, 0.9] : [1.05, 1];
-  };
-
-  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const rotate = useTransform(scrollYProgress, [0, 0.8], [45, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.8], [1.2, 1]);
+  const translateh = useTransform(scrollYProgress, [0, 0.8], [90, -100]);
 
   return (
     (<div
-      className="h-[60rem] flex items-center justify-center relative p-2"
+      className="h-full relative"
       ref={containerRef}>
       <div
-        className="py-10 w-full relative"
+        className="sm:py-10 w-full"
         style={{
           perspective: "1000px",
         }}>
-        <Header translate={translate} titleComponent={titleComponent} />
-        <Card rotate={rotate} translate={translate} scale={scale}>
+        <Header translate={translateh} titleComponent={titleComponent}isMobile={isMobile}/>
+        <Card rotate={rotate} scale={scale} isMobile={isMobile}>
           {children}
         </Card>
       </div>
@@ -50,13 +48,17 @@ export const ContainerScroll = ({
 
 export const Header = ({
   translate,
-  titleComponent
+  titleComponent,
+  isMobile
 }) => {
+
+  const attributes = !isMobile && {
+    translateY: translate,
+  }
+
   return (
     (<motion.div
-      style={{
-        translateY: translate,
-      }}
+      style={attributes}
       className="div max-w-5xl mx-auto text-center">
       {titleComponent}
     </motion.div>)
@@ -66,19 +68,23 @@ export const Header = ({
 export const Card = ({
   rotate,
   scale,
-  children
+  children,
+  isMobile
 }) => {
+
+  const attributes = !isMobile && {
+    rotateX: rotate,
+    scale,
+    boxShadow:
+      "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
+  }
+
   return (
     (<motion.div
-      style={{
-        rotateX: rotate,
-        scale,
-        boxShadow:
-          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
-      }}
-      className="max-w-5xl -mt-12 mx-auto w-full px-2 rounded-[30px] shadow-2xl">
+      style={attributes}
+      className="max-w-7xl p-px sm:-mt-12 mt-12 mx-auto w-full  bg-gradient-to-br from-dark-blue via-yellow-500 to-orange-100">
       <div
-        className="h-full w-full overflow-hidden rounded-2xl bg-zinc-900 md:rounded-2xl md:p-4 ">
+        className="h-full w-full bg-tertiary p-4 text-[16px] sm:text-lg">
         {children}
       </div>
     </motion.div>)

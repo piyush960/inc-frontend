@@ -1,61 +1,50 @@
-import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom"
-import { About, Register, Timeline, Hero, Navbar, Sponsors, StarsCanvas } from './components';
+import { About, Register, Navbar, Sponsors, StarsCanvas } from './components';
 
-import { BackgroundLines } from './components/ui/background-lines'
-import NotificationStrip from "./components/ui/notification-strip";
-import { notifications } from './constants/index'
+import Hero from "./components/HeroParallax";
+import Footer from "./components/Footer";
+import Events from "./components/Events";
+import SwipeGallery from "./components/Gallery";
+import EventDetails from "./components/EventDetails";
+import Notification from './components/Modal';
+import useDimension from "./hooks/useDimension";
+import MobileContext from './hooks/MobileContext'
 
 const App = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-    setLastScrollY(window.scrollY);
-  };
+  const isMobile = useDimension(); // Assuming useDimension is already implemented
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
+  console.log('in app', isMobile)
 
   return (
-    <>
-      <div className={`fixed top-0 z-20 w-full transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
-        <Navbar />
-        <NotificationStrip words={notifications} />
-      </div>
+    <MobileContext.Provider value={isMobile}>
+      <Navbar />
       <Routes>
           <Route path="/" element={
-            <>
             <div className="relative z-0 bg-primary">
-              <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-                <div className="relative z-0">
-                  <Hero />
-                  <BackgroundLines className={`max-sm:hidden`}/>
-                </div>  
-              </div>
+              <Hero />
               <About />
-              <Timeline />
+              <Events />
+              <SwipeGallery />
               <Sponsors />
+              <Footer />
+              <Notification />
             </div>
-            </>
             } />
           <Route path="/register" element={
-            <div className="relative z-0">
+            <div className="relative z-0 bg-primary">
               <Register />
               <StarsCanvas />
             </div>
           }/>
+          <Route path="/events/:id" element={
+            <div className="relative z-0 bg-primary">
+              <EventDetails />
+            </div> 
+          }
+          />
       </Routes>
-    </>
+    </MobileContext.Provider>
   )
 }
 
