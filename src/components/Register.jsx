@@ -1,10 +1,21 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { styles } from "../styles";
+import { SectionWrapper } from "../hoc";
+import FormsBanner from "./forms/formBanner";
+import implogo from "../assets/eventLogos/impetus_logo.png";
+import ProjectDetailsFormStep from "./forms/steps/projectDetails";
+import AddMemberStep from "./forms/steps/addMembersStep";
+import CollegeDetailsStep from "./forms/steps/collegeDetailStep";
+import PaymentStep from "./forms/steps/paymentStep";
+import StepProgressBar from "./forms/stepProgress";
 
-import { motion } from 'framer-motion'
-
-import { styles } from '../styles'
-import { SectionWrapper } from '../hoc'
-import { fadeIn } from '../utils/motion'
+const steps = [
+  { id: 1, label: "Project Details" },
+  { id: 2, label: "Add Members" },
+  { id: 3, label: "College Details" },
+  { id: 4, label: "Payment" },
+];
 
 const DummyContent = () => {
   return (
@@ -14,20 +25,57 @@ const DummyContent = () => {
 
 
 const Register = () => {
-  const formRef = useRef()
-  const [form, setForm] = useState({
-    name: '', email: '', message: ''
-  })
+  const [currentStep, setCurrentStep] = useState(0);
+  const nextStep = () => setCurrentStep((prev) => prev + 1);
+  const prevStep = () => setCurrentStep((prev) => prev - 1);
 
-  const [loading, setLoading] = useState(false)
+  return (
+    <>
+      <FormsBanner
+        logo={implogo}
+        eventName="Impetus"
+        eventDescription="Register for the most grand project exhibition event impetus for all students from First to Third Year"
+      />
 
-  const handleChange = (e) => {
+      <div className="container mx-auto px-4">
+        {/* New Progress Bar Component */}
+        <StepProgressBar steps={steps} currentStep={currentStep} />
 
-  }
 
-  const handleSubmit = (e) => {
+        {/* Step Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="mt-8"
+        >
+          {currentStep === 0 && ( 
+            <ProjectDetailsFormStep nextStep={nextStep} />
+          )}
+          {currentStep === 1 && (
+            <AddMemberStep
+              minMembers={2}
+              maxMembers={5}
+              nextStep={nextStep}
+            />
+          )}
+          {currentStep === 2 && (
+            <CollegeDetailsStep nextStep={nextStep} />
+          )}
+          {currentStep === 3 && (
+            <PaymentStep
+              amount={100}
+              imagePath={"src/assets/company/tesla.png"}
+            />
+          )}
+        </motion.div>
+      </div>
+    </>
+  );
+};
 
-  }
+export default SectionWrapper(Register, "register");
 
   return (
     <>
@@ -83,3 +131,4 @@ export default Register
 /*
 
 */
+
