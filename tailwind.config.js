@@ -16,6 +16,7 @@ module.exports = {
         primary: "#000609",
         secondary: "#5593ad",
         tertiary: "#021720",
+        'black-100': '#060C1C',
         'dark-blue': '#1746A2',
         'light-blue': '#5F9DF7',
         "white-100": "#FFF7E9",
@@ -23,6 +24,7 @@ module.exports = {
       },
       boxShadow: {
         card: "0px 35px 120px -15px #211e35",
+        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
       },
       screens: {
         xs: "450px",

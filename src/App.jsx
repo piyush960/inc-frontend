@@ -31,7 +31,7 @@ const App = () => {
               <Notification />
             </div>
             } />
-          <Route path="/register" element={
+          <Route path="/register/:event" element={
             <div className="relative z-0 bg-primary">
               <Register />
               <StarsCanvas />

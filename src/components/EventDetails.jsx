@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Tabs } from "./ui/tabs";
 
 import { eventsData } from '../constants';
@@ -57,6 +57,7 @@ export default TabsDemo;
 
 const EventDetails = ({ data }) => {
   const { id } = useParams();
+  const navigate = useNavigate()
   
   console.log(data)
 
@@ -92,7 +93,7 @@ const EventDetails = ({ data }) => {
         </div>
         <h4 className='flex gap-2 text-xl text-yellow-400'><IconTrophy /> {data.prize}</h4>
           <div className='flex max-sm:w-full max-sm:justify-between sm:gap-4 mb-2'>
-            <Button children={<><IconUserEdit /> Register</>} />
+            <Button children={<><IconUserEdit /> Register</>} onClick={() => {navigate(`/register/${data.id}`)}}/>
             <Button children={<><IconDownload /> Rule Book</>} />
           </div>
         </div>
@@ -150,10 +151,10 @@ const EventDetails = ({ data }) => {
 };
 
 
-const Button = ({children}) => {
+const Button = ({children, ...props}) => {
   return (
-    <button className='bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px hover:scale-105 duration-300'>
-      <span className='py-3 px-3 sm:px-6 sm:text-xl bg-primary flex gap-2 h-full'>{children}</span>
+    <button {...props} className='bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px hover:scale-105 duration-300'>
+      <span className='py-3 px-3 sm:px-6 sm:text-xl bg-black-100 flex gap-2 h-full'>{children}</span>
     </button>
   )
 }

@@ -86,6 +86,7 @@ const Hero = () => {
               scale: 0.985,
             }}
             className="w-full bg-gray-950/10 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-gray-950/50"
+            onClick={() => {navigate(`/register/impetus`)}}
           >
             Register Now
           </motion.button>
