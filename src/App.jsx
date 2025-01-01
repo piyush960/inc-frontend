@@ -9,6 +9,8 @@ import EventDetails from "./components/EventDetails";
 import Notification from './components/Modal';
 import useDimension from "./hooks/useDimension";
 import MobileContext from './hooks/MobileContext'
+import HeroSlider from "./components/HeroSlider";
+import RegisterHome from "./RegisterHome";
 
 const App = () => {
   
@@ -19,9 +21,10 @@ const App = () => {
   return (
     <MobileContext.Provider value={isMobile}>
       <Navbar />
+      <div className="relative z-0 bg-primary">
       <Routes>
           <Route path="/" element={
-            <div className="relative z-0 bg-primary">
+            <>
               <Hero />
               <About />
               <Events />
@@ -29,21 +32,23 @@ const App = () => {
               <Sponsors />
               <Footer />
               <Notification />
-            </div>
+            </>
             } />
-          <Route path="/register/:event" element={
-            <div className="relative z-0 bg-primary">
-              <Register />
+          <Route path="/register" element={
+            <>
+              <RegisterHome />
               <StarsCanvas />
-            </div>
+            </>
+          }/>
+          <Route path={`/register/:event`} element={
+            <Register />
           }/>
           <Route path="/events/:id" element={
-            <div className="relative z-0 bg-primary">
-              <EventDetails />
-            </div> 
+            <EventDetails />
           }
           />
       </Routes>
+      </div>
     </MobileContext.Provider>
   )
 }

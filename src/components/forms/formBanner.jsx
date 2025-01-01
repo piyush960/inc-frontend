@@ -1,23 +1,29 @@
 
+import { cn } from "../../lib/utils";
 
-const FormsBanner = (props) => {
+const FormsBanner = ({ logo, eventName, eventDescription, className, ...props }) => {
 	return (
-		<header className="w-full max-w-7xl mx-auto pt-24 px-2">
-			<div className="border-white-100 border-[1px] sm:px-6 sm:py-4 p-4 flex gap-8">
-				<div className="sm:w-[180px] border-r-[1px] pr-8 flex flex-col items-center justify-center">
-					<img src={props.logo} alt="" />
-				</div>
-				<div className='flex flex-col justify-center gap-2'>
-					<h1 className="font-bold text-3xl">{props.eventName}</h1>
-					{props.eventDescription && (
+		<div className={cn("w-full max-w-7xl mx-auto relative p-px", className)}
+		{...props}
+		>
+			<span className="absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100"></span>
+
+			<div className="w-full sm:px-6 sm:py-4 p-4 flex flex-col sm:flex-row max-sm:items-center gap-6 sm:gap-8 bg-tertiary relative">
+
+				<img src={logo} alt={eventName + '_logo'} className="w-[120px] sm:w-[180px] sm:pr-8 sm:border-r-[1px] flex flex-col items-center justify-center"/>
+
+				<div className='flex flex-col items-center sm:items-start justify-center gap-2'>
+					<h1 className="font-bold text-3xl">{eventName}</h1>
+					{eventDescription && (
 						<h2
-							className="font-normal text-xl"
-							dangerouslySetInnerHTML={{ __html: props.eventDescription }}
+						className="font-normal text-xl max-sm:text-center"
+						dangerouslySetInnerHTML={{ __html: eventDescription }}
 						/>
 					)}
 				</div>
+
 			</div>	
-		</header>
+		</div>
 	);
 }
 

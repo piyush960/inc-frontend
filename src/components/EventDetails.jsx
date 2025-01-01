@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Tabs } from "./ui/tabs";
 
 import { eventsData } from '../constants';
 
+import InfiniteLoopSlider from './ui/infinite-loop-slider';
 import { IconCalendarFilled, IconCheckupList, IconCurrencyDollar, IconDiamondsFilled, IconDownload, IconFileDescription, IconTrophy, IconUserCheck, IconUserEdit, IconUsersGroup } from '@tabler/icons-react'
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './ui/accordian';
-
+import scrollToTop from '../utils/scrollToTop'
 
 function TabsDemo() {
 
   const { id } = useParams()
+  const divRef = useRef(null);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  useEffect(() => {
+    scrollToTop()
+    if (divRef.current) {
+      divRef.current.style.height = "auto";
+      setContainerHeight(divRef.current.scrollHeight)
+    }
+  }, [])
 
   const tabs = [
     {
@@ -18,7 +29,8 @@ function TabsDemo() {
       value: "impetus",
       content: (
         <div
-          className="w-full overflow-y-scroll overflow-x-hidden relative h-screen p-4 bg-tertiary">
+          className={`w-full overflow-hidden relative p-px bg-tertiary h-[${containerHeight}px]`}>
+          <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.impetus} />
         </div>
       ),
@@ -28,7 +40,8 @@ function TabsDemo() {
       value: "concepts",
       content: (
         <div
-          className="w-full overflow-y-scroll overflow-x-hidden relative h-screen p-4 bg-tertiary">
+          className={`w-full overflow-hidden relative p-px bg-tertiary h-[${containerHeight}px]`}>
+          <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.concepts}/>
         </div>
       ),
@@ -38,7 +51,9 @@ function TabsDemo() {
       value: "pradnya",
       content: (
         <div
-          className="w-full overflow-y-scroll overflow-x-hidden relative h-screen p-4 bg-tertiary">
+          ref={divRef}
+          className={`w-full overflow-hidden relative p-px bg-tertiary h-[${containerHeight}px]`}>
+          <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.pradnya}/>
         </div>
       ),
@@ -47,7 +62,10 @@ function TabsDemo() {
 
   return (
     (<div
-      className="pt-20 max-sm:px-2 max-w-7xl w-full h-[150vh] mx-auto">
+      style={{
+        height: `${containerHeight + 300}px`
+      }}
+      className={`pt-24 max-sm:px-2 max-w-[90rem] w-full mx-auto`}>
       <Tabs tabs={tabs} activeId={id}/>
     </div>)
   );
@@ -56,35 +74,32 @@ function TabsDemo() {
 export default TabsDemo; 
 
 const EventDetails = ({ data }) => {
-  const { id } = useParams();
   const navigate = useNavigate()
   
-  console.log(data)
-
   return (
     <div
-    className='flex flex-col w-full h-[90vh] justify-between items-center p-1 sm:p-5 gap-3'
+    className='flex flex-col w-full justify-between items-center p-4 sm:p-8 gap-3 bg-tertiary relative'
     >
       <div className='flex flex-col sm:flex-row sm:justify-start items-center justify-center w-full border-b-[1px] max-sm:gap-3'>
-        <div className='flex flex-col items-center sm:border-r-[1px] border-white-100 sm:w-[43%] sm:mr-10'>
+        <div className='flex flex-col items-center sm:border-r-[1px] border-white-100 sm:w-[43%] sm:mr-10 gap-3'>
           <img src={data.logo} alt={`${data.id}_logo`} className='sm:w-[180px] sm:h-[180px] w-[140px] h-[140px]'/>
-          <h2 className='text-3xl font-bold my-4 text-orange-100'>{data.name}</h2>
+          <h2 className='text-3xl font-bold text-orange-100'>{data.name}</h2>
           <p className='font-bold text-xl sm:max-w-[70%] text-center'>{data.short_desc}</p>
-          <div className='pt-4 flex w-full justify-center items-center gap-4 mb-2'>
+          <div className='flex w-full justify-center items-center gap-4 mb-2'>
             <p className='px-2 py-1 text-sm bg-slate-800 font-semibold rounded-md flex items-center gap-2'><IconCalendarFilled /> {data.schedule}</p>
             <p className='px-2 py-1 text-sm bg-slate-800 font-semibold rounded-md flex items-center gap-2'><IconUsersGroup /> Max {data.registrations.max_team_size} members</p>
           </div>
         </div>
-        <div className='flex flex-col max-sm:gap-3 sm:w-1/2 items-start h-full justify-between'>
-        <div className='flex flex-col items-start'>
+        <div className={`sm:w-1/2 flex flex-col items-start ${data.id === 'pradnya' ? 'gap-2' : 'gap-3'}`}>
+        <div className='flex flex-col gap-1 items-start'>
           <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconUserCheck /> Criteria</h3>
-          <ul className='list-disc list-inside'>
+          <ul className='list-disc list-inside space-y-2'>
             {data.criteria.split('#$').map(c => (
-              <li key={c.slice(0, 10)} className='pt-2 font-medium'>{c}</li>
+              <li key={c.slice(0, 10)} className='font-medium'>{c}</li>
             ))}
           </ul>
         </div>
-        <div className='flex flex-col items-start gap-2'>
+        <div className='flex flex-col items-start gap-1'>
           <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconCurrencyDollar /> Fees</h3>
           <ul className='flex sm:gap-8 gap-1'>
             <li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>National: {data.registrations.fees.national}</li>
@@ -92,7 +107,7 @@ const EventDetails = ({ data }) => {
           </ul>
         </div>
         <h4 className='flex gap-2 text-xl text-yellow-400'><IconTrophy /> {data.prize}</h4>
-          <div className='flex max-sm:w-full max-sm:justify-between sm:gap-4 mb-2'>
+          <div className='flex max-sm:w-full max-sm:justify-between sm:gap-7 mb-2'>
             <Button children={<><IconUserEdit /> Register</>} onClick={() => {navigate(`/register/${data.id}`)}}/>
             <Button children={<><IconDownload /> Rule Book</>} />
           </div>
@@ -101,7 +116,7 @@ const EventDetails = ({ data }) => {
       <div>
       </div>
       
-      <div className='flex flex-col items-start gap-2'>
+      <div className='flex flex-col items-start justify-start gap-2'>
         <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconFileDescription /> Description</h3>
         <ul className='[&>*:first-child]:list-disc list-inside space-y-2'>
           <li key={data.description[0].slice(0, 19)}>{data.description[0]}</li>
@@ -110,13 +125,15 @@ const EventDetails = ({ data }) => {
 
      {data.domains && <div className='flex flex-col items-start w-full'>
         <h3 className='font-semibold text-orange-100 text-xl'>Domains</h3>
-        <ul className='flex animate-marquee'>
+        <InfiniteLoopSlider
+        duration={20000}
+        >
           {
             data.domains?.map(domain => (
-              <li className='text-nowrap text-sm mr-2 bg-slate-800 px-2 py-1 rounded-md flex items-end gap-1 uppercase'><IconDiamondsFilled className='text-orange-100'/> {domain}</li>
+              <li key={domain} className='text-nowrap text-sm mr-2 bg-slate-800 px-2 py-1 rounded-md flex items-end gap-1 uppercase'><IconDiamondsFilled className='text-orange-100'/> {domain}</li>
             ))
           }
-        </ul>
+        </InfiniteLoopSlider>
       </div>}
 
       {data.rounds && <div className='flex flex-col items-start w-full gap-2'>
@@ -135,7 +152,7 @@ const EventDetails = ({ data }) => {
         </Accordion>
       </div>}
 
-      <div className='flex flex-col items-start w-full pb-10 gap-2'>
+      <div className='flex flex-col items-start w-full gap-2'>
         <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconCheckupList /> Rules</h3>
         <ul className='list-inside list-disc'>
           {

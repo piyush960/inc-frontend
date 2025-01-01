@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Select } from "../../ui/select";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
@@ -40,6 +40,7 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({...initialState, isInternational: null});
   const [isPICT, setIsPICT] = useState(null);
+  const radioRef = useRef(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -83,7 +84,7 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
             console.log(isPICT)
             if (value === 'true') {
               setFormData((prev) => ({ ...prev, ...pictState }))
-              document.querySelectorAll('#isInternational')[1].checked = true
+              radioRef.current.checked = true;
             }
             else {
               setFormData((prev) => ({ ...prev, ...initialState, isInternational }))
@@ -239,6 +240,7 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
         <RadioButton
           id="isInternational"
           name="isInternational"
+          ref={radioRef}
           errorMessage={formData.isInternational === null && "Field is Required"}
           options={yesNoOptions}
           disabled={isPICT}

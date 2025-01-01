@@ -57,7 +57,7 @@ export const Tabs = ({
               layoutId="clickedbutton"
               transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
               className={cn(
-                "absolute inset-0 bg-zinc-800 rounded-full",
+                "absolute inset-0 bg-slate-800",
                 activeTabClassName
               )} />
           )}
@@ -93,13 +93,13 @@ export const FadeInDiv = ({
           key={tab.value}
           layoutId={tab.value}
           style={{
-            scale: 1 - idx * 0.1,
-            top: hovering ? idx * -65 : 0,
+            scale: 1 - idx * 0.14,
+            top: hovering ? idx * -85 : 0,
             zIndex: -idx,
             opacity: idx < 3 ? 1 - idx * 0.1 : 0,
           }}
           animate={{
-            y: isActive(tab) ? [0, 40, 0] : 0,
+            y: isActive(tab) ? [0, 30, 0] : 0,
           }}
           className={cn("w-full absolute top-0 left-0", className)}>
           {tab.content}

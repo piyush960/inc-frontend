@@ -50,7 +50,7 @@ function EventCards({ }) {
   };
 
   return (
-    <div className="py-20 flex flex-col lg:flex-row items-center justify-center bg-primary w-full gap-4 mx-auto px-6">
+    <div className="py-20 w-full h-full flex flex-wrap items-center justify-between px-6 gap-y-24">
       {events.map((event, index) => (
         <Card 
           key={event.id}
@@ -89,7 +89,7 @@ const Card = ({
     initial={{opacity: 0}}
     whileInView={{opacity: 1}}
     viewport={{ once: true, amount: 0.5 }}
-    transition={{ ease: "easeInOut", duration: 0.6, delay:index*0.25}}
+    transition={{ ease: "easeInOut", duration: 0.5 }}
     className="bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 transition duration-200 group/canvas-card flex flex-col items-center justify-between max-w-sm w-full mx-auto p-px relative h-[28rem]"
     >
       <AnimatePresence>
@@ -104,14 +104,31 @@ const Card = ({
         )}
       </AnimatePresence>
 
-      <div className="h-full flex flex-col items-center justify-center bg-primary p-4">
-        <div className="absolute opacity-0 z-10 -translate-y-8 group-hover/canvas-card:translate-y-0 group-hover/canvas-card:opacity-100 transition duration-200 w-full h-full flex flex-col items-center justify-evenly">
+      <div className="h-full w-full flex flex-col items-center justify-center bg-primary p-4">
+        <div className="absolute group-hover/canvas-card:
+        group-hover/canvas-card:opacity-0 z-10 group-hover/canvas-card:
+        group-hover/canvas-card:-translate-y-8 translate-y-0 opacity-100 transition duration-200 w-full h-full flex flex-col items-center justify-evenly">
           <img src={details.logo} alt={`${title} logo`} className="w-24 h-24" />
           <h2 className={`text-white-100 text-2xl font-bold`}>
             {title}
           </h2>
+        </div>
+        
+        <div className={`relative inset-0 flex flex-col items-center justify-center p-6 transition-all duration-300 ${
+          (hovered) ? 'opacity-100' : 'opacity-0'
+        }`}>
+
+          <img src={details.logo} alt={`${title} logo`} className="w-16 h-16 mb-4" />
+          <h2 className="text-2xl font-bold text-white-100 mb-2">{title}</h2>
+          <div className="flex flex-row space-x-2 mb-8">
+            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.type}</p>
+            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
+          </div>
+          <p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
+          <span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date)}</span>
+
           <button
-            className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+            className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95 z-10"
             onClick={() => handleViewDetails(details.id)}
           >
             <span className="absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
@@ -136,22 +153,6 @@ const Card = ({
               </div>
             </span>
           </button>
-        </div>
-        
-        
-        
-        <div className={`relative inset-0 flex flex-col items-center justify-center p-6 transition-all duration-300 ${
-          (!hovered) ? 'opacity-100' : 'opacity-0'
-        }`}>
-          <img src={details.logo} alt={`${title} logo`} className="w-16 h-16 mb-4" />
-          <h2 className="text-2xl font-bold text-white-100 mb-2">{title}</h2>
-          <div className="flex flex-row space-x-2 mb-8">
-            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.type}</p>
-            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
-          </div>
-          <p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
-          <span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date)}</span>
-
         </div>
       </div>
     </motion.div>

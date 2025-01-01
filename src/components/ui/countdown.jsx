@@ -39,8 +39,8 @@ const ShiftingCountdown = () => {
       onAnimationComplete={() => setHasAnimated(false)}
       className="w-[90%] max-sm:hidden z-20"
     >
-      <div className={hasAnimated ? "border-white-100 border-[1px]" : "bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px"}>
-        <div className={`mx-auto flex w-full max-w-5xl items-center ${hasAnimated ? `backdrop-blur-sm` : `bg-primary`}`}>
+      <div className={"border-secondary border-[1px]"}>
+        <div className={`mx-auto flex w-full max-w-5xl items-center ${hasAnimated ? `backdrop-blur-sm` : `bg-[#000609]/50`}`}>
           <CountdownItem unit="Day" text="days" cn={"border-r-[1px]"} />
           <CountdownItem unit="Hour" text="hours" cn={"border-r-[1px]"} />
           <CountdownItem unit="Minute" text="minutes" cn={"border-r-[1px]"} />
@@ -108,8 +108,8 @@ const useTimer = (unit) => {
     if (newTime !== timeRef.current) {
       await animate(
         ref.current,
-        { y: ["0%", "-50%"], opacity: [1, 0] },
-        { duration: 0.35 }
+        { opacity: [1, 0.1] },
+        { duration: 0.26 }
       );
 
       timeRef.current = newTime;
@@ -117,8 +117,8 @@ const useTimer = (unit) => {
 
       await animate(
         ref.current,
-        { y: ["50%", "0%"], opacity: [0, 1] },
-        { duration: 0.35 }
+        { opacity: [0.1, 1] },
+        { duration: 0.26 }
       );
     }
   };

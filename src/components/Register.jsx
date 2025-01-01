@@ -46,11 +46,13 @@ const Register = () => {
 
   return (
     <>
-      <FormsBanner
-        logo={eventData.logo}
-        eventName={eventData.name}
-        eventDescription={eventData.short_desc}
-      />
+      <div className="pt-24 p-2">
+        <FormsBanner
+          logo={eventData.logo}
+          eventName={eventData.name}
+          eventDescription={eventData.short_desc}
+        />
+      </div>
 
       <div className="container mx-auto px-2 pb-16">
         {/* New Progress Bar Component */}

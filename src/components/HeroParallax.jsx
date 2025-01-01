@@ -9,7 +9,8 @@ import {
 import { TextHoverEffect } from "./ui/text-hover-effect";
 import ShiftingCountdown from './ui/countdown';
 
-import { light, concepts_b, impetus_b, pradnya_b, inc_b, techfiesta_b, concepts_lg, impetus_lg, pradnya_lg, bottom_lg, impetus, concepts, pradnya } from '../assets'
+import { light, concepts_b, impetus_b, pradnya_b } from '../assets'
+import HeroSlider from './HeroSlider';
 
 const COLORS_TOP = ["#1746A2", "#5F9DF7", "#FFF7E9", "#D4621C"];
 
@@ -41,68 +42,60 @@ const Hero = () => {
   }
 
   return (
-    <section className={`relative sm:px-12 px-6 w-full h-screen mx-auto flex flex-col-reverse overflow-hidden sm:flex-row items-center sm:justify-between bg-grid-orange-100/[0.2] max-sm:pt-10`}>
-      <img src={light} alt="light" className='absolute object-cover pointer-events-none top-[-10%] right-[50vw] max-sm:translate-x-[50%] sm:right-[8%] z-10 opacity-35'/>
-      {/* <img src={inc_b} alt="inc_b" className='absolute animate-spin-slow sm:w-28 sm:h-28 w-12 h-12 object-cover pointer-events-none max-sm:bottom-[22%] max-sm:right-[24%] bottom-[27.5%] right-[33%]' onClick={() => handleNavigate('inc')}/>
-      <img src={techfiesta_b} alt="techfiesta_b" className='max-sm:hidden absolute animate-wiggle sm:w-28 sm:h-28 w-12 h-12 object-cover cursor-pointer z-10 top-[16%] right-[5%]' onClick={() => handleNavigate('techfiesta')}/> */}
-      <p className='absolute sm:left-[50%] top-[11%] sm:translate-x-[-50%] uppercase text-slate-400 font-light text-center text-md sm:text-lg'><span className=''>SCTR's Pune Institute of Computer Technology</span><span className='sm:block text-center'>&nbsp;Presents</span></p>
-      <div className='relative max-sm:h-1/2 flex flex-col items-center w-full'>
-        <h1 className='relative'>
-          <span className='text-white font-bold text-lg sm:text-5xl absolute top-[8%] left-[20%] sm:top-[20%] sm:left-[12%] pointer-events-none'>PICT</span>
-          <TextHoverEffect text={'INC'} />
-          <span className='text-white font-bold text-lg sm:text-5xl absolute bottom-[18%] right-[20%] sm:bottom-[29%] sm:right-[12%] pointer-events-none'>2K25</span>
-        </h1>
-
-        <div className='absolute bottom-[26%] sm:bottom-[14%] w-[70%]'>
-          <div className='absolute z-10 sm:w-28 sm:h-28 w-12 h-12 object-cover cursor-pointer bottom-[95%] right-0 group'
-          onClick={() => handleNavigate('concepts')}
-          >
-            <img src={concepts} alt="concepts_logo" className='absolute w-[50%] h-[50%] left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] group-hover:scale-110 duration-300 object-cover animate-pulse'/>
-            <img src={bottom_lg} alt="bottom_light" className='absolute object-cover opacity-70'/>
-          </div>
-
-          <div className='absolute z-10 sm:w-28 sm:h-28 w-12 h-12 cursor-pointer bottom-[95%] left-0 group'
-          onClick={() => handleNavigate('impetus')}
-          >
-            <img src={impetus} alt="impetus_logo" className='absolute w-[50%] h-[50%] left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] group-hover:scale-110 duration-300 object-cover animate-pulse'/>
-            <img src={bottom_lg} alt="bottom_light" className='absolute object-cover opacity-70'/>
-          </div>
-
-          <div className='absolute z-10 sm:w-28 sm:h-28 w-12 h-12 object-cover cursor-pointer bottom-[95%] left-[50%] translate-x-[-50%] group'
-          onClick={() => handleNavigate('pradnya')}
-          >
-            <img src={pradnya} alt="pradnya_logo" className='absolute w-[50%] h-[50%] left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] group-hover:scale-110 duration-300 object-cover animate-pulse'/>
-            <img src={bottom_lg} alt="bottom_light" className='absolute object-cover opacity-70'/>
-          </div>
-          <motion.button
-            style={{
-              border,
-              boxShadow,
-            }}
-            whileHover={{
-              scale: 1.015,
-            }}
-            whileTap={{
-              scale: 0.985,
-            }}
-            className="w-full bg-gray-950/10 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-gray-950/50"
-            onClick={() => {navigate(`/register/impetus`)}}
-          >
-            Register Now
-          </motion.button>
-        </div>
-
+    <section className='relative w-full h-screen'>
+      <div className='absolute inset-0'>
+        <HeroSlider />
       </div>
-      <div className='flex flex-col-reverse max-sm:h-1/2 sm:flex-col sm:justify-center items-center max-sm:-mb-8 sm:mt-10 w-full'>
-        <div className='w-[250px] h-[250px] sm:w-[400px] sm:h-[400px]'>
-          <IncCanvas />
+      <div className='relative sm:px-12 px-6 mx-auto w-full h-full flex flex-col-reverse overflow-hidden sm:flex-row items-center sm:justify-between bg-dot-secondary/[0.15] max-sm:pt-10'>
+
+        <img src={light} alt="light" className='absolute object-cover pointer-events-none top-[-10%] right-[50vw] max-sm:translate-x-[50%] sm:right-[8%] z-10 opacity-35'/>
+
+        <p className='absolute sm:left-[50%] top-[11%] sm:translate-x-[-50%] uppercase text-slate-400 font-light text-center text-md sm:text-lg'><span className=''>SCTR's Pune Institute of Computer Technology</span><span className='sm:block text-center'>&nbsp;Presents</span></p>
+        <div className='relative max-sm:h-1/2 flex flex-col items-center w-full'>
+          <h1 className='relative mt-4'>
+
+            <img src={impetus_b} alt="impetus_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute bottom-[12.2%] left-[17%] sm:bottom-[26.5%] sm:left-[9.5%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100'/>
+            <img src={pradnya_b} alt="impetus_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute left-[44%] sm:top-[17.2%] sm:left-[44%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100'/>
+            <img src={concepts_b} alt="impetus_logo" className='sm:w-24 sm:h-24 w-10 h-10 absolute top-[34%] right-[14%] sm:top-[40.2%] sm:right-[7%] rotate-[18deg] z-10 cursor-pointer opacity-70 hover:opacity-100 hover:scale-105 duration-300'/>
+            
+            <span className='text-white font-bold text-lg sm:text-5xl absolute top-[8%] left-[20%] sm:top-[20%] sm:left-[11.3%] pointer-events-none'>PICT</span>
+            <TextHoverEffect text={'INC'} />
+            <span className='text-white font-bold text-lg sm:text-5xl absolute bottom-[18%] right-[20%] sm:bottom-[29%] sm:right-[12%] pointer-events-none'>2K25</span>
+          </h1>
+
+          <div className='absolute bottom-[26%] sm:bottom-[14%] w-[70%]'>
+            <motion.button
+              style={{
+                border,
+                boxShadow,
+              }}
+              whileHover={{
+                scale: 1.015,
+              }}
+              whileTap={{
+                scale: 0.985,
+              }}
+              className="w-full bg-[#000609]/40 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-[#000609]/50"
+              onClick={() => {navigate(`/register`)}}
+            >
+              Register Now
+            </motion.button>
+          </div>
+
         </div>
-        <ShiftingCountdown />
+        <div className='flex flex-col-reverse max-sm:h-1/2 sm:flex-col sm:justify-center items-center max-sm:-mb-8 sm:mt-10 w-full'>
+          <div className='w-[250px] h-[250px] sm:w-[400px] sm:h-[400px]'>
+            <IncCanvas />
+          </div>
+          <ShiftingCountdown />
+        </div>
+        <div>
       </div>
-      <div>
     </div>
-    <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-[#000609]/0 to-[#000609]" />
-    </section>
+    <div className="absolute left-0 top-0 bottom-0 sm:w-10 w-4 bg-gradient-to-l from-[#000609]/0 to-[#000609]" />
+    <div className="absolute bottom-0 top-0 right-0 sm:w-10 w-4 bg-gradient-to-r from-[#000609]/0 to-[#000609]" />
+    <div className="absolute -bottom-1 left-0 right-0 h-20 bg-gradient-to-b from-[#000609]/0 to-[#000609]" />
+  </section>
   )
 }
 

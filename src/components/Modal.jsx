@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { notification } from "../assets";
-import NotificationStrip from "./ui/notification-strip";
+import InfiniteLoopSlider from "./ui/infinite-loop-slider";
 
 import { notifications } from "../constants";
 
@@ -40,25 +40,38 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
 						animate={{ scale: 1 }}
 						exit={{ scale: 0 }}
 						onClick={(e) => e.stopPropagation()}
-						className="bg-tertiary text-white-100 p-6 w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
-					>
-						<div className="relative z-10 mb-4">
-							<NotificationStrip words={notifications} />
-						</div>
-							<h3 className="text-3xl font-bold text-center mb-2">
-								One more thing!
-							</h3>
-							<p className="text-center mb-6">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
-								aperiam vitae, sapiente ducimus eveniet in velit.
-							</p>
-							<div className="flex gap-2">
-								<button
-									onClick={() => setIsOpen(false)}
-									className="bg-transparent hover:bg-white-100/10 transition-colors text-white-100 font-semibold w-full py-2"
-								>
-									Close
-								</button>
+						className="text-white-100 p-px w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+					>	
+						<span className="absolute bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 inset-0"></span>
+						<div className="relative bg-tertiary p-4">
+							<div className="relative z-10 mb-4">
+							<InfiniteLoopSlider
+							duration={25000}
+							>
+								{
+									notifications.map((noti) => (
+										<li key={noti} className="mr-10 rounded-xl text-nowrap px-2">
+											{noti}
+										</li>
+									))
+								}
+							</InfiniteLoopSlider>
+							</div>
+								<h3 className="text-3xl font-bold text-center mb-2">
+									One more thing!
+								</h3>
+								<p className="text-center mb-6">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
+									aperiam vitae, sapiente ducimus eveniet in velit.
+								</p>
+								<div className="flex gap-2">
+									<button
+										onClick={() => setIsOpen(false)}
+										className="bg-transparent hover:bg-white-100/10 transition-colors text-white-100 font-semibold w-full py-2"
+									>
+										Close
+									</button>
+							</div>
 						</div>
 					</motion.div>
 				</motion.div>

@@ -5,6 +5,7 @@ import { styles } from '../styles'
 import { SectionWrapper } from '../hoc'
 
 import { ContainerScroll } from './ui/container-scroll-animation';
+import InfiniteLoopSlider from './ui/infinite-loop-slider'
 
 const DURATION = 50000;
 const ROWS = 6;
@@ -49,22 +50,6 @@ const Tag = ({ text }) => (
   <li className='text-secondary text-nowrap bg-tertiary p-4 text-lg mr-4 rounded-md font-light opacity-85'><span className='text-yellow-500'>#</span>&nbsp;{text}</li>
 );
 
-const InfiniteLoopSlider = ({ children, duration, reverse = false }) => {
-  return (
-    <div
-      className="flex w-fit animate-loop"
-      style={{
-        "--duration": `${duration}ms`,
-        "--direction": reverse ? "reverse" : "normal",
-      }}
-    >
-      <ul className="flex">
-        {children}
-        {children}
-      </ul>
-    </div>
-  );
-};
 
 const About = () => {
 
@@ -106,8 +91,8 @@ const About = () => {
           </InfiniteLoopSlider>
         ))}
       </div>
-      <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-r from-primary/0 to-primary/100" />
-      <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-l from-primary/0 to-primary/100" />
+      <div className="absolute top-0 right-0 h-full w-5 sm:w-24 bg-gradient-to-r from-primary/0 to-primary/100" />
+      <div className="absolute top-0 left-0 h-full w-5 sm:w-24 bg-gradient-to-l from-primary/0 to-primary/100" />
     </div>
   )
   

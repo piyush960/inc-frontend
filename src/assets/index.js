@@ -18,6 +18,7 @@ import imocha from "./company/imocha.png";
 import concepts from './logos/concepts.png'
 import impetus from './logos/impetus.png'
 import pradnya from './logos/pradnya.png'
+import techfiesta from './logos/techfiesta.png'
 
 import concepts_b from './logos/concepts_bubble.png'
 import impetus_b from './logos/impetus_bubble.png'
@@ -38,4 +39,4 @@ import gal5 from './gallery/5.jpeg'
 import gal6 from './gallery/6.jpeg'
 import gal7 from './gallery/7.jpeg'
 
-export { logo, menu, notification, light, concepts, impetus, pradnya, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, meta, shopify, starbucks, tesla, eq, imocha, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader };
+export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, meta, shopify, starbucks, tesla, eq, imocha, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader };
