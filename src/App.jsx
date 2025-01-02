@@ -12,10 +12,11 @@ import MobileContext from './hooks/MobileContext'
 import RegisterHome from "./RegisterHome";
 import Test from "./components/Test";
 import AnimatedCounter from "./components/AnimatedCounter";
+import { section_bg } from "./assets";
 
 const App = () => {
   
-  const isMobile = useDimension(); // Assuming useDimension is already implemented
+  const isMobile = useDimension();
 
   console.log('in app', isMobile)
 

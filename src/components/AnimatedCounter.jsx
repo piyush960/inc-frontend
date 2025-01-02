@@ -36,11 +36,11 @@ const CountUp = ({
     }
 
     const controls = animate(from, to, {
-      duration: 5,
+      duration: 2,
       ease: "easeOut",
       ...animationOptions,
       onUpdate(value) {
-        element.textContent = Number(Number(value).toFixed(0)).toLocaleString();
+        element.textContent = Number(Number(value).toFixed(0)).toLocaleString('en-US');
       },
     });
 
@@ -66,7 +66,7 @@ const AnimatedCounter = () => {
       <div className="w-full flex items-center justify-center text-orange-100 max-sm:py-4">
         <IconCurrencyRupee className="sm:size-[190px] size-[50px]"/>
         <div className="sm:text-[200px] text-[60px]  font-extrabold" style={{width: "6ch"}}>
-          <CountUp from={500000} to={700000}/>
+          <CountUp from={550000} to={700000}/>
         </div>
         <span className="sm:text-[190px] text-[50px] font-bold">&nbsp;+</span>
       </div>

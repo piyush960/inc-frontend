@@ -9,6 +9,8 @@ import { styles } from '../styles.js'
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import MobileContext from "../hooks/MobileContext.js";
 import SwipeCards from "./ui/SwipeCards.jsx";
+import { section_bg } from "../assets/index.js";
+import { cn } from "../lib/utils.js";
 
 function dateToWords(dateStr) {
   const [day, month, year] = dateStr.split('-');
@@ -27,6 +29,7 @@ function Events(){
   return (
     <>
     <div
+    
     className='w-full flex flex-col items-center justify-evenly'>
       <motion.div 
       initial={{ y: 100, opacity: 0 }}
@@ -50,7 +53,8 @@ function EventCards({ }) {
   };
 
   return (
-    <div className="py-20 w-full h-full flex flex-wrap items-center justify-between px-6 gap-y-24">
+    <div className="py-20 w-full max-w-[85rem] grid grid-cols-6 grid-rows-3 gap-1"
+    >
       {events.map((event, index) => (
         <Card 
           key={event.id}
@@ -65,6 +69,13 @@ function EventCards({ }) {
             date: event.date
           }}
           handleViewDetails={handleViewDetails}
+          className={`
+            ${index === 0 ? 'col-span-2 row-span-2 bg-dark-blue' : ''} 
+            ${index === 1 ? 'col-span-2 row-span-2 bg-gradient-to-r from-dark-blue to-orange-100' : ''} 
+            ${index === 2 ? 'col-span-2 row-span-2 bg-orange-100' : ''} 
+            ${index === 3 ? 'col-start-1 col-end-4 bg-gradient-to-r from-dark-blue to-dark-blue/60' : ''} 
+            ${index === 4 ? 'col-start-4 col-end-7 bg-gradient-to-r from-orange-100/60 to-orange-100' : ''}
+          `}
         >
           <CanvasRevealEffect animationSpeed={5.0} containerClassName={event.color} />
         </Card>
@@ -79,6 +90,7 @@ const Card = ({
   details,
   index,
   handleViewDetails,
+  className
 }) => {
   const [hovered, setHovered] = React.useState(false);
 
@@ -90,7 +102,7 @@ const Card = ({
     whileInView={{opacity: 1}}
     viewport={{ once: true, amount: 0.5 }}
     transition={{ ease: "easeInOut", duration: 0.5 }}
-    className="bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 transition duration-300 group/canvas-card flex flex-col items-center justify-between max-w-sm w-full mx-auto p-px relative h-[28rem] cursor-pointer hover:scale-[1.02]"
+    className={cn(`transition duration-300 group/canvas-card flex flex-col items-center justify-between mx-auto w-full p-px relative cursor-pointer hover:scale-[1.02]`, className)}
     onClick={() => handleViewDetails(details.id)}
     >
       <AnimatePresence>
@@ -105,22 +117,26 @@ const Card = ({
         )}
       </AnimatePresence>
 
-      <div className="h-full w-full flex flex-col items-center justify-center bg-primary p-4">
-        <div className="absolute group-hover/canvas-card:opacity-0 z-10 group-hover/canvas-card:
-        group-hover/canvas-card:translate-y-8 translate-y-0 opacity-100 transition-all duration-300 w-full h-full flex flex-col items-center justify-center gap-4 p-6">
-          <img src={details.logo} alt={`${title} logo`} className="w-16 h-16 mb-4" />
-          <h2 className="text-2xl font-bold text-white-100 mb-2">{title}</h2>
-          <div className="flex flex-row space-x-2 mb-8">
-            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.type}</p>
-            <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
+      <div className={`h-full w-full flex flex-col items-center justify-center bg-primary p-4`}>
+        <div className={`absolute group-hover/canvas-card:opacity-0 z-10 
+        group-hover/canvas-card:translate-y-8 translate-y-0 opacity-100 transition-all duration-300 w-full h-full flex p-6 ${(index === 3 || index === 4) ? 'flex-row' : 'flex-col'}`}>
+          <div className="w-full h-full flex flex-col justify-center items-center space-y-8">
+            <img src={details.logo} alt={`${title} logo`} className="w-16 h-16" />
+            <h2 className="text-2xl font-bold text-white-100">{title}</h2>
           </div>
-          <p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
-          <span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date)}</span>
+          <div className="w-full h-full flex flex-col justify-center items-center space-y-6">
+            <div className="flex flex-row space-x-2">
+              <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.type}</p>
+              <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
+            </div>
+            <p className="text-white-100/90 text-md text-center">{details.description}</p>
+            <span className="text-slate-400 text-sm font-medium">{dateToWords(details.date)}</span>
+          </div>
         </div>
         
-        <div className={`relative inset-0 w-full h-full flex flex-col justify-evenly items-center transition-opacity duration-300 ${
+        <div className={`relative inset-0 w-full h-full flex justify-evenly items-center transition-opacity duration-300 ${
           (hovered) ? 'opacity-100' : 'opacity-0'
-        }`}>
+        } ${(index === 3 || index === 4) ? 'h-[11rem]' : 'flex-col'}`}>
           <img src={details.logo} alt={`${title} logo`} className="w-24 h-24" />
           <h2 className={`text-white-100 text-2xl font-bold`}>
             {title}
