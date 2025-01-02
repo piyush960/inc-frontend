@@ -53,7 +53,7 @@ function EventCards({ }) {
   };
 
   return (
-    <div className="py-20 w-full max-w-[85rem] grid grid-cols-6 grid-rows-3 gap-1"
+    <div className="py-20 px-4 w-full max-w-[85rem] grid grid-cols-6 grid-rows-3 gap-1"
     >
       {events.map((event, index) => (
         <Card 
@@ -73,8 +73,8 @@ function EventCards({ }) {
             ${index === 0 ? 'col-span-2 row-span-2 bg-dark-blue' : ''} 
             ${index === 1 ? 'col-span-2 row-span-2 bg-gradient-to-r from-dark-blue to-orange-100' : ''} 
             ${index === 2 ? 'col-span-2 row-span-2 bg-orange-100' : ''} 
-            ${index === 3 ? 'col-start-1 col-end-4 bg-gradient-to-r from-dark-blue to-dark-blue/60' : ''} 
-            ${index === 4 ? 'col-start-4 col-end-7 bg-gradient-to-r from-orange-100/60 to-orange-100' : ''}
+            ${index === 3 ? 'col-start-1 col-end-4 bg-gradient-to-r from-dark-blue to-dark-blue/60 h-[13rem]' : ''} 
+            ${index === 4 ? 'col-start-4 col-end-7 bg-gradient-to-r from-orange-100/60 to-orange-100 h-[13rem]' : ''}
           `}
         >
           <CanvasRevealEffect animationSpeed={5.0} containerClassName={event.color} />
@@ -117,7 +117,7 @@ const Card = ({
         )}
       </AnimatePresence>
 
-      <div className={`h-full w-full flex flex-col items-center justify-center bg-primary p-4`}>
+      <div className={`h-full w-full flex flex-col items-center justify-center bg-primary p-6`}>
         <div className={`absolute group-hover/canvas-card:opacity-0 z-10 
         group-hover/canvas-card:translate-y-8 translate-y-0 opacity-100 transition-all duration-300 w-full h-full flex p-6 ${(index === 3 || index === 4) ? 'flex-row' : 'flex-col'}`}>
           <div className="w-full h-full flex flex-col justify-center items-center space-y-8">
@@ -136,7 +136,7 @@ const Card = ({
         
         <div className={`relative inset-0 w-full h-full flex justify-evenly items-center transition-opacity duration-300 ${
           (hovered) ? 'opacity-100' : 'opacity-0'
-        } ${(index === 3 || index === 4) ? 'h-[11rem]' : 'flex-col'}`}>
+        } ${(index === 3 || index === 4) ? '' : 'flex-col'}`}>
           <img src={details.logo} alt={`${title} logo`} className="w-24 h-24" />
           <h2 className={`text-white-100 text-2xl font-bold`}>
             {title}
