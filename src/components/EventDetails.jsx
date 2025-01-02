@@ -8,6 +8,7 @@ import InfiniteLoopSlider from './ui/infinite-loop-slider';
 import { IconCalendarFilled, IconCheckupList, IconCurrencyDollar, IconDiamondsFilled, IconDownload, IconFileDescription, IconTrophy, IconUserCheck, IconUserEdit, IconUsersGroup } from '@tabler/icons-react'
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './ui/accordian';
 import scrollToTop from '../utils/scrollToTop'
+import { cn } from '../lib/utils';
 
 function TabsDemo() {
 
@@ -29,7 +30,7 @@ function TabsDemo() {
       value: "impetus",
       content: (
         <div
-          className={`w-full overflow-hidden relative p-px bg-tertiary h-[${containerHeight}px]`}>
+          className={cn('w-full overflow-hidden relative p-px bg-tertiary', `h-[${containerHeight}px]`)}>
           <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.impetus} />
         </div>
@@ -40,7 +41,7 @@ function TabsDemo() {
       value: "concepts",
       content: (
         <div
-          className={`w-full overflow-hidden relative p-px bg-tertiary h-[${containerHeight}px]`}>
+          className={cn('w-full overflow-hidden relative p-px bg-tertiary', `h-[${containerHeight}px]`)}>
           <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.concepts}/>
         </div>
@@ -52,7 +53,7 @@ function TabsDemo() {
       content: (
         <div
           ref={divRef}
-          className={`w-full overflow-hidden relative p-px bg-tertiary h-[${containerHeight}px]`}>
+          className={cn('w-full overflow-hidden relative p-px bg-tertiary', `h-[${containerHeight}px]`)}>
           <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.pradnya}/>
         </div>

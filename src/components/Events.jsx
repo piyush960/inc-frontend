@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useTransform, useScroll } from "framer-motion";
 import { CanvasRevealEffect } from "./ui/canvas-reveal-effect.jsx";
@@ -90,10 +90,11 @@ const Card = ({
     whileInView={{opacity: 1}}
     viewport={{ once: true, amount: 0.5 }}
     transition={{ ease: "easeInOut", duration: 0.5 }}
-    className="bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 transition duration-200 group/canvas-card flex flex-col items-center justify-between max-w-sm w-full mx-auto p-px relative h-[28rem]"
+    className="bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 transition duration-300 group/canvas-card flex flex-col items-center justify-between max-w-sm w-full mx-auto p-px relative h-[28rem] cursor-pointer hover:scale-[1.02]"
+    onClick={() => handleViewDetails(details.id)}
     >
       <AnimatePresence>
-        {(!hovered) && (
+        {(hovered) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -105,19 +106,8 @@ const Card = ({
       </AnimatePresence>
 
       <div className="h-full w-full flex flex-col items-center justify-center bg-primary p-4">
-        <div className="absolute group-hover/canvas-card:
-        group-hover/canvas-card:opacity-0 z-10 group-hover/canvas-card:
-        group-hover/canvas-card:-translate-y-8 translate-y-0 opacity-100 transition duration-200 w-full h-full flex flex-col items-center justify-evenly">
-          <img src={details.logo} alt={`${title} logo`} className="w-24 h-24" />
-          <h2 className={`text-white-100 text-2xl font-bold`}>
-            {title}
-          </h2>
-        </div>
-        
-        <div className={`relative inset-0 flex flex-col items-center justify-center p-6 transition-all duration-300 ${
-          (hovered) ? 'opacity-100' : 'opacity-0'
-        }`}>
-
+        <div className="absolute group-hover/canvas-card:opacity-0 z-10 group-hover/canvas-card:
+        group-hover/canvas-card:translate-y-8 translate-y-0 opacity-100 transition-all duration-300 w-full h-full flex flex-col items-center justify-center gap-4 p-6">
           <img src={details.logo} alt={`${title} logo`} className="w-16 h-16 mb-4" />
           <h2 className="text-2xl font-bold text-white-100 mb-2">{title}</h2>
           <div className="flex flex-row space-x-2 mb-8">
@@ -126,18 +116,25 @@ const Card = ({
           </div>
           <p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
           <span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date)}</span>
-
+        </div>
+        
+        <div className={`relative inset-0 w-full h-full flex flex-col justify-evenly items-center transition-opacity duration-300 ${
+          (hovered) ? 'opacity-100' : 'opacity-0'
+        }`}>
+          <img src={details.logo} alt={`${title} logo`} className="w-24 h-24" />
+          <h2 className={`text-white-100 text-2xl font-bold`}>
+            {title}
+          </h2>
           <button
-            className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95 z-10"
-            onClick={() => handleViewDetails(details.id)}
+            className="relative inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95 z-10"
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+            <span className="absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px] opacity-0 transition-opacity duration-500 group-hover/canvas-card:opacity-100"></span>
 
             <span className="relative z-10 block px-4 py-2 bg-gray-950">
               <div className="relative z-10 flex items-center space-x-2">
-                <span className="transition-all duration-500 group-hover:translate-x-1">View Details</span>
+                <span className="transition-all duration-500 group-hover/canvas-card:translate-x-1">View Details</span>
                 <svg
-                  className="w-6 h-6 transition-transform duration-500 group-hover:translate-x-1"
+                  className="w-6 h-6 transition-transform duration-500 group-hover/canvas-card:translate-x-1"
                   data-slot="icon"
                   aria-hidden="true"
                   fill="currentColor"
@@ -153,6 +150,7 @@ const Card = ({
               </div>
             </span>
           </button>
+          
         </div>
       </div>
     </motion.div>

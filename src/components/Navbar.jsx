@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { styles } from '../styles'
 import { navLinks } from '../constants'
 import { logo, menu, close } from '../assets'
 
@@ -45,7 +44,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`max-md:px-4 w-full mx-auto flex items-center py-5 backdrop-blur-sm fixed top-0 z-20 transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
+    <nav className={`max-md:px-4 w-full mx-auto flex items-center py-5 fixed backdrop-blur-sm top-0 z-20 transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
       <div className='w-full flex justify-between items-center mx-auto max-w-7xl'>
         <Link to={'/'} className='flex items-center gap-2' onClick={() => {setActive("");}}>
           <img src={logo} alt="logo" className='w-9 h-9 object-contain' />

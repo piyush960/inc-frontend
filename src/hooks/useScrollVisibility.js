@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 const useScrollVisibility = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
 
   const handleScroll = () => {

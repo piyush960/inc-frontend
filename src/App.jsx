@@ -9,8 +9,9 @@ import EventDetails from "./components/EventDetails";
 import Notification from './components/Modal';
 import useDimension from "./hooks/useDimension";
 import MobileContext from './hooks/MobileContext'
-import HeroSlider from "./components/HeroSlider";
 import RegisterHome from "./RegisterHome";
+import Test from "./components/test";
+import AnimatedCounter from "./components/AnimatedCounter";
 
 const App = () => {
   
@@ -27,6 +28,7 @@ const App = () => {
             <>
               <Hero />
               <About />
+              <AnimatedCounter />
               <Events />
               <SwipeGallery />
               <Sponsors />
@@ -45,6 +47,10 @@ const App = () => {
           }/>
           <Route path="/events/:id" element={
             <EventDetails />
+          }
+          />
+          <Route path="/test" element={
+            <Test />
           }
           />
       </Routes>

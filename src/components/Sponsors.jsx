@@ -2,7 +2,6 @@
 import { sponsors } from '../constants'
 import {InfiniteMovingCards} from './ui/infinite-moving-cards'
 import { styles } from '../styles'
-import { textVariant } from '../utils/motion'
 import { motion } from 'framer-motion'
 import useDimension from '../hooks/useDimension'
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { styles } from "../styles";
 
 import { gal1, gal2, gal3, gal4, gal5, gal6, gal7 } from "../assets";

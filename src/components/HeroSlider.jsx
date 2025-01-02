@@ -51,7 +51,7 @@ const HeroSlider = () => {
 	}, [imgIndex, totalImgs]);
 
 	return (
-		<div className="relative z-0 overflow-hidden blur-[2px] opacity-15">
+		<div className="relative z-0 overflow-hidden blur-[2px] opacity-25">
 			<motion.div
 				animate={{
 					translateX: `-${imgIndex * 100}%`,

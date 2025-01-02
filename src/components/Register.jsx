@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { styles } from "../styles";
-import { SectionWrapper } from "../hoc";
 import FormsBanner from "./forms/formBanner";
-import implogo from "../assets/eventLogos/impetus_logo.png";
 import ProjectDetailsFormStep from "./forms/steps/projectDetails";
 import AddMemberStep from "./forms/steps/addMembersStep";
 import CollegeDetailsStep from "./forms/steps/collegeDetailStep";
@@ -11,6 +7,7 @@ import PaymentStep from "./forms/steps/paymentStep";
 import StepProgressBar from "./forms/stepProgress";
 import { useParams } from "react-router-dom";
 import { eventsData } from "../constants";
+import scrollToTop from "../utils/scrollToTop";
 
 const osteps = [
   { id: 1, label: "Project Details" },
@@ -33,6 +30,7 @@ const Register = () => {
   const prevStep = () => setCurrentStep((prev) => prev - 1);
   
   useEffect(() => {
+    scrollToTop()
     if(event === 'pradnya'){
       setCurrentStep(1)
       setSteps(() => (pSteps))

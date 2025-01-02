@@ -26,7 +26,7 @@ const ShiftingCountdown = () => {
   }, []);
 
   const animationVariants = {
-    initial: { scale: 2, x: "-68%", y: "-150%" },
+    initial: { scale: 2, x: "-70%", y: "-150%" },
     animate: { scale: 1, x: 0, y: 0 },
   };
 
@@ -37,7 +37,7 @@ const ShiftingCountdown = () => {
       variants={animationVariants}
       transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
       onAnimationComplete={() => setHasAnimated(false)}
-      className="w-[90%] max-sm:hidden z-20"
+      className={`w-full max-sm:hidden z-20`}
     >
       <div className={"border-secondary border-[1px]"}>
         <div className={`mx-auto flex w-full max-w-5xl items-center ${hasAnimated ? `backdrop-blur-sm` : `bg-[#000609]/50`}`}>
