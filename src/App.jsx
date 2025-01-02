@@ -10,7 +10,7 @@ import Notification from './components/Modal';
 import useDimension from "./hooks/useDimension";
 import MobileContext from './hooks/MobileContext'
 import RegisterHome from "./RegisterHome";
-import Test from "./components/test";
+import Test from "./components/Test";
 import AnimatedCounter from "./components/AnimatedCounter";
 
 const App = () => {
