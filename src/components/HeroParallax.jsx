@@ -60,7 +60,7 @@ const Hero = () => {
           <motion.button
             style={{
               border,
-              boxShadow,
+              // boxShadow,
             }}
             whileHover={{
               scale: 1.015,
@@ -68,7 +68,7 @@ const Hero = () => {
             whileTap={{
               scale: 0.985,
             }}
-            className="w-full bg-[#000609]/40 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-[#000609]/50"
+            className="w-full tracking-widest bg-[#000609]/50 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-[#000609]/60"
             onClick={() => {navigate(`/register`)}}
           >
             Register Now

@@ -9,7 +9,6 @@ import { styles } from '../styles.js'
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import MobileContext from "../hooks/MobileContext.js";
 import SwipeCards from "./ui/SwipeCards.jsx";
-import { section_bg } from "../assets/index.js";
 import { cn } from "../lib/utils.js";
 
 function dateToWords(dateStr) {
@@ -102,7 +101,7 @@ const Card = ({
     whileInView={{opacity: 1}}
     viewport={{ once: true, amount: 0.5 }}
     transition={{ ease: "easeInOut", duration: 0.5 }}
-    className={cn(`transition duration-300 group/canvas-card flex flex-col items-center justify-between mx-auto w-full p-px relative cursor-pointer hover:scale-[1.02]`, className)}
+    className={cn(`transition duration-300 group/canvas-card flex flex-col items-center justify-between mx-auto w-full p-px relative cursor-pointer`, className)}
     onClick={() => handleViewDetails(details.id)}
     >
       <AnimatePresence>
