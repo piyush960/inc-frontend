@@ -12,7 +12,9 @@ import MobileContext from './hooks/MobileContext'
 import RegisterHome from "./RegisterHome";
 import Test from "./components/Test";
 import AnimatedCounter from "./components/AnimatedCounter";
-import { section_bg } from "./assets";
+import { ToastContainer, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const App = () => {
   
@@ -22,6 +24,19 @@ const App = () => {
 
   return (
     <MobileContext.Provider value={isMobile}>
+      <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      transition={Bounce}
+      />
       <Navbar />
       <div className="relative z-0 bg-primary">
       <Routes>

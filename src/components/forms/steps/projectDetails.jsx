@@ -6,6 +6,9 @@ import FormButton from "../FormButton";
 
 import { validate_isEmpty, validate_email, validate_phone, validate_wordCount, validate } from "../utils";
 import { impetus_domains } from "../constants";
+import { toast } from "react-toastify";
+
+import { useSelector, useDispatch } from 'react-redux';
 
 const initialState = {
   title: "",
@@ -23,36 +26,9 @@ const initialState = {
   no_demo_reason: "",
 }
 
-const reducer = (state, action) => {
-  switch(action.type){
-    case 'TITLE':
-      return {...state, title: action.payload}
-    case 'DOMAIN':
-      return {...state, domain: action.payload}
-    case 'PROJECT_TYPE':
-      return {...state, project_type: action.payload}
-    case 'GUIDE_NAME':
-      return {...state, guide_name: action.payload}
-    case 'GUIDE_EMAIL':
-      return {...state, guide_email: action.payload}
-    case 'HOD_EMAIL':
-      return {...state, hod_email: action.payload}
-    case 'IS_SPONSORED':
-      return {...state, is_sponsored: action.payload}
-    case 'COMPANY':
-      return {...state, company: action.payload}
-    case 'ABSTRACT':
-      return {...state, abstract: action.payload}
-    case 'IS_NDASIGN':
-      return {...state, is_ndaSign: action.payload}
-    case 'IS_SHOWDEMO':
-      return {...state, is_showDemo: action.payload}
-    case 'NODEMOREASON':
-      return {...state, no_demo_reason: action.payload}
-  }
-}
-
 const ProjectDetailsFormStep = ({ nextStep, prevStep }) => {
+  const form = useSelector(state => state.form.step1)
+  const dispatch = useDispatch()
   const [ formData, setFormData ] = useState(initialState)
 
   const [errors, setErrors] = useState({});
@@ -73,9 +49,11 @@ const ProjectDetailsFormStep = ({ nextStep, prevStep }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(!validate(formData)){
-      console.log('no errors')
+      toast.success('success')
+      console.log(formData)
+      dispatch(submit)
     }
-    else console.log('errors found')
+    else toast.error('Fill all the required details correctly!')
   };
 
   return (
@@ -277,7 +255,7 @@ const ProjectDetailsFormStep = ({ nextStep, prevStep }) => {
 
       {/* Submit Button */}
       <div className="sm:col-span-2 justify-self-end">
-        <FormButton loading={loading} className={``} onClick={() => nextStep()}></FormButton>
+        <FormButton loading={loading} className={``} onClick={handleSubmit}></FormButton>
       </div>
     </form>
   );
