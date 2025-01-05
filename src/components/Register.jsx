@@ -40,7 +40,6 @@ const Register = () => {
 
   const eventData = eventsData[event];
 
-  console.log('eventData', eventData)
 
   return (
     <>
@@ -62,12 +61,13 @@ const Register = () => {
         >
           {currentStep === 0 && ( 
             <GradientWrapper>
-              <ProjectDetailsFormStep nextStep={nextStep} prevStep={prevStep} />
+              <ProjectDetailsFormStep event={event} nextStep={nextStep} prevStep={prevStep} />
             </GradientWrapper>
           )}
           {currentStep === 1 && (
             <GradientWrapper>
               <AddMemberStep
+                event={event}
                 minMembers={2}
                 maxMembers={5}
                 nextStep={nextStep}
@@ -78,12 +78,13 @@ const Register = () => {
           )}
           {currentStep === 2 && (
             <GradientWrapper>
-              <CollegeDetailsStep nextStep={nextStep} prevStep={prevStep} />
+              <CollegeDetailsStep event={event} nextStep={nextStep} prevStep={prevStep} />
             </GradientWrapper>
           )}
           {currentStep === 3 && (
             <GradientWrapper>
               <PaymentStep
+                event={event}
                 amount={100}
                 imagePath={"src/assets/company/tesla.png"}
                 prevStep={prevStep}

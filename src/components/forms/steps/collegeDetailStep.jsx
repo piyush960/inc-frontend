@@ -7,40 +7,55 @@ import FormButton from "../FormButton";
 import { yearOptions, localityOptions, yesNoOptions, modeOptions } from '../constants'
 import { RadioButton } from "../../ui/RadioButton";
 import { validate_isEmpty, validateCollegeDetails } from "../utils"
+import { useDispatch, useSelector } from "react-redux";
+import { submit_step3 } from "../../../features/form/formSlice";
+import { toast } from "react-toastify";
 
 const pictState = {
-  isPICT: true,
+  isPICT: "1",
   college: "Pune Institute Of Computer Technology",
   country: "India",
   state: "Maharashtra",
   city: "Pune",
   district: "Pune",
-  locality: "urban",  // Urban
-  mode: "offline",      // Offline
+  locality: "1",
+  mode: "1",
   reason_of_mode: "",
-  isInternational: false,
+  isInternational: "0",
   year: "",
+  referral: "",
 }
 
 const initialState = {
-  isPICT: false,
+  isPICT: "1",
   college: "",
   country: "",
   state: "",
   city: "",
   district: "",
-  locality: "urban",      // Keep "Urban" as default
-  mode: "offline",          // Keep "Offline" as default
+  locality: "1",
+  mode: "1",
   reason_of_mode: "",
-  isInternational: false, // Keep "No" as default
+  isInternational: "0",
   year: "",
+  referral: "",
 }
 
 const CollegeDetailsStep = ({ prevStep, nextStep }) => {
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({...initialState, isInternational: null});
-  const [isPICT, setIsPICT] = useState(null);
+  const step3 = useSelector(state => state.form.step3)
+  const [formData, setFormData] = useState({...step3});
+  const dispatch = useDispatch()
+  const [isPICT, setIsPICT] = useState(formData.isPICT);
+
   const radioRef = useRef(null);
+
+  useEffect(() => {
+    if(formData.isPICT === "1"){
+      document.querySelectorAll('#isPICT')[0].checked = true
+      radioRef.current.checked = true
+    }
+  }, [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,16 +64,15 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(validateCollegeDetails(formData))
-
-    // nextStep()
-    // if (validate()) {
-    //   console.log("Form submitted successfully!", formData);
-    //   alert("Form submitted successfully!");
-    // } else {
-    //   console.log("Validation errors:", errors);
-    // }
+    console.log(formData)
+    if(!validateCollegeDetails(formData)){
+      dispatch(submit_step3(formData))
+      nextStep()
+      toast.success('College Details Added')
+    }
+    else{
+      toast.error("Fill all the required details correctly!")
+    }
   };
 
 
@@ -80,9 +94,9 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
           onChange={(e) => {
             const value = e.target.value
             const isInternational = formData.isInternational
-            setIsPICT(value === 'true')
+            setIsPICT(value === "1")
             console.log(isPICT)
-            if (value === 'true') {
+            if (value === "1") {
               setFormData((prev) => ({ ...prev, ...pictState }))
               radioRef.current.checked = true;
             }
@@ -224,7 +238,7 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
           type="text"
           name="reason_of_mode"
           id="reason_of_mode"
-          disabled={(formData.mode === 'offline')}
+          disabled={(formData.mode === '1')}
           value={formData.reason_of_mode}
           onChange={handleInputChange}
           validate={validate_isEmpty.bool}
@@ -255,7 +269,7 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
       {/* Submit Button */}
       <div className="sm:col-span-2 flex justify-between">
         <FormButton loading={loading} isPrev onClick={() => prevStep()}></FormButton>
-        <FormButton loading={loading} className={``} onClick={() => nextStep()}></FormButton>
+        <FormButton loading={loading} className={``} onClick={handleSubmit}></FormButton>
       </div>
     </form>
   );

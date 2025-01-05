@@ -9,49 +9,48 @@ import { impetus_domains } from "../constants";
 import { toast } from "react-toastify";
 
 import { useSelector, useDispatch } from 'react-redux';
+import { submit_step1 } from '../../../features/form/formSlice'
+import { useStepOneMutation } from "../../../app/services/formAPI";
 
-const initialState = {
-  title: "",
-  domain: "",
-  project_type: "",
-  guide_name: "",
-  guide_email: "",
-  guide_phone: "",
-  hod_email: "",
-  is_sponsored: false,
-  company: "",
-  abstract: "",
-  is_ndaSign: false,
-  is_showDemo: true,
-  no_demo_reason: "",
-}
 
-const ProjectDetailsFormStep = ({ nextStep, prevStep }) => {
-  const form = useSelector(state => state.form.step1)
+
+const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
+
+  const step1 = useSelector(state => state.form.step1)
+  const [ formData, setFormData ] = useState(step1)
   const dispatch = useDispatch()
-  const [ formData, setFormData ] = useState(initialState)
 
-  const [errors, setErrors] = useState({});
   const [abstractWordCount, setAbstractWordCount] = useState(0);
-  const [loading, setLoading] = useState(false);
 
+  const [ stepOne, { isLoading } ] = useStepOneMutation()
+  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? (checked ? "1" : "0") : value,
     });
     if (name === "abstract") {
       setAbstractWordCount(value.trim().split(/\s+/).length);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if(!validate(formData)){
-      toast.success('success')
-      console.log(formData)
-      dispatch(submit)
+      try {
+        const ticket = window.sessionStorage.getItem('ticket') || ''
+        const response = await stepOne({ event_name: event, ticket, data: formData }).unwrap();
+        console.log(response);
+        window.sessionStorage.setItem('ticket', response.ticket);
+        dispatch(submit_step1(formData));
+        toast.success('Project details saved');
+        nextStep();
+      } catch (err) {
+        console.error(err);
+        toast.error(err?.data?.message || 'Something went wrong');
+      }
     }
     else toast.error('Fill all the required details correctly!')
   };
@@ -185,18 +184,18 @@ const ProjectDetailsFormStep = ({ nextStep, prevStep }) => {
 
       {/* Sponsored */}
       <div className="flex flex-col gap-4">
-        <Label htmlFor="is_sponsored" className="flex items-center gap-2">
+        <Label htmlFor="sponsored" className="flex items-center gap-2">
           <input
             type="checkbox"
-            id="is_sponsored"
-            name="is_sponsored"
-            checked={formData.is_sponsored}
+            id="sponsored"
+            name="sponsored"
+            checked={formData.sponsored === "1"}
             onChange={handleChange}
             className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
           Is the project sponsored?
         </Label>
-        {formData.is_sponsored && (
+        {formData.sponsored === "1" && (
           <div className="">
             <Label htmlFor="company" required>Company Name</Label>
             <Input
@@ -208,12 +207,12 @@ const ProjectDetailsFormStep = ({ nextStep, prevStep }) => {
               errorMessage={validate_isEmpty.message()}
               placeholder="Enter company name"
             />
-            <Label htmlFor="is_ndaSign" className="flex items-center gap-2 py-8">
+            <Label htmlFor="nda" className="flex items-center gap-2 py-8">
               <input
                 type="checkbox"
-                id="is_ndaSign"
-                name="is_ndaSign"
-                checked={formData.is_ndaSign}
+                id="nda"
+                name="nda"
+                checked={formData.nda === "1"}
                 onChange={handleChange}
                 className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
               />
@@ -226,24 +225,24 @@ const ProjectDetailsFormStep = ({ nextStep, prevStep }) => {
 
       {/* Demo */}
       <div className="flex flex-col gap-4">
-        <Label htmlFor="is_showDemo" required className="flex items-center gap-2">
+        <Label htmlFor="demo" required className="flex items-center gap-2">
           <input
             type="checkbox"
-            name="is_showDemo"
-            id="is_showDemo"
-            checked={formData.is_showDemo}
+            name="demo"
+            id="demo"
+            checked={formData.demo === "1"}
             onChange={handleChange}
             className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
           Can you show a demo?
         </Label>
-        {!formData.is_showDemo && (
+        {formData.demo === "0" && (
           <div className="">
-            <Label htmlFor="no_demo_reason" required>Reason for no demo</Label>
+            <Label htmlFor="reason_of_demo" required>Reason for no demo</Label>
             <Input
-              id="no_demo_reason"
-              name="no_demo_reason"
-              value={formData.no_demo_reason}
+              id="reason_of_demo"
+              name="reason_of_demo"
+              value={formData.reason_of_demo}
               onChange={handleChange}
               validate={validate_isEmpty.bool}
               errorMessage={validate_isEmpty.message()}
@@ -255,7 +254,7 @@ const ProjectDetailsFormStep = ({ nextStep, prevStep }) => {
 
       {/* Submit Button */}
       <div className="sm:col-span-2 justify-self-end">
-        <FormButton loading={loading} className={``} onClick={handleSubmit}></FormButton>
+        <FormButton loading={isLoading} className={``} onClick={handleSubmit}></FormButton>
       </div>
     </form>
   );

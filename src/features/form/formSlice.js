@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const form = JSON.parse(window.sessionStorage.getItem('form'))
 
-const initialState = {
+const initialState = form || {
     step1: {
         title: "",
         domain: "",
@@ -10,21 +11,30 @@ const initialState = {
         guide_email: "",
         guide_phone: "",
         hod_email: "",
-        is_sponsored: false,
+        sponsored: "0",
         company: "",
         abstract: "",
-        is_ndaSign: false,
-        is_showDemo: true,
-        no_demo_reason: "",
+        nda: "0",
+        demo: "1",
+        reason_of_demo: "",
     },
-    step2: {
-
-    },
+    step2: Array(),
     step3: {
-
+      isPICT: null,
+      college: "",
+      country: "",
+      state: "",
+      city: "",
+      district: "",
+      locality: "1",
+      mode: "1",
+      reason_of_mode: "",
+      isInternational: null,
+      year: "",
+      referral: "",
     },
     step4: {
-
+      transaction_id: "",
     }
 }
 
@@ -32,17 +42,21 @@ export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    submit_step1: (state) => {
-      state.value += 1
+    submit_step1: (state, action) => {
+      state.step1 = { ...state.step1, ...action.payload }
+      window.sessionStorage.setItem('form', JSON.stringify(state))
     },
-    submit_step2: (state) => {
-			state.value += 1
+    submit_step2: (state, action) => {
+			state.step2 = [ ...action.payload ]
+      window.sessionStorage.setItem('form', JSON.stringify(state))
     },
-    submit_step3: (state) => {
-			state.value += 1
+    submit_step3: (state, action) => {
+			state.step3 = { ...state.step3, ...action.payload }
+      window.sessionStorage.setItem('form', JSON.stringify(state))
     },
-    submit_step4: (state) => {
-			state.value += 1
+    submit_step4: (state, action) => {
+			state.step4 = { ...state.step4, ...action.payload }
+      window.sessionStorage.setItem('form', JSON.stringify(state))
     },
   },
 })

@@ -20,7 +20,6 @@ const App = () => {
   
   const isMobile = useDimension();
 
-  console.log('in app', isMobile)
 
   return (
     <MobileContext.Provider value={isMobile}>

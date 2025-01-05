@@ -17,18 +17,18 @@ const yearOptions = [
 ];
 
 const localityOptions = [
-	{ value: "urban", label: "Urban" },
-	{ value: "rural", label: "Rural" }
+	{ value: "1", label: "Urban" },
+	{ value: "0", label: "Rural" }
 ];
 
 const modeOptions = [
-	{ value: "offline", label: "Offline" },
-	{ value: "online", label: "Online" }
+	{ value: "1", label: "Offline" },
+	{ value: "0", label: "Online" }
 ];
 
 const yesNoOptions = [
-	{ value: true, label: "Yes" },
-	{ value: false, label: "No" }
+	{ value: "1", label: "Yes" },
+	{ value: "0", label: "No" }
 ];
 
 

@@ -6,7 +6,6 @@ const Test = () => {
 
   const count = useSelector(state => state.form)
 
-  console.log(count)
 
   return (
     <div className='pt-24 bg-transparent text-center text-3xl w-full h-[300px]'

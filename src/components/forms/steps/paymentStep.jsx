@@ -7,45 +7,52 @@ import {
 } from "lucide-react";
 import EventDetail from "../eventDetail";
 import { validate_wordCount } from "../utils";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { submit_step4 } from "../../../features/form/formSlice";
+import { store } from '../../../app/store'
 
 const PaymentStep = ({ imagePath, amount, prevStep, isInternational = false }) => {
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({
-    transactionId: "",
-  });
+  const step4 = useSelector(state => state.form.step4)
+  const [formData, setFormData] = useState(step4);
+  const dispatch = useDispatch()
 
   const validate = () => {
     let tempErrors = {};
 
-    // Check if transaction ID is exactly 12 digits
-    if (!formData.transactionId) {
-      tempErrors.transactionId = "Transaction ID is required";
-    } else if (!/^\d{12}$/.test(formData.transactionId)) {
-      tempErrors.transactionId = "Transaction ID must be exactly 12 digits";
+    if (!formData.transaction_id) {
+      tempErrors.transaction_id = "Transaction ID is required";
+    } else if (formData.transaction_id.length > 12) {
+      tempErrors.transaction_id = "Transaction ID must be exactly 12 digits";
     }
 
-    setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Only allow digits and limit to 12 characters
-    if (name === "transactionId" && !/^\d*$/.test(value)) return;
-    if (name === "transactionId" && value.length > 12) return;
+    if (name === "transaction_id" && value.length > 12) return;
 
     setFormData({ ...formData, [name]: value });
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: null });
-    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log("Payment verification submitted!", formData);
-      alert("Payment verification submitted successfully!");
+      dispatch(submit_step4(formData))
+      const updatedForm = store.getState().form; 
+      await fetch('http://localhost:3001/events/register/impetus', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedForm)
+      })
+      toast.success("Form Submitted, Our Team will contact you shortly.")
+    }
+    else{
+      toast.error("Fill all the required details correctly!")
     }
   };
 
@@ -87,11 +94,11 @@ const PaymentStep = ({ imagePath, amount, prevStep, isInternational = false }) =
               </Label>
               <Input
                 type="text"
-                name="transactionId"
-                value={formData.transactionId}
+                name="transaction_id"
+                value={formData.transaction_id}
                 onChange={handleInputChange}
                 validate={(value) => {
-                  return !/^\d*$/.test(value) || !/^\d{12}$/.test(formData.transactionId)
+                  return value.length !== 12
                 }}
                 errorMessage={"Transaction ID must be exactly 12 digits"}
                 placeholder="Please enter the 12-digit Transaction ID received after payment"

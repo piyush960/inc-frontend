@@ -6,6 +6,10 @@ import FormButton from "../FormButton";
 import { validate_email, validate_isEmpty, validate_phone, validateMember } from "../utils"; 
 import { Select } from "../../ui/select";
 import { FileUpload } from '../../ui/file-upload'
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { submit_step2 } from "../../../features/form/formSlice";
+import { useStepTwoMutation } from "../../../app/services/formAPI";
 
 const initialState = {
   id: "",
@@ -13,64 +17,77 @@ const initialState = {
   email: "",
   phone: "",
   gender: "",
-  codechefID: "",
-  collegeID: null,
+  member_id: "",
+  codechef_id: ""
 }
 
-const AddMemberStep = ({ minMembers = 1, maxMembers = 5, prevStep, nextStep, isPradnya }) => {
-  const [members, setMembers] = useState([]);
+const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextStep, isPradnya }) => {
+  const step2 = useSelector(state => state.form.step2)
+  const [members, setMembers] = useState(() => [...step2]);
   const [newMember, setNewMember] = useState(initialState);
+  const [ stepTwo, { isLoading } ] = useStepTwoMutation()
+  const dispatch = useDispatch()
+
   
-  const [errors, setErrors] = useState({});
-  const [memberError, setMemberError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleAddMember = () => {
-    
+  const handleAddMember = async () => {
     if(validateMember(newMember)){
+      toast.error('Fill all the required details correctly!')
       return
     }
+    // const fd = {
+    //   "codechef_id": "",
+    //   "email": "per@gmail.co",
+    //   "gender": "male",
+    //   "id": "",
+    //   "member_id": "",
+    //   "name": "ddfj",
+    //   "phone": "9999999999"
+    // }
+    console.log(newMember)
+    try{
+      const ticket = window.sessionStorage.getItem('ticket') || ''
+      const memberFormData = new FormData();
+      memberFormData.append("member_id", newMember.member_id);
+      const tempMemberDetails = { ...newMember };
+      delete tempMemberDetails.member_id;
+      memberFormData.append("body", JSON.stringify(tempMemberDetails));
 
-    if (members.length >= maxMembers) {
-      setMemberError(`You can only add up to ${maxMembers} members.`);
-      return;
+      console.log('submit', memberFormData)
+      const response = await stepTwo({ event_name: event, ticket, data: memberFormData }).unwrap()
+
+      setMembers([...members, { ...newMember, id: Date.now() }]);
+      toast.success('Added Successfully')
+      setNewMember(initialState);
+    }
+    catch(err){
+      console.error(err)
+      toast.error(err?.data?.message || 'Failed to Add Member')
     }
 
-    setMembers([...members, { ...newMember, id: Date.now() }]);
-
-    setNewMember(initialState);
-
-    console.log(newMember, members)
   };
 
   const handleDeleteMember = (id) => {
     setMembers(members.filter((member) => member.id !== id));
   };
 
-  const handleFileUpload = (newFile) => {
-    setNewMember({ ...newMember, collegeID: newFile })
-    console.log(newMember, newFile)
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (members.length < minMembers) {
-      return;
-    }
-    if (members.length > maxMembers) {
-      return;
-    }
     console.log(members)
-    return
-    try {
-      alert("Team members saved successfully!");
-    } catch (error) {
-      console.error("Error saving members:", error);
-      alert("An error occurred while saving members.");
-    } finally {
-      setLoading(false);
+    if (members.length < minMembers) {
+      toast.info('Min Member must be ' + minMembers)
+      return;
     }
-    nextStep()
+    else if (members.length > maxMembers) {
+      toast.info('Max allowed Members is ' + maxMembers)
+      return;
+    }
+    else{
+      dispatch(submit_step2(members))
+      toast.success('Members Saved')
+      nextStep()
+    } 
   };
 
   return (
@@ -153,13 +170,13 @@ const AddMemberStep = ({ minMembers = 1, maxMembers = 5, prevStep, nextStep, isP
         </div>
 
         <div className={!isPradnya && 'hidden'}>
-          <Label htmlFor="codechefID">Codechef ID</Label>
+          <Label htmlFor="codechef_id">Codechef ID</Label>
           <Input
-            id="codechefID"
-            name="codechefID"
-            value={newMember.codechefID}
+            id="codechef_id"
+            name="codechef_id"
+            value={newMember.codechef_id}
             onChange={(e) =>
-              setNewMember({ ...newMember, codechefID: e.target.value })
+              setNewMember({ ...newMember, codechef_id: e.target.value })
             }
             placeholder="Enter member's Codechef ID"
           />
@@ -167,17 +184,17 @@ const AddMemberStep = ({ minMembers = 1, maxMembers = 5, prevStep, nextStep, isP
 
         {/* ID Card Photo Upload */}
         <div className="relative">
-          <Label htmlFor="collgeID" required>ID Card</Label>
+          <Label htmlFor="member_id" required>ID Card</Label>
           <FileUpload 
-          value={newMember.collegeID}
+          value={newMember.member_id}
           onChange={
             (files) => {
-              setNewMember({...newMember, collegeID: files[0]})
-              console.log(newMember)
+              setNewMember({...newMember, member_id: files[0]})
+              console.log('hello ', newMember)
             }
           }
           />
-          {!newMember.collegeID && (
+          {!newMember.member_id && (
             <div className="absolute mt-[1px] flex items-center gap-2 px-2 pt-1 text-sm text-red-600 bg-tertiary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -201,10 +218,10 @@ const AddMemberStep = ({ minMembers = 1, maxMembers = 5, prevStep, nextStep, isP
         <button
           type="button"
           onClick={handleAddMember}
-          disabled={members.length === maxMembers}
+          disabled={members.length === maxMembers || isLoading}
           className="bg-black-100 text-white border-[1px] border-secondary px-4 py-2 disabled:opacity-50"
         >
-          Add Member
+          { isLoading ? 'Adding...' : 'Add Member' }
         </button>
       </div>
 
@@ -250,7 +267,7 @@ const AddMemberStep = ({ minMembers = 1, maxMembers = 5, prevStep, nextStep, isP
               </p>
               <p className="font-bold text-sm">
                 College ID:
-                <span className="font-normal">&nbsp;{member.collegeID.name}</span>
+                <span className="font-normal">&nbsp;{member.member_id.name}</span>
               </p>
             </div>
             <button
@@ -275,7 +292,7 @@ const AddMemberStep = ({ minMembers = 1, maxMembers = 5, prevStep, nextStep, isP
 
       <div className={`sm:col-span-2 ${isPradnya ? 'justify-self-end' : 'flex items-center justify-between'}`}>
         {!isPradnya && <FormButton loading={loading} className={``} isPrev onClick={() => prevStep()} />}
-        <FormButton loading={loading} className={``} onClick={() => nextStep()} />
+        <FormButton loading={loading} className={``} onClick={handleSubmit} />
       </div>
       </form>
   );

@@ -23,7 +23,6 @@ function Events(){
 
   const isMobile = useContext(MobileContext);
 
-  console.log('in events', isMobile)
 
   return (
     <>

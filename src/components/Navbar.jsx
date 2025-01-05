@@ -14,9 +14,6 @@ const Navbar = () => {
 
   const location = useLocation();
 
-  console.log('in nav', isVisible)
-
-  console.log('toggle', toggle)
 
   useEffect(() => {
     if (location.hash) {
