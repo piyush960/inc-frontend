@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const form = JSON.parse(window.sessionStorage.getItem('form'))
 
-const initialState = form || {
+const initialState = {
     step1: {
         title: "",
         domain: "",
@@ -34,7 +33,7 @@ const initialState = form || {
       referral: "",
     },
     step4: {
-      transaction_id: "",
+      payment_id: "",
     }
 }
 
@@ -55,12 +54,15 @@ export const formSlice = createSlice({
       window.sessionStorage.setItem('form', JSON.stringify(state))
     },
     submit_step4: (state, action) => {
-			state.step4 = { ...state.step4, ...action.payload }
-      window.sessionStorage.setItem('form', JSON.stringify(state))
+      state = initialState;
+      window.sessionStorage.removeItem('form');
     },
+    resetForm() {
+      return initialState;
+    }
   },
 })
 
-export const { submit_step1, submit_step2, submit_step3, submit_step4 } = formSlice.actions
+export const { submit_step1, submit_step2, submit_step3, submit_step4, resetForm } = formSlice.actions
 
 export default formSlice.reducer

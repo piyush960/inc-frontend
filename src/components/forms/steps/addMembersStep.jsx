@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
 import FormButton from "../FormButton";
@@ -9,7 +9,7 @@ import { FileUpload } from '../../ui/file-upload'
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { submit_step2 } from "../../../features/form/formSlice";
-import { useStepTwoMutation } from "../../../app/services/formAPI";
+import { useAddMemberMutation, useLazyGetMembersQuery, useRemoveMemberMutation } from "../../../app/services/formAPI";
 
 const initialState = {
   id: "",
@@ -22,59 +22,82 @@ const initialState = {
 }
 
 const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextStep, isPradnya }) => {
-  const step2 = useSelector(state => state.form.step2)
-  const [members, setMembers] = useState(() => [...step2]);
-  const [newMember, setNewMember] = useState(initialState);
-  const [ stepTwo, { isLoading } ] = useStepTwoMutation()
-  const dispatch = useDispatch()
-
   
-  const [loading, setLoading] = useState(false);
+  const step2 = useSelector(state => state.form.step2)
+  const [ getMembers, { data, isSuccess } ] = useLazyGetMembersQuery();
+  const [members, setMembers] = useState([]);
+  const [newMember, setNewMember] = useState(initialState);
+  const [ addMember, { isLoading } ] = useAddMemberMutation()
+  const [ removeMember, { isLoading: isRemoveLoading } ] = useRemoveMemberMutation();
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    const ename = window.localStorage.getItem('event_name');
+    const ticket = window.localStorage.getItem('ticket') || '';
+    if(event === ename){
+      getMembers(ticket);
+    }
+  }, []);
 
+  useEffect(() => {
+    if (isSuccess) {
+      if (data.step_2 && Array.isArray(data.step_2)) {
+        setMembers([...data.step_2]);
+      }
+      else{
+        setMembers([...step2])
+      }
+    }
+  }, [data, isSuccess]); 
+  
   const handleAddMember = async () => {
     if(validateMember(newMember)){
       toast.error('Fill all the required details correctly!')
       return
     }
-    // const fd = {
-    //   "codechef_id": "",
-    //   "email": "per@gmail.co",
-    //   "gender": "male",
-    //   "id": "",
-    //   "member_id": "",
-    //   "name": "ddfj",
-    //   "phone": "9999999999"
-    // }
-    console.log(newMember)
+    newMember.id = Date.now();
     try{
-      const ticket = window.sessionStorage.getItem('ticket') || ''
+      const ticket = window.localStorage.getItem('ticket') || ''
       const memberFormData = new FormData();
       memberFormData.append("member_id", newMember.member_id);
       const tempMemberDetails = { ...newMember };
       delete tempMemberDetails.member_id;
       memberFormData.append("body", JSON.stringify(tempMemberDetails));
 
-      console.log('submit', memberFormData)
-      const response = await stepTwo({ event_name: event, ticket, data: memberFormData }).unwrap()
+      const response = await addMember({ event_name: event, ticket, data: memberFormData }).unwrap()
+      window.localStorage.setItem('ticket', response.ticket);
+      window.localStorage.setItem('event_name', event)
+      const clg_id_name = newMember.member_id?.name;
+      delete newMember.member_id;
+      newMember.member_id = clg_id_name
 
-      setMembers([...members, { ...newMember, id: Date.now() }]);
+      setMembers([...members, { ...newMember }])
       toast.success('Added Successfully')
       setNewMember(initialState);
     }
-    catch(err){
-      console.error(err)
-      toast.error(err?.data?.message || 'Failed to Add Member')
+    catch(error){
+      console.error(error)
+      toast.error(error?.data?.message || error?.message || 'Failed to Add Member')
     }
 
   };
 
-  const handleDeleteMember = (id) => {
-    setMembers(members.filter((member) => member.id !== id));
+  const handleDeleteMember = async (id, index=0) => {
+    try{
+      const ticket = window.localStorage.getItem('ticket') || '';
+      console.log(index)
+      const response = await removeMember({ index, ticket }).unwrap()
+      setMembers(members.filter((member) => member.id !== id));
+      toast.success('Removed Successfully')
+    }
+    catch(error){
+      console.log(error)
+      toast.error(error?.data?.message || error?.message  || 'Failed to Delete Member')
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(members)
     if (members.length < minMembers) {
       toast.info('Min Member must be ' + minMembers)
       return;
@@ -190,7 +213,6 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
           onChange={
             (files) => {
               setNewMember({...newMember, member_id: files[0]})
-              console.log('hello ', newMember)
             }
           }
           />
@@ -265,13 +287,18 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
                 Phone:
                 <span className="font-normal">&nbsp;{member.phone}</span> 
               </p>
+              <p className={`font-bold text-sm ${!isPradnya && 'hidden'}`}>
+                CodeChef ID:
+                <span className="font-normal">&nbsp;{member.codechef_id}</span> 
+              </p>
               <p className="font-bold text-sm">
                 College ID:
-                <span className="font-normal">&nbsp;{member.member_id.name}</span>
+                <span className="font-normal">&nbsp;{member.member_id || 'uploaded'}</span>
               </p>
             </div>
             <button
-              onClick={() => handleDeleteMember(member.id)}
+              onClick={() => handleDeleteMember(member.id, index)}
+              disabled={ isRemoveLoading }
               className="text-red-600 hover:text-red-700 transform hover:scale-110 transition duration-200"
             >
               <svg
@@ -291,8 +318,8 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
       </div>
 
       <div className={`sm:col-span-2 ${isPradnya ? 'justify-self-end' : 'flex items-center justify-between'}`}>
-        {!isPradnya && <FormButton loading={loading} className={``} isPrev onClick={() => prevStep()} />}
-        <FormButton loading={loading} className={``} onClick={handleSubmit} />
+        {!isPradnya && <FormButton loading={false} className={``} isPrev onClick={() => prevStep()} />}
+        <FormButton loading={false} className={``} onClick={handleSubmit} />
       </div>
       </form>
   );

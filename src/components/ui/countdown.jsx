@@ -17,7 +17,7 @@ const ShiftingCountdown = () => {
   console.log('loaded', isLoaded, ' animated', hasAnimated)
 
   useEffect(() => {
-    const hasTimerAnimated = sessionStorage.getItem("hasTimerAnimated");
+    const hasTimerAnimated = window.sessionStorage.getItem("hasTimerAnimated");
     if (!hasTimerAnimated) {
       setHasAnimated(true);
       sessionStorage.setItem("hasTimerAnimated", true);

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import { About, Register, Navbar, Sponsors, StarsCanvas } from './components';
+import { About, Register, Navbar, Sponsors, StarsCanvas, Committee } from './components';
 
 import Hero from "./components/HeroParallax";
 import Footer from "./components/Footer";
@@ -12,9 +12,7 @@ import MobileContext from './hooks/MobileContext'
 import RegisterHome from "./RegisterHome";
 import Test from "./components/Test";
 import AnimatedCounter from "./components/AnimatedCounter";
-import { ToastContainer, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import { ToastContainer, Zoom } from "react-toastify";
 
 const App = () => {
   
@@ -33,8 +31,7 @@ const App = () => {
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme="dark"
-      transition={Bounce}
+      transition={Zoom}
       />
       <Navbar />
       <div className="relative z-0 bg-primary">
@@ -45,17 +42,13 @@ const App = () => {
               <About />
               <AnimatedCounter />
               <Events />
-              <SwipeGallery />
+              {/* <SwipeGallery /> */}
               <Sponsors />
-              <Footer />
               <Notification />
             </>
             } />
           <Route path="/register" element={
-            <>
-              <RegisterHome />
-              <StarsCanvas />
-            </>
+            <RegisterHome />
           }/>
           <Route path={`/register/:event`} element={
             <Register />
@@ -64,11 +57,16 @@ const App = () => {
             <EventDetails />
           }
           />
+          <Route path="/committee" element={
+            <Committee />
+          }
+          />
           <Route path="/test" element={
             <Test />
           }
           />
       </Routes>
+      <Footer />
       </div>
     </MobileContext.Provider>
   )

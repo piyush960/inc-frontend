@@ -6,53 +6,55 @@ import {
   AlertCircle,
 } from "lucide-react";
 import EventDetail from "../eventDetail";
-import { validate_wordCount } from "../utils";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { submit_step4 } from "../../../features/form/formSlice";
-import { store } from '../../../app/store'
+import { useStepFourMutation } from "../../../app/services/formAPI";
 
-const PaymentStep = ({ imagePath, amount, prevStep, isInternational = false }) => {
-  const [loading, setLoading] = useState(false);
+const initialState = {
+  payment_id: "",
+}
+
+const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = false }) => {
   const step4 = useSelector(state => state.form.step4)
   const [formData, setFormData] = useState(step4);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [ stepFour, { isLoading } ] = useStepFourMutation();
 
   const validate = () => {
     let tempErrors = {};
-
-    if (!formData.transaction_id) {
-      tempErrors.transaction_id = "Transaction ID is required";
-    } else if (formData.transaction_id.length > 12) {
-      tempErrors.transaction_id = "Transaction ID must be exactly 12 digits";
+    if (!formData.payment_id) {
+      tempErrors.payment_id = "Transaction ID is required";
+    } else if (formData.payment_id.length > 12) {
+      tempErrors.payment_id = "Transaction ID must be exactly 12 digits";
     }
-
     return Object.keys(tempErrors).length === 0;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "transaction_id" && value.length > 12) return;
+    if (name === "payment_id" && value.length > 12) return;
 
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      dispatch(submit_step4(formData))
-      const updatedForm = store.getState().form; 
-      await fetch('http://localhost:3001/events/register/impetus', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedForm)
-      })
-      toast.success("Form Submitted, Our Team will contact you shortly.")
-    }
-    else{
+    if(!validate()){
       toast.error("Fill all the required details correctly!")
+      return;
+    }
+    try{
+      const ticket = window.localStorage.getItem('ticket') || '';
+      const response = await stepFour({ ticket, data: formData }).unwrap()
+      toast.success(<p>Form Submitted<br />Payment Under Verification</p>)
+      window.localStorage.removeItem('ticket');
+      window.localStorage.removeItem('event_name');
+      dispatch(submit_step4(formData))
+      setFormData(initialState);
+    }
+    catch(error){
+      toast.info(error?.data?.message || error?.message  || 'Failed to Submit')
     }
   };
 
@@ -63,14 +65,14 @@ const PaymentStep = ({ imagePath, amount, prevStep, isInternational = false }) =
     >
       <div className="space-y-8">
         {/* Event Details Section */}
-        <EventDetail amount={amount}/>
+        <EventDetail event_name={event} amount={amount}/>
 
         {/* Payment Section */}
         {!isInternational && (
           <div className="space-y-8">
             <div className="bg-blue-900/20 p-6 border border-blue-500/30">
               <h3 className="text-xl font-semibold mb-4 text-center text-blue-100">
-                Scan the QR to pay ₹ {amount}/-
+                Scan the QR to pay &nbsp;<span className="text-green-500">{amount}</span>
               </h3>
               <div className="flex justify-center">
                 <div className="bg-white p-6 max-w-xs">
@@ -94,8 +96,8 @@ const PaymentStep = ({ imagePath, amount, prevStep, isInternational = false }) =
               </Label>
               <Input
                 type="text"
-                name="transaction_id"
-                value={formData.transaction_id}
+                name="payment_id"
+                value={formData.payment_id}
                 onChange={handleInputChange}
                 validate={(value) => {
                   return value.length !== 12
@@ -123,7 +125,7 @@ const PaymentStep = ({ imagePath, amount, prevStep, isInternational = false }) =
         {/* Submit Button */}
         <div className="mt-6 flex w-full justify-between">
           <FormButton isPrev onClick={() => prevStep()}/>
-          <FormButton loading={loading} text={'Submit'} />
+          <FormButton loading={isLoading} text={'Submit'} />
         </div>
       </div>
     </form>

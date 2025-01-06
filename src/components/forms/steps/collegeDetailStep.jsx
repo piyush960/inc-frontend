@@ -10,6 +10,7 @@ import { validate_isEmpty, validateCollegeDetails } from "../utils"
 import { useDispatch, useSelector } from "react-redux";
 import { submit_step3 } from "../../../features/form/formSlice";
 import { toast } from "react-toastify";
+import { useStepThreeMutation } from "../../../app/services/formAPI";
 
 const pictState = {
   isPICT: "1",
@@ -27,7 +28,7 @@ const pictState = {
 }
 
 const initialState = {
-  isPICT: "1",
+  isPICT: "0",
   college: "",
   country: "",
   state: "",
@@ -41,19 +42,23 @@ const initialState = {
   referral: "",
 }
 
-const CollegeDetailsStep = ({ prevStep, nextStep }) => {
-  const [loading, setLoading] = useState(false);
+const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
   const step3 = useSelector(state => state.form.step3)
   const [formData, setFormData] = useState({...step3});
   const dispatch = useDispatch()
-  const [isPICT, setIsPICT] = useState(formData.isPICT);
-
-  const radioRef = useRef(null);
+  const [isPICT, setIsPICT] = useState(formData.isPICT === "1");
+  const [ stepThree, { isLoading } ] = useStepThreeMutation();
 
   useEffect(() => {
     if(formData.isPICT === "1"){
       document.querySelectorAll('#isPICT')[0].checked = true
-      radioRef.current.checked = true
+      document.querySelectorAll('#isInternational')[1].checked = true;
+    }
+    else if(formData.isPICT === "0"){
+      document.querySelectorAll('#isPICT')[1].checked = true
+      if(formData.isInternational === "1"){
+        document.querySelectorAll('#isInternational')[0].checked = true;
+      }
     }
   }, [])
 
@@ -62,16 +67,23 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData)
-    if(!validateCollegeDetails(formData)){
+    if(validateCollegeDetails(formData)){
+      toast.error("Fill all the required details correctly!")
+      return;
+    }
+    try{
+      const ticket = window.localStorage.getItem('ticket') || '';
+      const response = await stepThree({ event_name: event, ticket, data: formData }).unwrap()
+      toast.success('College Details Saved')
       dispatch(submit_step3(formData))
       nextStep()
-      toast.success('College Details Added')
     }
-    else{
-      toast.error("Fill all the required details correctly!")
+    catch(error){
+      console.log(error)
+      toast.error(error?.data?.message || error?.message  || 'Failed to Save College Details')
     }
   };
 
@@ -94,11 +106,12 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
           onChange={(e) => {
             const value = e.target.value
             const isInternational = formData.isInternational
-            setIsPICT(value === "1")
+            console.log(value)
+            setIsPICT(value === "1" ? true : false)
             console.log(isPICT)
             if (value === "1") {
               setFormData((prev) => ({ ...prev, ...pictState }))
-              radioRef.current.checked = true;
+              document.querySelectorAll('#isInternational')[1].checked = true;
             }
             else {
               setFormData((prev) => ({ ...prev, ...initialState, isInternational }))
@@ -254,13 +267,12 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
         <RadioButton
           id="isInternational"
           name="isInternational"
-          ref={radioRef}
           errorMessage={formData.isInternational === null && "Field is Required"}
           options={yesNoOptions}
           disabled={isPICT}
           onChange={(e) => {
             const value = e.target.value
-            setFormData((prev) => ({...prev, isInternational: (value === 'true' ? true : false)}))
+            setFormData((prev) => ({...prev, isInternational: (value === "1" ? "1" : "0")}))
           }}
           className=""
         />
@@ -268,8 +280,8 @@ const CollegeDetailsStep = ({ prevStep, nextStep }) => {
 
       {/* Submit Button */}
       <div className="sm:col-span-2 flex justify-between">
-        <FormButton loading={loading} isPrev onClick={() => prevStep()}></FormButton>
-        <FormButton loading={loading} className={``} onClick={handleSubmit}></FormButton>
+        <FormButton loading={false} isPrev onClick={() => prevStep()}></FormButton>
+        <FormButton loading={isLoading} className={``} onClick={handleSubmit}></FormButton>
       </div>
     </form>
   );

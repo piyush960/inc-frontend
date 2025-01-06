@@ -3,6 +3,7 @@ import React from 'react'
 import { eventsData } from './constants'
 import FormsBanner from './components/forms/formBanner'
 import { useNavigate } from 'react-router-dom'
+import Loader from './components/ui/Loader'
 
 const RegisterHome = () => {
 

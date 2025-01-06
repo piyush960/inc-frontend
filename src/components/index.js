@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import About from './About'
 import Sponsors from './Sponsors';
 import Register from './Register';
+import Committee from './Committee';
 
 export {
   Navbar,
@@ -10,5 +11,6 @@ export {
   Sponsors,
   Register,
   IncCanvas, 
-  StarsCanvas
+  StarsCanvas,
+  Committee,
 }

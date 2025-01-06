@@ -39,18 +39,18 @@ export function Accordion({ children, multiple, defaultIndex }) {
 }
 
 export function AccordionItem({ children }) {
-  return <div className="w-full mb-1 bg-primary">{children}</div>;
+  return <div className="w-full mb-2 bg-primary">{children}</div>;
 }
 
 export function AccordionHeader({ children }) {
   const { isActive, index, onChangeIndex } = useAccordion();
-
+  
   return (
     <motion.div
-      className={`py-2 px-4 sm:px-6 cursor-pointer transition-colors duration-150 ease-in-out uppercase font-medium bg-slate-800 text-white-100`}
+      className={`py-2 px-4 sm:px-6 cursor-pointer transition-colors duration-150 ease-in-out uppercase font-medium bg-slate-800 text-white-100 flex items-center justify-between gap-2`}
       onClick={() => onChangeIndex(index)}
     >
-      {children}
+      <span>{children}</span><span className="">{isActive ? '-' : '+'}</span>
     </motion.div>
   );
 }
@@ -67,7 +67,7 @@ export function AccordionPanel({ children }) {
           exit={{ height: 0, opacity: 0 }}
           transition={{ type: "spring", duration: 0.4, bounce: 0 }}
         >
-          <motion.div className="p-5">
+          <motion.div className="p-5 bg-black-100">
             {children}
           </motion.div>
         </motion.div>

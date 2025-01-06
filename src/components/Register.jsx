@@ -8,6 +8,7 @@ import StepProgressBar from "./forms/stepProgress";
 import { useParams } from "react-router-dom";
 import { eventsData } from "../constants";
 import scrollToTop from "../utils/scrollToTop";
+import { pradnya } from "../assets";
 
 const osteps = [
   { id: 1, label: "Project Details" },
@@ -28,6 +29,7 @@ const Register = () => {
   const [steps, setSteps] = useState(osteps)
   const nextStep = () => setCurrentStep((prev) => prev + 1);
   const prevStep = () => setCurrentStep((prev) => prev - 1);
+
   
   useEffect(() => {
     scrollToTop()
@@ -37,9 +39,7 @@ const Register = () => {
     }
   }, [])
   
-
   const eventData = eventsData[event];
-
 
   return (
     <>
@@ -68,8 +68,8 @@ const Register = () => {
             <GradientWrapper>
               <AddMemberStep
                 event={event}
-                minMembers={2}
-                maxMembers={5}
+                minMembers={event === 'pradnya' ? 1 : 2}
+                maxMembers={event === 'pradnya' ? 2 : 5}
                 nextStep={nextStep}
                 prevStep={prevStep}
                 isPradnya={(event === 'pradnya')}
@@ -85,7 +85,7 @@ const Register = () => {
             <GradientWrapper>
               <PaymentStep
                 event={event}
-                amount={100}
+                amount={eventData.registrations.fees.national}
                 imagePath={"src/assets/company/tesla.png"}
                 prevStep={prevStep}
               />

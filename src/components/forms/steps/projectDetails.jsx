@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { Input } from "../../ui/input";
 import { Select } from "../../ui/select";
 import { Label } from "../../ui/label";
@@ -9,20 +9,53 @@ import { impetus_domains } from "../constants";
 import { toast } from "react-toastify";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { submit_step1 } from '../../../features/form/formSlice'
-import { useStepOneMutation } from "../../../app/services/formAPI";
+import { resetForm, submit_step1, submit_step2, submit_step3 } from '../../../features/form/formSlice'
+import { useLazyGetTicketQuery, useStepOneMutation } from "../../../app/services/formAPI";
+import Loader from "../../ui/Loader";
 
-
+const initialState = {
+  title: "",
+  domain: "",
+  project_type: "",
+  guide_name: "",
+  guide_email: "",
+  guide_phone: "",
+  hod_email: "",
+  sponsored: "0",
+  company: "",
+  abstract: "",
+  nda: "0",
+  demo: "1",
+  reason_of_demo: "",
+}
 
 const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
 
-  const step1 = useSelector(state => state.form.step1)
-  const [ formData, setFormData ] = useState(step1)
+  const ename = window.localStorage.getItem('event_name');
+  const [ formData, setFormData ] = useState(initialState)
   const dispatch = useDispatch()
-
   const [abstractWordCount, setAbstractWordCount] = useState(0);
-
+  const [ getTicket, { data: ticketData, isLoading: isTicketLoading, isSuccess } ] = useLazyGetTicketQuery();
+  
   const [ stepOne, { isLoading } ] = useStepOneMutation()
+
+  useEffect(() => {
+    if(event === ename){
+      getTicket(window.localStorage.getItem('ticket') || '');
+    }
+    else{
+      dispatch(resetForm())
+    }
+  }, [])
+  
+  useEffect(() => {
+    if(ticketData && (event === ename)){
+      dispatch(submit_step1(ticketData.step_1))
+      dispatch(submit_step2(Array.isArray(ticketData.step_2) ? ticketData.step_2 : []))
+      dispatch(submit_step3(ticketData.step_3))
+      setFormData(ticketData.step_1)
+    }
+  }, [isSuccess, ticketData])
   
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -40,22 +73,32 @@ const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
     
     if(!validate(formData)){
       try {
-        const ticket = window.sessionStorage.getItem('ticket') || ''
+        const ticket = window.localStorage.getItem('ticket') || ''
         const response = await stepOne({ event_name: event, ticket, data: formData }).unwrap();
         console.log(response);
-        window.sessionStorage.setItem('ticket', response.ticket);
+        window.localStorage.setItem('ticket', response.ticket);
+        window.localStorage.setItem('event_name', event)
         dispatch(submit_step1(formData));
         toast.success('Project details saved');
         nextStep();
-      } catch (err) {
-        console.error(err);
-        toast.error(err?.data?.message || 'Something went wrong');
+      } catch (error) {
+        console.error(error);
+        toast.error(error?.data?.message || error?.message || 'Something went wrong');
       }
     }
     else toast.error('Fill all the required details correctly!')
   };
 
   return (
+    <>
+    { isTicketLoading ?
+    <div className="fixed inset-0 z-50 backdrop-blur-sm">
+      <div className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] flex flex-col gap-8">
+        <Loader size={150} />
+        <h2 className="sm:text-2xl text-white text-center">Please Wait...</h2>
+      </div>
+    </div>
+    :
     <form
       className="w-full bg-tertiary p-4 sm:p-10 grid grid-cols-1 sm:grid-cols-2 gap-8"
       onSubmit={handleSubmit}
@@ -257,6 +300,8 @@ const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
         <FormButton loading={isLoading} className={``} onClick={handleSubmit}></FormButton>
       </div>
     </form>
+    }
+    </>
   );
 };
 

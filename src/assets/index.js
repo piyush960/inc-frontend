@@ -8,12 +8,21 @@ import aboutbg from './about-bg.png'
 import prize from './prize.png'
 import loader from './loader.svg'
 
-import meta from "./company/meta.png";
-import shopify from "./company/shopify.png";
-import starbucks from "./company/starbucks.png";
-import tesla from "./company/tesla.png";
-import eq from "./company/eq.png";
-import imocha from "./company/imocha.png";
+import aayan from './company/aayan.jpg'
+import csi from './company/csi.jpg'
+import intangles from './company/intangles.jpg'
+import sarvatra from './company/sarvatra.jpg'
+import veritas from './company/veritas.jpg'
+import intangles_square from './company/intangles_square.jpg'
+import campustimes from './company/campustimes.png'
+import eq_square from './company/eq_square.png'
+import eq from './company/eq.png'
+import imocha from './company/imocha.png'
+import imperial from './company/imperial.png'
+import pasc from './company/pasc.png'
+import pisb from './company/pisb.png'
+import zbyte from './company/zbyte.png'
+import cloudhedge from './company/cloudhedge.png'
 
 import concepts from './logos/concepts.png'
 import impetus from './logos/impetus.png'
@@ -39,4 +48,6 @@ import gal5 from './gallery/5.jpeg'
 import gal6 from './gallery/6.jpeg'
 import gal7 from './gallery/7.jpeg'
 
-export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, meta, shopify, starbucks, tesla, eq, imocha, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader };
+import img1 from './team/manas.jpeg'
+
+export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader, img1, aayan, csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge, };

@@ -127,6 +127,39 @@
   transform: translateZ(0);
 }
 
+/* Toast Styles */
+
+.Toastify__progress-bar {
+  border-radius: 0 !important;
+  height: 3px;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 1;
+}
+
+.Toastify__progress-bar--wrp {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  height: 3px !important;
+  margin: 1px 0 !important;
+  overflow: hidden !important;
+}
+
+.Toastify__toast {
+  background: #000609 !important;
+  border: 1px solid transparent !important;
+  border-image: linear-gradient(to right, #1746A2, #5F9DF7, #d4621c) 1 !important;
+  color: #FFF7E9 !important;
+  border-radius: 0 !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.Toastify__close-button {
+  color: #FFF7E9;
+}
+
+
 @keyframes mulShdSpin {
   0%,
   100% {

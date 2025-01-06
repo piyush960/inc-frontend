@@ -15,7 +15,21 @@ export const formAPI = createApi({
                 body: data
             })
         }),
-        stepTwo: builder.mutation({
+        getMembers: builder.query({
+            query: (ticket) => ({
+                url: `/getmemberdetails?ticket=${ticket}`,
+                method: 'GET',
+                credentials: 'include',
+            })
+        }),
+        getTicket: builder.query({
+            query: (ticket) => ({
+                url: `/ticket?ticket=${ticket}`,
+                method: 'GET',
+                credentials: 'include',
+            })
+        }),
+        addMember: builder.mutation({
             query: ({event_name, ticket, data}) => ({
                 url: `/step_2?event_name=${event_name}&ticket=${ticket}`,
                 method: 'POST',
@@ -23,26 +37,33 @@ export const formAPI = createApi({
                 body: data
             })
         }),
+        removeMember: builder.mutation({
+            query: ({ index, ticket }) => ({
+                url: `/deletememberdetails?index=${index}&ticket=${ticket}`,
+                method: 'DELETE',
+                credentials: 'include',
+            })
+        }),
         stepThree: builder.mutation({
-            query: (event_name, ticket, body) => ({
+            query: ({ event_name, ticket, data }) => ({
                 url: `/step_3?event_name=${event_name}&ticket=${ticket}`,
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body
+                body: data
             })
         }),
         stepFour: builder.mutation({
-            query: (event_name, ticket, body) => ({
-                url: `/step_1?event_name=${event_name}&ticket=${ticket}`,
+            query: ({ ticket, data }) => ({
+                url: `/step_4?&ticket=${ticket}`,
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body
+                body: data
             })
         }),
     })
 })
 
 
-export const { useStepOneMutation, useStepTwoMutation, useStepThreeMutation, useStepFourMutation } = formAPI
+export const { useStepOneMutation, useAddMemberMutation, useStepThreeMutation, useStepFourMutation, useRemoveMemberMutation, useLazyGetMembersQuery, useLazyGetTicketQuery } = formAPI
