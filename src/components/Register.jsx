@@ -48,6 +48,9 @@ const Register = () => {
           logo={eventData.logo}
           eventName={eventData.name}
           eventDescription={eventData.short_desc}
+          fees={eventData.registrations.fees.national}
+          min_team_size={eventData.registrations.min_team_size}
+          max_team_size={eventData.registrations.max_team_size}
         />
       </div>
 

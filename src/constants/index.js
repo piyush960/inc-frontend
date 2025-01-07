@@ -5,7 +5,8 @@ import {
     pradnya,
     techfiesta,
     img1,
-    aayan, csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge,
+    csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge,
+    ayaan,
   } from "../assets";
 
   const notifications = ["🎉 New Update Available! Check out the latest features. 🎉", "🚀 Special Offer: 50% off all plans. Don't miss out! 🚀", "⚡ Maintenance scheduled for tonight at 10 PM. ⚡"]
@@ -37,20 +38,20 @@ import {
   
   const sponsors = {
     title: [
-      {src: sarvatra,
-      name: 'sarvatra',},
       {src: eq,
       name: 'eq',},
+      {src: sarvatra,
+      name: 'sarvatra',},
     ],
     co: [
-      {src: aayan,
+      {src: imocha,
+      name: 'imocha',},
+
+      {src: ayaan,
       name: 'aayan',},
   
       {src: intangles,
       name: 'intangles',},
-        
-      {src: imocha,
-      name: 'imocha',},
     ],
     pradnya: [
       {src: veritas,
@@ -128,15 +129,13 @@ import {
           national: `₹100 /-`,
           international: `Free`,
         },
+        min_team_size: 2,
         max_team_size: 5,
       },
       prize: `Cash prize worth ₹7 Lakh.`,
       rules: [
         `Judge's decision will be final.`,
-    ,
-        `Project status must be in "Ready to Use".`,
-    ,
-        `Already registered candidates need not register again.`,
+        `Project status must be in "Ready to Demonstrate".`,
       ],
       note: `Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded ₹1 Lakh Cash Prize from PICT.`,
 
@@ -193,6 +192,7 @@ import {
           national: `₹100 /-`,
           international: `Free`,
         },
+        min_team_size: 2,
         max_team_size: 5,
       },
 
@@ -200,9 +200,8 @@ import {
       note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded ₹ 1 Lakh Cash Prize from PICT.`,
 
       rules: [
-        'Judges decision will be final',
-        'Project status must be in "Ready to Use',
-        'Already registered candidates need not register again',
+        'Judges decision will be final.',
+        'Project status must be in "Ready to Demonstrate".',
       ],
       button_link: "https://pictinc.org/register/events/concepts",
     },
@@ -264,6 +263,7 @@ import {
           national: `₹100 /-`,
           international: `Free`,
         },
+        min_team_size: 1,
         max_team_size: 2,
       },
       rules: [
@@ -309,7 +309,7 @@ import {
     { value: "T-Shirts", names: [{ value: "1. Prof. V. S. Gaikwad (COMP)" }] },
     { value: "Hardware", names: [{ value: "1. Prof. V. R. Jaiswal & Prof. N. V. Buradkar (IT)" }, { value: "2. Prof. D. M. Shinde (E&TC)" }, { value: "3. Prof. S. R. Warhade (IT)" }, { value: "4. Mr. K. B. Kadambande (COMP)" }, { value: "5. Mr. B. S. Jadhav (IT)" }, { value: "6. Mr. D. P. Dabir (E&TC)" }, { value: "7. Mr. A. V. Torne (FE)" }] },
     { value: "Canteen Arrangement", names: [{ value: "1. Prof. H. D. Hake (E&TC)" }, { value: "2. Prof. R. R. Jadhav (COMP)" }, { value: "3. Prof. V. R. Kandekar (COMP)" }, { value: "4. Prof. D.P. Salapurkar (IT)" }, { value: "5. Mr. K.S. Bhosale (OFFICE)" }] },
-    { value: "P A System/Telephone/Network/Electrical facilities", names: [{ value: "1. Prof. L.P. Patil (Overall Incharge)" }, { value: "2. Mr. K.S.  Ugale (PA System)" }, { value: "3. Mr. S. M. Pawar (Electrical Maintenance)" }, { value: "4. Mr. S. S. Metkari (Network Admin)" }, { value: "5. Mr. S. M. Shinde (Telephone)" }, { value: "6. Mr. A M Chavan (Electrical Maintenance)" }] },
+    { value: "P A System/ Telephone/ Network/ Electrical facilities", names: [{ value: "1. Prof. L.P. Patil (Overall Incharge)" }, { value: "2. Mr. K.S.  Ugale (PA System)" }, { value: "3. Mr. S. M. Pawar (Electrical Maintenance)" }, { value: "4. Mr. S. S. Metkari (Network Admin)" }, { value: "5. Mr. S. M. Shinde (Telephone)" }, { value: "6. Mr. A M Chavan (Electrical Maintenance)" }] },
     { value: "Transport Management", names: [{ value: "1. Prof. P. D Jadhav & Mr. A. V. Sapkal" }, { value: "2. Prof. H. S. Khatri (FE)" }, { value: "3. Prof. V. R. Bhoi (FE)" }, { value: "4. Prof. A.S. Ramteke (E&TC)" }, { value: "5. Mr. R. V. Badekar (COMP)" }, { value: "6. Mr. A. B. Wagh (Purchase)" }] },
     { value: "Parking & Police Arrangement", names: [{ value: "1. Mr. A.V Sapkal (PO/EM)" }, { value: "2. Mr. K. Kadambande (COMP)" }, { value: "3. Mr. A. B. Wagh (Purchase)" }] },
     { value: "Trophies + Memento + Photos", names: [{ value: "1. Prof. K. R. Jadhav (Trophies) (FE)" }, { value: "2. Prof. R.R. Vardhaman (FE)" }, { value: "3. Prof. R. A. Karnavat (Chhajed) (Memento) (IT)" }, { value: "4. Prof. A.A. Bidkar (E&TC)" }, { value: "5. Prof. S. M. Hosamani  (Souvenir) (E&TC)" }, { value: "6. Mr. S. V.  Kasar (COMP)" }] },

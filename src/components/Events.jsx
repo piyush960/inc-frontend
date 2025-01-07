@@ -47,6 +47,10 @@ function EventCards({ }) {
   const navigate = useNavigate();
 
   const handleViewDetails = (id) => {
+    if(id === 'techfiesta'){
+      window.open('https://techfiesta.pict.edu', '_blank');
+      return;
+    }
     navigate(`/events/${id}`);
   };
 

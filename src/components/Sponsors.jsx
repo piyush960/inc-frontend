@@ -5,6 +5,14 @@ import { styles } from '../styles'
 import { motion } from 'framer-motion'
 import useDimension from '../hooks/useDimension'
 import { Tilt } from 'react-tilt'
+import { cn } from "../lib/utils";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+} from "react";
 
 import { imocha } from '../assets'
 
@@ -20,7 +28,7 @@ const Sponsors = () => {
       viewport={{ once: true }}
       transition={{ ease: "easeInOut", duration: 0.75}}
       > 
-        <p className={`${styles.sectionSubText}`}>Previous Year</p>
+        <p className={`${styles.sectionSubText}`}>InC 2024</p>
         <h2 className={`${styles.sectionHeadText}`}>Sponsors.</h2>
       </motion.div>
 
@@ -35,7 +43,7 @@ const Sponsors = () => {
                 {
                   sponsors[obj].map(sponsor => (
                     <SponsorCard key={sponsor.name} width={obj === 'title' ? 300 : 250} height={obj === 'title' ? 200 : 150}>
-                      <img src={sponsor.src} alt={sponsor.name} className='w-full h-full object-contain'/>
+                      <img src={sponsor.src} alt={sponsor.name} className='w-full h-full object-contain pointer-events-none'/>
                     </SponsorCard>
                   ))
                 }
@@ -52,42 +60,161 @@ const Sponsors = () => {
 
 export default Sponsors;
 
-const defaultOptions = {
-	reverse:        true,  // reverse the tilt direction
-	max:            35,     // max tilt rotation (degrees)
-	perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
-	scale:          1.05,    // 2 = 200%, 1.5 = 150%, etc..
-	speed:          1000,   // Speed of the enter/exit transition
-	transition:     true,   // Set a transition on enter/exit.
-	axis:           null,   // What axis should be disabled. Can be X or Y.
-	reset:          false,    // If the tilt effect has to be reset on exit.
-	easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-}
-
-const SponsorCard = ({ children, width=250, height=150 }) => {
+const SponsorCard = ({ children, width, height }) => {
   return (
-    <Tilt options={{
-      reverse:        true,  // reverse the tilt direction
-      max:            25,     // max tilt rotation (degrees)
-      perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
-      scale:          1.05,    // 2 = 200%, 1.5 = 150%, etc..
-      speed:          1000,   // Speed of the enter/exit transition
-      transition:     true,   // Set a transition on enter/exit.
-      axis:           null,   // What axis should be disabled. Can be X or Y.
-      reset:          true,    // If the tilt effect has to be reset on exit.
-      easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-    }} 
-    style={{
-      width,
-      height,
-      background: 'linear-gradient(to right, #1746A2, #5F9DF7, #d4621c)',
-      padding: 2,
-      // boxShadow: '0px 4px 10px 0px rgba(255, 255, 255, 0.8)',
-    }}
+    <CardContainer className="inter-var"
+    containerClassName={`bg-gradient-to-r from-dark-blue via-light-blue to-orange-100`}
     >
-      <div className='bg-white w-full h-full p-px'>
-        {children}
-      </div>
-    </Tilt>
+      <CardBody className={`relative group/card hover:shadow-white-100/[0.2] bg-white border-primary p-4 border`}
+      style={{width, height}}
+      >
+        <CardItem translateZ="100" className="w-full h-full group-hover/card:shadow-orange-100/[0.5] group-hover/card:shadow-xl">
+          {children}
+        </CardItem>
+      </CardBody>
+    </CardContainer>
   )
 }
+
+{/* <Tilt options={{
+  reverse: true,
+  max: 30,
+  perspective: 1000,
+  scale: 1.06,
+  speed: 5000,
+  transition: true,
+  axis: null,
+  reset: true,
+  easing: "cubic-bezier(.03,.98,.52,.99)"
+}} 
+style={{
+  width,
+  height,
+  background: 'linear-gradient(to right, #1746A2, #5F9DF7, #d4621c)',
+  padding: 2,
+  // boxShadow: '0px 4px 10px 0px rgba(255, 255, 255, 0.8)',
+}}
+>
+  <div className='bg-white w-full h-full p-px'>
+    {children}
+  </div>
+</Tilt> */}
+
+const MouseEnterContext = createContext(undefined);
+
+export const CardContainer = ({
+  children,
+  className,
+  containerClassName
+}) => {
+  const containerRef = useRef(null);
+  const [isMouseEntered, setIsMouseEntered] = useState(false);
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return;
+    const { left, top, width, height } =
+      containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - left - width / 2) / 25;
+    const y = (e.clientY - top - height / 2) / 25;
+    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+  };
+
+  const handleMouseEnter = (e) => {
+    setIsMouseEntered(true);
+    if (!containerRef.current) return;
+  };
+
+  const handleMouseLeave = (e) => {
+    if (!containerRef.current) return;
+    setIsMouseEntered(false);
+    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
+  };
+  return (
+    (<MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
+      <div
+        className={cn("p-px flex items-center justify-center", containerClassName)}
+        style={{
+          perspective: "1000px",
+        }}>
+        <div
+          ref={containerRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className={cn(
+            "flex items-center justify-center relative transition-all duration-200 ease-linear",
+            className
+          )}
+          style={{
+            transformStyle: "preserve-3d",
+          }}>
+          {children}
+        </div>
+      </div>
+    </MouseEnterContext.Provider>)
+  );
+};
+
+export const CardBody = ({
+  children,
+  className,
+  style
+}) => {
+  return (
+    (<div
+      style={style}
+      className={cn(
+        "[transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        className
+      )}>
+      {children}
+    </div>)
+  );
+};
+
+export const CardItem = ({
+  as: Tag = "div",
+  children,
+  className,
+  translateX = 0,
+  translateY = 0,
+  translateZ = 0,
+  rotateX = 0,
+  rotateY = 0,
+  rotateZ = 0,
+  ...rest
+}) => {
+  const ref = useRef(null);
+  const [isMouseEntered] = useMouseEnter();
+
+  useEffect(() => {
+    handleAnimations();
+  }, [isMouseEntered]);
+
+  const handleAnimations = () => {
+    if (!ref.current) return;
+    if (isMouseEntered) {
+      ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+    } else {
+      ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+    }
+  };
+
+  return (
+    (<Tag
+      ref={ref}
+      className={cn("transition duration-200 ease-linear", className)}
+      {...rest}>
+      {children}
+    </Tag>)
+  );
+};
+
+// Create a hook to use the context
+export const useMouseEnter = () => {
+  const context = useContext(MouseEnterContext);
+  if (context === undefined) {
+    throw new Error("useMouseEnter must be used within a MouseEnterProvider");
+  }
+  return context;
+};

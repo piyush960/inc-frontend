@@ -33,13 +33,14 @@ module.exports = {
         "hero-pattern": "url('/src/assets/bg4.png')",
       },
       animation: {
-        expand: "expand 6s ease-in forwards",
+        expand: "expand 6s ease forwards",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
         marquee: 'marquee 20s linear infinite',
         'spin-slow': 'spin 6s linear infinite',
         wiggle: 'wiggle 1s ease-in-out infinite',
         loop: 'loop var(--duration) linear infinite var(--direction)',
+        spotlight: "spotlight 4s ease-out .75s 1 forwards",
       },
       keyframes: {
         expand: {
@@ -62,6 +63,16 @@ module.exports = {
         loop: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
+        },
+        spotlight: {
+          "0%": {
+            opacity: 0,
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate(-50%,-40%) scale(1)",
+          },
         },
       },
     },

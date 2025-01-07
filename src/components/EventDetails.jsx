@@ -88,12 +88,12 @@ const EventDetails = ({ data }) => {
           <p className='font-bold text-xl sm:max-w-[70%] text-center'>{data.short_desc}</p>
           <div className='flex w-full justify-center items-center gap-4 mb-2'>
             <p className='px-2 py-1 text-sm bg-slate-800 font-semibold rounded-md flex items-center gap-2'><IconCalendarFilled /> {data.schedule}</p>
-            <p className='px-2 py-1 text-sm bg-slate-800 font-semibold rounded-md flex items-center gap-2'><IconUsersGroup /> Max {data.registrations.max_team_size} members</p>
+            <p className='px-2 py-1 text-sm bg-slate-800 font-semibold rounded-md flex items-center gap-2'><IconUsersGroup /> {data.registrations.min_team_size}-{data.registrations.max_team_size} members</p>
           </div>
         </div>
         <div className={`sm:w-1/2 flex flex-col items-start ${data.id === 'pradnya' ? 'gap-2' : 'gap-3'}`}>
         <div className='flex flex-col gap-1 items-start'>
-          <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconUserCheck /> Criteria</h3>
+          <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconUserCheck /> Eligibility</h3>
           <ul className='list-disc list-inside space-y-2'>
             {data.criteria.split('#$').map(c => (
               <li key={c.slice(0, 10)} className='font-medium'>{c}</li>
@@ -118,7 +118,7 @@ const EventDetails = ({ data }) => {
       </div>
       
       <div className='flex flex-col items-start justify-start gap-2'>
-        <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconFileDescription /> Description</h3>
+        <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconFileDescription /> About the Event</h3>
         <ul className='[&>*:first-child]:list-disc list-inside space-y-2'>
           <li key={data.description[0].slice(0, 19)}>{data.description[0]}</li>
         </ul>
