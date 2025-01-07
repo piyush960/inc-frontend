@@ -68,7 +68,7 @@ const CardStack = ({ }) => {
 								<p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
 							</div>
 							<p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
-							<span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date)}</span>
+							<span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date) === "Invalid Date" ? details.date : dateToWords(details.date)}</span>
 
 
 							<button
