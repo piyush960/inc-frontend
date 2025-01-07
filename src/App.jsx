@@ -9,10 +9,11 @@ import EventDetails from "./components/EventDetails";
 import Notification from './components/Modal';
 import useDimension from "./hooks/useDimension";
 import MobileContext from './hooks/MobileContext'
-import RegisterHome from "./RegisterHome";
+import RegisterHome from "./components/RegisterHome";
 import Test from "./components/Test";
 import AnimatedCounter from "./components/AnimatedCounter";
 import { ToastContainer, Zoom } from "react-toastify";
+import PageNotFound from "./components/PageNotFound";
 
 const App = () => {
   
@@ -63,6 +64,10 @@ const App = () => {
           />
           <Route path="/test" element={
             <Test />
+          }
+          />
+          <Route path="*" element={
+            <PageNotFound />
           }
           />
       </Routes>

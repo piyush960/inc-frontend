@@ -117,7 +117,7 @@ const Committee = () => {
 			<div className='w-full max-w-[90rem] bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-px'>
 				<div className='bg-tertiary md:p-8 px-4 py-8 max-sm:px-2'>
 					{activeCommittee === 'faculty' && <Faculty data={committees[activeCommittee]} />}
-					{activeCommittee !== 'faculty' && <WebnCore data={committees[activeCommittee]} />}
+					{activeCommittee !== 'faculty' && <StayTuned data={committees[activeCommittee]} />}
 				</div>
 			</div>
 		</section>
@@ -153,7 +153,7 @@ const WebnCore = ({ data }) => {
 		window.open(link, "_blank");
 	}
 
-	console.log(data)
+	// console.log(data)
 
 	return (
 		<div className='flex flex-col items-center w-full gap-[5rem]'>
@@ -191,10 +191,12 @@ const WebnCore = ({ data }) => {
 
 }
 
-const Core = ({ data: core }) => {
+const StayTuned = ({  }) => {
 
 	return (
-		<h1>core</h1>
+		<h4 className='text-center text-white-100 text-3xl font-bold'>
+			Bootin<span className='text-orange-100'>'</span> up<span className='text-orange-100'>,</span> Stay Tuned<span className='text-orange-100'>!</span>
+		</h4>
 	)
 
 }

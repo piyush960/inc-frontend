@@ -18,7 +18,7 @@ const Select = React.forwardRef(({ options, onChange, validate, errorMessage, cl
 
   const handleBlur = (e) => {
     const { value } = e.target;
-    console.log('select value', e.target.value)
+    // console.log('select value', e.target.value)
     if (validate) {
       const isValid = !validate(value);
       setError(isValid ? "" : errorMessage);

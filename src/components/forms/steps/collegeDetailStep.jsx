@@ -69,7 +69,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData)
+    // console.log(formData)
     if(validateCollegeDetails(formData)){
       toast.error("Fill all the required details correctly!")
       return;
@@ -82,7 +82,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
       nextStep()
     }
     catch(error){
-      console.log(error)
+      // console.log(error)
       toast.error(error?.data?.message || error?.message  || 'Failed to Save College Details')
     }
   };
@@ -106,9 +106,9 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
           onChange={(e) => {
             const value = e.target.value
             const isInternational = formData.isInternational
-            console.log(value)
+            // console.log(value)
             setIsPICT(value === "1" ? true : false)
-            console.log(isPICT)
+            // console.log(isPICT)
             if (value === "1") {
               setFormData((prev) => ({ ...prev, ...pictState }))
               document.querySelectorAll('#isInternational')[1].checked = true;
@@ -236,7 +236,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
           value={formData.mode}
           options={modeOptions}
           onChange={(e) => {
-            console.log('mode', e.target.value)
+            // console.log('mode', e.target.value)
             handleInputChange(e)
           }}
           validate={validate_isEmpty.bool}

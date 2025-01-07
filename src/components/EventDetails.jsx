@@ -9,6 +9,7 @@ import { IconCalendarFilled, IconCheckupList, IconCurrencyDollar, IconDiamondsFi
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './ui/accordian';
 import scrollToTop from '../utils/scrollToTop'
 import { cn } from '../lib/utils';
+import { toast } from 'react-toastify';
 
 function TabsDemo() {
 
@@ -110,7 +111,9 @@ const EventDetails = ({ data }) => {
         <h4 className='flex gap-2 text-xl text-yellow-400'><IconTrophy /> {data.prize}</h4>
           <div className='flex max-sm:w-full max-sm:justify-between sm:gap-7 mb-2'>
             <Button children={<><IconUserEdit /> Register</>} onClick={() => {navigate(`/register/${data.id}`)}}/>
-            <Button children={<><IconDownload /> Rule Book</>} />
+            <Button children={<><IconDownload /> Rule Book</>} 
+            onClick={() => {toast.info('Rule Book Yet to be Published.')}}
+            />
           </div>
         </div>
       </div>

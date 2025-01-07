@@ -3,20 +3,16 @@ import { section_bg } from '../assets'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import Loader from './ui/Loader'
+import { pagenotfound } from '../assets'
 
 const Test = () => {
 
-  const count = useSelector(state => state.form)
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    toast('Hello, I am testing if large text fits well in this container to ensure goodiii design')
-  }
-
   return (
-    <div className=''
+    <div className='w-full h-full flex justify-center items-center py-24'
     >
-      <Loader />
+      <img src={pagenotfound} alt="pagenotfound" 
+      className='w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] object-contain'
+      />
     </div>  
   )
 }

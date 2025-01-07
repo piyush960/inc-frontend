@@ -8,7 +8,7 @@ import StepProgressBar from "./forms/stepProgress";
 import { useParams } from "react-router-dom";
 import { eventsData } from "../constants";
 import scrollToTop from "../utils/scrollToTop";
-import { pradnya } from "../assets";
+import { pradnya, qr } from "../assets";
 
 const osteps = [
   { id: 1, label: "Project Details" },
@@ -89,7 +89,7 @@ const Register = () => {
               <PaymentStep
                 event={event}
                 amount={eventData.registrations.fees.national}
-                imagePath={"src/assets/company/tesla.png"}
+                imagePath={qr}
                 prevStep={prevStep}
               />
             </GradientWrapper>

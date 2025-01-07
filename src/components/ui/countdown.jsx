@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 // NOTE: Change this date to whatever date you want to countdown to :)
-const COUNTDOWN_FROM = "2025-01-14";
+const COUNTDOWN_FROM = "2025-01-28";
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
@@ -14,7 +14,7 @@ const ShiftingCountdown = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log('loaded', isLoaded, ' animated', hasAnimated)
+  // console.log('loaded', isLoaded, ' animated', hasAnimated)
 
   useEffect(() => {
     const hasTimerAnimated = window.sessionStorage.getItem("hasTimerAnimated");

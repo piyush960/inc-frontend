@@ -9,7 +9,7 @@ import {
     ayaan,
   } from "../assets";
 
-  const notifications = ["🎉 New Update Available! Check out the latest features. 🎉", "🚀 Special Offer: 50% off all plans. Don't miss out! 🚀", "⚡ Maintenance scheduled for tonight at 10 PM. ⚡"]
+  const notifications = ["🚀 Don’t just watch innovation—be part of it! Register today! 🚀", "⚡ Code, create, and conquer—your journey begins here. ⚡"]
   
   const navLinks = [
     {
@@ -80,11 +80,11 @@ import {
 
   
   const events = [
-    { id: 1, _id: 'impetus', title: "Impetus", description: "Participate in the National Level Competitive Programming Contest.", logo: impetus, color:"bg-slate-700", team_size: '4-5 members', type: 'Idea Competition', date: '14-01-2025' },
-    { id: 2, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-orange-900", team_size: '4-5 members', type: 'Coding Competition', date: '14-01-2025' },
-    { id: 3, _id: 'concepts', title: "Concepts", description: "Join us for an exciting coding competition at the national level.", logo: concepts, color:"bg-slate-700", team_size: '4-5 members', type: 'Idea Competition', date: '14-01-2025' },
-    { id: 4, _id: 'techfiesta', title: "TechFiesta", description: "International Hackathon", logo: techfiesta, color:"bg-orange-900", team_size: '4-5 members', type: 'Hackathon', date: '14-01-2025' },
-    { id: 5, _id: 'game', title: "Game Dev", description: "Compete with the best minds in the Game Development Contest", logo: logo, color:"bg-orange-900", team_size: '4-5 members', type: 'Gaming', date: '14-01-2025' },
+    { id: 1, _id: 'impetus', title: "Impetus", description: "International Level Project Exhibition and Competition.", logo: impetus, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "Droppin' soon, stay tuned!" },
+    { id: 2, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-orange-900", team_size: '1-2 members', type: 'Coding Competition', date: "Droppin' soon, stay tuned!" },
+    { id: 3, _id: 'concepts', title: "Concepts", description: "The most grand project exhibition event Concepts for final year student.", logo: concepts, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "Droppin' soon, stay tuned!" },
+    { id: 4, _id: 'techfiesta', title: "TechFiesta", description: "International Hackathon", logo: techfiesta, color:"bg-orange-900", team_size: '4-5 members', type: 'Hackathon', date: "Droppin' soon, stay tuned!" },
+    { id: 5, _id: 'impetus', title: "Special Event", description: "Streamin' details...", logo: logo, color:"bg-orange-900", team_size: '2-5 members', type: 'Not disclosed', date: "Droppin' soon, stay tuned!" },
   ];
 
   const eventsData = {
@@ -92,14 +92,14 @@ import {
       id: 'impetus',
       logo: impetus,
       criteria:
-        "First, Second and Third Year Students enrolled in any BE/BTech, BSc, BCA, Diploma Degree.",
+        "First, Second and Third Year Engineering Students.",
       name: "Impetus",
 
-      short_desc: "International Level Project Exhibition and Competition ",
+      short_desc: "International Level Project Exhibition and Competition",
 
       description: ["Impetus is an intercollegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, CSI, were closely associated with this event. During the 3 day event, first year, second year and third year students from various colleges across India and abroad showcase their projects in domains like", `Application Development `, `Communication, Networking, Security `, `git Learning, Pattern Recognition, Artificial Intelligence`, `Embedded systems, VLSI, IoT, Remote Sensing`, `Blockchain, Cloud Computing`, `Others`],
       
-      domains: [`Application Development `, `Communication, Networking, Security `, `Git Learning, Pattern Recognition, Artificial Intelligence`, `IoT, Remote Sensing`, `Blockchain`, `Cloud Computing`, `Others`],
+      domains: [`Application Development `, `Communication Networking`, `Security`, `Pattern Recognition, Artificial Intelligence`, `IoT, Remote Sensing`, `Blockchain`, `Cloud Computing`, `Others`],
 
       // domains: [
       //   {
@@ -126,13 +126,13 @@ import {
 
       registrations: {
         fees: {
-          national: `₹100 /-`,
+          national: `₹100/-`,
           international: `Free`,
         },
         min_team_size: 2,
         max_team_size: 5,
       },
-      prize: `Cash prize worth ₹7 Lakh.`,
+      prize: `Total Cash prizes worth ₹7 Lakh.`,
       rules: [
         `Judge's decision will be final.`,
         `Project status must be in "Ready to Demonstrate".`,
@@ -141,13 +141,13 @@ import {
 
       // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: "https://pictinc.org/register/events/impetus",
-      schedule: "5th 6th & 7th of April",
+      schedule: "Dates under construction 🚧",
     }, 
     concepts: {
       id: 'concepts',
       logo: concepts,
       criteria: "Final year students enrolled in BE/ BTech degree.",
-      schedule: "5th 6th & 7th of April",
+      schedule: "Dates under construction 🚧",
       name: "Concepts",
       notices: [
         "1. The Participants should be present on campus and the labs during the time period allocated.",
@@ -189,14 +189,14 @@ import {
 
       registrations: {
         fees: {
-          national: `₹100 /-`,
+          national: `₹100/-`,
           international: `Free`,
         },
         min_team_size: 2,
         max_team_size: 5,
       },
 
-      prize: "Cash prize worth ₹7 Lakh.",
+      prize: "Total Cash prizes worth ₹7 Lakh.",
       note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded ₹ 1 Lakh Cash Prize from PICT.`,
 
       rules: [
@@ -211,10 +211,10 @@ import {
       //   "Neha 9579678142"
       // ],
       id: 'pradnya',
-      prize: "Cash prize worth ₹7 Lakh",
+      prize: "Total Cash prizes worth ₹7 Lakh",
       note1: `🔹Judge's decision will be final.`,
       note3: `🔹Already registered candidatess need not register again.`,
-      schedule: "5th 6th & 7th of April",
+      schedule: "Dates under construction 🚧",
       criteria: `Junior Level - This category is open for all students who are pursuing first or second year of any undergraduate  degree/course.#$Senior Level - Third year engineering, final year engineering of any undergraduate degree/course.`,
       logo: pradnya,
       name: "Pradnya",
@@ -243,24 +243,24 @@ import {
             "The wildcard round is open to both junior and senior teams, and the top 5 teams from each category will enter directly into the programming round (Round 2). This round will be conducted online on the coding platform. The wildcard round will include programming questions where the participants can code using any programming language they prefer.",
         },
         {
-          name: "Round 1 : MCQ Round [ Day 1 ] ",
+          name: "Round 1 : MCQ Round [Day 1] ",
           details:
             "In this event the participants are given multiple-choice and short-answer questions. This round is conducted for both levels using a web platform specially designed by the PICT Pradnya team. The team will communicate information regarding scheduled slots for this round to the participants one day before the event.",
         },
         {
-          name: "Round 2: Programming Round [ Day 2 ]",
+          name: "Round 2: Programming Round [Day 2]",
           details:
             "Winners in the MCQ-based round and wild card winners are eligible for the programming contest. Five problem statements are allotted to each level, i.e., the junior and senior levels.  This round is held on an online programming platform. The team will communicate information regarding scheduled slots for this round to the participants one day before the event.",
         },
         {
-          name: "Round 3: Judges Round  [ Day 2 ]",
+          name: "Round 3: Judges Round  [Day 2]",
           details:
             "In the final round, the top 5 teams qualified for round 2 will enter the judging round. Esteemed industry professionals are invited to serve as judges for this competition stage. During the judging round, the judges will evaluate the five teams based on their solutions from round 2. The judges will then select the top three winning teams.",
         },
       ],
       registrations: {
         fees: {
-          national: `₹100 /-`,
+          national: `₹100/-`,
           international: `Free`,
         },
         min_team_size: 1,

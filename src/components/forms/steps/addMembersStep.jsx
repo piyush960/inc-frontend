@@ -85,13 +85,13 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
   const handleDeleteMember = async (id, index=0) => {
     try{
       const ticket = window.localStorage.getItem('ticket') || '';
-      console.log(index)
+      // console.log(index)
       const response = await removeMember({ index, ticket }).unwrap()
       setMembers(members.filter((member) => member.id !== id));
       toast.success('Removed Successfully')
     }
     catch(error){
-      console.log(error)
+      // console.log(error)
       toast.error(error?.data?.message || error?.message  || 'Failed to Delete Member')
     }
   };

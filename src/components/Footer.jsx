@@ -9,11 +9,11 @@ const Footer = () => {
       <div className='w-full max-w-7xl mx-auto items-start flex max-sm:flex-col justify-between pb-10 border-b-2 border-slate-800 max-sm:gap-10'>
         <div className='sm:flex-[0.5]'>
           <h5 className='text-lg font-semibold'>Address</h5>
-          <p className='text-sm'>PUNE INSTITUTE OF COMPUTER TECHNOLOGY, SR. NO 27, NEAR TRIMURTI CHOWK, DHANKAWADI, PUNE, MAHARASHTRA-411043</p>
+          <p className='text-sm'>Pune Institute of Computer Technology, Sr. No 27, Near Trimurti Chowk, Dhankawadi, Pune, Maharashtra, 411043</p>
         </div>
         <div>
           <h5 className='text-lg font-semibold'>Email</h5>
-          <a href='mailto:pictinc2024@gmail.com' className='text-sm'>pictinc2024@gmail.com</a>
+          <a href='mailto:pictinc2025@gmail.com' className='text-sm'>pictinc2025@gmail.com</a>
         </div>
         <div className='flex items-end'>
           <img src={logo} alt="inc-logo" className='h-[70px] w-[70px]'/>

@@ -27,7 +27,7 @@ const CardStack = ({ }) => {
   };
 
 	const handleViewDetails = (id) => {
-    console.log(id)
+    // console.log(id)
     navigate(`/events/${id}`);
   };
 
@@ -36,7 +36,7 @@ const CardStack = ({ }) => {
       <ul className="relative h-[400px] w-[300px] right-[2.5%]">
         {cards.map((details, index) => {
           const canDrag = index === 0;
-					console.log(details)
+					// console.log(details)
           return (
             <motion.li
               key={details._id}

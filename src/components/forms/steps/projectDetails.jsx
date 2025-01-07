@@ -75,7 +75,7 @@ const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
       try {
         const ticket = window.localStorage.getItem('ticket') || ''
         const response = await stepOne({ event_name: event, ticket, data: formData }).unwrap();
-        console.log(response);
+        // console.log(response);
         window.localStorage.setItem('ticket', response.ticket);
         window.localStorage.setItem('event_name', event)
         dispatch(submit_step1(formData));
