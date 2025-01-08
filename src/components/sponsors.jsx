@@ -1,10 +1,8 @@
 
 import { sponsors } from '../constants'
-import {InfiniteMovingCards} from './ui/infinite-moving-cards'
 import { styles } from '../styles'
 import { motion } from 'framer-motion'
 import useDimension from '../hooks/useDimension'
-import { Tilt } from 'react-tilt'
 import { cn } from "../lib/utils";
 import React, {
   createContext,
@@ -14,7 +12,6 @@ import React, {
   useEffect,
 } from "react";
 
-import { imocha } from '../assets'
 
 const Sponsors = () => {
 

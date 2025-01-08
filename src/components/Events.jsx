@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion, useTransform, useScroll } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { CanvasRevealEffect } from "./ui/canvas-reveal-effect.jsx";
 
 import { events } from "../constants/index.js";

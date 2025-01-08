@@ -1,4 +1,3 @@
-"use client";
 
 import { IconCurrencyRupee } from "@tabler/icons-react";
 import {

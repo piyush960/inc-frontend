@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { IncCanvas, StarsCanvas } from './canvas'
+import { IncCanvas } from './canvas'
 import { 
   useMotionTemplate,
   useMotionValue,

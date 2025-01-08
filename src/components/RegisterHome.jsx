@@ -1,4 +1,3 @@
-import React from 'react'
 
 import { eventsData } from '../constants'
 import FormsBanner from './forms/formBanner'

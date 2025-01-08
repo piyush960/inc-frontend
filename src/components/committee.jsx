@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { fadeIn, textVariant } from '../utils/motion';
-import { SectionWrapper } from '../hoc';
-import { AnimatedTooltip } from './ui/animated-tooltip';
 import { styles } from '../styles';
 import { faculty, web, core } from '../constants';
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './ui/accordian';
-import { AnimatedTestimonials } from './ui/animated-committee';
 import { cn } from "../lib/utils";
 import { IconBrandGithubFilled, IconBrandInstagramFilled, IconBrandLinkedinFilled } from '@tabler/icons-react';
 import { TypewriterEffectSmooth } from './ui/typewriter-effect';
