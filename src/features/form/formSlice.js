@@ -53,9 +53,9 @@ export const formSlice = createSlice({
 			state.step3 = { ...state.step3, ...action.payload }
       window.sessionStorage.setItem('form', JSON.stringify(state))
     },
-    submit_step4: (state) => {
-      state = initialState;
+    submit_step4() {
       window.sessionStorage.removeItem('form');
+      return initialState;
     },
     resetForm() {
       return initialState;
