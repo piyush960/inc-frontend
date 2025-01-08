@@ -1,236 +1,220 @@
-import "./styles/sponsors.css";
-import imperial from "../assets/images/imperial.png"
-import Aayan from "../assets/images/Aayan.png.jpg"
-import intangle from "../assets/images/intangles.png.jpg"
-import pict from "../assets/images/pict1997.jpg"
-import cloudhedge from "../assets/images/CloudHedge.png"
-import eQ from "../assets/images/eq_technologic_rectangle_logo.png"
-import campusTimes from "../assets/images/CampusTimesPune.png"
-const titleSponsors = [
-  {
-    name: "eQ Technologic",
-    logo: eQ,
-    website: "https://www.1eq.com/",
-  },
-  {
-    name: "Sarvatra Technologies",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914537/logo_sarvatra_ww7sgb.png",
-    website: "https://sarvatra.tech/",
-  }
 
+import { sponsors } from '../constants'
+import {InfiniteMovingCards} from './ui/infinite-moving-cards'
+import { styles } from '../styles'
+import { motion } from 'framer-motion'
+import useDimension from '../hooks/useDimension'
+import { Tilt } from 'react-tilt'
+import { cn } from "../lib/utils";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+} from "react";
 
-];
+import { imocha } from '../assets'
 
-const coSponsors = [
- 
-];
+const Sponsors = () => {
 
-const educationSponsors = [
-  {
-    name: "iMocha",
-    logo: "https://res.cloudinary.com/dwhoc05ug/image/upload/v1681740341/iMocha_black_dj0jpu.png",
-    website: "https://www.imocha.io/",
-  },
-  {
-    name: "Ayaan",
-    logo: Aayan,
-    website: "http://ayaan.ai/",
-  },
-  {
-    name: "Intangles",
-    logo: intangle,
-    website: "https://www.intangles.ai/",
-  }
+  const isMobile = useDimension();
 
-];
+  return (
+    <section className='h-full w-full flex flex-col items-center justify-evenly pb-24'>
+      <motion.div 
+      initial={{ y: 100, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ ease: "easeInOut", duration: 0.75}}
+      > 
+        <p className={`${styles.sectionSubText}`}>InC 2024</p>
+        <h2 className={`${styles.sectionHeadText}`}>Sponsors.</h2>
+      </motion.div>
 
-// const eventSponsors = [
-//   {
-//     name: "AGCO",
-//     logo: "https://res.cloudinary.com/job-kart/image/upload/v1678885571/AGCO_logo_nfigrk.png",
-//     website: "https://www.agcocorp.com/",
-//   },
-// ];
-const specialprize = [
-  {
-    name:    <div>
-    <span style={{ display: 'block' }}>Computer Engineering</span>
-    <span style={{ display: 'block' }}>Batch of 1997</span>
-  </div>,
-    logo: pict,
-    website: "https://pict.edu/",
-  },
-];
-const eventSponsors2 = [
-  {
-    name: "Veritas",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914537/Veritas_Logo_RED_1000x197_wzcrl7.jpg",
-    website: "https://www.veritas.com/",
-  },
-];
+      <div className='flex flex-col w-full h-full items-center gap-10 py-16'>
+        {
+          Object.keys(sponsors).map(obj => (
+            <div key={obj} className='flex flex-col gap-8 items-center'>
+              <h3 className='text-center text-3xl font-bold capitalize pb-2 border-b-2 border-orange-100'>
+                {obj !== 'association' ? obj + " Sponsors" : "In Association With"}
+              </h3>
+              <div className='flex flex-wrap items-center justify-center gap-8'>
+                {
+                  sponsors[obj].map(sponsor => (
+                    <SponsorCard key={sponsor.name} width={obj === 'title' ? 300 : 250} height={obj === 'title' ? 200 : 150}>
+                      <img src={sponsor.src} alt={sponsor.name} className='w-full h-full object-contain pointer-events-none'/>
+                    </SponsorCard>
+                  ))
+                }
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      
 
-const Other = [
-  {
-    name: "Cloud Hedge",
-    logo: cloudhedge,
-    website: "https://cloudhedge.io/",
-  },
-  {
-    name: "Imperial Overseas",
-    logo: imperial,
-    website: "https://www.imperial-overseas.com/",
-  }
-  // {
-  //   name: "Zbyte",
-  //   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaYFPO8ZH4KTkju3ki8oS9g3gZFCeA8YFeN4YYAKsng&s",
-  //   website: "https://zbyte.io/",
-  // },
-  // {
-  //   name: "AlgoAnalytics",
-  //   logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914536/AlgoAnalytics_Logo_1_j2xxp4.png",
-  //   website: "https://www.algoanalytics.com/",
-  // },
-  // {
-  //   name: "BNY MELLON",
-  //   logo: "https://res.cloudinary.com/dsoid12mi/image/upload/v1680198601/bnym_logo_horiz_teal_rgb_3_q5npvc.png",
-  //   website: "https://www.bnymellon.com/",
-  // },
-  // {
-  //   name: "Diacto",
-  //   logo: "https://res.cloudinary.com/dsoid12mi/image/upload/v1680201291/Screenshot_2023-03-31_000335_tvhbkj.png",
-  //   website: "https://www.diacto.com/",
-  // },
-];
+    </section>
+  )
+} 
 
-const onlineMedia=[
-  {
-    name: "Campus Times Pune",
-    logo: campusTimes,
-    website: "https://www.campustimespune.com/",
-  }
-];
+export default Sponsors;
 
-const Association = [
-  {
-    name: "CSI",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1678885023/CSI_Logo_blue_rmxkvy.png",
-    website: "https://www.pictcsi.com/",
-  },
-  {
-    name: "IEEE",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914533/PISB_color_qbyv80.png",
-    website: "https://pictieee.in/",
-  },
-  {
-    name: "ACM",
-    logo: "https://res.cloudinary.com/job-kart/image/upload/v1677914536/Pasc_gafhcj.png",
-    website: "https://pict.acm.org/",
-  }
- 
-];
+const SponsorCard = ({ children, width, height }) => {
+  return (
+    <CardContainer className="inter-var"
+    containerClassName={`bg-gradient-to-r from-dark-blue via-light-blue to-orange-100`}
+    >
+      <CardBody className={`relative group/card hover:shadow-white-100/[0.2] bg-white border-primary p-4 border`}
+      style={{width, height}}
+      >
+        <CardItem translateZ="100" className="w-full h-full group-hover/card:shadow-orange-100/[0.5] group-hover/card:shadow-xl">
+          {children}
+        </CardItem>
+      </CardBody>
+    </CardContainer>
+  )
+}
 
-const getList1 = (sponsorsArray) => {
-  const list = sponsorsArray.map((sponsor) => {
-    return (
-      <div className="sponsor-card">
-        {sponsor.website && (
-          <a href={sponsor.website} target="_blank" rel="noopener noreferrer">
-            <div
-              className="logo-container hover:border-faint_blue hover:bottom-2 group shadow-lg max-w-sm rounded-3xl hover:bg-transparent hover:text-gold   hover:scale-105 cursor-pointer  hover:shadow-light_blue hover:shadow-xl"
-              style={{ backgroundImage: `url(${sponsor.logo})` }}
-            ></div>
-          </a>
-        )}
+{/* <Tilt options={{
+  reverse: true,
+  max: 30,
+  perspective: 1000,
+  scale: 1.06,
+  speed: 5000,
+  transition: true,
+  axis: null,
+  reset: true,
+  easing: "cubic-bezier(.03,.98,.52,.99)"
+}} 
+style={{
+  width,
+  height,
+  background: 'linear-gradient(to right, #1746A2, #5F9DF7, #d4621c)',
+  padding: 2,
+  // boxShadow: '0px 4px 10px 0px rgba(255, 255, 255, 0.8)',
+}}
+>
+  <div className='bg-white w-full h-full p-px'>
+    {children}
+  </div>
+</Tilt> */}
 
-        <p className="sponsor-name">{sponsor.name}</p>
-        <div className="sponsor-social">
-          {/* {sponsor.website && (
-            <a href={sponsor.website} target='_blank' rel='noopener noreferrer'>
-              <i className='fas fa-globe'></i>
-            </a>
-          )} */}
-          {sponsor.linkedin && (
-            <a
-              href={sponsor.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa fa-linkedin"></i>
-            </a>
+const MouseEnterContext = createContext(undefined);
+
+export const CardContainer = ({
+  children,
+  className,
+  containerClassName
+}) => {
+  const containerRef = useRef(null);
+  const [isMouseEntered, setIsMouseEntered] = useState(false);
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return;
+    const { left, top, width, height } =
+      containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - left - width / 2) / 25;
+    const y = (e.clientY - top - height / 2) / 25;
+    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+  };
+
+  const handleMouseEnter = (e) => {
+    setIsMouseEntered(true);
+    if (!containerRef.current) return;
+  };
+
+  const handleMouseLeave = (e) => {
+    if (!containerRef.current) return;
+    setIsMouseEntered(false);
+    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
+  };
+  return (
+    (<MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
+      <div
+        className={cn("p-px flex items-center justify-center", containerClassName)}
+        style={{
+          perspective: "1000px",
+        }}>
+        <div
+          ref={containerRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className={cn(
+            "flex items-center justify-center relative transition-all duration-200 ease-linear",
+            className
           )}
-          {sponsor.twitter && (
-            <a href={sponsor.twitter} target="_blank" rel="noopener noreferrer">
-              <i className="fa fa-twitter"></i>
-            </a>
-          )}
-          {sponsor.instagram && (
-            <a
-              href={sponsor.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa fa-instagram"></i>
-            </a>
-          )}
-          {sponsor.facebook && (
-            <a
-              href={sponsor.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa fa-facebook"></i>
-            </a>
-          )}
-          {sponsor.careers && (
-            <a href={sponsor.careers} target="_blank" rel="noopener noreferrer">
-              <i className="fa fa-briefcase"></i>
-            </a>
-          )}
+          style={{
+            transformStyle: "preserve-3d",
+          }}>
+          {children}
         </div>
       </div>
-    );
-  });
-  return list;
+    </MouseEnterContext.Provider>)
+  );
 };
 
-const titleSponsorsList = getList1(titleSponsors);
-const coSponsorsList = getList1(coSponsors);
-const educationSponsorsList = getList1(educationSponsors);
-// const ImpetusSponsorsList = getList1(eventSponsors);
-const PradnyaSponsorsList = getList1(eventSponsors2);
-const OtherSponsorsList = getList1(Other);
-const onlineMediaPartner = getList1(onlineMedia);
-const AssociationSponsorsList = getList1(Association);
-const specialprizeList=getList1(specialprize);
-export default function Sponsors() {
+export const CardBody = ({
+  children,
+  className,
+  style
+}) => {
   return (
-    <div id="sponsors" className="sponsors mt-5">
-      <div className="sm:text-6xl text-5xl  font-semibold text-center text-white pb-12">
-        Our Sponsors
-      </div>
-      <h1 className="sponsors-head">Title Sponsors</h1>
-      <div className="sponsors-list  title-sponsors">{titleSponsorsList}</div>
-      {/* <div className="sponsors-head  title-sponsors">
-       Co-Sponsors And Concept Sponsor
-      </div> */}
-      <div className="sponsors-list  title-sponsors">{coSponsorsList}</div>
-      <div className="sponsors-head  title-sponsors">Co-Sponsors</div>
-      <div className="sponsors-list title-cosponsors">
-        {educationSponsorsList}
-      </div>
-      {/* <div className="sponsors-head">Impetus Sponsor</div> */}
-      {/* <div className="sponsors-list">{ImpetusSponsorsList}</div> */}
-      <div className="sponsors-head">Pradnya Sponsor</div>
-      <div className="sponsors-list">{PradnyaSponsorsList}</div>
-      <div className="sponsors-head mt-5">Special Prize Sponsor</div>
-      <div className="sponsors-list ">{specialprizeList}</div>
-
-      <div className="sponsors-head">Other Sponsors</div>
-      <div className="sponsors-list">{OtherSponsorsList}</div>
-      <div className="sponsors-head">Online Media Partner</div>
-      <div className="sponsors-list">{onlineMediaPartner}</div>
-      <div className="sponsors-head">In Association With</div>
-      <div className="sponsors-list">{AssociationSponsorsList}</div>
-    </div>
+    (<div
+      style={style}
+      className={cn(
+        "[transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        className
+      )}>
+      {children}
+    </div>)
   );
-}
+};
+
+export const CardItem = ({
+  as: Tag = "div",
+  children,
+  className,
+  translateX = 0,
+  translateY = 0,
+  translateZ = 0,
+  rotateX = 0,
+  rotateY = 0,
+  rotateZ = 0,
+  ...rest
+}) => {
+  const ref = useRef(null);
+  const [isMouseEntered] = useMouseEnter();
+
+  useEffect(() => {
+    handleAnimations();
+  }, [isMouseEntered]);
+
+  const handleAnimations = () => {
+    if (!ref.current) return;
+    if (isMouseEntered) {
+      ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+    } else {
+      ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+    }
+  };
+
+  return (
+    (<Tag
+      ref={ref}
+      className={cn("transition duration-200 ease-linear", className)}
+      {...rest}>
+      {children}
+    </Tag>)
+  );
+};
+
+// Create a hook to use the context
+export const useMouseEnter = () => {
+  const context = useContext(MouseEnterContext);
+  if (context === undefined) {
+    throw new Error("useMouseEnter must be used within a MouseEnterProvider");
+  }
+  return context;
+};

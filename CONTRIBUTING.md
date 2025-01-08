@@ -17,4 +17,4 @@ git pull origin abhi/event_forms
 # Development
 While developing respective components, always follow this guidelines,
 - Never make changes into `App.js` file
-- To see your code output on the website, go on to the specific route in which that component is supposed to be. For example, to see `schedule` component which will be on the homepage, you should go to the route as `localhost:3000/`. For `login-signup` component, you should go to the route `localhost:3000/auth`, so on.
+- To see your code output on the website, go on to the specific route in which that component is supposed to be. For example, to see `schedule` component which will be on the homepage, you should go to the route as `localhost:5173/`. For `login-signup` component, you should go to the route `localhost:5173/auth`, so on.
