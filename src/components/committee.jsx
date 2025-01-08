@@ -4,7 +4,7 @@ import { styles } from '../styles';
 import { faculty, web, core } from '../constants';
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './ui/accordian';
 import { cn } from "../lib/utils";
-import { IconBrandGithubFilled, IconBrandInstagramFilled, IconBrandLinkedinFilled } from '@tabler/icons-react';
+// import { IconBrandGithubFilled, IconBrandInstagramFilled, IconBrandLinkedinFilled } from '@tabler/icons-react';
 import { TypewriterEffectSmooth } from './ui/typewriter-effect';
 import scrollToTop from '../utils/scrollToTop';
 
@@ -187,7 +187,7 @@ const WebnCore = ({ data }) => {
 
 }
 */
-const StayTuned = ({  }) => {
+const StayTuned = () => {
 
 	return (
 		<h4 className='text-center text-white-100 text-3xl font-bold'>
@@ -201,7 +201,7 @@ const StayTuned = ({  }) => {
 
 export default Committee;
 
-
+/*
 const BackgroundGradient = ({
 	children,
 	className,
@@ -264,7 +264,7 @@ const BackgroundGradient = ({
 		</div>)
 	);
 };
-
+*/
 
 const Spotlight = ({
 	className,

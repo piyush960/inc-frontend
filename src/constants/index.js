@@ -5,7 +5,7 @@ import {
     pradnya,
     techfiesta,
     img1,
-    csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge,
+    csi, intangles, sarvatra, veritas, eq, imocha, imperial, pasc, pisb, cloudhedge,
     ayaan,
   } from "../assets";
 

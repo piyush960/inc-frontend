@@ -86,7 +86,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
     try{
       const ticket = window.localStorage.getItem('ticket') || '';
       // console.log(index)
-      const response = await removeMember({ index, ticket }).unwrap()
+      await removeMember({ index, ticket }).unwrap()
       setMembers(members.filter((member) => member.id !== id));
       toast.success('Removed Successfully')
     }

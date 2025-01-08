@@ -2,7 +2,6 @@
 import { sponsors } from '../constants'
 import { styles } from '../styles'
 import { motion } from 'framer-motion'
-import useDimension from '../hooks/useDimension'
 import { cn } from "../lib/utils";
 import {
   createContext,

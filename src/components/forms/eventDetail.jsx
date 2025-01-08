@@ -1,5 +1,4 @@
 import { Globe } from "lucide-react";
-import { useState } from "react";
 
 // import { eventsData } from "../../constants";
 
