@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from "framer-motion";
 import { CanvasRevealEffect } from "./ui/canvas-reveal-effect.jsx";
@@ -43,7 +43,7 @@ function Events(){
   )
 }
 
-function EventCards({ }) {
+function EventCards() {
   const navigate = useNavigate();
 
   const handleViewDetails = (id) => {
@@ -94,7 +94,7 @@ const Card = ({
   handleViewDetails,
   className
 }) => {
-  const [hovered, setHovered] = React.useState(false);
+  const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div

@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../ui/input";
 import { Select } from "../../ui/select";
 import { Label } from "../../ui/label";
@@ -29,7 +29,7 @@ const initialState = {
   reason_of_demo: "",
 }
 
-const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
+const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
   const ename = window.localStorage.getItem('event_name');
   const [ formData, setFormData ] = useState(initialState)
@@ -215,7 +215,7 @@ const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
           name="abstract"
           value={formData.abstract}
           onChange={handleChange}
-          validate={(value) => validate_wordCount.bool(abstractWordCount, 150, 300)}
+          validate={() => validate_wordCount.bool(abstractWordCount, 150, 300)}
           errorMessage={validate_wordCount.message('', 150, 300)}
           placeholder="Enter abstract (150-200 words)"
           rows={5}

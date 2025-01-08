@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import move from "lodash-move";
 
@@ -16,7 +17,7 @@ function dateToWords(dateStr) {
   return date.toLocaleDateString('en-US', options);
 }
 
-const CardStack = ({ }) => {
+const CardStack = () => {
 
   const navigate = useNavigate()
 
@@ -107,6 +108,7 @@ const CardStack = ({ }) => {
 
 export default CardStack;
 
+/*
 const wrapperStyle = {
   position: "relative",
   display: "flex",
@@ -129,3 +131,4 @@ const cardStyle = {
   transformOrigin: "center center",
   listStyle: "none",
 };
+*/

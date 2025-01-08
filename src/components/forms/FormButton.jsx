@@ -1,4 +1,3 @@
-import { loader } from "../../assets";
 import { cn } from "../../lib/utils";
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import Loader from "../ui/Loader";

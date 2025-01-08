@@ -26,10 +26,9 @@ const Hero = () => {
       repeat: Infinity,
       repeatType: "mirror",
     });
-  }, []);
+  });
 
   const border = useMotionTemplate`1px solid ${color}`;
-  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   return (
     <section className='relative w-full h-screen'>
@@ -40,7 +39,7 @@ const Hero = () => {
 
       <img src={light} alt="light" className='absolute object-cover pointer-events-none top-[-8%] translate-x-[50%] right-[50%] z-10 opacity-35 sm:hidden'/>
 
-      <p className='absolute sm:left-[50%] top-[11%] sm:translate-x-[-50%] uppercase text-slate-400 font-light text-center text-md sm:text-lg'><span className=''>SCTR's Pune Institute of Computer Technology</span><span className='sm:block text-center'>&nbsp;Presents</span></p>
+      <p className='absolute sm:left-[50%] top-[11%] sm:translate-x-[-50%] uppercase text-slate-400 font-light text-center text-md sm:text-lg'><span className=''>SCTR&apos;s Pune Institute of Computer Technology</span><span className='sm:block text-center'>&nbsp;Presents</span></p>
 
       <div className='relative max-sm:h-[350px] max-sm:w-[350px] flex flex-col items-center w-[600px]'>
 

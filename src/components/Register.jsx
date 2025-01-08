@@ -37,7 +37,7 @@ const Register = () => {
       setCurrentStep(1)
       setSteps(() => (pSteps))
     }
-  }, [])
+  })
   
   const eventData = eventsData[event];
 

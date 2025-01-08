@@ -22,7 +22,7 @@ export const AnimatedTooltip = ({
 
 	return (
 		<div className="flex flex-wrap justify-center items-center gap-16">
-			{items.map((item, idx) => (
+			{items.map((item) => (
 				<div
 					className="relative group"
 					key={item.name}

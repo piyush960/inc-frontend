@@ -110,10 +110,12 @@ const EventDetails = ({ data }) => {
         </div>
         <h4 className='flex gap-2 text-xl text-yellow-400'><IconTrophy /> {data.prize}</h4>
           <div className='flex max-sm:w-full max-sm:justify-between sm:gap-7 mb-2'>
-            <Button children={<><IconUserEdit /> Register</>} onClick={() => {navigate(`/register/${data.id}`)}}/>
-            <Button children={<><IconDownload /> Rule Book</>} 
-            onClick={() => {toast.info('Rule Book Yet to be Published.')}}
-            />
+            <Button onClick={() => {navigate(`/register/${data.id}`)}}>
+            <><IconUserEdit /> Register</>
+            </Button>
+            <Button onClick={() => {toast.info('Rule Book Yet to be Published.')}}>
+              <><IconDownload /> Rule Book</>
+            </Button>
           </div>
         </div>
       </div>
@@ -161,7 +163,7 @@ const EventDetails = ({ data }) => {
         <ul className='list-inside list-disc'>
           {
             data.rules?.map(rule => (
-              <li className=''>{rule}</li>
+              <li className='' key={rule}>{rule}</li>
             ))
           }
         </ul>
