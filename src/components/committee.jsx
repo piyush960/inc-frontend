@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { fadeIn, textVariant } from '../utils/motion';
-import { SectionWrapper } from '../hoc';
-import { AnimatedTooltip } from './ui/animated-tooltip';
 import { styles } from '../styles';
 import { faculty, web, core } from '../constants';
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './ui/accordian';
-import { AnimatedTestimonials } from './ui/animated-committee';
 import { cn } from "../lib/utils";
-import { IconBrandGithubFilled, IconBrandInstagramFilled, IconBrandLinkedinFilled } from '@tabler/icons-react';
+// import { IconBrandGithubFilled, IconBrandInstagramFilled, IconBrandLinkedinFilled } from '@tabler/icons-react';
 import { TypewriterEffectSmooth } from './ui/typewriter-effect';
 import scrollToTop from '../utils/scrollToTop';
 
@@ -134,7 +130,7 @@ const Faculty = ({ data: faculty }) => {
 						<AccordionPanel>
 							<ul className='text-white-100 list-disc list-inside'>
 								{
-									position.names.map((name, index) => (
+									position.names.map((name) => (
 										<li className='' key={name.value}>{name.value.trim().slice(3)}</li>
 									))
 								}
@@ -146,7 +142,7 @@ const Faculty = ({ data: faculty }) => {
 		</Accordion>
 	)
 }
-
+/*
 const WebnCore = ({ data }) => {
 
 	const handleLinkClick = (link) => {
@@ -158,11 +154,11 @@ const WebnCore = ({ data }) => {
 	return (
 		<div className='flex flex-col items-center w-full gap-[5rem]'>
 			{data.map(team => (
-				<div className='flex flex-col items-center gap-10'>
+				<div className='flex flex-col items-center gap-10' key={team.team}>
 					<h3 className='sm:text-3xl text-2xl font-semibold pb-2 border-b-2 border-orange-100'>{team.team}</h3>
 					<div className='flex flex-wrap w-full justify-center items-stretch gap-10'>
 						{team.members.map(m => (
-							<div className='sm:w-[300px] w-[290px]'>
+							<div className='sm:w-[300px] w-[290px]' key={m.name}>
 								<BackgroundGradient className="p-4 bg-black-100 flex flex-col items-center gap-4">
 									<img
 										src={m.photo}
@@ -190,12 +186,12 @@ const WebnCore = ({ data }) => {
 	)
 
 }
-
-const StayTuned = ({  }) => {
+*/
+const StayTuned = () => {
 
 	return (
 		<h4 className='text-center text-white-100 text-3xl font-bold'>
-			Bootin<span className='text-orange-100'>'</span> up<span className='text-orange-100'>,</span> Stay Tuned<span className='text-orange-100'>!</span>
+			Bootin<span className='text-orange-100'>&apos;</span> up<span className='text-orange-100'>,</span> Stay Tuned<span className='text-orange-100'>!</span>
 		</h4>
 	)
 
@@ -205,7 +201,7 @@ const StayTuned = ({  }) => {
 
 export default Committee;
 
-
+/*
 const BackgroundGradient = ({
 	children,
 	className,
@@ -268,7 +264,7 @@ const BackgroundGradient = ({
 		</div>)
 	);
 };
-
+*/
 
 const Spotlight = ({
 	className,

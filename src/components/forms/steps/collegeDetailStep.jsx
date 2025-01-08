@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Select } from "../../ui/select";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
@@ -76,7 +76,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
     }
     try{
       const ticket = window.localStorage.getItem('ticket') || '';
-      const response = await stepThree({ event_name: event, ticket, data: formData }).unwrap()
+      await stepThree({ event_name: event, ticket, data: formData }).unwrap()
       toast.success('College Details Saved')
       dispatch(submit_step3(formData))
       nextStep()

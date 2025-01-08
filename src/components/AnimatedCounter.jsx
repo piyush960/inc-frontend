@@ -1,6 +1,5 @@
-"use client";
 
-import { IconCurrencyRupee, IconPlus } from "@tabler/icons-react";
+import { IconCurrencyRupee } from "@tabler/icons-react";
 import {
   motion,
   animate,

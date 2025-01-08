@@ -1,4 +1,3 @@
-import React from 'react'
 
 import { eventsData } from '../constants'
 import FormsBanner from './forms/formBanner'
@@ -10,7 +9,7 @@ const RegisterHome = () => {
 
   return (
     <section className='py-24 h-full flex flex-col gap-y-8 p-2'>
-        {Object.keys(eventsData).map((key, index) => {
+        {Object.keys(eventsData).map((key) => {
 						const event = eventsData[key]
             return <FormsBanner
 							key={key}

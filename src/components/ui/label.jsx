@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cn } from "../../lib/utils";
 import * as LabelPrimitive from "@radix-ui/react-label";
+import React from "react";
 
 const Label = React.forwardRef((props, ref) => {
   const { className, required, children, ...otherProps } = props;

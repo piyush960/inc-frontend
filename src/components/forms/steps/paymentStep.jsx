@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import FormButton from "../FormButton";
@@ -46,7 +46,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
     }
     try{
       const ticket = window.localStorage.getItem('ticket') || '';
-      const response = await stepFour({ ticket, data: formData }).unwrap()
+      await stepFour({ ticket, data: formData }).unwrap()
       toast.success(<p>Form Submitted<br />Payment Under Verification</p>)
       window.localStorage.removeItem('ticket');
       window.localStorage.removeItem('event_name');

@@ -1,10 +1,8 @@
 import { Routes, Route } from "react-router-dom"
-import { About, Register, Navbar, Sponsors, StarsCanvas, Committee } from './components';
+import { About, Register, Navbar, Sponsors, Committee } from './components';
 
 import Hero from "./components/HeroParallax";
-import Footer from "./components/Footer";
 import Events from "./components/Events";
-import SwipeGallery from "./components/Gallery";
 import EventDetails from "./components/EventDetails";
 import Notification from './components/Modal';
 import useDimension from "./hooks/useDimension";
@@ -14,6 +12,7 @@ import Test from "./components/Test";
 import AnimatedCounter from "./components/AnimatedCounter";
 import { ToastContainer, Zoom } from "react-toastify";
 import PageNotFound from "./components/PageNotFound";
+import Footer from './components/footer'
 
 const App = () => {
   
