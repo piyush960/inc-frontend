@@ -7,7 +7,6 @@ import PaymentStep from "./forms/steps/paymentStep";
 import StepProgressBar from "./forms/stepProgress";
 import { useParams } from "react-router-dom";
 import { eventsData } from "../constants";
-import scrollToTop from "../utils/scrollToTop";
 import { qr } from "../assets";
 
 const osteps = [
