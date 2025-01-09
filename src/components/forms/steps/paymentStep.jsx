@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import FormButton from "../FormButton";
@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { submit_step4 } from "../../../features/form/formSlice";
 import { useStepFourMutation } from "../../../app/services/formAPI";
+import scrollToTop from "../../../utils/scrollToTop";
 
 const initialState = {
   payment_id: "",
@@ -20,6 +21,11 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
   const [formData, setFormData] = useState(step4);
   const dispatch = useDispatch();
   const [ stepFour, { isLoading } ] = useStepFourMutation();
+  const [hasRegistered, setHasRegistered] = useState(false);
+
+  useEffect(() => {
+    scrollToTop();
+  }, [])
 
   const validate = () => {
     let tempErrors = {};
@@ -52,6 +58,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
       window.localStorage.removeItem('event_name');
       dispatch(submit_step4(formData))
       setFormData(initialState);
+      setHasRegistered(() => true)
     }
     catch(error){
       toast.info(error?.data?.message || error?.message  || 'Failed to Submit')
@@ -68,7 +75,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
         <EventDetail event_name={event} amount={amount}/>
 
         {/* Payment Section */}
-        {!isInternational && (
+        {!isInternational && !hasRegistered && (
           <div className="space-y-8">
             <div className="bg-blue-900/20 p-6 border border-blue-500/30">
               <h3 className="text-xl font-semibold mb-4 text-center text-blue-100">
@@ -122,6 +129,10 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
           </div>
         )}
 
+        {
+          hasRegistered && <ThankYou />
+        }
+
         {/* Submit Button */}
         <div className="mt-6 flex w-full justify-between">
           <FormButton isPrev onClick={() => prevStep()}/>
@@ -133,3 +144,15 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
 };
 
 export default PaymentStep;
+
+
+const ThankYou = () => {
+  return (
+    <div className="bg-blue-900/20 p-6 border border-blue-500/30">
+      <h3 className="text-xl font-semibold text-center text-green-500">
+        Thank You for Registering <br />
+        Our team is verifying your details...
+      </h3>
+    </div>
+  )
+}

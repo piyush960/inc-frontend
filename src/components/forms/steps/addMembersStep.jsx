@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { submit_step2 } from "../../../features/form/formSlice";
 import { useAddMemberMutation, useLazyGetMembersQuery, useRemoveMemberMutation } from "../../../app/services/formAPI";
+import scrollToTop from "../../../utils/scrollToTop";
 
 const initialState = {
   id: "",
@@ -32,6 +33,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
   const dispatch = useDispatch()
   
   useEffect(() => {
+    scrollToTop()
     const ename = window.localStorage.getItem('event_name');
     const ticket = window.localStorage.getItem('ticket') || '';
     if(event === ename){

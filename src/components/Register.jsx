@@ -7,7 +7,6 @@ import PaymentStep from "./forms/steps/paymentStep";
 import StepProgressBar from "./forms/stepProgress";
 import { useParams } from "react-router-dom";
 import { eventsData } from "../constants";
-import scrollToTop from "../utils/scrollToTop";
 import { qr } from "../assets";
 
 const osteps = [
@@ -32,12 +31,14 @@ const Register = () => {
 
   
   useEffect(() => {
-    scrollToTop()
+    // console.log('hit')
     if(event === 'pradnya'){
-      setCurrentStep(1)
-      setSteps(() => (pSteps))
+      if(currentStep === 0){
+        setCurrentStep(1)
+        setSteps(() => (pSteps))
+      }
     }
-  })
+  }, [])
   
   const eventData = eventsData[event];
 

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { submit_step3 } from "../../../features/form/formSlice";
 import { toast } from "react-toastify";
 import { useStepThreeMutation } from "../../../app/services/formAPI";
+import scrollToTop from "../../../utils/scrollToTop";
 
 const pictState = {
   isPICT: "1",
@@ -50,6 +51,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
   const [ stepThree, { isLoading } ] = useStepThreeMutation();
 
   useEffect(() => {
+    scrollToTop();
     if(formData.isPICT === "1"){
       document.querySelectorAll('#isPICT')[0].checked = true
       document.querySelectorAll('#isInternational')[1].checked = true;
