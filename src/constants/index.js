@@ -126,28 +126,28 @@ import {
 
       registrations: {
         fees: {
-          national: `₹100/-`,
+          national: `&#8377;100/-`,
           international: `Free`,
         },
         min_team_size: 2,
         max_team_size: 5,
       },
-      prize: `Total Cash prizes worth ₹7 Lakh.`,
+      prize: `Total Cash prizes worth &#8377;7 Lakh.`,
       rules: [
         `Judge's decision will be final.`,
         `Project status must be in "Ready to Demonstrate".`,
       ],
-      note: `Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded ₹1 Lakh Cash Prize from PICT.`,
+      note: `Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded &#8377;1 Lakh Cash Prize from PICT.`,
 
       // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: "https://pictinc.org/register/events/impetus",
-      schedule: "Dates under construction 🚧",
+      schedule: "Droppin' soon, stay tuned!",
     }, 
     concepts: {
       id: 'concepts',
       logo: concepts,
       criteria: "Final year students enrolled in BE/ BTech degree.",
-      schedule: "Dates under construction 🚧",
+      schedule: "Droppin' soon, stay tuned!",
       name: "Concepts",
       notices: [
         "1. The Participants should be present on campus and the labs during the time period allocated.",
@@ -189,15 +189,15 @@ import {
 
       registrations: {
         fees: {
-          national: `₹100/-`,
+          national: `&#8377;100/-`,
           international: `Free`,
         },
         min_team_size: 2,
         max_team_size: 5,
       },
 
-      prize: "Total Cash prizes worth ₹7 Lakh.",
-      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded ₹ 1 Lakh Cash Prize from PICT.`,
+      prize: "Total Cash prizes worth &#8377;7 Lakh.",
+      note: ` Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded &#8377;1 Lakh Cash Prize from PICT.`,
 
       rules: [
         'Judges decision will be final.',
@@ -211,10 +211,10 @@ import {
       //   "Neha 9579678142"
       // ],
       id: 'pradnya',
-      prize: "Total Cash prizes worth ₹7 Lakh",
+      prize: "Total Cash prizes worth &#8377;7 Lakh",
       note1: `🔹Judge's decision will be final.`,
       note3: `🔹Already registered candidatess need not register again.`,
-      schedule: "Dates under construction 🚧",
+      schedule: "Droppin' soon, stay tuned!",
       criteria: `Junior Level - This category is open for all students who are pursuing first or second year of any undergraduate  degree/course.#$Senior Level - Third year engineering, final year engineering of any undergraduate degree/course.`,
       logo: pradnya,
       name: "Pradnya",
@@ -260,7 +260,7 @@ import {
       ],
       registrations: {
         fees: {
-          national: `₹100/-`,
+          national: `&#8377;100/-`,
           international: `Free`,
         },
         min_team_size: 1,

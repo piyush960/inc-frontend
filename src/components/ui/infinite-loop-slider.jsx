@@ -7,7 +7,7 @@ const InfiniteLoopSlider = ({ children, duration, reverse = false, ...props }) =
 				"--direction": reverse ? "reverse" : "normal",
 			}}
 			{...props}
-		>
+			>
 			<ul className="flex">
 				{children}
 				{children}

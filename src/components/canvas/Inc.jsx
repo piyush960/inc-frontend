@@ -14,7 +14,7 @@ const Earth = () => {
     
     <mesh>
       <hemisphereLight 
-        intensity={2.5}
+        intensity={2.7}
         color="white"
         groundColor="black"
       />
@@ -22,14 +22,14 @@ const Earth = () => {
         position={[0, 60, 10]}
         angle={0.3}
         penumbra={0.5}
-        intensity={3000} 
+        intensity={1600} 
         castShadow
         shadow-mapSize={2048}
         shadow-bias={-0.0001}
       />
       <pointLight 
         position={[0, -40, 0]} 
-        intensity={1200} 
+        intensity={900} 
         color="white" 
         castShadow
       />
@@ -49,9 +49,9 @@ const Earth = () => {
       </primitive>
       <EffectComposer>
         <Bloom 
-          intensity={1.2}
-          luminanceThreshold={0.8}
-          luminanceSmoothing={1.2}
+          intensity={1.0}
+          luminanceThreshold={1.5}
+          luminanceSmoothing={1.0}
         />
       </EffectComposer>
     </mesh>
