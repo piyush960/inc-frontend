@@ -75,7 +75,7 @@ function TabsDemo() {
 
 export default TabsDemo; 
 
-const EventDetails = ({ data, event }) => {
+const EventDetails = ({ data }) => {
   const navigate = useNavigate()
   
   return (

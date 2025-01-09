@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { logo } from '../assets'
-import { IconCopyright, IconHeartFilled, IconMinusVertical } from '@tabler/icons-react'
+import { IconCopyright, IconMinusVertical } from '@tabler/icons-react'
 
 
 const Footer = () => {
