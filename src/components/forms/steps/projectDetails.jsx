@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { resetForm, submit_step1, submit_step2, submit_step3 } from '../../../features/form/formSlice'
 import { useLazyGetTicketQuery, useStepOneMutation } from "../../../app/services/formAPI";
 import Loader from "../../ui/Loader";
+import scrollToTop from "../../../utils/scrollToTop";
 
 const initialState = {
   title: "",
@@ -40,6 +41,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
   const [ stepOne, { isLoading } ] = useStepOneMutation()
 
   useEffect(() => {
+    scrollToTop()
     if(event === ename){
       getTicket(window.localStorage.getItem('ticket') || '');
     }

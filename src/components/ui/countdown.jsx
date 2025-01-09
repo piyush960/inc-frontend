@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 // NOTE: Change this date to whatever date you want to countdown to :)
-const COUNTDOWN_FROM = "2025-01-28";
+const COUNTDOWN_FROM = "2025-03-28";
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;

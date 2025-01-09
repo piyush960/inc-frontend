@@ -32,12 +32,14 @@ const Register = () => {
 
   
   useEffect(() => {
-    scrollToTop()
+    // console.log('hit')
     if(event === 'pradnya'){
-      setCurrentStep(1)
-      setSteps(() => (pSteps))
+      if(currentStep === 0){
+        setCurrentStep(1)
+        setSteps(() => (pSteps))
+      }
     }
-  })
+  }, [])
   
   const eventData = eventsData[event];
 
