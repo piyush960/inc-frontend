@@ -1,4 +1,3 @@
-"use client";;
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
@@ -80,7 +79,6 @@ export const Tabs = ({
 export const FadeInDiv = ({
   className,
   tabs,
-  active,
   hovering
 }) => {
   const isActive = (tab) => {
@@ -93,8 +91,8 @@ export const FadeInDiv = ({
           key={tab.value}
           layoutId={tab.value}
           style={{
-            scale: 1 - idx * 0.14,
-            top: hovering ? idx * -85 : 0,
+            scale: 1 - idx * 0.15,
+            top: hovering ? idx * -85 : idx * -46,
             zIndex: -idx,
             opacity: idx < 3 ? 1 - idx * 0.1 : 0,
           }}

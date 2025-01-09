@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Tabs } from "./ui/tabs";
 
@@ -31,7 +31,7 @@ function TabsDemo() {
       value: "impetus",
       content: (
         <div
-          className={cn('w-full overflow-hidden relative p-px bg-tertiary', `h-[${containerHeight}px]`)}>
+          className={cn('w-full overflow-hidden relative p-px bg-tertiary', ``)}>
           <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.impetus} />
         </div>
@@ -42,7 +42,7 @@ function TabsDemo() {
       value: "concepts",
       content: (
         <div
-          className={cn('w-full overflow-hidden relative p-px bg-tertiary', `h-[${containerHeight}px]`)}>
+          className={cn('w-full overflow-hidden relative p-px bg-tertiary', ``)}>
           <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.concepts}/>
         </div>
@@ -54,7 +54,7 @@ function TabsDemo() {
       content: (
         <div
           ref={divRef}
-          className={cn('w-full overflow-hidden relative p-px bg-tertiary', `h-[${containerHeight}px]`)}>
+          className={cn('w-full overflow-hidden relative p-px bg-tertiary', ``)}>
           <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
           <EventDetails data={eventsData.pradnya}/>
         </div>
@@ -65,7 +65,7 @@ function TabsDemo() {
   return (
     (<div
       style={{
-        height: `${containerHeight + 300}px`
+        height: `${containerHeight + 270}px`
       }}
       className={`pt-24 max-sm:px-2 max-w-[90rem] w-full mx-auto`}>
       <Tabs tabs={tabs} activeId={id}/>
@@ -75,7 +75,7 @@ function TabsDemo() {
 
 export default TabsDemo; 
 
-const EventDetails = ({ data }) => {
+const EventDetails = ({ data, event }) => {
   const navigate = useNavigate()
   
   return (
@@ -104,16 +104,18 @@ const EventDetails = ({ data }) => {
         <div className='flex flex-col items-start gap-1'>
           <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconCurrencyDollar /> Fees</h3>
           <ul className='flex sm:gap-8 gap-1'>
-            <li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>National: {data.registrations.fees.national}</li>
+            <li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>National: <span dangerouslySetInnerHTML={{__html: data.registrations.fees.national}}></span></li>
             <li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>International: {data.registrations.fees.international}</li>
           </ul>
         </div>
-        <h4 className='flex gap-2 text-xl text-yellow-400'><IconTrophy /> {data.prize}</h4>
+        <h4 className='flex gap-2 text-xl text-yellow-400'><IconTrophy /> <span dangerouslySetInnerHTML={{__html: data.prize}}></span></h4>
           <div className='flex max-sm:w-full max-sm:justify-between sm:gap-7 mb-2'>
-            <Button children={<><IconUserEdit /> Register</>} onClick={() => {navigate(`/register/${data.id}`)}}/>
-            <Button children={<><IconDownload /> Rule Book</>} 
-            onClick={() => {toast.info('Rule Book Yet to be Published.')}}
-            />
+            <Button onClick={() => {navigate(`/register/${data.id}`)}}>
+            <><IconUserEdit /> Register</>
+            </Button>
+            <Button onClick={() => {toast.info('Rule Book yet to be published.')}}>
+              <><IconDownload /> Rule Book</>
+            </Button>
           </div>
         </div>
       </div>
@@ -127,7 +129,7 @@ const EventDetails = ({ data }) => {
         </ul>
       </div>
 
-     {data.domains && <div className='flex flex-col items-start w-full'>
+     {data.domains && <div className='flex flex-col items-start w-full overflow-hidden'>
         <h3 className='font-semibold text-orange-100 text-xl'>Domains</h3>
         <InfiniteLoopSlider
         duration={20000}
@@ -161,7 +163,7 @@ const EventDetails = ({ data }) => {
         <ul className='list-inside list-disc'>
           {
             data.rules?.map(rule => (
-              <li className=''>{rule}</li>
+              <li className='' key={rule}>{rule}</li>
             ))
           }
         </ul>

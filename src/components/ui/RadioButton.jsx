@@ -1,9 +1,7 @@
-import * as React from "react";
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
-import { cn } from "../../lib/utils";
+import React from "react";
 
 const RadioButton = React.forwardRef(
-	({ options, onChange, errorMessage="", className, name, ...props }, ref) => {
+	({ options, onChange, errorMessage="", name, ...props }, ref) => {
 
 		return (
 			<div

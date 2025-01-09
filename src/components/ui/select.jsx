@@ -1,6 +1,6 @@
-import * as React from "react";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { cn } from "../../lib/utils";
+import React from "react";
 
 const Select = React.forwardRef(({ options, onChange, validate, errorMessage, className, ...props }, ref) => {
   const radius = 100; // Radius of hover effect

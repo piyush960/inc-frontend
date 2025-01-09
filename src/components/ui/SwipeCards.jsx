@@ -17,7 +17,7 @@ function dateToWords(dateStr) {
   return date.toLocaleDateString('en-US', options);
 }
 
-const CardStack = ({ }) => {
+const CardStack = () => {
 
   const navigate = useNavigate()
 
@@ -108,6 +108,7 @@ const CardStack = ({ }) => {
 
 export default CardStack;
 
+/*
 const wrapperStyle = {
   position: "relative",
   display: "flex",
@@ -130,3 +131,4 @@ const cardStyle = {
   transformOrigin: "center center",
   listStyle: "none",
 };
+*/

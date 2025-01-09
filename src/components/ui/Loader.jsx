@@ -1,7 +1,5 @@
 
-import React from 'react'
 import './loader.css'
-import { style } from 'framer-motion/client'
 
 const Loader = ({ size=45 }) => {
 	return (

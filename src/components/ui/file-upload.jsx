@@ -1,5 +1,5 @@
 import { cn } from "../../lib/utils";
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { IconUpload } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
@@ -38,7 +38,7 @@ export const FileUpload = ({
 		multiple: false,
 		noClick: true,
 		onDrop: (files) => { onChange(files) },
-		onDropRejected: (error) => {
+		onDropRejected: () => {
 			// console.log(error);
 		},
 	});

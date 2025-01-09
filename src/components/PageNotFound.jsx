@@ -1,4 +1,3 @@
-import React from 'react'
 import { pagenotfound } from '../assets'
 
 const PageNotFound = () => {

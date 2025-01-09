@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FormsBanner from "./forms/formBanner";
 import ProjectDetailsFormStep from "./forms/steps/projectDetails";
 import AddMemberStep from "./forms/steps/addMembersStep";
@@ -7,8 +7,7 @@ import PaymentStep from "./forms/steps/paymentStep";
 import StepProgressBar from "./forms/stepProgress";
 import { useParams } from "react-router-dom";
 import { eventsData } from "../constants";
-import scrollToTop from "../utils/scrollToTop";
-import { pradnya, qr } from "../assets";
+import { qr } from "../assets";
 
 const osteps = [
   { id: 1, label: "Project Details" },
@@ -32,10 +31,12 @@ const Register = () => {
 
   
   useEffect(() => {
-    scrollToTop()
+    // console.log('hit')
     if(event === 'pradnya'){
-      setCurrentStep(1)
-      setSteps(() => (pSteps))
+      if(currentStep === 0){
+        setCurrentStep(1)
+        setSteps(() => (pSteps))
+      }
     }
   }, [])
   

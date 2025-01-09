@@ -1,10 +1,9 @@
-import { ChevronDown, ChevronUp, Globe, IndianRupee } from "lucide-react";
-import { useState } from "react";
+import { Globe } from "lucide-react";
 
 // import { eventsData } from "../../constants";
 
-const EventDetail = ({ event_name, amount }) => {
-  const [showDetails, setShowDetails] = useState(false);
+const EventDetail = ({ amount }) => {
+  // const [showDetails, setShowDetails] = useState(false);
 
   // const event = eventsData[event_name];
 

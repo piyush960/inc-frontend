@@ -5,26 +5,30 @@ import InfiniteLoopSlider from "./ui/infinite-loop-slider";
 
 import { notifications } from "../constants";
 
-const ExampleWrapper = () => {
+const ExampleWrapper = ({ setLightOn }) => {
 	const [isOpen, setIsOpen] = useState(false);
+
 	return (
-		<div className="fixed z-50 bottom-6 right-6">
+		<div className="fixed z-50 bottom-4 right-4">
 			<button
 			className="relative inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-full shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
-			onClick={() => setIsOpen(prev => !prev)}
+			onClick={() => {
+				setIsOpen(prev => !prev)
+				setLightOn(prev => !prev);
+			}}
 			>
 			<span className="absolute inset-0 rounded-full bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px]"></span>
 
-			<span className="relative z-10 block px-4 py-4 rounded-full bg-gray-950">
-				<img src={notification} alt="notification" />
+			<span className="relative z-10 block p-3 sm:p-4 rounded-full bg-gray-950">
+				<img src={notification} alt="notification"/>
 			</span>
 			</button>
-			<SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
+			<SpringModal isOpen={isOpen} setIsOpen={setIsOpen} setLightOn={setLightOn} />
 		</div>
 	);
 };
 
-const SpringModal = ({ isOpen, setIsOpen }) => {
+const SpringModal = ({ isOpen, setIsOpen, setLightOn }) => {
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -32,7 +36,10 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					onClick={() => setIsOpen(false)}
+					onClick={() => {
+						setIsOpen(false)
+						setLightOn(prev => !prev)
+					}}
 					className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
 				>
 					<motion.div
@@ -65,7 +72,10 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
 								</p>
 								<div className="flex gap-2">
 									<button
-										onClick={() => setIsOpen(false)}
+										onClick={() => {
+											setIsOpen(false)
+											setLightOn(prev => !prev)
+										}}
 										className="bg-transparent hover:bg-white-100/10 transition-colors text-white-100 font-semibold w-full py-2"
 									>
 										Close

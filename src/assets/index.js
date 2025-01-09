@@ -9,6 +9,7 @@ import prize from './prize.png'
 import loader from './loader.svg'
 import pagenotfound from './404_notfound.svg'
 import qr from './payment_qr.jpeg'
+import popper from './popper.gif'
 
 import csi from './company/csi.jpg'
 import intangles from './company/intangles.jpg'
@@ -53,4 +54,4 @@ import gal7 from './gallery/7.jpeg'
 
 import img1 from './team/manas.jpeg'
 
-export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader, img1, ayaan, csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge, pict, pagenotfound, qr, };
+export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader, img1, ayaan, csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge, pict, pagenotfound, qr, popper, };

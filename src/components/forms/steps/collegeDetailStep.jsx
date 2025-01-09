@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Select } from "../../ui/select";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { submit_step3 } from "../../../features/form/formSlice";
 import { toast } from "react-toastify";
 import { useStepThreeMutation } from "../../../app/services/formAPI";
+import scrollToTop from "../../../utils/scrollToTop";
 
 const pictState = {
   isPICT: "1",
@@ -50,6 +51,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
   const [ stepThree, { isLoading } ] = useStepThreeMutation();
 
   useEffect(() => {
+    scrollToTop();
     if(formData.isPICT === "1"){
       document.querySelectorAll('#isPICT')[0].checked = true
       document.querySelectorAll('#isInternational')[1].checked = true;
@@ -76,7 +78,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
     }
     try{
       const ticket = window.localStorage.getItem('ticket') || '';
-      const response = await stepThree({ event_name: event, ticket, data: formData }).unwrap()
+      await stepThree({ event_name: event, ticket, data: formData }).unwrap()
       toast.success('College Details Saved')
       dispatch(submit_step3(formData))
       nextStep()

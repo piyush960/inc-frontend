@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../ui/input";
 import { Select } from "../../ui/select";
 import { Label } from "../../ui/label";
@@ -8,10 +8,11 @@ import { validate_isEmpty, validate_email, validate_phone, validate_wordCount, v
 import { impetus_domains } from "../constants";
 import { toast } from "react-toastify";
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { resetForm, submit_step1, submit_step2, submit_step3 } from '../../../features/form/formSlice'
 import { useLazyGetTicketQuery, useStepOneMutation } from "../../../app/services/formAPI";
 import Loader from "../../ui/Loader";
+import scrollToTop from "../../../utils/scrollToTop";
 
 const initialState = {
   title: "",
@@ -29,7 +30,7 @@ const initialState = {
   reason_of_demo: "",
 }
 
-const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
+const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
   const ename = window.localStorage.getItem('event_name');
   const [ formData, setFormData ] = useState(initialState)
@@ -40,6 +41,7 @@ const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
   const [ stepOne, { isLoading } ] = useStepOneMutation()
 
   useEffect(() => {
+    scrollToTop()
     if(event === ename){
       getTicket(window.localStorage.getItem('ticket') || '');
     }
@@ -215,7 +217,7 @@ const ProjectDetailsFormStep = ({ event, nextStep, prevStep }) => {
           name="abstract"
           value={formData.abstract}
           onChange={handleChange}
-          validate={(value) => validate_wordCount.bool(abstractWordCount, 150, 300)}
+          validate={() => validate_wordCount.bool(abstractWordCount, 150, 300)}
           errorMessage={validate_wordCount.message('', 150, 300)}
           placeholder="Enter abstract (150-200 words)"
           rows={5}

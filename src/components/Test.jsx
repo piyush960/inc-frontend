@@ -1,8 +1,4 @@
-import React from 'react'
-import { section_bg } from '../assets'
-import { useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
-import Loader from './ui/Loader'
+
 import { pagenotfound } from '../assets'
 
 const Test = () => {

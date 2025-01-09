@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
 import { styles } from "../styles";
 
@@ -38,7 +38,7 @@ const SwipeGallery = () => {
         <h2 className={`${styles.sectionSubText}`}>
           Gallery <br />
           <span className={`${styles.sectionHeadText}`}>
-            InC'24.
+            InC&apos;24.
           </span>
         </h2>
       </motion.div>
@@ -67,7 +67,7 @@ const SwipeGalleryContent = () => {
     }, AUTO_DELAY);
 
     return () => clearInterval(intervalRef);
-  }, []);
+  });
 
   const onDragEnd = () => {
     const x = dragX.get();

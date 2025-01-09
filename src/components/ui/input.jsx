@@ -1,11 +1,10 @@
-import * as React from "react";
 import { useMotionValue, motion, useMotionTemplate } from "framer-motion";
 import { cn } from "../../lib/utils";
+import React from "react";
 
 const Input = React.forwardRef((props, ref) => {
   const {
     className,
-    type,
     as: Component = "input",
     validate,
     errorMessage,
