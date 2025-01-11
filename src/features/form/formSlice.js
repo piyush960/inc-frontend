@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { techfiesta } from '../../assets'
 
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
       mode: "1",
       reason_of_mode: "",
       isInternational: null,
+      techfiesta: null,
       year: "",
       referral: "",
     },

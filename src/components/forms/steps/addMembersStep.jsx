@@ -3,7 +3,7 @@ import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
 import FormButton from "../FormButton";
 
-import { validate_email, validate_isEmpty, validate_phone, validateMember } from "../utils"; 
+import { formatPhoneNumber, validate_email, validate_isEmpty, validate_phone, validateMember } from "../utils"; 
 import { Select } from "../../ui/select";
 import { FileUpload } from '../../ui/file-upload'
 import { toast } from "react-toastify";
@@ -31,6 +31,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
   const [ addMember, { isLoading } ] = useAddMemberMutation()
   const [ removeMember, { isLoading: isRemoveLoading } ] = useRemoveMemberMutation();
   const dispatch = useDispatch()
+  const [phone, setPhone] = useState("")
   
   useEffect(() => {
     scrollToTop()
@@ -76,6 +77,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
       setMembers([...members, { ...newMember }])
       toast.success('Added Successfully')
       setNewMember(initialState);
+      setPhone("");
     }
     catch(error){
       console.error(error)
@@ -131,6 +133,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <div>
           <Label htmlFor="name" required>Name</Label>
           <Input
+            disabled={isLoading}
             name="name"
             id="name"
             value={newMember.name}
@@ -146,6 +149,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <div>
           <Label htmlFor="email" required>Email</Label>
           <Input
+            disabled={isLoading}
             id="email"
             name="email"
             value={newMember.email}
@@ -163,12 +167,16 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
           <div className="flex-1">
             <Label htmlFor="phone" required>Phone</Label>
             <Input
+              disabled={isLoading}
               id="phone"
               name="phone"
-              value={newMember.phone}
-              onChange={(e) =>
-                setNewMember({ ...newMember, phone: e.target.value })
-              }
+              value={phone}
+              onChange={(e) => {
+                const { value } = e.target;
+                const {formatted, numbersOnly} = formatPhoneNumber(value);
+                setPhone(formatted)
+                setNewMember({ ...newMember, phone: numbersOnly })
+              }}
               validate={validate_phone.bool}
               errorMessage={validate_phone.message()}
               placeholder="Phone number"
@@ -179,6 +187,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
             <Select
               id="gender"
               name="gender"
+              disabled={isLoading}
               value={newMember.gender}
               onChange={(e) =>
                 setNewMember({ ...newMember, gender: e.target.value })
@@ -197,6 +206,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <div className={!isPradnya && 'hidden'}>
           <Label htmlFor="codechef_id">Codechef ID</Label>
           <Input
+            disabled={isLoading}
             id="codechef_id"
             name="codechef_id"
             value={newMember.codechef_id}
@@ -211,7 +221,9 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <div className="relative">
           <Label htmlFor="member_id" required>ID Card</Label>
           <FileUpload 
+          id="member_id"
           value={newMember.member_id}
+          disabled={isLoading}
           onChange={
             (files) => {
               setNewMember({...newMember, member_id: files[0]})
@@ -301,7 +313,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
             <button
               onClick={() => handleDeleteMember(member.id, index)}
               disabled={ isRemoveLoading }
-              className="text-red-600 hover:text-red-700 transform hover:scale-110 transition duration-200"
+              className="text-red-600 hover:scale-110 transform transition duration-200 disabled:text-red-400"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

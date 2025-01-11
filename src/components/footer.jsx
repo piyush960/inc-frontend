@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
         <div>
           <h5 className='text-lg font-semibold'>Email</h5>
-          <a href='mailto:pictinc2025@gmail.com' className='text-sm'>pictinc2025@gmail.com</a>
+          <a href='mailto:inc@pict.edu' className='text-sm'>inc@pict.edu</a>
         </div>
         <div className='flex items-center gap-1 cursor-pointer' onClick={() => navigate('/')}>
           <img src={logo} alt="inc-logo" className='h-[70px] w-[70px]'/>

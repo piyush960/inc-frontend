@@ -132,7 +132,7 @@ const Card = ({
               <p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
             </div>
             <p className="text-white-100/90 text-md text-center">{details.description}</p>
-            <span className="text-slate-400 text-sm font-medium">{dateToWords(details.date) === "Invalid Date" ? details.date : dateToWords(details.date)}</span>
+            <span className={`${details.date.includes("Closed") ? 'text-red-500' : 'text-secondary'} text-sm font-medium`}>{dateToWords(details.date) === "Invalid Date" ? details.date : dateToWords(details.date)}</span>
           </div>
         </div>
         

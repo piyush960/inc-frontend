@@ -80,11 +80,11 @@ import {
 
   
   const events = [
-    { id: 1, _id: 'impetus', title: "Impetus", description: "International Level Project Exhibition and Competition.", logo: impetus, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "Droppin' soon, stay tuned!" },
-    { id: 2, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-orange-900", team_size: '1-2 members', type: 'Coding Competition', date: "Droppin' soon, stay tuned!" },
-    { id: 3, _id: 'concepts', title: "Concepts", description: "The most grand project exhibition event Concepts for final year student.", logo: concepts, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "Droppin' soon, stay tuned!" },
-    { id: 4, _id: 'techfiesta', title: "TechFiesta", description: "International Hackathon", logo: techfiesta, color:"bg-orange-900", team_size: '4-5 members', type: 'Hackathon', date: "Droppin' soon, stay tuned!" },
-    { id: 5, _id: 'impetus', title: "Special Event", description: "Streamin' details...", logo: logo, color:"bg-orange-900", team_size: '2-5 members', type: 'Not disclosed', date: "Droppin' soon, stay tuned!" },
+    { id: 1, _id: 'impetus', title: "Impetus", description: "International Level Project Exhibition and Competition.", logo: impetus, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "March 28, 2025" },
+    { id: 2, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-slate-700", team_size: '1-2 members', type: 'Coding Competition', date: "March 28, 2025" },
+    { id: 3, _id: 'concepts', title: "Concepts", description: "The most grand project exhibition event Concepts for final year student.", logo: concepts, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "March 28, 2025" },
+    { id: 4, _id: 'techfiesta', title: "TechFiesta", description: "International Hackathon", logo: techfiesta, color:"bg-slate-700", team_size: '4-5 members', type: 'Hackathon', date: "Registration Closed" },
+    { id: 5, _id: 'impetus', title: "Special Event", description: "Streamin' details...", logo: logo, color:"bg-slate-700", team_size: '2-5 members', type: 'Not disclosed', date: "March 28, 2025" },
   ];
 
   const eventsData = {
@@ -95,11 +95,11 @@ import {
         "First, Second and Third Year Engineering Students.",
       name: "Impetus",
 
-      short_desc: "International Level Project Exhibition and Competition",
+      short_desc: "International Level Project Exhibition and Competition.",
 
       description: ["Impetus is an intercollegiate international level competition and has been attracting corporate giants for not only sponsorship but also in terms of time and guidance to the participants. Industries such as eQ Technologic, Microsoft, Mobiliya, Deutsche Bank Group, Avaya, Siemens, Sagitech, Apporbit, e-Zest, HP, Indian Oil, 3 Ogeestudio, Tata, Mojo Networks, Ryussi, Tibco, Calsoft, Persistent, Pubmatic, IBM, Airtight, AthenaHealth, IEEE, ACM, CSI, were closely associated with this event. During the 3 day event, first year, second year and third year students from various colleges across India and abroad showcase their projects in domains like", `Application Development `, `Communication, Networking, Security `, `git Learning, Pattern Recognition, Artificial Intelligence`, `Embedded systems, VLSI, IoT, Remote Sensing`, `Blockchain, Cloud Computing`, `Others`],
       
-      domains: [`Application Development `, `Communication Networking`, `Security`, `Pattern Recognition, Artificial Intelligence`, `IoT, Remote Sensing`, `Blockchain`, `Cloud Computing`, `Others`],
+      domains: [`Application Development `, `Communication Networking`, `Security`, `Pattern Recognition, Artificial Intelligence`, `Digital / Image / Speech / Video Processing`, `Others`],
 
       // domains: [
       //   {
@@ -126,7 +126,7 @@ import {
 
       registrations: {
         fees: {
-          national: `&#8377;100/-`,
+          national: `&#8377;300/-`,
           international: `Free`,
         },
         min_team_size: 2,
@@ -141,13 +141,13 @@ import {
 
       // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: "https://pictinc.org/register/events/impetus",
-      schedule: "Droppin' soon, stay tuned!",
+      schedule: "March 28, 2025",
     }, 
     concepts: {
       id: 'concepts',
       logo: concepts,
       criteria: "Final year students enrolled in BE/ BTech degree.",
-      schedule: "Droppin' soon, stay tuned!",
+      schedule: "March 28, 2025",
       name: "Concepts",
       notices: [
         "1. The Participants should be present on campus and the labs during the time period allocated.",
@@ -158,11 +158,11 @@ import {
       ],
 
       short_desc:
-        "The most grand project exhibition event Concepts for final year student",
+        "The most grand project exhibition event for Final Year students.",
 
       description: ["Concepts is an inter-collegiate international-level competition and has been attracting corporate giants for not only sponsorship but also  for guiding and mentoring the participants for their Quality products/projects and providing on spot job offers & internships. It offers Patent registration fees for Innovative and Patentable projects. During the 3 day event, Final Year students from various colleges across India and abroad showcase their projects.",],
 
-      domains: [`Application Development `, `Communication, Networking, Security `, `DIGITAL / IMAGE / SPEECH / VIDEO PROCESSING`, `EMBEDDED/VLSI SYSTEMS`, `Others`],
+      domains: [`Application Development `, `Communication Networking`, `Security`, `Pattern Recognition, Artificial Intelligence`, `Digital / Image / Speech / Video Processing`, `Others`],
 
       // domains: [
       //   {
@@ -215,7 +215,7 @@ import {
       note1: `🔹Judge's decision will be final.`,
       note3: `🔹Already registered candidatess need not register again.`,
       schedule: "Droppin' soon, stay tuned!",
-      criteria: `Junior Level - This category is open for all students who are pursuing first or second year of any undergraduate  degree/course.#$Senior Level - Third year engineering, final year engineering of any undergraduate degree/course.`,
+      criteria: `Junior Level - This category is open for all students who are pursuing first or second year of any undergraduate degree/course.#$Senior Level - Third and final year engineering students of any undergraduate degree/course.`,
       logo: pradnya,
       name: "Pradnya",
       short_desc: "Competitive Programming",

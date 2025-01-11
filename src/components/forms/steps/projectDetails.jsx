@@ -13,6 +13,7 @@ import { resetForm, submit_step1, submit_step2, submit_step3 } from '../../../fe
 import { useLazyGetTicketQuery, useStepOneMutation } from "../../../app/services/formAPI";
 import Loader from "../../ui/Loader";
 import scrollToTop from "../../../utils/scrollToTop";
+import { formatPhoneNumber } from "../utils";
 
 const initialState = {
   title: "",
@@ -37,7 +38,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
   const dispatch = useDispatch()
   const [abstractWordCount, setAbstractWordCount] = useState(0);
   const [ getTicket, { data: ticketData, isLoading: isTicketLoading, isSuccess } ] = useLazyGetTicketQuery();
-  
+  const [phone, setPhone] = useState("");
   const [ stepOne, { isLoading } ] = useStepOneMutation()
 
   useEffect(() => {
@@ -56,11 +57,22 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
       dispatch(submit_step2(Array.isArray(ticketData.step_2) ? ticketData.step_2 : []))
       dispatch(submit_step3(ticketData.step_3))
       setFormData(ticketData.step_1)
+      setPhone(formatPhoneNumber(ticketData.step_1.guide_phone).formatted)
     }
   }, [isSuccess, ticketData])
+
   
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    if(name === "guide_phone"){
+      const {formatted, numbersOnly} = formatPhoneNumber(value);
+      setPhone(formatted)
+      setFormData({
+        ...formData,
+        [name]: numbersOnly,
+      });
+      return;
+    }
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? (checked ? "1" : "0") : value,
@@ -185,7 +197,8 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
         <Input
           id="guide_phone"
           name="guide_phone"
-          value={formData.guide_phone}
+          isPhone
+          value={phone}
           onChange={handleChange}
           validate={validate_phone.bool}
           errorMessage={validate_phone.message()}
