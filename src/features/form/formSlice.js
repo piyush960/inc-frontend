@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { techfiesta } from '../../assets'
 
 
 const initialState = {
@@ -15,6 +16,8 @@ const initialState = {
         abstract: "",
         nda: "0",
         demo: "1",
+        techfiesta: "0",
+        team_id: "",
         reason_of_demo: "",
     },
     step2: Array(),

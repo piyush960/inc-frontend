@@ -8,6 +8,7 @@ const Input = React.forwardRef((props, ref) => {
     as: Component = "input",
     validate,
     errorMessage,
+    isPhone,
     ...otherProps
   } = props;
   const radius = 100; // Radius of hover effect

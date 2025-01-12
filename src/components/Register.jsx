@@ -76,7 +76,7 @@ const Register = () => {
                 maxMembers={event === 'pradnya' ? 2 : 5}
                 nextStep={nextStep}
                 prevStep={prevStep}
-                isPradnya={(event === 'pradnya')}
+                isPradnya={(event === 'pradnya' ? true : false)}
               />
             </GradientWrapper>
           )}
