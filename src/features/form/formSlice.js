@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { techfiesta } from '../../assets'
-
 
 const initialState = {
     step1: {
