@@ -34,7 +34,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
   const [ getTechfiestaMembers, { data: techfiestaMems, isSuccess: isTechfiestaSuccess, isLoading: isTechfiestaLoading, error: techerr, isError: isTechfiestaError } ] = useLazyGetTechfiestaMembersQuery();
   const [ addMember, { isLoading } ] = useAddMemberMutation()
   const [ removeMember, { isLoading: isRemoveLoading } ] = useRemoveMemberMutation();
-  const [ addTechfiestaMembers, { isLoading: isAddTechLoading, isSuccess: isAddTechSuccess } ] = useAddTechfiestaMembersMutation();
+  const [ addTechfiestaMembers, { isLoading: isAddTechLoading } ] = useAddTechfiestaMembersMutation();
   const [members, setMembers] = useState([]);
   const [newMember, setNewMember] = useState(initialState);
   const dispatch = useDispatch()
@@ -141,7 +141,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
     e.preventDefault();
     if(form?.step1?.techfiesta === "1"){
       try {
-        const response = await addTechfiestaMembers({ ticket, data: members }).unwrap();
+        await addTechfiestaMembers({ ticket, data: members }).unwrap();
         toast.success('Added Successfully')
         setNewMember(initialState);
         setPhone("");
