@@ -323,7 +323,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
             onChange={handleChange}
             className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
-          Do you participated in Techfiesta?
+          Did you participate in Techfiesta?
         </Label>
         {formData.techfiesta === "1" && (
           <div className="">
