@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-
 const initialState = {
     step1: {
         title: "",
@@ -15,6 +14,8 @@ const initialState = {
         abstract: "",
         nda: "0",
         demo: "1",
+        techfiesta: "0",
+        team_id: "",
         reason_of_demo: "",
     },
     step2: Array(),

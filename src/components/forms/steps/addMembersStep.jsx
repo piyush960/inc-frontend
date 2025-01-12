@@ -3,14 +3,15 @@ import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
 import FormButton from "../FormButton";
 
-import { validate_email, validate_isEmpty, validate_phone, validateMember } from "../utils"; 
+import { formatPhoneNumber, validate_email, validate_isEmpty, validate_phone, validateMember } from "../utils"; 
 import { Select } from "../../ui/select";
 import { FileUpload } from '../../ui/file-upload'
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { submit_step2 } from "../../../features/form/formSlice";
-import { useAddMemberMutation, useLazyGetMembersQuery, useRemoveMemberMutation } from "../../../app/services/formAPI";
+import { useAddMemberMutation, useAddTechfiestaMembersMutation, useLazyGetMembersQuery, useLazyGetTechfiestaMembersQuery, useRemoveMemberMutation } from "../../../app/services/formAPI";
 import scrollToTop from "../../../utils/scrollToTop";
+import Loader from "../../ui/Loader";
 
 const initialState = {
   id: "",
@@ -25,32 +26,54 @@ const initialState = {
 const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextStep, isPradnya }) => {
   
   const step2 = useSelector(state => state.form.step2)
-  const [ getMembers, { data, isSuccess } ] = useLazyGetMembersQuery();
-  const [members, setMembers] = useState([]);
-  const [newMember, setNewMember] = useState(initialState);
+  const ename = window.localStorage.getItem('event_name');
+  const form = JSON.parse(window.sessionStorage.getItem('form'));
+  const ticket = window.localStorage.getItem('ticket') || '';
+  
+  const [ getMembers, { data, isSuccess, isLoading: isGetMemsLoading } ] = useLazyGetMembersQuery();
+  const [ getTechfiestaMembers, { data: techfiestaMems, isSuccess: isTechfiestaSuccess, isLoading: isTechfiestaLoading, error: techerr, isError: isTechfiestaError } ] = useLazyGetTechfiestaMembersQuery();
   const [ addMember, { isLoading } ] = useAddMemberMutation()
   const [ removeMember, { isLoading: isRemoveLoading } ] = useRemoveMemberMutation();
+  const [ addTechfiestaMembers, { isLoading: isAddTechLoading } ] = useAddTechfiestaMembersMutation();
+  const [members, setMembers] = useState([]);
+  const [newMember, setNewMember] = useState(initialState);
   const dispatch = useDispatch()
+  const [phone, setPhone] = useState("")
   
   useEffect(() => {
     scrollToTop()
-    const ename = window.localStorage.getItem('event_name');
-    const ticket = window.localStorage.getItem('ticket') || '';
-    if(event === ename){
-      getMembers(ticket);
+    try {
+      if(event === ename && form.step1.techfiesta === "1"){
+        getTechfiestaMembers(form?.step1?.team_id);
+      }
+      else if(event === ename){
+        getMembers(ticket);
+      }
+    } catch (error) {
+      toast.error(error?.data?.message || error?.message || 'Failed to get Members')
     }
   }, []);
 
   useEffect(() => {
-    if (isSuccess) {
-      if (data.step_2 && Array.isArray(data.step_2)) {
+    if (isSuccess || isTechfiestaSuccess) {
+      if (techfiestaMems?.team_json?.length > 0) {
+        const mems = techfiestaMems.team_json.filter((mem) => {
+          return mem.name || mem.email || mem.gender || mem.phone;
+        })
+        setMembers([...mems]);
+      }
+      else if(data.step_2 && Array.isArray(data.step_2)){
         setMembers([...data.step_2]);
       }
       else{
         setMembers([...step2])
       }
     }
-  }, [data, isSuccess]); 
+    else if(isTechfiestaError){
+      toast.error(techerr?.data?.message || 'Failed to fetch Team Members');
+      prevStep();
+    }
+  }, [data, isSuccess, techfiestaMems, isTechfiestaSuccess, isTechfiestaError]); 
   
   const handleAddMember = async () => {
     if(validateMember(newMember)){
@@ -59,7 +82,6 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
     }
     newMember.id = Date.now();
     try{
-      const ticket = window.localStorage.getItem('ticket') || ''
       const memberFormData = new FormData();
       memberFormData.append("member_id", newMember.member_id);
       const tempMemberDetails = { ...newMember };
@@ -76,6 +98,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
       setMembers([...members, { ...newMember }])
       toast.success('Added Successfully')
       setNewMember(initialState);
+      setPhone("");
     }
     catch(error){
       console.error(error)
@@ -86,9 +109,9 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
 
   const handleDeleteMember = async (id, index=0) => {
     try{
-      const ticket = window.localStorage.getItem('ticket') || '';
-      // console.log(index)
-      await removeMember({ index, ticket }).unwrap()
+      if(form?.step1?.techfiesta === "0"){
+        await removeMember({ index, ticket }).unwrap()
+      }
       setMembers(members.filter((member) => member.id !== id));
       toast.success('Removed Successfully')
     }
@@ -98,8 +121,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
     if (members.length < minMembers) {
       toast.info('Min Member must be ' + minMembers)
       return;
@@ -115,7 +137,34 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
     } 
   };
 
+  const handleFinalSubmit = async (e) => {
+    e.preventDefault();
+    if(form?.step1?.techfiesta === "1"){
+      try {
+        await addTechfiestaMembers({ ticket, data: members }).unwrap();
+        toast.success('Added Successfully')
+        setNewMember(initialState);
+        setPhone("");
+        handleSubmit();
+      } catch (error) {
+        toast.error(error?.data?.message || error?.message  || 'Failed to Add Members')
+      }
+    }
+    else{
+      handleSubmit();
+    }
+  }
+
   return (
+    <>
+    { isTechfiestaLoading ?
+      <div className="fixed inset-0 z-50 backdrop-blur-sm">
+        <div className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] flex flex-col gap-8">
+          <Loader size={150} />
+          <h2 className="sm:text-2xl text-white text-center">Fetching Techfiesta Team...</h2>
+        </div>
+      </div>
+    :
     <form
       className="w-full bg-tertiary p-4 sm:p-10 grid grid-cols-1 sm:grid-cols-2 gap-8"
       onSubmit={handleSubmit}
@@ -125,12 +174,12 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <strong>Note:</strong> The first member added will be the{" "}
         <span className="text-blue-500 font-bold">Team Leader</span>.
       </p>
-
       {/* Add New Member Form */}
       <div className="space-y-8">
         <div>
           <Label htmlFor="name" required>Name</Label>
           <Input
+            disabled={isLoading}
             name="name"
             id="name"
             value={newMember.name}
@@ -146,6 +195,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <div>
           <Label htmlFor="email" required>Email</Label>
           <Input
+            disabled={isLoading}
             id="email"
             name="email"
             value={newMember.email}
@@ -163,12 +213,16 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
           <div className="flex-1">
             <Label htmlFor="phone" required>Phone</Label>
             <Input
+              disabled={isLoading}
               id="phone"
               name="phone"
-              value={newMember.phone}
-              onChange={(e) =>
-                setNewMember({ ...newMember, phone: e.target.value })
-              }
+              value={phone}
+              onChange={(e) => {
+                const { value } = e.target;
+                const {formatted, numbersOnly} = formatPhoneNumber(value);
+                setPhone(formatted)
+                setNewMember({ ...newMember, phone: numbersOnly })
+              }}
               validate={validate_phone.bool}
               errorMessage={validate_phone.message()}
               placeholder="Phone number"
@@ -179,6 +233,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
             <Select
               id="gender"
               name="gender"
+              disabled={isLoading}
               value={newMember.gender}
               onChange={(e) =>
                 setNewMember({ ...newMember, gender: e.target.value })
@@ -197,6 +252,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <div className={!isPradnya && 'hidden'}>
           <Label htmlFor="codechef_id">Codechef ID</Label>
           <Input
+            disabled={isLoading}
             id="codechef_id"
             name="codechef_id"
             value={newMember.codechef_id}
@@ -211,7 +267,9 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <div className="relative">
           <Label htmlFor="member_id" required>ID Card</Label>
           <FileUpload 
+          id="member_id"
           value={newMember.member_id}
+          disabled={isLoading}
           onChange={
             (files) => {
               setNewMember({...newMember, member_id: files[0]})
@@ -242,7 +300,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <button
           type="button"
           onClick={handleAddMember}
-          disabled={members.length === maxMembers || isLoading}
+          disabled={members.length === maxMembers || isLoading || isTechfiestaSuccess}
           className="bg-black-100 text-white border-[1px] border-secondary px-4 py-2 disabled:opacity-50"
         >
           { isLoading ? 'Adding...' : 'Add Member' }
@@ -254,9 +312,9 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
         <h3 className="text-lg font-semibold text-white">
           Team Members ({members.length}/{maxMembers})
         </h3>
-        {members.sort((a, b) => new Date(a.id) - new Date(b.id)).map((member, index) => (
+        {isGetMemsLoading ? <p>Fetching...</p> : members.sort((a, b) => new Date(a.id) - new Date(b.id)).map((member, index) => (
           <div
-            key={member.id}
+            key={member.phone}
             className={`relative flex items-center justify-between bg-slate-800 p-4 text-white group ${
               index === 0 ? "border-l-4 border-secondary" : ""
             }`}
@@ -283,7 +341,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
               </p>
               <p className="font-bold text-sm">
                 Gender:
-                <span className="font-normal">&nbsp;{member.gender}</span>
+                <span className="font-normal">&nbsp;{member.gender || 'saved'}</span>
               </p>
               <p className="font-bold text-sm">
                 Phone:
@@ -301,7 +359,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
             <button
               onClick={() => handleDeleteMember(member.id, index)}
               disabled={ isRemoveLoading }
-              className="text-red-600 hover:text-red-700 transform hover:scale-110 transition duration-200"
+              className="text-red-600 hover:scale-110 transform transition duration-200 disabled:text-red-400"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -321,9 +379,11 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
 
       <div className={`sm:col-span-2 ${isPradnya ? 'justify-self-end' : 'flex items-center justify-between'}`}>
         {!isPradnya && <FormButton loading={false} className={``} isPrev onClick={() => prevStep()} />}
-        <FormButton loading={false} className={``} onClick={handleSubmit} />
+        <FormButton loading={isAddTechLoading} className={``} onClick={handleFinalSubmit} />
       </div>
       </form>
+    }
+    </>
   );
 };
 

@@ -104,7 +104,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
           id="isPICT"
           name="isPICT"
           options={yesNoOptions}
-          errorMessage={isPICT === null && "Field is Required"}
+          errorMessage={formData.isPICT === null && "Field is Required"}
           onChange={(e) => {
             const value = e.target.value
             const isInternational = formData.isInternational
@@ -112,11 +112,11 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
             setIsPICT(value === "1" ? true : false)
             // console.log(isPICT)
             if (value === "1") {
-              setFormData((prev) => ({ ...prev, ...pictState }))
+              setFormData((prev) => ({ ...prev, ...pictState, }))
               document.querySelectorAll('#isInternational')[1].checked = true;
             }
             else {
-              setFormData((prev) => ({ ...prev, ...initialState, isInternational }))
+              setFormData((prev) => ({ ...prev, ...initialState, isInternational, }))
             }
           }}
           className=""

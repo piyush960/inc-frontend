@@ -13,17 +13,19 @@ import AnimatedCounter from "./components/AnimatedCounter";
 import { ToastContainer, Zoom } from "react-toastify";
 import PageNotFound from "./components/PageNotFound";
 import Footer from './components/footer'
+import { useState } from "react";
 
 const App = () => {
   
   const isMobile = useDimension();
+  const [lightOn, setLightOn] = useState(true);
 
 
   return (
     <MobileContext.Provider value={isMobile}>
       <ToastContainer
       position="top-right"
-      autoClose={5000}
+      autoClose={4000}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick={false}
@@ -38,13 +40,13 @@ const App = () => {
       <Routes>
           <Route path="/" element={
             <>
-              <Hero />
+              <Hero lightOn={lightOn} />
               <About />
-              <AnimatedCounter />
               <Events />
               {/* <SwipeGallery /> */}
+              <AnimatedCounter />
               <Sponsors />
-              <Notification />
+              <Notification setLightOn={setLightOn} />
             </>
             } />
           <Route path="/register" element={

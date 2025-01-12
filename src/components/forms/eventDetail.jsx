@@ -28,7 +28,7 @@ const EventDetail = ({ amount }) => {
         <div className="flex flex-col items-end gap-3">
           <div className="flex items-center gap-2 bg-gray-800/30 px-4 py-2">
             <span className="text-green-500 font-medium">
-              {amount}&nbsp;<span className="text-gray-400">National Entries</span>
+              <span dangerouslySetInnerHTML={{ __html: amount}}></span>&nbsp;<span className="text-gray-400">National Entries</span>
             </span>
           </div>
 

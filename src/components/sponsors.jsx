@@ -15,7 +15,7 @@ import {
 const Sponsors = () => {
 
   return (
-    <section className='h-full w-full flex flex-col items-center justify-evenly pb-24'>
+    <section className='h-full w-full flex flex-col items-center justify-evenly pb-24 pt-4'>
       <motion.div 
       initial={{ y: 100, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
@@ -26,7 +26,7 @@ const Sponsors = () => {
         <h2 className={`${styles.sectionHeadText}`}>Sponsors.</h2>
       </motion.div>
 
-      <div className='flex flex-col w-full h-full items-center gap-10 py-16'>
+      <div className='flex flex-col w-full h-full items-center gap-10 sm:py-16 py-8'>
         {
           Object.keys(sponsors).map(obj => (
             <div key={obj} className='flex flex-col gap-8 items-center'>

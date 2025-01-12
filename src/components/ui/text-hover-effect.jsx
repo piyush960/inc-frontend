@@ -32,7 +32,7 @@ export const TextHoverEffect = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
-      className="select-none max-sm:h-[200px] max-sm:w-[350px]">
+      className="select-none max-sm:hidden">
       <defs>
         <linearGradient
           id="textGradient"
@@ -44,9 +44,9 @@ export const TextHoverEffect = ({
             <>
               <stop offset="0%" stopColor={"var(--dark-blue-500)"} />
               <stop offset="25%" stopColor={"var(--blue-500)"} />
-              <stop offset="50%" stopColor={"var(--cyan-500)"} />
-              <stop offset="75%" stopColor={"var(--orange-500)"} />
-              <stop offset="100%" stopColor={"var(--orange-500)"} />
+              <stop offset="50%" stopColor={"var(--orange-500)"} />
+              <stop offset="75%" stopColor={"var(--orange-600)"} />
+              <stop offset="100%" stopColor={"var(--orange-700)"} />
             </>
           )}
         </linearGradient>
@@ -65,7 +65,7 @@ export const TextHoverEffect = ({
           <rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)" />
         </mask>
       </defs>
-      {/* <text
+      <text
         x="50%"
         y="50%"
         textAnchor="middle"
@@ -74,7 +74,7 @@ export const TextHoverEffect = ({
         className="font-[helvetica] font-bold fill-transparent text-8xl  "
         style={{ opacity: hovered ? 0.7 : 0 }}>
         {text}
-      </text> */}
+      </text>
       <motion.text
         x="50%"
         y="50%"
@@ -99,7 +99,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         stroke="url(#textGradient)"
-        strokeWidth="2.0"
+        strokeWidth="2.6"
         mask="url(#textMask)"
         className="font-[helvetica] max-sm:hidden font-bold fill-transparent text-8xl">
         {text}

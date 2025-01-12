@@ -25,7 +25,7 @@ const FormsBanner = ({ logo, eventName, eventDescription, fees, min_team_size, m
 				<div className="flex flex-col items-center sm:items-end justify-center gap-4">
 					{min_team_size && max_team_size && <p className='px-2 py-1 text-sm bg-slate-800 font-semibold rounded-md flex items-center gap-2'><IconUsersGroup /> {min_team_size}-{max_team_size} members</p>}
 					{fees && <ul className='flex sm:gap-4 gap-1'>
-						<li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>National: {fees}</li>
+						<li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>National: <span dangerouslySetInnerHTML={{__html: fees}}></span></li>
 						<li className='bg-slate-800 text-green-400 font-semibold px-1 sm:px-2 py-1 rounded-md'>International: {'Free'}</li>
 					</ul>}
 				</div>

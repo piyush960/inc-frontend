@@ -16,25 +16,29 @@ const initialState = {
   payment_id: "",
 }
 
-const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = false }) => {
+const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
   const step4 = useSelector(state => state.form.step4)
   const [formData, setFormData] = useState(step4);
   const dispatch = useDispatch();
   const [ stepFour, { isLoading } ] = useStepFourMutation();
   const [hasRegistered, setHasRegistered] = useState(false);
+  const form = JSON.parse(window.sessionStorage.getItem('form'));
+  const isPICT = form?.step3?.isPICT === "1";
+  const isInternational = form?.step3?.isInternational === "1";
+  const techfiesta = form?.step1?.techfiesta === "1";
 
   useEffect(() => {
     scrollToTop();
   }, [])
 
   const validate = () => {
-    let tempErrors = {};
+    let count = 0;
     if (!formData.payment_id) {
-      tempErrors.payment_id = "Transaction ID is required";
-    } else if (formData.payment_id.length > 12) {
-      tempErrors.payment_id = "Transaction ID must be exactly 12 digits";
+      count++;
+    } else if (formData.payment_id.length !== 12) {
+      count++;
     }
-    return Object.keys(tempErrors).length === 0;
+    return count === 0;
   };
 
   const handleInputChange = (e) => {
@@ -46,7 +50,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!validate()){
+    if(!isInternational && !isPICT && !techfiesta && !validate()){
       toast.error("Fill all the required details correctly!")
       return;
     }
@@ -75,11 +79,11 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
         <EventDetail event_name={event} amount={amount}/>
 
         {/* Payment Section */}
-        {!isInternational && !hasRegistered && (
+        {!isInternational && !isPICT && !techfiesta && !hasRegistered && (
           <div className="space-y-8">
             <div className="bg-blue-900/20 p-6 border border-blue-500/30">
               <h3 className="text-xl font-semibold mb-4 text-center text-blue-100">
-                Scan the QR to pay &nbsp;<span className="text-green-500">{amount}</span>
+                Scan the QR to pay &nbsp;<span className="text-green-500" dangerouslySetInnerHTML={{ __html: amount}}></span>
               </h3>
               <div className="flex justify-center">
                 <div className="bg-white p-6 max-w-xs">
@@ -118,13 +122,13 @@ const PaymentStep = ({ event, imagePath, amount, prevStep, isInternational = fal
         )}
 
         {/* Show message for international participants */}
-        {isInternational && (
+        {(isInternational || isPICT || techfiesta) && (
           <div className="bg-green-900/20 p-6 border border-green-500/30 text-center">
-            <h3 className="text-xl font-semibold text-green-100">
-              Free Registration for International Participants
+            <h3 className="text-xl font-semibold text-green-500">
+              Free Registration for {isInternational ? 'International' : techfiesta ? 'Techfiesta' : 'PICT'} Participants.
             </h3>
-            <p className="text-gray-300 mt-2">
-              You can proceed without payment
+            <p className="text-slate-500 mt-2">
+              You can proceed without payment.
             </p>
           </div>
         )}
