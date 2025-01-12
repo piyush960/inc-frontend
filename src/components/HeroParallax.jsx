@@ -43,9 +43,9 @@ const Hero = ({ lightOn }) => {
 
       <div className='relative flex flex-col items-center sm:h-full justify-center sm:w-[600px]'>
 
-        <img src={impetus_b} alt="impetus_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute bottom-[11.6%] left-[1%] sm:bottom-[21%] sm:left-[-4%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100' onClick={() => navigate('/events/impetus')}/>
+        <img src={impetus_b} alt="impetus_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute bottom-[11.8%] left-[1.2%] sm:bottom-[21%] sm:left-[-4%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100' onClick={() => navigate('/events/impetus')}/>
 
-        <img src={pradnya_b} alt="pradnya_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute left-[44%] top-[10%] sm:top-[15%] sm:left-[42%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100' onClick={() => navigate('/events/pradnya')}/>
+        <img src={pradnya_b} alt="pradnya_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute left-[45%] top-[9.8%] sm:top-[15%] sm:left-[42%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100' onClick={() => navigate('/events/pradnya')}/>
 
         <img src={concepts_b} alt="concepts_logo" className='sm:w-24 sm:h-24 w-9 h-9 absolute top-[44.5%] right-[-2.5%] sm:top-[41.4%] sm:right-[-8%] rotate-[18deg] z-10 cursor-pointer opacity-70 hover:opacity-100 hover:scale-105 duration-300' onClick={() => navigate('/events/concepts')}/>
         
