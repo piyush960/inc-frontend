@@ -28,6 +28,8 @@ const initialState = {
   abstract: "",
   nda: "0",
   demo: "1",
+  techfiesta: "0",
+  team_id: "",
   reason_of_demo: "",
 }
 
@@ -305,6 +307,35 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
               validate={validate_isEmpty.bool}
               errorMessage={validate_isEmpty.message()}
               placeholder="Enter reason for not showing a demo"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* techfiesta */}
+      <div className="flex flex-col gap-4">
+        <Label htmlFor="techfiesta" required className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="techfiesta"
+            id="techfiesta"
+            checked={formData.techfiesta === "1"}
+            onChange={handleChange}
+            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          Do you participated in Techfiesta?
+        </Label>
+        {formData.techfiesta === "1" && (
+          <div className="">
+            <Label htmlFor="team_id" required>Techfiesta Team ID</Label>
+            <Input
+              id="team_id"
+              name="team_id"
+              value={formData.team_id}
+              onChange={handleChange}
+              validate={validate_isEmpty.bool}
+              errorMessage={validate_isEmpty.message()}
+              placeholder="Eg. T4014"
             />
           </div>
         )}

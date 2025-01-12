@@ -30,6 +30,21 @@ export const formAPI = createApi({
                 credentials: 'include',
             })
         }),
+        getTechfiestaMembers: builder.query({
+            query: (team_id) => ({
+                url: `/techfiesta-members?team_id=${team_id}`,
+                method: 'GET',
+                credentials: 'include',
+            })
+        }),
+        addTechfiestaMembers: builder.mutation({
+            query: ({ticket, data}) => ({
+                url: `/techfiesta-members?ticket=${ticket}`,
+                method: 'POST',
+                credentials: 'include',
+                body: data
+            })
+        }),
         addMember: builder.mutation({
             query: ({event_name, ticket, data}) => ({
                 url: `/step_2?event_name=${event_name}&ticket=${ticket}`,
@@ -56,7 +71,7 @@ export const formAPI = createApi({
         }),
         stepFour: builder.mutation({
             query: ({ ticket, data }) => ({
-                url: `/step_4?&ticket=${ticket}`,
+                url: `/step_4?ticket=${ticket}`,
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -67,4 +82,4 @@ export const formAPI = createApi({
 })
 
 
-export const { useStepOneMutation, useAddMemberMutation, useStepThreeMutation, useStepFourMutation, useRemoveMemberMutation, useLazyGetMembersQuery, useLazyGetTicketQuery } = formAPI
+export const { useStepOneMutation, useAddMemberMutation, useStepThreeMutation, useStepFourMutation, useRemoveMemberMutation, useLazyGetMembersQuery, useLazyGetTicketQuery, useLazyGetTechfiestaMembersQuery, useAddTechfiestaMembersMutation, } = formAPI

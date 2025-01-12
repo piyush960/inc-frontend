@@ -24,7 +24,6 @@ const pictState = {
   mode: "1",
   reason_of_mode: "",
   isInternational: "0",
-  techfiesta: null,
   year: "",
   referral: "",
 }
@@ -40,7 +39,6 @@ const initialState = {
   mode: "1",
   reason_of_mode: "",
   isInternational: "0",
-  techfiesta: null,
   year: "",
   referral: "",
 }
@@ -63,12 +61,6 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
       if(formData.isInternational === "1"){
         document.querySelectorAll('#isInternational')[0].checked = true;
       }
-    }
-    if(formData.techfiesta === "1"){
-      document.querySelectorAll('#techfiesta')[0].checked = true;
-    }
-    else if(formData.techfiesta === "0"){
-      document.querySelectorAll('#techfiesta')[1].checked = true;
     }
   }, [])
 
@@ -112,20 +104,19 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
           id="isPICT"
           name="isPICT"
           options={yesNoOptions}
-          errorMessage={isPICT === null && "Field is Required"}
+          errorMessage={formData.isPICT === null && "Field is Required"}
           onChange={(e) => {
             const value = e.target.value
             const isInternational = formData.isInternational
-            const techfiesta = formData.techfiesta;
             // console.log(value)
             setIsPICT(value === "1" ? true : false)
             // console.log(isPICT)
             if (value === "1") {
-              setFormData((prev) => ({ ...prev, ...pictState, techfiesta }))
+              setFormData((prev) => ({ ...prev, ...pictState, }))
               document.querySelectorAll('#isInternational')[1].checked = true;
             }
             else {
-              setFormData((prev) => ({ ...prev, ...initialState, isInternational, techfiesta }))
+              setFormData((prev) => ({ ...prev, ...initialState, isInternational, }))
             }
           }}
           className=""
@@ -284,22 +275,6 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
           onChange={(e) => {
             const value = e.target.value
             setFormData((prev) => ({...prev, isInternational: (value === "1" ? "1" : "0")}))
-          }}
-          className=""
-        />
-      </div>
-
-      {/* Is Techfiesta */}
-      <div className="">
-        <Label htmlFor="techfiesta" required>Do You Participated in Techfiesta?</Label>
-        <RadioButton
-          id="techfiesta"
-          name="techfiesta"
-          errorMessage={formData.techfiesta === null && "Field is Required"}
-          options={yesNoOptions}
-          onChange={(e) => {
-            const value = e.target.value
-            setFormData((prev) => ({...prev, techfiesta: (value === "1" ? "1" : "0")}))
           }}
           className=""
         />

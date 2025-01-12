@@ -22,7 +22,10 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
   const dispatch = useDispatch();
   const [ stepFour, { isLoading } ] = useStepFourMutation();
   const [hasRegistered, setHasRegistered] = useState(false);
-  const isInternational = (JSON.parse(window.sessionStorage.getItem('form'))?.step3?.isInternational === "1");
+  const form = JSON.parse(window.sessionStorage.getItem('form'));
+  const isPICT = form?.step3?.isPICT === "1";
+  const isInternational = form?.step3?.isInternational === "1";
+  const techfiesta = form?.step1?.techfiesta === "1";
 
   useEffect(() => {
     scrollToTop();
@@ -47,7 +50,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!isInternational && !validate()){
+    if(!isInternational && !isPICT && !techfiesta && !validate()){
       toast.error("Fill all the required details correctly!")
       return;
     }
@@ -76,7 +79,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
         <EventDetail event_name={event} amount={amount}/>
 
         {/* Payment Section */}
-        {!isInternational && !hasRegistered && (
+        {!isInternational && !isPICT && !techfiesta && !hasRegistered && (
           <div className="space-y-8">
             <div className="bg-blue-900/20 p-6 border border-blue-500/30">
               <h3 className="text-xl font-semibold mb-4 text-center text-blue-100">
@@ -119,10 +122,10 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
         )}
 
         {/* Show message for international participants */}
-        {isInternational && (
+        {(isInternational || isPICT || techfiesta) && (
           <div className="bg-green-900/20 p-6 border border-green-500/30 text-center">
             <h3 className="text-xl font-semibold text-green-500">
-              Free Registration for International Participants.
+              Free Registration for {isInternational ? 'International' : techfiesta ? 'Techfiesta' : 'PICT'} Participants.
             </h3>
             <p className="text-slate-500 mt-2">
               You can proceed without payment.
