@@ -5,7 +5,7 @@ import { Label } from "../../ui/label";
 import FormButton from "../FormButton";
 
 import { validate_isEmpty, validate_email, validate_phone, validate_wordCount, validate } from "../utils";
-import { impetus_domains } from "../constants";
+import { impetus_domains, nova_domains } from "../constants";
 import { toast } from "react-toastify";
 
 import { useDispatch } from 'react-redux';
@@ -86,7 +86,10 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    if(event === "nova") setFormData({
+      ...formData,
+      project_type: "software",
+    });
     if(!validate(formData)){
       try {
         const ticket = window.localStorage.getItem('ticket') || ''
@@ -140,7 +143,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
           id="domain"
           value={formData.domain}
           onChange={handleChange}
-          options={impetus_domains}
+          options={event === "nova" ? nova_domains : impetus_domains}
           validate={validate_isEmpty.bool}
           errorMessage={validate_isEmpty.message()}
           name="domain"
@@ -148,7 +151,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
       </div>
 
       {/* Project Type */}
-      <div>
+      {event !== "nova" && <div>
         <Label htmlFor="project_type"  required>Project Type</Label>
         <Select
           options={[
@@ -163,7 +166,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
           id="project_type"
           name="project_type"
         />
-      </div>
+      </div>}
 
       {/* Guide Name */}
       <div>

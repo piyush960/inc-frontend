@@ -8,11 +8,26 @@ const impetus_domains = [
 	{ value: "OT", label: "Others (OT)" },
 ];
 
+const nova_domains = [
+	{ value: "", label: "Select Option" },
+	{ value: "AR", label: "Game Development (Arena)" },
+	{ value: "MS", label: "Game Development (Mindscape)" },
+	{ value: "DE", label: "3D Design" },
+]
+
 const yearOptions = [
 	{ value: "", label: "Select Year" },
 	{ value: "FE", label: "First Year" },
 	{ value: "SE", label: "Second Year" },
 	{ value: "TE", label: "Third Year" },
+];
+
+const yearOptionsNova = [
+	{ value: "", label: "Select Year" },
+	{ value: "FE", label: "First Year" },
+	{ value: "SE", label: "Second Year" },
+	{ value: "TE", label: "Third Year" },
+	{ value: "BE", label: "Fourth Year" },
 ];
 
 const yearOptionsConcepts = [
@@ -36,4 +51,4 @@ const yesNoOptions = [
 ];
 
 
-export { impetus_domains, yearOptions, localityOptions, modeOptions, yesNoOptions, yearOptionsConcepts, }
+export { impetus_domains, yearOptions, localityOptions, modeOptions, yesNoOptions, yearOptionsConcepts, nova_domains, yearOptionsNova, }

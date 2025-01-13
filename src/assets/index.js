@@ -32,6 +32,7 @@ import impetus from './logos/impetus.png'
 import pradnya from './logos/pradnya.png'
 import techfiesta from './logos/techfiesta.png'
 import pict from './logos/pict.png'
+import nova from './logos/nova.png'
 
 import concepts_b from './logos/concepts_bubble.png'
 import impetus_b from './logos/impetus_bubble.png'
@@ -54,4 +55,4 @@ import gal7 from './gallery/7.jpeg'
 
 import img1 from './team/manas.jpeg'
 
-export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader, img1, ayaan, csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge, pict, pagenotfound, qr, popper, };
+export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader, img1, ayaan, csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge, pict, pagenotfound, qr, popper, nova, };

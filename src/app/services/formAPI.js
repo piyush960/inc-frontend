@@ -31,8 +31,8 @@ export const formAPI = createApi({
             })
         }),
         getTechfiestaMembers: builder.query({
-            query: (team_id) => ({
-                url: `/techfiesta-members?team_id=${team_id}`,
+            query: ({team_id, event}) => ({
+                url: `/techfiesta-members?team_id=${team_id}&event=${event}`,
                 method: 'GET',
                 credentials: 'include',
             })
@@ -70,8 +70,8 @@ export const formAPI = createApi({
             })
         }),
         stepFour: builder.mutation({
-            query: ({ ticket, data }) => ({
-                url: `/step_4?ticket=${ticket}`,
+            query: ({ ticket, data, event }) => ({
+                url: `/step_4?ticket=${ticket}&event=${event}`,
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

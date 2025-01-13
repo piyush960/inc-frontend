@@ -23,13 +23,14 @@ const initialState = {
   codechef_id: ""
 }
 
-const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextStep, isPradnya }) => {
+const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
   
   const step2 = useSelector(state => state.form.step2)
   const ename = window.localStorage.getItem('event_name');
   const form = JSON.parse(window.sessionStorage.getItem('form'));
   const ticket = window.localStorage.getItem('ticket') || '';
-  
+  const [minMembers, setMinMembers] = useState(2);
+  const [maxMembers, setMaxMembers] = useState(5);
   const [ getMembers, { data, isSuccess, isLoading: isGetMemsLoading } ] = useLazyGetMembersQuery();
   const [ getTechfiestaMembers, { data: techfiestaMems, isSuccess: isTechfiestaSuccess, isLoading: isTechfiestaLoading, error: techerr, isError: isTechfiestaError } ] = useLazyGetTechfiestaMembersQuery();
   const [ addMember, { isLoading } ] = useAddMemberMutation()
@@ -44,13 +45,21 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
     scrollToTop()
     try {
       if(event === ename && form.step1.techfiesta === "1"){
-        getTechfiestaMembers(form?.step1?.team_id);
+        getTechfiestaMembers({team_id: form?.step1?.team_id, event});
       }
       else if(event === ename){
         getMembers(ticket);
       }
     } catch (error) {
       toast.error(error?.data?.message || error?.message || 'Failed to get Members')
+    }
+    if(event === "pradnya"){
+      setMinMembers(1);
+      setMaxMembers(2);
+    }
+    if(form?.step1?.domain === "DE"){
+      setMinMembers(1);
+      setMaxMembers(3);
     }
   }, []);
 
@@ -242,6 +251,7 @@ const AddMemberStep = ({ event, minMembers = 2, maxMembers = 5, prevStep, nextSt
                 { value: "", label: "Select Gender" },
                 { value: "male", label: "Male" },
                 { value: "female", label: "Female" },
+                { value: "other", label: "Other" },
               ]}
               validate={validate_isEmpty.bool}
               errorMessage={validate_isEmpty.message()}
