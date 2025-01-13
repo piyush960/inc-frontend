@@ -85,17 +85,13 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     // console.log(formData);
   };
 
-  const func = async () => {
-    if(event === "nova") setFormData({
-      ...formData,
-      project_type: "software",
-    });
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await func();
-    if(!validate(formData)){
+    if(event === "nova"){
+      setFormData((prev) => ({...prev, project_type: "software"}));
+    }
+    console.log(formData);
+    if(!validate(event, formData)){
       try {
         const ticket = window.localStorage.getItem('ticket') || ''
         const response = await stepOne({ event_name: event, ticket, data: formData }).unwrap();
