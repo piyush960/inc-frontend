@@ -72,6 +72,7 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(formData)
+    if(event === "concepts") formData.year = "BE";
     if(validateCollegeDetails(formData)){
       toast.error("Fill all the required details correctly!")
       return;
@@ -125,12 +126,12 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
 
       {/* If Yes, ask only for Year */}
       <div className="">
-        <Label htmlFor="year" required>Which year are you in?</Label>
+        <Label htmlFor="year" required>Which year are you in (Team Leader)?</Label>
         <Select
           name="year"
           id="year"
-          value={formData.year}
-          options={yearOptions}
+          value={event === "concepts" ? "BE" : formData.year}
+          options={event === "concepts" ? [{ value: "BE", label: "Final Year" }] : yearOptions}
           onChange={handleInputChange}
           validate={validate_isEmpty.bool}
           errorMessage={validate_isEmpty.message()}

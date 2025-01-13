@@ -13,8 +13,12 @@ const yearOptions = [
 	{ value: "FE", label: "First Year" },
 	{ value: "SE", label: "Second Year" },
 	{ value: "TE", label: "Third Year" },
-	{ value: "BE", label: "Final Year" }
 ];
+
+const yearOptionsConcepts = [
+	{ value: "", label: "Select Year" },
+	{ value: "BE", label: "Final Year" }
+]
 
 const localityOptions = [
 	{ value: "1", label: "Urban" },
@@ -32,4 +36,4 @@ const yesNoOptions = [
 ];
 
 
-export { impetus_domains, yearOptions, localityOptions, modeOptions, yesNoOptions }
+export { impetus_domains, yearOptions, localityOptions, modeOptions, yesNoOptions, yearOptionsConcepts, }
