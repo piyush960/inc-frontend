@@ -85,12 +85,16 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     // console.log(formData);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const func = async () => {
     if(event === "nova") setFormData({
       ...formData,
       project_type: "software",
     });
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await func();
     if(!validate(formData)){
       try {
         const ticket = window.localStorage.getItem('ticket') || ''

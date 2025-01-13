@@ -69,10 +69,14 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const func = async () => {
+    if(event === "concepts") setFormData({ ...formData, year: "BE" });
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(formData)
-    if(event === "concepts") formData.year = "BE";
+    await func();
     if(validateCollegeDetails(formData)){
       toast.error("Fill all the required details correctly!")
       return;
