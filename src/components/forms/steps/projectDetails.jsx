@@ -82,7 +82,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     if (name === "abstract") {
       setAbstractWordCount(value.trim().split(/\s+/).length);
     }
-    console.log(formData);
+    // console.log(formData);
   };
 
   const handleSubmit = async (e) => {
