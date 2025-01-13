@@ -166,9 +166,9 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
 
   return (
     <>
-    { isTechfiestaLoading ?
+    {isTechfiestaLoading ?
       <div className="fixed inset-0 z-50 backdrop-blur-sm">
-        <div className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] flex flex-col gap-8">
+        <div className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] flex flex-col items-center gap-8">
           <Loader size={150} />
           <h2 className="sm:text-2xl text-white text-center">Fetching Techfiesta Team...</h2>
         </div>

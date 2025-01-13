@@ -82,6 +82,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     if (name === "abstract") {
       setAbstractWordCount(value.trim().split(/\s+/).length);
     }
+    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -110,9 +111,9 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
   return (
     <>
-    { isTicketLoading ?
+    {isTicketLoading ?
     <div className="fixed inset-0 z-50 backdrop-blur-sm">
-      <div className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] flex flex-col gap-8">
+      <div className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] flex flex-col items-center gap-8">
         <Loader size={150} />
         <h2 className="sm:text-2xl text-white text-center">Please Wait...</h2>
       </div>
@@ -202,7 +203,6 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
         <Input
           id="guide_phone"
           name="guide_phone"
-          isPhone
           value={phone}
           onChange={handleChange}
           validate={validate_phone.bool}
@@ -245,6 +245,65 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
         </div>
       </div>
 
+      {/* techfiesta */}
+      <div className="flex flex-col gap-4">
+        <Label htmlFor="techfiesta" required className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="techfiesta"
+            id="techfiesta"
+            checked={formData.techfiesta === "1"}
+            onChange={handleChange}
+            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          Did you participate in Techfiesta?
+        </Label>
+        {formData.techfiesta === "1" && (
+          <div className="">
+            <Label htmlFor="team_id" required>Techfiesta Team ID</Label>
+            <Input
+              id="team_id"
+              name="team_id"
+              value={formData.team_id}
+              onChange={handleChange}
+              validate={validate_isEmpty.bool}
+              errorMessage={validate_isEmpty.message()}
+              placeholder="Eg. T4014"
+            />
+          </div>
+        )}
+      </div>
+
+      
+      {/* Demo */}
+      <div className="flex flex-col gap-4">
+        <Label htmlFor="demo" required className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="demo"
+            id="demo"
+            checked={formData.demo === "1"}
+            onChange={handleChange}
+            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          Can you show a demo?
+        </Label>
+        {formData.demo === "0" && (
+          <div className="">
+            <Label htmlFor="reason_of_demo" required>Reason for no demo</Label>
+            <Input
+              id="reason_of_demo"
+              name="reason_of_demo"
+              value={formData.reason_of_demo}
+              onChange={handleChange}
+              validate={validate_isEmpty.bool}
+              errorMessage={validate_isEmpty.message()}
+              placeholder="Enter reason for not showing a demo"
+            />
+          </div>
+        )}
+      </div>
+
       {/* Sponsored */}
       <div className="flex flex-col gap-4">
         <Label htmlFor="sponsored" className="flex items-center gap-2">
@@ -281,65 +340,6 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
               />
               Has NDA Signed Your Project?
             </Label>
-          </div>
-        )}
-      </div>
-
-
-      {/* Demo */}
-      <div className="flex flex-col gap-4">
-        <Label htmlFor="demo" required className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            name="demo"
-            id="demo"
-            checked={formData.demo === "1"}
-            onChange={handleChange}
-            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-          />
-          Can you show a demo?
-        </Label>
-        {formData.demo === "0" && (
-          <div className="">
-            <Label htmlFor="reason_of_demo" required>Reason for no demo</Label>
-            <Input
-              id="reason_of_demo"
-              name="reason_of_demo"
-              value={formData.reason_of_demo}
-              onChange={handleChange}
-              validate={validate_isEmpty.bool}
-              errorMessage={validate_isEmpty.message()}
-              placeholder="Enter reason for not showing a demo"
-            />
-          </div>
-        )}
-      </div>
-
-      {/* techfiesta */}
-      <div className="flex flex-col gap-4">
-        <Label htmlFor="techfiesta" required className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            name="techfiesta"
-            id="techfiesta"
-            checked={formData.techfiesta === "1"}
-            onChange={handleChange}
-            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-          />
-          Did you participate in Techfiesta?
-        </Label>
-        {formData.techfiesta === "1" && (
-          <div className="">
-            <Label htmlFor="team_id" required>Techfiesta Team ID</Label>
-            <Input
-              id="team_id"
-              name="team_id"
-              value={formData.team_id}
-              onChange={handleChange}
-              validate={validate_isEmpty.bool}
-              errorMessage={validate_isEmpty.message()}
-              placeholder="Eg. T4014"
-            />
           </div>
         )}
       </div>
