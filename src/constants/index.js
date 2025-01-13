@@ -84,7 +84,7 @@ import {
     { id: 2, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-slate-700", team_size: '1-2 members', type: 'Coding Competition', date: "March 28, 2025" },
     { id: 3, _id: 'concepts', title: "Concepts", description: "The most grand project exhibition event Concepts for final year student.", logo: concepts, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "March 28, 2025" },
     { id: 4, _id: 'techfiesta', title: "TechFiesta", description: "International Hackathon", logo: techfiesta, color:"bg-slate-700", team_size: '4-5 members', type: 'Hackathon', date: "Registration Closed" },
-    { id: 5, _id: 'impetus', title: "Special Event", description: "Streamin' details...", logo: logo, color:"bg-slate-700", team_size: '2-5 members', type: 'Not disclosed', date: "March 28, 2025" },
+    { id: 5, _id: 'nova', title: "Nova", description: "International-level Game Development and 3D Design Expo", logo: logo, color:"bg-slate-700", team_size: '1-5 members', type: 'Game, Design Expo', date: "March 28, 2025" },
   ];
 
   const eventsData = {
@@ -272,6 +272,73 @@ import {
       button_link: "https://pictinc.org/register/events/pradnya",
       rule_book: ""
     },
+    nova: {
+      id: 'nova',
+      logo: pradnya,
+      criteria:
+        "First to Fourth Year Students.",
+      name: "Nova",
+
+      short_desc: "International-level Game Development and 3D Design Project Exhibition and Competition.",
+
+      description: [`Nova is one of the very few platforms in India dedicated to game developers and designers to showcase their talent.Whether you're passionate about crafting compelling games or creating stunning 3D visuals, Nova offers the perfect stage to let your imagination take center stage. Gain recognition, connect with like-minded creators, and be part of a growing community, redefining the future of game development and design.`,],
+      
+      domains: [`Arena`, `Mindspark`, `Creative 3D models`, `Animations`, `Assets for games or standalone projects`, `Others`],
+
+      // domains: [
+      //   {
+      //     domain: "APPLICATION DEVELOPMENT",
+      //     sub_domains:
+      //       "Mobile Applications-Android, Web Applications, Database applications, others),(Big Earth Data Analytics, Geo Informatics, Data Mining on Big Data, Digital marketing optimization, Data exploration and discovery, Fraud detection and prevention, Social network and relationship analysis, Machine generated data analytics, Data retention, Others)",
+      //   },
+      //   {
+      //     domain: "COMMUNICATION NETWORKS & SECURITY SYSTEMS",
+      //     sub_domains:
+      //       "(Computer networks, Internet of Things, Software Defined Network, Vehicular Networks, Wireless and Mobile Networks, Information and Network Security, GPS | GSM Projects, Wireless Communication, Antenna & RF Communication, Optical Communication & Network, Others), (Blockchain applications: cryptocurrency systems, healthcare system, advertising processes, insurance processes, copyright protection system, energy system, tracking system, monitoring system, Security system, societal applications, others), (Virtualization and Autonomic Computing, High Speed Network, Security in Cloud, Cloud Computing, Data center Management, Handling Big Data on Cloud, Mobile Cloud, Cloud Forensics, Fog Computing, Others)",
+      //   },
+      //   {
+      //     domain: "DIGITAL / IMAGE/ SPEECH / VIDEO PROCESSING",
+      //     sub_domains:
+      //       "(Digital Signal processing, Image processing, Speech recognition, Video processing, Speech to text / Text to speech, Others)",
+      //   },
+      //   {
+      //     domain: "EMBEDDED/VLSI SYSTEMS",
+      //     sub_domains:
+      //       "(Image Processing & Remote Sensing, Machine Learning for Embedded Systems, Embedded Vision, Internet of Things, others), (Analog & Mixed Signal VLSI Design, Testing & Verification of VLSI Design, others)",
+      //   },
+      // ],
+
+      registrations: {
+        fees: {
+          national: `&#8377;300/-`,
+          international: `Free`,
+        },
+        min_team_size: 1,
+        max_team_size: 5,
+      },
+      prize: `Total Cash prizes worth &#8377;7 Lakh.`,
+      rules: [
+        `Judge's decision will be final.`,
+        `Project status must be in "Ready to Demonstrate".`,
+      ],
+      additional: [
+        {
+          domain: "Game Development",
+          details:
+            ["Arena: Action, platformers, survival, shooters (FPS/TPS), roguelikes, open-world adventures, racing, rhythm games, stealth, sports, arcade games, fighting games, modded action games." , "Mindscape: Strategy (RTS, turn-based, tower defense), puzzles, simulation (life, business, and physics), tycoon games, card games, board game adaptations, resource management, educational games, gamification projects, games for real-world training, AI-controlled games, and games that involve system optimization or automation.", "2-5 members per team."],
+        },
+        {
+          domain: "Design",
+          details:
+            ["Creative 3D models, animations, and assets for games or standalone projects.", "1-3 members per team."],
+        },
+      ],
+      note: `Project addressing the societal needs like Health, Agriculture, Kids/Women Safety, Education etc. & selected project shall be awarded &#8377;1 Lakh Cash Prize from PICT.`,
+
+      // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
+      button_link: "https://pictinc.org/register/events/impetus",
+      schedule: "March 28, 2025",
+    }, 
   };
 
 

@@ -60,6 +60,18 @@ function TabsDemo() {
         </div>
       ),
     },
+    {
+      title: "Nova",
+      value: "nova",
+      content: (
+        <div
+          ref={divRef}
+          className={cn('w-full overflow-hidden relative p-px bg-tertiary', ``)}>
+          <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
+          <EventDetails data={eventsData.nova}/>
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -158,6 +170,29 @@ const EventDetails = ({ data }) => {
         </Accordion>
       </div>}
 
+      {data.additional ? 
+      <div className='flex flex-col items-start w-full gap-2'>
+        <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconCheckupList /> Additional Details</h3>
+        <Accordion>
+          {
+            data.additional?.map(add => (
+            <AccordionItem key={add.domain}>
+              <AccordionHeader>{add.domain}</AccordionHeader>
+              <AccordionPanel>
+              <ul className='list-inside list-disc'>
+                {
+                  add.details?.map(rule => (
+                    <li className='' key={rule}>{rule}</li>
+                  ))
+                }
+              </ul>
+              </AccordionPanel>
+            </AccordionItem>
+            ))
+          }
+        </Accordion>
+      </div>
+      :
       <div className='flex flex-col items-start w-full gap-2'>
         <h3 className='font-semibold text-orange-100 text-xl flex items-center gap-2'><IconCheckupList /> Rules</h3>
         <ul className='list-inside list-disc'>
@@ -167,7 +202,7 @@ const EventDetails = ({ data }) => {
             ))
           }
         </ul>
-      </div>
+      </div>}
 
     </div>
   );

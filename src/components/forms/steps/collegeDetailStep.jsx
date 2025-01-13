@@ -4,7 +4,7 @@ import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import FormButton from "../FormButton";
 
-import { yearOptions, localityOptions, yesNoOptions, modeOptions } from '../constants'
+import { yearOptions, localityOptions, yesNoOptions, modeOptions, yearOptionsNova } from '../constants'
 import { RadioButton } from "../../ui/RadioButton";
 import { validate_isEmpty, validateCollegeDetails } from "../utils"
 import { useDispatch, useSelector } from "react-redux";
@@ -131,7 +131,13 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
           name="year"
           id="year"
           value={event === "concepts" ? "BE" : formData.year}
-          options={event === "concepts" ? [{ value: "BE", label: "Final Year" }] : yearOptions}
+          options={
+              event === "concepts"
+              ? [{ value: "BE", label: "Final Year" }]
+              : event === "nova"
+              ? yearOptionsNova
+              : yearOptions
+          }
           onChange={handleInputChange}
           validate={validate_isEmpty.bool}
           errorMessage={validate_isEmpty.message()}
