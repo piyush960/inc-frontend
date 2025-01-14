@@ -61,7 +61,7 @@ const CardStack = () => {
 							className={`absolute w-[300px] h-[400px] origin-center list-none bg-gradient-to-br from-dark-blue via-light-blue to-orange-100 p-px`}
             >
 							<div className="bg-primary h-full w-full flex flex-col px-3 py-2 overflow-hidden justify-center items-center">
-							<img src={details.logo} alt={`${details.title} logo`} className="w-16 h-16 mb-4" />
+							<img src={details.logo} alt={`${details.title} logo`} className="w-16 h-16 mb-4 rounded-full" />
 							<h2 className="text-2xl font-bold text-white-100 mb-2">{details.title}</h2>
 							<div className="flex flex-row space-x-2 mb-8">
 								<p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.type}</p>
@@ -69,7 +69,6 @@ const CardStack = () => {
 							</div>
 							<p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
 							<span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date) === "Invalid Date" ? details.date : dateToWords(details.date)}</span>
-
 
 							<button
 								className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"

@@ -18,9 +18,9 @@ const validate_wordCount = {
 	bool: (value, min, max) => (min > value || value > max), message: (msg, min, max) => (msg || `Required words between ${min} and ${max}`)
 }
 
-const validate = (formData) => {
+const validate = (event, formData) => {
 	
-	return validate_isEmpty.bool(formData.title) || !formData.domain || !formData.project_type || validate_isEmpty.bool(formData.guide_name) || validate_email.bool(formData.guide_email) || validate_phone.bool(formData.guide_phone) || validate_email.bool(formData.hod_email) || (formData.sponsored === "1" && validate_isEmpty.bool(formData.company)) || validate_wordCount.bool(formData.abstract.trim().split(/\s+/).length, 150, 300) || (formData.demo === "0" && validate_isEmpty.bool(formData.reason_of_demo)) || (formData.techfiesta === "1" && validate_isEmpty.bool(formData.team_id))
+	return validate_isEmpty.bool(formData.title) || !formData.domain || (event !== "nova" && !formData.project_type) || validate_isEmpty.bool(formData.guide_name) || validate_email.bool(formData.guide_email) || validate_phone.bool(formData.guide_phone) || validate_email.bool(formData.hod_email) || (formData.sponsored === "1" && validate_isEmpty.bool(formData.company)) || validate_wordCount.bool(formData.abstract.trim().split(/\s+/).length, 150, 300) || (formData.demo === "0" && validate_isEmpty.bool(formData.reason_of_demo)) || (formData.techfiesta === "1" && validate_isEmpty.bool(formData.team_id))
 
 };
 
@@ -30,8 +30,8 @@ const validateMember = (member) => {
 
 };
 
-const validateCollegeDetails = (formData) => {
-	return formData.isPICT === null || formData.isInternational === null || validate_isEmpty.bool(formData.year) || validate_isEmpty.bool(formData.college) || validate_isEmpty.bool(formData.country) || validate_isEmpty.bool(formData.state) || validate_isEmpty.bool(formData.city) || validate_isEmpty.bool(formData.district) || validate_isEmpty.bool(formData.locality) || validate_isEmpty.bool(formData.mode) || (formData.mode === '0' && validate_isEmpty.bool(formData.reason_of_mode))
+const validateCollegeDetails = (event, formData) => {
+	return formData.isPICT === null || formData.isInternational === null || (event !== "concepts" && validate_isEmpty.bool(formData.year)) || validate_isEmpty.bool(formData.college) || validate_isEmpty.bool(formData.country) || validate_isEmpty.bool(formData.state) || validate_isEmpty.bool(formData.city) || validate_isEmpty.bool(formData.district) || validate_isEmpty.bool(formData.locality) || validate_isEmpty.bool(formData.mode) || (formData.mode === '0' && validate_isEmpty.bool(formData.reason_of_mode))
 
 };
 

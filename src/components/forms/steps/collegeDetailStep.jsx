@@ -4,7 +4,7 @@ import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import FormButton from "../FormButton";
 
-import { yearOptions, localityOptions, yesNoOptions, modeOptions } from '../constants'
+import { yearOptions, localityOptions, yesNoOptions, modeOptions, yearOptionsNova } from '../constants'
 import { RadioButton } from "../../ui/RadioButton";
 import { validate_isEmpty, validateCollegeDetails } from "../utils"
 import { useDispatch, useSelector } from "react-redux";
@@ -71,8 +71,11 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData)
-    if(validateCollegeDetails(formData)){
+    if(event === "concepts"){
+      setFormData((prev) => ({...prev, year: "BE"}));
+    }
+    console.log(formData)
+    if(validateCollegeDetails(event, formData)){
       toast.error("Fill all the required details correctly!")
       return;
     }
@@ -125,12 +128,18 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
 
       {/* If Yes, ask only for Year */}
       <div className="">
-        <Label htmlFor="year" required>Which year are you in?</Label>
+        <Label htmlFor="year" required>Which year are you in (Team Leader)?</Label>
         <Select
           name="year"
           id="year"
-          value={formData.year}
-          options={yearOptions}
+          value={event === "concepts" ? "BE" : formData.year}
+          options={
+              event === "concepts"
+              ? [{ value: "BE", label: "Final Year" }]
+              : event === "nova"
+              ? yearOptionsNova
+              : yearOptions
+          }
           onChange={handleInputChange}
           validate={validate_isEmpty.bool}
           errorMessage={validate_isEmpty.message()}

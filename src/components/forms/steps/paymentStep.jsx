@@ -56,7 +56,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
     }
     try{
       const ticket = window.localStorage.getItem('ticket') || '';
-      await stepFour({ ticket, data: formData }).unwrap()
+      await stepFour({ ticket, data: formData, event }).unwrap()
       toast.success(<p>Form Submitted<br />Payment Under Verification</p>)
       window.localStorage.removeItem('ticket');
       window.localStorage.removeItem('event_name');
