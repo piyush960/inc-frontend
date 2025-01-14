@@ -31,7 +31,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
   const ticket = window.localStorage.getItem('ticket') || '';
   const [minMembers, setMinMembers] = useState(2);
   const [maxMembers, setMaxMembers] = useState(5);
-  const [ getMembers, { data, isSuccess, isLoading: isGetMemsLoading } ] = useLazyGetMembersQuery();
+  const [ getMembers, { data, isSuccess, isFetching: isGetMemsLoading } ] = useLazyGetMembersQuery();
   const [ getTechfiestaMembers, { data: techfiestaMems, isSuccess: isTechfiestaSuccess, isLoading: isTechfiestaLoading, error: techerr, isError: isTechfiestaError } ] = useLazyGetTechfiestaMembersQuery();
   const [ addMember, { isLoading } ] = useAddMemberMutation()
   const [ removeMember, { isLoading: isRemoveLoading } ] = useRemoveMemberMutation();
@@ -44,7 +44,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
   useEffect(() => {
     scrollToTop()
     try {
-      if(event === ename && form.step1.techfiesta === "1"){
+      if(event === ename && form?.step1?.techfiesta === "1"){
         getTechfiestaMembers({team_id: form?.step1?.team_id, event});
       }
       else if(event === ename){
@@ -118,7 +118,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
 
   const handleDeleteMember = async (id, index=0) => {
     try{
-      if(form?.step1?.techfiesta === "0"){
+      if(form?.step1?.techfiesta === "0" || !form){
         await removeMember({ index, ticket }).unwrap()
       }
       setMembers(members.filter((member) => member.id !== id));
@@ -322,7 +322,8 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
         <h3 className="text-lg font-semibold text-white">
           Team Members ({members.length}/{maxMembers})
         </h3>
-        {isGetMemsLoading ? <p>Fetching...</p> : members.sort((a, b) => new Date(a.id) - new Date(b.id)).map((member, index) => (
+        {isGetMemsLoading && <p>Fetching...</p>} 
+        {members.sort((a, b) => new Date(a.id) - new Date(b.id)).map((member, index) => (
           <div
             key={member.phone}
             className={`relative flex items-center justify-between bg-slate-800 p-4 text-white group ${
