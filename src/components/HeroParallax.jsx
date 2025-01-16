@@ -60,7 +60,6 @@ const Hero = ({ lightOn }) => {
           <motion.button
             style={{
               border,
-              // boxShadow,
             }}
             className="w-full tracking-widest bg-[#000609]/50 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-[#000609]/60"
             onClick={() => {navigate(`/register`)}}
