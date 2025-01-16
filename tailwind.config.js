@@ -9,6 +9,9 @@ const config = {
   mode: "jit",
   theme: {
     extend: {
+      fontFamily: {
+        lato: ['"Lato"', "sans-serif"],
+      },
       colors: {
         primary: "#000609",
         secondary: "#5593ad",

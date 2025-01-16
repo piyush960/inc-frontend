@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseURL = (import.meta.env.VITE_BACKEND_URL || "http://localhost:3001") + "/events";
+const baseURL = ("https://api.pictinc.org") + "/events";
 
 
 export const formAPI = createApi({

@@ -45,11 +45,11 @@ const Navbar = () => {
       <div className='w-full flex justify-between items-center mx-auto max-w-[82rem]'>
         <div className='flex items-center gap-2'>
         <a href="https://pict.edu" target="_blank" rel="noopener noreferrer" onClick={() => setActive("")}>
-          <img src={pict} alt="pict" className="object-cover w-13 h-9" />
+          <img loading='lazy'  src={pict} alt="pict" className="object-cover w-13 h-9" />
         </a>
         <span className='h-9 bg-white w-[1px]'></span>
         <Link to={'/'} className='flex items-center gap-2' onClick={() => {setActive("");}}>
-          <img src={logo} alt="logo" className='w-9 h-9 object-cover' />
+          <img loading='lazy'  src={logo} alt="logo" className='w-9 h-9 object-cover' />
           <p className='text-white-100 text-[18px] font-bold cursor-pointer'>PICT INC 2025</p>
         </Link>
         </div>
@@ -64,7 +64,7 @@ const Navbar = () => {
         </ul>
 
         <div className='sm:hidden flex flex-1 justify-end items-center' ref={menuRef}>
-          <img src={toggle ? close : menu} alt="menu" className='w-[28px] h-[28px] object-contain cursor-pointer' 
+          <img loading='lazy'  src={toggle ? close : menu} alt="menu" className='w-[28px] h-[28px] object-contain cursor-pointer' 
           onClick={() => setToggle(!toggle)}/>
           <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-tertiary absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10`}>
           <ul className='list-none flex justify-end items-start flex-col gap-4'>

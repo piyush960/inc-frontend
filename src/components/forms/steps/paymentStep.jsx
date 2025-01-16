@@ -87,7 +87,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
               </h3>
               <div className="flex justify-center">
                 <div className="bg-white p-6 max-w-xs">
-                  <img
+                  <img loading='lazy' 
                     src={imagePath}
                     alt="Payment QR Code"
                     className="w-full"
