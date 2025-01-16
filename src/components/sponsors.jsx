@@ -37,7 +37,7 @@ const Sponsors = () => {
                 {
                   sponsors[obj].map(sponsor => (
                     <SponsorCard key={sponsor.name} width={obj === 'title' ? 300 : 250} height={obj === 'title' ? 200 : 150}>
-                      <img src={sponsor.src} alt={sponsor.name} className='w-full h-full object-contain pointer-events-none'/>
+                      <img loading='lazy'  src={sponsor.src} alt={sponsor.name} className='w-full h-full object-contain pointer-events-none'/>
                     </SponsorCard>
                   ))
                 }

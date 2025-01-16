@@ -171,13 +171,13 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
       {/* Guide Name */}
       <div>
-        <Label htmlFor="guide_name"  required>Guide Name</Label>
+        <Label htmlFor="guide_name" required={event === "concepts"}>Guide Name</Label>
         <Input
           name="guide_name"
           id="guide_name"
           value={formData.guide_name}
           onChange={handleChange}
-          validate={validate_isEmpty.bool}
+          validate={event === "concepts" && validate_isEmpty.bool}
           errorMessage={validate_isEmpty.message()}
           placeholder="Enter guide's name"
         />
@@ -185,13 +185,13 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
       {/* Guide Email */}
       <div>
-        <Label htmlFor="guide_email"  required>Guide Email</Label>
+        <Label htmlFor="guide_email" required={event === "concepts"}>Guide Email</Label>
         <Input
           id="guide_email"
           name="guide_email"
           value={formData.guide_email}
           onChange={handleChange}
-          validate={validate_email.bool}
+          validate={event === "concepts" && validate_email.bool}
           errorMessage={validate_email.message()}
           placeholder="Enter guide's email"
         />
@@ -199,13 +199,13 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
       {/* Guide Phone */}
       <div>
-        <Label htmlFor="guide_phone"  required>Guide Phone</Label>
+        <Label htmlFor="guide_phone" required={event === "concepts"}>Guide Phone</Label>
         <Input
           id="guide_phone"
           name="guide_phone"
           value={phone}
           onChange={handleChange}
-          validate={validate_phone.bool}
+          validate={event === "concepts" && validate_phone.bool}
           errorMessage={validate_phone.message()}
           placeholder="Enter guide's phone number"
         />

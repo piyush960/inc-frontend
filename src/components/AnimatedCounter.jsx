@@ -61,7 +61,7 @@ const AnimatedCounter = () => {
     viewport={{ once: true }}
     transition={{duration: 1, delay: 3}}
     >
-      <img src={popper} alt="popper" className="w-[70%] sm:w-[50%]"/>
+      <img loading='lazy'  src={popper} alt="popper" className="w-[70%] sm:w-[50%]"/>
     </motion.div>
     <motion.div 
     initial={{ y: 100, opacity: 0 }}
@@ -70,7 +70,7 @@ const AnimatedCounter = () => {
     transition={{ ease: "easeInOut", duration: 0.75}}
     className="sm:my-24 py-14"
     >
-      <h2 className={`${styles.sectionHeadText} flex max-sm:flex-col items-center justify-center gap-4`}><img src={prize} alt="trophy" width={70} height={70}/><span className="block">With a Prize Pool of</span></h2>
+      <h2 className={`${styles.sectionHeadText} flex max-sm:flex-col items-center justify-center gap-4`}><img loading='lazy'  src={prize} alt="trophy" width={70} height={70}/><span className="block">With a Prize Pool of</span></h2>
       <div className="w-full flex items-center justify-center text-orange-100 max-sm:py-4">
         <IconCurrencyRupee className="sm:size-[190px] size-[50px]"/>
         <div className="sm:text-[200px] text-[60px]  font-extrabold" style={{width: "6ch"}}>

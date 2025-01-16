@@ -136,9 +136,9 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
           options={
               event === "concepts"
               ? [{ value: "BE", label: "Final Year" }]
-              : event === "nova"
-              ? yearOptionsNova
-              : yearOptions
+              : event === "impetus"
+              ? yearOptions
+              : yearOptionsNova
           }
           onChange={handleInputChange}
           validate={validate_isEmpty.bool}

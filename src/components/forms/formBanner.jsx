@@ -11,7 +11,7 @@ const FormsBanner = ({ logo, eventName, eventDescription, fees, min_team_size, m
 
 			<div className="w-full sm:px-6 sm:py-4 max-sm:px-2 p-4 flex flex-col sm:flex-row max-sm:items-center gap-6 sm:gap-8 bg-tertiary relative">
 
-				<img src={logo} alt={eventName + '_logo'} className="w-[120px] sm:w-[180px] sm:pr-8 sm:border-r-[1px] flex flex-col items-center justify-center"/>
+				<img loading='lazy'  src={logo} alt={eventName + '_logo'} className="w-[120px] sm:w-[180px] sm:pr-8 sm:border-r-[1px] flex flex-col items-center justify-center"/>
 				<div className="flex max-sm:flex-col justify-between max-sm:gap-4 w-full">
 				<div className='flex flex-col items-center sm:items-start justify-center gap-2 sm:flex-[0.8]'>
 					<h1 className="font-bold text-3xl">{eventName}</h1>

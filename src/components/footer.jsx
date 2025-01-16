@@ -19,7 +19,7 @@ const Footer = () => {
           <a href='mailto:inc@pict.edu' className='text-sm'>inc@pict.edu</a>
         </div>
         <div className='flex items-center gap-1 cursor-pointer' onClick={() => navigate('/')}>
-          <img src={logo} alt="inc-logo" className='h-[70px] w-[70px]'/>
+          <img loading='lazy'  src={logo} alt="inc-logo" className='h-[70px] w-[70px]'/>
           <p className='text-slate-400 max-sm:text-sm flex flex-col'><span className='text-xl block text-white-100'>InC</span><span className='block'>Impetus and Concepts</span></p>
         </div>
       </div>

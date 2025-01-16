@@ -37,17 +37,17 @@ const Hero = ({ lightOn }) => {
       </div>
     <div className='relative sm:px-12 px-4 mx-auto w-full h-full flex sm:flex-row flex-col-reverse overflow-hidden items-center sm:justify-around justify-end bg-dot-secondary/[0.25]'>
 
-      {lightOn && <img src={light} alt="light" className='absolute object-cover pointer-events-none top-[-8%] translate-x-[50%] right-[50%] z-10 opacity-35 sm:hidden'/>}
+      {lightOn && <img loading='lazy'  src={light} alt="light" className='absolute object-cover pointer-events-none top-[-8%] translate-x-[50%] right-[50%] z-10 opacity-35 sm:hidden'/>}
 
       <p className='absolute sm:left-[50%] top-[10.5%] sm:top-[12%] sm:translate-x-[-50%] uppercase text-slate-400 font-light text-center text-md sm:text-lg'><span className=''>SCTR&apos;s Pune Institute of Computer Technology</span><span className='sm:block text-center'>&nbsp;Presents</span></p>
 
       <div className='relative flex flex-col items-center justify-center sm:w-[600px]'>
 
-        <img src={impetus_b} alt="impetus_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute bottom-[11.8%] left-[1.2%] sm:bottom-[25.4%] sm:left-[-4%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100' onClick={() => navigate('/events/impetus')}/>
+        <img loading='lazy'  src={impetus_b} alt="impetus_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute bottom-[11.8%] left-[1.2%] sm:bottom-[25.4%] sm:left-[-4%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100' onClick={() => navigate('/events/impetus')}/>
 
-        <img src={pradnya_b} alt="pradnya_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute left-[45%] top-[9.8%] sm:top-[20.3%] sm:left-[42%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100' onClick={() => navigate('/events/pradnya')}/>
+        <img loading='lazy'  src={pradnya_b} alt="pradnya_logo" className='sm:w-24 sm:h-24 w-11 h-11 absolute left-[45%] top-[9.8%] sm:top-[20.3%] sm:left-[42%] z-10 cursor-pointer hover:scale-105 duration-300 opacity-70 hover:opacity-100' onClick={() => navigate('/events/pradnya')}/>
 
-        <img src={concepts_b} alt="concepts_logo" className='sm:w-24 sm:h-24 w-9 h-9 absolute top-[44.5%] right-[-2.5%] sm:top-[42.6%] sm:right-[-8%] rotate-[18deg] z-10 cursor-pointer opacity-70 hover:opacity-100 hover:scale-105 duration-300' onClick={() => navigate('/events/concepts')}/>
+        <img loading='lazy'  src={concepts_b} alt="concepts_logo" className='sm:w-24 sm:h-24 w-9 h-9 absolute top-[44.5%] right-[-2.5%] sm:top-[42.6%] sm:right-[-8%] rotate-[18deg] z-10 cursor-pointer opacity-70 hover:opacity-100 hover:scale-105 duration-300' onClick={() => navigate('/events/concepts')}/>
         
         <h1 className='relative sm:mt-8'>
           <span className='text-white font-bold text-lg sm:text-5xl absolute top-[14%] left-[3.8%] sm:top-[20.6%] sm:left-[11.4%] pointer-events-none'>PICT</span>
@@ -60,7 +60,6 @@ const Hero = ({ lightOn }) => {
           <motion.button
             style={{
               border,
-              // boxShadow,
             }}
             className="w-full tracking-widest bg-[#000609]/50 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-[#000609]/60"
             onClick={() => {navigate(`/register`)}}
@@ -71,7 +70,7 @@ const Hero = ({ lightOn }) => {
 
       </div>
       <div className='flex sm:flex-[0.65] flex-col-reverse max-sm:h-1/2 sm:flex-col sm:justify-center items-center max-sm:-mb-8 mt-10 xl:-mr-9 relative'>
-        {lightOn && <img src={light} alt="light" className='absolute object-cover pointer-events-none top-[-28%] translate-x-[50%] right-[50%] z-10 opacity-35 max-sm:hidden'/>}
+        {lightOn && <img loading='lazy'  src={light} alt="light" className='absolute object-cover pointer-events-none top-[-28%] translate-x-[50%] right-[50%] z-10 opacity-35 max-sm:hidden'/>}
         <div className='w-[240px] h-[240px] sm:w-[400px] sm:h-[400px] relative'>
           <IncCanvas />
         </div>
