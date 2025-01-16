@@ -160,7 +160,7 @@ const WebnCore = ({ data }) => {
 						{team.members.map(m => (
 							<div className='sm:w-[300px] w-[290px]' key={m.name}>
 								<BackgroundGradient className="p-4 bg-black-100 flex flex-col items-center gap-4">
-									<img
+									<img loading='lazy' 
 										src={m.photo}
 										alt="member"
 										height="180"

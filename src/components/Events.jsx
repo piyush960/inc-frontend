@@ -123,7 +123,7 @@ const Card = ({
         <div className={`absolute group-hover/canvas-card:opacity-0 z-10 
         group-hover/canvas-card:translate-y-8 translate-y-0 opacity-100 transition-all duration-300 w-full h-full flex p-6 ${(index === 3 || index === 4) ? 'flex-row' : 'flex-col'}`}>
           <div className="w-full h-full flex flex-col justify-center items-center space-y-8">
-            <img src={details.logo} alt={`${title} logo`} className="w-16 h-16 rounded-full" />
+            <img loading='lazy'  src={details.logo} alt={`${title} logo`} className="w-16 h-16 rounded-full" />
             <h2 className="text-2xl font-bold text-white-100">{title}</h2>
           </div>
           <div className="w-full h-full flex flex-col justify-center items-center space-y-6">
@@ -139,7 +139,7 @@ const Card = ({
         <div className={`relative inset-0 w-full h-full flex justify-evenly items-center transition-opacity duration-300 ${
           (hovered) ? 'opacity-100' : 'opacity-0'
         } ${(index === 3 || index === 4) ? '' : 'flex-col'}`}>
-          <img src={details.logo} alt={`${title} logo`} className="w-24 h-24 rounded-full" />
+          <img loading='lazy'  src={details.logo} alt={`${title} logo`} className="w-24 h-24 rounded-full" />
           <h2 className={`text-white-100 text-2xl font-bold`}>
             {title}
           </h2>

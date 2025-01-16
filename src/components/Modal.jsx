@@ -20,7 +20,7 @@ const ExampleWrapper = ({ setLightOn }) => {
 			<span className="absolute inset-0 rounded-full bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px]"></span>
 
 			<span className="relative z-10 block p-3 sm:p-4 rounded-full bg-gray-950">
-				<img src={notification} alt="notification"/>
+				<img loading='lazy'  src={notification} alt="notification"/>
 			</span>
 			</button>
 			<SpringModal isOpen={isOpen} setIsOpen={setIsOpen} setLightOn={setLightOn} />

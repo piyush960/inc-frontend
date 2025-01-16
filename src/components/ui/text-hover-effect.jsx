@@ -71,7 +71,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.6"
-        className="font-[helvetica] font-bold fill-transparent text-8xl  "
+        className="font-[Helvetica] font-bold fill-transparent text-8xl  "
         style={{ opacity: hovered ? 0.7 : 0 }}>
         {text}
       </text>
@@ -81,7 +81,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.4"
-        className="font-[helvetica] font-bold text-8xl fill-transparent stroke-white-100"
+        className="font-[Helvetica] font-bold text-8xl fill-transparent stroke-white-100"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 10,
@@ -101,7 +101,7 @@ export const TextHoverEffect = ({
         stroke="url(#textGradient)"
         strokeWidth="2.6"
         mask="url(#textMask)"
-        className="font-[helvetica] max-sm:hidden font-bold fill-transparent text-8xl">
+        className="font-[Helvetica] max-sm:hidden font-bold fill-transparent text-8xl">
         {text}
       </text>
     </svg>)

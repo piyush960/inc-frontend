@@ -96,7 +96,7 @@ const EventDetails = ({ data }) => {
     >
       <div className='flex flex-col sm:flex-row sm:justify-start items-center justify-center w-full border-b-[1px] max-sm:gap-3'>
         <div className='flex flex-col items-center sm:border-r-[1px] border-white-100 sm:w-[43%] sm:mr-10 gap-3'>
-          <img src={data.logo} alt={`${data.id}_logo`} className='sm:w-[180px] sm:h-[180px] w-[140px] h-[140px] rounded-full'/>
+          <img loading='lazy'  src={data.logo} alt={`${data.id}_logo`} className='sm:w-[180px] sm:h-[180px] w-[140px] h-[140px] rounded-full'/>
           <h2 className='text-3xl font-bold text-orange-100'>{data.name}</h2>
           <p className='font-bold text-xl sm:max-w-[70%] text-center'>{data.short_desc}</p>
           <div className='flex w-full justify-center items-center gap-4 mb-2'>
