@@ -77,7 +77,7 @@ function TabsDemo() {
   return (
     (<div
       style={{
-        height: `${containerHeight + 270}px`
+        height: `${containerHeight + 300}px`
       }}
       className={`pt-24 max-sm:px-2 max-w-[90rem] w-full mx-auto`}>
       <Tabs tabs={tabs} activeId={id}/>

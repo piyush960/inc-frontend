@@ -28,7 +28,12 @@ const CardStack = () => {
 
 	const handleViewDetails = (id) => {
     // console.log(id)
-    navigate(`/events/${id}`);
+    if(id === "techfiesta"){
+      window.open('https://techfiesta.pict.edu/', '_blank');
+    }
+    else{
+      navigate(`/events/${id}`);
+    }
   };
 
   return (
@@ -68,7 +73,7 @@ const CardStack = () => {
 								<p className="text-sm font-medium bg-tertiary rounded-lg px-2 py-1 text-slate-400">{details.team_size}</p>
 							</div>
 							<p className="text-white-100/90 text-md text-center mb-4">{details.description}</p>
-							<span className="text-slate-400 text-sm font-medium mb-4">{dateToWords(details.date) === "Invalid Date" ? details.date : dateToWords(details.date)}</span>
+							<span className={`text-sm font-medium mb-4 ${details.date.includes("Closed") ? 'text-red-500' : 'text-secondary'}`}>{dateToWords(details.date) === "Invalid Date" ? details.date : dateToWords(details.date)}</span>
 
 							<button
 								className="relative group inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"

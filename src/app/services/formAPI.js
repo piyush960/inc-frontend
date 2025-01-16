@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseURL = ("https://inc.prathamalu.xyz") + "/events";
+const baseURL = ("https://api.pictinc.org") + "/events";
 
 
 export const formAPI = createApi({
