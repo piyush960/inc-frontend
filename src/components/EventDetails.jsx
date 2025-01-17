@@ -60,18 +60,18 @@ function TabsDemo() {
         </div>
       ),
     },
-    {
-      title: "Nova",
-      value: "nova",
-      content: (
-        <div
-          ref={divRef}
-          className={cn('w-full overflow-hidden relative p-px bg-tertiary', ``)}>
-          <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
-          <EventDetails data={eventsData.nova}/>
-        </div>
-      ),
-    },
+    // {
+    //   title: "Nova",
+    //   value: "nova",
+    //   content: (
+    //     <div
+    //       ref={divRef}
+    //       className={cn('w-full overflow-hidden relative p-px bg-tertiary', ``)}>
+    //       <span className='absolute inset-0 bg-gradient-to-r from-dark-blue via-light-blue to-orange-100'></span>
+    //       <EventDetails data={eventsData.nova}/>
+    //     </div>
+    //   ),
+    // },
   ];
 
   return (
