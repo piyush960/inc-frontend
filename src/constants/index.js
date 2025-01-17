@@ -7,7 +7,6 @@ import {
     img1,
     csi, intangles, sarvatra, veritas, eq, imocha, imperial, pasc, pisb, cloudhedge,
     ayaan,
-    nova,
   } from "../assets";
 
   const notifications = ["🚀 Don’t just watch innovation—be part of it! Register today! 🚀", "⚡ Code, create, and conquer—your journey begins here. ⚡"]
