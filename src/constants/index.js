@@ -85,7 +85,7 @@ import {
     { id: 2, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-slate-700", team_size: '1-2 members', type: 'Coding Competition', date: "March 28, 2025" },
     { id: 3, _id: 'concepts', title: "Concepts", description: "The most grand project exhibition event Concepts for final year student.", logo: concepts, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "March 28, 2025" },
     { id: 4, _id: 'techfiesta', title: "TechFiesta", description: "International Hackathon", logo: techfiesta, color:"bg-slate-700", team_size: '4-5 members', type: 'Hackathon', date: "Registration Closed" },
-    { id: 5, _id: 'nova', title: "Nova", description: "International-level Game Development and 3D Design Expo", logo: nova, color:"bg-slate-700", team_size: '1-5 members', type: 'Game, Design Expo', date: "March 28, 2025" },
+    { id: 5, _id: 'impetus', title: "Special Event", description: "An exciting surprise awaits! Stay tuned for something unforgettable.", logo: logo, color:"bg-slate-700", team_size: '1-5 members', type: 'Unveiling Soon', date: "To Be Announced" },
   ];
 
   const eventsData = {
@@ -273,6 +273,7 @@ import {
       button_link: "https://pictinc.org/register/events/pradnya",
       rule_book: ""
     },
+    /*
     nova: {
       id: 'nova',
       logo: nova,
@@ -340,6 +341,7 @@ import {
       button_link: "https://pictinc.org/register/events/impetus",
       schedule: "March 28, 2025",
     }, 
+    */
   };
 
 
