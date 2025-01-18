@@ -82,7 +82,6 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     if (name === "abstract") {
       setAbstractWordCount(value.trim().split(/\s+/).length);
     }
-    // console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -90,12 +89,10 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     if(event === "nova"){
       setFormData((prev) => ({...prev, project_type: "software"}));
     }
-    console.log(formData);
     if(!validate(event, formData)){
       try {
         const ticket = window.localStorage.getItem('ticket') || ''
         const response = await stepOne({ event_name: event, ticket, data: formData }).unwrap();
-        // console.log(response);
         window.localStorage.setItem('ticket', response.ticket);
         window.localStorage.setItem('event_name', event)
         dispatch(submit_step1(formData));

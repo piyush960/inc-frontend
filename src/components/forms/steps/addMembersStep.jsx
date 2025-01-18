@@ -71,7 +71,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
         })
         setMembers([...mems]);
       }
-      else if(data.step_2 && Array.isArray(data.step_2)){
+      else if(data?.step_2 && Array.isArray(data.step_2)){
         setMembers([...data.step_2]);
       }
       else{
