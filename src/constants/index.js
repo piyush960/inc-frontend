@@ -126,7 +126,7 @@ import {
 
       registrations: {
         fees: {
-          national: `&#8377;300/-`,
+          national: `&#8377;100/-`,
           international: `Free`,
         },
         min_team_size: 2,
