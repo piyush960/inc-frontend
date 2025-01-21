@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import formReducer from '../features/form/formSlice'
+import formReducer from './features/form/formSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { formAPI } from './services/formAPI'
 

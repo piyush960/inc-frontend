@@ -59,10 +59,10 @@ const SponsorCard = ({ children, width, height }) => {
     <CardContainer className="inter-var"
     containerClassName={`bg-gradient-to-r from-dark-blue via-light-blue to-orange-100`}
     >
-      <CardBody className={`relative group/card hover:shadow-white-100/[0.2] bg-white border-primary p-4 border`}
+      <CardBody className={`relative group/card shadow-lg shadow-orange-100/[0.6] bg-white border-primary p-4 border`}
       style={{width, height}}
       >
-        <CardItem translateZ="100" className="w-full h-full group-hover/card:shadow-orange-100/[0.5] group-hover/card:shadow-xl">
+        <CardItem translateZ="100" className="w-full h-full group-hover/card:shadow-secondary group-hover/card:shadow-lg">
           {children}
         </CardItem>
       </CardBody>

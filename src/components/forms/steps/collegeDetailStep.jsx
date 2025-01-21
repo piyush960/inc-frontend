@@ -8,7 +8,7 @@ import { yearOptions, localityOptions, yesNoOptions, modeOptions, yearOptionsNov
 import { RadioButton } from "../../ui/RadioButton";
 import { validate_isEmpty, validateCollegeDetails } from "../utils"
 import { useDispatch, useSelector } from "react-redux";
-import { submit_step3 } from "../../../features/form/formSlice";
+import { submit_step3 } from "../../../app/features/form/formSlice";
 import { toast } from "react-toastify";
 import { useStepThreeMutation } from "../../../app/services/formAPI";
 import scrollToTop from "../../../utils/scrollToTop";
