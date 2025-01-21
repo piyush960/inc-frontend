@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Tabs } from "./ui/tabs";
 
 import { eventsData } from '../constants';
@@ -75,13 +75,17 @@ function TabsDemo() {
   ];
 
   return (
-    (<div
+    (
+    (id === 'impetus' || id === 'concepts' || id === 'pradnya') ?
+    <div
       style={{
         height: `${containerHeight + 300}px`
       }}
       className={`pt-24 max-sm:px-2 max-w-[90rem] w-full mx-auto`}>
       <Tabs tabs={tabs} activeId={id}/>
-    </div>)
+    </div>
+    : <Navigate to={'/page-not-found'} />    
+    )
   );
 }
 
@@ -148,7 +152,7 @@ const EventDetails = ({ data }) => {
         >
           {
             data.domains?.map(domain => (
-              <li key={domain} className='text-nowrap text-sm mr-2 bg-slate-800 px-2 py-1 rounded-md flex items-end gap-1 uppercase'><IconDiamondsFilled className='text-orange-100'/> {domain}</li>
+              <li key={domain} className='text-sm text-nowrap whitespace-nowrap flex-nowrap mr-2 w-fit bg-slate-800 px-2 py-1 rounded-md flex items-end gap-1 uppercase'><IconDiamondsFilled className='text-orange-100'/> {domain}</li>
             ))
           }
         </InfiniteLoopSlider>
@@ -203,7 +207,6 @@ const EventDetails = ({ data }) => {
           }
         </ul>
       </div>}
-
     </div>
   );
 };

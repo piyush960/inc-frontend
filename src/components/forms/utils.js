@@ -20,13 +20,13 @@ const validate_wordCount = {
 
 const validate = (event, formData) => {
 	
-	return validate_isEmpty.bool(formData.title) || !formData.domain || (event !== "nova" && !formData.project_type) || (event === "concepts" && (validate_isEmpty.bool(formData.guide_name) || validate_email.bool(formData.guide_email) || validate_phone.bool(formData.guide_phone))) || validate_email.bool(formData.hod_email) || (formData.sponsored === "1" && validate_isEmpty.bool(formData.company)) || validate_wordCount.bool(formData.abstract.trim().split(/\s+/).length, 150, 300) || (formData.demo === "0" && validate_isEmpty.bool(formData.reason_of_demo)) || (formData.techfiesta === "1" && validate_isEmpty.bool(formData.team_id))
+	return validate_isEmpty.bool(formData.title) || !formData.domain || (event !== "nova" && !formData.project_type) || (event === "concepts" && (validate_isEmpty.bool(formData.guide_name) || validate_email.bool(formData.guide_email) || validate_phone.bool(formData.guide_phone))) || (formData.sponsored === "1" && validate_isEmpty.bool(formData.company)) || validate_wordCount.bool(formData.abstract.trim().split(/\s+/).length, 150, 300) || (formData.demo === "0" && validate_isEmpty.bool(formData.reason_of_demo)) || (formData.techfiesta === "1" && validate_isEmpty.bool(formData.team_id))
 
 };
 
 const validateMember = (member) => {
 
-	return validate_isEmpty.bool(member.name) || validate_email.bool(member.email) || validate_phone.bool(member.phone) || validate_isEmpty.bool(member.gender) || validate_isEmpty.bool(member.member_id)
+	return validate_isEmpty.bool(member.name) || validate_email.bool(member.email) || validate_phone.bool(member.phone) || validate_isEmpty.bool(member.gender)
 
 };
 

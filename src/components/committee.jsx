@@ -7,13 +7,17 @@ import { cn } from "../lib/utils";
 // import { IconBrandGithubFilled, IconBrandInstagramFilled, IconBrandLinkedinFilled } from '@tabler/icons-react';
 import { TypewriterEffectSmooth } from './ui/typewriter-effect';
 import scrollToTop from '../utils/scrollToTop';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 const Committee = () => {
 	const [activeCommittee, setActiveCommittee] = useState('core');
+	const navigate = useNavigate();
+	const { id } = useParams();
 
 	useEffect(() => {
 		scrollToTop();
-	}, [])
+		setActiveCommittee(id);
+	}, [id])
 
 	const committees = {
 		faculty,
@@ -47,6 +51,7 @@ const Committee = () => {
 	];
 
 	return (
+		(id === 'core' || id === 'web' || id === 'faculty') ?
 		<section className="py-24 relative bg-primary w-full flex flex-col items-center">
 			<Spotlight
         className="left-0 md:left-60 top-0"
@@ -74,7 +79,7 @@ const Committee = () => {
 				{Object.keys(committees).map((committee) => (
 					<button
 						key={committee}
-						onClick={() => setActiveCommittee(committee)}
+						onClick={() => navigate(`/committee/${committee}`)}
 						className={`group/button relative inline-block p-px font-semibold leading-6 text-white-100 shadow-2xl cursor-pointer shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95 z-10
 							${activeCommittee === committee ? 'bg-tertiary' : 'bg-gray-800'}`}
 					>
@@ -117,6 +122,8 @@ const Committee = () => {
 				</div>
 			</div>
 		</section>
+		:
+		<Navigate to={'/page-not-found'} />
 	);
 };
 

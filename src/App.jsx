@@ -59,7 +59,7 @@ const App = () => {
             <EventDetails />
           }
           />
-          <Route path="/committee" element={
+          <Route path="/committee/:id" element={
             <Committee />
           }
           />

@@ -8,7 +8,7 @@ import {
 import EventDetail from "../eventDetail";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { submit_step4 } from "../../../features/form/formSlice";
+import { submit_step4 } from "../../../app/features/form/formSlice";
 import { useStepFourMutation } from "../../../app/services/formAPI";
 import scrollToTop from "../../../utils/scrollToTop";
 
