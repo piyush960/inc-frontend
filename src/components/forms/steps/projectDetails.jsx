@@ -91,7 +91,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     }
     if(!validate(event, formData)){
       try {
-        const ticket = window.localStorage.getItem('ticket') || ''
+        const ticket = (event === ename) ? window.localStorage.getItem('ticket') : '';
         const response = await stepOne({ event_name: event, ticket, data: formData }).unwrap();
         window.localStorage.setItem('ticket', response.ticket);
         window.localStorage.setItem('event_name', event)

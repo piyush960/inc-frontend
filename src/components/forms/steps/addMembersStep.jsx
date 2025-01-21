@@ -97,8 +97,8 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
       const tempMemberDetails = { ...newMember };
       delete tempMemberDetails.member_id;
       memberFormData.append("body", JSON.stringify(tempMemberDetails));
-
-      const response = await addMember({ event_name: event, ticket, data: memberFormData }).unwrap()
+      const tempTicket = (event === ename) ? ticket : '';
+      const response = await addMember({ event_name: event, ticket: tempTicket, data: memberFormData }).unwrap()
       window.localStorage.setItem('ticket', response.ticket);
       window.localStorage.setItem('event_name', event)
       const clg_id_name = newMember.member_id?.name;
@@ -260,7 +260,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
           </div>
         </div>
 
-        <div className={!isPradnya && 'hidden'}>
+        <div className={!isPradnya ? 'hidden' : 'block'}>
           <Label htmlFor="codechef_id">Codechef ID</Label>
           <Input
             disabled={isLoading}

@@ -74,7 +74,6 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
     if(event === "concepts"){
       setFormData((prev) => ({...prev, year: "BE"}));
     }
-    console.log(formData)
     if(validateCollegeDetails(event, formData)){
       toast.error("Fill all the required details correctly!")
       return;
