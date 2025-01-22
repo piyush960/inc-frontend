@@ -11,6 +11,7 @@ import ShiftingCountdown from './ui/countdown';
 
 import { light, concepts_b, impetus_b, pradnya_b } from '../assets'
 import HeroSlider from './HeroSlider';
+import scrollToTop from '../utils/scrollToTop';
 
 const COLORS_TOP = ["#1746A2", "#D4621C"];
 
@@ -20,13 +21,14 @@ const Hero = ({ lightOn }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    scrollToTop();
     animate(color, COLORS_TOP, {
       ease: "easeInOut",
       duration: 5,
       repeat: Infinity,
       repeatType: "mirror",
     });
-  });
+  }, []);
 
   const border = useMotionTemplate`1px solid ${color}`;
 

@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { submit_step4 } from "../../../app/features/form/formSlice";
 import { useStepFourMutation } from "../../../app/services/formAPI";
 import scrollToTop from "../../../utils/scrollToTop";
+import { useNavigate } from "react-router-dom";
+import { IconCircleCheck } from "@tabler/icons-react";
 
 const initialState = {
   payment_id: "",
@@ -26,10 +28,27 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
   const isPICT = form?.step3?.isPICT === "1";
   const isInternational = form?.step3?.isInternational === "1";
   const techfiesta = form?.step1?.techfiesta === "1";
+  const [ countdown, setCountdown ] = useState(3);
+  const navigate = useNavigate();
 
   useEffect(() => {
     scrollToTop();
   }, [])
+
+  useEffect(() => {
+    let timer;
+    if (hasRegistered) {
+      timer = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+
+      if (countdown === 0) {
+        clearInterval(timer);
+        navigate("/");
+      }
+    }
+    return () => clearInterval(timer);
+  }, [countdown, hasRegistered]);
 
   const validate = () => {
     let count = 0;
@@ -134,7 +153,15 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
         )}
 
         {
-          hasRegistered && <ThankYou />
+          hasRegistered && 
+          <div className="bg-blue-900/20 p-6 border flex flex-col items-center border-blue-500/30">
+            <IconCircleCheck color="#22c55e" size={80}/>
+            <h3 className="text-xl font-semibold text-center text-green-500">
+              Thank You for Registering <br />
+              Our Team is Verifying your Details. <br />
+              <span className="text-secondary">Redirecting in {countdown}...</span>
+            </h3>
+          </div>
         }
 
         {/* Submit Button */}
@@ -148,15 +175,3 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
 };
 
 export default PaymentStep;
-
-
-const ThankYou = () => {
-  return (
-    <div className="bg-blue-900/20 p-6 border border-blue-500/30">
-      <h3 className="text-xl font-semibold text-center text-green-500">
-        Thank You for Registering <br />
-        Our team is verifying your details...
-      </h3>
-    </div>
-  )
-}

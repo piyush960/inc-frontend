@@ -76,13 +76,14 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
         setMembers([...data.step_2]);
       }
       else{
-        setMembers([...step2])
+        // setMembers([...step2])
       }
     }
     else if(isTechfiestaError){
       toast.error(techerr?.data?.message || 'Failed to fetch Team Members');
       prevStep();
     }
+    console.log(data);
   }, [data, isSuccess, techfiestaMems, isTechfiestaSuccess, isTechfiestaError]); 
   
   const handleAddMember = async () => {
