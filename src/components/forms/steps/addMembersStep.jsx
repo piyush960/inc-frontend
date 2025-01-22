@@ -26,7 +26,6 @@ const initialState = {
 
 const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
   
-  const step2 = useSelector(state => state.form.step2)
   const ename = window.localStorage.getItem('event_name');
   const form = JSON.parse(window.sessionStorage.getItem('form'));
   const ticket = window.localStorage.getItem('ticket') || '';
