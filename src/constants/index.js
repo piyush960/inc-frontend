@@ -23,7 +23,7 @@ import {
       title: "Events",
     },
     {
-      id: "committee",
+      id: "committee/core",
       isHome: false,
       title: "Committee",
     },
@@ -77,12 +77,11 @@ import {
     ],  
   }
 
-
   
   const events = [
-    { id: 1, _id: 'impetus', title: "Impetus", description: "International Level Project Exhibition and Competition.", logo: impetus, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "March 28, 2025" },
-    { id: 2, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-slate-700", team_size: '1-2 members', type: 'Coding Competition', date: "March 28, 2025" },
-    { id: 3, _id: 'concepts', title: "Concepts", description: "The most grand project exhibition event Concepts for final year student.", logo: concepts, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "March 28, 2025" },
+    { id: 1, _id: 'impetus', title: "Impetus", description: "International Level Project Exhibition and Competition.", logo: impetus, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "March 21, 2025" },
+    { id: 2, _id: 'pradnya', title: "Pradnya", description: "Compete with the best minds in the National Level Coding Contest.", logo:pradnya, color:"bg-slate-700", team_size: '1-2 members', type: 'Coding Competition', date: "March 21, 2025" },
+    { id: 3, _id: 'concepts', title: "Concepts", description: "The most grand project exhibition event Concepts for final year student.", logo: concepts, color:"bg-slate-700", team_size: '2-5 members', type: 'Project Expo', date: "March 21, 2025" },
     { id: 4, _id: 'techfiesta', title: "TechFiesta", description: "International Hackathon", logo: techfiesta, color:"bg-slate-700", team_size: '4-5 members', type: 'Hackathon', date: "Registration Closed" },
     { id: 5, _id: 'impetus', title: "Special Event", description: "An exciting surprise awaits! Stay tuned for something unforgettable.", logo: logo, color:"bg-slate-700", team_size: '1-5 members', type: 'Unveiling Soon', date: "To Be Announced" },
   ];
@@ -141,13 +140,13 @@ import {
 
       // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: "https://pictinc.org/register/events/impetus",
-      schedule: "March 28, 2025",
+      schedule: "March 21, 2025",
     }, 
     concepts: {
       id: 'concepts',
       logo: concepts,
       criteria: "Final year students enrolled in BE/ BTech degree.",
-      schedule: "March 28, 2025",
+      schedule: "March 21, 2025",
       name: "Concepts",
       notices: [
         "1. The Participants should be present on campus and the labs during the time period allocated.",
@@ -214,7 +213,7 @@ import {
       prize: "Total Cash prizes worth &#8377;7 Lakh",
       note1: `🔹Judge's decision will be final.`,
       note3: `🔹Already registered candidatess need not register again.`,
-      schedule: "Droppin' soon, stay tuned!",
+      schedule: "March 21, 2025",
       criteria: `Junior Level - This category is open for all students who are pursuing first or second year of any undergraduate degree/course.#$Senior Level - Third and final year engineering students of any undergraduate degree/course.`,
       logo: pradnya,
       name: "Pradnya",
@@ -338,7 +337,7 @@ import {
 
       // contact: ['Apoorvaraj 8530191073 ', 'Mrugank 7083823772', 'Vrushali 9766176681', 'Aarti 9405119460'],
       button_link: "https://pictinc.org/register/events/impetus",
-      schedule: "March 28, 2025",
+      schedule: "March 21, 2025",
     }, 
     */
   };

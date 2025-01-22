@@ -4,6 +4,7 @@ import { notification } from "../assets";
 import InfiniteLoopSlider from "./ui/infinite-loop-slider";
 
 import { notifications } from "../constants";
+import { IconCircleFilled } from "@tabler/icons-react";
 
 const ExampleWrapper = ({ setLightOn }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +41,7 @@ const SpringModal = ({ isOpen, setIsOpen, setLightOn }) => {
 						setIsOpen(false)
 						setLightOn(prev => !prev)
 					}}
-					className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
+					className="bg-slate-900/20 backdrop-blur sm:p-8 p-2 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
 				>
 					<motion.div
 						initial={{ scale: 0 }}
@@ -51,25 +52,25 @@ const SpringModal = ({ isOpen, setIsOpen, setLightOn }) => {
 					>	
 						<span className="absolute bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 inset-0"></span>
 						<div className="relative bg-tertiary p-4">
-							<div className="relative z-10 mb-4">
+							<div className="relative z-10 mb-4 overflow-hidden">
 							<InfiniteLoopSlider
 							duration={25000}
 							>
 								{
 									notifications.map((noti) => (
-										<li key={noti} className="mr-10 rounded-xl text-nowrap px-2">
+										<li key={noti} className="mr-10 rounded-xl text-nowrap whitespace-nowrap w-fit px-2">
 											{noti}
 										</li>
 									))
 								}
 							</InfiniteLoopSlider>
 							</div>
-								<h3 className="text-3xl font-bold text-center mb-2">
+								<h3 className="text-xl font-bold text-center mb-2">
 									Latest Notifications
 								</h3>
-								<p className="text-center mb-6 text-slate-400">
-									no new notifications
-								</p>
+								<ul className="my-4">
+									<li className="text-red-600 flex items-center gap-2"><IconCircleFilled /> <span className="text-white-100">Registrations are Live.</span></li>
+								</ul>
 								<div className="flex gap-2">
 									<button
 										onClick={() => {

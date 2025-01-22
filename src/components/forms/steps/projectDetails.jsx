@@ -9,7 +9,7 @@ import { impetus_domains, nova_domains } from "../constants";
 import { toast } from "react-toastify";
 
 import { useDispatch } from 'react-redux';
-import { resetForm, submit_step1, submit_step2, submit_step3 } from '../../../features/form/formSlice'
+import { resetForm, submit_step1, submit_step2, submit_step3 } from '../../../app/features/form/formSlice'
 import { useLazyGetTicketQuery, useStepOneMutation } from "../../../app/services/formAPI";
 import Loader from "../../ui/Loader";
 import scrollToTop from "../../../utils/scrollToTop";
@@ -55,11 +55,11 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
   
   useEffect(() => {
     if(ticketData && (event === ename)){
-      dispatch(submit_step1(ticketData.step_1))
-      dispatch(submit_step2(Array.isArray(ticketData.step_2) ? ticketData.step_2 : []))
-      dispatch(submit_step3(ticketData.step_3))
-      setFormData(ticketData.step_1)
-      setPhone(formatPhoneNumber(ticketData.step_1.guide_phone).formatted)
+      dispatch(submit_step1(ticketData?.step_1))
+      dispatch(submit_step2(Array.isArray(ticketData?.step_2) ? ticketData.step_2 : []))
+      dispatch(submit_step3(ticketData?.step_3))
+      setFormData(ticketData?.step_1)
+      setPhone(formatPhoneNumber(ticketData?.step_1?.guide_phone).formatted)
     }
   }, [isSuccess, ticketData])
 
@@ -82,7 +82,6 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     if (name === "abstract") {
       setAbstractWordCount(value.trim().split(/\s+/).length);
     }
-    // console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -90,12 +89,10 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
     if(event === "nova"){
       setFormData((prev) => ({...prev, project_type: "software"}));
     }
-    console.log(formData);
     if(!validate(event, formData)){
       try {
-        const ticket = window.localStorage.getItem('ticket') || ''
+        const ticket = (event === ename) ? window.localStorage.getItem('ticket') : '';
         const response = await stepOne({ event_name: event, ticket, data: formData }).unwrap();
-        // console.log(response);
         window.localStorage.setItem('ticket', response.ticket);
         window.localStorage.setItem('event_name', event)
         dispatch(submit_step1(formData));
@@ -213,14 +210,12 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
       {/* HOD Email */}
       <div>
-        <Label htmlFor="hod_email"  required>HOD Email</Label>
+        <Label htmlFor="hod_email">HOD Email</Label>
         <Input
           id="hod_email"
           name="hod_email"
           value={formData.hod_email}
           onChange={handleChange}
-          validate={validate_email.bool}
-          errorMessage={validate_email.message()}
           placeholder="Enter HOD's email"
         />
       </div>
@@ -238,7 +233,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
           validate={() => validate_wordCount.bool(abstractWordCount, 150, 300)}
           errorMessage={validate_wordCount.message('', 150, 300)}
           placeholder="Enter abstract (150-200 words)"
-          rows={5}
+          rows={8}
         />
         <div className="mt-1 text-sm text-secondary">
           Word count: {abstractWordCount} (150-200 words required)
@@ -247,7 +242,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
       {/* techfiesta */}
       <div className="flex flex-col gap-4">
-        <Label htmlFor="techfiesta" required className="flex items-center gap-2">
+        <Label htmlFor="techfiesta" className="flex items-center gap-2">
           <input
             type="checkbox"
             name="techfiesta"

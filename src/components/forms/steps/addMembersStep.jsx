@@ -8,10 +8,11 @@ import { Select } from "../../ui/select";
 import { FileUpload } from '../../ui/file-upload'
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { submit_step2 } from "../../../features/form/formSlice";
+import { submit_step2 } from "../../../app/features/form/formSlice";
 import { useAddMemberMutation, useAddTechfiestaMembersMutation, useLazyGetMembersQuery, useLazyGetTechfiestaMembersQuery, useRemoveMemberMutation } from "../../../app/services/formAPI";
 import scrollToTop from "../../../utils/scrollToTop";
 import Loader from "../../ui/Loader";
+import { IconInfoCircleFilled } from "@tabler/icons-react";
 
 const initialState = {
   id: "",
@@ -71,7 +72,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
         })
         setMembers([...mems]);
       }
-      else if(data.step_2 && Array.isArray(data.step_2)){
+      else if(data?.step_2 && Array.isArray(data?.step_2)){
         setMembers([...data.step_2]);
       }
       else{
@@ -96,8 +97,8 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
       const tempMemberDetails = { ...newMember };
       delete tempMemberDetails.member_id;
       memberFormData.append("body", JSON.stringify(tempMemberDetails));
-
-      const response = await addMember({ event_name: event, ticket, data: memberFormData }).unwrap()
+      const tempTicket = (event === ename) ? ticket : '';
+      const response = await addMember({ event_name: event, ticket: tempTicket, data: memberFormData }).unwrap()
       window.localStorage.setItem('ticket', response.ticket);
       window.localStorage.setItem('event_name', event)
       const clg_id_name = newMember.member_id?.name;
@@ -259,7 +260,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
           </div>
         </div>
 
-        <div className={!isPradnya && 'hidden'}>
+        <div className={!isPradnya ? 'hidden' : 'block'}>
           <Label htmlFor="codechef_id">Codechef ID</Label>
           <Input
             disabled={isLoading}
@@ -275,7 +276,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
 
         {/* ID Card Photo Upload */}
         <div className="relative">
-          <Label htmlFor="member_id" required>ID Card</Label>
+          <Label htmlFor="member_id">ID Card</Label>
           <FileUpload 
           id="member_id"
           value={newMember.member_id}
@@ -286,25 +287,10 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
             }
           }
           />
-          {!newMember.member_id && (
-            <div className="absolute mt-[1px] flex items-center gap-2 px-2 pt-1 text-sm text-red-600 bg-tertiary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-5 h-5 text-red-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 9v3m0 3h.01m-6.938 4h13.856c1.054 0 1.987-.816 2.052-1.87L21.942 10c.065-1.054-.724-1.918-1.788-1.918H4.846c-1.054 0-1.787.84-1.722 1.87L4.92 19.13C4.985 20.184 5.918 21 6.972 21z"
-                />
-              </svg>
-              <p>{`College ID is Required`}</p>
-            </div>
-          )}
+          <div className="mt-2 flex items-center gap-1 text-sm text-cyan-500">
+            <IconInfoCircleFilled />
+            <p>{`Mandatory for International Candidates`}</p>
+          </div>
         </div>
 
         <button
