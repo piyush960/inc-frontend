@@ -31,7 +31,6 @@ const Register = () => {
 
   
   useEffect(() => {
-    // console.log('hit')
     if(event === 'pradnya'){
       if(currentStep === 0){
         setCurrentStep(1)
