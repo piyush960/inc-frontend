@@ -28,7 +28,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
   const isPICT = form?.step3?.isPICT === "1";
   const isInternational = form?.step3?.isInternational === "1";
   const techfiesta = form?.step1?.techfiesta === "1";
-  const [ countdown, setCountdown ] = useState(3);
+  const [ countdown, setCountdown ] = useState(10);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,6 +69,10 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(hasRegistered){
+      toast.info("You have already registered.")
+      return;
+    }
     if(!isInternational && !isPICT && !techfiesta && !validate()){
       toast.error("Fill all the required details correctly!")
       return;

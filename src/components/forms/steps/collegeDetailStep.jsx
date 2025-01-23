@@ -246,7 +246,6 @@ const CollegeDetailsStep = ({ event, prevStep, nextStep }) => {
           value={formData.mode}
           options={modeOptions}
           onChange={(e) => {
-            // console.log('mode', e.target.value)
             handleInputChange(e)
           }}
           validate={validate_isEmpty.bool}

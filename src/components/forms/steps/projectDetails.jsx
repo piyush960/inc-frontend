@@ -150,11 +150,11 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
 
       {/* Project Type */}
       {event !== "nova" && <div>
-        <Label htmlFor="project_type"  required>Project Type</Label>
+        <Label htmlFor="project_type"  required>Type</Label>
         <Select
           options={[
             { value: "", label: "Select Option" },
-            { value: "hardware", label: "Open Hardware" },
+            { value: "hardware", label: "Hardware" },
             { value: "software", label: "Software" },
           ]}
           value={formData.project_type}
@@ -230,13 +230,13 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
           name="abstract"
           value={formData.abstract}
           onChange={handleChange}
-          validate={() => validate_wordCount.bool(abstractWordCount, 150, 300)}
-          errorMessage={validate_wordCount.message('', 150, 300)}
-          placeholder="Enter abstract (150-200 words)"
+          validate={() => validate_wordCount.bool(abstractWordCount, 50, 300)}
+          errorMessage={validate_wordCount.message('', 50, 300)}
+          placeholder="Enter abstract (50-300 words)"
           rows={8}
         />
         <div className="mt-1 text-sm text-secondary">
-          Word count: {abstractWordCount} (150-200 words required)
+          Word count: {abstractWordCount} (50-300 words required)
         </div>
       </div>
 
@@ -281,7 +281,7 @@ const ProjectDetailsFormStep = ({ event, nextStep }) => {
             onChange={handleChange}
             className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
-          Can you show a demo?
+          Would you like to showcase your project with a demo?
         </Label>
         {formData.demo === "0" && (
           <div className="">

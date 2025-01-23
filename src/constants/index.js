@@ -145,7 +145,7 @@ import {
     concepts: {
       id: 'concepts',
       logo: concepts,
-      criteria: "Final year students enrolled in BE/ BTech degree.",
+      criteria: "Final year students enrolled in BE / BTech degree.",
       schedule: "March 21, 2025",
       name: "Concepts",
       notices: [
@@ -157,7 +157,7 @@ import {
       ],
 
       short_desc:
-        "The most grand project exhibition event for Final Year students.",
+        "The Premier Project Exhibition showcasing Innovation and Achievement",
 
       description: ["Concepts is an inter-collegiate international-level competition and has been attracting corporate giants for not only sponsorship but also  for guiding and mentoring the participants for their Quality products/projects and providing on spot job offers & internships. It offers Patent registration fees for Innovative and Patentable projects. During the 3 day event, Final Year students from various colleges across India and abroad showcase their projects.",],
 
@@ -214,7 +214,7 @@ import {
       note1: `🔹Judge's decision will be final.`,
       note3: `🔹Already registered candidatess need not register again.`,
       schedule: "March 21, 2025",
-      criteria: `Junior Level - This category is open for all students who are pursuing first or second year of any undergraduate degree/course.#$Senior Level - Third and final year engineering students of any undergraduate degree/course.`,
+      criteria: `Junior Level - First or Second year students of any undergraduate degree/course.#$Senior Level - Third and Final year students of any undergraduate degree/course.`,
       logo: pradnya,
       name: "Pradnya",
       short_desc: "Competitive Programming",

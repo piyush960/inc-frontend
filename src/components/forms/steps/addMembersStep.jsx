@@ -82,7 +82,6 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
       toast.error(techerr?.data?.message || 'Failed to fetch Team Members');
       prevStep();
     }
-    console.log(data);
   }, [data, isSuccess, techfiestaMems, isTechfiestaSuccess, isTechfiestaError]); 
   
   const handleAddMember = async () => {
@@ -122,7 +121,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
       if(form?.step1?.techfiesta === "0" || !form){
         await removeMember({ index, ticket }).unwrap()
       }
-      setMembers(members.filter((member) => member.id !== id));
+      setMembers((prev) => prev.filter((member) => member.id !== id));
       toast.success('Removed Successfully')
     }
     catch(error){

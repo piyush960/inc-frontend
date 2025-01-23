@@ -17,6 +17,7 @@ const RegisterHome = () => {
 							logo={event.logo}
 							eventName={event.name}
 							eventDescription={event.short_desc}
+							eventEligibility={event.criteria}
 							onClick={() => {navigate(`/register/${event.id}`)}}
 						/>
         })}
