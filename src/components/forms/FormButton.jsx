@@ -13,13 +13,13 @@ const FormButton = ({ loading, onClick, isPrev, text, className }) => (
       {
       loading ? 
       <Loader />
-      : 
+      :
       text ? 
       text
       :
       isPrev ? 
       <IconArrowNarrowLeft className="sm:w-[40px] sm:h-[37px]" /> 
-      : 
+      :
       <IconArrowNarrowRight className="sm:w-[40px] sm:h-[37px]"/>
       }
     </button>

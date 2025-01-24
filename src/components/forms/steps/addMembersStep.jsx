@@ -7,7 +7,7 @@ import { formatPhoneNumber, validate_email, validate_isEmpty, validate_phone, va
 import { Select } from "../../ui/select";
 import { FileUpload } from '../../ui/file-upload'
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { submit_step2 } from "../../../app/features/form/formSlice";
 import { useAddMemberMutation, useAddTechfiestaMembersMutation, useLazyGetMembersQuery, useLazyGetTechfiestaMembersQuery, useRemoveMemberMutation } from "../../../app/services/formAPI";
 import scrollToTop from "../../../utils/scrollToTop";

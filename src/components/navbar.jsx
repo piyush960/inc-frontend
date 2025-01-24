@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { navLinks } from '../constants'
+import { navLinks, adminNavlinks, } from '../constants'
+
 import { logo, menu, close, pict } from '../assets'
 
 import useScrollVisibility from '../hooks/useScrollVisibility'
@@ -9,11 +10,11 @@ import useScrollVisibility from '../hooks/useScrollVisibility'
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
-  const isVisible = useScrollVisibility();
+  const isVisible = useScrollVisibility();  
+  const [navItems, setNavItems] = useState(navLinks);
   const menuRef = useRef(null);
 
   const location = useLocation();
-
 
   useEffect(() => {
     if (location.hash) {
@@ -25,6 +26,12 @@ const Navbar = () => {
       };
 
       setTimeout(scrollToElement, 300);
+    }
+    if(location.pathname.startsWith('/admin')){
+      setNavItems(adminNavlinks);
+    }
+    else{
+      setNavItems(navLinks);
     }
   }, [location]);
 
@@ -54,7 +61,7 @@ const Navbar = () => {
         </Link>
         </div>
         <ul className='list-none hidden sm:flex flex-row gap-7'>
-          {navLinks.map((link) => (
+          {navItems.map((link) => (
             <li key={link.id} className={`${active == link.title ? 'text-orange-100 border-b-2 border-orange-100' : 'text-white-100'} hover:text-orange-100 text-[16px] font-medium cursor-pointer`} onClick={() => setActive(link.title)}>
               {
                 <Link to={link.isHome ? `/#${link.id}` : `/${link.id}`}>{link.title}</Link>
@@ -68,7 +75,7 @@ const Navbar = () => {
           onClick={() => setToggle(!toggle)}/>
           <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-tertiary absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10`}>
           <ul className='list-none flex justify-end items-start flex-col gap-4'>
-            {navLinks.map((link) => (
+            {navItems.map((link) => (
               <li key={link.id} className={`${active == link.title ? 'text-orange-100' : 'text-white-100'} font-poppins font-medium cursor-pointer text-[16px]`} onClick={() => {
                 setActive(link.title)
                 setToggle(!toggle)
