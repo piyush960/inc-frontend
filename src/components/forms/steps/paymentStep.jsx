@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import FormButton from "../FormButton";
-import {
-  AlertCircle,
-} from "lucide-react";
 import EventDetail from "../eventDetail";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -123,10 +120,10 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
             <div className="space-y-2">
               <Label required className="text-lg flex items-center gap-2">
                 Transaction/UTR ID
-                <AlertCircle
+                {/* <AlertCircle
                   className="h-4 w-4 text-blue-400"
                   title="12 digit transaction ID required"
-                />
+                /> */}
               </Label>
               <Input
                 type="text"

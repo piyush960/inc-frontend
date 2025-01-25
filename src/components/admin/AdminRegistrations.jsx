@@ -1,30 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import FormButton from '../forms/FormButton'
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useNavigate, useParams } from 'react-router-dom';
-
-const rows = [
-  { id: 1, col1: 'Hello', col2: 'World' },
-  { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-  { id: 3, col1: 'MUI', col2: 'is Amazing' },
-];
-
-const columns = [
-  { field: 'col1', headerName: 'Column 1', width: 150 },
-  { field: 'col2', headerName: 'Column 2', width: 150 },
-];
+import { Box, Button, Modal, Typography } from '@mui/material';
+import ProjectDetailsModal from './modals/ProjectDetailsModal';
+import TeamDetailsModal from './modals/TeamDetailsModal';
+import CollegeDetailsModal from './modals/CollegeDetailsModal';
+import { useLazyGetVerifiedRegistrationsQuery } from '../../app/services/adminAPI';
+import { toast } from 'react-toastify';
 
 
 const AdminRegistrations = () => {
   const { event_name } = useParams();
   const [activeEvent, setActiveEvent] = useState('impetus');
+  const [ rows, setRows ] = useState([]);
+  const [ getVerifiedRegistrations, { isFetching, isSuccess, data, isError, error } ] = useLazyGetVerifiedRegistrationsQuery();
   const navigate = useNavigate();
 
+  const fetchEventVerifications = async () => {
+    try {
+      await getVerifiedRegistrations(event_name);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    if(isSuccess){
+      setRows([...data]);
+    }
+  }, [isSuccess, data])
+  
   useEffect(() => {
     if(event_name === 'impetus' || event_name === 'concepts' || event_name === 'pradnya'){
-      setActiveEvent(event_name)
+      setActiveEvent(event_name);
+      fetchEventVerifications();
     }
-    else setActiveEvent('impetus')
   }, [ event_name ])
 
   return (
@@ -36,10 +47,78 @@ const AdminRegistrations = () => {
       </div>
       <h2 className='font-bold text-3xl'>{activeEvent[0].toUpperCase() + activeEvent.slice(1)} Registrations.</h2>
       <div>
-        <DataGrid  rows={rows} columns={columns} />
+        <DataGrid rows={rows} columns={columns} loading={isFetching} slots={{ toolbar: GridToolbar, noRowsOverlay: CustomNoResultsOverlay }} initialState={{pagination: { paginationModel: { pageSize: 25 }}}} disableRowSelectionOnClick />
       </div>
     </section>
   )
 }
 
 export default AdminRegistrations
+
+const columns = [
+  { field: 'pid', headerName: 'PID', minWidth: 150, flex: 1 },
+  { 
+    field: 'paymentId', 
+    headerName: 'Payment ID', 
+    minWidth: 150, 
+    flex: 1 
+  },
+  { 
+    field: 'judges_count', 
+    headerName: 'Judges Count', 
+    minWidth: 150, 
+    flex: 1 
+  },
+  { 
+    field: 'evaluations', 
+    headerName: 'Evaluations', 
+    minWidth: 150, 
+    flex: 1 
+  },
+  { 
+    field: 'projectDetails', 
+    headerName: 'Project Details', 
+    minWidth: 150, 
+    flex: 1,
+    sortable: false,
+    filterable: false,
+    renderCell: (params) => (
+      <ProjectDetailsModal data={params?.row?.projectDetails} />
+    ),
+    valueGetter: (params) => {
+      return `${JSON.stringify(params)}`;
+    },
+  },
+  { 
+    field: 'teamDetails', 
+    headerName: 'Team Details', 
+    minWidth: 150, 
+    flex: 1,
+    sortable: false,
+    filterable: false,
+    renderCell: (params) => (
+      <TeamDetailsModal data={params?.row?.teamDetails} />
+    ),
+    valueGetter: (params) => {
+      return `${JSON.stringify(params)}`;
+    },
+  },
+  { 
+    field: 'collegeDetails', 
+    headerName: 'College Details', 
+    minWidth: 150, 
+    flex: 1,
+    sortable: false,
+    filterable: false,
+    renderCell: (params) => (
+      <CollegeDetailsModal data={params?.row?.collegeDetails} />
+    ),
+    valueGetter: (params) => {
+      return `${JSON.stringify(params)}`;
+    },
+  },
+];
+
+const CustomNoResultsOverlay = () => {
+  return <p className='h-full flex justify-center items-center text-secondary'>No rows or Click on another Event to load data.</p>
+}

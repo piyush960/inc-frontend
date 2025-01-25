@@ -1,5 +1,3 @@
-import { Globe } from "lucide-react";
-
 // import { eventsData } from "../../constants";
 
 const EventDetail = ({ amount }) => {
@@ -33,7 +31,7 @@ const EventDetail = ({ amount }) => {
           </div>
 
           <div className="flex items-center gap-2 bg-gray-800/30 px-4 py-2">
-            <Globe className="w-4 h-4 text-blue-400" />
+            {/* <Globe className="w-4 h-4 text-blue-400" /> */}
             <span className="text-white font-medium">
               Free <span className="text-gray-400">International Entries</span>
             </span>

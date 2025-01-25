@@ -1,11 +1,16 @@
 import { useEffect, useState, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { navLinks, adminNavlinks, } from '../constants'
 
 import { logo, menu, close, pict } from '../assets'
 
 import useScrollVisibility from '../hooks/useScrollVisibility'
+import { Button } from '@mui/material'
+import { useLazyProcessLogoutQuery } from '../app/services/authAPI'
+import { useDispatch } from 'react-redux'
+import { resetAuthState } from '../app/features/auth/authSlice'
+import { toast } from 'react-toastify'
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -13,8 +18,10 @@ const Navbar = () => {
   const isVisible = useScrollVisibility();  
   const [navItems, setNavItems] = useState(navLinks);
   const menuRef = useRef(null);
-
+  const [ processLogout, { isFetching } ] = useLazyProcessLogoutQuery();
+  const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.hash) {
@@ -47,6 +54,18 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await processLogout().unwrap();
+      dispatch(resetAuthState());
+      toast.success("Logout Success.");
+      navigate('/admin/login');
+    } catch (error) {
+      toast.error(error?.data?.message || error?.message || 'Failed to Logout.');
+    }
+  }
+
   return (
     <nav className={`max-md:px-4 w-full mx-auto flex items-center py-4 fixed backdrop-blur-sm top-0 z-20 transition-transform duration-300 ${!isVisible ? 'transform-none' : '-translate-y-16'}`}>
       <div className='w-full flex justify-between items-center mx-auto max-w-[82rem]'>
@@ -60,8 +79,11 @@ const Navbar = () => {
           <p className='text-white-100 text-[18px] font-bold cursor-pointer'>PICT INC 2025</p>
         </Link>
         </div>
-        <ul className='list-none hidden sm:flex flex-row gap-7'>
+        <ul className='list-none hidden sm:flex flex-row items-center gap-7'>
           {navItems.map((link) => (
+            link.id === "admin/logout" ? 
+            <Button key={link.id} variant='outlined' color='white' sx={{borderRadius: 0}} onClick={handleLogout} disabled={isFetching}>{isFetching ? 'Wait...' : 'Logout' }</Button> 
+            : 
             <li key={link.id} className={`${active == link.title ? 'text-orange-100 border-b-2 border-orange-100' : 'text-white-100'} hover:text-orange-100 text-[16px] font-medium cursor-pointer`} onClick={() => setActive(link.title)}>
               {
                 <Link to={link.isHome ? `/#${link.id}` : `/${link.id}`}>{link.title}</Link>

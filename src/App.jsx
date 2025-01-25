@@ -1,9 +1,7 @@
 import { Routes, Route } from "react-router-dom"
-import { About, Register, Navbar, Sponsors, Committee } from './components';
-
+import { About, Navbar, Sponsors } from './components';
 import Hero from "./components/HeroParallax";
 import Events from "./components/Events";
-import EventDetails from "./components/EventDetails";
 import Notification from './components/Modal';
 import useDimension from "./hooks/useDimension";
 import MobileContext from './hooks/MobileContext'
@@ -13,9 +11,13 @@ import AnimatedCounter from "./components/AnimatedCounter";
 import { ToastContainer, Zoom } from "react-toastify";
 import PageNotFound from "./components/PageNotFound";
 import Footer from './components/footer'
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import Admin from "./components/admin/AdminRoot";
 import AdminLogin from "./components/admin/AdminLogin";
+
+const Register = lazy(() => import("./components/Register"));
+const Committee = lazy(() => import("./components/committee"));
+const EventDetails = lazy(() => import("./components/EventDetails"));
 
 const App = () => {
   
@@ -40,11 +42,11 @@ const App = () => {
       <div className="relative z-0 bg-primary min-h-full">
       <Routes>
         {/* user routes */}
-        <Route path="/" element={<><Hero lightOn={lightOn} /><About /><Events /><AnimatedCounter /><Sponsors /><Notification setLightOn={setLightOn} /></>} />
+        <Route index element={<><Hero lightOn={lightOn} /><About /><Events /><AnimatedCounter /><Sponsors /><Notification setLightOn={setLightOn} /></>} />
         <Route path="/register" element={<RegisterHome />} />
-        <Route path={`/register/:event`} element={<Register />} />
-        <Route path="/events/:id" element={<EventDetails />} />
-        <Route path="/committee/:id" element={<Committee />} />
+        <Route path={`/register/:event`} element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><Register /></Suspense>} />
+        <Route path="/events/:id" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><EventDetails /></Suspense>} />
+        <Route path="/committee/:id" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><Committee /></Suspense>} />
         <Route path="/test" element={<Test />} />
 
         {/* admin routes */}
