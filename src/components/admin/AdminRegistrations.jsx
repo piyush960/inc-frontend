@@ -1,8 +1,7 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import FormButton from '../forms/FormButton'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Button, Modal, Typography } from '@mui/material';
 import ProjectDetailsModal from './modals/ProjectDetailsModal';
 import TeamDetailsModal from './modals/TeamDetailsModal';
 import CollegeDetailsModal from './modals/CollegeDetailsModal';
@@ -14,7 +13,7 @@ const AdminRegistrations = () => {
   const { event_name } = useParams();
   const [activeEvent, setActiveEvent] = useState('impetus');
   const [ rows, setRows ] = useState([]);
-  const [ getVerifiedRegistrations, { isFetching, isSuccess, data, isError, error } ] = useLazyGetVerifiedRegistrationsQuery();
+  const [ getVerifiedRegistrations, { isFetching, isSuccess, data, } ] = useLazyGetVerifiedRegistrationsQuery();
   const navigate = useNavigate();
 
   const fetchEventVerifications = async () => {
@@ -22,6 +21,7 @@ const AdminRegistrations = () => {
       await getVerifiedRegistrations(event_name);
     } catch (error) {
       console.error(error);
+      toast.error(error?.data?.message || error?.message || 'Failed to fetch.');
     }
   }
 

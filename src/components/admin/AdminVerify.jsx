@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import FormButton from '../forms/FormButton'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,13 +8,12 @@ import TeamDetailsModal from './modals/TeamDetailsModal';
 import CollegeDetailsModal from './modals/CollegeDetailsModal';
 import { useLazyGetPendingVerificationsQuery, useProcessPaymentVerificationMutation } from '../../app/services/adminAPI';
 import { toast } from 'react-toastify';
-import Loader from '../ui/Loader';
 
 const AdminVerify = () => {
   const { event_name } = useParams();
   const [activeEvent, setActiveEvent] = useState('impetus');
   const [rows, setRows] = useState([]);
-  const [ getPendingVerifications, { isFetching, isSuccess, data, isError } ] = useLazyGetPendingVerificationsQuery();
+  const [ getPendingVerifications, { isFetching, isSuccess, data } ] = useLazyGetPendingVerificationsQuery();
   const navigate = useNavigate();
 
   const fetchEventVerifications = async () => {
@@ -22,6 +21,7 @@ const AdminVerify = () => {
       await getPendingVerifications(event_name);
     } catch (error) {
       console.error(error);
+      toast.error(error?.data?.message || error?.message || 'Failed to fetch.');
     }
   }
 
@@ -147,7 +147,7 @@ const VerifyTicket = ({data}) => {
       toast.success('Verification success and Mail sent.')
     } catch (error) {
       console.error(error);
-      toast.error(error?.data?.message || error?.message || 'Verification failed.');      
+      toast.error(error?.data?.message || error?.message || 'Verification failed.');     
     }
     data.api.setLoading(() => false);
   }

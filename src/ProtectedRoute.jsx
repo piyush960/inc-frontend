@@ -22,7 +22,7 @@ const ProtectedRoute = ({path}) => {
         navigate('/admin')
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.info(error?.data?.message || error?.message || 'Login to Proceed.');
     }
     finally {

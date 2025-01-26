@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import FormButton from '../forms/FormButton'
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -20,13 +20,14 @@ const AdminDashboard = () => {
   const [pradnyaIncomplete, setPradnyaIncomplete] = useState(0);
   const [totalRegs, setTotalRegs] = useState(0);
 
-  const [ getRegistrationsCount, { data, isFetching, isSuccess, isError } ] = useLazyGetRegistrationsCountQuery();
+  const [ getRegistrationsCount, { data, isFetching, isSuccess, } ] = useLazyGetRegistrationsCountQuery();
 
   const fetchRegistrations = async () => {
     try {
       await getRegistrationsCount();
     } catch (error) {
       console.error(error);
+      toast.error(error?.data?.message || error?.message || 'Failed to fetch.');
     }
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogTitle, DialogContent, Typography, Box, IconButton, styled, Button, Modal } from "@mui/material";
 import { IconX } from "@tabler/icons-react";
 import { useLazyGetCollegeIDQuery } from "../../../app/services/adminAPI";
@@ -116,7 +116,8 @@ const ChildModal = ({ email }) => {
       setOpen(true);
       await getCollegeID(email);
     } catch (error) {
-      console.error(error);      
+      console.error(error);  
+      toast.error(error?.data?.message || error?.message || 'Failed to fetch.');    
     }
   };
   const handleClose = () => {
