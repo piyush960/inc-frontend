@@ -9,7 +9,6 @@ import { IconCalendarFilled, IconCheckupList, IconCurrencyDollar, IconDiamondsFi
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './ui/accordian';
 import scrollToTop from '../utils/scrollToTop'
 import { cn } from '../lib/utils';
-import { toast } from 'react-toastify';
 
 function TabsDemo() {
 
