@@ -365,6 +365,11 @@ import {
     */
   };
 
+  const ruleBookLinks = new Map([
+    ["impetus", "https://drive.google.com/file/d/1n2Ksym9IS7eORj2VyhvhZb2vMZwTZgM2/view?usp=sharing"],
+    ["concepts", "https://drive.google.com/file/d/1SS87y18kA5TbseNXieuszv84eFqQf1YI/view?usp=sharing"],
+    ["pradnya", "https://drive.google.com/file/d/1SZKhQM-5kQAT_rshHYQdZLtOlWTfXiEt/view?usp=sharing"],
+  ])
 
   const faculty = [
     { value: "Advisory Committee", names: [{ value: "1. Director: Dr. P. T. Kulkarni" }, { value: "2. Principal: Dr. S. T. Gandhe" }, { value: "3. Convenor: Dr. G. P. Potdar" }, { value: "4. HOCD:  Dr. G. V. Kale" }, { value: "5. HOED:  Dr. M. V. Munot" }, { value: "6. HOID:  Dr. A. S. Ghotkar" }, { value: "7. HOFD: Prof. E. M. Reddy" }] },
@@ -749,4 +754,4 @@ const core = [
   ];
   
   
-  export { about_text, events, timeline, navLinks, sponsors, notifications, eventsData, faculty, web, core, adminNavlinks, };
+export { about_text, events, timeline, navLinks, sponsors, notifications, eventsData, faculty, web, core, adminNavlinks, ruleBookLinks, };

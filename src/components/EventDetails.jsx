@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Tabs } from "./ui/tabs";
 
-import { eventsData } from '../constants';
+import { eventsData, ruleBookLinks } from '../constants';
 
 import InfiniteLoopSlider from './ui/infinite-loop-slider';
 import { IconCalendarFilled, IconCheckupList, IconCurrencyDollar, IconDiamondsFilled, IconDownload, IconFileDescription, IconTrophy, IconUserCheck, IconUserEdit, IconUsersGroup } from '@tabler/icons-react'
@@ -129,7 +129,7 @@ const EventDetails = ({ data }) => {
             <Button onClick={() => {navigate(`/register/${data.id}`)}}>
             <><IconUserEdit /> Register</>
             </Button>
-            <Button onClick={() => {toast.info('Rule Book yet to be published.')}}>
+            <Button onClick={() => {window.open(ruleBookLinks.get(data.id), "_blank")}}>
               <><IconDownload /> Rule Book</>
             </Button>
           </div>
