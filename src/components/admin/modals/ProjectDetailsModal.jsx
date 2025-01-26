@@ -17,7 +17,7 @@ const ProjectDetailsModal = ({data}) => {
   );
 };
 
-const StyledDialog = styled(Dialog)(({ theme }) => ({
+const StyledDialog = styled(Dialog)(() => ({
   "& .MuiDialog-paper": {
     width: "100%",
     maxWidth: "800px",
@@ -26,21 +26,18 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
   }
 }));
 
-const FieldLabel = styled(Typography)(({ theme }) => ({
+const FieldLabel = styled(Typography)(() => ({
   color: "#ffffff",
   fontWeight: 600,
   marginBottom: "4px"
 }));
 
-const FieldValue = styled(Typography)(({ theme }) => ({
+const FieldValue = styled(Typography)(() => ({
   color: "#ffffff",
   marginBottom: "16px"
 }));
 
 const DataDisplayModal = ({ open, onClose, data }) => {
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
-  };
 
   const renderField = (label, value, icon) => (
     <Box>

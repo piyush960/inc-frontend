@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, DialogContent, Typography, Box, IconButton, styled
 import { IconX } from "@tabler/icons-react";
 import { useLazyGetCollegeIDQuery } from "../../../app/services/adminAPI";
 import Loader from "../../ui/Loader";
+import { toast } from "react-toastify";
 
 const TeamDetailsModal = ({ data }) => {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ const TeamDetailsModal = ({ data }) => {
   );
 };
 
-const StyledDialog = styled(Dialog)(({ theme }) => ({
+const StyledDialog = styled(Dialog)(() => ({
   "& .MuiDialog-paper": {
     width: "100%",
     maxWidth: "800px",
@@ -28,13 +29,13 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
   }
 }));
 
-const FieldLabel = styled(Typography)(({ theme }) => ({
+const FieldLabel = styled(Typography)(() => ({
   color: "#ffffff",
   fontWeight: 600,
   marginBottom: "4px"
 }));
 
-const FieldValue = styled(Typography)(({ theme }) => ({
+const FieldValue = styled(Typography)(() => ({
   color: "#ffffff",
   marginBottom: "16px"
 }));

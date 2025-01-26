@@ -5,6 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useLazyGetRegistrationsCountQuery } from '../../app/services/adminAPI';
 import Loader from '../ui/Loader';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
