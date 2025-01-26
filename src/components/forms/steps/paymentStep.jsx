@@ -159,7 +159,7 @@ const PaymentStep = ({ event, imagePath, amount, prevStep }) => {
             <IconCircleCheck color="#22c55e" size={80}/>
             <h3 className="text-xl font-semibold text-center text-green-500">
               Thank You for Registering <br />
-              Our Team is Verifying your Details. <br />
+              Confirmation Mail will be received once details are verified. <br />
               <span className="text-secondary">Redirecting in {countdown}...</span>
             </h3>
           </div>

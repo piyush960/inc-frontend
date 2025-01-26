@@ -144,7 +144,7 @@ const VerifyTicket = ({data}) => {
     try {
       await processVerification({data: { ticket: row?.ticket }, event_name}).unwrap();
       data.api.updateRows([{ id: row.id, _action: 'delete' }]);
-      toast.success('Verification Success.')
+      toast.success('Verification success and Mail sent.')
     } catch (error) {
       console.error(error);
       toast.error(error?.data?.message || error?.message || 'Verification failed.');      

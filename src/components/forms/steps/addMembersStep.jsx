@@ -175,14 +175,17 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
       </div>
     :
     <form
-      className="w-full bg-tertiary p-4 sm:p-10 grid grid-cols-1 sm:grid-cols-2 gap-8"
+      className="w-full bg-tertiary p-4 sm:p-10 grid grid-cols-1 sm:grid-cols-2 gap-6"
       onSubmit={handleSubmit}
-    >
+    > 
       <h2 className="text-xl font-bold text-white-100">Add Team Members</h2>
-      <p className="text-gray-400 text-sm">
-        <strong>Note:</strong> The first member added will be the{" "}
-        <span className="text-blue-500 font-bold">Team Leader</span>.
-      </p>
+      <div className="text-gray-400 text-sm">
+        <strong>Note:</strong> 
+        <ul className="list-disc list-inside">
+          <li>The first member added will be the&nbsp;<span className="text-blue-500 font-bold">Team Leader</span>.</li>
+          {isTechfiestaSuccess && <li>Techfiesta Participants cannot add new members.</li>}
+        </ul>
+      </div>
       {/* Add New Member Form */}
       <div className="space-y-8">
         <div>

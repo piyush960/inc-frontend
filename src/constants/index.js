@@ -48,7 +48,7 @@ import {
     {
       id: "admin/registrations/impetus",
       isHome: false,
-      title: "Registrations",
+      title: "Teams",
     },
     {
       id: "admin/logout",
