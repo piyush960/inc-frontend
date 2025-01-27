@@ -39,14 +39,14 @@ const AdminRegistrations = () => {
   }, [ event_name ])
 
   return (
-    <section className='w-full max-w-7xl mx-auto flex flex-col gap-12'>
+    <section className='w-full max-w-7xl mx-auto flex flex-col gap-6'>
       <div className='flex items-center justify-center gap-4'>
         <FormButton className={`w-auto h-auto px-4 py-2`} text={`Impetus`} onClick={() => {navigate('/admin/registrations/impetus')}}/>
         <FormButton className={`w-auto h-auto px-4 py-2`} text={`Concepts`} onClick={() => {navigate('/admin/registrations/concepts')}}/>
         <FormButton className={`w-auto h-auto px-4 py-2`} text={`Pradnya`} onClick={() => {navigate('/admin/registrations/pradnya')}}/>
       </div>
       <h2 className='font-bold text-3xl'>{activeEvent[0].toUpperCase() + activeEvent.slice(1)} Registrations.</h2>
-      <div>
+      <div style={{ height: '500px', width: '100%' }}>
         <DataGrid rows={rows} columns={columns} loading={isFetching} slots={{ toolbar: GridToolbar, noRowsOverlay: CustomNoResultsOverlay }} initialState={{pagination: { paginationModel: { pageSize: 25 }}}} disableRowSelectionOnClick />
       </div>
     </section>
