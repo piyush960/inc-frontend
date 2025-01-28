@@ -26,7 +26,7 @@ const validate = (event, formData) => {
 
 const validateMember = (member) => {
 
-	return validate_isEmpty.bool(member.name) || validate_email.bool(member.email) || validate_phone.bool(member.phone) || validate_isEmpty.bool(member.gender)
+	return validate_isEmpty.bool(member.name) || validate_email.bool(member.email) || validate_phone.bool(member.phone) || validate_isEmpty.bool(member.gender) || validate_isEmpty.bool(member.member_id)
 
 };
 

@@ -61,7 +61,7 @@ export const FileUpload = ({
 				<div className="flex flex-col items-center justify-center">
 					<p
 						className="relative z-20 font-sans font-normal text-secondary text-base">
-						Drag or Drop Image here or Click to Upload
+						Drag and Drop or Click to Upload ( upto <span className="text-red-500 text-sm">512kb</span> )
 					</p>
 					<div className="relative w-full max-w-xl mx-auto">
 						{value &&
