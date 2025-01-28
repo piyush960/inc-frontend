@@ -36,38 +36,38 @@ const validateCollegeDetails = (event, formData) => {
 };
 
 const formatPhoneNumber = (value) => {
-    const numbersOnly = value.replace(/\D/g, "");
+  const numbersOnly = value.replace(/\D/g, "");
 
-    let formatted = numbersOnly;
-    if (numbersOnly.length > 3) {
-      formatted = `(${numbersOnly.slice(0, 3)}) ${numbersOnly.slice(3)}`;
-    }
-    if (numbersOnly.length > 6) {
-      formatted = `(${numbersOnly.slice(0, 3)}) ${numbersOnly.slice(
-        3,
-        6
-      )}-${numbersOnly.slice(6, 10)}`;
-    }
-    if (numbersOnly.length > 10) {
-      formatted = `+${numbersOnly.slice(0, 1)} (${numbersOnly.slice(
-        1,
-        4
-      )}) ${numbersOnly.slice(4, 7)}-${numbersOnly.slice(7, 11)}`;
-    }
+  let formatted = numbersOnly;
+  if (numbersOnly.length > 3) {
+    formatted = `(${numbersOnly.slice(0, 3)}) ${numbersOnly.slice(3)}`;
+  }
+  if (numbersOnly.length > 6) {
+    formatted = `(${numbersOnly.slice(0, 3)}) ${numbersOnly.slice(
+      3,
+      6
+    )}-${numbersOnly.slice(6, 10)}`;
+  }
+  if (numbersOnly.length > 10) {
+    formatted = `+${numbersOnly.slice(0, 1)} (${numbersOnly.slice(
+      1,
+      4
+    )}) ${numbersOnly.slice(4, 7)}-${numbersOnly.slice(7, 11)}`;
+  }
 	if (numbersOnly.length > 11) {
-		formatted = `+${numbersOnly.slice(0, 2)} (${numbersOnly.slice(
+    formatted = `+${numbersOnly.slice(0, 2)} (${numbersOnly.slice(
 			2,
 			5
 		)}) ${numbersOnly.slice(5, 8)}-${numbersOnly.slice(8, 12)}`;
 	}
-    if (numbersOnly.length > 12){
-      formatted = `+${numbersOnly.slice(0, 3)} (${numbersOnly.slice(
-        3,
-        6
-      )}) ${numbersOnly.slice(6, 9)}-${numbersOnly.slice(9, 13)}`;
-    }
-
-    return {formatted, numbersOnly};
-  };
+  if (numbersOnly.length > 12){
+    formatted = `+${numbersOnly.slice(0, 3)} (${numbersOnly.slice(
+      3,
+      6
+    )}) ${numbersOnly.slice(6, 9)}-${numbersOnly.slice(9, 13)}`;
+  }
+  
+  return {formatted, numbersOnly: numbersOnly.slice(0, 13)};
+};
 
 export { validate, validate_isEmpty, validate_phone, validate_email, validate_wordCount, validateMember, validateCollegeDetails, formatPhoneNumber }

@@ -110,8 +110,8 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
       setPhone("");
     }
     catch(error){
-      console.error(error)
-      toast.error(error?.data?.message || error?.message || 'Failed to Add Member')
+      if(error?.status === 'FETCH_ERROR') toast.error('Invalid File Input');
+      else toast.error(error?.data?.message || error?.message || 'Failed to Add Member')
     }
 
   };
@@ -156,6 +156,7 @@ const AddMemberStep = ({ event, prevStep, nextStep, isPradnya }) => {
         setPhone("");
         handleSubmit();
       } catch (error) {
+        console.error(error);
         toast.error(error?.data?.message || error?.message  || 'Failed to Add Members')
       }
     }
