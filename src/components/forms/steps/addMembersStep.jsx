@@ -12,7 +12,6 @@ import { submit_step2 } from "../../../app/features/form/formSlice";
 import { useAddMemberMutation, useAddTechfiestaMembersMutation, useLazyGetMembersQuery, useLazyGetTechfiestaMembersQuery, useRemoveMemberMutation } from "../../../app/services/formAPI";
 import scrollToTop from "../../../utils/scrollToTop";
 import Loader from "../../ui/Loader";
-import { IconInfoCircleFilled } from "@tabler/icons-react";
 
 const initialState = {
   id: "",
