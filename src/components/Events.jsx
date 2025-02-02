@@ -28,14 +28,10 @@ function Events(){
     <div
     
     className='w-full flex flex-col items-center justify-evenly'>
-      <motion.div 
-      initial={{ y: 100, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ ease: "easeInOut", duration: 0.75}}
+      <div 
       >
         <h2 className={`${styles.sectionHeadText}`}>Events.</h2>
-      </motion.div>
+      </div>
       {isMobile ? <SwipeCards events={events} /> : <EventCards />}
     </div>
     </>
@@ -99,10 +95,6 @@ const Card = ({
     <motion.div
     onMouseEnter={() => setHovered(true)}
     onMouseLeave={() => setHovered(false)}
-    initial={{opacity: 0}}
-    whileInView={{opacity: 1}}
-    viewport={{ once: true, amount: 0.5 }}
-    transition={{ ease: "easeInOut", duration: 0.5 }}
     className={cn(`transition duration-300 group/canvas-card flex flex-col items-center justify-between mx-auto w-full p-px relative cursor-pointer`, className)}
     onClick={() => handleViewDetails(details.id)}
     >

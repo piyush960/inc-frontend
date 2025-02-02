@@ -32,7 +32,7 @@ const FormsBanner = ({ logo, eventName, eventDescription, eventEligibility, fees
 					{eventEligibility && <ul className='flex flex-col gap-2'>
 						{
 							eventEligibility.split('#$').map(criteria => (
-								<li key={criteria} className="bg-slate-800 text-sm px-2 py-1 rounded-md">{criteria}</li>
+								<li key={criteria} className="bg-black-100 text-sm px-2 py-1 rounded-md">{criteria}</li>
 							))
 						}
 					</ul>}

@@ -55,22 +55,19 @@ const CountUp = ({
 const AnimatedCounter = () => {
   return (
     <section className="relative w-full overflow-hidden pointer-events-none">
-    <motion.div className="w-full absolute max-sm:top-[28%] flex justify-center overflow-hidden"
+    <motion.div className="w-full absolute max-sm:top-[10%] flex justify-center overflow-hidden"
     initial={{opacity: 0}}
     whileInView={{opacity: 1}}
     viewport={{ once: true }}
     transition={{duration: 1, delay: 3}}
     >
-      <img loading='lazy'  src={popper} alt="popper" className="w-[70%] sm:w-[50%]"/>
+      <img src={popper} alt="popper" className="w-[70%] sm:w-[50%] opacity-50"/>
+      <img src={popper} alt="popper" className="w-[70%] sm:w-[50%] opacity-50"/>
     </motion.div>
-    <motion.div 
-    initial={{ y: 100, opacity: 0 }}
-    whileInView={{ y: 0, opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ ease: "easeInOut", duration: 0.75}}
+    <div
     className="sm:my-24 py-14"
     >
-      <h2 className={`${styles.sectionHeadText} flex max-sm:flex-col items-center justify-center gap-4`}><img loading='lazy'  src={prize} alt="trophy" width={70} height={70}/><span className="block">With a Prize Pool of</span></h2>
+      <h2 className={`${styles.sectionHeadText} flex max-sm:flex-col items-center justify-center gap-4`}><img loading='lazy' src={prize} alt="trophy" width={50} height={50} className="max-sm:hidden"/><span className="block">With a Prize Pool of</span></h2>
       <div className="w-full flex items-center justify-center text-orange-100 max-sm:py-4">
         <IconCurrencyRupee className="sm:size-[190px] size-[50px]"/>
         <div className="sm:text-[200px] text-[60px]  font-extrabold" style={{width: "6ch"}}>
@@ -78,7 +75,7 @@ const AnimatedCounter = () => {
         </div>
         <span className="sm:text-[190px] text-[50px] font-bold">&nbsp;+</span>
       </div>
-    </motion.div>
+    </div>
     </section>
   )
 }

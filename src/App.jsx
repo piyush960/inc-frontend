@@ -11,7 +11,7 @@ import AnimatedCounter from "./components/AnimatedCounter";
 import { ToastContainer, Zoom } from "react-toastify";
 import PageNotFound from "./components/PageNotFound";
 import Footer from './components/footer'
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy } from "react";
 import Admin from "./components/admin/AdminRoot";
 import AdminLogin from "./components/admin/AdminLogin";
 
@@ -22,7 +22,6 @@ const EventDetails = lazy(() => import("./components/EventDetails"));
 const App = () => {
   
   const isMobile = useDimension();
-  const [lightOn, setLightOn] = useState(true);
 
   return (
     <MobileContext.Provider value={isMobile}>
@@ -42,7 +41,7 @@ const App = () => {
       <div className="relative z-0 bg-primary min-h-full">
       <Routes>
         {/* user routes */}
-        <Route index element={<><Hero lightOn={lightOn} /><About /><Events /><AnimatedCounter /><Sponsors /><Notification setLightOn={setLightOn} /></>} />
+        <Route index element={<><Hero /><About /><Events /><AnimatedCounter /><Sponsors /><Notification /></>} />
         <Route path="/register" element={<RegisterHome />} />
         <Route path={`/register/:event`} element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><Register /></Suspense>} />
         <Route path="/events/:id" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><EventDetails /></Suspense>} />

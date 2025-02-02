@@ -15,7 +15,7 @@ import scrollToTop from '../utils/scrollToTop';
 
 const COLORS_TOP = ["#1746A2", "#D4621C"];
 
-const Hero = ({ lightOn }) => {
+const Hero = () => {
 
   const color = useMotionValue(COLORS_TOP[0]);
   const navigate = useNavigate()
@@ -39,7 +39,7 @@ const Hero = ({ lightOn }) => {
       </div>
     <div className='relative sm:px-12 px-4 mx-auto w-full h-full flex sm:flex-row flex-col-reverse overflow-hidden items-center sm:justify-around justify-end bg-dot-secondary/[0.25]'>
 
-      {lightOn && <img loading='lazy'  src={light} alt="light" className='absolute object-cover pointer-events-none top-[-8%] translate-x-[50%] right-[50%] z-10 opacity-35 sm:hidden'/>}
+      <img loading='lazy'  src={light} alt="light" className='absolute object-cover pointer-events-none top-[-8%] translate-x-[50%] right-[50%] z-10 opacity-35 sm:hidden'/>
 
       <p className='absolute sm:left-[50%] top-[10.5%] sm:top-[12%] sm:translate-x-[-50%] uppercase text-slate-400 font-light text-center text-md sm:text-lg'><span className=''>SCTR&apos;s Pune Institute of Computer Technology</span><span className='sm:block text-center'>&nbsp;Presents</span></p>
 
@@ -63,7 +63,7 @@ const Hero = ({ lightOn }) => {
             style={{
               border,
             }}
-            className="w-full tracking-widest bg-[#000609]/50 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-[#000609]/60"
+            className="w-full tracking-wider font-bold bg-[#000609]/50 px-7 py-3 text-white-100 uppercase transition-colors hover:bg-[#000609]/60"
             onClick={() => {navigate(`/register`)}}
           >
             Register Now
@@ -72,7 +72,7 @@ const Hero = ({ lightOn }) => {
 
       </div>
       <div className='flex sm:flex-[0.65] flex-col-reverse max-sm:h-1/2 sm:flex-col sm:justify-center items-center max-sm:-mb-8 mt-10 xl:-mr-9 relative'>
-        {lightOn && <img loading='lazy'  src={light} alt="light" className='absolute object-cover pointer-events-none top-[-28%] translate-x-[50%] right-[50%] z-10 opacity-35 max-sm:hidden'/>}
+        <img loading='lazy'  src={light} alt="light" className='absolute object-cover pointer-events-none top-[-28%] translate-x-[50%] right-[50%] z-10 opacity-35 max-sm:hidden'/>
         <div className='w-[240px] h-[240px] sm:w-[400px] sm:h-[400px] relative'>
           <IncCanvas />
         </div>

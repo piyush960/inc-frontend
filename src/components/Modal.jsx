@@ -6,7 +6,7 @@ import InfiniteLoopSlider from "./ui/infinite-loop-slider";
 import { notifications } from "../constants";
 import { IconCircleFilled } from "@tabler/icons-react";
 
-const ExampleWrapper = ({ setLightOn }) => {
+const ExampleWrapper = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
@@ -15,7 +15,6 @@ const ExampleWrapper = ({ setLightOn }) => {
 			className="relative inline-block p-px font-semibold leading-6 text-white-100 bg-tertiary shadow-2xl cursor-pointer rounded-full shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
 			onClick={() => {
 				setIsOpen(prev => !prev)
-				setLightOn(prev => !prev);
 			}}
 			>
 			<span className="absolute inset-0 rounded-full bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-[2px]"></span>
@@ -24,12 +23,12 @@ const ExampleWrapper = ({ setLightOn }) => {
 				<img loading='lazy'  src={notification} alt="notification"/>
 			</span>
 			</button>
-			<SpringModal isOpen={isOpen} setIsOpen={setIsOpen} setLightOn={setLightOn} />
+			<SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
 		</div>
 	);
 };
 
-const SpringModal = ({ isOpen, setIsOpen, setLightOn }) => {
+const SpringModal = ({ isOpen, setIsOpen }) => {
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -39,7 +38,6 @@ const SpringModal = ({ isOpen, setIsOpen, setLightOn }) => {
 					exit={{ opacity: 0 }}
 					onClick={() => {
 						setIsOpen(false)
-						setLightOn(prev => !prev)
 					}}
 					className="bg-slate-900/20 backdrop-blur sm:p-8 p-2 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
 				>
@@ -75,7 +73,6 @@ const SpringModal = ({ isOpen, setIsOpen, setLightOn }) => {
 									<button
 										onClick={() => {
 											setIsOpen(false)
-											setLightOn(prev => !prev)
 										}}
 										className="bg-transparent hover:bg-white-100/10 transition-colors text-white-100 font-semibold w-full py-2"
 									>
