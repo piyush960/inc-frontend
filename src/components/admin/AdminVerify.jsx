@@ -55,7 +55,7 @@ const AdminVerify = () => {
       </div>
       <h2 className='font-bold text-3xl'>Verify {activeEvent[0].toUpperCase() + activeEvent.slice(1)} Registrations - {new Date().toDateString("en-Us", {timeZone: 'Asia/Kolkata'})}</h2>
       <div style={{ height: '500px', width: '100%' }}>
-        <DataGrid rows={rows} columns={columns} loading={isFetching} slots={{ toolbar: GridToolbar, noRowsOverlay: CustomNoResultsOverlay }} initialState={{pagination: { paginationModel: { pageSize: 25 }}}} disableRowSelectionOnClick />
+        <DataGrid rows={rows} columns={columns} loading={isFetching} slots={{ toolbar: GridToolbar, noRowsOverlay: CustomNoResultsOverlay }} initialState={{pagination: { paginationModel: { pageSize: 25 }}}} pageSizeOptions={[25, 50, 100, { value: -1, label: 'All' }]} disableRowSelectionOnClick />
       </div>
     </section>
   )
@@ -91,7 +91,6 @@ const columns = [
     minWidth: 150, 
     flex: 1,
     sortable: false,
-    filterable: false,
     renderCell: (params) => (
       <TeamDetailsModal data={params?.row?.teamDetails} />
     ),

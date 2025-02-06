@@ -92,7 +92,7 @@ const DashboardCard = ({ event_name, verified, pending, incomplete, isLoading })
           options={{ maintainAspectRatio: false, aspectRatio: 1 }}
         />
       </div>}
-      <FormButton text={`Verify Now`} className={`w-auto h-auto px-4 py-2 hover:scale-105 duration-300 border-secondary`} onClick={() => navigate(`/admin/verify/${event_name}`)} />
+      <FormButton text={`Verify Now`} className={`w-auto h-auto px-4 py-2 hover:scale-105 duration-300 border-secondary`} onClick={() => navigate(`/admin/verify/${event_name.toLowerCase()}`)} />
     </div>
   )
 }
