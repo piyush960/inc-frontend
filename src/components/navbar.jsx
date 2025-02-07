@@ -82,7 +82,7 @@ const Navbar = () => {
         <ul className='list-none hidden sm:flex flex-row items-center gap-7'>
           {navItems.map((link) => (
             link.id === "admin/logout" ? 
-            <Button key={link.id} variant='outlined' color='white' sx={{borderRadius: 0}} onClick={handleLogout} disabled={isFetching}>{isFetching ? 'Wait...' : 'Logout' }</Button> 
+            <Button key={link.id} variant='outlined' sx={{borderRadius: 0, width: 100, color: 'white', borderColor: 'white', '&.Mui-disabled': {color: 'rgba(255, 255, 255, 0.7)', borderColor: 'rgba(255, 255, 255, 0.7)',}}} onClick={handleLogout} disabled={isFetching} >{isFetching ? 'Wait...' : 'Logout' }</Button> 
             : 
             <li key={link.id} className={`${active == link.title ? 'text-orange-100 border-b-2 border-orange-100' : 'text-white-100'} hover:text-orange-100 text-[16px] font-medium cursor-pointer`} onClick={() => setActive(link.title)}>
               {

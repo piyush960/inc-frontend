@@ -46,6 +46,11 @@ import {
       title: "Verify",
     },
     {
+      id: "admin/incomplete-registrations/impetus",
+      isHome: false,
+      title: "Follow-up",
+    },
+    {
       id: "admin/registrations/impetus",
       isHome: false,
       title: "Teams",

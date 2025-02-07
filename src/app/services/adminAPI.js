@@ -31,6 +31,13 @@ export const adminAPI = createApi({
               },
           })
         }),
+        getIncompleteRegistrations: builder.query({
+          query: (event_name) => ({
+              url: `/incomplete-registrations/${event_name}`,
+              method: 'GET',
+              credentials: 'include',
+          })
+        }),
         getCollegeID: builder.query({
           query: (email) => ({
               url: `/verify-file?email=${email}`,
@@ -54,4 +61,4 @@ export const adminAPI = createApi({
 })
 
 
-export const { useLazyGetRegistrationsCountQuery, useLazyGetPendingVerificationsQuery, useLazyGetVerifiedRegistrationsQuery, useLazyGetCollegeIDQuery, useProcessPaymentVerificationMutation, } = adminAPI
+export const { useLazyGetRegistrationsCountQuery, useLazyGetPendingVerificationsQuery, useLazyGetVerifiedRegistrationsQuery, useLazyGetCollegeIDQuery, useProcessPaymentVerificationMutation, useLazyGetIncompleteRegistrationsQuery, } = adminAPI

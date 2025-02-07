@@ -35,6 +35,7 @@ const AdminLogin = () => {
         <form
           className="w-full h-full bg-tertiary p-4 sm:p-10 grid grid-cols-1 gap-8"
           onSubmit={handleAdminSubmit}
+          autoComplete='on'
         >
           <h2 className="text-xl font-bold text-white-100">Login In to Continue...</h2>
           
@@ -47,7 +48,7 @@ const AdminLogin = () => {
               onChange={(e) =>
                 setUsername(e.target.value)
               }
-              placeholder="Enter  username"
+              placeholder="Enter username"
             />
           </div>
 
