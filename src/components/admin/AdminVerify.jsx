@@ -129,7 +129,7 @@ const columns = [
     renderCell: (params) => (
       <VerifyTicket data={params} />
     ),
-    valueGetter: (params) => {
+    valueGetter: () => {
       return `N/A`;
     },
   },
