@@ -37,7 +37,7 @@ const AdminLogin = () => {
           onSubmit={handleAdminSubmit}
           autoComplete='on'
         >
-          <h2 className="text-xl font-bold text-white-100">Login In to Continue...</h2>
+          <h2 className="text-xl font-bold text-white-100">Login to Continue...</h2>
           
           <div>
             <Label htmlFor="username" required>Username</Label>
