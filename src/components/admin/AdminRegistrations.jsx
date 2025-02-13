@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import FormButton from '../forms/FormButton'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -16,27 +16,22 @@ const AdminRegistrations = () => {
   const [ getVerifiedRegistrations, { isFetching, isSuccess, data, } ] = useLazyGetVerifiedRegistrationsQuery();
   const navigate = useNavigate();
 
-  const fetchEventVerifications = async () => {
-    try {
-      await getVerifiedRegistrations(event_name);
-    } catch (error) {
-      console.error(error);
-      toast.error(error?.data?.message || error?.message || 'Failed to fetch.');
-    }
-  }
-
   useEffect(() => {
-    if(isSuccess){
-      setRows([...data]);
+    if (isSuccess) {
+      setRows(data);
     }
-  }, [isSuccess, data])
+  }, [isSuccess, data]);
   
   useEffect(() => {
-    if(event_name === 'impetus' || event_name === 'concepts' || event_name === 'pradnya'){
+    if (["impetus", "concepts", "pradnya"].includes(event_name)) {
       setActiveEvent(event_name);
-      fetchEventVerifications();
+      getVerifiedRegistrations(event_name)
+      .unwrap()
+      .catch((error) => {
+        toast.error(error?.data?.message || error?.message || "Failed to fetch.");
+      });
     }
-  }, [ event_name ])
+  }, [event_name]);
 
   return (
     <section className='w-full max-w-7xl mx-auto flex flex-col gap-6'>
@@ -47,7 +42,7 @@ const AdminRegistrations = () => {
       </div>
       <h2 className='font-bold text-3xl'>{activeEvent[0].toUpperCase() + activeEvent.slice(1)} Registrations.</h2>
       <div style={{ height: '500px', width: '100%' }}>
-        <DataGrid rows={rows} columns={columns} loading={isFetching} slots={{ toolbar: GridToolbar, noRowsOverlay: CustomNoResultsOverlay }} initialState={{pagination: { paginationModel: { pageSize: 25 }}}} pageSizeOptions={[25, 50, 100, { value: -1, label: 'All' }]}  disableRowSelectionOnClick />
+        <DataGrid rows={rows} columns={columns} loading={isFetching} slots={{ toolbar: GridToolbar, noRowsOverlay: CustomNoResultsOverlay }} initialState={{pagination: { paginationModel: { pageSize: 25 }}}} pageSizeOptions={[25, 50, 100, { value: -1, label: 'All' }]} disableRowSelectionOnClick />
       </div>
     </section>
   )

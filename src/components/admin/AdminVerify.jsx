@@ -16,15 +16,6 @@ const AdminVerify = () => {
   const [ getPendingVerifications, { isFetching, isSuccess, data } ] = useLazyGetPendingVerificationsQuery();
   const navigate = useNavigate();
 
-  const fetchEventVerifications = async () => {
-    try {
-      await getPendingVerifications(event_name);
-    } catch (error) {
-      console.error(error);
-      toast.error(error?.data?.message || error?.message || 'Failed to fetch.');
-    }
-  }
-
   useEffect(() => {
     if(isSuccess){
       const tempRows = data.map((row, index) => ({
@@ -36,14 +27,18 @@ const AdminVerify = () => {
         collegeDetails: row?.step_3,
         date: new Date(row?.date).toLocaleDateString('en-IN'),
       }))
-      setRows([...tempRows]);
+      setRows(tempRows);
     }
   }, [isSuccess, data])
 
   useEffect(() => {
-    if(event_name === 'impetus' || event_name === 'concepts' || event_name === 'pradnya'){
+    if (["impetus", "concepts", "pradnya"].includes(event_name)) {
       setActiveEvent(event_name);
-      fetchEventVerifications();
+      getPendingVerifications(event_name)
+      .unwrap()
+      .catch((error) => {
+        toast.error(error?.data?.message || error?.message || "Failed to fetch.");
+      });
     }
   }, [ event_name ])
 
