@@ -17,8 +17,8 @@ const Sponsors = () => {
     <section className='h-full w-full flex flex-col items-center justify-evenly pb-24 pt-4'>
       <div
       > 
-        <p className={`${styles.sectionSubText}`}>InC 2024</p>
-        <h2 className={`${styles.sectionHeadText}`}>Sponsors.</h2>
+        {/* <p className={`${styles.sectionSubText}`}>InC 2024</p> */}
+        <h2 className={`${styles.sectionHeadText}`}>Our Sponsors.</h2>
       </div>
 
       <div className='flex flex-col w-full h-full items-center gap-10 sm:py-16 py-8'>
@@ -26,7 +26,7 @@ const Sponsors = () => {
           Object.keys(sponsors).map(obj => (
             <div key={obj} className='flex flex-col gap-8 items-center'>
               <h3 className='text-center text-3xl font-bold capitalize pb-2 border-b-2 border-orange-100'>
-                {obj !== 'association' ? obj + " Sponsors" : "In Association With"}
+                {obj !== 'association' ? obj === 'co' ? <><span>Co</span><span className='lowercase'>-sponsors</span></> : obj + (sponsors[obj].length > 1 ? " sponsors" : " sponsor") : "In Association With"}
               </h3>
               <div className='flex flex-wrap items-center justify-center gap-8'>
                 {

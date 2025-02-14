@@ -26,6 +26,7 @@ import pisb from './company/pisb.png'
 import zbyte from './company/zbyte.png'
 import cloudhedge from './company/cloudhedge.png'
 import ayaan from './company/ayaan.svg'
+import marketcast from './company/marketcast.png'
 
 import concepts from './logos/concepts.png'
 import impetus from './logos/impetus.png'
@@ -55,4 +56,4 @@ import gal7 from './gallery/7.jpeg'
 
 import img1 from './team/manas.jpeg'
 
-export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader, img1, ayaan, csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge, pict, pagenotfound, qr, popper, nova, };
+export { logo, menu, notification, light, concepts, impetus, pradnya, techfiesta, concepts_b, impetus_b, inc_b, pradnya_b, techfiesta_b, close, gal1, gal2, gal3, gal4, gal5, gal6, gal7, aboutbg, concepts_lg, impetus_lg, pradnya_lg, section_bg, bottom_lg, prize, loader, img1, ayaan, csi, intangles, sarvatra, veritas, intangles_square, campustimes, eq_square, eq, imocha, imperial, pasc, pisb, zbyte, cloudhedge, pict, pagenotfound, qr, popper, nova, marketcast, };

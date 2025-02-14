@@ -5,8 +5,7 @@ import {
     pradnya,
     techfiesta,
     img1,
-    csi, intangles, sarvatra, veritas, eq, imocha, imperial, pasc, pisb, cloudhedge,
-    ayaan,
+    csi, intangles, eq, imocha, pasc, pisb, marketcast,
   } from "../assets";
 
   const notifications = ["🚀 Don’t just watch innovation—be part of it! Register today! 🚀", "⚡ Code, create, and conquer—your journey begins here. ⚡"]
@@ -68,30 +67,17 @@ import {
     title: [
       {src: eq,
       name: 'eq',},
-      {src: sarvatra,
-      name: 'sarvatra',},
     ],
     co: [
+      {src: intangles,
+      name: 'intangles',},
+
       {src: imocha,
       name: 'imocha',},
 
-      {src: ayaan,
-      name: 'aayan',},
-  
-      {src: intangles,
-      name: 'intangles',},
-    ],
-    pradnya: [
-      {src: veritas,
-      name: 'veritas',},
-    ],
-    other: [
-      {src: imperial,
-      name: 'imperial',},
-
-      {src: cloudhedge,
-      name: 'cloudhedge',},
-
+      {src: marketcast,
+      name: 'marketcast',
+      },
     ],
     association: [
       {src: pasc,
