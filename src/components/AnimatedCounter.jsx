@@ -1,7 +1,6 @@
 
 import { IconCurrencyRupee } from "@tabler/icons-react";
 import {
-  motion,
   animate,
   useInView,
   useIsomorphicLayoutEffect,
