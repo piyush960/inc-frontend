@@ -76,7 +76,6 @@ const columns = [
     minWidth: 150, 
     flex: 1,
     sortable: false,
-    filterable: false,
     renderCell: (params) => (
       <ProjectDetailsModal data={params?.row?.projectDetails} />
     ),
@@ -103,7 +102,6 @@ const columns = [
     minWidth: 150, 
     flex: 1,
     sortable: false,
-    filterable: false,
     renderCell: (params) => (
       <CollegeDetailsModal data={params?.row?.collegeDetails} />
     ),
