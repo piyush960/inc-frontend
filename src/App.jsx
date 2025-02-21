@@ -14,6 +14,8 @@ import Footer from './components/footer'
 import { Suspense, lazy } from "react";
 import Admin from "./components/admin/AdminRoot";
 import AdminLogin from "./components/admin/AdminLogin";
+import JudgeRegister from "./components/forms/JudgeRegister";
+import Judge from "./components/judge/JudgeRoot";
 
 const Register = lazy(() => import("./components/Register"));
 const Committee = lazy(() => import("./components/committee"));
@@ -40,17 +42,21 @@ const App = () => {
       <Navbar />
       <div className="relative z-0 bg-primary min-h-full">
       <Routes>
-        {/* user routes */}
+        {/* public routes */}
         <Route index element={<><Hero /><About /><Events /><AnimatedCounter /><Sponsors /><Notification /></>} />
         <Route path="/register" element={<RegisterHome />} />
+        <Route path="/register/judge" element={<JudgeRegister />} />
         <Route path={`/register/:event`} element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><Register /></Suspense>} />
         <Route path="/events/:id" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><EventDetails /></Suspense>} />
         <Route path="/committee/:id" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><Committee /></Suspense>} />
         <Route path="/test" element={<Test />} />
 
         {/* admin routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/auth/login" element={<AdminLogin />} />
         <Route path="/admin/*" element={<Admin />} />
+
+        {/* judge routes */}
+        <Route path="/judge/*" element={<Judge />} />
 
         {/* page not found */}
         <Route path="*" element={<PageNotFound />}/>

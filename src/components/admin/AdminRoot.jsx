@@ -22,7 +22,7 @@ const Admin = () => {
       <div className="h-full py-24">
         <Routes>
           {/* Protected Admin Routes */}
-          <Route element={<ProtectedRoute path={"/admin/login"} />}>
+          <Route element={<ProtectedRoute path={"/admin/login"} navigate={"/admin"}/>}>
             <Route path="/" element={<AdminDashboard />} />
             <Route path="/verify/:event_name" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><AdminVerify /></Suspense>} />
             <Route path="/registrations/:event_name" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><AdminRegistrations /></Suspense>} />

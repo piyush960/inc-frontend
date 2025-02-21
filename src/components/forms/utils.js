@@ -32,8 +32,11 @@ const validateMember = (member) => {
 
 const validateCollegeDetails = (event, formData) => {
 	return formData.isPICT === null || formData.isInternational === null || (event !== "concepts" && validate_isEmpty.bool(formData.year)) || validate_isEmpty.bool(formData.college) || validate_isEmpty.bool(formData.country) || validate_isEmpty.bool(formData.state) || validate_isEmpty.bool(formData.city) || validate_isEmpty.bool(formData.district) || validate_isEmpty.bool(formData.locality) || validate_isEmpty.bool(formData.mode) || (formData.mode === '0' && validate_isEmpty.bool(formData.reason_of_mode))
-
 };
+
+const validateJudgeForm = (formData) => {
+  return formData.isPICT === null || validate_isEmpty.bool(formData.name) || validate_email.bool(formData.email) || validate_phone.bool(formData.phone) || validate_isEmpty.bool(formData.company) || validate_isEmpty.bool(formData.commercial_address) || validate_isEmpty.bool(formData.residential_address) || validate_isEmpty.bool(formData.exp) || validate_isEmpty.bool(formData.min_projects) || !formData.domains.length || !formData.slots.length
+}
 
 const formatPhoneNumber = (value) => {
   const numbersOnly = value.replace(/\D/g, "");
@@ -70,4 +73,12 @@ const formatPhoneNumber = (value) => {
   return {formatted, numbersOnly: numbersOnly.slice(0, 13)};
 };
 
-export { validate, validate_isEmpty, validate_phone, validate_email, validate_wordCount, validateMember, validateCollegeDetails, formatPhoneNumber }
+function generateOptions(min, max) {
+  let options = []
+  for (let i = min; i <= max; i++) {
+      options.push({ value: i, label: i })
+  }
+  return options
+}
+
+export { validate, validate_isEmpty, validate_phone, validate_email, validate_wordCount, validateMember, validateCollegeDetails, formatPhoneNumber, validateJudgeForm, generateOptions, }

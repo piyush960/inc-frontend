@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import { navLinks, adminNavlinks, } from '../constants'
+import { navLinks, adminNavlinks, judgeNavLinks, } from '../constants'
 
 import { logo, menu, close, pict } from '../assets'
 
@@ -37,9 +37,10 @@ const Navbar = () => {
     if(location.pathname.startsWith('/admin')){
       setNavItems(adminNavlinks);
     }
-    else{
-      setNavItems(navLinks);
+    else if(location.pathname.startsWith('/judge')){
+      setNavItems(judgeNavLinks);
     }
+    else setNavItems(navLinks);
   }, [location]);
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const Navbar = () => {
       await processLogout().unwrap();
       dispatch(resetAuthState());
       toast.success("Logout Success.");
-      navigate('/admin/login');
+      navigate('/auth/login');
     } catch (error) {
       toast.error(error?.data?.message || error?.message || 'Failed to Logout.');
     }
@@ -98,10 +99,10 @@ const Navbar = () => {
           <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-tertiary absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10`}>
           <ul className='list-none flex justify-end items-start flex-col gap-4'>
             {navItems.map((link) => (
-              <li key={link.id} className={`${active == link.title ? 'text-orange-100' : 'text-white-100'} font-poppins font-medium cursor-pointer text-[16px]`} onClick={() => {
-                setActive(link.title)
-                setToggle(!toggle)
-              }}>
+              link.id === "admin/logout" ? 
+              <Button key={link.id} variant='outlined' sx={{borderRadius: 0, width: 100, color: 'white', borderColor: 'white', '&.Mui-disabled': {color: 'rgba(255, 255, 255, 0.7)', borderColor: 'rgba(255, 255, 255, 0.7)',}}} onClick={handleLogout} disabled={isFetching} >{isFetching ? 'Wait...' : 'Logout' }</Button> 
+              : 
+              <li key={link.id} className={`${active == link.title ? 'text-orange-100 border-b-2 border-orange-100' : 'text-white-100'} hover:text-orange-100 text-[16px] font-medium cursor-pointer`} onClick={() => setActive(link.title)}>
                 {
                   <Link to={link.isHome ? `/#${link.id}` : `/${link.id}`}>{link.title}</Link>
                 }
