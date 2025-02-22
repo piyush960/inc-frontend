@@ -1,32 +1,51 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { validate_isEmpty } from '../forms/utils';
 import { Label } from '../ui/label';
 import { Select } from '../ui/select';
 import { generateOptions } from '../forms/utils';
 import FormButton from '../forms/FormButton';
+import { toast } from 'react-toastify';
+import { useEvaluateProjectMutation } from '../../app/services/judgeAPI';
 
 
 const initialState = {
-  innovation: "",
-  approachToIdeas: "",
-  approachToImplementation: "",
-  principles: "",
-  presentation: "",
+  innovation: "1",
+  approachToIdeas: "1",
+  approachToImplementation: "1",
+  principles: "1",
+  presentation: "1",
 }
 
 const EvaluateConcepts = () => {
 
+  const judge_data = JSON.parse(window.sessionStorage.getItem("judge_data"));
   const [conceptsResult, setConceptsResult] = useState(initialState);
   const { pid } = useParams();
+  const [evaluateProject, { isLoading, isError, error }] = useEvaluateProjectMutation();
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      await evaluateProject({data: {...conceptsResult, pid, jid: judge_data?.jid}, event_name: 'concepts'}).unwrap();
+      if(isError){
+        throw error;
+      }
+      else{
+        toast.success("Evaluation Completed!")
+        setConceptsResult(initialState);
+        navigate('/judge/evaluate');
+      }
+    }
+    catch(error){
+      console.error(error);
+      toast.error(error?.data?.message || error?.message || 'Something went wrong');
+    }
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setConceptsResult({
       ...conceptsResult,
       [name] : value,
@@ -76,7 +95,7 @@ const EvaluateConcepts = () => {
 
       {/* Submit Button */}
       <div className="pt-4">
-        <FormButton loading={false} className={`w-fit px-4`} onClick={handleSubmit} text={'Submit Score'}></FormButton>
+        <FormButton loading={isLoading} className={`w-fit px-4`} onClick={handleSubmit} text={'Submit Score'}></FormButton>
       </div>
     </form>
     </div>

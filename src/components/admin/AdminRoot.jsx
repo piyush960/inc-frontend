@@ -4,10 +4,12 @@ import ProtectedRoute from '../../ProtectedRoute';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import AdminDashboard from './AdminDashboard';
-import AdminIncomplete from './AdminIncomplete';
 
 const AdminVerify = lazy(() => import("./AdminVerify"));
 const AdminRegistrations = lazy(() => import("./AdminRegistrations"));
+const AdminIncomplete = lazy(() => import("./AdminIncomplete"));
+const AdminAllocate = lazy(() => import("./AdminAllocate"));
+const AdminDeallocate = lazy(() => import("./AdminDeallocate"));
 
 const darkTheme = createTheme({
   palette: {
@@ -22,11 +24,13 @@ const Admin = () => {
       <div className="h-full py-24">
         <Routes>
           {/* Protected Admin Routes */}
-          <Route element={<ProtectedRoute path={"/admin/login"} navigate={"/admin"}/>}>
+          <Route element={<ProtectedRoute path={"/auth/login"} navigate={"/admin"}/>}>
             <Route path="/" element={<AdminDashboard />} />
             <Route path="/verify/:event_name" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><AdminVerify /></Suspense>} />
             <Route path="/registrations/:event_name" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><AdminRegistrations /></Suspense>} />
             <Route path="/incomplete-registrations/:event_name" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><AdminIncomplete /></Suspense>} />
+            <Route path="/allocate/:event_name" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><AdminAllocate /></Suspense>} />
+            <Route path="/deallocate/:event_name" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><AdminDeallocate /></Suspense>} />
           </Route>
         </Routes>
       </div>

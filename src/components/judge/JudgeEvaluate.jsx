@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import FormButton from '../forms/FormButton'
 import { useLazyGetAllocatedProjectsQuery } from '../../app/services/judgeAPI'
-import { Dialog, DialogTitle, DialogContent, Typography, Box, IconButton, styled, Button, Modal } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, Typography, IconButton, styled, Button, } from "@mui/material";
 import { IconX } from "@tabler/icons-react";
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const initialState = {
   project_id: '',
 }
 
 const JudgeEvaluate = () => {
+
+  const judge_data = JSON.parse(window.sessionStorage.getItem('judge_data'));
   const [formData, setFormData] = useState(initialState);
   const [allocatedProjects, setAllocatedProjects] = useState([]);
   const [ getAllocatedProjects, { isFetching }] = useLazyGetAllocatedProjectsQuery();
@@ -37,9 +40,13 @@ const JudgeEvaluate = () => {
   }
 
   const fetchAllocatedProjects = async () => {
-    const data = await getAllocatedProjects('IM-J9ef834b').unwrap();
-    console.log(data);
-    setAllocatedProjects(data);
+    try {
+      const data = await getAllocatedProjects(judge_data?.jid).unwrap();
+      setAllocatedProjects(data);
+    } catch(error){
+      console.error(error);
+      toast.error(error?.data?.message || error?.message || 'Something went wrong');
+    }
   }
 
   const handleEvaluate = (pid) => {
@@ -81,7 +88,7 @@ const JudgeEvaluate = () => {
       <div className='flex flex-col gap-4 pt-10'>
         <h2 className='sm:text-2xl text-xl text-orange-100 font-bold'>Allocated Projects - Impetus</h2>
         {allocatedProjects.impetus.map((project) => (
-          <div className='bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-px'>
+          <div key={project.pid} className='bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-px'>
             <div className='text-white-100 bg-tertiary p-6 grid grid-cols-2 gap-4'>
               {renderP('Title', project.title)}
               {renderP('ID', project.pid)}
@@ -123,7 +130,7 @@ const JudgeEvaluate = () => {
       <div className='flex flex-col gap-4 pt-10'>
         <h2 className='sm:text-2xl text-xl text-orange-100 font-bold'>Allocated Projects - Concepts</h2>
         {allocatedProjects.concepts.map((project) => (
-          <div className='bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-px'>
+          <div key={project.pid} className='bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 p-px'>
             <div className='text-white-100 bg-tertiary p-6 grid grid-cols-2 gap-4'>
               {renderP('Title', project.title)}
               {renderP('ID', project.pid)}

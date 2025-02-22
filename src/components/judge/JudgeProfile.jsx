@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { judgingSlots as slots } from "../forms/constants";
 import { useGetJudgeQuery } from "../../app/services/judgeAPI";
 
 const JudgeProfile = () => {
   const judge_data = JSON.parse(window.sessionStorage.getItem("judge_data"))
-  const { data, isLoading, isSuccess } = useGetJudgeQuery(judge_data.jid);
+  const { data, isSuccess } = useGetJudgeQuery(judge_data.jid);
   const [judgeData, setJudgeData] = useState();
 
   useEffect(() => {
     if(isSuccess){
       setJudgeData(data);
-      console.log(data);
     }
   }, [isSuccess, data])
     

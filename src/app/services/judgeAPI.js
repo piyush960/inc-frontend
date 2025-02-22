@@ -31,8 +31,24 @@ export const judgeAPI = createApi({
               credentials: 'include',
           })
         }),
+        evaluateProject: builder.mutation({
+          query: ({data, event_name}) => ({
+            url: `/${event_name}/evaluate`,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: data,
+          })
+        }),
+        getJudgeRegistrations: builder.query({
+          query: (eventName) => ({
+              url: `/registration/view/${eventName}`,
+              method: 'GET',
+              credentials: 'include',
+          })
+        }),
     })
 })
 
 
-export const { useProcessJudgeRegisterMutation, useGetJudgeQuery, useLazyGetAllocatedProjectsQuery } = judgeAPI
+export const { useProcessJudgeRegisterMutation, useGetJudgeQuery, useLazyGetAllocatedProjectsQuery, useEvaluateProjectMutation, useGetJudgeRegistrationsQuery, } = judgeAPI

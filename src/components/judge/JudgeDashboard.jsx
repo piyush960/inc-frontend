@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useGetJudgeQuery } from '../../app/services/judgeAPI'
 import { logo } from '../../assets'
 import { useNavigate } from 'react-router-dom'
 
 const JudgeDashboard = () => {
   const judge_data = JSON.parse(window.sessionStorage.getItem("judge_data"))
-  const { data, isLoading, isSuccess } = useGetJudgeQuery(judge_data.jid);
+  const { data, isSuccess } = useGetJudgeQuery(judge_data.jid);
   
   useEffect(() => {
 

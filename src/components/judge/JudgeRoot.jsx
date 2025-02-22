@@ -4,10 +4,12 @@ import ProtectedRoute from '../../ProtectedRoute';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import JudgeDashboard from './JudgeDashboard';
-import JudgeEvaluate from './JudgeEvaluate';
-import JudgeProfile from './JudgeProfile';
-import EvaluateConcepts from './EvaluateConcepts';
-import EvaluateImpetus from './EvaluateImpetus';
+
+
+const JudgeEvaluate = lazy(() => import("./JudgeEvaluate"));
+const JudgeProfile = lazy(() => import("./JudgeProfile"));
+const EvaluateConcepts = lazy(() => import("./EvaluateConcepts"));
+const EvaluateImpetus = lazy(() => import("./EvaluateImpetus"));
 
 const darkTheme = createTheme({
   palette: {
@@ -24,10 +26,10 @@ const Judge = () => {
           {/* Protected Admin Routes */}
           <Route element={<ProtectedRoute path={"/auth/login"} navigate={"/judge"}/>}>
             <Route path="/" element={<JudgeDashboard />} />
-            <Route path="/evaluate" element={<JudgeEvaluate />} />
-            <Route path="/evaluate/impetus/:pid" element={<EvaluateImpetus />} />
-            <Route path="/evaluate/concepts/:pid" element={<EvaluateConcepts />} />
-            <Route path="/profile" element={<JudgeProfile />} />
+            <Route path="/evaluate" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><JudgeEvaluate /></Suspense>} />
+            <Route path="/evaluate/impetus/:pid" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><EvaluateImpetus /></Suspense>} />
+            <Route path="/evaluate/concepts/:pid" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><EvaluateConcepts /></Suspense>} />
+            <Route path="/profile" element={<Suspense fallback={<p style={{textAlign: 'center', padding: '150px 0'}}>Loading...</p>}><JudgeProfile /></Suspense>} />
           </Route>
         </Routes>
       </div>

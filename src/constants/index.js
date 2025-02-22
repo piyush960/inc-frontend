@@ -55,6 +55,16 @@ import {
       title: "Teams",
     },
     {
+      id: "admin/allocate/impetus",
+      isHome: false,
+      title: "Allocate",
+    },
+    {
+      id: "admin/deallocate/impetus",
+      isHome: false,
+      title: "Deallocate",
+    },
+    {
       id: "admin/logout",
       isHome: false,
       title: "Logout",

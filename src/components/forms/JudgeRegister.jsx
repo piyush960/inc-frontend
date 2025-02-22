@@ -3,16 +3,14 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import FormButton from "./FormButton";
 
-import { validate_isEmpty, validate_email, validate_phone, validate_wordCount, validate, validateJudgeForm } from "./utils";
-import { impetus_domains, judgingSlots, nova_domains, yesNoOptions } from "./constants";
+import { validate_isEmpty, validate_email, validate_phone, validateJudgeForm } from "./utils";
+import { impetus_domains, judgingSlots, yesNoOptions } from "./constants";
 import { toast } from "react-toastify";
 
-import { useDispatch } from 'react-redux';
 import scrollToTop from "../../utils/scrollToTop";
 import { formatPhoneNumber } from "./utils";
 import { RadioButton } from "../ui/RadioButton";
 import { Select } from "../ui/select";
-import { useParams } from "react-router-dom";
 import { useProcessJudgeRegisterMutation } from "../../app/services/judgeAPI";
 
 const initialState = {
@@ -31,7 +29,7 @@ const initialState = {
   'referral': ''
 }
 
-const JudgeRegister = ({ event, nextStep }) => {
+const JudgeRegister = () => {
 
   const [ formData, setFormData ] = useState(initialState)
   const [phone, setPhone] = useState("");
@@ -42,7 +40,7 @@ const JudgeRegister = ({ event, nextStep }) => {
   }, [])
   
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     if(name === "phone"){
       const {formatted, numbersOnly} = formatPhoneNumber(value);
       setPhone(formatted)
