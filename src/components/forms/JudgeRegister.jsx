@@ -281,7 +281,7 @@ function Checkboxes({ options, name, state, setState }) {
         setState(prevState => {
             let newState = { ...prevState }
             if (!newState[name].includes(value)) {
-                newState[name] = [...newState[name], value] || []
+                newState[name] = [...newState[name], value]
             } else {
                 newState[name] = newState[name].filter(item => item !== value)
             }
