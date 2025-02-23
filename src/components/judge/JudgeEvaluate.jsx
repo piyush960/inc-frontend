@@ -140,7 +140,7 @@ const JudgeEvaluate = () => {
               <Button variant="outlined" sx={{ borderRadius: 0, width: 'fit-content' }} color="primary" onClick={handleOpen}>
                 View Abstract
               </Button>
-              <Button variant="outlined" sx={{ borderRadius: 0, width: 'fit-content' }} color="primary" onClick={handleEvaluate}>
+              <Button variant="outlined" sx={{ borderRadius: 0, width: 'fit-content' }} color="primary" onClick={() => handleEvaluate(project.pid)}>
                 Evaluate
               </Button>
             </div>

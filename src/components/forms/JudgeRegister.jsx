@@ -12,6 +12,7 @@ import { formatPhoneNumber } from "./utils";
 import { RadioButton } from "../ui/RadioButton";
 import { Select } from "../ui/select";
 import { useProcessJudgeRegisterMutation } from "../../app/services/judgeAPI";
+import { IconCircleCheck } from "@tabler/icons-react";
 
 const initialState = {
   'events': 'impetus',
@@ -33,7 +34,7 @@ const JudgeRegister = () => {
 
   const [ formData, setFormData ] = useState(initialState)
   const [phone, setPhone] = useState("");
-  const [ processJudgeRegister, { isLoading, isError, error } ] = useProcessJudgeRegisterMutation();
+  const [ processJudgeRegister, { isLoading, isSuccess } ] = useProcessJudgeRegisterMutation();
 
   useEffect(() => {
     scrollToTop()
@@ -63,11 +64,9 @@ const JudgeRegister = () => {
       return
     }
     try{
-      await processJudgeRegister(formData);
-      if(isError){
-        throw error;
-      }
-      toast.success('Registered Successfully')
+      const data = await processJudgeRegister(formData).unwrap();
+      if(data?.success) toast.success('Registered Successfully');
+      else toast.info('Unable to register');
     }
     catch(error){
       console.error(error);
@@ -90,6 +89,15 @@ const JudgeRegister = () => {
 			</div>	
 		</div>
     <div className="bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 w-full max-w-7xl mx-auto p-px">
+    {isSuccess ? 
+    <div className="bg-tertiary p-6 border flex flex-col items-center border-blue-500/30">
+      <IconCircleCheck color="#22c55e" size={80}/>
+      <h3 className="text-xl font-semibold text-center text-green-500">
+        Thank You for Registering <br />
+        <span className="text-secondary">Credentials will be sent to you via email.</span>
+      </h3>
+    </div>
+    :
     <form
       className="w-full bg-tertiary p-4 sm:p-10 grid grid-cols-1 sm:grid-cols-2 gap-6"
       onSubmit={handleSubmit}
@@ -267,7 +275,7 @@ const JudgeRegister = () => {
       <div className="sm:col-span-2 justify-self-end">
         <FormButton loading={isLoading} className={``} onClick={handleSubmit} text={'Register'}></FormButton>
       </div>
-    </form>
+    </form>}
     </div>
     </section>
   );

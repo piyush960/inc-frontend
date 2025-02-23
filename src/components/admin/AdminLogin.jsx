@@ -30,7 +30,7 @@ const AdminLogin = () => {
   }
 
   return (
-    <section className='w-full h-full py-24'>
+    <section className='w-full h-full py-24 max-sm:px-2'>
       <div className="bg-gradient-to-r from-dark-blue via-light-blue to-orange-100 w-full max-w-7xl mx-auto p-px">
         <form
           className="w-full h-full bg-tertiary p-4 sm:p-10 grid grid-cols-1 gap-8"

@@ -35,6 +35,7 @@ const AdminAllocate = () => {
       setJid([]);
       setPid([]);
       refetch();
+      fetchVerifiedRegistrations();
     } catch (error) {
       console.error(error);
       toast.error(error?.data?.message || error?.message || "Failed to allocate.");
@@ -60,6 +61,10 @@ const AdminAllocate = () => {
   }, [isSuccess, data]);  
 
   useEffect(() => {
+    fetchVerifiedRegistrations();
+  }, [event_name]);
+
+  const fetchVerifiedRegistrations = () => {
     if (["impetus", "concepts", "pradnya"].includes(event_name)) {
       getVerifiedRegistrations(event_name)
       .unwrap()
@@ -67,7 +72,7 @@ const AdminAllocate = () => {
         toast.error(error?.data?.message || error?.message || "Failed to fetch teams.");
       });
     }
-  }, [event_name]);
+  }
 
   return (
     <section className='max-w-[90rem] mx-auto flex flex-col gap-6'>
