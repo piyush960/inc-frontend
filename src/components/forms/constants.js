@@ -2,7 +2,7 @@ const impetus_domains = [
 	{ value: "", label: "Select Option" },
 	{ value: "AD", label: "Application Development (AD)" },
 	{ value: "CN", label: "Communication Networks and Security Systems (CN)" },
-	{ value: "DSP", label: "Digital / Image/ Speech / Video Processing (DSP)" },
+	{ value: "DSP", label: "Digital / Image/ Speech / Video Processing (DS)" },
 	{ value: "ES", label: "Embedded/VLSI Systems (ES)" },
 	{ value: "ML", label: "Machine Learning and Pattern Recognition (ML)" },
 	{ value: "OT", label: "Other (OT)" },

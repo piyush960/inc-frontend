@@ -13,6 +13,7 @@ import { RadioButton } from "../ui/RadioButton";
 import { Select } from "../ui/select";
 import { useProcessJudgeRegisterMutation } from "../../app/services/judgeAPI";
 import { IconCircleCheck } from "@tabler/icons-react";
+import { useSearchParams } from "react-router-dom";
 
 const initialState = {
   'events': 'impetus',
@@ -33,11 +34,15 @@ const initialState = {
 const JudgeRegister = () => {
 
   const [ formData, setFormData ] = useState(initialState)
+  const [searchParams] = useSearchParams();
   const [phone, setPhone] = useState("");
   const [ processJudgeRegister, { isLoading, isSuccess } ] = useProcessJudgeRegisterMutation();
 
   useEffect(() => {
     scrollToTop()
+    if(!searchParams.get('URLAccessCode')){
+      toast.info('URL Access Code missing in query param');
+    }
   }, [])
   
   const handleChange = (e) => {
@@ -64,7 +69,8 @@ const JudgeRegister = () => {
       return
     }
     try{
-      const data = await processJudgeRegister(formData).unwrap();
+      const tempData = { ...formData, accessCode: searchParams.get('URLAccessCode') };
+      const data = await processJudgeRegister(tempData).unwrap();
       if(data?.success) toast.success('Registered Successfully');
       else toast.info('Unable to register');
     }
